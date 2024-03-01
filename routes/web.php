@@ -25,6 +25,7 @@ Route::get('/laravel-dashboard', function () {
     return view('template');
 });
 
-Route::get('sales/saleinvoice', function () {
-    return view('sales/saleinvoice');
-});
+
+//sales
+Route::get('sales/saleinvoice', [App\Http\Controllers\SalesController::class, 'index'])->name('saleinvoice');
+Route::get('sales/saleinvoiceprint', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('saleinvoiceprint');

@@ -47,6 +47,11 @@ Theme Version: 	4.0.0
 					null,
 					null,
 					null,
+					null,
+					null,
+					null,
+					null,
+					
 					{ "bSortable": false }
 				]
 			});
@@ -77,10 +82,9 @@ Theme Version: 	4.0.0
 				})
 				.on( 'click', 'a.remove-row', function( e ) {
 					e.preventDefault();
-
 					var $row = $(this).closest( 'tr' ),
 						itemId = $row.attr('data-item-id');
-
+					
 					$.magnificPopup.open({
 						items: {
 							src: _self.options.dialog.wrapper,
@@ -145,7 +149,7 @@ Theme Version: 	4.0.0
 				'<a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>'
 			].join(' ');
 
-			data = this.datatable.row.add([ '', '', '', actions ]);
+			data = this.datatable.row.add([ '', '', '','','','','', actions ]);
 			$row = this.datatable.row( data[0] ).nodes().to$();
 
 			$row
@@ -245,7 +249,6 @@ Theme Version: 	4.0.0
 			$row.find( '.on-editing' ).addClass( 'hidden' );
 			$row.find( '.on-default' ).removeClass( 'hidden' );
 		}
-
 	};
 
 	$(function() {

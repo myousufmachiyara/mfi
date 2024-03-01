@@ -23,8 +23,13 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="nav-link" href="ecommerce-dashboard.html">
-										Sales Invoice
+									<a class="nav-link" href="{{ route('saleinvoice')}}">
+										All Invoice
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="{{ route('saleinvoice')}}">
+										New Invoice
 									</a>
 								</li>
 								<li>
