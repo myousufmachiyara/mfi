@@ -1,7 +1,7 @@
 <header class="header header-nav-menu header-nav-top-line">
 	<div class="logo-container">
 		<a href="../" class="logo">
-			<img src="/public/assets/img/logo.png" width="55" height="35" alt="Porto Admin" />
+			<img src="/assets/img/logo.png" width="55" height="35" alt="Porto Admin" />
 		</a>
 		<button class="btn header-btn-collapse-nav d-lg-none" data-bs-toggle="collapse" data-bs-target=".header-nav">
 			<i class="fas fa-bars"></i>
@@ -607,7 +607,7 @@
 		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
 				<figure class="profile-picture">
-					<img src="/public/assets/img/!logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="/public/assets/img/!logged-user.jpg" />
+					<img src="/assets/img/!logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="/assets/img/!logged-user.jpg" />
 				</figure>
 				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
 					<span class="name">User Name</span>
