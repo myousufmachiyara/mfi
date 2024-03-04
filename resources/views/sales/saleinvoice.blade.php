@@ -102,8 +102,8 @@
 											</tbody>
 										</table>
 									</div>
-									<!-- <footer class="card-footer text-end">
-										<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
+									<!-- <footer class="card-footer">
+						
 									</footer> -->
 								</section>
 
@@ -142,7 +142,11 @@
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<input type="text" name="firstName" placeholder="Bill Discount" class="form-control">
 											</div>
-
+										</div>
+										<div class="row mb-3">
+											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
+												<input type="file" class="form-control">
+											</div>
 										</div>
 									</div>
 									<footer class="card-footer text-end">
