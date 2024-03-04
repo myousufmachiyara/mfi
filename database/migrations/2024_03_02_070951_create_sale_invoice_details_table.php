@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('sales_price');
             $table->integer('Sales_qty2');
             $table->timestamps();
-            $table->foreign('sales_inv_cod')->references('id')->on('sale_invoice')->onDelete('cascade');
         });
     }
 

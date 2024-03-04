@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('cash-pur_phone');
             $table->integer('bill_not');
             $table->string('att');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
