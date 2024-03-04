@@ -10,7 +10,7 @@
 					<!-- start: page -->
 					<div class="row">
 						<div class="col-lg-12">
-							<form>
+							<!-- <form> -->
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
@@ -78,30 +78,33 @@
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
-											<button id="addToTable" class="btn btn-primary"> <i class="fas fa-plus"></i> Add Item</button>
+											<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
 										</div>
 
 										<h2 class="card-title">Item Details</h2>
 									</header>
-									<div class="card-body">
-										<table class="table table-bordered table-striped mb-0" id="datatable-editable">
+									<div class="card-body" style="overflow-x:auto;">
+										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th>Item Code</th>
-													<th>Qty</th>
-													<th>Item Name</th>
-													<th>Remarks</th>
-													<th>Weight(kgs)</th>
-													<th>Price</th>
-													<th>Amount</th>
-													<th>Action</th>
+													<th width="5%">Item Code</th>
+													<th width="5%">Qty</th>
+													<th width="5%">Item Name</th>
+													<th width="5%">Remarks</th>
+													<th width="5%">Weight(kgs)</th>
+													<th width="5%">Price</th>
+													<th width="5%">Amount</th>
+													<th width="5%">Action</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="saleInvoiceTable">
 												
 											</tbody>
 										</table>
 									</div>
+									<!-- <footer class="card-footer text-end">
+										<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
+									</footer> -->
 								</section>
 
 								<section class="card">
@@ -143,10 +146,10 @@
 										</div>
 									</div>
 									<footer class="card-footer text-end">
-										<button class="btn btn-primary">Create Invoice</button>
+										<button type="submit" class="btn btn-primary">Create Invoice</button>
 									</footer>
 								</section>
-							</form>
+							<!-- </form> -->
 						</div>
 					</div>
 					<!-- end: page -->
@@ -178,3 +181,41 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script>
+    document.getElementById('addRowBtn').addEventListener('click', function() {
+        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+		var cell7 = newRow.insertCell(6);
+        var cell8 = newRow.insertCell(7);
+
+        cell1.innerHTML = '<input type="text" name="totalAmount" placeholder="Item Code" class="form-control">';
+        cell2.innerHTML = '<input type="text" name="totalAmount" placeholder="Quantity" class="form-control">';
+		cell3.innerHTML = '<select class="form-control mb-3"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
+        cell4.innerHTML = '<input type="text" name="totalAmount" placeholder="Remarks" class="form-control">';
+        cell5.innerHTML = '<input type="text" name="totalAmount" placeholder="Weight (kgs)" class="form-control">';
+        cell6.innerHTML = '<input type="text" name="totalAmount" placeholder="Price" class="form-control">';
+        cell7.innerHTML = '<input type="text" name="totalAmount" placeholder="Amount" class="form-control">';
+        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+    });
+
+    function removeRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+
+    document.getElementById('removeRowBtn').addEventListener('click', function() {
+        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+        if (table.rows.length > 0) {
+            table.deleteRow(table.rows.length - 1);
+        } else {
+            alert("No rows to delete!");
+        }
+    });
+</script>
