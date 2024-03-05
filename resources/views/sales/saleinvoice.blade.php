@@ -111,8 +111,8 @@
 									<header class="card-header">
 										<div class="card-actions">
 											<h3 class="font-weight-bold text-color-dark mt-0 mb-0 text-5">Net Amount</h3>
-											<span class="d-flex align-items-center justify-content-lg-end">
-													<strong class="text-color-dark text-4">PKR 1000.00</strong>
+											<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
+													<strong class="text-color-dark text-4" >PKR 0.00</strong>
 											</span>
 										</div>
 										<h2 class="card-title">Invoice Summary Details</h2>
@@ -124,23 +124,23 @@
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="date" name="firstName" placeholder="Total Weight" class="form-control">
+												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="text" name="firstName" placeholder="GST" class="form-control">
+												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="text" name="firstName" placeholder="Convance Charges" class="form-control">
+												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="text" name="firstName" placeholder="Labour Charges" class="form-control">
+												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="text" name="firstName" placeholder="Bill Discount" class="form-control">
+												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -201,12 +201,12 @@
         var cell8 = newRow.insertCell(7);
 
         cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Item Code" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
-        cell2.innerHTML = '<input type="text" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Quantity" class="form-control">';
+        cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Quantity" class="form-control">';
 		cell3.innerHTML = '<select class="form-control mb-3" id="item_code'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
         cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
-        cell5.innerHTML = '<input type="text" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="text" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="text" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
+        cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
+        cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
+        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
         cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
 
 		index++;
@@ -237,12 +237,27 @@
 
 	function tableTotal(){
 		var total=0;
+		var weight=0;
 		var tableRows = $("#saleInvoiceTable tr").length;
-		console.log(tableRows)
 		for (var i = 0; i < tableRows; i++) {
-			total = total + $('#amount'+i+'').val();
+			total = total + Number($('#amount'+i+'').val());
+			weight = weight + Number($('#weight'+i+'').val());
         }
 		$('#totalAmount').val(total);
+		$('#total_weight').val(weight);
+		netTotal();
+	}
+
+	function netTotal(){
+		var netTotal = 0;
+		var total = Number($('#totalAmount').val());
+		var gst = Number($('#gst').val());
+		var convance_charges = Number($('#convance_charges').val());
+		var labour_charges = Number($('#labour_charges').val());
+		var bill_discount = Number($('#bill_discount').val());
+
+		netTotal = total + gst + convance_charges + labour_charges - bill_discount;
+		document.getElementById("netTotal").innerHTML = '<strong class="text-color-dark text-4" >PKR '+netTotal+'.00</strong>';
 	}
 
 </script>
