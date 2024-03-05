@@ -228,9 +228,9 @@
     });
 
 	function rowTotal(index){
-		var qty = $('#item_qty'+index+'').val();
+		var weight = $('#weight'+index+'').val();
 		var price = $('#price'+index+'').val();
-		var amount = qty * price;
+		var amount = weight * price;
 		$('#amount'+index+'').val(amount);
 		tableTotal();
 	}
