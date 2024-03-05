@@ -120,7 +120,7 @@
 									<div class="card-body">
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<input type="text" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
+												<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -186,6 +186,7 @@
 	</body>
 </html>
 <script>
+	var index=0;
     document.getElementById('addRowBtn').addEventListener('click', function() {
         var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
@@ -199,19 +200,22 @@
 		var cell7 = newRow.insertCell(6);
         var cell8 = newRow.insertCell(7);
 
-        cell1.innerHTML = '<input type="text" name="totalAmount" placeholder="Item Code" class="form-control">';
-        cell2.innerHTML = '<input type="text" name="totalAmount" placeholder="Quantity" class="form-control">';
-		cell3.innerHTML = '<select class="form-control mb-3"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
-        cell4.innerHTML = '<input type="text" name="totalAmount" placeholder="Remarks" class="form-control">';
-        cell5.innerHTML = '<input type="text" name="totalAmount" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="text" name="totalAmount" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="text" name="totalAmount" placeholder="Amount" class="form-control">';
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Item Code" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
+        cell2.innerHTML = '<input type="text" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Quantity" class="form-control">';
+		cell3.innerHTML = '<select class="form-control mb-3" id="item_code'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
+        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
+        cell5.innerHTML = '<input type="text" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
+        cell6.innerHTML = '<input type="text" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
+        cell7.innerHTML = '<input type="text" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
         cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+
+		index++;
     });
 
     function removeRow(button) {
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
+		index--;
     }
 
     document.getElementById('removeRowBtn').addEventListener('click', function() {
@@ -222,4 +226,23 @@
             alert("No rows to delete!");
         }
     });
+
+	function rowTotal(index){
+		var qty = $('#item_qty'+index+'').val();
+		var price = $('#price'+index+'').val();
+		var amount = qty * price;
+		$('#amount'+index+'').val(amount);
+		tableTotal();
+	}
+
+	function tableTotal(){
+		var total=0;
+		var tableRows = $("#saleInvoiceTable tr").length;
+		console.log(tableRows)
+		for (var i = 0; i < tableRows; i++) {
+			total = total + $('#amount'+i+'').val();
+        }
+		$('#totalAmount').val(total);
+	}
+
 </script>
