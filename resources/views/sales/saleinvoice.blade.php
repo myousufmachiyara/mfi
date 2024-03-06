@@ -77,7 +77,7 @@
 
 										<h2 class="card-title">Item Details</h2>
 									</header>
-									<div class="card-body" style="overflow-x:auto;max-height:390px;overflow-y:auto">
+									<div class="card-body" style="overflow-x:auto;min-height:390px;max-height:390px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
