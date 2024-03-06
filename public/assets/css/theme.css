@@ -6814,7 +6814,7 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 
 .btn {
 	font-size: 14.4px;
-	font-size: 0.9rem;
+	font-size: 0.7rem;
 	padding: 7.52px 12px;
 	padding: 0.47rem 0.75rem;
 	cursor: pointer;
@@ -7448,7 +7448,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 	background: #f6f6f6;
 	border-radius: 5px 5px 0 0 !important;
 	border-bottom: 1px solid #DADADA;
-	padding: 24px;
+	padding: 20px;
 	position: relative;
 }
 

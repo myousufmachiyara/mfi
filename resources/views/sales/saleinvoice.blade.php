@@ -70,14 +70,14 @@
 
 							<div class="col-9 mb-3">
 								<section class="card">
-									<header class="card-header">
+									<!-- <header class="card-header">
 										<div class="card-actions">
 											<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
 										</div>
 
 										<h2 class="card-title">Item Details</h2>
-									</header>
-									<div class="card-body" style="overflow-x:auto;min-height:390px;max-height:390px;overflow-y:auto">
+									</header> -->
+									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -120,6 +120,7 @@
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+														<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i></button>
 													</td>
 												</tr>
 											</tbody>
