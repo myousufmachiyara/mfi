@@ -7,31 +7,31 @@
 					@extends('../layouts.pageheader')
 					<!-- <form> -->
 						<div class="row">
-								<div class="col-3 mb-3">								
-									<section class="card">
-										<header class="card-header">
-											<div class="card-actions">
-												<button type="button" class="mb-1 me-1 btn btn-primary"><i class="fas fa-plus" ></i> Add New</button>											
-												<!-- <button type="button" class="mb-1 me-1 btn btn-danger"><i class="fas fa-print"></i> Print</button>											 -->
-											</div>
-											<h2 class="card-title">Party Details</h2>
-										</header>
+							<div class="col-3 mb-3">								
+								<section class="card">
+									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="mb-1 me-1 btn btn-primary"><i class="fas fa-plus" ></i> Add New</button>											
+											<!-- <button type="button" class="mb-1 me-1 btn btn-danger"><i class="fas fa-print"></i> Print</button>											 -->
+										</div>
+										<h2 class="card-title">Party Details</h2>
+									</header>
 
-										<div class="card-body">
-											<div class="row form-group mb-3">
-											<div class="col-sm-12 col-md-6 pb-sm-6 pb-md-0 mb-3">
+									<div class="card-body">
+										<div class="row form-group mb-2">
+											<div class="col-sm-12 col-md-6 mb-2">
 												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
 											</div>
 
-											<div class="col-sm-12 col-md-6 pb-sm-6 pb-md-0 mb-3">
+											<div class="col-sm-12 col-md-6 mb-2">
 												<input type="date" name="date" placeholder="Date" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-6 pb-sm-6 pb-md-0 mb-3">
-												<input type="text" name="bill_no" placeholder="Bill No." class="form-control" disabled>
+											<div class="col-sm-12 col-md-6">
+												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-6 pb-sm-3 pb-md-0 mb-3">
+											<div class="col-sm-12 col-md-6">
 												<select class="form-control mb-3">
 													<option selected>Status</option>
 													<option>Bill Not Final</option>
@@ -48,107 +48,182 @@
 											</div>
 
 											<div class="col-12 mb-3">
-												<input type="text" name="nop" placeholder="Name Of Person" class="form-control" disabled>
+												<input type="text" name="nop" placeholder="Name Of Person" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
-												<input type="text" name="address" placeholder="Address" class="form-control" disabled>
+												<input type="text" name="address" placeholder="Address" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
-												<input type="text" name="cash-pur_phone" placeholder="Cash - Pur_phone" class="form-control" disabled>
+												<input type="text" name="cash-pur_phone" placeholder="Cash - Pur_phone" class="form-control">
 
 											</div>
 
-											<div class="col-12 mb-3">
-												<input type="text" name="remarks" placeholder="Remarks" class="form-control" disabled>
+											<div class="col-12">
+												<input type="text" name="remarks" placeholder="Remarks" class="form-control">
+											</div>
+									  </div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-9 mb-3">
+								<section class="card">
+									<header class="card-header">
+										<div class="card-actions">
+											<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
+										</div>
+
+										<h2 class="card-title">Item Details</h2>
+									</header>
+									<div class="card-body" style="overflow-x:auto;max-height:390px;overflow-y:auto">
+										<table class="table table-bordered table-striped mb-0" id="myTable" >
+											<thead>
+												<tr>
+													<th width="5%">Code</th>
+													<th width="5%">Qty</th>
+													<th width="5%">Name</th>
+													<th width="5%">Remarks</th>
+													<th width="5%">Weight(kgs)</th>
+													<th width="5%">Price</th>
+													<th width="5%">Amount</th>
+													<th width="5%">Action</th>
+												</tr>
+											</thead>
+											<tbody id="saleInvoiceTable">
+												<tr>
+													<td>
+														<input type="text" id="item_code0'" name="item_code" placeholder="Code" class="form-control">
+														<input type="number" name="row_no" value="0" class="form-control" hidden>
+													</td>
+													<td>
+														<input type="number" id="item_qty0" name="item_qty" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
+													</td>
+													<td>
+														<select class="form-control" id="item_name0'" name="item_name">
+															<option>Select Item</option><option>Item 1</option>
+															<option>Item 2</option>
+														</select>
+													</td>
+													<td>
+														<input type="text" id="remarks0" name="remarks" placeholder="Remarks" class="form-control">
+													</td>
+													<td>
+														<input type="number" id="weight0" name="weight" onchange="rowTotal(0)" placeholder="Weight (kgs)" class="form-control">
+													</td>
+													<td>
+														<input type="number" id="price0" name="price" onchange="rowTotal(0)" placeholder="Price" class="form-control">
+													</td>
+													<td>
+														<input type="number" id="amount0" name="amount" onchange="rowTotal(0)" placeholder="Amount" class="form-control" disabled>
+													</td>
+													<td>
+														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<footer class="card-footer">
+										<div class="row form-group mb-3">
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
 											</div>
 										</div>
-									</section>
-								</div>
-
-								<div class="col-9 mb-3">
-									<section class="card">
-										<header class="card-header">
-											<div class="card-actions">
-												<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i> Add Item</button>
+										<div class="row mb-3">
+											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
+												<input type="file" class="form-control">
 											</div>
 
-											<h2 class="card-title">Item Details</h2>
-										</header>
-										<div class="card-body" style="overflow-x:auto;">
-											<table class="table table-bordered table-striped mb-0" id="myTable" >
-												<thead>
-													<tr>
-														<th width="5%">Code</th>
-														<th width="5%">Qty</th>
-														<th width="5%">Name</th>
-														<th width="5%">Remarks</th>
-														<th width="5%">Weight(kgs)</th>
-														<th width="5%">Price</th>
-														<th width="5%">Amount</th>
-														<th width="5%">Action</th>
-													</tr>
-												</thead>
-												<tbody id="saleInvoiceTable">
-													
-												</tbody>
-											</table>
-										</div>
-										<!-- <footer class="card-footer">
-							
-										</footer> -->
-									</section>
-								</div>
-
-								<div class="col-12 mb-3">
-									<section class="card">
-										<header class="card-header">
-											<div class="card-actions">
-												<h3 class="font-weight-bold text-color-dark mt-0 mb-0 text-5">Net Amount</h3>
+											<div class="col-sm-2 col-md-8 pb-sm-3 pb-md-0">
+												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end" style="color:#ef0202">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
-														<strong class="text-color-dark text-4" >PKR 0.00</strong>
+														<strong class="text-4" style="color:#ef0202">PKR 0.00</strong>
 												</span>
 											</div>
-											<h2 class="card-title">Invoice Summary</h2>
-										</header>
-										<div class="card-body">
-											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
-												</div>
+											
+										</div>
+									</footer>
+								</section>
+							</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
-												</div>
-
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
-												</div>
-
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
-												</div>
-
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
-												</div>
-
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
-												</div>
+							<div class="col-12 mb-3">
+								<section class="card">
+									<header class="card-header">
+										<!-- <div class="card-actions">
+											<h3 class="font-weight-bold text-color-dark mt-0 mb-0 text-5">Net Amount</h3>
+											<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
+													<strong class="text-color-dark text-4" >PKR 0.00</strong>
+											</span>
+										</div> -->
+										<h2 class="card-title">Invoice Summary</h2>
+									</header>
+									<div class="card-body">
+										<div class="row form-group mb-3">
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 											</div>
-											<div class="row mb-3">
-												<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
-													<input type="file" class="form-control">
-												</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
 											</div>
 										</div>
-										<footer class="card-footer text-end">
-											<button type="submit" class="btn btn-primary">Create Invoice</button>
-										</footer>
-									</section>
-								</div>
+										<div class="row mb-3">
+											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
+												<input type="file" class="form-control">
+											</div>
+
+											<div class="col-sm-2 col-md-8 pb-sm-3 pb-md-0">
+												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end" style="color:#ef0202">Net Amount</h3>
+												<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
+														<strong class="text-4" style="color:#ef0202">PKR 0.00</strong>
+												</span>
+											</div>
+											
+										</div>
+									</div>
+									<footer class="card-footer text-end">
+										<button type="submit" class="btn btn-primary">Create Invoice</button>
+									</footer>
+								</section>
+							</div>
 						</div>
 					<!-- </form> -->
 				</section>
@@ -158,7 +233,7 @@
 	</body>
 </html>
 <script>
-	var index=0;
+	var index=1;
     document.getElementById('addRowBtn').addEventListener('click', function() {
         var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
@@ -174,7 +249,7 @@
 
         cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
         cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
-		cell3.innerHTML = '<select class="form-control mb-3" id="item_code'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
+		cell3.innerHTML = '<select class="form-control" id="item_code'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
         cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
         cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
         cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
