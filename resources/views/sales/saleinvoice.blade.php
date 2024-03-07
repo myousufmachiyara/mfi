@@ -20,18 +20,22 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
+												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
+												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" placeholder="Date" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
+												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
+												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3">
 													<option selected>Status</option>
 													<option>Bill Not Final</option>
@@ -40,6 +44,7 @@
 											</div>
 
 											<div class="col-12 mb-3">
+												<label class="col-form-label">Chart Of Account</label>
 												<select class="form-control">
 													<option selected>Select Chart Of Account</option>
 													<option>COA 1</option>
@@ -48,19 +53,23 @@
 											</div>
 
 											<div class="col-12 mb-3">
+												<label class="col-form-label">Name Of Person</label>
 												<input type="text" name="nop" placeholder="Name Of Person" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
+												<label class="col-form-label">Address</label>
 												<input type="text" name="address" placeholder="Address" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
+												<label class="col-form-label">Cash Pur Phone</label>
 												<input type="text" name="cash-pur_phone" placeholder="Cash - Pur_phone" class="form-control">
 
 											</div>
 
 											<div class="col-12">
+												<label class="col-form-label">Remarks</label>
 												<input type="text" name="remarks" placeholder="Remarks" class="form-control">
 											</div>
 									  </div>
@@ -120,7 +129,6 @@
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
-														<!-- <button id="addRowBtn" class="btn btn-primary"> <i class="fas fa-plus"></i></button> -->
 													</td>
 												</tr>
 											</tbody>
@@ -129,26 +137,32 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+`												<label class="col-form-label">Total Amount</label>
 												<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											`	<label class="col-form-label">Total Weight</label>
 												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											`	<label class="col-form-label">GST</label>
 												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											`	<label class="col-form-label">Convance</label>
 												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											`	<label class="col-form-label">Labour Charges</label>
 												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											`	<label class="col-form-label">Bill Discount</label>
 												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
 											</div>
 										</div>
