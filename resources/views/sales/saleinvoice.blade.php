@@ -159,8 +159,8 @@
 
 											<div class="col-sm-2 col-md-8 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
-														<strong class="text-4 text-primary">PKR <span class="text-5 text-danger">0.00 </span></strong>
+												<span class="d-flex align-items-center justify-content-lg-end">
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 												</span>
 											</div>
 											
@@ -332,7 +332,7 @@
 		var bill_discount = Number($('#bill_discount').val());
 
 		netTotal = total + gst + convance_charges + labour_charges - bill_discount;
-		document.getElementById("netTotal").innerHTML = '<strong class="text-color-dark text-4" >PKR '+netTotal+'.00</strong>';
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'.00</span>';
 	}
 
 </script>
