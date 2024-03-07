@@ -27,5 +27,9 @@ Route::get('/laravel-dashboard', function () {
 
 
 //sales
-Route::get('sales/saleinvoice', [App\Http\Controllers\SalesController::class, 'index'])->name('saleinvoice');
-Route::get('sales/saleinvoiceprint', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('saleinvoiceprint');
+Route::get('sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');
+Route::get('sales/new-invoice', function () {
+    return view('sales.create');
+});
+Route::get('sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'index'])->name('create-sale-invoice');
+Route::get('sales/saleinvoice/print', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('print-sale-invoice');

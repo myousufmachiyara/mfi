@@ -41,6 +41,7 @@
 <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="/assets/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
 
+
 <!-- Theme Base, Components and Settings -->
 <script src="/assets/js/theme.js"></script>
 
@@ -53,6 +54,7 @@
 <!-- Examples -->
 <script src="/assets/js/examples/examples.header.menu.js"></script>
 <script src="/assets/js/examples/examples.dashboard.js"></script>
-<script src="/assets/js/examples/examples.datatables.editable.js"></script>
+<script src="/assets/js/examples/examples.datatables.default.js"></script>
+
 
 

@@ -9087,6 +9087,7 @@ html.dark .colorpicker:after {
 	border-collapse: collapse !important;
 	margin: 0 !important;
 	width: 100% !important;
+	margin-top: 5px !important
 }
 
 .dataTables_wrapper div.dataTables_info {

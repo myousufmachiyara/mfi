@@ -11,7 +11,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-        return view('sales.saleinvoice');
+        return view('sales.index');
     }
 
     public function create()

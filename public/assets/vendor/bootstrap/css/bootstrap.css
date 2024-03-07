@@ -1965,6 +1965,7 @@ progress {
 
 .table-bordered > :not(caption) > * {
   border-width: 1px 0;
+  font-size: 14px;
 }
 .table-bordered > :not(caption) > * > * {
   border-width: 0 1px;

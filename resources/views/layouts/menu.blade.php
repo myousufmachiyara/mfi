@@ -23,12 +23,12 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="nav-link" href="{{ route('saleinvoice')}}">
+									<a class="nav-link" href="{{ route('all-saleinvoices')}}">
 										All Invoice
 									</a>
 								</li>
 								<li>
-									<a class="nav-link" href="{{ route('saleinvoice')}}">
+									<a class="nav-link" href="/sales/new-invoice	">
 										New Invoice
 									</a>
 								</li>								
