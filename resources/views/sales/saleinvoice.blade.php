@@ -116,7 +116,7 @@
 														<input type="number" id="price0" name="price" onchange="addNewRow(0)" placeholder="Price" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="amount0" name="amount" onchange="addNewRow(0)" placeholder="Amount" class="form-control" disabled>
+														<input type="number" id="amount0" name="amount" placeholder="Amount" class="form-control" disabled>
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
@@ -250,12 +250,12 @@
     //     var cell8 = newRow.insertCell(7);
 
     //     cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" onchange="addNewRow('+index+')" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
-    //     cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
+    //     cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="addNewRow('+index+')" placeholder="Qty" class="form-control">';
 	// 	cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
     //     cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
     //     cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
     //     cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
-    //     cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
+    //     cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" placeholder="Amount" class="form-control" disabled>';
     //     cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
 
 	// 	index++;
