@@ -94,33 +94,33 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="text" id="item_code0'" name="item_code" placeholder="Code" class="form-control">
+														<input type="text" id="item_code0'" onchange="addNewRow(0)"  name="item_code" placeholder="Code" class="form-control">
 														<input type="number" name="row_no" value="0" class="form-control" hidden>
 													</td>
 													<td>
-														<input type="number" id="item_qty0" name="item_qty" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
+														<input type="number" id="item_qty0" name="item_qty" onchange="addNewRow(0)" placeholder="Qty" class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name0'" name="item_name">
+														<select class="form-control" id="item_name0'" onchange="addNewRow(0)" name="item_name">
 															<option>Select Item</option><option>Item 1</option>
 															<option>Item 2</option>
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks0" name="remarks" placeholder="Remarks" class="form-control">
+														<input type="text" id="remarks0" name="remarks" onchange="addNewRow(0)" placeholder="Remarks" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="weight0" name="weight" onchange="rowTotal(0)" placeholder="Weight (kgs)" class="form-control">
+														<input type="number" id="weight0" name="weight" onchange="addNewRow(0)" placeholder="Weight (kgs)" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="price0" name="price" onchange="rowTotal(0)" placeholder="Price" class="form-control">
+														<input type="number" id="price0" name="price" onchange="addNewRow(0)" placeholder="Price" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="amount0" name="amount" onchange="rowTotal(0)" placeholder="Amount" class="form-control" disabled>
+														<input type="number" id="amount0" name="amount" onchange="addNewRow(0)" placeholder="Amount" class="form-control" disabled>
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
-														<button id="addRowBtn" class="btn btn-primary addRowBtn"> <i class="fas fa-plus"></i></button>
+														<!-- <button id="addRowBtn" class="btn btn-primary"> <i class="fas fa-plus"></i></button> -->
 													</td>
 												</tr>
 											</tbody>
@@ -158,9 +158,9 @@
 											</div>
 
 											<div class="col-sm-2 col-md-8 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end" style="color:#ef0202">Net Amount</h3>
+												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
-														<strong class="text-4" style="color:#ef0202">PKR 0.00</strong>
+														<strong class="text-4 text-primary">PKR <span class="text-danger text-5">0.00 </span></strong>
 												</span>
 											</div>
 											
@@ -169,15 +169,15 @@
 								</section>
 							</div>
 
-							<div class="col-12 mb-3">
+							<!-- <div class="col-12 mb-3">
 								<section class="card">
 									<header class="card-header">
-										<!-- <div class="card-actions">
+										<div class="card-actions">
 											<h3 class="font-weight-bold text-color-dark mt-0 mb-0 text-5">Net Amount</h3>
 											<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
 													<strong class="text-color-dark text-4" >PKR 0.00</strong>
 											</span>
-										</div> -->
+										</div>
 										<h2 class="card-title">Invoice Summary</h2>
 									</header>
 									<div class="card-body">
@@ -224,7 +224,7 @@
 										<button type="submit" class="btn btn-primary">Create Invoice</button>
 									</footer>
 								</section>
-							</div>
+							</div> -->
 						</div>
 					<!-- </form> -->
 				</section>
@@ -235,30 +235,31 @@
 </html>
 <script>
 	var index=1;
-    document.getElementById('addRowBtn').addEventListener('click', function() {
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
+    // document.getElementById('addRowBtn').addEventListener('click', function() {
 
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        var cell4 = newRow.insertCell(3);
-        var cell5 = newRow.insertCell(4);
-        var cell6 = newRow.insertCell(5);
-		var cell7 = newRow.insertCell(6);
-        var cell8 = newRow.insertCell(7);
+    //     var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+    //     var newRow = table.insertRow(table.rows.length);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
-        cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
-		cell3.innerHTML = '<select class="form-control" id="item_code'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
-        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
-        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+    //     var cell1 = newRow.insertCell(0);
+    //     var cell2 = newRow.insertCell(1);
+    //     var cell3 = newRow.insertCell(2);
+    //     var cell4 = newRow.insertCell(3);
+    //     var cell5 = newRow.insertCell(4);
+    //     var cell6 = newRow.insertCell(5);
+	// 	var cell7 = newRow.insertCell(6);
+    //     var cell8 = newRow.insertCell(7);
 
-		index++;
-    });
+    //     cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" onchange="addNewRow('+index+')" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
+    //     cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
+	// 	cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
+    //     cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
+    //     cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="rowTotal('+index+')" placeholder="Weight (kgs)" class="form-control">';
+    //     cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="rowTotal('+index+')" placeholder="Price" class="form-control">';
+    //     cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="rowTotal('+index+')" placeholder="Amount" class="form-control" disabled>';
+    //     cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+
+	// 	index++;
+    // });
 
     function removeRow(button) {
         var row = button.parentNode.parentNode;
@@ -274,6 +275,35 @@
             alert("No rows to delete!");
         }
     });
+
+	function addNewRow(index){
+
+		console.log("hello");
+
+        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+		var cell7 = newRow.insertCell(6);
+        var cell8 = newRow.insertCell(7);
+
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" onchange="addNewRow('+index+')" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
+        cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
+		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
+        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" onchange="addNewRow('+index+')" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="addNewRow('+index+')" placeholder="Weight (kgs)" class="form-control">';
+        cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="addNewRow('+index+')" placeholder="Price" class="form-control">';
+        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="addNewRow('+index+')"placeholder="Amount" class="form-control" disabled>';
+        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+
+		rowTotal(index);
+		index++;
+	}
 
 	function rowTotal(index){
 		var weight = $('#weight'+index+'').val();

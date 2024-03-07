@@ -31,11 +31,6 @@
 									<a class="nav-link" href="{{ route('saleinvoice')}}">
 										New Invoice
 									</a>
-								</li>
-								<li>
-									<a class="nav-link" href="ecommerce-products-list.html">
-										Sales Report
-									</a>
 								</li>								
 							</ul>
 						</li>
