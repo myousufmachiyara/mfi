@@ -94,11 +94,11 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="text" id="item_code0'" onchange="addNewRow(0)"  name="item_code" placeholder="Code" class="form-control">
+														<input type="text" id="item_code0'" name="item_code" placeholder="Code" class="form-control">
 														<input type="number" name="row_no" value="0" class="form-control" hidden>
 													</td>
 													<td>
-														<input type="number" id="item_qty0" name="item_qty" onchange="addNewRow(0)" placeholder="Qty" class="form-control">
+														<input type="number" id="item_qty0" name="item_qty" placeholder="Qty" class="form-control">
 													</td>
 													<td>
 														<select class="form-control" id="item_name0'" onchange="addNewRow(0)" name="item_name">
@@ -107,13 +107,13 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks0" name="remarks" onchange="addNewRow(0)" placeholder="Remarks" class="form-control">
+														<input type="text" id="remarks0" name="remarks" placeholder="Remarks" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="weight0" name="weight" onchange="addNewRow(0)" placeholder="Weight (kgs)" class="form-control">
+														<input type="number" id="weight0" name="weight" onchange="rowTotal(0)" placeholder="Weight (kgs)" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="price0" name="price" onchange="addNewRow(0)" placeholder="Price" class="form-control">
+														<input type="number" id="price0" name="price" onchange="rowTotal(0)" placeholder="Price" class="form-control">
 													</td>
 													<td>
 														<input type="number" id="amount0" name="amount" placeholder="Amount" class="form-control" disabled>
@@ -160,7 +160,7 @@
 											<div class="col-sm-2 col-md-8 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-0 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end" id="netTotal">
-														<strong class="text-4 text-primary">PKR <span class="text-danger text-5">0.00 </span></strong>
+														<strong class="text-4 text-primary">PKR <span class="text-5 text-danger">0.00 </span></strong>
 												</span>
 											</div>
 											
@@ -276,9 +276,7 @@
         }
     });
 
-	function addNewRow(index){
-
-		console.log("hello");
+	function addNewRow(){
 
         var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
@@ -292,16 +290,15 @@
 		var cell7 = newRow.insertCell(6);
         var cell8 = newRow.insertCell(7);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" onchange="addNewRow('+index+')" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
-        cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" onchange="rowTotal('+index+')" placeholder="Qty" class="form-control">';
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code" placeholder="Code" class="form-control"><input type="number" name="row_no" value="'+index+'" class="form-control" hidden>';
+        cell2.innerHTML = '<input type="number" id="item_qty'+index+'" name="item_qty" placeholder="Qty" class="form-control">';
 		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name"><option>Select Item</option><option>Item 1</option><option>Item 2</option></select>';
-        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" onchange="addNewRow('+index+')" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="weight'+index+'" name="weight" onchange="addNewRow('+index+')" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="number" id="price'+index+'" name="price" onchange="addNewRow('+index+')" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" onchange="addNewRow('+index+')"placeholder="Amount" class="form-control" disabled>';
+        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks" placeholder="Remarks" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="weight" placeholder="Weight (kgs)" class="form-control">';
+        cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="price" placeholder="Price" class="form-control">';
+        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="amount" placeholder="Amount" class="form-control" disabled>';
         cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
 
-		rowTotal(index);
 		index++;
 	}
 
