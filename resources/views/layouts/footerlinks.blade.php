@@ -55,6 +55,8 @@
 <script src="/assets/js/examples/examples.header.menu.js"></script>
 <script src="/assets/js/examples/examples.dashboard.js"></script>
 <script src="/assets/js/examples/examples.datatables.default.js"></script>
+<script src="/assets/js/examples/examples.modals.js"></script>
+
 
 
 

@@ -23,39 +23,27 @@
                                                 <th>Bill No.</th>
                                                 <th>Date</th>
                                                 <th>Chart Of Account</th>
-                                                <th>Party Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($sales as $key => $row)
                                             <tr>
-                                                <td>1</td>
-                                                <td> 1001 </td>
-                                                <td> 12/12/2024 </td>
-                                                <td> Account 1 Name </td>
-                                                <td> Party 1 </td>
+                                                <td>{{$row->Sal_inv_no}}</td>
+                                                <td>{{$row->pur_ord_no}}</td>
+                                                <td>{{$row->sa_date}}</td>
+                                                <td>{{$row->account_name}}</td>
                                                 <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                 <td class="actions">
                                                     <a href="" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="" class=""><i class="far fa-trash-alt" style="color:red"></i></a>
-                                                    <a href="" class=""><i class="fas fa-print" style="color:green"></i></a>
+                                                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" href="#modalAnim"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                    <a href="{{ route('print-sale-invoice') }}" class=""><i class="fas fa-print" style="color:green"></i></a>
 												</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td> 1002 </td>
-                                                <td> 12/13/2024 </td>
-                                                <td> Account 2 Name </td>
-                                                <td> Party 2 </td>
-                                                <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
-                                                <td class="actions">
-                                                    <a href="" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="" class=""><i class="far fa-trash-alt" style="color:red"></i></a>
-                                                    <a href="" class=""><i class="fas fa-print" style="color:green"></i></a>
-												</td>
-                                            </tr>
+
                                         </tbody>
+                                        @endforeach
 									</table>
                                 </div>
                             </section>
@@ -64,6 +52,31 @@
                 </section>		
 			</div>
 		</section>
+        <div id="modalAnim" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <section class="card">
+                <header class="card-header">
+                    <h2 class="card-title">Delete Invoice</h2>
+                </header>
+                <div class="card-body">
+                    <div class="modal-wrapper">
+                        <div class="modal-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="modal-text">
+                            <p class="mb-0">Are you sure that you want to delete this invoice?</p>
+                        </div>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-end">
+                            <button class="btn btn-danger modal-confirm">Delete</button>
+                            <button class="btn btn-default modal-dismiss">Cancel</button>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
         @extends('../layouts.footerlinks')
 	</body>
 </html>
