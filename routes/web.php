@@ -27,7 +27,16 @@ Route::get('/laravel-dashboard', function () {
 
 
 //sales
-Route::get('sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');
-Route::get('sales/new-invoice', [App\Http\Controllers\SalesController::class, 'create'])->name('create-sale-invoice'); 
-Route::post('sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
-Route::get('sales/saleinvoice/print', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('print-sale-invoice');
+Route::get('/sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');
+Route::get('/sales/new-invoice', [App\Http\Controllers\SalesController::class, 'create'])->name('create-sale-invoice'); 
+Route::get('/sales/edit-invoice', [App\Http\Controllers\SalesController::class, 'edit'])->name('edit-sale-invoice'); 
+Route::post('/sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
+Route::post('/sales/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
+Route::post('/sales/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
+Route::get('/sales/saleinvoice/print', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('print-sale-invoice');
+
+//items
+Route::get('/item/detail', [App\Http\Controllers\ItemsController::class, 'getItemDetails'])->name('get-item-details');
+
+//COA
+Route::get('/coa/detail', [App\Http\Controllers\COAController::class, 'getAccountDetails'])->name('get-acc-details');

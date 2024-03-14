@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
+use App\Traits\SaveImage;
 use App\Models\AC;
 use App\Models\Item_entry;
 use App\Models\Sales;
@@ -16,9 +17,11 @@ class SalesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    use SaveImage;
+
     public function index()
     {
-        $sales = Sales::all();
+        $sales = Sales::where('status', 1)->get();
         return view('sales.index',compact('sales'));
     }
 
@@ -31,19 +34,13 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-        // $userId = Auth::id();
         $userId=1;
-        // $valid =  Validator::make($request, [
-
-        // ]);
-
         $sales = new Sales();
 
         // $sales->Sal_inv_no;
         $sales->sa_date=$request->date;
         $sales->bill_not=$request->bill_status;
         $sales->account_name=$request->account_name;
-        $sales->att=null;
         $sales->Bill_discount=$request->bill_discount;
         $sales->cash_pur_phone=$request->cash_pur_phone;
         $sales->cash_Pur_address=$request->address;
@@ -56,6 +53,10 @@ class SalesController extends Controller
         $sales->Sales_remarks=$request->remarks;
         $sales->sed_sal=0;
         $sales->status=1;
+
+        if($request->hasFile('att')){
+            $sales->att = $this->salesDocs($request->file('att'));
+        }
 
         $sales->save();
 
@@ -87,7 +88,9 @@ class SalesController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $items = Item_entry::all();
+        $coa = AC::all();
+        return view('sales.create',compact('items','coa'));
     }
 
     public function update(Request $request, string $id)
@@ -95,9 +98,10 @@ class SalesController extends Controller
         //
     }
 
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $sales = Sales::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        return redirect()->route('all-saleinvoices');
     }
     
     public function printInvoice()

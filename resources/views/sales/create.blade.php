@@ -26,7 +26,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="date" placeholder="Date" class="form-control">
+												<input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
@@ -37,7 +37,7 @@
 											<div class="col-sm-12 col-md-6">
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" name="bill_status">
-													<option selected>Status</option>
+													<option>Status</option>
 													<option value="0">Bill Not Final</option>
 													<option value="1">Finalized</option>
 												</select>												
@@ -45,8 +45,8 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Chart Of Account</label>
-												<select class="form-control" name="account_name">
-													<option selected>Select Chart Of Account</option>
+												<select class="form-control" id="coa_name" onchange="getCOADetails()" name="account_name">
+													<option>Select Chart Of Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -55,23 +55,23 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Name Of Person</label>
-												<input type="text" name="nop" placeholder="Name Of Person" class="form-control">
+												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Address</label>
-												<input type="text" name="address" placeholder="Address" class="form-control">
+												<input type="text" name="address" id="address" placeholder="Address" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Cash Pur Phone</label>
-												<input type="text" name="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control">
+												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control">
 
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Remarks</label>
-												<input type="text" name="remarks" placeholder="Remarks" class="form-control">
+												<input type="text" name="remarks" id="remarks" placeholder="Remarks" class="form-control">
 											</div>
 									  </div>
 									</div>
@@ -97,15 +97,15 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="text" id="item_code0'" name="item_code[]" placeholder="Code" class="form-control">
+														<input type="number" id="item_code0" name="item_code[]" placeholder="Code" class="form-control">
 														<input type="text" id="itemCount" name="items" value="0" placeholder="Code" class="form-control" hidden>
 													</td>
 													<td>
 														<input type="number" id="item_qty0" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name0'" onchange="addNewRow(0)" name="item_name[]">
-														<option selected>Select Item</option>
+														<select class="form-control" id="item_name0" onchange="addNewRow(0)" name="item_name[]">
+														<option>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
 															@endforeach
@@ -124,7 +124,7 @@
 														<input type="number" id="amount0" name="item_amount[]" placeholder="Amount" class="form-control" disabled>
 													</td>
 													<td>
-														<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
+														<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
 												</tr>
 											</tbody>
@@ -201,6 +201,7 @@
 </html>
 <script>
 	var index=1;
+
     function removeRow(button) {
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
@@ -219,8 +220,9 @@
         }
     });
 
-	function addNewRow(){
+	function addNewRow(id){
 
+		getItemDetails(id);
         var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);
 
@@ -235,18 +237,62 @@
 
         cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
         cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
-		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name"><option>Select Item</option><option value="1">Item 1</option><option value="2">Item 2</option></select>';
+		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
+								'<option>Select Item</option>'+
+								@foreach($items as $key => $row)	
+									'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
+								@endforeach
+							'</select>';
         cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
         cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
         cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
         cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
-        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>';
+        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 		index++;
 
 		var itemCount = Number($('#itemCount').val());
 		itemCount = itemCount+1;
 		$('#itemCount').val(itemCount);
+	}
+
+	function getItemDetails(row_no){
+		var itemId = document.getElementById("item_name"+row_no).value;
+
+		$.ajax({
+			type: "GET",
+			url: "/item/detail",
+			data: {id:itemId},
+			success: function(result){
+				$('#item_code'+row_no).val(result[0]['it_cod']);
+				$('#remarks'+row_no).val(result[0]['item_remark']);
+				$('#price'+row_no).val(result[0]['sales_price']);
+				$('#item_qty'+row_no).val(result[0]['opp_qty']);
+				console.log(result);
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+	}
+
+	function getCOADetails(){
+		var coaId = document.getElementById("coa_name").value;
+		
+		$.ajax({
+			type: "GET",
+			url: "/coa/detail",
+			data: {id:coaId},
+			success: function(result){
+				$('#address').val(result[0]['address']);
+				$('#cash_pur_phone').val(result[0]['phone_no']);
+				$('#remarks').val(result[0]['remarks']);
+				console.log(result);
+			},
+			error: function(){
+				alert("error");
+			}
+		});
 	}
 
 	function rowTotal(index){
