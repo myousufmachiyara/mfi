@@ -55,7 +55,9 @@ class SalesController extends Controller
         $sales->status=1;
 
         if($request->hasFile('att')){
-            $sales->att = $this->salesDocs($request->file('att'));
+            $extension = $request->file('att')->getClientOriginalExtension();
+            $sales->att = $this->salesDoc($request->file('att'),$extension);
+
         }
 
         $sales->save();

@@ -26,7 +26,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
@@ -45,7 +45,7 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Chart Of Account</label>
-												<select class="form-control" id="coa_name" onchange="getCOADetails()" name="account_name">
+												<select class="form-control" id="coa_name" required onchange="getCOADetails()" name="account_name">
 													<option>Select Chart Of Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -170,8 +170,8 @@
 
 											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
 												<label class="col-form-label">File Attached</label>
-												<input type="file" class="form-control" name="att">
-											</div>
+												<input type="file" class="form-control" name="att" accept="application/pdf, image/png, image/jpeg">
+										 	</div>
 
 											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
@@ -268,7 +268,6 @@
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#price'+row_no).val(result[0]['sales_price']);
 				$('#item_qty'+row_no).val(result[0]['opp_qty']);
-				console.log(result);
 			},
 			error: function(){
 				alert("error");
@@ -287,7 +286,6 @@
 				$('#address').val(result[0]['address']);
 				$('#cash_pur_phone').val(result[0]['phone_no']);
 				$('#remarks').val(result[0]['remarks']);
-				console.log(result);
 			},
 			error: function(){
 				alert("error");
