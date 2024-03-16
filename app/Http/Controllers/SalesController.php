@@ -21,7 +21,9 @@ class SalesController extends Controller
 
     public function index()
     {
-        $sales = Sales::where('status', 1)->get();
+        $sales = Sales::where('sales.status', 1)
+                        ->join('ac','sales.account_name','=','ac.ac_code')
+                        ->get();
         return view('sales.index',compact('sales'));
     }
 
@@ -38,27 +40,49 @@ class SalesController extends Controller
         $sales = new Sales();
 
         // $sales->Sal_inv_no;
-        $sales->sa_date=$request->date;
-        $sales->bill_not=$request->bill_status;
-        $sales->account_name=$request->account_name;
-        $sales->Bill_discount=$request->bill_discount;
-        $sales->cash_pur_phone=$request->cash_pur_phone;
-        $sales->cash_Pur_address=$request->address;
-        $sales->Cash_pur_name=$request->nop;
-        $sales->ConvanceCharges=$request->convance_charges;
-        $sales->created_by=$userId;
-        $sales->Gst_sal=$request->gst;
-        $sales->LaborCharges=$request->labour_charges;
-        $sales->pur_ord_no=$request->bill_no;
-        $sales->Sales_remarks=$request->remarks;
-        $sales->sed_sal=0;
-        $sales->status=1;
-
+        if ($request->has('date') && $request->date) {
+            $sales->sa_date=$request->date;
+        }
+        if ($request->has('bill_no') && $request->bill_no) {
+            $sales->pur_ord_no=$request->bill_no;
+        }
+        if ($request->has('remarks') && $request->remarks) {
+            $sales->Sales_remarks=$request->remarks;
+        }
+        if ($request->has('labour_charges') && $request->labour_charges) {
+            $sales->LaborCharges=$request->labour_charges;
+        }
+        if ($request->has('gst') && $request->gst) {
+            $sales->Gst_sal=$request->gst;
+        }
+        if ($request->has('convance_charges') && $request->convance_charges) {
+            $sales->ConvanceCharges=$request->convance_charges;
+        }
+        if ($request->has('nop') && $request->nop) {
+            $sales->Cash_pur_name=$request->nop;
+        }
+        if ($request->has('address') && $request->address) {
+            $sales->cash_Pur_address=$request->address;
+        }
+        if ($request->has('cash_pur_phone') && $request->cash_pur_phone) {
+            $sales->cash_pur_phone=$request->cash_pur_phone;
+        }
+        if ($request->has('bill_discount') && $request->bill_discount) {
+            $sales->Bill_discount=$request->bill_discount;
+        }
+        if ($request->has('account_name') && $request->account_name) {
+            $sales->account_name=$request->account_name;
+        }
+        if ($request->has('bill_status') && $request->bill_status) {
+            $sales->bill_not=$request->bill_status;
+        }
         if($request->hasFile('att')){
             $extension = $request->file('att')->getClientOriginalExtension();
             $sales->att = $this->salesDoc($request->file('att'),$extension);
-
         }
+        $sales->created_by=$userId;
+        $sales->sed_sal=0;
+        $sales->status=1;
 
         $sales->save();
 
@@ -69,15 +93,18 @@ class SalesController extends Controller
         {
             for($i=0;$i<=$request->items;$i++)
             {
-                $sales_2 = new Sales_2();
-                $sales_2->sales_inv_cod=$invoice_id;
-                $sales_2->item_cod=$request->item_code[$i];
-                $sales_2->remarks=$request->item_remarks[$i];
-                $sales_2->Sales_qty=$request->item_weight[$i];
-                $sales_2->sales_price=$request->item_price[$i];
-                $sales_2->Sales_qty2=$request->item_qty[$i];
-
-                $sales_2->save();
+                if(filled($request->item_code[$i]))
+                {
+                    $sales_2 = new Sales_2();
+                    $sales_2->sales_inv_cod=$invoice_id;
+                    $sales_2->item_cod=$request->item_code[$i];
+                    $sales_2->remarks=$request->item_remarks[$i];
+                    $sales_2->Sales_qty=$request->item_weight[$i];
+                    $sales_2->sales_price=$request->item_price[$i];
+                    $sales_2->Sales_qty2=$request->item_qty[$i];
+    
+                    $sales_2->save();
+                }
             }
         }
         return redirect()->route('all-saleinvoices');
@@ -88,11 +115,13 @@ class SalesController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit($id)
     {
+        $sales = Sales::find($id);
+        $sale_items = Sales_2::where('sales_inv_cod',$id)->get();
         $items = Item_entry::all();
         $coa = AC::all();
-        return view('sales.create',compact('items','coa'));
+        return view('sales.edit', compact('sales','sale_items','items','coa'));
     }
 
     public function update(Request $request, string $id)

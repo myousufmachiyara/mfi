@@ -37,6 +37,7 @@
 											<div class="col-sm-12 col-md-6">
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" name="bill_status">
+													<option>Status</option>
 													<option value="0">Bill Not Final</option>
 													<option value="1">Finalized</option>
 												</select>												
@@ -44,7 +45,7 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Chart Of Account</label>
-												<select class="form-control" id="coa_name" onchange="getCOADetails()" name="account_name" required>
+												<select class="form-control" id="coa_name" required onchange="getCOADetails()" name="account_name">
 													<option>Select Chart Of Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -65,6 +66,7 @@
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Cash Pur Phone</label>
 												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control">
+
 											</div>
 
 											<div class="col-12 mb-3">
@@ -95,15 +97,15 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="number" id="item_code0" name="item_code[]" placeholder="Code" class="form-control" required>
+														<input type="number" id="item_code0" name="item_code[]" placeholder="Code" class="form-control">
 														<input type="text" id="itemCount" name="items" value="0" placeholder="Code" class="form-control" hidden>
 													</td>
 													<td>
 														<input type="number" id="item_qty0" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name0" onchange="addNewRow(0)" required name="item_name[]">
-														<option selected>Select Item</option>
+														<select class="form-control" id="item_name0" onchange="addNewRow(0)" name="item_name[]">
+														<option>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
 															@endforeach
@@ -182,7 +184,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button disbaled class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
+												<button class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
 											</div>
 										</div>

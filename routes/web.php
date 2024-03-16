@@ -29,7 +29,7 @@ Route::get('/laravel-dashboard', function () {
 //sales
 Route::get('/sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');
 Route::get('/sales/new-invoice', [App\Http\Controllers\SalesController::class, 'create'])->name('create-sale-invoice'); 
-Route::get('/sales/edit-invoice', [App\Http\Controllers\SalesController::class, 'edit'])->name('edit-sale-invoice'); 
+Route::get('/sales/edit-invoice/{id}', [App\Http\Controllers\SalesController::class, 'edit'])->name('edit-sale-invoice');
 Route::post('/sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
 Route::post('/sales/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
 Route::post('/sales/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');

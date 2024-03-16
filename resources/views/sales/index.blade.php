@@ -33,7 +33,7 @@
                                                 <td>{{$row->Sal_inv_no}}</td>
                                                 <td>{{$row->pur_ord_no}}</td>
                                                 <td>{{$row->sa_date}}</td>
-                                                <td>{{$row->account_name}}</td>
+                                                <td>{{$row->ac_name}}</td>
                                                 <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                 <td class="actions">
                                                     <a href="" class=""><i class="fas fa-pencil-alt"></i></a>
@@ -41,7 +41,6 @@
                                                     <a href="{{ route('print-sale-invoice') }}" class=""><i class="fas fa-print" style="color:green"></i></a>
 												</td>
                                             </tr>
-
                                         </tbody>
                                         @endforeach
 									</table>
