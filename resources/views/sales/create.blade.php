@@ -182,7 +182,6 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button disbaled class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
 											</div>
 										</div>

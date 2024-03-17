@@ -135,8 +135,8 @@ class SalesController extends Controller
         return redirect()->route('all-saleinvoices');
     }
     
-    public function printInvoice()
+    public function viewInvoice()
     {
-        return view('sales.print');    
+        return view('sales.view');    
     }
 }

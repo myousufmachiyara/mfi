@@ -36,9 +36,9 @@
                                                 <td>{{$row->ac_name}}</td>
                                                 <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                 <td class="actions">
+                                                    <a href="{{ route('view-sale-invoice') }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="" class=""><i class="fas fa-pencil-alt"></i></a>
                                                     <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#modalAnim"><i class="far fa-trash-alt" style="color:red"></i></a>
-                                                    <a href="{{ route('print-sale-invoice') }}" class=""><i class="fas fa-print" style="color:green"></i></a>
 												</td>
                                             </tr>
                                         </tbody>

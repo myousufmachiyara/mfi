@@ -33,7 +33,7 @@ Route::get('/sales/edit-invoice/{id}', [App\Http\Controllers\SalesController::cl
 Route::post('/sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
 Route::post('/sales/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
 Route::post('/sales/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
-Route::get('/sales/saleinvoice/print', [App\Http\Controllers\SalesController::class, 'printInvoice'])->name('print-sale-invoice');
+Route::get('/sales/saleinvoice/view', [App\Http\Controllers\SalesController::class, 'viewInvoice'])->name('view-sale-invoice');
 
 //items
 Route::get('/item/detail', [App\Http\Controllers\ItemsController::class, 'getItemDetails'])->name('get-item-details');
