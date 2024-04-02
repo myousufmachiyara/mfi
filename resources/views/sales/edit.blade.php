@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data">
+					<form method="post" action="{{ route('update-sale-invoice',$sales->Sal_inv_no) }}" enctype="multipart/form-data">
 						@csrf
 						<div class="row">
 							<div class="col-3 mb-3">								
@@ -21,17 +21,17 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
-												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled value="{{$sales->Sal_inv_no}}">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="date" required class="form-control" value="{{$sales->sa_date}}">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
 												<label class="col-form-label" >Bill No.</label>
-												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
+												<input type="text" name="bill_no" placeholder="Bill No." class="form-control" value="{{$sales->pur_ord_no}}">
 											</div>
 
 											<div class="col-sm-12 col-md-6">
@@ -48,30 +48,30 @@
 												<select class="form-control" id="coa_name" required onchange="getCOADetails()" name="account_name">
 													<option>Select Chart Of Account</option>
 													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+														<option value="{{$row->ac_code}}" {{ $row->ac_code == $sales->account_name ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
 												</select>
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Name Of Person</label>
-												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control">
+												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control" value="{{$sales->Cash_pur_name}}">
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Address</label>
-												<input type="text" name="address" id="address" placeholder="Address" class="form-control">
+												<input type="text" name="address" id="address" placeholder="Address" class="form-control" value="{{$sales->cash_Pur_address}}">
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Cash Pur Phone</label>
-												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control">
+												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control" value="{{$sales->cash_pur_phone}}">
 
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Remarks</label>
-												<input type="text" name="remarks" id="remarks" placeholder="Remarks" class="form-control">
+												<input type="text" name="remarks" id="remarks" placeholder="Remarks" class="form-control" value="{{$sales->Sales_remarks}}">
 											</div>
 									  </div>
 									</div>
@@ -95,38 +95,40 @@
 												</tr>
 											</thead>
 											<tbody id="saleInvoiceTable">
+												@foreach($sale_items as $key => $sale_item)
 												<tr>
 													<td>
-														<input type="number" id="item_code0" name="item_code[]" placeholder="Code" class="form-control">
-														<input type="text" id="itemCount" name="items" value="0" placeholder="Code" class="form-control" hidden>
+														<input type="number" id="item_code{{$key}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}">
+														<input type="text" id="itemCount" name="items" value="{{$key}}" class="form-control" hidden>
 													</td>
 													<td>
-														<input type="number" id="item_qty0" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
+														<input type="number" id="item_qty{{$key}}" name="item_qty[]" onchange="rowTotal({{$key}})" placeholder="Qty" class="form-control" value="{{$sale_item->Sales_qty}}">
 													</td>
 													<td>
-														<select class="form-control" id="item_name0" onchange="addNewRow(0)" name="item_name[]">
+														<select class="form-control" id="item_name{{$key}}" onchange="addNewRow({{$key}})" name="item_name[]">
 														<option>Select Item</option>
 															@foreach($items as $key => $row)	
-																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
+																<option value="{{$row->it_cod}}" {{ $row->it_cod == $sale_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
 															@endforeach
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks0" name="item_remarks[]" placeholder="Remarks" class="form-control">
+														<input type="text" id="remarks{{$key}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
 													</td>
 													<td>
-														<input type="number" id="weight0" name="item_weight[]" onchange="rowTotal(0)" placeholder="Weight (kgs)" class="form-control">
+														<input type="number" id="weight{{$key}}" name="item_weight[]" onchange="rowTotal({{$key}})" placeholder="Weight (kgs)" class="form-control" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
-														<input type="number" id="price0" name="item_price[]" onchange="rowTotal(0)" placeholder="Price" class="form-control">
+														<input type="number" id="price{{$key}}" name="item_price[]" onchange="rowTotal({{$key}})" placeholder="Price" class="form-control" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
-														<input type="number" id="amount0" name="item_amount[]" placeholder="Amount" class="form-control" disabled>
+														<input type="number" id="amount{{$key}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled value="{{$sale_item->Sales_qty2 * $sale_item->sales_price}}"> 
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
 												</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>
@@ -134,38 +136,38 @@
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
-										 		<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
+										 		<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled value="{{$sales->sed_sal}}">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
-												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
+												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled >
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
-												<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled>
+												<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled >
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">GST</label>
-												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
+												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control" value="{{$sales->Gst_sal}}">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance</label>
-												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
+												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control" value="{{$sales->ConvanceCharges}}">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
-												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
+												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control" value="{{$sales->LaborCharges}}">
 											</div>
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
-												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
+												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control" value="{{$sales->Bill_discount}}">
 											</div>
 
 											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
@@ -176,7 +178,7 @@
 											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">{{$sales->sed_sal}} </span></strong>
 												</span>
 											</div>
 										</div>
@@ -200,8 +202,7 @@
 	</body>
 </html>
 <script>
-	var index=1;
-
+	var index={{$sale_item_count}};
     function removeRow(button) {
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
@@ -221,7 +222,6 @@
     });
 
 	function addNewRow(id){
-
 		getItemDetails(id);
         var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
         var newRow = table.insertRow(table.rows.length);

@@ -36,9 +36,9 @@
                                                 <td>{{$row->ac_name}}</td>
                                                 <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                 <td class="actions">
-                                                    <a href="{{ route('view-sale-invoice') }}" class=""><i class="fas fa-eye"></i></a>
-                                                    <a href="" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#modalAnim"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                    <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
+                                                    <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
+                                                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
 												</td>
                                             </tr>
                                         </tbody>
@@ -51,7 +51,7 @@
                 </section>		
 			</div>
 		</section>
-        <div id="modalAnim" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+        <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
             <form method="post" action="{{ route('delete-sale-invoice') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
