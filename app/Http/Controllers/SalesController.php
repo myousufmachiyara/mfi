@@ -215,20 +215,62 @@ class SalesController extends Controller
     {
         $pdf = new TCPDF();
 
-        $pdf->SetCreator('Your Company');
-        $pdf->SetAuthor('Your Name');
-        $pdf->SetTitle('Invoice');
-        $pdf->SetSubject('Invoice');
-        $pdf->SetKeywords('Invoice, PDF');
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Your Name');
+        $pdf->SetTitle('Invoice Title');
+        $pdf->SetSubject('Invoice');
+        $pdf->SetKeywords('Invoice, TCPDF, PDF');
+                
+        // Set header and footer fonts
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        
+        // Set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        
+        // Set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+                
+        // Set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        
+        // Set font
+        $pdf->SetFont('helvetica', '', 10);
+        
         // Add a page
         $pdf->AddPage();
-
+        
         // Set some content to display
-        $content = 'Your invoice content goes here...';
+        // Set some content to display with styling
+        $html = '
+            <h1 style="color: #FF0000; text-align: center;">Styled PDF Example</h1>
+            <p style="font-weight: bold;">This is a paragraph with bold text.</p>
+            <p style="font-style: italic;">This is a paragraph with italic text.</p>
+            <p style="text-decoration: underline;">This is a paragraph with underlined text.</p>
+            <p style="text-decoration: line-through;">This is a paragraph with strike-through text.</p>
+            <p style="color: blue;">This is a paragraph with blue text.</p>
+            <div style="background-color: #FFFF00; padding: 10px;">
+                <p>This is a paragraph with yellow background color and padding.</p>
+            </div>
+            <table border="1" style="border-collapse: collapse;">
+                <tr>
+                    <th style="border: 1px solid #000000; padding: 5px;">Header 1</th>
+                    <th style="border: 1px solid #000000; padding: 5px;">Header 2</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000000; padding: 5px;">Cell 1</td>
+                    <td style="border: 1px solid #000000; padding: 5px;">Cell 2</td>
+                </tr>
+            </table>
+        ';
 
-        // Output the content
-        $pdf->writeHTML($content, true, false, true, false, '');
+        // Output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
 
         // Close and output PDF
         $pdf->Output('invoice.pdf', 'I');
@@ -248,7 +290,7 @@ class SalesController extends Controller
         $pdf->AddPage();
 
         // Set some content to display
-        $content = 'Your invoice content goes here...';
+        $content = '<table><tr><th>Company</th><th>Contact</th><th>Country</th></tr><tr><td>Alfreds Futterkiste</td><td>Maria Anders</td><td>Germany</td></tr></table>';
 
         // Output the content
         $pdf->writeHTML($content, true, false, true, false, '');
