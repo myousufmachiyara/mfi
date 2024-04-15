@@ -1,7 +1,7 @@
 <header class="header header-nav-menu header-nav-top-line">
 	<div class="logo-container">
-		<a href="../" class="logo">
-			<img src="/assets/img/logo.png" width="55" height="35" alt="Porto Admin" />
+		<a href="/" class="logo">
+			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
 		</a>
 		<button class="btn header-btn-collapse-nav d-lg-none" data-bs-toggle="collapse" data-bs-target=".header-nav">
 			<i class="fas fa-bars"></i>

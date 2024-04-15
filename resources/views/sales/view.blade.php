@@ -13,7 +13,7 @@
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
-											<h2 class="h2 mt-0 mb-1 text-dark font-weight-bold">INVOICE</h2>
+											<h2 class="h2 mt-0 mb-1 text-dark ">INVOICE NO:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">{{$sales->Sal_inv_no}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
@@ -107,8 +107,8 @@
 								</div>
 							</div>
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a href="{{ route('print-sale-invoice') }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
-								<a href="{{ route('download-sale-invoice') }}" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-download"></i> Download</a>
+								<a href="{{ route('print-sale-invoice', $sales->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
+								<a href="{{ route('download-sale-invoice', $sales->Sal_inv_no) }}" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-download"></i> Download</a>
 							</div>
 						</div>
 					</section>

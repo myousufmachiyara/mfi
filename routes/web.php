@@ -34,8 +34,8 @@ Route::post('/sales/saleinvoice/create', [App\Http\Controllers\SalesController::
 Route::post('/sales/saleinvoice/update/{id}', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
 Route::post('/sales/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
 Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
-Route::get('/sales/saleinvoice/generatePDF', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
-Route::get('/sales/saleinvoice/downloadPDF', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
+Route::get('/sales/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
+Route::get('/sales/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
 
 //items
 Route::get('/item/detail', [App\Http\Controllers\ItemsController::class, 'getItemDetails'])->name('get-item-details');
