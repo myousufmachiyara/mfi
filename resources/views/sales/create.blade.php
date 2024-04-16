@@ -206,6 +206,7 @@
 		var itemCount = Number($('#itemCount').val());
 		itemCount = itemCount-1;
 		$('#itemCount').val(itemCount);
+		tableTotal()
     }
 
     document.getElementById('removeRowBtn').addEventListener('click', function() {
