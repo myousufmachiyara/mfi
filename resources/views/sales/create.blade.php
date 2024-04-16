@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data">
+					<form method="post" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-3 mb-3">								
@@ -200,6 +200,15 @@
 <script>
 	var index=1;
 
+	$(document).ready(function() {
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+
     function removeRow(button) {
 		var tableRows = $("#saleInvoiceTable tr").length;
 		if(tableRows>1){
@@ -330,4 +339,5 @@
 		netTotal = total + gst + convance_charges + labour_charges - bill_discount;
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'.00</span>';
 	}
+
 </script>
