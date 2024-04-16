@@ -38,9 +38,14 @@
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" name="bill_status">
 													<option>Status</option>
-													<option value="0">Bill Not Final</option>
-													<option value="1">Finalized</option>
-												</select>												
+													@if($sales->bill_not == 0)
+														<option value="0" selected>Bill Not Final</option>
+														<option value="1">Finalized</option>
+													@elseif($sales->bill_not == 1)
+														<option value="0" >Bill Not Final</option>
+														<option value="1" selected>Finalized</option>
+													@endif
+												</select>													
 											</div>
 
 											<div class="col-12 mb-3">
@@ -95,6 +100,13 @@
 												</tr>
 											</thead>
 											<tbody id="saleInvoiceTable">
+												@php
+													$total_amount=0;
+													$total_weight=0;
+													$total_quantity=0;
+													$net_amount=0;
+												@endphp
+
 												@foreach($sale_items as $key => $sale_item)
 												<tr>
 													<td>
@@ -103,6 +115,8 @@
 													</td>
 													<td>
 														<input type="number" id="item_qty{{$key}}" name="item_qty[]" onchange="rowTotal({{$key}})" placeholder="Qty" class="form-control" value="{{$sale_item->Sales_qty}}">
+														@php  $total_quantity=$total_quantity + $sale_item->Sales_qty  @endphp
+
 													</td>
 													<td>
 														<select class="form-control" id="item_name{{$key}}" onchange="addNewRow({{$key}})" name="item_name[]">
@@ -117,12 +131,15 @@
 													</td>
 													<td>
 														<input type="number" id="weight{{$key}}" name="item_weight[]" onchange="rowTotal({{$key}})" placeholder="Weight (kgs)" class="form-control" value="{{$sale_item->Sales_qty2}}">
+														@php  $total_weight=$total_weight + $sale_item->Sales_qty2  @endphp
+
 													</td>
 													<td>
 														<input type="number" id="price{{$key}}" name="item_price[]" onchange="rowTotal({{$key}})" placeholder="Price" class="form-control" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
 														<input type="number" id="amount{{$key}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled value="{{$sale_item->Sales_qty2 * $sale_item->sales_price}}"> 
+														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty2 * $sale_item->sales_price) @endphp
 													</td>
 													<td>
 														<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -136,17 +153,17 @@
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
-										 		<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled value="{{$sales->sed_sal}}">
+										 		<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled value=@php echo $total_amount @endphp>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
-												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled >
+												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled value=@php echo $total_weight @endphp >
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
-												<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled >
+												<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled value=@php echo $total_quantity @endphp >
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -174,11 +191,11 @@
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att" accept="application/pdf, image/png, image/jpeg">
 										 	</div>
-
+											@php $net_amount= $total_amount + $sales->Gst_sal + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount @endphp
 											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">{{$sales->sed_sal}} </span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
 												</span>
 											</div>
 										</div>

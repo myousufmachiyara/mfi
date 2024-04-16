@@ -103,9 +103,9 @@ class SalesController extends Controller
                     $sales_2->sales_inv_cod=$invoice_id;
                     $sales_2->item_cod=$request->item_code[$i];
                     $sales_2->remarks=$request->item_remarks[$i];
-                    $sales_2->Sales_qty=$request->item_weight[$i];
+                    $sales_2->Sales_qty=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
-                    $sales_2->Sales_qty2=$request->item_qty[$i];
+                    $sales_2->Sales_qty2=$request->item_weight[$i];
     
                     $sales_2->save();
                 }
@@ -137,72 +137,104 @@ class SalesController extends Controller
 
     public function update($id, Request $request)
     {
-        $sales = new Sales();
+        $sales_update = new Sales();
+        $sa_date= null;
+        $pur_ord_no=null;
+        $Sales_remarks=null; 
+        $LaborCharges=null; 
+        $Gst_sal=null; 
+        $ConvanceCharges=null; 
+        $Cash_pur_name=null; 
+        $cash_Pur_address=null;
+        $cash_pur_phone=null; 
+        $Bill_discount=null; 
+        $account_name=null; 
+        $bill_not=null;
+        $att=null;
+        $sed_sal=null;
 
         if ($request->has('date') && $request->date) {
-            $sales['sa_date']=$request->date;
+            $sa_date=$request->date;
         }
         if ($request->has('bill_no') && $request->bill_no) {
-            $sales['pur_ord_no']=$request->bill_no;
+            $pur_ord_no=$request->bill_no;
         }
         if ($request->has('remarks') && $request->remarks) {
-            $sales['Sales_remarks']=$request->remarks;
+            $Sales_remarks=$request->remarks;
         }
         if ($request->has('labour_charges') && $request->labour_charges) {
-            $sales['LaborCharges']=$request->labour_charges;
+            $LaborCharges=$request->labour_charges;
         }
         if ($request->has('gst') && $request->gst) {
-            $sales['Gst_sal']=$request->gst;
+            $Gst_sal=$request->gst;
         }
         if ($request->has('convance_charges') && $request->convance_charges) {
-            $sales['ConvanceCharges']=$request->convance_charges;
+            $ConvanceCharges=$request->convance_charges;
         }
         if ($request->has('nop') && $request->nop) {
-            $sales['Cash_pur_name']=$request->nop;
+            $Cash_pur_name=$request->nop;
         }
         if ($request->has('address') && $request->address) {
-            $sales['cash_Pur_address']=$request->address;
+            $cash_Pur_address=$request->address;
         }
         if ($request->has('cash_pur_phone') && $request->cash_pur_phone) {
-            $sales['cash_pur_phone']=$request->cash_pur_phone;
+            $cash_pur_phone=$request->cash_pur_phone;
         }
         if ($request->has('bill_discount') && $request->bill_discount) {
-            $sales['Bill_discount']=$request->bill_discount;
+            $Bill_discount=$request->bill_discount;
         }
         if ($request->has('account_name') && $request->account_name) {
-            $sales['account_name']=$request->account_name;
+            $account_name=$request->account_name;
         }
         if ($request->has('bill_status') && $request->bill_status) {
-            $sales['bill_not']=$request->bill_status;
+            $bill_not=$request->bill_status;
         }
         if ($request->has('totalAmount') && $request->totalAmount) {
-            $sales['sed_sal']=$request->totalAmount;
+            $sed_sal= $request->totalAmount;
         }
         if($request->hasFile('att')){
             $extension = $request->file('att')->getClientOriginalExtension();
-            $sales['att'] = $this->salesDoc($request->file('att'),$extension);
+            $att = $this->salesDoc($request->file('att'),$extension);
         }
-        // Sales::where('Sal_inv_no', $id)->update($sales);
+        Sales::where('Sal_inv_no', $id)->update([
+            'sed_sal'=>$sed_sal,
+            'bill_not'=>$bill_not,
+            'account_name'=>$account_name,
+            'Bill_discount'=>$Bill_discount,
+            'cash_pur_phone'=>$cash_pur_phone,
+            'cash_Pur_address'=>$cash_Pur_address,
+            'Cash_pur_name'=>$Cash_pur_name,
+            'ConvanceCharges'=>$ConvanceCharges,
+            'Gst_sal'=>$Gst_sal,
+            'LaborCharges'=>$LaborCharges,
+            'Sales_remarks'=>$Sales_remarks,
+            'sa_date'=>$sa_date,
+            'pur_ord_no'=>$pur_ord_no,
+            'att'=>$att
+        ]);
+        
         Sales_2::where('sales_inv_cod', $id)->delete();
-
+        
         if($request->has('items'))
         {
             for($i=0;$i<=$request->items;$i++)
             {
+
                 if(filled($request->item_code[$i]))
                 {
                     $sales_2 = new Sales_2();
                     $sales_2->sales_inv_cod=$id;
                     $sales_2->item_cod=$request->item_code[$i];
                     $sales_2->remarks=$request->item_remarks[$i];
-                    $sales_2->Sales_qty=$request->item_weight[$i];
+                    $sales_2->Sales_qty=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
-                    $sales_2->Sales_qty2=$request->item_qty[$i];
+                    $sales_2->Sales_qty2=$request->item_weight[$i];
     
                     $sales_2->save();
                 }
             }
         }
+        return redirect()->route('all-saleinvoices');
     }
 
     public function destroy(Request $request)

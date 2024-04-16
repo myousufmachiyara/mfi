@@ -34,7 +34,11 @@
                                                 <td>{{$row->pur_ord_no}}</td>
                                                 <td>{{$row->sa_date}}</td>
                                                 <td>{{$row->ac_name}}</td>
-                                                <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
+                                                @if($row->bill_not==0)
+                                                    <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
+                                                @elseif($row->bill_not==1)
+                                                    <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
+                                                @endif
                                                 <td class="actions">
                                                     <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>

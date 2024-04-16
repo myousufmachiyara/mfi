@@ -96,9 +96,13 @@
 														<td colspan="2">Convance Charges</td>
 														<td class="text-left">{{$sales->ConvanceCharges}} PKR</td>
 													</tr>
+													</tr>
+														<td colspan="2">Discount</td>
+														<td class="text-left">{{$sales->Bill_discount}} PKR</td>
+													</tr>
 													<tr class="h4">
-														<td colspan="2">Total</td>
-														<td class="text-left">{{$sales->sed_sal}} PKR</td>
+														<td colspan="2">Net Amount</td>
+														<td class="text-left">{{$subtotal + $sales->Gst_sal + $sales->LaborCharges + $sales->ConvanceCharges - $sales->Bill_discount }} PKR</td>
 													</tr>
 												</tbody>
 											</table>
