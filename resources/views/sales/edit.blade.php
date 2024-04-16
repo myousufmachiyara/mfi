@@ -142,7 +142,8 @@
 														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty2 * $sale_item->sales_price) @endphp
 													</td>
 													<td>
-														<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+														<button type="button" onclick="addNewRow(0)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>
 													</td>
 												</tr>
 												@endforeach
@@ -221,12 +222,16 @@
 <script>
 	var index={{$sale_item_count}};
     function removeRow(button) {
-        var row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-		index--;
-		var itemCount = Number($('#itemCount').val());
-		itemCount = itemCount-1;
-		$('#itemCount').val(itemCount);
+	var tableRows = $("#saleInvoiceTable tr").length;
+		if(tableRows>1){
+			var row = button.parentNode.parentNode;
+			row.parentNode.removeChild(row);
+			index--;
+			var itemCount = Number($('#itemCount').val());
+			itemCount = itemCount-1;
+			$('#itemCount').val(itemCount);
+		}  
+		tableTotal();
     }
 
     document.getElementById('removeRowBtn').addEventListener('click', function() {
@@ -264,7 +269,7 @@
         cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
         cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
         cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
-        cell8.innerHTML = '<button onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+        cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
 
 		index++;
 
