@@ -95,14 +95,14 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="number" id="item_code0" name="item_code[]" placeholder="Code" class="form-control" required>
-														<input type="text" id="itemCount" name="items" value="0" placeholder="Code" class="form-control" hidden>
+														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required>
+														<input type="text" id="itemCount" name="items" value="1" placeholder="Code" class="form-control" hidden>
 													</td>
 													<td>
-														<input type="number" id="item_qty0" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
+														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name0" onchange="addNewRow(0)" required name="item_name[]">
+														<select class="form-control" id="item_name1" onchange="addNewRow(1)" required name="item_name[]">
 														<option selected>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -110,20 +110,20 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks0" name="item_remarks[]" placeholder="Remarks" class="form-control">
+														<input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="weight0" name="item_weight[]" onchange="rowTotal(0)" placeholder="Weight (kgs)" class="form-control">
+														<input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)"  class="form-control">
 													</td>
 													<td>
-														<input type="number" id="price0" name="item_price[]" onchange="rowTotal(0)" placeholder="Price" class="form-control">
+														<input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price"  class="form-control">
 													</td>
 													<td>
-														<input type="number" id="amount0" name="item_amount[]" placeholder="Amount" class="form-control" disabled>
+														<input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control"  disabled>
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-														<button type="button" onclick="addNewRow(0)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>
+														<button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>
 													</td>
 												</tr>
 											</tbody>
@@ -198,7 +198,7 @@
 	</body>
 </html>
 <script>
-	var index=1;
+	var index=2;
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -233,56 +233,61 @@
 
 	function addNewRow(id){
 		getItemDetails(id);
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
+		
+		var lastRow =  $('#myTable tr:last');
+		latestValue=lastRow[0].cells[2].querySelector('select').value;
 
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        var cell4 = newRow.insertCell(3);
-        var cell5 = newRow.insertCell(4);
-        var cell6 = newRow.insertCell(5);
-		var cell7 = newRow.insertCell(6);
-        var cell8 = newRow.insertCell(7);
+		if(latestValue!="Select Item"){
+			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+			var newRow = table.insertRow(table.rows.length);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
-        cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
-		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
-								'<option>Select Item</option>'+
-								@foreach($items as $key => $row)	
-									'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-								@endforeach
-							'</select>';
-        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
-        cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
+			var cell1 = newRow.insertCell(0);
+			var cell2 = newRow.insertCell(1);
+			var cell3 = newRow.insertCell(2);
+			var cell4 = newRow.insertCell(3);
+			var cell5 = newRow.insertCell(4);
+			var cell6 = newRow.insertCell(5);
+			var cell7 = newRow.insertCell(6);
+			var cell8 = newRow.insertCell(7);
 
-		index++;
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
+			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
+									'<option>Select Item</option>'+
+									@foreach($items as $key => $row)	
+										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
+									@endforeach
+								'</select>';
+			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
+			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" class="form-control">';
+			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" class="form-control">';
+			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
+			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
 
-		var itemCount = Number($('#itemCount').val());
-		itemCount = itemCount+1;
-		$('#itemCount').val(itemCount);
+			index++;
+
+			var itemCount = Number($('#itemCount').val());
+			itemCount = itemCount+1;
+			$('#itemCount').val(itemCount);
+		}
 	}
 
 	function getItemDetails(row_no){
 		var itemId = document.getElementById("item_name"+row_no).value;
-
-		$.ajax({
-			type: "GET",
-			url: "/item/detail",
-			data: {id:itemId},
-			success: function(result){
-				$('#item_code'+row_no).val(result[0]['it_cod']);
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#price'+row_no).val(result[0]['sales_price']);
-				$('#item_qty'+row_no).val(result[0]['opp_qty']);
-			},
-			error: function(){
-				alert("error");
-			}
-		});
+			$.ajax({
+				type: "GET",
+				url: "/item/detail",
+				data: {id:itemId},
+				success: function(result){
+					$('#item_code'+row_no).val(result[0]['it_cod']);
+					$('#remarks'+row_no).val(result[0]['item_remark']);
+					$('#price'+row_no).val(result[0]['sales_price']);
+					$('#item_qty'+row_no).val(result[0]['opp_qty']);
+				},
+				error: function(){
+					alert("error");
+				}
+			});
 	}
 
 	function getCOADetails(){
@@ -312,18 +317,22 @@
 	}
 
 	function tableTotal(){
-		var total=0;
-		var weight=0;
-		var quantity=0;
+		var totalAmount=0;
+		var totalWeight=0;
+		var totalQuantity=0;
 		var tableRows = $("#saleInvoiceTable tr").length;
+		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
 		for (var i = 0; i < tableRows; i++) {
-			total = total + Number($('#amount'+i+'').val());
-			weight = weight + Number($('#weight'+i+'').val());
-			quantity = quantity + Number($('#item_qty'+i+'').val());
+			var currentRow =  table.rows[i];
+			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
+			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
+			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
         }
-		$('#totalAmount').val(total);
-		$('#total_weight').val(weight);
-		$('#total_quantity').val(quantity);
+
+		$('#totalAmount').val(totalAmount);
+		$('#total_weight').val(totalWeight);
+		$('#total_quantity').val(totalQuantity);
 
 		netTotal();
 	}

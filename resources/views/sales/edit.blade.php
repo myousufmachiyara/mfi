@@ -255,37 +255,44 @@
 
 	function addNewRow(id){
 		getItemDetails(id);
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow(table.rows.length);
 
-        var cell1 = newRow.insertCell(0);
-        var cell2 = newRow.insertCell(1);
-        var cell3 = newRow.insertCell(2);
-        var cell4 = newRow.insertCell(3);
-        var cell5 = newRow.insertCell(4);
-        var cell6 = newRow.insertCell(5);
-		var cell7 = newRow.insertCell(6);
-        var cell8 = newRow.insertCell(7);
+		var lastRow =  $('#myTable tr:last');
+		latestValue=lastRow[0].cells[2].querySelector('select').value;
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
-        cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
-		cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
-								'<option>Select Item</option>'+
-								@foreach($items as $key => $row)	
-									'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-								@endforeach
-							'</select>';
-        cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
-        cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
-        cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
-        cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
+		if(latestValue!="Select Item"){
 
-		index++;
+			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+			var newRow = table.insertRow(table.rows.length);
 
-		var itemCount = Number($('#itemCount').val());
-		itemCount = itemCount+1;
-		$('#itemCount').val(itemCount);
+			var cell1 = newRow.insertCell(0);
+			var cell2 = newRow.insertCell(1);
+			var cell3 = newRow.insertCell(2);
+			var cell4 = newRow.insertCell(3);
+			var cell5 = newRow.insertCell(4);
+			var cell6 = newRow.insertCell(5);
+			var cell7 = newRow.insertCell(6);
+			var cell8 = newRow.insertCell(7);
+
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
+			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
+									'<option>Select Item</option>'+
+									@foreach($items as $key => $row)	
+										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
+									@endforeach
+								'</select>';
+			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
+			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
+			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
+			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
+			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
+
+			index++;
+
+			var itemCount = Number($('#itemCount').val());
+			itemCount = itemCount+1;
+			$('#itemCount').val(itemCount);
+		}
 	}
 
 	function getItemDetails(row_no){
@@ -334,21 +341,26 @@
 	}
 
 	function tableTotal(){
-		var total=0;
-		var weight=0;
-		var quantity=0;
+		var totalAmount=0;
+		var totalWeight=0;
+		var totalQuantity=0;
 		var tableRows = $("#saleInvoiceTable tr").length;
+		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
 		for (var i = 0; i < tableRows; i++) {
-			total = total + Number($('#amount'+i+'').val());
-			weight = weight + Number($('#weight'+i+'').val());
-			quantity = quantity + Number($('#item_qty'+i+'').val());
+			var currentRow =  table.rows[i];
+			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
+			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
+			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
         }
-		$('#totalAmount').val(total);
-		$('#total_weight').val(weight);
-		$('#total_quantity').val(quantity);
+
+		$('#totalAmount').val(totalAmount);
+		$('#total_weight').val(totalWeight);
+		$('#total_quantity').val(totalQuantity);
 
 		netTotal();
 	}
+
 
 	function netTotal(){
 		var netTotal = 0;
