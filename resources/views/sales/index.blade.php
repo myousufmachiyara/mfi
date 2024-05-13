@@ -10,7 +10,7 @@
                             <section class="card">
                                 <header class="card-header">
                                     <div class="card-actions">
-
+                                        <button type="button" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice </button>
                                     </div>
 
                                     <h2 class="card-title">Sale Invoices</h2>

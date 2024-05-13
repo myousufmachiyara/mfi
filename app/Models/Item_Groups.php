@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Item_entry extends Model
+class Item_Groups extends Model
 {
     use HasFactory;
-    protected $table = "item_entry";
+    protected $table = "item_group";
     protected $fillable = [
     ];
 }

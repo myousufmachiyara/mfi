@@ -63,7 +63,7 @@ a:active {
 /* Layout Base - Content Body */
 .content-body {
 	display: table-cell;
-	padding: 40px;
+	padding: 60px 10px;
 	position: relative;
 	vertical-align: top;
 }
@@ -6816,7 +6816,7 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 	font-size: 14.4px;
 	font-size: 0.7rem;
 	padding: 7.52px 12px;
-	padding: 0.47rem 0.75rem;
+	padding: 0.3rem 0.5rem;
 	cursor: pointer;
 }
 

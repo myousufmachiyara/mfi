@@ -34,6 +34,28 @@
 								</li>								
 							</ul>
 						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Items
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link" href="{{ route('all-item-groups')}}">
+										Item Groups
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="{{ route('create-item')}}">
+										New Item
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="{{ route('all-items')}}">
+										All Items
+									</a>
+								</li>
+							</ul>
+						</li>
 						<!-- <li class="dropdown">
 							<a class="nav-link dropdown-toggle" href="#">
 								Layouts
