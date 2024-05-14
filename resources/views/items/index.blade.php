@@ -169,11 +169,11 @@
                     </header>
                     <div class="card-body">
                         <div class="row form-group">
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>Item Code</label>
                                 <input type="number" class="form-control" placeholder="Item Code" name="it_cod" required disabled>
-                            </div>
-                            <div class="col-lg-6">
+                            </div> -->
+                            <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
                                 <select class="form-control" name ="item_group" required>
                                     <option selected>Select Group</option>
@@ -182,35 +182,43 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
                                 <input type="text" class="form-control" placeholder="Item Name" name="item_name">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" name="item_remark">
                             </div>
-                            <div class="col-lg-6">
-                                <label>Sale Price</label>
-                                <input type="text" class="form-control" placeholder="Sale Price" name="sales_price">
-                            </div>
-                            <div class="col-lg-6">
-                                <label>Purchase Price</label>
-                                <input type="text" class="form-control" placeholder="Purchase Price" name="OPP_qty_cost">
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Stock</label>
                                 <input type="text" class="form-control" placeholder="Stock" name="qty">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
+                                <label>Purchase Price</label>
+                                <input type="text" class="form-control" placeholder="Purchase Price" name="OPP_qty_cost">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Purchase Rate Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="purchase_date">
+                            </div>  
+                            <div class="col-lg-6 mb-2">
+                                <label>Sale Price</label>
+                                <input type="text" class="form-control" placeholder="Sale Price" name="sales_price">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                            <label>Sale Rate Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="date">
+                            </div>  
+                            <div class="col-lg-6 mb-2">
                                 <label>Date</label>
                                 <input type="date" class="form-control" placeholder="Date" name="date">
                             </div>  
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
                                 <input type="text" class="form-control" placeholder="Stock Level" name="stock_level">
                             </div>  
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
                                 <input type="text" class="form-control" placeholder="Labour Price" name="labourprice">
                             </div>  
