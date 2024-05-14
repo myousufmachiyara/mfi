@@ -22,17 +22,19 @@
 													<th width="">Group</th>
 													<th width="">Name</th>
 													<th width="">Remarks</th>
-													<th width="">P.Price</th>
+													<th width="6%">Qty</th>
+													<th width="6%">P.Price</th>
 													<th width="">PR.Date</th>
-													<th width="">S.Price</th>
+													<th width="6%">S.Price</th>
 													<th width="">SR.Date</th>
-													<th width="">Qty</th>
 													<th width="">Date</th>
-													<th width="">S.Level</th>
-													<th width="">L.Price</th>
-													<th width="">Action</th>
+													<th width="6%">S.Level</th>
+													<th width="6%">L.Price</th>
+													<th width=""></th>
 												</tr>
 											</thead>
+											<colgroup>
+
 											<tbody id="ItemsTable">
 												<tr>
 													<!-- <td>
@@ -54,33 +56,31 @@
 														<input type="text" class="form-control" name="item_remarks[]" required>
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_pur_cost[]" required>
+														<input type="number" class="form-control" name="item_stock[]" required value="0">
 													</td>
 													<td>
-														<input type="date" class="form-control" name="purchase_rate_date[]" required>
+														<input type="number" class="form-control" name="item_pur_cost[]" required value="0">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_s_price[]" required>
+														<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" size=5 required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="date" class="form-control" name="sale_rate_date[]" required>
-													</td>
-
-													<td>
-														<input type="number" class="form-control" name="item_stock[]" required>
+														<input type="number" class="form-control" name="item_s_price[]" required value="0">
 													</td>
 													<td>
-														<input type="date" class="form-control" name="item_date[]" required>
+														<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock_level[]" required>
+														<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_l_price[]" required>
+														<input type="number" class="form-control" name="item_stock_level[]" required value="0">
+													</td>
+													<td>
+														<input type="number" class="form-control" name="item_l_price[]" required value="0">
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-														<button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>
 													</td>
 												</tr>
 											</tbody>
@@ -141,7 +141,7 @@
 
 	function addNewRow(id){
 		var lastRow =  $('#myTable tr:last');
-		latestValue=lastRow[0].cells[1].querySelector('select').value;
+		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
 		if(latestValue!="Select Group"){
 			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
@@ -158,23 +158,26 @@
 			var cell9 = newRow.insertCell(8);
 			var cell10 = newRow.insertCell(9);
 			var cell11 = newRow.insertCell(10);
+			var cell12 = newRow.insertCell(11);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
-			cell2.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]">'+
+			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
+			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
-			cell3.innerHTML  = '<input type="text" class="form-control" name="item_name[]">';
-			cell4.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
-			cell5.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]">';
-			cell6.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]">';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="item_stock[]">';
-			cell8.innerHTML  = '<input type="date" class="form-control" name="item_date[]">';
-			cell9.innerHTML  = '<input type="number" class="form-control" name="item_stock_level[]">';
-			cell10.innerHTML = '<input type="number" class="form-control" name="item_l_price[]">';
-			cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" required>';
+			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
+			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0">';
+			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0">';
+			cell6.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0">';
+			cell8.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
+			cell9.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
+			cell10.innerHTML  = '<input type="number" class="form-control" name="item_stock_level[]" required value="0">';
+			cell11.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0">';
+			cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
 

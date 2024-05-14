@@ -11,7 +11,7 @@
                             <section class="card">
                                 <header class="card-header">
                                     <div class="card-actions">
-                                        <button type="button" class="btn btn-primary"> <i class="fas fa-plus"></i> New Item</button>
+                                        <button type="button" class="btn btn-primary mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item</button>
                                     </div>
                                     <h2 class="card-title">Items</h2>
 
@@ -127,8 +127,8 @@
                                 <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price">
                             </div>
                             <div class="col-lg-6">
-                                <label>Pur Cost</label>
-                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Pur Cost" name="OPP_qty_cost">
+                                <label>Purchase Price</label>
+                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost">
                             </div>
                             <div class="col-lg-6">
                                 <label>Stock</label>
@@ -152,6 +152,74 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary">Update Item</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </section>
+        </div>
+
+        <div id="createModal" class="modal-block modal-block-primary mfp-hide">
+            <section class="card">
+                <form method="post" action="{{ route('update-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                    @csrf
+                    <header class="card-header">
+                        <h2 class="card-title">Add Item</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Item Code</label>
+                                <input type="number" class="form-control" placeholder="Item Code" name="it_cod" required disabled>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Item Group</label>
+                                <select class="form-control" name ="item_group" required>
+                                    <option selected>Select Group</option>
+                                    @foreach($itemGroups as $key => $row)	
+                                        <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Item Name</label>
+                                <input type="text" class="form-control" placeholder="Item Name" name="item_name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Remarks</label>
+                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remark">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Sale Price</label>
+                                <input type="text" class="form-control" placeholder="Sale Price" name="sales_price">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Purchase Price</label>
+                                <input type="text" class="form-control" placeholder="Purchase Price" name="OPP_qty_cost">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Stock</label>
+                                <input type="text" class="form-control" placeholder="Stock" name="qty">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="date">
+                            </div>  
+                            <div class="col-lg-6">
+                                <label>Stock Level</label>
+                                <input type="text" class="form-control" placeholder="Stock Level" name="stock_level">
+                            </div>  
+                            <div class="col-lg-6">
+                                <label>Labour Price</label>
+                                <input type="text" class="form-control" placeholder="Labour Price" name="labourprice">
+                            </div>  
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Add Item</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
