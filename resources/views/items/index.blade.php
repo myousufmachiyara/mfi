@@ -20,17 +20,17 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th width="5%">Code</th>
-                                                <th width="15%">Name</th>
-                                                <th width="15%">Group</th>
-                                                <th width="15%">Remarks</th>
-                                                <th width="5%">Qty</th>
-                                                <th width="5%">P.Price</th>
-                                                <th width="5%">L.Price</th>
-                                                <th width="5%">S.Price</th>
-                                                <th width="5%">S.Date</th>
-                                                <th width="5%">P.Date</th>
-                                                <th width="5%">Action</th>
+                                                <th width="4%">Code</th>
+                                                <th width="13%">Name</th>
+                                                <th width="13%">Group</th>
+                                                <th width="13%">Remarks</th>
+                                                <th width="4%">Qty</th>
+                                                <th width="6%">P.Date</th>
+                                                <th width="4%">P.Price</th>
+                                                <th width="6%">S.Date</th>
+                                                <th width="4%">S.Price</th>
+                                                <th width="4%">L.Price</th>
+                                                <th width="4%"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -41,11 +41,11 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
                                                     <td>{{$row->opp_qty}}</td>
+                                                    <td>{{$row->opp_date}}</td>
                                                     <td>{{$row->Opp_qty_cost}}</td>
-                                                    <td>{{$row->labourprice}}</td>
+                                                    <td>{{$row->opp_date}}</td>
                                                     <td>{{$row->sales_price}}</td>
-                                                    <td>{{$row->opp_date}}</td>
-                                                    <td>{{$row->opp_date}}</td>
+                                                    <td>{{$row->labourprice}}</td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
