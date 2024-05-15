@@ -124,7 +124,7 @@
                                 <input type="text" class="form-control" id="item_remark" placeholder="Remarks" name="item_remark">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Stock</label>
+                                <label>Opening Stock</label>
                                 <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty">
                             </div>
                             <div class="col-lg-6 mb-2">
@@ -205,7 +205,7 @@
                                 <input type="text" class="form-control"  placeholder="Remarks" name="item_remarks[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Stock</label>
+                                <label>Opening Stock</label>
                                 <input type="text" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">

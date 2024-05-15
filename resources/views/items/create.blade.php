@@ -22,7 +22,7 @@
 													<th width="">Group</th>
 													<th width="">Name</th>
 													<th width="">Remarks</th>
-													<th width="6%">Qty</th>
+													<th width="6%">O.Stock</th>
 													<th width="6%">P.Price</th>
 													<th width="">PR.Date</th>
 													<th width="6%">S.Price</th>
