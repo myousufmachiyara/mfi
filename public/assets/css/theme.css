@@ -6814,7 +6814,7 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 
 .btn {
 	font-size: 14.4px;
-	font-size: 0.6rem;
+	font-size: 0.8rem;
 	padding: 7.52px 12px;
 	padding: 0.4rem 0.6rem;
 	cursor: pointer;
@@ -7509,7 +7509,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card-actions {
 	right: 15px;
 	position: absolute;
-	top: 15px;
+	top: 8px;
 }
 
 .card-actions a,
