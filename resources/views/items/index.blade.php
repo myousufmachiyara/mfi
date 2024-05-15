@@ -26,9 +26,9 @@
                                                 <th width="13%">Remarks</th>
                                                 <th width="4%">Qty</th>
                                                 <th width="6%">P.Date</th>
-                                                <th width="4%">P.Price</th>
+                                                <th width="2%">P.Price</th>
                                                 <th width="6%">S.Date</th>
-                                                <th width="4%">S.Price</th>
+                                                <th width="2%">S.Price</th>
                                                 <th width="4%">L.Price</th>
                                                 <th width="4%"></th>
                                             </tr>
@@ -41,9 +41,9 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
                                                     <td>{{$row->opp_qty}}</td>
-                                                    <td>{{$row->opp_date}}</td>
-                                                    <td>{{$row->Opp_qty_cost}}</td>
-                                                    <td>{{$row->opp_date}}</td>
+                                                    <td>{{$row->pur_rate_date}}</td>
+                                                    <td>{{$row->OPP_qty_cost}}</td>
+                                                    <td>{{$row->sale_rate_date}}</td>
                                                     <td>{{$row->sales_price}}</td>
                                                     <td>{{$row->labourprice}}</td>
                                                     <td class="actions">
@@ -101,11 +101,12 @@
                     </header>
                     <div class="card-body">
                         <div class="row form-group">
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>Item Code</label>
-                                <input type="number" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required disabled>
-                            </div>
-                            <div class="col-lg-6">
+                            </div> -->
+                            <div class="col-lg-6 mb-2">
+                                <input type="number" hidden class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>
+
                                 <label>Item Group</label>
                                 <select class="form-control" id="item_group" name ="item_group" required>
                                     <option selected>Select Group</option>
@@ -114,35 +115,47 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
                                 <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
                                 <input type="text" class="form-control" id="item_remark" placeholder="Remarks" name="item_remark">
                             </div>
-                            <div class="col-lg-6">
-                                <label>Sale Price</label>
-                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price">
-                            </div>
-                            <div class="col-lg-6">
-                                <label>Purchase Price</label>
-                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost">
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Stock</label>
                                 <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty">
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
+                                <label>Purchase Price</label>
+                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost">
+                            </div>
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Purchase Rate Date</label>
+                                <input type="date" class="form-control" id="pur_rate_date" placeholder="Date"  name="pur_rate_date" required value="<?php echo date('Y-m-d'); ?>">
+                            </div>  
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Sale Price</label>
+                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price">
+                            </div>
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Sale Rate Date</label>
+                                <input type="date" class="form-control" id="sale_rate_date" placeholder="Date"  name="sale_rate_date" required value="<?php echo date('Y-m-d'); ?>">
+                            </div>  
+
+                            <div class="col-lg-6 mb-2">
                                 <label>Date</label>
                                 <input type="date" class="form-control" id="date" placeholder="Date" name="date">
                             </div>  
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
                                 <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level">
                             </div>  
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
                                 <input type="text" class="form-control" id="labourprice" placeholder="Labour Price" name="labourprice">
                             </div>  
@@ -162,7 +175,7 @@
 
         <div id="createModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('update-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('store-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Add Item</h2>
@@ -175,7 +188,8 @@
                             </div> -->
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
-                                <select class="form-control" name ="item_group" required>
+                                <input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
+                                <select class="form-control" name ="item_group[]" required>
                                     <option selected>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -184,43 +198,43 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" placeholder="Item Name" name="item_name">
+                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remark">
+                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remarks[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Stock</label>
-                                <input type="text" class="form-control" placeholder="Stock" name="qty">
+                                <input type="text" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
-                                <input type="text" class="form-control" placeholder="Purchase Price" name="OPP_qty_cost">
+                                <input type="text" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Rate Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="purchase_date">
+                                <input type="date" class="form-control" placeholder="Date"  name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>">
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Sale Price</label>
-                                <input type="text" class="form-control" placeholder="Sale Price" name="sales_price">
+                                <input type="text" class="form-control" placeholder="Sale Price" value="0" name="item_s_price[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                             <label>Sale Rate Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="date">
+                                <input type="date" class="form-control" placeholder="Date" name="sale_rate_date[]" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="date">
+                                <input type="date" class="form-control" placeholder="Date"  name="item_date[]" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
-                                <input type="text" class="form-control" placeholder="Stock Level" name="stock_level">
+                                <input type="text" class="form-control" placeholder="Stock Level" value="0" name="item_stock_level[]" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
-                                <input type="text" class="form-control" placeholder="Labour Price" name="labourprice">
+                                <input type="text" class="form-control" placeholder="Labour Price" value="0" name="item_l_price" required>
                             </div>  
                         </div>
                     </div>
@@ -260,9 +274,11 @@
                 $('#item_group').val(result[0]['item_group']);
                 $('#item_name').val(result[0]['item_name']);
                 $('#item_remark').val(result[0]['item_remark']);
-                $('#sales_price').val(result[0]['sales_price']);
-                $('#OPP_qty_cost').val(result[0]['OPP_qty_cost']);
                 $('#qty').val(result[0]['qty']);
+                $('#OPP_qty_cost').val(result[0]['OPP_qty_cost']);
+                $('#pur_rate_date').val(result[0]['pur_rate_date']);
+                $('#sales_price').val(result[0]['sales_price']);
+                $('#sale_rate_date').val(result[0]['sale_rate_date']);
                 $("#date" ).val(date)
                 $('#stock_level').val(result[0]['stock_level']);
                 $('#labourprice').val(result[0]['labourprice']);

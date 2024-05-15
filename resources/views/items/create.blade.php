@@ -33,8 +33,6 @@
 													<th width=""></th>
 												</tr>
 											</thead>
-											<colgroup>
-
 											<tbody id="ItemsTable">
 												<tr>
 													<!-- <td>
@@ -79,7 +77,7 @@
 													<td>
 														<input type="number" class="form-control" name="item_l_price[]" required value="0">
 													</td>
-													<td>
+													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
 												</tr>

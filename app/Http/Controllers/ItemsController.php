@@ -41,6 +41,8 @@ class ItemsController extends Controller
                     $item_entry->item_remark=$request->item_remarks[$i];
                     $item_entry->sales_price=$request->item_s_price[$i];
                     $item_entry->OPP_qty_cost=$request->item_pur_cost[$i];
+                    $item_entry->pur_rate_date=$request->purchase_rate_date[$i];
+                    $item_entry->sale_rate_date=$request->sale_rate_date[$i];
                     $item_entry->qty=$request->item_stock[$i];
                     $item_entry->opp_qty=$request->item_stock[$i];
                     $item_entry->opp_date=$request->item_date[$i];
@@ -65,49 +67,55 @@ class ItemsController extends Controller
 
     public function update(Request $request)
     {
+        $item = new Item_entry();
+        $item = Item_entry::where('it_cod', $request->it_cod)->get();
                 
         if ($request->has('item_group') && $request->item_group) {
-            $item_group=$request->item_group;
+            $item->item_group=$request->item_group;
         }
         if ($request->has('item_name') && $request->item_name) {
-            $item_name=$request->item_name;
+            $item->item_name=$request->item_name;
         }
         if ($request->has('item_remark') && $request->item_remark) {
-            $item_remark=$request->item_remark;
-        }
-        if ($request->has('sales_price') && $request->sales_price) {
-            $sales_price=$request->sales_price;
-        }
-        if ($request->has('OPP_qty_cost') && $request->OPP_qty_cost) {
-            $OPP_qty_cost=$request->OPP_qty_cost;
+            $item->item_remark=$request->item_remark;
         }
         if ($request->has('qty') && $request->qty) {
-            $qty=$request->qty;
+            $item->opp_qty=$request->qty;
+        }
+        if ($request->has('OPP_qty_cost') && $request->OPP_qty_cost) {
+            $item->OPP_qty_cost=$request->OPP_qty_cost;
+        }
+        if ($request->has('pur_rate_date') && $request->pur_rate_date) {
+            $item->pur_rate_date=$request->pur_rate_date;
+        }
+        if ($request->has('sales_price') && $request->sales_price) {
+            $item->sales_price=$request->sales_price;
+        }
+        if ($request->has('sale_rate_date') && $request->sale_rate_date) {
+            $item->sale_rate_date=$request->sale_rate_date;
         }
         if ($request->has('date') && $request->date) {
-            $date=$request->date;
+            $item->opp_date=$request->date;
         }
         if ($request->has('stock_level') && $request->stock_level) {
-            $stock_level=$request->stock_level;
+            $item->stock_level=$request->stock_level;
         }
         if ($request->has('labourprice') && $request->labourprice) {
-            $labourprice=$request->labourprice;
+            $item->labourprice=$request->labourprice;
         }
-        if ($request->has('item_name') && $request->item_name) {
-            $item_name=$request->item_name;
-        }
-       
+
         Item_entry::where('it_cod', $request->it_cod)->update([
-            'item_name'=>$item_name,
-            'item_group'=>$item_group,
-            'item_remark'=>$item_remark,
-            'opp_qty'=>$qty,
-            'OPP_qty_cost'=>$OPP_qty_cost,
-            'sales_price'=>$sales_price,
-            'opp_date'=>$date,
-            'stock_level'=>$stock_level,
-            'labourprice'=>$labourprice,
-            'qty'=>$labourprice
+            'item_name'=>$item->item_name,
+            'item_group'=>$item->item_group,
+            'item_remark'=>$item->item_remark,
+            'opp_qty'=>$item->opp_qty,
+            'OPP_qty_cost'=>$item->OPP_qty_cost,
+            'pur_rate_date'=>$item->pur_rate_date,
+            'sales_price'=>$item->sales_price,
+            'sale_rate_date'=>$item->sale_rate_date,
+            'opp_date'=>$item->opp_date,
+            'stock_level'=>$item->stock_level,
+            'labourprice'=>$item->labourprice,
         ]);
         
         return redirect()->route('all-items');
