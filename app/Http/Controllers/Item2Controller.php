@@ -11,8 +11,8 @@ class Item2Controller extends Controller
     
     public function index()
     {
-        $items = Item_entry2::where('Item_entry2.status', 1)
-                ->join('item_group as ig', 'ig.item_group_cod', '=', 'Item_entry2.item_group')
+        $items = Item_entry2::where('item_entry2.status', 1)
+                ->join('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
                 ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
 
