@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AC;
 
-class COAController extends Controller
+class COAGroupsController extends Controller
 {
     //
     public function index()

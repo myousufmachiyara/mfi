@@ -66,7 +66,28 @@
 								</li>
 							</ul>
 						</li>
-
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Accounts
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link" href="{{ route('all-acc')}}">
+										Chart Of Accounts
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="{{ route('all-acc-groups')}}">
+										COA Groups
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="{{ route('all-acc-sub-heads-groups')}}">
+										COA Sub Heads
+									</a>
+								</li>
+							</ul>
+						</li>
 					</ul>	
 				</nav>
 			</div>

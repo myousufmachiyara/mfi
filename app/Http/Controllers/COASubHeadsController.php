@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AC;
+use App\Models\sub_head_of_acc;
 
-class COAController extends Controller
+class COASubHeadsController extends Controller
 {
     //
     public function index()
     {
-        $itemGroups = Item_Groups::where('status', 1)->get();
-        return view('item_groups.index',compact('itemGroups'));
+        $subheads = sub_head_of_acc::where('status', 1)
+        ->join('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
+        ->get();
+        return view('ac.subheads',compact('subheads'));
     }
 
     public function store(Request $request)
