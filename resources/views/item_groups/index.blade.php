@@ -18,7 +18,6 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th>S.No</th>
                                                 <th>Group Code</th>
                                                 <th>Name</th>
                                                 <th>Remarks</th>
@@ -28,7 +27,6 @@
                                         <tbody>
                                             @foreach ($itemGroups as $key => $row)
                                                 <tr>
-                                                    <td>{{$key+1}}</td>
                                                     <td>{{$row->item_group_cod}}</td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->group_remarks}}</td>
@@ -115,10 +113,14 @@
                         <h2 class="card-title">Update Group</h2>
                     </header>
                     <div class="card-body">
+                       <div class="form-group">
+                            <label>Group Code</label>
+                            <input type="number" class="form-control" id="update_group_id" name="item_group_cod" required disabled>
+                        </div>
                         <div class="form-group">
                             <label>Group Name</label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
-                            <input type="hidden" class="form-control" id="update_group_id" placeholder="Name" name="item_group_cod" required>
+                            <input type="hidden" class="form-control" id="update_group_id" name="item_group_cod" required>
                         </div>
                         <div class="form-group">
                             <label>Remarks</label>

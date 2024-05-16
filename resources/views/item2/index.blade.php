@@ -12,7 +12,7 @@
                                 <header class="card-header">
                                     <div class="row">
                                     <div class="col-6">
-                                        <h2 class="card-title">Items</h2>
+                                        <h2 class="card-title">Items Pipes</h2>
                                     </div>
 
                                     <div class="card-actions col-6 text-end">
@@ -28,6 +28,7 @@
                                                 <th width="13%">Group</th>
                                                 <th width="13%">Remarks</th>
                                                 <th width="4%">Qty</th>
+                                                <th width="4%">Wt.</th>
                                                 <th width="6%">P.Date</th>
                                                 <th width="2%">P.Price</th>
                                                 <th width="6%">S.Date</th>
@@ -44,6 +45,7 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
                                                     <td>{{$row->opp_qty}}</td>
+                                                    <td>{{$row->weight}}</td>
                                                     <td>{{$row->pur_rate_date}}</td>
                                                     <td>{{$row->OPP_qty_cost}}</td>
                                                     <td>{{$row->sale_rate_date}}</td>
@@ -66,7 +68,7 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-item') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-item-2') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
@@ -97,7 +99,7 @@
 
         <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('update-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('update-item-2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Update Item</h2>
@@ -107,9 +109,7 @@
                             <div class="col-lg-6">
                                 <label>Item Code</label>
                                 <input type="number" class="form-control" id="it_cod_display" placeholder="Item Code" name="it_cod_display" required disabled>
-                                <input type="hidden" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>
-
-                            </div>
+                                <input type="hidden" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>                            </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
                                 <select class="form-control" id="item_group" name ="item_group" required>
@@ -129,7 +129,11 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
-                                <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty">
+                                <input type="text" class="form-control" id="qty" placeholder="Opening Stock" name="qty">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Weigth</label>
+                                <input type="text" class="form-control" id="weight" placeholder="Weigth" name="weight">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
@@ -179,7 +183,7 @@
 
         <div id="createModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('store-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('store-item-2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Add Item</h2>
@@ -211,6 +215,10 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
                                 <input type="text" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Weigth</label>
+                                <input type="text" class="form-control" placeholder="Weigth" name="weight">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
@@ -265,7 +273,7 @@
     function getItemDetails(id){
         $.ajax({
             type: "GET",
-            url: "/item/detail",
+            url: "/item2/detail",
             data: {id:id},
             success: function(result){
                 var dateParts = result[0]['opp_date'].split("-");
@@ -280,6 +288,7 @@
                 $('#item_name').val(result[0]['item_name']);
                 $('#item_remark').val(result[0]['item_remark']);
                 $('#qty').val(result[0]['opp_qty']);
+                $('#weight').val(result[0]['weight']);
                 $('#OPP_qty_cost').val(result[0]['OPP_qty_cost']);
                 $('#pur_rate_date').val(result[0]['pur_rate_date']);
                 $('#sales_price').val(result[0]['sales_price']);

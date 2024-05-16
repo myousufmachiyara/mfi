@@ -41,6 +41,6 @@
 		<link rel="stylesheet" href="/assets/css/custom.css">
 
 		<!-- Head Libs -->
-		<script src="/assets/vendor/modernizr/modernizr.js"></script>
+		<!-- <script src="/assets/vendor/modernizr/modernizr.js"></script> -->
 
 	</head>

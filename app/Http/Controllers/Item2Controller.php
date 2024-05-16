@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Item_entry;
+use App\Models\Item_entry2;
 use App\Models\Item_Groups;
 
-class ItemsController extends Controller
+class Item2Controller extends Controller
 {
     
     public function index()
     {
-        $items = Item_entry::where('item_entry.status', 1)
-                ->join('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
+        $items = Item_entry2::where('Item_entry2.status', 1)
+                ->join('item_group as ig', 'ig.item_group_cod', '=', 'Item_entry2.item_group')
                 ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
 
-        return view('items.index',compact('items','itemGroups'));
+        return view('item2.index',compact('items','itemGroups'));
     }
 
     public function create()
     {
         $item_groups = Item_Groups::all();
-        return view('items.create',compact('item_groups'));
+        return view('item2.create',compact('item_groups'));
     }
 
     public function store(Request $request)
@@ -35,40 +35,42 @@ class ItemsController extends Controller
             {
                 if(filled($request->item_name[$i]))
                 {
-                    $item_entry = new Item_entry();
-                    $item_entry->item_name=$request->item_name[$i];
-                    $item_entry->item_group=$request->item_group[$i];
-                    $item_entry->item_remark=$request->item_remarks[$i];
-                    $item_entry->sales_price=$request->item_s_price[$i];
-                    $item_entry->OPP_qty_cost=$request->item_pur_cost[$i];
-                    $item_entry->pur_rate_date=$request->purchase_rate_date[$i];
-                    $item_entry->sale_rate_date=$request->sale_rate_date[$i];
-                    $item_entry->qty=$request->item_stock[$i];
-                    $item_entry->opp_qty=$request->item_stock[$i];
-                    $item_entry->opp_date=$request->item_date[$i];
-                    $item_entry->stock_level=$request->item_stock_level[$i];
-                    $item_entry->labourprice=$request->item_l_price[$i];
-                    $item_entry->status=1;
-                    $item_entry->created_by=$userId;
+                    $Item_entry2 = new Item_entry2();
+                    $Item_entry2->item_name=$request->item_name[$i];
+                    $Item_entry2->item_group=$request->item_group[$i];
+                    $Item_entry2->item_remark=$request->item_remarks[$i];
+                    $Item_entry2->sales_price=$request->item_s_price[$i];
+                    $Item_entry2->OPP_qty_cost=$request->item_pur_cost[$i];
+                    $Item_entry2->pur_rate_date=$request->purchase_rate_date[$i];
+                    $Item_entry2->sale_rate_date=$request->sale_rate_date[$i];
+                    $Item_entry2->qty=$request->item_stock[$i];
+                    $Item_entry2->weight=$request->weight[$i];
+                    $Item_entry2->opp_qty=$request->item_stock[$i];
+                    $Item_entry2->opp_date=$request->item_date[$i];
+                    $Item_entry2->stock_level=$request->item_stock_level[$i];
+                    $Item_entry2->labourprice=$request->item_l_price[$i];
+                    $Item_entry2->status=1;
+                    $Item_entry2->created_by=$userId;
 
-                    $item_entry->save();
+                    $Item_entry2->save();
                 }
             }
         }
 
-        return redirect()->route('all-items');
+        return redirect()->route('all-items-2');
     }
 
     public function destroy(Request $request)
     {
-        $item_groups = Item_entry::where('it_cod', $request->item_id)->update(['status' => '0']);
-        return redirect()->route('all-items');
+        $item_groups = Item_entry2::where('it_cod', $request->item_id)->update(['status' => '0']);
+        return redirect()->route('all-items-2');
     }
 
     public function update(Request $request)
     {
-        $item = Item_entry::where('it_cod', $request->it_cod)->get();
-    
+        $item = new Item_entry2();
+        $item = Item_entry2::where('it_cod', $request->it_cod)->get();
+                
         if ($request->has('item_group') && $request->item_group) {
             $item->item_group=$request->item_group;
         }
@@ -80,6 +82,9 @@ class ItemsController extends Controller
         }
         if ($request->has('qty') && $request->qty) {
             $item->opp_qty=$request->qty;
+        }
+        if ($request->has('weight') && $request->weight) {
+            $item->weight=$request->weight;
         }
         if ($request->has('OPP_qty_cost') && $request->OPP_qty_cost) {
             $item->OPP_qty_cost=$request->OPP_qty_cost;
@@ -103,11 +108,12 @@ class ItemsController extends Controller
             $item->labourprice=$request->labourprice;
         }
 
-        Item_entry::where('it_cod', $request->it_cod)->update([
+        Item_entry2::where('it_cod', $request->it_cod)->update([
             'item_name'=>$item->item_name,
             'item_group'=>$item->item_group,
             'item_remark'=>$item->item_remark,
             'opp_qty'=>$item->opp_qty,
+            'weight'=>$item->weight,
             'OPP_qty_cost'=>$item->OPP_qty_cost,
             'pur_rate_date'=>$item->pur_rate_date,
             'sales_price'=>$item->sales_price,
@@ -117,13 +123,12 @@ class ItemsController extends Controller
             'labourprice'=>$item->labourprice,
         ]);
         
-        return redirect()->route('all-items');
+        return redirect()->route('all-items-2');
     }
 
     public function getItemDetails(Request $request)
     {
-        $item_details = Item_entry::where('it_cod', $request->id)->get();
+        $item_details = Item_entry2::where('it_cod', $request->id)->get();
         return $item_details;
     }
-    
 }
