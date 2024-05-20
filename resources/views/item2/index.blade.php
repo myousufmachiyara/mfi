@@ -24,8 +24,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="4%">Code</th>
-                                                <th width="13%">Name</th>
                                                 <th width="13%">Group</th>
+                                                <th width="13%">Name</th>
                                                 <th width="13%">Remarks</th>
                                                 <th width="4%">Qty</th>
                                                 <th width="4%">Wt.</th>
@@ -41,8 +41,8 @@
                                             @foreach ($items as $key => $row)
                                                 <tr>
                                                     <td>{{$row->it_cod}}</td>
-                                                    <td>{{$row->item_name}}</td>
                                                     <td>{{$row->group_name}}</td>
+                                                    <td>{{$row->item_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
                                                     <td>{{$row->opp_qty}}</td>
                                                     <td>{{$row->weight}}</td>
@@ -121,23 +121,23 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name">
+                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control" id="item_remark" placeholder="Remarks" name="item_remark">
+                                <input type="text" class="form-control" value=" " id="item_remark" placeholder="Remarks" name="item_remark">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
-                                <input type="text" class="form-control" id="qty" placeholder="Opening Stock" name="qty">
+                                <input type="text" class="form-control" id="qty" placeholder="Opening Stock" name="qty"  step=".01" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Weigth</label>
-                                <input type="text" class="form-control" id="weight" placeholder="Weigth" name="weight">
+                                <input type="text" class="form-control" id="weight" placeholder="Weigth" name="weight"  step=".01" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
-                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost">
+                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost" step=".01" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -147,7 +147,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Sale Price</label>
-                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price">
+                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price"  step=".01" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -161,11 +161,11 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
-                                <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level">
+                                <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level"  step=".01" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
-                                <input type="text" class="form-control" id="labourprice" placeholder="Labour Price" name="labourprice">
+                                <input type="text" class="form-control" id="labourprice" placeholder="Labour Price" name="labourprice"  step=".01" required>
                             </div>  
                         </div>
                     </div>
@@ -210,19 +210,19 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remarks[]" required>
+                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remarks[]" value=" ">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
-                                <input type="text" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required>
+                                <input type="number" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required step=".01">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Weigth</label>
-                                <input type="text" class="form-control" placeholder="Weigth" name="weight">
+                                <input type="number" class="form-control" placeholder="Weigth" value="0" name="weight" step=".01" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
-                                <input type="text" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required>
+                                <input type="number" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required step=".01">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Rate Date</label>
@@ -230,7 +230,7 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Sale Price</label>
-                                <input type="text" class="form-control" placeholder="Sale Price" value="0" name="item_s_price[]" required>
+                                <input type="number" class="form-control" placeholder="Sale Price" value="0" name="item_s_price[]" required step=".01">
                             </div>
                             <div class="col-lg-6 mb-2">
                             <label>Sale Rate Date</label>
@@ -242,11 +242,11 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
-                                <input type="text" class="form-control" placeholder="Stock Level" value="0" name="item_stock_level[]" required>
+                                <input type="number" class="form-control" placeholder="Stock Level" value="0" name="item_stock_level[]" required step=".01">
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
-                                <input type="text" class="form-control" placeholder="Labour Price" value="0" name="item_l_price" required>
+                                <input type="number" class="form-control" placeholder="Labour Price" value="0" name="item_l_price" required step=".01">
                             </div>  
                         </div>
                     </div>
@@ -276,26 +276,26 @@
             url: "/item2/detail",
             data: {id:id},
             success: function(result){
-                var dateParts = result[0]['opp_date'].split("-");
+                var dateParts = result['opp_date'].split("-");
                 var year = dateParts[0];
                 var month = dateParts[1];
                 var day = dateParts[2];
                 var date = year + "-" + month + "-" + day;  
                 
-                $('#it_cod').val(result[0]['it_cod']);
-                $('#it_cod_display').val(result[0]['it_cod']);
-                $('#item_group').val(result[0]['item_group']);
-                $('#item_name').val(result[0]['item_name']);
-                $('#item_remark').val(result[0]['item_remark']);
-                $('#qty').val(result[0]['opp_qty']);
-                $('#weight').val(result[0]['weight']);
-                $('#OPP_qty_cost').val(result[0]['OPP_qty_cost']);
-                $('#pur_rate_date').val(result[0]['pur_rate_date']);
-                $('#sales_price').val(result[0]['sales_price']);
-                $('#sale_rate_date').val(result[0]['sale_rate_date']);
-                $("#date" ).val(date)
-                $('#stock_level').val(result[0]['stock_level']);
-                $('#labourprice').val(result[0]['labourprice']);
+                $('#it_cod').val(result['it_cod']);
+                $('#it_cod_display').val(result['it_cod']);
+                $('#item_group').val(result['item_group']);
+                $('#item_name').val(result['item_name']);
+                $('#item_remark').val(result['item_remark']);
+                $('#qty').val(result['opp_qty']);
+                $('#weight').val(result['weight']);
+                $('#OPP_qty_cost').val(result['OPP_qty_cost']);
+                $('#pur_rate_date').val(result['pur_rate_date']);
+                $('#sales_price').val(result['sales_price']);
+                $('#sale_rate_date').val(result['sale_rate_date']);
+                $("#date" ).val(result['opp_date'])
+                $('#stock_level').val(result['stock_level']);
+                $('#labourprice').val(result['labourprice']);
             },
             error: function(){
                 alert("error");

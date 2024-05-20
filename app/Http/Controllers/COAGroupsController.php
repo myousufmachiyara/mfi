@@ -3,58 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ac_group;
 
 class COAGroupsController extends Controller
 {
     //
     public function index()
     {
-        $itemGroups = Item_Groups::where('status', 1)->get();
-        return view('item_groups.index',compact('itemGroups'));
+        $accGroups = ac_group::where('status', 1)->get();
+        return view('ac.acc_groups',compact('accGroups'));
     }
 
     public function store(Request $request)
     {
-        $item_group = new Item_Groups();
+        $acc_group = new ac_group();
 
-        if ($request->has('group_name') && $request->group_name) {
-            $item_group->group_name=$request->group_name;
+        if ($request->has('acc_group_name') && $request->acc_group_name) {
+            $acc_group->group_name=$request->acc_group_name;
         }
-        if ($request->has('group_remarks') && $request->group_remarks) {
-            $item_group->group_remarks=$request->group_remarks;
-        }
-        $item_group->save();
-        return redirect()->route('all-item-groups');
+
+        $acc_group->save();
+        return redirect()->route('all-acc-groups');
     }
     
     public function destroy(Request $request)
     {
-        $item_group = Item_Groups::where('item_group_cod', $request->item_group_cod)->update(['status' => '0']);
-        return redirect()->route('all-item-groups');
+        $ac_group = ac_group::where('group_cod', $request->acc_group_cod)->update(['status' => '0']);
+        return redirect()->route('all-acc-groups');
     }
 
     public function update(Request $request)
     {
-        $group_name= null;
-        $group_remarks=null;
-       
+        $ac_group = ac_group::where('group_cod', $request->group_cod)->get();
+
         if ($request->has('group_name') && $request->group_name) {
-            $group_name=$request->group_name;
+            $ac_group->group_name=$request->group_name;
         }
-        if ($request->has('group_remarks') && $request->group_remarks) {
-            $group_remarks=$request->group_remarks;
-        }
-       
-        Item_Groups::where('item_group_cod', $request->item_group_cod)->update([
-            'group_name'=>$group_name,
-            'group_remarks'=>$group_remarks
+               
+        ac_group::where('group_cod', $request->group_cod)->update([
+            'group_name'=>$ac_group->group_name,
         ]);
-        
-        return redirect()->route('all-item-groups');
+
+        return redirect()->route('all-acc-groups');
     }
-    public function getAccountDetails(Request $request)
+
+    public function getDetails(Request $request)
     {
-        $acc_details = AC::where('ac_code', $request->id)->get();
-        return $acc_details;
+        $acc__group_details = ac_group::where('group_cod', $request->id)->get()->first();
+        return $acc__group_details;
     }
+
 }

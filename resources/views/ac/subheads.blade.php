@@ -1,5 +1,6 @@
 @extends('../layouts.header')
 	<body>
+
 		<section class="body">
 			@extends('../layouts.menu')
 			<div class="inner-wrapper">
@@ -18,20 +19,20 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Head Name</th>
+                                                <th width="5%">ID</th>
+                                                <th width="15%">Head Name</th>
                                                 <th>Sub Head Name</th>
-                                                <th>Action</th>
+                                                <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($subheads as $key => $row)
                                                 <tr>
                                                     <td>{{$row->id}}</td>
-                                                    <td>{{$row->heads}}</td>
-                                                    <td>{{$row->sub}}</td>
-                                                    <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                    <td>{{$row->name}}</td>
+                                                    <td>{{$row->sub_name}}</td>
+                                                    <td class="actions text-end">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getCOASubHeadDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
@@ -47,11 +48,11 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-item-group') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-acc-sub-heads-groups') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Group</h2>
+                        <h2 class="card-title">Delete Sub Head</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -59,8 +60,8 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this group?</p>
-                                <input name="item_group_cod" id="deleteID" hidden>
+                                <p class="mb-0">Are you sure that you want to delete this Sub Head?</p>
+                                <input name="sub_head_id" id="deleteID" hidden>
                             </div>
                         </div>
                     </div>
@@ -78,25 +79,30 @@
 
         <div id="addModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('store-item-group') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('store-acc-sub-heads-groups') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
-                        <h2 class="card-title">Add Group</h2>
+                        <h2 class="card-title">Add COA Sub Head</h2>
                     </header>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Group Name</label>
-                            <input type="text" class="form-control" placeholder="Name" name="group_name" required>
+                            <label>Select Head</label>
+                            <select class="form-control" name ="main" required>
+                                <option selected>Select Group</option>
+                                @foreach($heads as $key => $row)	
+                                    <option value="{{$row->id}}">{{$row->heads}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label>Remarks</label>
-                            <input type="text" class="form-control" placeholder="Remarks" name="group_remarks">
+                        <div class="form-group mb-3">
+                            <label>Sub Head Name</label>
+                            <input type="text" class="form-control" placeholder="Sub Head Name" name="sub" required>
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Add Group</button>
+                                <button type="submit" class="btn btn-primary">Add COA Sub Head</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -107,30 +113,35 @@
 
         <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('update-item-group') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('update-acc-sub-heads-groups') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
-                        <h2 class="card-title">Update Group</h2>
+                        <h2 class="card-title">Update COA Sub Head</h2>
                     </header>
                     <div class="card-body">
                        <div class="form-group">
-                            <label>Group Code</label>
-                            <input type="number" class="form-control" id="update_group_id" name="item_group_cod" required disabled>
+                            <label>ID</label>
+                            <input type="number" class="form-control" id="sub_head_id" name="id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Group Name</label>
-                            <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
-                            <input type="hidden" class="form-control" id="update_group_id" name="item_group_cod" required>
+                            <label>Select Head</label>
+                            <select class="form-control" name="main" required id="update_head_name">
+                                <option selected>Select Group</option>
+                                @foreach($heads as $key => $row)	
+                                    <option value="{{$row->id}}">{{$row->heads}}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden" class="form-control" id="update_sub_head_id" name="sub_head_id" required>
                         </div>
-                        <div class="form-group">
-                            <label>Remarks</label>
-                            <input type="text" class="form-control" id="update_group_remarks" placeholder="Remarks" name="group_remarks">
+                        <div class="form-group mb-3">
+                            <label>Sub Head Name</label>
+                            <input type="text" class="form-control" id="update_sub_head_name" placeholder="Remarks" name="sub" required>
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Update Group</button>
+                                <button type="submit" class="btn btn-primary">Update COA Sub Head</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -143,20 +154,21 @@
 	</body>
 </html>
 <script>
+    
     function setId(id){
         $('#deleteID').val(id);
     }
 
-    function getGroupDetails(groupID){
+    function getCOASubHeadDetails(id){
         $.ajax({
             type: "GET",
-            url: "/item-group/detail",
-            data: {id:groupID},
+            url: "/coa/coa-sub-heads/detail",
+            data: {id:id},
             success: function(result){
-                console.log(result)
-                $('#update_group_id').val(result[0]['item_group_cod']);
-                $('#update_group_name').val(result[0]['group_name']);
-                $('#update_group_remarks').val(result[0]['group_remarks']);
+                $('#sub_head_id').val(result['id']);
+                $('#update_sub_head_id').val(result['id']);
+                $('#update_head_name').val(result['main']);
+                $('#update_sub_head_name').val(result['sub']);
             },
             error: function(){
                 alert("error");

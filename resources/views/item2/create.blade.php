@@ -52,22 +52,22 @@
 														<input type="text" class="form-control" name="item_name[]" required>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_remarks[]" required>
+														<input type="text" class="form-control" name="item_remarks[]" required value=" ">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock[]" required value="0">
+														<input type="number" class="form-control" name="item_stock[]" required value="0" step=".01">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="weight[]" required value="0">
+														<input type="number" class="form-control" name="weight[]" required value="0" step=".01">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_pur_cost[]" required value="0">
+														<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".01">
 													</td>
 													<td>
 														<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" size=5 required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_s_price[]" required value="0">
+														<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".01">
 													</td>
 													<td>
 														<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >
@@ -76,10 +76,10 @@
 														<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock_level[]" required value="0">
+														<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".01">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_l_price[]" required value="0">
+														<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".01">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -171,16 +171,16 @@
 									@endforeach
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" required>';
-			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0">';
-			cell5.innerHTML  = '<input type="number" class="form-control" name="weight[]" required value="0">';
-			cell6.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0">';
+			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
+			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".01">';
+			cell5.innerHTML  = '<input type="number" class="form-control" name="weight[]" required value="0" step=".01">';
+			cell6.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".01">';
 			cell7.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell8.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0">';
+			cell8.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".01">';
 			cell9.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
 			cell10.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell11.innerHTML  = '<input type="number" class="form-control" name="item_stock_level[]" required value="0">';
-			cell12.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0">';
+			cell11.innerHTML  = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".01">';
+			cell12.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".01">';
 			cell13.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;

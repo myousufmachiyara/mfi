@@ -21,14 +21,13 @@ class ItemsController extends Controller
 
     public function create()
     {
-        $item_groups = Item_Groups::all();
+        $item_groups = Item_Groups::where('item_group.status', 1)->get();
         return view('items.create',compact('item_groups'));
     }
 
     public function store(Request $request)
     {
         $userId=1;
-
         if($request->has('items'))
         {
             for($i=0;$i<$request->items;$i++)
@@ -67,8 +66,10 @@ class ItemsController extends Controller
 
     public function update(Request $request)
     {
+
         $item = Item_entry::where('it_cod', $request->it_cod)->get();
-    
+        $item->item_remark=null;
+
         if ($request->has('item_group') && $request->item_group) {
             $item->item_group=$request->item_group;
         }
@@ -78,28 +79,28 @@ class ItemsController extends Controller
         if ($request->has('item_remark') && $request->item_remark) {
             $item->item_remark=$request->item_remark;
         }
-        if ($request->has('qty') && $request->qty) {
+        if ($request->has('qty') && $request->qty OR $request->qty==0) {
             $item->opp_qty=$request->qty;
         }
-        if ($request->has('OPP_qty_cost') && $request->OPP_qty_cost) {
+        if ($request->has('OPP_qty_cost') && $request->OPP_qty_cost OR $request->OPP_qty_cost==0) {
             $item->OPP_qty_cost=$request->OPP_qty_cost;
         }
         if ($request->has('pur_rate_date') && $request->pur_rate_date) {
             $item->pur_rate_date=$request->pur_rate_date;
         }
-        if ($request->has('sales_price') && $request->sales_price) {
+        if ($request->has('sales_price') && $request->sales_price OR $request->sales_price==0) {
             $item->sales_price=$request->sales_price;
         }
-        if ($request->has('sale_rate_date') && $request->sale_rate_date) {
+        if ($request->has('sale_rate_date') && $request->sale_rate_date ) {
             $item->sale_rate_date=$request->sale_rate_date;
         }
         if ($request->has('date') && $request->date) {
             $item->opp_date=$request->date;
         }
-        if ($request->has('stock_level') && $request->stock_level) {
+        if ($request->has('stock_level') && $request->stock_level OR $request->stock_level==0 ) {
             $item->stock_level=$request->stock_level;
         }
-        if ($request->has('labourprice') && $request->labourprice) {
+        if ($request->has('labourprice') && $request->labourprice OR $request->labourprice==0) {
             $item->labourprice=$request->labourprice;
         }
 

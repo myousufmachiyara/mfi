@@ -24,8 +24,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="4%">Code</th>
-                                                <th width="13%">Name</th>
                                                 <th width="13%">Group</th>
+                                                <th width="13%">Name</th>
                                                 <th width="13%">Remarks</th>
                                                 <th width="4%">Qty</th>
                                                 <th width="6%">P.Date</th>
@@ -40,8 +40,8 @@
                                             @foreach ($items as $key => $row)
                                                 <tr>
                                                     <td>{{$row->it_cod}}</td>
-                                                    <td>{{$row->item_name}}</td>
                                                     <td>{{$row->group_name}}</td>
+                                                    <td>{{$row->item_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
                                                     <td>{{$row->opp_qty}}</td>
                                                     <td>{{$row->pur_rate_date}}</td>
@@ -97,7 +97,7 @@
 
         <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('update-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('update-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" >
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Update Item</h2>
@@ -108,12 +108,11 @@
                                 <label>Item Code</label>
                                 <input type="number" class="form-control" id="it_cod_display" placeholder="Item Code" name="it_cod_display" required disabled>
                                 <input type="hidden" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>
-
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
                                 <select class="form-control" id="item_group" name ="item_group" required>
-                                    <option selected>Select Group</option>
+                                    <option>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
@@ -121,19 +120,19 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name">
+                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control" id="item_remark" placeholder="Remarks" name="item_remark">
+                                <input type="text" class="form-control" value=" " id="item_remark" placeholder="Remarks" name="item_remark">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
-                                <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty">
+                                <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty" step=".01" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
-                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost">
+                                <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost" step=".01" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -143,7 +142,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Sale Price</label>
-                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price">
+                                <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price" step=".01" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -153,15 +152,15 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" id="date" placeholder="Date" name="date">
+                                <input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
-                                <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level">
+                                <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level" step=".01" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
-                                <input type="text" class="form-control" id="labourprice" placeholder="Labour Price" name="labourprice">
+                                <input type="text" class="form-control" id="labourprice"  placeholder="Labour Price" name="labourprice" step=".01" required>
                             </div>  
                         </div>
                     </div>
@@ -206,15 +205,15 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="item_remarks[]" required>
+                                <input type="text" class="form-control"  placeholder="Remarks" value=" " name="item_remarks[]">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Opening Stock</label>
-                                <input type="text" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required>
+                                <input type="number" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required step=".01" >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Price</label>
-                                <input type="text" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required>
+                                <input type="number" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required step=".01" >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Purchase Rate Date</label>
@@ -222,7 +221,7 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Sale Price</label>
-                                <input type="text" class="form-control" placeholder="Sale Price" value="0" name="item_s_price[]" required>
+                                <input type="number" class="form-control" placeholder="Sale Price" value="0" step=".01"  name="item_s_price[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                             <label>Sale Rate Date</label>
@@ -234,11 +233,11 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Stock Level</label>
-                                <input type="text" class="form-control" placeholder="Stock Level" value="0" name="item_stock_level[]" required>
+                                <input type="number" class="form-control" placeholder="Stock Level" value="0" step=".01"  name="item_stock_level[]" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Labour Price</label>
-                                <input type="text" class="form-control" placeholder="Labour Price" value="0" name="item_l_price" required>
+                                <input type="number" class="form-control" placeholder="Labour Price" value="0" step=".01"  name="item_l_price" required >
                             </div>  
                         </div>
                     </div>

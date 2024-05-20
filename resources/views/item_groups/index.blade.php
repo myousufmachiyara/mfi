@@ -115,7 +115,7 @@
                     <div class="card-body">
                        <div class="form-group">
                             <label>Group Code</label>
-                            <input type="number" class="form-control" id="update_group_id" name="item_group_cod" required disabled>
+                            <input type="number" class="form-control" id="group_id" required disabled>
                         </div>
                         <div class="form-group">
                             <label>Group Name</label>
@@ -153,10 +153,10 @@
             url: "/item-group/detail",
             data: {id:groupID},
             success: function(result){
-                console.log(result)
-                $('#update_group_id').val(result[0]['item_group_cod']);
-                $('#update_group_name').val(result[0]['group_name']);
-                $('#update_group_remarks').val(result[0]['group_remarks']);
+                $('#group_id').val(result['item_group_cod']);
+                $('#update_group_id').val(result['item_group_cod']);
+                $('#update_group_name').val(result['group_name']);
+                $('#update_group_remarks').val(result['group_remarks']);
             },
             error: function(){
                 alert("error");

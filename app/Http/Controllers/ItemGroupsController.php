@@ -55,7 +55,7 @@ class ItemGroupsController extends Controller
 
     public function getGroupDetails(Request $request)
     {
-        $item_group_details = Item_Groups::where('item_group_cod', $request->id)->get();
+        $item_group_details = Item_Groups::where('item_group_cod', $request->id)->get()->first();
         return $item_group_details;
     }
 }

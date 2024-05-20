@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\sub_head_of_acc;
+use App\Models\head_of_acc;
 
 class COASubHeadsController extends Controller
 {
@@ -12,52 +13,56 @@ class COASubHeadsController extends Controller
     {
         $subheads = sub_head_of_acc::where('status', 1)
         ->join('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
+        ->select('hoa.heads as name', 'sub_head_of_acc.id as id', 'sub_head_of_acc.sub as sub_name')
         ->get();
-        return view('ac.subheads',compact('subheads'));
+
+        $heads = head_of_acc::all();
+        return view('ac.subheads',compact('subheads','heads'));
     }
 
     public function store(Request $request)
     {
-        $item_group = new Item_Groups();
+        $subheads = new sub_head_of_acc();
 
-        if ($request->has('group_name') && $request->group_name) {
-            $item_group->group_name=$request->group_name;
+        if ($request->has('main') && $request->main) {
+            $subheads->main=$request->main;
         }
-        if ($request->has('group_remarks') && $request->group_remarks) {
-            $item_group->group_remarks=$request->group_remarks;
+        if ($request->has('sub') && $request->sub) {
+            $subheads->sub=$request->sub;
         }
-        $item_group->save();
-        return redirect()->route('all-item-groups');
+        $subheads->save();
+        return redirect()->route('all-acc-sub-heads-groups');
     }
     
     public function destroy(Request $request)
     {
-        $item_group = Item_Groups::where('item_group_cod', $request->item_group_cod)->update(['status' => '0']);
-        return redirect()->route('all-item-groups');
+        $sub_head = sub_head_of_acc::where('id', $request->sub_head_id)->update(['status' => '0']);
+        return redirect()->route('all-acc-sub-heads-groups');
     }
 
     public function update(Request $request)
     {
-        $group_name= null;
-        $group_remarks=null;
        
-        if ($request->has('group_name') && $request->group_name) {
-            $group_name=$request->group_name;
+        $sub_head = sub_head_of_acc::where('id', $request->sub_head_id)->get();
+
+        if ($request->has('main') && $request->main) {
+            $sub_head->main=$request->main;
         }
-        if ($request->has('group_remarks') && $request->group_remarks) {
-            $group_remarks=$request->group_remarks;
+        if ($request->has('sub') && $request->sub) {
+            $sub_head->sub=$request->sub;
         }
-       
-        Item_Groups::where('item_group_cod', $request->item_group_cod)->update([
-            'group_name'=>$group_name,
-            'group_remarks'=>$group_remarks
+               
+        sub_head_of_acc::where('id', $request->sub_head_id)->update([
+            'main'=>$sub_head->main,
+            'sub'=>$sub_head->sub,
         ]);
-        
-        return redirect()->route('all-item-groups');
+
+        return redirect()->route('all-acc-sub-heads-groups');
     }
-    public function getAccountDetails(Request $request)
+
+    public function getCOASubHeadDetails(Request $request)
     {
-        $acc_details = AC::where('ac_code', $request->id)->get();
-        return $acc_details;
+        $subheads = sub_head_of_acc::where('id', $request->id)->get()->first();
+        return $subheads;
     }
 }
