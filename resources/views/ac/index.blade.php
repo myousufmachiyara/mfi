@@ -39,7 +39,8 @@
                                                     <td>{{$row->ac_name}}</td>
                                                     <td>{{$row->rec_able}}</td>
                                                     <td>{{$row->pay_able}}</td>
-                                                    <td>{{$row->opp_date}}</td>
+                                                    <!-- <td>{{$row->opp_date}}</td> -->
+                                                    <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
                                                     <td>{{$row->address}}</td>
                                                     <td>{{$row->phone_no}}</td>
@@ -136,7 +137,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
                                 <select class="form-control" name ="group_cod">
-                                    <option selected>Select Group</option>
+                                    <option >Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
@@ -146,7 +147,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
                                 <select class="form-control" name ="AccountType" required>
-                                    <option selected>Select Account Type</option>
+                                    <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
                                     @endforeach
@@ -227,7 +228,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
                                 <select class="form-control" name="AccountType" required id="update_AccountType">
-                                    <option selected>Select Account Type</option>
+                                    <option  value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
                                     @endforeach

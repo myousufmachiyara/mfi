@@ -21639,3 +21639,14 @@ html.dark .mailbox-compose .bootstrap-tagsinput {
 html.dark .mailbox-compose .bootstrap-tagsinput > input {
 	color: #FFF;
 }
+/* Hide the spinners in Webkit browsers (Chrome, Safari, etc.) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the spinners in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
