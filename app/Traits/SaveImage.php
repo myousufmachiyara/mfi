@@ -17,5 +17,16 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/sales/'),$filenamenew);
         return $filenamepath;
     }
+    public function coaDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        // $extension      = $img->extension();
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/coa/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/coa/'),$filenamenew);
+        return $filenamepath;
+    }
 }
 ?>

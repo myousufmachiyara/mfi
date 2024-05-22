@@ -54,6 +54,8 @@ Route::post('/coa/acc/create', [App\Http\Controllers\COAController::class, 'stor
 Route::post('/coa/acc/update', [App\Http\Controllers\COAController::class, 'update'])->name('update-acc');
 Route::post('/coa/acc/delete', [App\Http\Controllers\COAController::class, 'destroy'])->name('delete-acc');
 Route::get('/coa/acc/detail', [App\Http\Controllers\COAController::class, 'getAccountDetails'])->name('get-acc-details');
+Route::get('/coa/acc/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
+Route::get('/coa/acc/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
 
 // COA Groups
 Route::get('/coa/all-coa-groups', [App\Http\Controllers\COAGroupsController::class, 'index'])->name('all-acc-groups');

@@ -39,14 +39,18 @@
                                                     <td>{{$row->ac_name}}</td>
                                                     <td>{{$row->rec_able}}</td>
                                                     <td>{{$row->pay_able}}</td>
-                                                    <!-- <td>{{$row->opp_date}}</td> -->
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
                                                     <td>{{$row->address}}</td>
                                                     <td>{{$row->phone_no}}</td>
-                                                    <td>{{$row->group_cod}}</td>
-                                                    <td>{{$row->AccountType}}</td>
-                                                    <td>{{$row->att}}</td>
+                                                    <td>{{$row->group_name}}</td>
+                                                    <td>{{$row->sub}}</td>
+                                                    <td>
+                                                        @if($row->att!=null)
+                                                            <a class="mb-1 mt-1 me-1 text-danger" href="{{ route('coa-att-download', $row->ac_code ) }}"><i class="fas fa-download"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 " href="{{ route('coa-att-view', $row->ac_code ) }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                        @endif
+                                                    </td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
@@ -64,7 +68,7 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-item-group') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-acc') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
@@ -137,7 +141,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
                                 <select class="form-control" name ="group_cod">
-                                    <option >Select Group</option>
+                                    <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
@@ -193,32 +197,32 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" required>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" required>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="opp_date" id="update_opp_date" required>
+                                <input type="date" class="form-control" placeholder="Date" name="opp_date" id="update_opp_date">
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks" required>
+                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <label>Address</label>
-                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address" required></textarea>
+                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
-                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no" required>
+                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
-                                <select class="form-control" name="group_cod" required id="update_group_cod">
-                                    <option selected>Select Group</option>
+                                <select class="form-control" name="group_cod" id="update_group_cod">
+                                    <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
@@ -237,7 +241,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Att.</label>
-                                <input type="text" class="form-control" placeholder="Att." name="att" id="update_att" required>
+                                <input type="file" class="form-control" placeholder="Att." name="att" id="update_att">
                             </div>
   
                         </div>
@@ -268,7 +272,6 @@
             url: "/coa/acc/detail",
             data: {id:id},
             success: function(result){
-                console.log(result)
                 $('#ac_id').val(result['ac_code']);
                 $('#update_ac_id').val(result['ac_code']);
                 $('#update_ac_name').val(result['ac_name']);
