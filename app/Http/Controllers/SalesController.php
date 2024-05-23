@@ -368,7 +368,6 @@ class SalesController extends Controller
         $net_amount=0;
 
         foreach ($sale_items as $items) {
-
             if($count%2==0)
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';

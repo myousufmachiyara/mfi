@@ -10,7 +10,8 @@
                             <section class="card">
                                 <header class="card-header">
                                     <div class="card-actions">
-                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Account</button>
+                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
+                                        <button type="button" class="modal-with-form btn btn-danger" href="#printModal"> <i class="fas fa-file-pdf">  </i>  Print Report</button>
                                     </div>
                                     <h2 class="card-title">Chart Of Accounts</h2>
                                 </header>
@@ -89,6 +90,37 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-danger">Delete</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
+
+        <div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('print-acc') }}" enctype="multipart/form-data">
+                @csrf
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Print COA Report Account</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>From Date:</label>
+                                <input type="date" class="form-control" name="print_from_date" value="<?php echo date('Y-m-d',strtotime("yesterday")); ?>">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>To Date:</label>
+                                <input type="date" class="form-control" name="print_to_date" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-danger">Print</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
