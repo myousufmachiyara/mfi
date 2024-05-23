@@ -10,7 +10,8 @@ class COAGroupsController extends Controller
     //
     public function index()
     {
-        $accGroups = ac_group::where('status', 1)->get();
+        $accGroups = ac_group::where('status', 1)
+        ->get();
         return view('ac.acc_groups',compact('accGroups'));
     }
 

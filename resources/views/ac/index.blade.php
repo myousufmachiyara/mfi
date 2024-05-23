@@ -11,7 +11,7 @@
                                 <header class="card-header">
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
-                                        <button type="button" class="modal-with-form btn btn-danger" href="#printModal"> <i class="fas fa-file-pdf">  </i>  Print Report</button>
+                                        <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button>
                                     </div>
                                     <h2 class="card-title">Chart Of Accounts</h2>
                                 </header>
@@ -49,7 +49,7 @@
                                                     <td>
                                                         @if($row->att!=null)
                                                             <a class="mb-1 mt-1 me-1 text-danger" href="{{ route('coa-att-download', $row->ac_code ) }}"><i class="fas fa-download"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 " href="{{ route('coa-att-view', $row->ac_code ) }}" target="_blank"><i class="fas fa-eye"></i></a>
+                                                            <a class="mb-1 mt-1 me-1" href="{{ route('coa-att-view', $row->ac_code ) }}" target="_blank"><i class="fas fa-eye"></i></a>
                                                         @endif
                                                     </td>
                                                     <td class="actions">
@@ -322,4 +322,9 @@
             }
         });
 	}
+
+    function printReport(){
+        window.location.href = "{{ route('print-acc')}}";
+    }
+
 </script>

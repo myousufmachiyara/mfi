@@ -134,7 +134,7 @@ class COAController extends Controller
         return $acc_details;
     }
 
-    public function print(Request $request)
+    public function print()
     {
         $data = AC::where('ac.status', 1)
         ->join('sub_head_of_acc', 'ac.AccountType', '=', 'sub_head_of_acc.id')
