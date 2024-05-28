@@ -165,7 +165,7 @@
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
 			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
-									'<option disabled selected>Select Group</option>'+
+									'<option disabled selected required>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
