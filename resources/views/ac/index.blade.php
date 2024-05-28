@@ -308,10 +308,9 @@
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Att.</label>
-                                <input type="file" class="form-control" placeholder="Att." name="att" id="update_att">
+                                <label>Attachements</label>
+                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
                             </div>
-  
                         </div>
                     </div>
                     <footer class="card-footer">
@@ -409,6 +408,12 @@
 	}
 
     function getAttachements(id){
+
+        var table = document.getElementById('acc_attachements');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
         $.ajax({
             type: "GET",
             url: "/coa/acc/attachements",

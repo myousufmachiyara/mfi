@@ -135,10 +135,6 @@ class COAController extends Controller
         if ($request->has('AccountType') && $request->AccountType) {
             $acc->AccountType=$request->AccountType;
         }
-        if($request->hasFile('att')){
-            $extension = $request->file('att')->getClientOriginalExtension();
-            $acc->att = $this->coaDoc($request->file('att'),$extension);
-        }
 
         AC::where('ac_code', $request->ac_cod)->update([
             'ac_name'=>$acc->ac_name,
@@ -150,8 +146,22 @@ class COAController extends Controller
             'phone_no'=>$acc->phone_no,
             'group_cod'=>$acc->group_cod,
             'AccountType'=>$acc->AccountType,
-            'att'=>$acc->att,
         ]);
+
+        
+        if($request->hasFile('att')){
+            
+            ac_att::where('ac_code', $request->ac_cod)->delete();
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $acc_att = new ac_att();
+                $acc_att->ac_code = $request->ac_cod;
+                $extension = $file->getClientOriginalExtension();
+                $acc_att->att_path = $this->coaDoc($file,$extension);
+                $acc_att->save();
+            }
+        }
 
         return redirect()->route('all-acc');
     }

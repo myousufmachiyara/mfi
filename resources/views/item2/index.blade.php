@@ -1,6 +1,5 @@
 @extends('../layouts.header')
 	<body>
-
 		<section class="body">
 			@extends('../layouts.menu')
 			<div class="inner-wrapper">
