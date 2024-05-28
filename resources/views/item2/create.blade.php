@@ -42,14 +42,14 @@
 													<td>
 														<input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
 														<select class="form-control" name ="item_group[]" onchange="addNewRow(1)" required>
-															<option  value="" disabled selected>Select Group</option>
+															<option disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
 															@endforeach
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_name[]" required>
+														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
 													</td>
 													<td>
 														<input type="text" class="form-control" name="item_remarks[]" required value=" ">
@@ -165,12 +165,12 @@
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
 			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
-									'<option  value="" disabled selected>Select Group</option>'+
+									'<option disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
 			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".0001">';
 			cell5.innerHTML  = '<input type="number" class="form-control" name="weight[]" required value="0" step=".0001">';
@@ -191,4 +191,28 @@
 		}
 	}
 
+	function validateItemName(inputElement)
+	{
+		var item_name = inputElement.value;
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+        $.ajax({
+            type: 'POST',
+			url: '/item2/new-item/validate',
+            data: {'item_name': item_name},
+            success: function(response){
+				console.log(response)
+            },
+            error: function(response){
+                var errors = response.responseJSON.errors;
+                var errorMessage = 'Item Already Exists';
+                alert(errorMessage);
+            }
+        });
+    }
 </script>

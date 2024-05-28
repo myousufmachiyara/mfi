@@ -17,6 +17,7 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/sales/'),$filenamenew);
         return $filenamepath;
     }
+    
     public function coaDoc($file,$extension)
     {
         $img = $file;

@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" required>
+                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" onchange="validateItemName(this)" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
@@ -304,4 +304,29 @@
             }
         });
 	}
+
+    function validateItemName(inputElement)
+	{
+		var item_name = inputElement.value;
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+        $.ajax({
+            type: 'POST',
+			url: '/item2/new-item/validate',
+            data: {'item_name': item_name},
+            success: function(response){
+				console.log(response)
+            },
+            error: function(response){
+                var errors = response.responseJSON.errors;
+                var errorMessage = 'Product Already Exists';
+                alert(errorMessage);
+            }
+        });
+    }
 </script>

@@ -48,7 +48,7 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_name[]" required>
+														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
 													</td>
 													<td>
 														<input type="text" class="form-control" name="item_remarks[]" value=" ">
@@ -102,6 +102,7 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 	var index=2;
@@ -160,12 +161,12 @@
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
 			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
-									'<option value="" disabled selected>Select Group</option>'+
+									'<option disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
 			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".0001">';
 			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".0001">';
@@ -173,7 +174,7 @@
 			cell7.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".0001">';
 			cell8.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
 			cell9.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell10.innerHTML  = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".0001">';
+			cell10.innerHTML = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".0001">';
 			cell11.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".0001">';
 			cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
@@ -185,4 +186,28 @@
 		}
 	}
 
+	function validateItemName(inputElement)
+	{
+		var item_name = inputElement.value;
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+        $.ajax({
+            type: 'POST',
+			url: '/item/new-item/validate',
+            data: {'item_name': item_name},
+            success: function(response){
+				console.log(response)
+            },
+            error: function(response){
+                var errors = response.responseJSON.errors;
+                var errorMessage = 'Item Already Exists';
+                alert(errorMessage);
+            }
+        });
+    }
 </script>

@@ -18,7 +18,7 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th>Group Code</th>
+                                                <th width="5%">Code</th>
                                                 <th>Name</th>
                                                 <th>Remarks</th>
                                                 <th>Action</th>

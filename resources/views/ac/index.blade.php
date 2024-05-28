@@ -46,12 +46,7 @@
                                                     <td>{{$row->phone_no}}</td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->sub}}</td>
-                                                    <td>
-                                                        @if($row->att!=null)
-                                                            <a class="mb-1 mt-1 me-1 text-danger" href="{{ route('coa-att-download', $row->ac_code ) }}"><i class="fas fa-download"></i></a>
-                                                            <a class="mb-1 mt-1 me-1" href="{{ route('coa-att-view', $row->ac_code ) }}" target="_blank"><i class="fas fa-eye"></i></a>
-                                                        @endif
-                                                    </td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
@@ -98,6 +93,44 @@
             </form>
         </div>
 
+        <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">All Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+
+                            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Attachement Path</th>
+                                        <th>Download</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="acc_attachements">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                                    @csrf   -->
+                                    <input type="hidden" id="download_id" name="download_id">                              
+                                    <button type="button" class="btn btn-danger">Download All</button>
+                                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                                <!-- </form> -->
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+        </div>
+
         <div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
             <form method="post" action="{{ route('print-acc') }}" enctype="multipart/form-data">
                 @csrf
@@ -131,7 +164,7 @@
 
         <div id="addModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('store-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="addForm" action="{{ route('store-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Add New Account</h2>
@@ -171,13 +204,14 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Group</label>
+                                <label>Account Group </label>
                                 <select class="form-control" name ="group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
                                 </select>
+                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -188,11 +222,13 @@
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
                                     @endforeach
                                 </select>
+                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
+
                             </div>
 
                             <div class="col-lg-6 mb-2">
                                 <label>Attachement</label>
-                                <input type="file" class="form-control" name="att" accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
                             </div>
   
                         </div>
@@ -211,7 +247,7 @@
 
         <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('update-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="updateForm" action="{{ route('update-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Update Account</h2>
@@ -264,7 +300,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
                                 <select class="form-control" name="AccountType" required id="update_AccountType">
-                                    <option  value="" disabled selected>Select Account Type</option>
+                                    <option disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
                                     @endforeach
@@ -293,7 +329,56 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
+    $(document).ready(function(){
+    
+        $('#addForm').on('submit', function(e){
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '/coa/acc/validate',
+                data: formData,
+                success: function(response){
+                    var form = document.getElementById('addForm');
+                    form.submit();
+                },
+                error: function(response){
+                    var errors = response.responseJSON.errors;
+                    var errorMessage = 'Account Already Exists';
+
+                    alert(errorMessage);
+                }
+            });
+        });
+
+        // $('#updateForm').on('submit', function(e){
+        //     e.preventDefault();
+
+        //     var formData = $(this).serialize();
+
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/coa/acc/validate',
+        //         data: formData,
+        //         success: function(response){
+        //             var form = document.getElementById('updateForm');
+        //             form.submit();
+        //         },
+        //         error: function(response){
+        //             var errors = response.responseJSON.errors;
+        //             var errorMessage = 'Account Already Exists';
+
+        //             alert(errorMessage);
+        //         }
+        //     });
+        // });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }
@@ -323,8 +408,32 @@
         });
 	}
 
+    function getAttachements(id){
+        $.ajax({
+            type: "GET",
+            url: "/coa/acc/attachements",
+            data: {id:id},
+            success: function(result){
+                $.each(result, function(k,v){
+                    var html="<tr>";
+                    html+= "<td>"+v['att_id']+"</td>"
+                    html+= "<td>"+v['att_path']+"</td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/acc/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/acc/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+="</tr>";
+                    $('#acc_attachements').append(html);
+                });
+                $('#download_id').val(result[0]['ac_code']);
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+	}
+
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";
     }
 
+    
 </script>

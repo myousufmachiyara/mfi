@@ -204,7 +204,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" required>
+                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" onchange="validateItemName(this)" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
@@ -259,7 +259,10 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
+
     function setId(id){
         $('#deleteID').val(id);
     }
@@ -295,4 +298,30 @@
             }
         });
 	}
+
+    function validateItemName(inputElement)
+	{
+		var item_name = inputElement.value;
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+        $.ajax({
+            type: 'POST',
+			url: '/item/new-item/validate',
+            data: {'item_name': item_name},
+            success: function(response){
+				console.log(response)
+            },
+            error: function(response){
+                var errors = response.responseJSON.errors;
+                var errorMessage = 'Product Already Exists';
+                alert(errorMessage);
+            }
+        });
+    }
+
 </script>

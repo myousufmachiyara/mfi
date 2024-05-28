@@ -88,7 +88,7 @@
                         <div class="form-group">
                             <label>Select Head</label>
                             <select class="form-control" name ="main" required>
-                                <option selected>Select Group</option>
+                                <option disabled selected>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>
                                 @endforeach
@@ -126,7 +126,7 @@
                         <div class="form-group">
                             <label>Select Head</label>
                             <select class="form-control" name="main" required id="update_head_name">
-                                <option selected>Select Group</option>
+                                <option disabled selected>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>
                                 @endforeach

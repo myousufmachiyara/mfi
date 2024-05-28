@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item_entry2;
 use App\Models\Item_Groups;
+use Illuminate\Support\Facades\Validator;
 
 class Item2Controller extends Controller
 {
@@ -17,6 +18,20 @@ class Item2Controller extends Controller
         $itemGroups = Item_Groups::where('status', 1)->get();
 
         return view('item2.index',compact('items','itemGroups'));
+    }
+
+    public function validation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'item_name' => 'required|unique:item_entry2',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        else{
+            return response()->json(['success' => "success"]);
+        }
     }
 
     public function create()

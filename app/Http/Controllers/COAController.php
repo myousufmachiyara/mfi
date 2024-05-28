@@ -7,8 +7,12 @@ use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use App\Models\AC;
 use App\Models\sub_head_of_acc;
+use App\Models\ac_att;
 use App\Models\ac_group;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use ZipArchive;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 use TCPDF;
 
@@ -25,13 +29,28 @@ class COAController extends Controller
                ->get();
         $sub_head_of_acc = sub_head_of_acc::where('status', 1)->get();
         $ac_group = ac_group::where('status', 1)->get();
+
         return view('ac.index',compact('acc','sub_head_of_acc','ac_group'));
+    }
+
+    public function validation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ac_name' => 'required|unique:ac',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        else{
+            return response()->json(['success' => "success"]);
+        }
     }
 
     public function store(Request $request)
     {
-
         $acc = new AC();
+
         $acc->created_by=1;
 
         if ($request->has('ac_name') && $request->ac_name) {
@@ -61,12 +80,21 @@ class COAController extends Controller
         if ($request->has('AccountType') && $request->AccountType) {
             $acc->AccountType=$request->AccountType;
         }
-        if($request->hasFile('att')){
-            $extension = $request->file('att')->getClientOriginalExtension();
-            $acc->att = $this->coaDoc($request->file('att'),$extension);
-        }
         $acc->save();
 
+        $latest_acc = AC::latest()->first();
+
+        if($request->hasFile('att')){
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $acc_att = new ac_att();
+                $acc_att->ac_code = $latest_acc['ac_code'];
+                $extension = $file->getClientOriginalExtension();
+                $acc_att->att_path = $this->coaDoc($file,$extension);
+                $acc_att->save();
+            }
+        }
         return redirect()->route('all-acc');
     }
     
@@ -78,7 +106,7 @@ class COAController extends Controller
 
     public function update(Request $request)
     {
-       
+        
         $acc = AC::where('ac_code', $request->ac_cod)->get()->first();
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
@@ -132,6 +160,12 @@ class COAController extends Controller
     {
         $acc_details = AC::where('ac_code', $request->id)->get()->first();
         return $acc_details;
+    }
+
+    public function getAttachements(Request $request)
+    {
+        $acc_atts = ac_att::where('ac_code', $request->id)->get();
+        return $acc_atts;
     }
 
     public function print()
@@ -256,17 +290,30 @@ class COAController extends Controller
 
     public function downloadAtt($id)
     {
-        $doc=AC::where('ac_code', $id)->select('att')->first();
-        $filePath = public_path($doc['att']);
+        $doc=ac_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::download($filePath);
         } 
     }
 
+    public function downloadAllAtt(Request $request)
+    {
+        $doc=ac_att::where('ac_code', $request->download_id)->select('att_path')->get();
+        foreach($doc as $attachment){
+            $filePath = public_path($attachment['att_path']);
+            if (file_exists($filePath)) {
+                $allAtt[] = public_path($attachment['att_path']);
+            }
+        }
+        return Response::download($allAtt[0]);
+    }
+
+
     public function view($id)
     {
-        $doc=AC::where('ac_code', $id)->select('att')->first();
-        $filePath = public_path($doc['att']);
+        $doc=ac_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::file($filePath);
         } 
