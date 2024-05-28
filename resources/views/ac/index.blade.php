@@ -181,11 +181,11 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step="0.1">
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step="0.1">
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -265,11 +265,11 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able">
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able">
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>

@@ -54,16 +54,16 @@
 														<input type="text" class="form-control" name="item_remarks[]" value=" ">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock[]" required value="0" step=".0001">
+														<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".0001">
+														<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">
 													</td>
 													<td>
 														<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" size=5 required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".0001">
+														<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".00001">
 													</td>
 													<td>
 														<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >
@@ -72,10 +72,10 @@
 														<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".0001">
+														<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".00001">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".0001">
+														<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".00001">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -168,14 +168,14 @@
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
 			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".0001">';
-			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".0001">';
+			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">';
+			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">';
 			cell6.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".0001">';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".00001">';
 			cell8.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
 			cell9.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell10.innerHTML = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".0001">';
-			cell11.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".0001">';
+			cell10.innerHTML = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".00001">';
+			cell11.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".00001">';
 			cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
