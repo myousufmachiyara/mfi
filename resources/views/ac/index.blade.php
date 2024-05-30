@@ -38,8 +38,16 @@
                                                 <tr>
                                                     <td>{{$row->ac_code}}</td>
                                                     <td>{{$row->ac_name}}</td>
-                                                    <td>{{$row->rec_able}}</td>
-                                                    <td>{{$row->pay_able}}</td>
+                                                    @if($row->rec_able>0)
+                                                        <td>{{$row->rec_able}}</td>
+                                                    @else
+                                                        <td>0</td>
+                                                    @endif
+                                                    @if($row->pay_able>0)
+                                                        <td>{{$row->pay_able}}</td>
+                                                    @else
+                                                        <td>0</td>
+                                                    @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
                                                     <td>{{$row->address}}</td>
@@ -331,6 +339,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    
     $(document).ready(function(){
     
         $('#addForm').on('submit', function(e){
