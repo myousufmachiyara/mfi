@@ -60,11 +60,7 @@
                                                         <td>{{ intval($row->OPP_qty_cost) }}</td>
                                                     @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
-                                                    @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
-                                                        <td>{{$row->sales_price}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->sales_price) }}</td>
-                                                    @endif
+
                                                     @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
                                                         <td>{{$row->sales_price}}</td>
                                                     @else
