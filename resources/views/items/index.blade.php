@@ -42,29 +42,27 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->item_name}}</td>
                                                     <td>{{$row->item_remark}}</td>
-                                                    @if($row->opp_qty>0)
+                                                    @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
                                                         <td>{{$row->opp_qty}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->opp_qty) }}</td>
                                                     @endif
-                                                    <!-- <td>{{$row->pur_rate_date}}</td> -->
                                                     <td>{{ \Carbon\Carbon::parse($row->pur_rate_date)->format('d-m-y') }}</td>
-                                                    @if($row->OPP_qty_cost>0)
+                                                    @if(substr(strval($row->OPP_qty_cost), strpos(strval($row->OPP_qty_cost), '.') + 1)>0)
                                                         <td>{{$row->OPP_qty_cost}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->OPP_qty_cost) }}</td>
                                                     @endif
-                                                    <!-- <td>{{$row->sale_rate_date}}</td> -->
                                                     <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
-                                                    @if($row->sales_price>0)
+                                                    @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
                                                         <td>{{$row->sales_price}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->sales_price) }}</td>
                                                     @endif
-                                                    @if($row->labourprice>0)
+                                                    @if(substr(strval($row->labourprice), strpos(strval($row->labourprice), '.') + 1)>0)
                                                         <td>{{$row->labourprice}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->labourprice) }}</td>
                                                     @endif
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>

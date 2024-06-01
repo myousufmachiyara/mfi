@@ -38,15 +38,15 @@
                                                 <tr>
                                                     <td>{{$row->ac_code}}</td>
                                                     <td>{{$row->ac_name}}</td>
-                                                    @if($row->rec_able>0)
+                                                    @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
                                                         <td>{{$row->rec_able}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->rec_able) }}</td>
                                                     @endif
-                                                    @if($row->pay_able>0)
+                                                    @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
                                                         <td>{{$row->pay_able}}</td>
                                                     @else
-                                                        <td>0</td>
+                                                        <td>{{ intval($row->pay_able) }}</td>
                                                     @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
