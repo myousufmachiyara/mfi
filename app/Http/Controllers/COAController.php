@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Response;
-
-use App\Traits\SaveImage;
 use Illuminate\Http\Request;
-use App\Models\AC;
-use App\Models\sub_head_of_acc;
-use App\Models\ac_att;
-use App\Models\ac_group;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use ZipArchive;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 use TCPDF;
+use ZipArchive;
+use Carbon\Carbon;
+use App\Models\AC;
+use App\Models\ac_att;
+use App\Models\ac_group;
+use App\Traits\SaveImage;
+use App\Models\sub_head_of_acc;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class COAController extends Controller
 {
@@ -307,6 +307,20 @@ class COAController extends Controller
         } 
     }
 
+    public function deleteAtt($id)
+    {
+        $doc=ac_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            $acc_att = ac_att::where('att_id', $id)->delete();
+            return response()->json(['message' => 'File deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'File not found.'], 404);
+        }
+    }
+
     public function downloadAllAtt(Request $request)
     {
         $doc=ac_att::where('ac_code', $request->download_id)->select('att_path')->get();
@@ -318,7 +332,6 @@ class COAController extends Controller
         }
         return Response::download($allAtt[0]);
     }
-
 
     public function view($id)
     {

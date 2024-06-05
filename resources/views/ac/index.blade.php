@@ -39,14 +39,14 @@
                                                     <td>{{$row->ac_code}}</td>
                                                     <td>{{$row->ac_name}}</td>
                                                     @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
-                                                        <td>{{$row->rec_able}}</td>
+                                                        <td>{{number_format($row->rec_able, 4)}}</td>
                                                     @else
-                                                        <td>{{ intval($row->rec_able) }}</td>
+                                                        <td>{{ number_format(intval($row->rec_able))}}</td>
                                                     @endif
                                                     @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
-                                                        <td>{{$row->pay_able}}</td>
+                                                        <td>{{number_format($row->pay_able, 4)}}</td>
                                                     @else
-                                                        <td>{{ intval($row->pay_able) }}</td>
+                                                        <td>{{ number_format(intval($row->pay_able))}}</td>
                                                     @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
@@ -112,10 +112,10 @@
                             <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Attachement Path</th>
                                         <th>Download</th>
                                         <th>View</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody id="acc_attachements">
@@ -130,7 +130,7 @@
                                 <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                                     @csrf   -->
                                     <input type="hidden" id="download_id" name="download_id">                              
-                                    <button type="button" class="btn btn-danger">Download All</button>
+                                    <!-- <button type="button" class="btn btn-danger">Delete All</button> -->
                                     <button class="btn btn-default modal-dismiss">Cancel</button>
                                 <!-- </form> -->
                             </div>
@@ -231,7 +231,6 @@
                                     @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
-
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -303,6 +302,7 @@
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
                                 </select>
+                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -313,6 +313,7 @@
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
                                     @endforeach
                                 </select>
+                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -430,10 +431,10 @@
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
-                    html+= "<td>"+v['att_id']+"</td>"
                     html+= "<td>"+v['att_path']+"</td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/acc/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/acc/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#acc_attachements').append(html);
                 });
@@ -447,6 +448,34 @@
 
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";
+    }
+
+    function deleteFile(fileId) {
+        if (!confirm('Are you sure you want to delete this file?')) {
+            return;
+        }
+
+        fetch('/coa/acc/deleteAtt/' + fileId, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('File deleted successfully.');
+                // Optionally, remove the element or reload the page
+                location.reload();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.message || 'An error occurred.');
+                });
+            }
+        })
+        .catch(error => {
+            alert(error.message);
+        });
     }
 
     

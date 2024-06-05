@@ -200,10 +200,10 @@
                     </header>
                     <div class="card-body">
                         <div class="row form-group">
-                            <!-- <div class="col-lg-6">
+                            <div class="col-lg-6">
                                 <label>Item Code</label>
                                 <input type="number" class="form-control" placeholder="Item Code" name="it_cod" required disabled>
-                            </div> -->
+                            </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
                                 <input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">

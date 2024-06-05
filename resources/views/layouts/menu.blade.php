@@ -88,6 +88,33 @@
 								</li>
 							</ul>
 						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Vouchers
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link" href="{{ route('all-jv1')}}">
+										Journal Voucher 1
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="{{ route('all-jv2')}}">
+										Journal Voucher 2
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link" href="#">
+										Receipts
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="#">
+										Payments
+									</a>
+								</li>
+							</ul>
+						</li>
 					</ul>	
 				</nav>
 			</div>
