@@ -151,7 +151,7 @@ class COAController extends Controller
         
         if($request->hasFile('att')){
             
-            ac_att::where('ac_code', $request->ac_cod)->delete();
+            // ac_att::where('ac_code', $request->ac_cod)->delete();
             $files = $request->file('att');
             foreach ($files as $file)
             {

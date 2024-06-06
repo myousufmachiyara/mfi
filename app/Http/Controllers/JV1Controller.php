@@ -117,7 +117,7 @@ class JV1Controller extends Controller
         $latest_jv1 = jvsingel::latest()->first();
         if($request->hasFile('update_att')){
             
-            jv1_att::where('jv1_id', $request->update_auto_lager)->delete();
+            // jv1_att::where('jv1_id', $request->update_auto_lager)->delete();
             $files = $request->file('update_att');
             foreach ($files as $file)
             {
