@@ -20,11 +20,11 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">Code</th>
-                                                <th>Account Credit</th>
-                                                <th>Account Debit</th>
-                                                <th>Amount</th>
                                                 <th>Date</th>
+                                                <th>Account Debit</th>
+                                                <th>Account Credit</th>
                                                 <th>Remarks</th>
+                                                <th>Amount</th>
                                                 <th>Att.</th>
                                                 <th>Action</th>
                                             </tr>
@@ -33,15 +33,15 @@
                                             @foreach ($jv1 as $key => $row)
                                                 <tr>
                                                     <td>{{$row->auto_lager}}</td>
-                                                    <td>{{$row->credit_account}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-y') }}</td>
                                                     <td>{{$row->debit_account}}</td>
+                                                    <td>{{$row->credit_account}}</td>
+                                                    <td>{{$row->remarks}}</td>
                                                     @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)
                                                         <td>{{number_format($row->amount, 4)}}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->amount))}}</td>
                                                     @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->remarks}}</td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#"><i class="fas fa-print"></i></a>
@@ -104,6 +104,10 @@
                                 <input type="number" class="form-control" placeholder="JV1 Code" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
                                 <select class="form-control" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
@@ -125,10 +129,7 @@
                                 <label>Amount</label>
                                 <input type="number" class="form-control" placeholder="Amount" value="0" step=".00001" name="amount">
                             </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>" required>
-                            </div>
+
                             <div class="col-lg-6 mb-2">
                                 <label>Attachments</label>
                                 <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
@@ -166,6 +167,10 @@
                                 <input type="hidden" class="form-control" placeholder="JV1 Code" name="update_auto_lager" id="update_id_view" required>
                             </div>
                             <div class="col-lg-6 mb-2">
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
                                 <select class="form-control" name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
@@ -187,10 +192,7 @@
                                 <label>Amount</label>
                                 <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step=".00001" name="update_amount">
                             </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
-                            </div>
+
                             <div class="col-lg-6 mb-2">
                                 <label>Attachments</label>
                                 <input type="file" class="form-control" name="update_att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
