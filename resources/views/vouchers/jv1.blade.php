@@ -23,7 +23,7 @@
                                                 <th>Date</th>
                                                 <th>Account Debit</th>
                                                 <th>Account Credit</th>
-                                                <th>Remarks</th>
+                                                <th width="20%">Remarks</th>
                                                 <th>Amount</th>
                                                 <th>Att.</th>
                                                 <th>Action</th>
@@ -36,7 +36,7 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-y') }}</td>
                                                     <td>{{$row->debit_account}}</td>
                                                     <td>{{$row->credit_account}}</td>
-                                                    <td>{{$row->remarks}}</td>
+                                                    <td >{{$row->remarks}}</td>
                                                     @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)
                                                         <td>{{number_format($row->amount, 4)}}</td>
                                                     @else

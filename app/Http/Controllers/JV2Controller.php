@@ -29,6 +29,7 @@ class JV2Controller extends Controller
 
     public function create(Request $request)
     {
-        return view('vouchers.jv2-new');
+        $acc = AC::where('status', 1)->get();
+        return view('vouchers.jv2-new',compact('acc'));
     }
 }

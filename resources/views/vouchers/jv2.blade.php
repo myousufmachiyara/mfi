@@ -11,7 +11,6 @@
                                 <header class="card-header">
                                     <div class="card-actions">
                                         <form action="{{ route('new-jv2') }}" method="GET">
-                                            @csrf
                                             <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Journal Voucher</button>
                                         </form>
                                     </div>

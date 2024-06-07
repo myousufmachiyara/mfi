@@ -8,12 +8,36 @@
 					<form method="post" action="{{ route('store-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
-							<div class="col-12 mb-3">
+							<div class="col-2 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Journal Voucher 2 Entry</h2>
+										<h2 class="card-title">Journal Voucher 2</h2>
 									</header>
 
+									<div class="card-body">
+										<div class="row form-group mb-2">
+											<div class="col-sm-12 col-md-12 mb-2">
+												<label class="col-form-label" >RC. #</label>
+												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+											</div>
+
+											<div class="col-sm-12 col-md-12 mb-2">
+												<label class="col-form-label" >Date</label>
+												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
+											</div>
+											<div class="col-12 mb-3">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="4" cols="50" name="remarks" id="narration" placeholder="Narration" class="form-control"></textarea>
+											</div>
+									  </div>
+									</div>
+								</section>
+							</div>
+							<div class="col-10 mb-3">
+								<section class="card">
+									<!-- <header class="card-header">
+										<h2 class="card-title">Journal Voucher 2 Details</h2>
+									</header> -->
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -22,7 +46,7 @@
 													<th width="">Account Name</th>
 													<th width="">Remarks</th>
 													<th width="">Bank Name</th>
-													<th width="9%">Instrument #</th>
+													<th width="9%">Instr. #</th>
 													<th width="10%">Chq Date</th>
 													<th width="10%">Debit</th>
 													<th width="10%">Credit</th>
@@ -31,34 +55,33 @@
 											</thead>
 											<tbody id="ItemsTable">
 												<tr>
-													<!-- <td>
-														<input type="number" class="form-control" disabled>
-													</td> -->
 													<td>
 														<input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
-														<select class="form-control" name ="item_group[]" onchange="addNewRow(1)" required>
+														<select class="form-control" name ="account[]" onchange="addNewRow(1)" required>
 															<option value="0" disabled selected>Select Account</option>
-
+															@foreach($acc as $key => $row)	
+																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+															@endforeach
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
+														<input type="text" class="form-control" name="remarks[]" onchange="validateItemName(this)" required>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_remarks[]" value=" ">
+														<input type="text" class="form-control" name="bank_name[]">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">
+														<input type="number" class="form-control" name="instrumentnumber[]" required value="0" step=".00001">
 													</td>
                                                     <td>
-														<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" size=5 required value="<?php echo date('Y-m-d'); ?>" >
+														<input type="date" class="form-control" style="max-width: 124px" name="date[]" size=5 required value="<?php echo date('Y-m-d'); ?>" >
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">
+														<input type="number" class="form-control" name="debit[]" required value="0" step=".00001">
 													</td>
 
 													<td>
-														<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".00001">
+														<input type="number" class="form-control" name="credit[]" required value="0" step=".00001">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -71,7 +94,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Items</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
 											</div>
 										</div>
 									</footer>
@@ -137,27 +160,20 @@
 			var cell6 = newRow.insertCell(5);
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
-			var cell9 = newRow.insertCell(8);
-			var cell10 = newRow.insertCell(9);
-			var cell11 = newRow.insertCell(10);
-			var cell12 = newRow.insertCell(11);
 
-			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
-			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="account[]" required>'+
 									'<option value="0" disabled selected>Select Group</option>'+
+									@foreach($acc as $key => $row)	
+                                        '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
+                                    @endforeach
 								'</select>';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
-			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">';
-			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">';
-			cell6.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="item_s_price[]" required value="0" step=".00001">';
-			cell8.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="sale_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell9.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="item_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
-			cell10.innerHTML = '<input type="number" class="form-control" name="item_stock_level[]" required value="0" step=".00001">';
-			cell11.innerHTML = '<input type="number" class="form-control" name="item_l_price[]" required value="0" step=".00001">';
-			cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
-
+			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" onchange="validateItemName(this)" required>';
+			cell3.innerHTML  = '<input type="text"   class="form-control" name="bank_name[]" required>';
+			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]" required value="0" step=".00001">';
+			cell5.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="date[]" required value="<?php echo date('Y-m-d'); ?>" >';
+			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]" required value="0" step=".00001">';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]" required value="0" step=".00001">';
+			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
 			itemCount = Number($('#itemCount').val());
