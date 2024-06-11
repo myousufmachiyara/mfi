@@ -35,15 +35,15 @@
                                                     <td>{{$row->jv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->narration}}</td>
-                                                    @if(substr(strval($row->debit), strpos(strval($row->debit), '.') + 1)>0)
-                                                        <td>{{number_format($row->debit, 4)}}</td>
+                                                    @if(substr(strval($row->total_debit), strpos(strval($row->total_debit), '.') + 1)>0)
+                                                        <td>{{number_format($row->total_debit, 4)}}</td>
                                                     @else
-                                                        <td>{{ number_format(intval($row->debit))}}</td>
+                                                        <td>{{ number_format(intval($row->total_debit))}}</td>
                                                     @endif
-                                                    @if(substr(strval($row->credit), strpos(strval($row->credit), '.') + 1)>0)
-                                                        <td>{{number_format($row->credit, 4)}}</td>
+                                                    @if(substr(strval($row->total_credit), strpos(strval($row->total_credit), '.') + 1)>0)
+                                                        <td>{{number_format($row->total_credit, 4)}}</td>
                                                     @else
-                                                        <td>{{ number_format(intval($row->credit))}}</td>
+                                                        <td>{{ number_format(intval($row->total_credit))}}</td>
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
