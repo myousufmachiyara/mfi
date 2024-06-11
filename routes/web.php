@@ -82,6 +82,11 @@ Route::delete('/vouchers/jv1/deleteAttachment/{id}', [App\Http\Controllers\JV1Co
 // Journal Voucher 2
 Route::get('/vouchers/all-jv2', [App\Http\Controllers\JV2Controller::class, 'index'])->name('all-jv2');
 Route::get('/vouchers/jv2/new', [App\Http\Controllers\JV2Controller::class, 'create'])->name('new-jv2');
+Route::post('/vouchers/jv2/create', [App\Http\Controllers\JV2Controller::class, 'store'])->name('store-jv2');
+Route::get('/vouchers/jv2/edit/{id}', [App\Http\Controllers\JV2Controller::class, 'edit'])->name('edit-jv2');
+Route::post('/vouchers/jv2/update', [App\Http\Controllers\JV2Controller::class, 'update'])->name('update-jv2');
+Route::get('/vouchers/jv2/print/{id}', [App\Http\Controllers\JV2Controller::class, 'print'])->name('print-jv2');
+Route::get('/vouchers/jv2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
 
 //sales
 Route::get('/sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');

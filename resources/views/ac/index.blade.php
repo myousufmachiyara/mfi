@@ -365,27 +365,6 @@
             });
         });
 
-        // $('#updateForm').on('submit', function(e){
-        //     e.preventDefault();
-
-        //     var formData = $(this).serialize();
-
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/coa/acc/validate',
-        //         data: formData,
-        //         success: function(response){
-        //             var form = document.getElementById('updateForm');
-        //             form.submit();
-        //         },
-        //         error: function(response){
-        //             var errors = response.responseJSON.errors;
-        //             var errorMessage = 'Account Already Exists';
-
-        //             alert(errorMessage);
-        //         }
-        //     });
-        // });
     });
 
     function setId(id){

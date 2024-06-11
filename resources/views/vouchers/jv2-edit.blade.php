@@ -5,29 +5,31 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
 							<div class="col-3 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Journal Voucher 2</h2>
+										<h2 class="card-title">Edit Journal Voucher 2</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-12 mb-2">
 												<label class="col-form-label" >RC. #</label>
-												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
+												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-12 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="jv_date" required value="{{$jv2->jv_date}}" class="form-control">
+												<input type="hidden" id="itemCount" name="items" class="form-control">
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control"></textarea>
+												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control">{{$jv2->narration}}</textarea>
 											</div>
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -55,10 +57,44 @@
 												</tr>
 											</thead>
 											<tbody id="JV2Table">
+                                            	@foreach ($jv2_items as $jv_key => $jv2_items)
+													<tr>
+														<td>
+															<select class="form-control" name ="account_cod[]" onchange="addNewRow()" required>
+																<option value="" disabled selected>Select Account</option>
+																@foreach($acc as $key => $row)	
+																	<option value="{{$row->ac_code}}" {{ $jv2_items->account_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
+																@endforeach
+															</select>
+														</td>	
+														<td>
+															<input type="text" class="form-control" name="remarks[]" value="{{$jv2_items->remarks}}">
+														</td>
+														<td>
+															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->remarks}}">
+														</td>
+														<td>
+															<input type="number" class="form-control" name="instrumentnumber[]" required value="{{$jv2_items->instrumentnumber}}" step=".00001">
+														</td>
+														<td>
+															<input type="date" class="form-control" style="max-width: 124px" name="chq_date[]" size=5 required value="{{$jv2_items->chqdate}}">
+														</td>
+														<td>
+															<input type="number" class="form-control" name="debit[]" onchange="totalDebit(this)" required value="{{$jv2_items->debit}}" step=".00001">
+														</td>
+
+														<td>
+															<input type="number" class="form-control" name="credit[]" onchange="totalCredit(this)" required value="{{$jv2_items->credit}}"  step=".00001">
+														</td>
+														<td style="vertical-align: middle;">
+															<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+														</td>
+													</tr>
+												@endforeach
 												<tr>
 													<td>
 														<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-														<select class="form-control" name ="account_cod[]" onchange="addNewRow(1)" required>
+														<select class="form-control" name ="account_cod[]" onchange="addNewRow()" required>
 															<option value="" disabled selected>Select Account</option>
 															@foreach($acc as $key => $row)	
 																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -107,7 +143,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Voucher</button>
 											</div>
 										</div>
 									</footer>
@@ -124,8 +160,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-	var index=2;
-	var itemCount = Number($('#itemCount').val());
+	var itemCount;
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -135,12 +170,12 @@
 			}
 		});
 
-		$('#addForm').on('submit', function(e){
+		$('#updateForm').on('submit', function(e){
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
 			if(total_debit==total_credit){
-				var form = document.getElementById('addForm');
+				var form = document.getElementById('updateForm');
 				form.submit();
 			}
 			else{
@@ -148,6 +183,25 @@
 			}
 
 		});
+
+		var totalDebit=0, totalCredit=0, debit=0, credit=0;
+		var table = document.getElementById("JV2Table"); // Get the table element
+        var rowCount = table.rows.length; // Get the total number of rows
+
+		var itemCount = rowCount;
+		$('#itemCount').val(itemCount);
+
+		for (var j=0;j<rowCount; j++){
+
+			debit = table.rows[j].cells[5].querySelector('input').value; // Get the value of the input field in the specified cell
+			totalDebit = totalDebit + Number(debit);
+
+			credit = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
+			totalCredit = totalCredit + Number(credit);
+		}
+		$('#total_credit').val(totalCredit);
+		$('#total_debit').val(totalDebit);
+
 	});
 
     function removeRow(button) {
@@ -155,7 +209,6 @@
 		if(tableRows>1){
 			var row = button.parentNode.parentNode;
 			row.parentNode.removeChild(row);
-			index--;	
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount-1;
 			$('#itemCount').val(itemCount);
@@ -171,7 +224,7 @@
         }
     });
 
-	function addNewRow(id){
+	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
@@ -188,7 +241,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -196,12 +249,11 @@
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]"  value="0" step=".00001">';
+			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]" required value="0" step=".00001">';
 			cell5.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit(this)" step=".00001">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit(this)" step=".00001">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
-			index++;
 
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
