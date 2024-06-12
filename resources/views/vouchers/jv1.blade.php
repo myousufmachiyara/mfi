@@ -20,10 +20,10 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">Code</th>
-                                                <th>Date</th>
-                                                <th>Account Debit</th>
-                                                <th>Account Credit</th>
-                                                <th width="20%">Remarks</th>
+                                                <th width="8%">Date</th>
+                                                <th width="15%">Account Debit</th>
+                                                <th width="15%">Account Credit</th>
+                                                <th width="30%">Remarks</th>
                                                 <th>Amount</th>
                                                 <th>Att.</th>
                                                 <th>Action</th>
