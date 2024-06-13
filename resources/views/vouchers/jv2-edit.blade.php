@@ -115,11 +115,11 @@
 														<input type="date" class="form-control"  name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit(this)" required value="0" step=".00001">
+														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step=".00001">
 													</td>
 
 													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit(this)" required value="0" step=".00001">
+														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step=".00001">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -214,6 +214,8 @@
 			itemCount = itemCount-1;
 			$('#itemCount').val(itemCount);
 		}   
+		totalDebit();
+		totalCredit();
     }
 
     document.getElementById('removeRowBtn').addEventListener('click', function() {
@@ -252,8 +254,8 @@
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]" required value="0" step=".00001">';
 			cell5.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
-			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit(this)" step=".00001">';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit(this)" step=".00001">';
+			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			itemCount = Number($('#itemCount').val());
@@ -302,7 +304,7 @@
 
 	}
 
-	function totalCredit(item){
+	function totalCredit(){
 		var totalCredit=0;
 		var credit=0;
 		var table = document.getElementById("JV2Table"); // Get the table element
