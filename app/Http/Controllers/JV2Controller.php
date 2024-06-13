@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
 
-use App\Models\Sales;
-use App\Models\Sales_2;
 
 class JV2Controller extends Controller
 {

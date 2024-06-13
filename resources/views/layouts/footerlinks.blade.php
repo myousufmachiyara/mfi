@@ -35,6 +35,8 @@
 <script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
 <script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
 <script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+<script src="/assets/vendor/select2/js/select2.js"></script>
+<script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
 
 <!-- Specific Page Vendor -->
 <script src="/assets/vendor/select2/js/select2.js"></script>

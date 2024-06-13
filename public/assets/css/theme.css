@@ -10981,6 +10981,7 @@ html.dark .dropzone:hover .dz-default span {
 /* Forms */
 form label {
 	font-weight: 600;
+	color: #000;
 }
 
 textarea {

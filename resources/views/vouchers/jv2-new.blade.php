@@ -8,7 +8,7 @@
 					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">
-							<div class="col-3 mb-3">								
+							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Journal Voucher 2</h2>
@@ -16,28 +16,28 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-12 mb-2">
+											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >RC. #</label>
-												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+												<input type="text" name="invoice_no" placeholder="RC. #" class="form-control" disabled>
 											</div>
 
-											<div class="col-sm-12 col-md-12 mb-2">
+											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
-											<div class="col-12 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control"></textarea>
-											</div>
-											<div class="col-12 mb-3">
+											<div class="col-4 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+											<div class="col-12 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
 											</div>
 									  </div>
 									</div>
 								</section>
 							</div>
-							<div class="col-9 mb-3">
+							<div class="col-12 mb-3">
 								<section class="card">
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -47,10 +47,10 @@
 													<th width="">Account Name</th>
 													<th width="">Remarks</th>
 													<th width="">Bank Name</th>
-													<th width="9%">Instr. #</th>
-													<th width="10%">Chq Date</th>
-													<th width="10%">Debit</th>
-													<th width="10%">Credit</th>
+													<th width="">Instr. #</th>
+													<th width="">Chq Date</th>
+													<th width="">Debit</th>
+													<th width="">Credit</th>
 													<th width=""></th>
 												</tr>
 											</thead>
@@ -58,7 +58,7 @@
 												<tr>
 													<td>
 														<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-														<select class="form-control" name ="account_cod[]" onchange="addNewRow(1)" required>
+														<select data-plugin-selectTwo class="form-control" name ="account_cod[]" onchange="addNewRow(1)" required>
 															<option value="" disabled selected>Select Account</option>
 															@foreach($acc as $key => $row)	
 																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -75,7 +75,7 @@
 														<input type="number" class="form-control" name="instrumentnumber[]" value="0" step=".00001">
 													</td>
                                                     <td>
-														<input type="date" class="form-control" style="max-width: 124px" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
                                                     </td>
 													<td>
 														<input type="number" class="form-control" name="debit[]" onchange="totalDebit(this)" required value="0" step=".00001">
@@ -188,7 +188,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selectTwo class="form-control" onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\jvsingel;
-use App\Models\jv1_att;
-use App\Models\AC;
-use App\Traits\SaveImage;
 use TCPDF;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
+use App\Models\AC;
+use NumberFormatter;
+use App\Models\jv1_att;
+use App\Models\jvsingel;
+use App\Traits\SaveImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class JV1Controller extends Controller
 {
@@ -180,6 +181,126 @@ class JV1Controller extends Controller
         } else {
             return response()->json(['message' => 'File not found.'], 404);
         }
+    }
+
+    public function print($id)
+    {
+
+        $jv1 = jvsingel::where('jvsingel.auto_lager', $id)
+        ->join('ac as d_ac', 'd_ac.ac_code', '=', 'jvsingel.ac_dr_sid')
+        ->join('ac as c_ac', 'c_ac.ac_code', '=', 'jvsingel.ac_cr_sid')
+        ->select('jvsingel.*', 
+        'd_ac.ac_name as debit_account', 
+        'c_ac.ac_name as credit_account')
+        ->first();
+
+        $pdf = new TCPDF();
+
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('JV1 # '.$jv1['auto_lager']);
+        $pdf->SetSubject('JV1 # '.$jv1['auto_lager']);
+        $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
+        $pdf->setPageOrientation('L');
+               
+        // Set header and footer fonts
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        
+        // Set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        
+        // Set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+                
+        // Set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        
+        // Set font
+        $pdf->SetFont('helvetica', '', 10);
+        
+        // Add a page
+        $pdf->AddPage();
+           
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 5px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="text-align:center">Journal Voucher 1</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+
+        $html = '<table>';
+        $html .= '<tr>';
+        $html .= '<td width="50%">Voucher No: <span style="text-decoration: underline;">'.$jv1['auto_lager'].'</span></td>';
+        $html .= '<td width="50%" style="text-align:right">Date: '.$jv1['date'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Remarks: '.$jv1['remarks'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
+        $html .= '<tr>';
+        $html .= '<th style="width:40%;">Account Debit</th>';
+        $html .= '<th style="width:40%">Account Credit</th>';
+        $html .= '<th style="width:20%">Amount</th>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        
+        // Output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $count=1;
+        $total_credit=0;
+        $total_debit=0;
+
+        $item_table =  '<table style="text-align:center">';
+        $item_table .= '<tr style="background-color:#f1f1f1">';
+        $item_table .= '<td style="width:40%;">'.$jv1['debit_account'].'</td>';
+        $item_table .= '<td style="width:40%;">'.$jv1['credit_account'].'</td>';
+        $item_table .= '<td style="width:20%;">'.$jv1['amount'].'</td>';
+        $item_table .= '</tr>';
+        
+        $item_table .= '</table>';
+        $pdf->writeHTML($item_table, true, false, true, false, '');
+
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        // Column 3
+        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        $numberText=$f->format($jv1['amount']);
+        $heading='<h1 style="text-decoration:underline;font-style:italic">'.$numberText.' Only</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+
+
+        // Close and output PDF
+        $pdf->Output('jv1_'.$jv1['auto_lager'].'.pdf', 'I');
     }
 
 }

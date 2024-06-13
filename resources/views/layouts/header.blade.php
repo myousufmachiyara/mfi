@@ -25,6 +25,8 @@
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.css" />
 		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.theme.css" />
+		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
+		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="/assets/vendor/morris/morris.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
