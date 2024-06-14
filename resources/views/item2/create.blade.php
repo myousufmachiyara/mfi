@@ -15,6 +15,7 @@
 									</header>
 
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+										<input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -40,7 +41,6 @@
 														<input type="number" class="form-control" disabled>
 													</td> -->
 													<td>
-														<input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
 														<select class="form-control" name ="item_group[]" onchange="addNewRow(1)" required>
 															<option value="0" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	

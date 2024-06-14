@@ -18,7 +18,8 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >RC. #</label>
-												<input type="text" name="invoice_no" placeholder="RC. #" class="form-control" disabled>
+												<input type="text" placeholder="RC. #" class="form-control" disabled>
+												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-4 mb-2">
@@ -57,7 +58,6 @@
 											<tbody id="JV2Table">
 												<tr>
 													<td>
-														<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 														<select data-plugin-selectTwo class="form-control" name ="account_cod[]" onchange="addNewRow(1)" required>
 															<option value="" disabled selected>Select Account</option>
 															@foreach($acc as $key => $row)	

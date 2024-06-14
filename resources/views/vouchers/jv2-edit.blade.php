@@ -20,12 +20,12 @@
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
 												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
+												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" required value="{{$jv2->jv_date}}" class="form-control">
-												<input type="hidden" id="itemCount" name="items" class="form-control">
 											</div>
 											<div class="col-4 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -94,7 +94,6 @@
 												@endforeach
 												<tr>
 													<td>
-														<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 														<select data-plugin-selectTwo class="form-control" name ="account_cod[]" onchange="addNewRow()" required>
 															<option value="" disabled selected>Select Account</option>
 															@foreach($acc as $key => $row)	
