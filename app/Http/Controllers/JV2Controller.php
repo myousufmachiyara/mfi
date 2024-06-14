@@ -274,11 +274,12 @@ class JV2Controller extends Controller
 
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
-        $html .= '<th style="width:10%;">Ac Code</th>';
-        $html .= '<th style="width:25%">Account Name</th>';
-        $html .= '<th style="width:25%">Remarks</th>';
-        $html .= '<th style="width:20%">Debit</th>';
-        $html .= '<th style="width:20%">Credit</th>';
+        $html .= '<th style="width:20%">Account Name</th>';
+        $html .= '<th style="width:20%">Remarks</th>';
+        $html .= '<th style="width:20%">Bank Name</th>';
+        $html .= '<th style="width:10%">Inst #</th>';
+        $html .= '<th style="width:15%">Debit</th>';
+        $html .= '<th style="width:15%">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
         
@@ -294,22 +295,24 @@ class JV2Controller extends Controller
             if($count%2==0)
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';
-                $item_table .= '<td style="width:10%;">'.$items['acc_code'].'</td>';
-                $item_table .= '<td style="width:25%;">'.$items['acc_name'].'</td>';
-                $item_table .= '<td style="width:25%;">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['debit'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['credit'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['bankname'].'</td>';
+                $item_table .= '<td style="width:10%;">'.$items['instrumentnumber'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['debit'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['credit'].'</td>';
                 $total_debit=$total_debit+$items['debit'];
                 $total_credit=$total_credit+$items['credit'];
                 $item_table .= '</tr>';
             }
             else{
                 $item_table .= '<tr>';
-                $item_table .= '<td style="width:10%;">'.$items['acc_code'].'</td>';
-                $item_table .= '<td style="width:25%;">'.$items['acc_name'].'</td>';
-                $item_table .= '<td style="width:25%;">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['debit'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['credit'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:20%;">'.$items['bankname'].'</td>';
+                $item_table .= '<td style="width:10%;">'.$items['instrumentnumber'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['debit'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['credit'].'</td>';
                 $total_debit=$total_debit+$items['debit'];
                 $total_credit=$total_credit+$items['credit'];
                 $item_table .= '</tr>';
@@ -322,16 +325,16 @@ class JV2Controller extends Controller
         $currentY = $pdf->GetY();
 
         // Column 3
-        $pdf->SetXY(145, $currentY+10);
-        $pdf->MultiCell(30, 5, 'Total', 1,'C');
+        $pdf->SetXY(175, $currentY+10);
+        $pdf->MultiCell(28, 5, 'Total', 1,'C');
 
         // Column 3
-        $pdf->SetXY(175, $currentY+10);
-        $pdf->MultiCell(55, 5, $total_debit, 1,'C');
+        $pdf->SetXY(203, $currentY+10);
+        $pdf->MultiCell(40, 5, $total_debit, 1,'C');
      
         // Column 4
-        $pdf->SetXY(230, $currentY+10);
-        $pdf->MultiCell(53, 5, $total_credit, 1, 'C');
+        $pdf->SetXY(243, $currentY+10);
+        $pdf->MultiCell(40, 5, $total_credit, 1, 'C');
         
         // Close and output PDF
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
