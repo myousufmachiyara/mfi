@@ -72,7 +72,7 @@
 														<input type="text" class="form-control" name="bank_name[]">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="instrumentnumber[]" value="0" step=".00001">
+														<input type="text" class="form-control" name="instrumentnumber[]">
 													</td>
                                                     <td>
 														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
@@ -107,6 +107,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
 											</div>
 										</div>
@@ -198,7 +199,7 @@
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]"  value="0" step=".00001">';
+			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
 			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';

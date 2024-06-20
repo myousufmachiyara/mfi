@@ -26,7 +26,7 @@ class JV1Controller extends Controller
                 'd_ac.ac_name as debit_account', 
                 'c_ac.ac_name as credit_account')
                 ->get();
-        $acc = AC::where('status', 1)->get();
+        $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
 
         return view('vouchers.jv1',compact('jv1','acc'));
     }
@@ -298,6 +298,20 @@ class JV1Controller extends Controller
         $heading='<h1 style="text-decoration:underline;font-style:italic">'.$numberText.' Only</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
+
+        $currentY = $pdf->GetY();
+
+        $style = array(
+            'T' => array('width' => 0.75),  // Only top border with width 0.75
+        );
+
+        // First Cell
+        $pdf->SetXY(50, $currentY+50);
+        $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
+
+        // Second Cell
+        $pdf->SetXY(200, $currentY+50);
+        $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
 
         // Close and output PDF
         $pdf->Output('jv1_'.$jv1['auto_lager'].'.pdf', 'I');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use TCPDF;
 use App\Models\AC;
+
 use App\Models\lager;
 use App\Models\lager0;
 use App\Models\jv2_att;
@@ -34,7 +35,7 @@ class JV2Controller extends Controller
 
     public function create(Request $request)
     {
-        $acc = AC::where('status', 1)->get();
+        $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
         return view('vouchers.jv2-new',compact('acc'));
     }
 
@@ -110,7 +111,7 @@ class JV2Controller extends Controller
     {
         $jv2 = lager0::where('lager0.jv_no',$id)->first();
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
-        $acc = AC::where('status', 1)->get();
+        $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
 
         return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items'));
     }
@@ -276,8 +277,8 @@ class JV2Controller extends Controller
         $html .= '<tr>';
         $html .= '<th style="width:20%">Account Name</th>';
         $html .= '<th style="width:20%">Remarks</th>';
-        $html .= '<th style="width:20%">Bank Name</th>';
-        $html .= '<th style="width:10%">Inst #</th>';
+        $html .= '<th style="width:15%">Bank Name</th>';
+        $html .= '<th style="width:15%">Inst #</th>';
         $html .= '<th style="width:15%">Debit</th>';
         $html .= '<th style="width:15%">Credit</th>';
         $html .= '</tr>';
@@ -297,8 +298,8 @@ class JV2Controller extends Controller
                 $item_table .= '<tr style="background-color:#f1f1f1">';
                 $item_table .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
                 $item_table .= '<td style="width:20%;">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['bankname'].'</td>';
-                $item_table .= '<td style="width:10%;">'.$items['instrumentnumber'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['bankname'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['instrumentnumber'].'</td>';
                 $item_table .= '<td style="width:15%;">'.$items['debit'].'</td>';
                 $item_table .= '<td style="width:15%;">'.$items['credit'].'</td>';
                 $total_debit=$total_debit+$items['debit'];
@@ -309,8 +310,8 @@ class JV2Controller extends Controller
                 $item_table .= '<tr>';
                 $item_table .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
                 $item_table .= '<td style="width:20%;">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:20%;">'.$items['bankname'].'</td>';
-                $item_table .= '<td style="width:10%;">'.$items['instrumentnumber'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['bankname'].'</td>';
+                $item_table .= '<td style="width:15%;">'.$items['instrumentnumber'].'</td>';
                 $item_table .= '<td style="width:15%;">'.$items['debit'].'</td>';
                 $item_table .= '<td style="width:15%;">'.$items['credit'].'</td>';
                 $total_debit=$total_debit+$items['debit'];
@@ -336,6 +337,20 @@ class JV2Controller extends Controller
         $pdf->SetXY(243, $currentY+10);
         $pdf->MultiCell(40, 5, $total_credit, 1, 'C');
         
+        $currentY = $pdf->GetY();
+
+        $style = array(
+            'T' => array('width' => 0.75),  // Only top border with width 0.75
+        );
+
+        // First Cell
+        $pdf->SetXY(50, $currentY+50);
+        $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
+
+        // Second Cell
+        $pdf->SetXY(200, $currentY+50);
+        $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
+
         // Close and output PDF
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
     }

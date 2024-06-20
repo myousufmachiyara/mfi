@@ -42,6 +42,12 @@
 							</div>
 							<div class="col-12 mb-3">
 								<section class="card">
+									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
+										<h2 class="card-title">Edit JV2 Details</h2>
+									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -75,7 +81,7 @@
 															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->remarks}}">
 														</td>
 														<td>
-															<input type="number" class="form-control" name="instrumentnumber[]" required value="{{$jv2_items->instrumentnumber}}" step=".00001">
+															<input type="text" class="form-control" name="instrumentnumber[]" value="{{$jv2_items->instrumentnumber}}">
 														</td>
 														<td>
 															<input type="date" class="form-control"  name="chq_date[]" size=5 required value="{{$jv2_items->chqdate}}">
@@ -92,38 +98,6 @@
 														</td>
 													</tr>
 												@endforeach
-												<tr>
-													<td>
-														<select data-plugin-selectTwo class="form-control" name ="account_cod[]" onchange="addNewRow()" required>
-															<option value="" disabled selected>Select Account</option>
-															@foreach($acc as $key => $row)	
-																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-															@endforeach
-														</select>
-													</td>	
-													<td>
-														<input type="text" class="form-control" name="remarks[]">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="bank_name[]">
-													</td>
-													<td>
-														<input type="number" class="form-control" name="instrumentnumber[]" value="0" step=".00001">
-													</td>
-                                                    <td>
-														<input type="date" class="form-control"  name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
-                                                    </td>
-													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step=".00001">
-													</td>
-
-													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step=".00001">
-													</td>
-													<td style="vertical-align: middle;">
-														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-													</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -143,6 +117,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Voucher</button>
 											</div>
 										</div>
@@ -243,7 +218,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selectTwo class="form-control" onclick="addNewRow()" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select "data-plugin-selectTwo" class="form-control" onclick="addNewRow()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -251,7 +226,7 @@
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
-			cell4.innerHTML  = '<input type="number" class="form-control" name="instrumentnumber[]" required value="0" step=".00001">';
+			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
 			cell5.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';
@@ -315,6 +290,10 @@
 		}
 		$('#total_credit').val(totalCredit);
 
+	}
+
+	function goBack() {
+		window.history.back();
 	}
 
 </script>
