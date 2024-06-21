@@ -88,9 +88,8 @@ class JV1Controller extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-
         $jv1 = jvsingel::where('auto_lager', $request->update_auto_lager)->get()->first();
-        
+
         if ($request->has('update_ac_dr_sid') && $request->update_ac_dr_sid) {
             $jv1->ac_dr_sid=$request->update_ac_dr_sid;
         }
@@ -115,7 +114,6 @@ class JV1Controller extends Controller
             'remarks'=>$jv1->remarks,
         ]);
 
-        $latest_jv1 = jvsingel::latest()->first();
         if($request->hasFile('update_att')){
             
             // jv1_att::where('jv1_id', $request->update_auto_lager)->delete();
@@ -123,7 +121,7 @@ class JV1Controller extends Controller
             foreach ($files as $file)
             {
                 $jv1_att = new jv1_att();
-                $jv1_att->jv1_id = $latest_jv1['auto_lager'];
+                $jv1_att->jv1_id =  $request->update_auto_lager;
                 $extension = $file->getClientOriginalExtension();
                 $jv1_att->att_path = $this->jv1Doc($file,$extension);
                 $jv1_att->save();

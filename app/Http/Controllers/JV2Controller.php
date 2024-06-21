@@ -381,16 +381,16 @@ class JV2Controller extends Controller
 
     public function deleteAtt($id)
     {
-        $doc=jv2_att::where('att_id', $id)->select('att_path')->first();
+        $doc=jv2_att::where('att_id', $id)->select('att_path')->get();
         $filePath = public_path($doc['att_path']);
-
-        if (File::exists($filePath)) {
+        
+       if (File::exists($filePath)) {
             File::delete($filePath);
             $jv2_att = jv2_att::where('att_id', $id)->delete();
             return response()->json(['message' => 'File deleted successfully.']);
         } else {
             return response()->json(['message' => 'File not found.'], 404);
-        }
+        }	
     }
 
 }
