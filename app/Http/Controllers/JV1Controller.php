@@ -192,8 +192,6 @@ class JV1Controller extends Controller
         'c_ac.ac_name as credit_account')
         ->first();
 
-        $pdf = new TCPDF();
-
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         // Set document information
@@ -291,10 +289,12 @@ class JV1Controller extends Controller
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         // Column 3
+        $number = floor($jv1['amount']); // Remove decimals (round down)
         $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $numberText=$f->format($jv1['amount']);
-        $heading='<h1 style="text-decoration:underline;font-style:italic">'.$numberText.' Only</h1>';
-        $pdf->writeHTML($heading, true, false, true, false, '');
+        $numberText=$f->format($number);
+        $formattedWords = ucwords(strtolower($numberText));
+        $words='<h1 style="text-decoration:underline;font-style:italic">'.$formattedWords.' Only</h1>';
+        $pdf->writeHTML($words, true, false, true, false, '');
 
 
         $currentY = $pdf->GetY();
@@ -311,8 +311,8 @@ class JV1Controller extends Controller
         $pdf->SetXY(200, $currentY+50);
         $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
 
-        // Close and output PDF
         $pdf->Output('jv1_'.$jv1['auto_lager'].'.pdf', 'I');
+
     }
 
 }
