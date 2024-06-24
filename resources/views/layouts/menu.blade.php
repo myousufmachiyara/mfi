@@ -19,23 +19,6 @@
 						</li>
 						<li class="dropdown">
 							<a class="nav-link dropdown-toggle" href="#">
-								Sale
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a  class="dropdown-item" href="{{ route('all-saleinvoices')}}">
-										All Invoice
-									</a>
-								</li>
-								<li>
-									<a class="nav-link" href="/sales/new-invoice">
-										New Invoice
-									</a>
-								</li>								
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a class="nav-link dropdown-toggle" href="#">
 								Items
 							</a>
 							<ul class="dropdown-menu">
@@ -113,6 +96,45 @@
 										Payments
 									</a>
 								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Purchase
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">
+										Purchase 1
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">
+										Purchase 2
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="/sales/new-invoice">
+										Purchase Return
+									</a>
+								</li>								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Sale
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a  class="dropdown-item" href="{{ route('all-saleinvoices')}}">
+										All Invoice
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="/sales/new-invoice">
+										New Invoice
+									</a>
+								</li>								
 							</ul>
 						</li>
 					</ul>	

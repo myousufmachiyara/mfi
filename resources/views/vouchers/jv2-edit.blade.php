@@ -25,7 +25,7 @@
 
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="jv_date" required value="{{$jv2->jv_date}}" class="form-control">
+												<input type="date" name="jv_date" value="{{$jv2->jv_date}}" class="form-control">
 											</div>
 											<div class="col-4 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -84,7 +84,7 @@
 															<input type="text" class="form-control" name="instrumentnumber[]" value="{{$jv2_items->instrumentnumber}}">
 														</td>
 														<td>
-															<input type="date" class="form-control"  name="chq_date[]" size=5 required value="{{$jv2_items->chqdate}}">
+															<input type="date" class="form-control"  name="chq_date[]" size=5  value="{{$jv2_items->chqdate}}">
 														</td>
 														<td>
 															<input type="number" class="form-control" name="debit[]" onchange="totalDebit(this)" required value="{{$jv2_items->debit}}" step=".00001">
@@ -117,7 +117,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Voucher</button>
 											</div>
 										</div>
