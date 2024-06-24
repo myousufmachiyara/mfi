@@ -37,8 +37,8 @@
                                                     <td>{{$row->debit_account}}</td>
                                                     <td>{{$row->credit_account}}</td>
                                                     <td >{{$row->remarks}}</td>
-                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)
-                                                        <td>{{number_format($row->amount, 4)}}</td>
+                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)  
+                                                        <td>{{ rtrim(rtrim(number_format($row->amount, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->amount))}}</td>
                                                     @endif

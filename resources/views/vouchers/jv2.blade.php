@@ -36,12 +36,12 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->narration}}</td>
                                                     @if(substr(strval($row->total_debit), strpos(strval($row->total_debit), '.') + 1)>0)
-                                                        <td>{{number_format($row->total_debit, 4)}}</td>
+                                                        <td>{{ rtrim(rtrim(number_format($row->total_debit, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->total_debit))}}</td>
                                                     @endif
                                                     @if(substr(strval($row->total_credit), strpos(strval($row->total_credit), '.') + 1)>0)
-                                                        <td>{{number_format($row->total_credit, 4)}}</td>
+                                                        <td>{{ rtrim(rtrim(number_format($row->total_credit, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->total_credit))}}</td>
                                                     @endif
