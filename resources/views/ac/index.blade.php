@@ -39,13 +39,12 @@
                                                     <td>{{$row->ac_code}}</td>
                                                     <td>{{$row->ac_name}}</td>
                                                     @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
-                                                        <td>{{number_format($row->rec_able, 5)}}</td>
-
+                                                        <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->rec_able))}}</td>
                                                     @endif
                                                     @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
-                                                        <td>{{number_format($row->pay_able, 5)}}</td>
+                                                        <td>{{ rtrim(rtrim(number_format($row->pay_able, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
                                                         <td>{{ number_format(intval($row->pay_able))}}</td>
                                                     @endif
