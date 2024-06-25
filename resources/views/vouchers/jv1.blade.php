@@ -8,12 +8,11 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
-                                    <div class="card-actions">
-                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Journal Voucher</button>
-                                        
+                                <header class="card-header row">
+                                    <h2 class="card-title col-6">Journal Voucher 1</h2>
+                                    <div class="col-6 card-actions text-end">
+                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
                                     </div>
-                                    <h2 class="card-title">Journal Voucher 1</h2>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
