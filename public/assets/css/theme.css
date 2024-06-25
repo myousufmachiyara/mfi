@@ -460,7 +460,7 @@ a:active {
 		padding: 80px 10px;
 	}
 	.card-header {
-		padding: 18px 20px 0px 20px !important;
+		padding: 12px 17px 3px 17px !important;
 	}
 	.card-title{
 		line-height: 38px !important;
@@ -7454,7 +7454,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 	background: #f6f6f6;
 	border-radius: 5px 5px 0 0 !important;
 	border-bottom: 1px solid #DADADA;
-	padding: 20px;
+	padding: 5px 20px;
 	position: relative;
 }
 
@@ -7550,7 +7550,6 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card-title {
 	color: #33353F;
 	font-size: 18px;
-	line-height: 18px;
 	padding: 0;
 	text-transform: none;
 	margin: 0;

@@ -8,13 +8,11 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header row">
-                                    <h2 class="card-title col-6">Journal Voucher 2</h2>
-                                    <div class="card-actions col-6 text-end">
-                                        <form action="{{ route('new-jv2') }}" method="GET">
-                                            <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Voucher</button>
-                                        </form>
-                                    </div>
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">Journal Voucher 2</h2>
+                                    <form class="text-end" action="{{ route('new-jv2') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Voucher</button>
+                                    </form>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">

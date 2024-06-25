@@ -8,9 +8,9 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header row">
-                                    <h2 class="card-title col-6">Journal Voucher 1</h2>
-                                    <div class="col-6 card-actions text-end">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">Journal Voucher 1</h2>
+                                    <div class="text-end">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
                                     </div>
                                 </header>
