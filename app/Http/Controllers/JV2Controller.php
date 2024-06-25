@@ -204,8 +204,6 @@ class JV2Controller extends Controller
         ->select('lager.*', 'ac.ac_code as acc_code', 'ac.ac_name as acc_name')
         ->get();
 
-        $pdf = new TCPDF();
-
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         // Set document information
@@ -215,10 +213,12 @@ class JV2Controller extends Controller
         $pdf->SetSubject('JV2 # '.$jv2['jv_no']);
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
-               
+
+        $pdf->setPrintFooter(false);
+
         // Set header and footer fonts
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        // $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
         
         // Set default monospaced font
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
@@ -226,7 +226,7 @@ class JV2Controller extends Controller
         // Set margins
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
         // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
                 
         // Set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -350,6 +350,9 @@ class JV2Controller extends Controller
         // Second Cell
         $pdf->SetXY(200, $currentY+50);
         $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
+
+        // $pdf->SetY(-15);
+        // $pdf->Cell(0, 10, 'Page '.$pdf->getAliasNumPage().'/'.$pdf->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 
         // Close and output PDF
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');

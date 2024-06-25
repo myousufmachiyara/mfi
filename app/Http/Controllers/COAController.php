@@ -23,9 +23,9 @@ class COAController extends Controller
 
     public function index()
     {
-        $acc = AC::where('ac.status', 1)
-               ->join('sub_head_of_acc as shoa', 'shoa.id', '=', 'ac.AccountType')
+        $acc = AC::join('sub_head_of_acc as shoa', 'shoa.id', '=', 'ac.AccountType')
                ->leftjoin('ac_group as ag', 'ag.group_cod', '=', 'ac.group_cod')
+               ->select('ac.*' , 'ag.group_name', 'shoa.sub')
                ->get();
         $sub_head_of_acc = sub_head_of_acc::where('status', 1)->get();
         $ac_group = ac_group::where('status', 1)->get();
@@ -101,6 +101,12 @@ class COAController extends Controller
     public function destroy(Request $request)
     {
         $acc = AC::where('ac_code', $request->acc_id)->update(['status' => '0']);
+        return redirect()->route('all-acc');
+    }
+
+    public function activate($id)
+    {
+        $acc = AC::where('ac_code', $id)->update(['status' => '1']);
         return redirect()->route('all-acc');
     }
 
