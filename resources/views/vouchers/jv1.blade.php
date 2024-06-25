@@ -11,7 +11,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">Journal Voucher 1</h2>
                                     <div class="text-end">
-                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
+                                        <button type="button" class="modal-with-form btn btn-primary mt-2" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
                                     </div>
                                 </header>
                                 <div class="card-body">
