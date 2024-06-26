@@ -108,7 +108,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
-                                <select data-plugin-selectTwo class="form-control" name ="ac_dr_sid" required>
+                                <select data-plugin-selectTwo autofocus class="form-control" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -118,7 +118,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Credit</label>
 
-                                <select data-plugin-selectTwo class="form-control" name ="ac_cr_sid" required>
+                                <select data-plugin-selectTwo autofocus class="form-control" name ="ac_cr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
-                                <select class="form-control" name="update_ac_dr_sid" required id="update_ac_dr_sid">
+                                <select class="form-control" autofocus name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Credit</label>
-                                <select class="form-control" name ="update_ac_cr_sid" required id="update_ac_cr_sid">
+                                <select class="form-control" autofocus name ="update_ac_cr_sid" required id="update_ac_cr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>

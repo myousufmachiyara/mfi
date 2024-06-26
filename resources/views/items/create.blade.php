@@ -41,7 +41,7 @@
 														<input type="number" class="form-control" disabled>
 													</td> -->
 													<td>
-														<select class="form-control" name ="item_group[]" onchange="addNewRow(1)" required>
+														<select class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
 															<option value="0" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -161,7 +161,7 @@
 			var cell12 = newRow.insertCell(11);
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
-			cell1.innerHTML  = '<select class="form-control" onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option value="0" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+

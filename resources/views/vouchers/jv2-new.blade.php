@@ -58,7 +58,7 @@
 											<tbody id="JV2Table">
 												<tr>
 													<td>
-														<select data-plugin-selectTwo class="form-control" name ="account_cod[]" onchange="addNewRow(1)" required>
+														<select data-plugin-selectTwo class="form-control" autofocus  name ="account_cod[]" onchange="addNewRow(1)" required>
 															<option value="" disabled selected>Select Account</option>
 															@foreach($acc as $key => $row)	
 																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -148,7 +148,7 @@
 				alert("Total Debit & Credit Must be Equal")
 			}
 
-		});
+		});	
 	});
 
     function removeRow(button) {
@@ -191,7 +191,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selectTwo class="form-control" onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selectTwo class="form-control" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -263,7 +263,6 @@
 			totalCredit = totalCredit + Number(credit);
 		}
 		$('#total_credit').val(totalCredit);
-
 	}
 
 </script>

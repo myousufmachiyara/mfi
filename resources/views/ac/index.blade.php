@@ -217,7 +217,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
-                                <select class="form-control" name ="group_cod">
+                                <select class="form-control" autofocus name ="group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -228,7 +228,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
-                                <select class="form-control" name ="AccountType" required>
+                                <select class="form-control" autofocus name ="AccountType" required>
                                     <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -300,7 +300,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
-                                <select class="form-control" name="group_cod" id="update_group_cod">
+                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -311,7 +311,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
-                                <select class="form-control" name="AccountType" required id="update_AccountType">
+                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
