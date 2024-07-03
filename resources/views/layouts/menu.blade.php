@@ -104,7 +104,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="dropdown-item" href="#">
+									<a class="nav-link" href="{{ route('all-purchases1')}}">
 										Purchase 1
 									</a>
 								</li>
