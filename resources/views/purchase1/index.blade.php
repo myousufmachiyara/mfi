@@ -29,7 +29,7 @@
                                                 <th>Bill Amount</th>
                                                 <th>Convance Charges</th>
                                                 <th>Labour Charges</th>
-                                                <th>Disc.</th>
+                                                <th>Discount</th>
                                                 <th>Net Amount</th>
                                                 <th>Action</th>
                                             </tr>
