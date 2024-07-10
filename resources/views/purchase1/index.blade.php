@@ -38,7 +38,7 @@
                                             @foreach ($pur1 as $key => $row)
                                             <tr>
                                                 <td>{{$row->pur_id }}</td>
-                                                <td>{{$row->pur_date}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                 <td>{{$row->ac_name}}</td>
                                                 <td>{{$row->cash_saler_name}}</td>
                                                 <td>{{$row->pur_remarks}}</td>
