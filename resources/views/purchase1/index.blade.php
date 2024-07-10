@@ -18,11 +18,19 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th width="5%">ID</th>
-                                                <th width="10%">Date</th>
-                                                <th width="40%">Account</th>
-                                                <th>Saler Name</th>
+                                                <th>Inv #</th>
+                                                <th>Date</th>
+                                                <th>Account</th>
+                                                <th>Person Name</th>
+                                                <th>Remarks</th>
+                                                <th>SaleInv #</th>
                                                 <th>Att.</th>
+                                                <th>Total Wg.</th>
+                                                <th>Bill</th>
+                                                <th>C.C</th>
+                                                <th>L.B</th>
+                                                <th>Disc.</th>
+                                                <th>Net Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -33,7 +41,15 @@
                                                 <td>{{$row->pur_date}}</td>
                                                 <td>{{$row->ac_name}}</td>
                                                 <td>{{$row->cash_saler_name}}</td>
+                                                <td>{{$row->pur_remarks}}</td>
+                                                <td>{{$row->sale_against}}</td>
                                                 <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
+                                                <td>{{$row->total_weight}}</td>
+                                                <td>{{$row->bill_amount}}</td>
+                                                <td>{{$row->pur_convance_char}}</td>
+                                                <td>{{$row->pur_labor_char}}</td>
+                                                <td>{{$row->pur_discount}}</td>
+                                                <td>{{$row->net_amount}}</td>
                                                 <td class="actions">
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
@@ -52,11 +68,11 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-jv2') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-purchases1') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Journal Voucher</h2>
+                        <h2 class="card-title">Delete Purchase Invoice</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -64,8 +80,8 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this Journal Voucher?</p>
-                                <input name="delete_jv_no" id="deleteID" hidden>
+                                <p class="mb-0">Are you sure that you want to delete this Purchase Invoice?</p>
+                                <input name="delete_purc1" id="deleteID" hidden>
                             </div>
                         </div>
                     </div>
@@ -98,7 +114,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="jv2_attachements">
+                            <tbody id="pur1_attachements">
 
                             </tbody>
                         </table>
@@ -123,16 +139,17 @@
 
     function getAttachements(id){
 
-        var table = document.getElementById('jv2_attachements');
+        var table = document.getElementById('pur1_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/vouchers/jv2/attachements",
+            url: "/purchase1/attachements",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
@@ -140,7 +157,7 @@
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/vouchers/jv2/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#jv2_attachements').append(html);
+                    $('#pur1_attachements').append(html);
                 });
             },
             error: function(){

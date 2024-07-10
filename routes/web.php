@@ -101,6 +101,7 @@ Route::get('/purchase1/edit/{id}', [App\Http\Controllers\PurchaseController::cla
 Route::post('/purchase1/update', [App\Http\Controllers\PurchaseController::class, 'update'])->name('update-purchases1');
 Route::post('/purchase1/delete', [App\Http\Controllers\PurchaseController::class, 'destroy'])->name('delete-purchases1');
 Route::get('/purchase1/view/{id}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('show-purchases1');
+Route::get('/purchase1/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-purc1-att');
 
 //sales
 Route::get('/sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');

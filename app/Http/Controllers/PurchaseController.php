@@ -20,6 +20,7 @@ class PurchaseController extends Controller
         $pur1 = purchase::where('purchase.status',1)
         ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
         ->get();
+        
         return view('purchase1.index',compact('pur1'));
     }
 
@@ -63,6 +64,15 @@ class PurchaseController extends Controller
         }
         if ($request->has('pur_discount') && $request->pur_discount) {
             $pur1->pur_discount=$request->pur_discount;
+        }
+        if ($request->has('total_weight') && $request->total_weight) {
+            $pur1->total_weight=$request->total_weight;
+        }
+        if ($request->has('total_amount') && $request->total_amount) {
+            $pur1->bill_amount=$request->total_amount;
+        }
+        if ($request->has('net_amount') && $request->net_amount) {
+            $pur1->net_amount=$request->net_amount;
         }
 
         $pur1->save();
@@ -110,5 +120,27 @@ class PurchaseController extends Controller
         }
 
         return redirect()->route('all-purchases1');
+    }
+
+    public function edit($id)
+    {
+        $items = Item_entry::all();
+        $acc = AC::all();
+        $pur = purchase::where('purchase.pur_id',$id)->first();
+        $pur_items = purchase_2::where('purchase_2.pur_cod',$id)->get();
+
+        return view('purchase1.edit',compact('items','acc','pur','pur_items'));
+    }
+
+    public function destroy(Request $request)
+    {
+        $purc1 = purchase::where('pur_id', $request->delete_purc1)->update(['status' => '0']);
+        return redirect()->route('all-purchases1');
+    }
+
+    public function getAttachements(Request $request)
+    {
+        $pur1_atts = pur1_att::where('pur1_id', $request->id)->get();
+        return $pur1_atts;
     }
 }

@@ -195,7 +195,7 @@
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
-                                    @endforeach
+                                    @endforeach;
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
