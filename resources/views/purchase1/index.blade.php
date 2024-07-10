@@ -25,10 +25,10 @@
                                                 <th>Remarks</th>
                                                 <th>SaleInv #</th>
                                                 <th>Att.</th>
-                                                <th>Weight</th>
+                                                <th>Weight (kg)</th>
                                                 <th>Bill Amount</th>
-                                                <th>Conv.</th>
-                                                <th>L.B</th>
+                                                <th>Convance Charges</th>
+                                                <th>Labour Charges</th>
                                                 <th>Disc.</th>
                                                 <th>Net Amount</th>
                                                 <th>Action</th>
