@@ -22,7 +22,7 @@
                                                 <th>Date</th>
                                                 <th>Account</th>
                                                 <th>Person Name</th>
-                                                <th>Remarks</th>
+                                                <th width="30%">Remarks</th>
                                                 <th>SaleInv #</th>
                                                 <th>Att.</th>
                                                 <th>Weight (kg)</th>
