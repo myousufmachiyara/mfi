@@ -100,10 +100,10 @@
 														<input type="text" class="form-control" id="remarks1" name="remarks[]">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" required>
+														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" step="0.0000001" min="0" max="9999999.9999999" required>
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" required>
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" step="0.0000001" min="0" max="9999999.9999999" required>
 													</td>
 
 													<td>
