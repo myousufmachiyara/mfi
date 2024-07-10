@@ -62,8 +62,8 @@ class PurchaseController extends Controller
         if ($request->has('pur_labor_char') && $request->pur_labor_char) {
             $pur1->pur_labor_char=$request->pur_labor_char;
         }
-        if ($request->has('pur_discount') && $request->pur_discount) {
-            $pur1->pur_discount=$request->pur_discount;
+        if ($request->has('bill_discount') && $request->bill_discount) {
+            $pur1->pur_discount=$request->bill_discount;
         }
         if ($request->has('total_weight') && $request->total_weight) {
             $pur1->total_weight=$request->total_weight;
