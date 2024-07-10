@@ -49,7 +49,7 @@
                                                 <td>{{$row->pur_convance_char}}</td>
                                                 <td>{{$row->pur_labor_char}}</td>
                                                 <td>{{$row->pur_discount}}</td>
-                                                <td><strong>{{$row->net_amount}}</strong></td>
+                                                <td><strong style="font-size:15px">{{$row->net_amount}}</strong></td>
                                                 <td class="actions">
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
