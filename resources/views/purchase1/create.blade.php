@@ -83,10 +83,10 @@
 											<tbody id="Purchase1Table">
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)">
+														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="pur_qty2[]" value="0">
+														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0">
 													</td>
 													<td>
 														<select class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
@@ -100,15 +100,16 @@
 														<input type="text" class="form-control" id="remarks1" name="remarks[]">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" required>
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" required>
 													</td>
 
 													<td>
-														<input type="number" class="form-control" name="amount[]" id="amount1" onchange="tableTotal()" value="0">
+														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" disabled required>
 													</td>
+
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
@@ -228,8 +229,8 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')">';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step=".00001" value="0">';
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" name="pur_qty2[]" step="0.0000001" min="0" max="9999999.9999999" required>';
 			cell3.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
@@ -237,9 +238,9 @@
                                     '@endforeach'+
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step=".00001">';
-			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step=".00001">';
-			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]"  value="0" onchange="tableTotal()" step=".00001">';
+			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" value="0" onchange="rowTotal('+index+')" step="0.0000001" min="0" max="9999999.9999999" required>';
+			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="0.0000001" min="0" max="9999999.9999999" required>';
+			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" onchange="tableTotal()" step=".00001" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
@@ -313,6 +314,7 @@
 			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
 			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
 			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
+			console.log(totalQuantity);
         }
 
 		$('#totalAmount').val(totalAmount);
@@ -331,7 +333,7 @@
 		var bill_discount = Number($('#bill_discount').val());
 
 		netTotal = total + convance_charges + labour_charges - bill_discount;
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'.00</span>';
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'</span>';
 	}
 
 </script>
