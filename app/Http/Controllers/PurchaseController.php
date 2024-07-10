@@ -42,7 +42,7 @@ class PurchaseController extends Controller
             $pur1->pur_bill_no=$request->pur_bill_no;
         }
         if ($request->has('pur_sale_inv') && $request->pur_sale_inv) {
-            $pur1->pur_sale_inv=$request->pur_sale_inv;
+            $pur1->sale_against=$request->pur_sale_inv;
         }
         if ($request->has('ac_cod') && $request->ac_cod) {
             $pur1->ac_cod=$request->ac_cod;
