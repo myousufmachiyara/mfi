@@ -27,7 +27,7 @@
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
-												<input type="number" placeholder="Bill No." name="pur_bill_no" class="form-control">
+												<input type="text" placeholder="Bill No." name="pur_bill_no" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Sale Inv.</label>
@@ -86,7 +86,7 @@
 														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>	
 													<td>
-														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0">
+														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0" required>
 													</td>
 													<td>
 														<select class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
