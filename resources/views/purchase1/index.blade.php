@@ -25,9 +25,9 @@
                                                 <th>Remarks</th>
                                                 <th>SaleInv #</th>
                                                 <th>Att.</th>
-                                                <th>Total Wg.</th>
-                                                <th>Bill</th>
-                                                <th>C.C</th>
+                                                <th>Weight</th>
+                                                <th>Bill Amount</th>
+                                                <th>Conv.</th>
                                                 <th>L.B</th>
                                                 <th>Disc.</th>
                                                 <th>Net Amount</th>
