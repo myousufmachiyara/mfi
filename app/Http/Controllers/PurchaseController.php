@@ -9,6 +9,8 @@ use App\Models\purchase_2;
 use App\Models\pur1_att;
 use Illuminate\Support\Facades\File;
 use App\Traits\SaveImage;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class PurchaseController extends Controller
 {
@@ -141,6 +143,38 @@ class PurchaseController extends Controller
     public function getAttachements(Request $request)
     {
         $pur1_atts = pur1_att::where('pur1_id', $request->id)->get();
+        
         return $pur1_atts;
+    }
+
+    public function deleteAtt($id)
+    {
+        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            $pur1_att = pur1_att::where('att_id', $id)->delete();
+            return response()->json(['message' => 'File deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'File not found.'], 404);
+        }	
+    }
+
+    public function view($id)
+    {
+        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (file_exists($filePath)) {
+            return Response::file($filePath);
+        } 
+    }
+
+    public function downloadAtt($id)
+    {
+        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (file_exists($filePath)) {
+            return Response::download($filePath);
+        } 
     }
 }
