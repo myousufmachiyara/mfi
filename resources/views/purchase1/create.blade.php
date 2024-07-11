@@ -333,6 +333,7 @@
 		var bill_discount = Number($('#bill_discount').val());
 
 		netTotal = total + convance_charges + labour_charges - bill_discount;
+		netTotal = netTotal.toFixed(0);
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'</span>';
 		$('#net_amount').val(netTotal);
 	}

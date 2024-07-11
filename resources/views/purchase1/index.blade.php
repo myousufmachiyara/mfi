@@ -22,7 +22,7 @@
                                                 <th>Date</th>
                                                 <th>Account</th>
                                                 <th>Person Name</th>
-                                                <th style="width: 100px;">Remarks</th>
+                                                <th>Remarks</th>
                                                 <th>SaleInv #</th>
                                                 <th>Att.</th>
                                                 <th>Weight (kg)</th>
@@ -41,7 +41,7 @@
                                                 <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                 <td>{{$row->ac_name}}</td>
                                                 <td>{{$row->cash_saler_name}}</td>
-                                                <td style="width: 100px;">{{$row->pur_remarks}}</td>
+                                                <td>{{$row->pur_remarks}}</td>
                                                 <td>{{$row->sale_against}}</td>
                                                 <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                 <td>{{$row->total_weight}}</td>
