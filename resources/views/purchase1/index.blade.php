@@ -49,7 +49,11 @@
                                                 <td>{{$row->pur_convance_char}}</td>
                                                 <td>{{$row->pur_labor_char}}</td>
                                                 <td>{{$row->pur_discount}}</td>
-                                                <td><strong style="font-size:15px">{{$row->net_amount}}</strong></td>
+                                                @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0)  
+                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($row->net_amount, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                    @else
+                                                        <td><strong style="font-size:15px">{{ number_format(intval($row->net_amount))}}</strong></td>
+                                                    @endif
                                                 <td class="actions">
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class="text-danger"><i class="fas fa-print"></i></a>
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>

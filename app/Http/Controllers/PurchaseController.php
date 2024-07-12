@@ -195,8 +195,8 @@ class PurchaseController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$sales['Sal_inv_no']);
-        $pdf->SetSubject('Invoice-'.$sales['Sal_inv_no']);
+        $pdf->SetTitle('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sal_inv_no']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
         $pdf->setPageOrientation('L');
                
@@ -242,9 +242,9 @@ class PurchaseController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$sales['Sal_inv_no'].'</span></td>';
-        $html .= '<td>Date: '.$sales['sa_date'].'</td>';
-        $html .= '<td>pur_ord_no: '.$sales['pur_ord_no'].'</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sal_inv_no'].'</span></td>';
+        $html .= '<td>Date: '.$purchase['sa_date'].'</td>';
+        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Login: Hamza</td>';
         $html .= '</tr>';
         $html .= '</table>';
@@ -254,25 +254,25 @@ class PurchaseController extends Controller
         $html = '<table border="1" style="border-collapse: collapse;">';
         $html .= '<tr>';
         $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name </td>';
-        $html .= '<td width="30%">'.$sales['ac_name'].'</td>';
+        $html .= '<td width="30%">'.$purchase['ac_name'].'</td>';
         $html .= '<td width="20%">Name Of Person</td>';
-        $html .= '<td width="30%">'.$sales['Cash_pur_name'].'</td>';
+        $html .= '<td width="30%">'.$purchase['Cash_pur_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" >Address </td>';
-        $html .= '<td width="30%">'.$sales['address'].'</td>';
+        $html .= '<td width="30%">'.$purchase['address'].'</td>';
         $html .= "<td width='20%'>Person's Address</td>";
-        $html .= '<td width="30%">'.$sales['cash_Pur_address'].'</td>';
+        $html .= '<td width="30%">'.$purchase['cash_Pur_address'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" >Phone </td>';
-        $html .= '<td width="30%">'.$sales['phone_no'].'</td>';
+        $html .= '<td width="30%">'.$purchase['phone_no'].'</td>';
         $html .= "<td width='20%'>Person's Phone</td>";
-        $html .= '<td width="30%">'.$sales['cash_pur_phone'].'</td>';
+        $html .= '<td width="30%">'.$purchase['cash_pur_phone'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" >Remarks </td>';
-        $html .= '<td width="30%">'.$sales['remarks'].'</td>';
+        $html .= '<td width="30%">'.$purchase['remarks'].'</td>';
         $html .= "<td width='20%'>Previous Balance</td>";
         $html .= '<td width="30%"></td>';
         $html .= '</tr>';
@@ -302,7 +302,7 @@ class PurchaseController extends Controller
         $total_amount=0;
         $net_amount=0;
 
-        foreach ($sale_items as $items) {
+        foreach ($purchase_items as $items) {
             if($count%2==0)
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';
@@ -366,16 +366,16 @@ class PurchaseController extends Controller
         $pdf->SetXY(240, $currentY+10);
         $pdf->MultiCell(40, 5, $total_amount, 1, 'R');
         $pdf->SetXY(240, $currentY+16.82);
-        $pdf->MultiCell(40, 5, $sales['LaborCharges'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['LaborCharges'], 1, 'R');
         $pdf->SetXY(240, $currentY+23.5);
-        $pdf->MultiCell(40, 5, $sales['ConvanceCharges'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['ConvanceCharges'], 1, 'R');
         $pdf->SetXY(240, $currentY+30.18);
-        $pdf->MultiCell(40, 5, $sales['Bill_discount'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['Bill_discount'], 1, 'R');
         $pdf->SetXY(240, $currentY+36.86);
-        $net_amount=$total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount'];
+        $net_amount=$total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount'];
         $pdf->MultiCell(40, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
-        $pdf->Output('invoice_'.$sales['Sal_inv_no'].'.pdf', 'I');
+        $pdf->Output('invoice_'.$purchase['Sal_inv_no'].'.pdf', 'I');
     }
 }
