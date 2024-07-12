@@ -51,6 +51,7 @@
                                                 <td>{{$row->pur_discount}}</td>
                                                 <td><strong style="font-size:15px">{{$row->net_amount}}</strong></td>
                                                 <td class="actions">
+                                                    <a href="{{ route('show-purchases1',$row->pur_id) }}" class="text-danger"><i class="fas fa-print"></i></a>
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                     <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
