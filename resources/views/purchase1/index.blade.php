@@ -43,7 +43,7 @@
                                                 <td>{{$row->cash_saler_name}}</td>
                                                 <td>{{$row->pur_remarks}}</td>
                                                 <td>{{$row->sale_against}}</td>
-                                                <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View Att.</a></td>
+                                                <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                 <td>{{$row->total_weight}}</td>
                                                 <td>{{$row->bill_amount}}</td>
                                                 <td>{{$row->pur_convance_char}}</td>
@@ -55,7 +55,7 @@
                                                         <td><strong style="font-size:15px">{{ number_format(intval($row->net_amount))}}</strong></td>
                                                     @endif
                                                 <td class="actions">
-                                                    <a href="{{ route('show-purchases1',$row->pur_id) }}" class="text-danger"><i class="fas fa-print"></i></a>
+                                                    <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger"> <i class="fas fa-print"></i></a>
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                     <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>

@@ -1,6 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
+use TCPDF;
+
 use Illuminate\Http\Request;
 use App\Models\Item_entry;
 use App\Models\AC;
@@ -195,8 +196,8 @@ class PurchaseController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$purchase['Sal_inv_no']);
-        $pdf->SetSubject('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetTitle('Invoice-'.$purchase['pur_id']);
+        $pdf->SetSubject('Invoice-'.$purchase['pur_id']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
         $pdf->setPageOrientation('L');
                
@@ -235,17 +236,15 @@ class PurchaseController extends Controller
         }';
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="text-align:center">Sales Invoice</h1>';
+        $heading='<h1 style="text-align:center">Purchase Invoice</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sal_inv_no'].'</span></td>';
-        $html .= '<td>Date: '.$purchase['sa_date'].'</td>';
-        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
-        $html .= '<td>Login: Hamza</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
+        $html .= '<td>Date: '.$purchase['pur_date'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -256,7 +255,7 @@ class PurchaseController extends Controller
         $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name </td>';
         $html .= '<td width="30%">'.$purchase['ac_name'].'</td>';
         $html .= '<td width="20%">Name Of Person</td>';
-        $html .= '<td width="30%">'.$purchase['Cash_pur_name'].'</td>';
+        $html .= '<td width="30%">'.$purchase['cash_saler_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" >Address </td>';
@@ -271,10 +270,8 @@ class PurchaseController extends Controller
         $html .= '<td width="30%">'.$purchase['cash_pur_phone'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td width="20%" >Remarks </td>';
-        $html .= '<td width="30%">'.$purchase['remarks'].'</td>';
-        $html .= "<td width='20%'>Previous Balance</td>";
-        $html .= '<td width="30%"></td>';
+        $html .= '<td>Remarks </td>';
+        $html .= '<td width="80%">'.$purchase['pur_remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -307,29 +304,29 @@ class PurchaseController extends Controller
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';
                 $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
-                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
-                $total_quantity=$total_quantity+$items['Sales_qty'];
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['pur_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['pur_qty2'];
                 $item_table .= '<td style="width:20%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
                 $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
-                $total_weight=$total_weight+$items['Sales_qty2'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty2']*$items['sales_price'].'</td>';
-                $total_amount=$total_amount+($items['Sales_qty2']*$items['sales_price']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_price'].'</td>';
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty'].'</td>';
+                $total_weight=$total_weight+$items['pur_qty'];
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty']*$items['pur_price'].'</td>';
+                $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
                 $item_table .= '</tr>';
             }
             else{
                 $item_table .= '<tr>';
                 $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
-                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
-                $total_quantity=$total_quantity+$items['Sales_qty'];
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['pur_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['pur_qty2'];
                 $item_table .= '<td style="width:20%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
                 $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
-                $total_weight=$total_weight+$items['Sales_qty2'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty2']*$items['sales_price'].'</td>';
-                $total_amount=$total_amount+($items['Sales_qty2']*$items['sales_price']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_price'].'</td>';
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty'].'</td>';
+                $total_weight=$total_weight+$items['pur_qty'];
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty']*$items['pur_price'].'</td>';
+                $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
                 $item_table .= '</tr>';
             }
             $count++;
@@ -366,16 +363,16 @@ class PurchaseController extends Controller
         $pdf->SetXY(240, $currentY+10);
         $pdf->MultiCell(40, 5, $total_amount, 1, 'R');
         $pdf->SetXY(240, $currentY+16.82);
-        $pdf->MultiCell(40, 5, $purchase['LaborCharges'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['pur_labor_char'], 1, 'R');
         $pdf->SetXY(240, $currentY+23.5);
-        $pdf->MultiCell(40, 5, $purchase['ConvanceCharges'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['pur_convance_char'], 1, 'R');
         $pdf->SetXY(240, $currentY+30.18);
-        $pdf->MultiCell(40, 5, $purchase['Bill_discount'], 1, 'R');
+        $pdf->MultiCell(40, 5, $purchase['pur_discount'], 1, 'R');
         $pdf->SetXY(240, $currentY+36.86);
-        $net_amount=$total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount'];
+        $net_amount=$total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount'];
         $pdf->MultiCell(40, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
-        $pdf->Output('invoice_'.$purchase['Sal_inv_no'].'.pdf', 'I');
+        $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');
     }
 }
