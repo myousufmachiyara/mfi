@@ -334,8 +334,13 @@
 
 		netTotal = total + convance_charges + labour_charges - bill_discount;
 		netTotal = netTotal.toFixed(0);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'</span>';
+		FormattednetTotal = formatNumberWithCommas(netTotal);
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 		$('#net_amount').val(netTotal);
 	}
-
+ 
+	function formatNumberWithCommas(number) {
+    	// Convert number to string and add commas
+    	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 </script>
