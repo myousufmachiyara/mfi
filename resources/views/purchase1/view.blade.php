@@ -107,6 +107,7 @@
 								</div>
 							</div>
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+								<a onclick="window.location='{{ route('all-purchases1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a href="{{ route('print-purc1-invoice', $pur->pur_id) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
 							</div>
 						</div>
