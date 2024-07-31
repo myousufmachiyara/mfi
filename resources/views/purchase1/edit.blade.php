@@ -259,7 +259,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')">';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step=".00001" value="0">';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step="any" value="0">';
 			cell3.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($items as $key => $row)
@@ -267,9 +267,9 @@
                                     @endforeach
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step=".00001">';
-			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step=".00001">';
-			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]" value="0" onchange="tableTotal()" step=".00001" disabled>';
+			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step="any">';
+			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any">';
+			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]" value="0" onchange="tableTotal()" step="any" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
