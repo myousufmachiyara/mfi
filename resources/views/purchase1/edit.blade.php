@@ -88,16 +88,16 @@
 												</tr>
 											</thead>
 											<tbody id="Purchase1Table">
-                                            	@foreach ($pur_items as $jv_key => $pur_items)
+                                            	@foreach ($pur_items as $pur1_key => $pur_items)
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]"  value="{{$pur_items->item_cod}}" onchange="getItemDetails(1,1)">
+														<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur1_key+1}}" value="{{$pur_items->item_cod}}" onchange="getItemDetails(1,1)">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="pur_qty2[]" value="{{$pur_items->pur_qty2}}">
+														<input type="text" class="form-control" name="pur_qty2[]" id="pur_qty2{{$pur1_key+1}}" value="{{$pur_items->pur_qty2}}">
 													</td>
 													<td>
-														<select class="form-control" autofocus name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select class="form-control" autofocus name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -105,16 +105,16 @@
 														</select>													
 													</td>
 													<td>
-														<input type="text" class="form-control"  name="remarks[]" value="{{$pur_items->remarks}}">
+														<input type="text" class="form-control"  name="remarks[]" id="remarks{{$pur1_key+1}}" value="{{$pur_items->remarks}}">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]"  onchange="rowTotal(1)" value="{{$pur_items->pur_qty}}">
+														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty{{$pur1_key+1}}"  onchange="rowTotal(1)" value="{{$pur_items->pur_qty}}">
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]"  value="{{$pur_items->pur_price}}"  onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price{{$pur1_key+1}}" value="{{$pur_items->pur_price}}"  onchange="rowTotal(1)" value="0">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="amount[]" value="{{ $pur_items->pur_qty * $pur_items->pur_price }}" onchange="tableTotal()" value="0">
+														<input type="number" class="form-control" name="amount[]" id="amount{{$pur1_key+1}}" value="{{ $pur_items->pur_qty * $pur_items->pur_price }}" onchange="tableTotal()" value="0" disabled>
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -228,6 +228,7 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount-1;
 			$('#itemCount').val(itemCount);
+			index--;
 		}   
 		tableTotal();
     }
@@ -268,7 +269,7 @@
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
 			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step=".00001">';
 			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step=".00001">';
-			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]"  value="0" onchange="tableTotal()" step=".00001">';
+			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]" value="0" onchange="tableTotal()" step=".00001" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
