@@ -71,6 +71,9 @@ class PurchaseController extends Controller
         if ($request->has('total_weight') && $request->total_weight) {
             $pur1->total_weight=$request->total_weight;
         }
+        if ($request->has('total_quantity') && $request->total_quantity) {
+            $pur1->total_quantity=$request->total_quantity;
+        }
         if ($request->has('total_amount') && $request->total_amount) {
             $pur1->bill_amount=$request->total_amount;
         }
@@ -133,6 +136,115 @@ class PurchaseController extends Controller
         $pur_items = purchase_2::where('purchase_2.pur_cod',$id)->get();
 
         return view('purchase1.edit',compact('items','acc','pur','pur_items'));
+    }
+
+    public function update(Request $request){
+
+        $pur1 = purchase::where('pur_id',$request->pur_id)->get()->first();
+
+        if ($request->has('pur_date') && $request->pur_date) {
+            $pur1->pur_date=$request->pur_date;
+        }
+        if ($request->has('pur_bill_no') && $request->pur_bill_no) {
+            $pur1->pur_bill_no=$request->pur_bill_no;
+        }
+        if ($request->has('pur_sale_inv') && $request->pur_sale_inv) {
+            $pur1->sale_against=$request->pur_sale_inv;
+        }
+        if ($request->has('ac_cod') && $request->ac_cod) {
+            $pur1->ac_cod=$request->ac_cod;
+        }
+        if ($request->has('cash_saler_name') && $request->cash_saler_name) {
+            $pur1->cash_saler_name=$request->cash_saler_name;
+        }
+        if ($request->has('cash_saler_address') && $request->cash_saler_address) {
+            $pur1->cash_saler_address=$request->cash_saler_address;
+        }
+        if ($request->has('pur_remarks') && $request->pur_remarks) {
+            $pur1->pur_remarks=$request->pur_remarks;
+        }
+        if ($request->has('pur_convance_char') && $request->pur_convance_char) {
+            $pur1->pur_convance_char=$request->pur_convance_char;
+        }
+        if ($request->has('pur_labor_char') && $request->pur_labor_char) {
+            $pur1->pur_labor_char=$request->pur_labor_char;
+        }
+        if ($request->has('bill_discount') && $request->bill_discount) {
+            $pur1->pur_discount=$request->bill_discount;
+        }
+        if ($request->has('total_weight') && $request->total_weight) {
+            $pur1->total_weight=$request->total_weight;
+        }
+        if ($request->has('total_quantity') && $request->total_quantity) {
+            $pur1->total_quantity=$request->total_quantity;
+        }
+        if ($request->has('total_amount') && $request->total_amount) {
+            $pur1->bill_amount=$request->total_amount;
+        }
+        if ($request->has('net_amount') && $request->net_amount) {
+            $pur1->net_amount=$request->net_amount;
+        }
+
+        purchase::where('pur_id', $request->pur_id)->update([
+            'pur_date'=>$pur1->pur_date,
+            'pur_bill_no'=>$pur1->pur_bill_no,
+            'sale_against'=>$pur1->pur_sale_inv,
+            'ac_cod'=>$pur1->ac_cod,
+            'cash_saler_name'=>$pur1->cash_saler_name,
+            'cash_saler_address'=>$pur1->cash_saler_address,
+            'pur_remarks'=>$pur1->pur_remarks,
+            'pur_convance_char'=>$pur1->pur_convance_char,
+            'pur_labor_char'=>$pur1->pur_labor_char,
+            'pur_discount'=>$pur1->pur_discount,
+            'total_weight'=>$pur1->total_weight,
+            'total_quantity'=>$pur1->total_quantity,
+            'bill_amount'=>$pur1->total_amount,
+            'net_amount'=>$pur1->net_amount
+        ]);
+
+        purchase_2::where('pur_cod', $request->pur_id)->delete();
+
+        if($request->has('items'))
+        {
+            for($i=0;$i<$request->items;$i++)
+            {
+
+                if(filled($request->item_name[$i]))
+                {
+                    $purchase_2 = new purchase_2();
+
+                    $purchase_2->pur_cod=$request->pur_id;
+                    $purchase_2->item_cod=$request->item_cod[$i];
+                    if ($request->remarks[$i]!=null) {
+                        $purchase_2->remarks=$request->remarks[$i];
+                    }
+                    if ($request->pur_qty[$i]!=null) {
+                        $purchase_2->pur_qty=$request->pur_qty[$i];
+                    }
+                    if ($request->pur_price[$i]!=null) {
+                        $purchase_2->pur_price=$request->pur_price[$i];
+                    }
+                    if ($request->pur_qty2[$i]!=null) {
+                        $purchase_2->pur_qty2=$request->pur_qty2[$i];
+                    }
+                    $purchase_2->save();
+                }
+            }
+        }
+
+        if($request->hasFile('att')){
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $purAtt = new pur1_att();
+                $purAtt->pur1_id = $pur_1_id['pur_id'];
+                $extension = $file->getClientOriginalExtension();
+                $purAtt->att_path = $this->pur1Doc($file,$extension);
+                $purAtt->save();
+            }
+        }
+
+        return redirect()->route('all-purchases1');
     }
 
     public function destroy(Request $request)

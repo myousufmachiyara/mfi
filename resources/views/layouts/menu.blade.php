@@ -17,6 +17,28 @@
 								Home
 							</a>    
 						</li>
+						<li>
+							<a class="nav-link" href="layouts-default.html">
+								Dashboard
+							</a>    
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Users
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link">
+										User Accounts
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link">
+										User Roles
+									</a>
+								</li>							
+							</ul>
+						</li>
 						<li class="dropdown">
 							<a class="nav-link dropdown-toggle" href="#">
 								Items
@@ -126,15 +148,54 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a  class="dropdown-item" href="{{ route('all-saleinvoices')}}">
-										All Invoice
+									<a class="nav-link" href="{{ route('all-saleinvoices')}}">
+										Sale 1
 									</a>
 								</li>
 								<li>
-									<a class="nav-link" href="/sales/new-invoice">
-										New Invoice
+									<a class="dropdown-item" href="#">
+										Sale 2
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="#">
+										Sale Return
 									</a>
 								</li>								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Reports
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link">
+										Main Option
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link">
+										Main Option
+									</a>
+								</li>							
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
+								Others
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link">
+										Stock In/Out
+									</a>
+								</li>	
+								<li>
+									<a class="nav-link">
+										Complains
+									</a>
+								</li>							
 							</ul>
 						</li>
 					</ul>	

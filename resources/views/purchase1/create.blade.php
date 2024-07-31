@@ -131,12 +131,12 @@
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
 													<input type="hidden" id="total_weight_show" name="total_weight" placeholder="Total Weight" class="form-control">
-
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
-													<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
+													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
+													<input type="hidden" id="total_quantity_show" name="total_quantity" placeholder="Total Quantity" class="form-control">
 												</div>
 
 												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -322,6 +322,8 @@
 		$('#total_weight').val(totalWeight);
 		$('#total_weight_show').val(totalWeight);
 		$('#total_quantity').val(totalQuantity);
+		$('#total_quantity_show').val(totalQuantity);
+		
 		netTotal();
 	}
 

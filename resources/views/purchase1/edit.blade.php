@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
+					<form method="post" action="{{ route('update-purchases1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
@@ -19,6 +19,7 @@
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice #</label>
 												<input type="text" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" disabled>
+												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" name="pur_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -70,7 +71,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Invoice Details</h2>
+										<h2 class="card-title">Edit Purchase 1 Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -90,30 +91,30 @@
                                             	@foreach ($pur_items as $jv_key => $pur_items)
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)">
+														<input type="text" class="form-control" name="item_cod[]"  value="{{$pur_items->item_cod}}" onchange="getItemDetails(1,1)">
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="pur_qty2[]" value="0">
+														<input type="text" class="form-control" name="pur_qty2[]" value="{{$pur_items->pur_qty2}}">
 													</td>
 													<td>
-														<select class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select class="form-control" autofocus name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
-																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
+																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
 															@endforeach
 														</select>													
 													</td>
 													<td>
-														<input type="text" class="form-control" id="remarks1" name="remarks[]">
+														<input type="text" class="form-control"  name="remarks[]" value="{{$pur_items->remarks}}">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_qty[]"  onchange="rowTotal(1)" value="{{$pur_items->pur_qty}}">
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_price[]"  value="{{$pur_items->pur_price}}"  onchange="rowTotal(1)" value="0">
 													</td>
 													<td>
-														<input type="number" class="form-control" name="amount[]" id="amount1" onchange="tableTotal()" value="0">
+														<input type="number" class="form-control" name="amount[]" value="{{ $pur_items->pur_qty * $pur_items->pur_price }}" onchange="tableTotal()" value="0">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -130,43 +131,40 @@
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
-													<input type="hidden" id="total_amount_show" name="total_amount" placeholder="Total Weight" class="form-control">
+													<input type="hidden" id="total_amount_show" name="total_amount" placeholder="Total Amount" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
-													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
-													<input type="hidden" id="total_weight_show" name="total_weight" placeholder="Total Weight" class="form-control">
+													<input type="text" id="total_weight" placeholder="Total Weight" value="{{$pur->total_weight}}" class="form-control" disabled>
+													<input type="hidden" id="total_weight_show" name="total_weight" value="{{$pur->total_weight}}" placeholder="Total Weight" class="form-control">
 
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
-													<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
-												</div>
+													<input type="text" id="total_quantity" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control" disabled>
+													<input type="hidden" id="total_quantity_show" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control">
 
-												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">GST</label>
-													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
-												</div> -->
+												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" placeholder="Convance Charges" class="form-control">
+													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" value="{{$pur->pur_convance_char}}" placeholder="Convance Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" placeholder="Labour Charges" class="form-control">
+													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" value="{{$pur->pur_labor_char}}" placeholder="Labour Charges" class="form-control">
 												</div>
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount</label>
-													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
+													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" value="{{$pur->pur_discount}}" placeholder="Bill Discount" class="form-control">
 												</div>
 												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 													<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">{{$pur->net_amount}}</span></strong>
 													</span>
 													<input type="hidden" id="net_amount" name="net_amount" placeholder="Total Weight" class="form-control">
 												</div>
@@ -194,7 +192,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-	var itemCount;
+	var itemCount, index;
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -204,38 +202,22 @@
 			}
 		});
 
-		$('#updateForm').on('submit', function(e){
-            e.preventDefault();
-			var total_credit=$('#total_credit').val();
-			var total_debit=$('#total_debit').val();
-			if(total_debit==total_credit){
-				var form = document.getElementById('updateForm');
-				form.submit();
-			}
-			else{
-				alert("Total Debit & Credit Must be Equal")
-			}
+		var totalAmount=0, amount=0;
 
-		});
-
-		var totalDebit=0, totalCredit=0, debit=0, credit=0;
 		var table = document.getElementById("Purchase1Table"); // Get the table element
         var rowCount = table.rows.length; // Get the total number of rows
 
-		var itemCount = rowCount;
+		itemCount = rowCount;
+		index = rowCount+1;
+
 		$('#itemCount').val(itemCount);
 
 		for (var j=0;j<rowCount; j++){
-
-			debit = table.rows[j].cells[5].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalDebit = totalDebit + Number(debit);
-
-			credit = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalCredit = totalCredit + Number(credit);
+			amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
+			totalAmount = totalAmount + Number(amount);
 		}
-		$('#total_credit').val(totalCredit);
-		$('#total_debit').val(totalDebit);
-
+		$('#total_amount_show').val(totalAmount);
+		$('#totalAmount').val(totalAmount);
 	});
 
     function removeRow(button) {
@@ -247,8 +229,7 @@
 			itemCount = itemCount-1;
 			$('#itemCount').val(itemCount);
 		}   
-		totalDebit();
-		totalCredit();
+		tableTotal();
     }
 
     document.getElementById('removeRowBtn').addEventListener('click', function() {
@@ -280,9 +261,9 @@
 			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step=".00001" value="0">';
 			cell3.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
-									'@foreach($items as $key => $row)'+	
+									@foreach($items as $key => $row)
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-                                    '@endforeach'+
+                                    @endforeach
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
 			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step=".00001">';
@@ -348,32 +329,56 @@
         });
     }
 
-	function totalDebit(){
-		var totalDebit=0;
-		var debit=0;
-		var table = document.getElementById("Purchase1Table"); // Get the table element
-        var rowCount = table.rows.length; // Get the total number of rows
-
-		for (var j=0;j<rowCount; j++){
-			debit = table.rows[j].cells[5].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalDebit = totalDebit + Number(debit);
-		}
-		$('#total_debit').val(totalDebit);
-
+	function rowTotal(index){
+		var weight = $('#pur_qty'+index+'').val();
+		var price = $('#pur_price'+index+'').val();
+		var amount = weight * price;
+		$('#amount'+index+'').val(amount);
+		tableTotal();
 	}
 
-	function totalCredit(){
-		var totalCredit=0;
-		var credit=0;
-		var table = document.getElementById("Purchase1Table"); // Get the table element
-        var rowCount = table.rows.length; // Get the total number of rows
+	function tableTotal(){
+		var totalAmount=0;
+		var totalWeight=0;
+		var totalQuantity=0;
+		var tableRows = $("#Purchase1Table tr").length;
+		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 
-		for (var i=0;i<rowCount; i++){
-			credit = table.rows[i].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalCredit = totalCredit + Number(credit);
-		}
-		$('#total_credit').val(totalCredit);
+		for (var i = 0; i < tableRows; i++) {
+			var currentRow =  table.rows[i];
+			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
+			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
+			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
+			console.log(totalQuantity);
+        }
 
+		$('#totalAmount').val(totalAmount);
+		$('#total_amount_show').val(totalAmount);
+		$('#total_weight').val(totalWeight);
+		$('#total_weight_show').val(totalWeight);
+		$('#total_quantity').val(totalQuantity);
+		$('#total_quantity_show').val(totalQuantity);
+		
+		netTotal();
+	}
+
+	function netTotal(){
+		var netTotal = 0;
+		var total = Number($('#totalAmount').val());
+		var convance_charges = Number($('#convance_charges').val());
+		var labour_charges = Number($('#labour_charges').val());
+		var bill_discount = Number($('#bill_discount').val());
+
+		netTotal = total + convance_charges + labour_charges - bill_discount;
+		netTotal = netTotal.toFixed(0);
+		FormattednetTotal = formatNumberWithCommas(netTotal);
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
+		$('#net_amount').val(netTotal);
+	}
+ 
+	function formatNumberWithCommas(number) {
+    	// Convert number to string and add commas
+    	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
 	function goBack() {
