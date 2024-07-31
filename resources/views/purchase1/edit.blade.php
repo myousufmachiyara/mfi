@@ -111,7 +111,7 @@
 														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty{{$pur1_key+1}}"  onchange="rowTotal(1)" value="{{$pur_items->pur_qty}}">
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price{{$pur1_key+1}}" value="{{$pur_items->pur_price}}"  onchange="rowTotal(1)" value="0">
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price{{$pur1_key+1}}" value="{{$pur_items->pur_price}}"  step="any" onchange="rowTotal(1)" value="0">
 													</td>
 													<td>
 														<input type="number" class="form-control" name="amount[]" id="amount{{$pur1_key+1}}" value="{{ $pur_items->pur_qty * $pur_items->pur_price }}" onchange="tableTotal()" value="0" disabled>
