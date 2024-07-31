@@ -100,14 +100,14 @@
 														<input type="text" class="form-control" id="remarks1" name="remarks[]">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" step="0.0000001" min="0" max="9999999.9999999" required>
+														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" step="any" required>
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" step="0.0000001" min="0" max="9999999.9999999" required>
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" step="any" required>
 													</td>
 
 													<td>
-														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" disabled required>
+														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" disabled required step="any">
 													</td>
 
 													<td style="vertical-align: middle;">
@@ -230,7 +230,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" name="pur_qty2[]" step="0.0000001" min="0" max="9999999.9999999" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" name="pur_qty2[]" step="any" required>';
 			cell3.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
@@ -238,9 +238,9 @@
                                     '@endforeach'+
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" value="0" onchange="rowTotal('+index+')" step="0.0000001" min="0" max="9999999.9999999" required>';
-			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="0.0000001" min="0" max="9999999.9999999" required>';
-			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" onchange="tableTotal()" step=".00001" disabled>';
+			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" value="0" onchange="rowTotal('+index+')" step="any" required>';
+			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any" required>';
+			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" onchange="tableTotal()" step="any" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
