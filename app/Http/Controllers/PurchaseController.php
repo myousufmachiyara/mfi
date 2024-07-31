@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Item_entry;
 use App\Models\AC;
 use App\Models\purchase;
+use App\Models\sales;
+use App\Models\sales_2;
 use App\Models\purchase_2;
 use App\Models\pur1_att;
 use Illuminate\Support\Facades\File;
@@ -251,6 +253,19 @@ class PurchaseController extends Controller
     {
         $purc1 = purchase::where('pur_id', $request->delete_purc1)->update(['status' => '0']);
         return redirect()->route('all-purchases1');
+    }
+
+    public function show(string $id)
+    {
+        $pur = purchase::where('pur_id',$id)
+                ->join('ac','purchase.ac_cod','=','ac.ac_code')
+                ->first();
+
+        $pur2 = purchase_2::where('pur_cod',$id)
+                ->join('item_entry','purchase_2.item_cod','=','item_entry.it_cod')
+                ->get();
+
+        return view('purchase1.view',compact('pur','pur2'));
     }
 
     public function getAttachements(Request $request)
