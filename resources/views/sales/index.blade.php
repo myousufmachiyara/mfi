@@ -9,11 +9,10 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header">
-                                    <div class="card-actions">
-                                        <button type="button" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice </button>
-                                    </div>
-
                                     <h2 class="card-title">Sale Invoices</h2>
+                                    <form class="text-end" action="{{ route('create-sale-invoice') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Sale</button>
+                                    </form>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
