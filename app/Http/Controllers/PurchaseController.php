@@ -200,7 +200,7 @@ class PurchaseController extends Controller
             'pur_discount'=>$pur1->pur_discount,
             'total_weight'=>$pur1->total_weight,
             'total_quantity'=>$pur1->total_quantity,
-            'bill_amount'=>$pur1->total_amount,
+            'bill_amount'=>$pur1->bill_amount,
             'net_amount'=>$pur1->net_amount
         ]);
 
