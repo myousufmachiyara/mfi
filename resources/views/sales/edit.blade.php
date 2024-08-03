@@ -54,8 +54,8 @@
 
 											<div class="col-12 col-md-2 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" id="coa_name" required onchange="getCOADetails()" name="account_name">
-													<option>Select Account</option>
+												<select class="form-control" id="coa_name" required name="account_name">
+													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $row->ac_code == $sales->account_name ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach

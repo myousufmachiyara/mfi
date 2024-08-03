@@ -46,7 +46,7 @@
 											<div class="col-12 col-md-2 mb-3">
 												<label class="col-form-label">Account Name</label>
 												<select class="form-control" id="coa_name" name="account_name" required>
-													<option disabled selected>Select Account</option>
+													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -99,10 +99,10 @@
 														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required>
 													</td>
 													<td>
-														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" step="any" class="form-control">
+														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name1" onchange="addNewRow(1)" required name="item_name[]">
+														<select class="form-control" id="item_name1" onchange="addNewRow(1)"  name="item_name[]" required>
 														<option selected>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -113,13 +113,13 @@
 														<input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)" step="any" class="form-control">
+														<input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)" value="0" step="any" required class="form-control">
 													</td>
 													<td>
-														<input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" step="any" class="form-control">
+														<input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" value="0" step="any" required class="form-control">
 													</td>
 													<td>
-														<input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control" step="any" disabled>
+														<input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control" value="0" step="any" required disabled>
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -247,7 +247,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
-			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" step="any" class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
 			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
@@ -255,9 +255,9 @@
 									@endforeach
 								'</select>';
 			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" step="any" class="form-control">';
-			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" step="any" class="form-control">';
-			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" step="any" disabled>';
+			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" value="0" step="any" required class="form-control">';
+			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" value="0" step="any" required class="form-control">';
+			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" value="0" step="any" required disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
