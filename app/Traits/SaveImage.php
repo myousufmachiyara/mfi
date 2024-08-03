@@ -60,5 +60,16 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/pur1/'),$filenamenew);
         return $filenamepath;
     }
+
+    public function sale1Doc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/sale1/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/sale1/'),$filenamenew);
+        return $filenamepath;
+    }
 }
 ?>

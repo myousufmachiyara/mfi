@@ -8,98 +8,98 @@
 					<form method="post" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
-							<div class="col-3 mb-3">								
+							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="mb-1 me-1 btn btn-primary"><i class="fas fa-plus" ></i> Add New</button>											
-										</div>
-										<h2 class="card-title">Party Details</h2>
+										<h2 class="card-title">Sale 1</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-6">
+											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-6">
+											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" name="bill_status">
 													<option value="0">Bill Not Final</option>
 													<option value="1">Finalized</option>
 												</select>												
 											</div>
-
-											<div class="col-12 mb-3">
-												<label class="col-form-label">Chart Of Account</label>
-												<select class="form-control" id="coa_name" onchange="getCOADetails()" name="account_name" required>
-													<option>Select Chart Of Account</option>
+											<div class="col-sm-12 col-md-4">
+												<label class="col-form-label">File Attached</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+											<div class="col-12 col-md-2 mb-3">
+												<label class="col-form-label">Account Name</label>
+												<select class="form-control" id="coa_name" name="account_name" required>
+													<option disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
 												</select>
 											</div>
 
-											<div class="col-12 mb-3">
+											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label">Name Of Person</label>
 												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control">
 											</div>
 
-											<div class="col-12 mb-3">
+											<div class="col-12 col-md-4 mb-3">
 												<label class="col-form-label">Address</label>
 												<input type="text" name="address" id="address" placeholder="Address" class="form-control">
 											</div>
 
-											<div class="col-12 mb-3">
+											<div class="col-12 col-md-4 mb-3">
 												<label class="col-form-label">Cash Pur Phone</label>
-												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash - Pur_phone" class="form-control">
+												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash Pur Phone" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Remarks</label>
-												<input type="text" name="remarks" id="remarks" placeholder="Remarks" class="form-control">
+												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control"></textarea>
 											</div>
 									  </div>
 									</div>
 								</section>
 							</div>
 
-							<div class="col-9 mb-3">
+							<div class="col-12 mb-3">
 								<section class="card">
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="5%">Code</th>
-													<th width="5%">Qty</th>
-													<th width="5%">Name</th>
-													<th width="5%">Remarks</th>
-													<th width="5%">Weight(kgs)</th>
-													<th width="5%">Price</th>
-													<th width="5%">Amount</th>
-													<th width="5%">Action</th>
+													<th width="10%">Item Code</th>
+													<th width="10%">Qty.</th>
+													<th width="20%">Item Name</th>
+													<th width="20%">Remarks</th>
+													<th width="15%">Weight (kgs)</th>
+													<th width="10%">Price</th>
+													<th width="10%">Amount</th>
+													<th width="10%"></th>
 												</tr>
 											</thead>
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
 														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required>
-														<input type="text" id="itemCount" name="items" value="1" placeholder="Code" class="form-control" hidden>
 													</td>
 													<td>
-														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" class="form-control">
+														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" step="any" class="form-control">
 													</td>
 													<td>
 														<select class="form-control" id="item_name1" onchange="addNewRow(1)" required name="item_name[]">
@@ -113,17 +113,17 @@
 														<input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)"  class="form-control">
+														<input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)" step="any" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price"  class="form-control">
+														<input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" step="any" class="form-control">
 													</td>
 													<td>
-														<input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control"  disabled>
+														<input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control" step="any" disabled>
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-														<button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>
+														<!-- <button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button> -->
 													</td>
 												</tr>
 											</tbody>
@@ -133,46 +133,42 @@
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
-										 		<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
+										 		<input type="number" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" step="any" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
-												<input type="text" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" disabled>
+												<input type="number" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" step="any" disabled>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
-												<input type="text" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled>
+												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" step="any" disabled>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">GST</label>
 												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
-											</div>
+											</div> -->
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Convance</label>
-												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control">
+												<label class="col-form-label">Convance Charges</label>
+												<input type="number" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" step="any" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
-												<input type="text" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control">
+												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" step="any" class="form-control">
 											</div>
-										</div>
-										<div class="row mb-3">
+
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
-												<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
+												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" step="any" class="form-control">
 											</div>
 
-											<div class="col-sm-2 col-md-4 pb-sm-3 pb-md-0">
-												<label class="col-form-label">File Attached</label>
-												<input type="file" class="form-control" name="att" accept="application/pdf, image/png, image/jpeg">
-										 	</div>
-
-											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+										</div>
+										<div class="row mb-3">
+											<div class="col-sm-12 col-md-12 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end">
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
@@ -183,7 +179,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
 											</div>
 										</div>
 									</footer>
@@ -231,9 +228,8 @@
         }
     });
 
-	function addNewRow(id){
+	function addNewRow(id){		
 		getItemDetails(id);
-		
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[2].querySelector('select').value;
 
@@ -251,7 +247,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
-			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" step="any" class="form-control">';
 			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
@@ -259,10 +255,10 @@
 									@endforeach
 								'</select>';
 			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" class="form-control">';
-			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" class="form-control">';
-			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
-			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button> <button type="button" onclick="addNewRow('+index+')" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button>';
+			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" step="any" class="form-control">';
+			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" step="any" class="form-control">';
+			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" step="any" disabled>';
+			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
 
@@ -298,9 +294,9 @@
 			url: "/coa/detail",
 			data: {id:coaId},
 			success: function(result){
-				$('#address').val(result[0]['address']);
-				$('#cash_pur_phone').val(result[0]['phone_no']);
-				$('#remarks').val(result[0]['remarks']);
+				// $('#address').val(result[0]['address']);
+				// $('#cash_pur_phone').val(result[0]['phone_no']);
+				// $('#remarks').val(result[0]['remarks']);
 			},
 			error: function(){
 				alert("error");
@@ -340,13 +336,18 @@
 	function netTotal(){
 		var netTotal = 0;
 		var total = Number($('#totalAmount').val());
-		var gst = Number($('#gst').val());
 		var convance_charges = Number($('#convance_charges').val());
 		var labour_charges = Number($('#labour_charges').val());
 		var bill_discount = Number($('#bill_discount').val());
 
-		netTotal = total + gst + convance_charges + labour_charges - bill_discount;
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+netTotal+'.00</span>';
+		netTotal = total + convance_charges + labour_charges - bill_discount;
+		netTotal = netTotal.toFixed(0);
+		FormattednetTotal = formatNumberWithCommas(netTotal);
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 	}
 
+	function formatNumberWithCommas(number) {
+    	// Convert number to string and add commas
+    	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 </script>

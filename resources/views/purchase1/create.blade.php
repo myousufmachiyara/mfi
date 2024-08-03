@@ -314,7 +314,6 @@
 			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
 			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
 			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
-			console.log(totalQuantity);
         }
 
 		$('#totalAmount').val(totalAmount);
