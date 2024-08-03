@@ -284,7 +284,6 @@
 				$('#item_name'+row_no).val(result[0]['it_cod']);
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#price'+row_no).val(result[0]['sales_price']);
-				$('#item_qty'+row_no).val(result[0]['opp_qty']);
 
 				addNewRow();
 			},

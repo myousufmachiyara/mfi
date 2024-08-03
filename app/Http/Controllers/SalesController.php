@@ -228,7 +228,7 @@ class SalesController extends Controller
             foreach ($files as $file)
             {
                 $sale1_att = new sale1_att();
-                $sale1_att->sale1_id = $invoice_id;
+                $sale1_att->sale1_id = $request->invoice_id;
                 $extension = $file->getClientOriginalExtension();
                 $sale1_att->att_path = $this->sale1Doc($file,$extension);
                 $sale1_att->save();
