@@ -121,7 +121,6 @@
 												<tr>
 													<td>
 														<input type="number" id="item_code{{$key}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails(1,1)">
-														<input type="hidden" id="itemCount" name="items" value="{{$key+1}}" class="form-control" >
 													</td>
 													<td>
 														<input type="number" id="item_qty{{$key}}" name="item_qty[]" onchange="rowTotal({{$key}})" placeholder="Qty" class="form-control" step="any" value="{{$sale_item->Sales_qty}}">
@@ -148,7 +147,7 @@
 														<input type="number" id="price{{$key}}" name="item_price[]" onchange="rowTotal({{$key}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
-														<input type="number" id="amount{{$key}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" value="{{$sale_item->Sales_qty2 * $sale_item->sales_price}}"> 
+														<input type="number" id="amount{{$key}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty2 * $sale_item->sales_price}}"> 
 														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty2 * $sale_item->sales_price) @endphp
 													</td>
 													<td>

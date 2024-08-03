@@ -96,13 +96,13 @@
 											<tbody id="saleInvoiceTable">
 												<tr>
 													<td>
-														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required>
+														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
 													</td>
 													<td>
 														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
 													</td>
 													<td>
-														<select class="form-control" id="item_name1" onchange="addNewRow(1)"  name="item_name[]" required>
+														<select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
 														<option selected>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -229,7 +229,6 @@
     });
 
 	function addNewRow(id){		
-		getItemDetails(id);
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[2].querySelector('select').value;
 
@@ -246,9 +245,9 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control">';
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" onchange="getItemDetails('+index+','+1+')" placeholder="Code" class="form-control">';
 			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
-			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="addNewRow('+index+')" name="item_name">'+
+			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
 										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -268,22 +267,32 @@
 		}
 	}
 
-	function getItemDetails(row_no){
-		var itemId = document.getElementById("item_name"+row_no).value;
-			$.ajax({
-				type: "GET",
-				url: "/item/detail",
-				data: {id:itemId},
-				success: function(result){
-					$('#item_code'+row_no).val(result[0]['it_cod']);
-					$('#remarks'+row_no).val(result[0]['item_remark']);
-					$('#price'+row_no).val(result[0]['sales_price']);
-					$('#item_qty'+row_no).val(result[0]['opp_qty']);
-				},
-				error: function(){
-					alert("error");
-				}
-			});
+	function getItemDetails(row_no,option){
+		var itemId;
+		if(option==1){
+			itemId = document.getElementById("item_code"+row_no).value;
+		}
+		else if(option==2){
+			itemId = document.getElementById("item_name"+row_no).value;
+		}
+		$.ajax({
+			type: "GET",
+			url: "/item/detail",
+			data: {id:itemId},
+			success: function(result){
+				$('#item_code'+row_no).val(result[0]['it_cod']);
+				$('#item_name'+row_no).val(result[0]['it_cod']);
+				$('#remarks'+row_no).val(result[0]['item_remark']);
+				$('#price'+row_no).val(result[0]['sales_price']);
+				$('#item_qty'+row_no).val(result[0]['opp_qty']);
+
+				addNewRow();
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+		
 	}
 
 	function getCOADetails(){
