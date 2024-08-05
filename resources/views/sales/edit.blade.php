@@ -20,7 +20,7 @@
 												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" placeholder="Invoice No." class="form-control" disabled value="{{$sales->Sal_inv_no}}">
 												<input type="hidden" name="invoice_no" placeholder="Invoice No." class="form-control" value="{{$sales->Sal_inv_no}}">
-												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
+												<input type="hidden" id="itemCount" name="items" class="form-control" >
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -35,7 +35,7 @@
 
 											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label">Status</label>
-												<select class="form-control mb-3" name="bill_status">
+												<select class="form-control mb-3" name="bill_status" required>
 													<option>Status</option>
 													@if($sales->bill_not == 0)
 														<option value="0" selected>Bill Not Final</option>
@@ -168,7 +168,8 @@
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
-												<input type="number" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_weight @endphp >
+												<input type="number" id="total_weight_show" step="any" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_weight @endphp >
+												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control" value=@php echo $total_weight @endphp>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -221,7 +222,23 @@
 	</body>
 </html>
 <script>
-	var itemCount, index;
+	var itemCount=0, index;
+	var totalAmount=0, amount=0;
+
+	var table = document.getElementById("saleInvoiceTable"); // Get the table element
+	var rowCount = table.rows.length; // Get the total number of rows
+
+	itemCount = rowCount;	
+	$('#itemCount').val(itemCount);
+
+	index = rowCount+1;
+
+	for (var j=0;j<rowCount; j++){
+		amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
+		totalAmount = totalAmount + Number(amount);
+	}
+	$('#total_amount_show').val(totalAmount);
+	$('#totalAmount').val(totalAmount);
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -230,27 +247,10 @@
 				return false;
 			}
 		});
-
-		var totalAmount=0, amount=0;
-
-		var table = document.getElementById("saleInvoiceTable"); // Get the table element
-        var rowCount = table.rows.length; // Get the total number of rows
-
-		itemCount = rowCount;
-		index = rowCount+1;
-
-		$('#itemCount').val(itemCount);
-
-		for (var j=0;j<rowCount; j++){
-			amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalAmount = totalAmount + Number(amount);
-		}
-		$('#total_amount_show').val(totalAmount);
-		$('#totalAmount').val(totalAmount);
 	});
 
     function removeRow(button) {
-	var tableRows = $("#saleInvoiceTable tr").length;
+		var tableRows = $("#saleInvoiceTable tr").length;
 		if(tableRows>1){
 			var row = button.parentNode.parentNode;
 			row.parentNode.removeChild(row);
@@ -290,7 +290,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
 			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
@@ -298,8 +298,8 @@
 									@endforeach
 								'</select>';
 			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" class="form-control">';
-			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" class="form-control">';
+			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]" placeholder="Weight (kgs)" value="0" step="any" required class="form-control">';
+			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]" placeholder="Price" value="0" step="any" required class="form-control">';
 			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
@@ -380,7 +380,9 @@
         }
 
 		$('#totalAmount').val(totalAmount);
+		$('#total_amount_show').val(totalAmount);
 		$('#total_weight').val(totalWeight);
+		$('#total_weight_show').val(totalWeight);
 		$('#total_quantity').val(totalQuantity);
 
 		netTotal();

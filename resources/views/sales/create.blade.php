@@ -133,12 +133,14 @@
 										<div class="row form-group mb-3">
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
-										 		<input type="number" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" step="any" disabled>
+										 		<input type="number" id="total_amount_show" placeholder="Total Amount" class="form-control" step="any" disabled>
+												<input type="hidden" id="totalAmount" name="totalAmount" step="any" placeholder="Total Amount" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
-												<input type="number" id="total_weight" name="total_weight" placeholder="Total Weight" class="form-control" step="any" disabled>
+												<input type="number" id="total_weight_show"  placeholder="Total Weight" class="form-control" step="any" disabled>
+												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -335,7 +337,9 @@
         }
 
 		$('#totalAmount').val(totalAmount);
+		$('#total_amount_show').val(totalAmount);
 		$('#total_weight').val(totalWeight);
+		$('#total_weight_show').val(totalWeight);
 		$('#total_quantity').val(totalQuantity);
 
 		netTotal();

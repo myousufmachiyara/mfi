@@ -83,6 +83,9 @@ class SalesController extends Controller
         if ($request->has('totalAmount') && $request->totalAmount) {
             $sales->sed_sal=$request->totalAmount;
         }
+        if ($request->has('total_weight') && $request->total_weight) {
+            $sales->total_weight=$request->total_weight;
+        }
 
         $sales->created_by=$userId;
         $sales->status=1;
@@ -130,6 +133,7 @@ class SalesController extends Controller
         $sales = Sales::where('Sal_inv_no',$id)
                         ->join('ac','sales.account_name','=','ac.ac_code')
                         ->first();
+
         $sale_items = Sales_2::where('sales_inv_cod',$id)
                         ->join('item_entry','sales_2.item_cod','=','item_entry.it_cod')
                         ->get();
@@ -217,7 +221,6 @@ class SalesController extends Controller
                     $sales_2->Sales_qty=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
                     $sales_2->Sales_qty2=$request->item_weight[$i];
-    
                     $sales_2->save();
                 }
             }
@@ -228,7 +231,7 @@ class SalesController extends Controller
             foreach ($files as $file)
             {
                 $sale1_att = new sale1_att();
-                $sale1_att->sale1_id = $request->invoice_id;
+                $sale1_att->sale1_id = $request->invoice_no;
                 $extension = $file->getClientOriginalExtension();
                 $sale1_att->att_path = $this->sale1Doc($file,$extension);
                 $sale1_att->save();

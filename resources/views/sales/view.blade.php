@@ -13,7 +13,7 @@
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
-											<h2 class="h2 mt-0 mb-1 text-dark ">INVOICE NO:</h2>
+											<h2 class="h2 mt-0 mb-1 text-dark ">SALE INVOICE NO:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">{{$sales->Sal_inv_no}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
