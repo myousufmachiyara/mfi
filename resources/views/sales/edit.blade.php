@@ -36,7 +36,6 @@
 											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" name="bill_status" required>
-													<option>Status</option>
 													@if($sales->bill_not == 0)
 														<option value="0" selected>Bill Not Final</option>
 														<option value="1">Finalized</option>
@@ -206,6 +205,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
+												<button type="button" class="btn btn-warning mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
 											</div>
@@ -229,8 +229,9 @@
 	var rowCount = table.rows.length; // Get the total number of rows
 
 	itemCount = rowCount;	
-	$('#itemCount').val(itemCount);
+	document.getElementById("itemCount").value = itemCount;
 
+	// $('#itemCount').val(itemCount);
 	index = rowCount+1;
 
 	for (var j=0;j<rowCount; j++){

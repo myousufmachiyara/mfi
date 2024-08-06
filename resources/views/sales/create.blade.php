@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
@@ -20,6 +20,7 @@
 												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
+												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -186,6 +187,33 @@
 											</div>
 										</div>
 									</footer>
+									<div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+											<section class="card">
+												<header class="card-header">
+													<h2 class="card-title">Save Invoice</h2>
+												</header>
+												<div class="card-body">
+													<div class="modal-wrapper">
+														<div class="modal-icon">
+															<i class="fas fa-question-circle"></i>
+														</div>
+														<div class="modal-text">
+															<p class="mb-0">Are you sure that you want to delete this invoice?</p>
+															<input name="invoice_id" id="deleteID" hidden>
+														</div>
+													</div>
+												</div>
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-end">
+															<button type="submit" class="btn btn-danger">Delete</button>
+															<button class="btn btn-default modal-dismiss">Cancel</button>
+														</div>
+													</div>
+												</footer>
+											</section>
+										</form>
+									</div>
 								</section>
 							</div>
 						</div>
@@ -362,4 +390,5 @@
     	// Convert number to string and add commas
     	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
+
 </script>

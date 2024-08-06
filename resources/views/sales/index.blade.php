@@ -11,7 +11,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">Sale Invoices</h2>
                                     <form class="text-end" action="{{ route('create-sale-invoice') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Sale</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Sale 1</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -57,6 +57,7 @@
                                                     <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                 @endif
                                                 <td class="actions">
+                                                    <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
                                                     <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
                                                     <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                     <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
