@@ -50,7 +50,7 @@
                                                 <td>{{$row->ConvanceCharges}}</td>
                                                 <td>{{$row->LaborCharges}}</td>
                                                 <td>{{$row->Bill_discount}}</td>
-                                                <td>{{$row->sed_sal + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount}}</td>
+                                                <td>{{$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount}}</td>
                                                 @if($row->bill_not==0)
                                                     <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
                                                 @elseif($row->bill_not==1)
