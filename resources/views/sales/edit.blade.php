@@ -122,7 +122,7 @@
 														<input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails(1,1)">
 													</td>
 													<td>
-														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" class="form-control" step="any" value="{{$sale_item->Sales_qty}}">
+														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
 														@php  $total_quantity=$total_quantity + $sale_item->Sales_qty  @endphp
 
 													</td>
@@ -138,7 +138,7 @@
 														<input type="text" id="remarks{{$key1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
 													</td>
 													<td>
-														<input type="number" id="weight{{$key1}}" name="item_weight[]" onchange="rowTotal({{$key1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty2}}">
+														<input type="number" id="weight{{$key1}}" name="item_weight[]" onchange="rowTotal({{$key1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
 														@php  $total_weight=$total_weight + $sale_item->Sales_qty2  @endphp
 
 													</td>
