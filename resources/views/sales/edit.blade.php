@@ -123,8 +123,6 @@
 													</td>
 													<td>
 														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
-														@php  $total_quantity=$total_quantity + $sale_item->Sales_qty  @endphp
-
 													</td>
 													<td>
 														<select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
@@ -139,7 +137,7 @@
 													</td>
 													<td>
 														<input type="number" id="weight{{$key1}}" name="item_weight[]" onchange="rowTotal({{$key1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
-														@php  $total_weight=$total_weight + $sale_item->Sales_qty2  @endphp
+														@php  $total_weight=$total_weight + $sale_item->Sales_qty  @endphp
 
 													</td>
 													<td>
@@ -147,7 +145,7 @@
 													</td>
 													<td>
 														<input type="number" id="amount{{$key1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
-														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty2 * $sale_item->sales_price) @endphp
+														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty * $sale_item->sales_price) @endphp
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
