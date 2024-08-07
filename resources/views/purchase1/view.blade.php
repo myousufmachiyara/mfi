@@ -46,7 +46,7 @@
 											<div class="bill-data text-end">
 												<h4 class="mb-0">
 													<span class="text-dark">Invoice Date:</span>
-													<span style="font-weight:400;color:black" class="value">{{$pur->pur_date}}</span>
+													<span style="font-weight:300;color:black" class="value">{{$pur->pur_date}}</span>
 												</h4>
 											</div>
 										</div>
