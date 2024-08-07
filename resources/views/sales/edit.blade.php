@@ -162,7 +162,6 @@
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
 										 		<input type="number" id="total_amount_show" step="any" placeholder="Total Amount" class="form-control" disabled step="any" value=@php echo $total_amount @endphp>
-												<input type="hidden" id="totalAmount" name="totalAmount" step="any" placeholder="Total Amount" class="form-control" step="any" value=@php echo $total_amount @endphp>
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -223,7 +222,7 @@
 </html>
 <script>
 	var itemCount=0, index;
-	var totalAmount=0, amount=0;
+	var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
 
 	var table = document.getElementById("saleInvoiceTable"); // Get the table element
 	var rowCount = table.rows.length; // Get the total number of rows
@@ -235,11 +234,20 @@
 	index = rowCount+1;
 
 	for (var j=0;j<rowCount; j++){
+
+		quantity = table.rows[j].cells[1].querySelector('input').value; // Get the value of the input field in the specified cell
+		totalQuantity = totalQuantity + Number(quantity);
+
+		weight = table.rows[j].cells[4].querySelector('input').value; // Get the value of the input field in the specified cell
+		totalWeight = totalWeight + Number(weight);
+
 		amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
 		totalAmount = totalAmount + Number(amount);
 	}
+	$('#total_quantity').val(totalQuantity);
+	$('#total_weight_show').val(totalWeight);
 	$('#total_amount_show').val(totalAmount);
-	$('#totalAmount').val(totalAmount);
+
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -380,9 +388,7 @@
 			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
         }
 
-		$('#totalAmount').val(totalAmount);
 		$('#total_amount_show').val(totalAmount);
-		$('#total_weight').val(totalWeight);
 		$('#total_weight_show').val(totalWeight);
 		$('#total_quantity').val(totalQuantity);
 

@@ -131,21 +131,16 @@
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
-													<input type="hidden" id="total_amount_show" name="total_amount" placeholder="Total Amount" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" value="{{$pur->total_weight}}" class="form-control" disabled>
-													<input type="hidden" id="total_weight_show" name="total_weight" value="{{$pur->total_weight}}" placeholder="Total Weight" class="form-control">
-
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control" disabled>
-													<input type="hidden" id="total_quantity_show" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control">
-
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
@@ -164,9 +159,8 @@
 												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 													<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">{{$pur->net_amount}}</span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger"></span></strong>
 													</span>
-													<input type="hidden" id="net_amount" name="net_amount" placeholder="Total Weight" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -202,7 +196,7 @@
 			}
 		});
 
-		var totalAmount=0, amount=0;
+		var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
 
 		var table = document.getElementById("Purchase1Table"); // Get the table element
         var rowCount = table.rows.length; // Get the total number of rows
@@ -213,11 +207,27 @@
 		$('#itemCount').val(itemCount);
 
 		for (var j=0;j<rowCount; j++){
+
+			quantity = table.rows[j].cells[1].querySelector('input').value; // Get the value of the input field in the specified cell
+			totalQuantity = totalQuantity + Number(quantity);
+
+			weight = table.rows[j].cells[4].querySelector('input').value; // Get the value of the input field in the specified cell
+			totalWeight = totalWeight + Number(weight);
+
 			amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
 			totalAmount = totalAmount + Number(amount);
 		}
-		$('#total_amount_show').val(totalAmount);
+		$('#total_quantity').val(totalQuantity);
+		$('#total_weight').val(totalWeight);
 		$('#totalAmount').val(totalAmount);
+
+		var convance_charges = Number($('#convance_charges').val());
+		var labour_charges = Number($('#labour_charges').val());
+		var bill_discount = Number($('#bill_discount').val());
+
+		netAmount = totalAmount + convance_charges +  labour_charges - bill_discount;
+		FormattednetTotal = formatNumberWithCommas(netAmount);
+		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 	});
 
     function removeRow(button) {
@@ -350,16 +360,11 @@
 			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
 			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
 			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
-			console.log(totalQuantity);
         }
 
 		$('#totalAmount').val(totalAmount);
-		$('#total_amount_show').val(totalAmount);
 		$('#total_weight').val(totalWeight);
-		$('#total_weight_show').val(totalWeight);
-		$('#total_quantity').val(totalQuantity);
-		$('#total_quantity_show').val(totalQuantity);
-		
+		$('#total_quantity').val(totalQuantity);		
 		netTotal();
 	}
 
@@ -374,7 +379,6 @@
 		netTotal = netTotal.toFixed(0);
 		FormattednetTotal = formatNumberWithCommas(netTotal);
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
-		$('#net_amount').val(netTotal);
 	}
  
 	function formatNumberWithCommas(number) {

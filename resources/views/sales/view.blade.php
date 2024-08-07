@@ -28,22 +28,22 @@
 										<div class="col-md-6">
 											<div class="bill-to">
 												<p class="h5 mb-1 text-dark font-weight-semibold">To:</p>
-												<address>
+												<h4 style="font-weight:500;color:black">
 													{{$sales->ac_name}}
 													<br/>
 													{{$sales->address}}
 													<br/>
 													{{$sales->phone_no}}
 													<br/>
-												</address>
+												</h4>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="bill-data text-end">
-												<p class="mb-0">
+												<h4 class="mb-0">
 													<span class="text-dark">Invoice Date:</span>
-													<span class="value">{{$sales->sa_date}}</span>
-												</p>
+													<span style="font-weight:300;color:black" class="value">{{$sales->sa_date}}</span>
+												</h4>
 											</div>
 										</div>
 									</div>
@@ -52,42 +52,65 @@
 								<table class="table table-responsive-md invoice-items">
 									<thead>
 										<tr class="text-dark">
-											<th id="cell-id"     class="font-weight-semibold">#</th>
-											<th id="cell-item"   class="font-weight-semibold">Item</th>
-											<th id="cell-desc"   class="font-weight-semibold">Remarks</th>
-											<th id="cell-price"  class="text-center font-weight-semibold">Price</th>
-											<th id="cell-qty"    class="text-center font-weight-semibold">Quantity</th>
-											<th id="cell-total"  class="text-center font-weight-semibold">Total</th>
+											<th width="5%" class="font-weight-semibold">S.No</th>
+											<th class="text-center font-weight-semibold">Quantity</th>
+											<th width="22%" class="font-weight-semibold">Item</th>
+											<th width="22%" class="font-weight-semibold">Remarks</th>
+											<th class="text-center font-weight-semibold">Weight</th>
+											<th class="text-center font-weight-semibold">Price</th>
+											<th class="text-center font-weight-semibold">Amount</th>
 										</tr>
 									</thead>
 									@php($subtotal = 0)
+									@php($total_quantity = 0)
+									@php($total_weight = 0)
+
 									<tbody>
 										@foreach($sale_items as $key => $sale_item)
 										<tr>
 											<td>{{$key+1}}</td>
+											<td class="text-center">{{$sale_item->Sales_qty2}}</td>
 											<td class="font-weight-semibold text-dark">{{$sale_item->item_name}}</td>
 											<td>{{$sale_item->remarks}}</td>
 											<td class="text-center">{{$sale_item->sales_price}}</td>
-											<td class="text-center">{{$sale_item->Sales_qty2}}</td>
-											<td class="text-center">{{$sale_item->sales_price * $sale_item->Sales_qty2}}</td>
+											<td class="text-center">{{$sale_item->Sales_qty}}</td>
+											<td class="text-center">{{$sale_item->sales_price * $sale_item->Sales_qty}}</td>
 										</tr>
-										<?php $subtotal=$subtotal+($sale_item->sales_price * $sale_item->Sales_qty2) ?>
+										<?php $subtotal=$subtotal+($sale_item->sales_price * $sale_item->Sales_qty) ?>
+										<?php $total_weight=$total_weight+ $sale_item->Sales_qty ?>
+										<?php $total_quantity=$total_quantity+ $sale_item->Sales_qty2 ?>
+
 										@endforeach
 									</tbody>
 								</table>
 
-								<div class="invoice-summary">
-									<div class="row justify-content-end">
-										<div class="col-sm-4">
+								<div class="row">
+									<div class="col-8">
+										<div class="row">
+											<div class="col-6">
+												<table class="table h6 text-dark">
+													<tbody>
+														<tr class="b-top-0">
+															<td colspan="2">Total Quantity</td>
+															<td class="text-left">{{$total_quantity}}</td>
+														</tr>
+														<tr>
+															<td colspan="2">Total Weight</td>
+															<td class="text-left">{{$total_weight}}</td>
+														</tr>
+			
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-4 invoice-summary">
+										<div class="row justify-content-end">
 											<table class="table h6 text-dark">
 												<tbody>
 													<tr class="b-top-0">
 														<td colspan="2">Subtotal</td>
 														<td class="text-left">{{$subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2">GST</td>
-														<td class="text-left">{{$sales->Gst_sal}} PKR</td>
 													</tr>
 													<tr>
 														<td colspan="2">Labour Charges</td>
@@ -100,15 +123,15 @@
 														<td colspan="2">Discount</td>
 														<td class="text-left">{{$sales->Bill_discount}} PKR</td>
 													</tr>
-													<tr class="h4">
+													<tr class="h5">
 														<td colspan="2">Net Amount</td>
-														<td class="text-left">{{$subtotal + $sales->Gst_sal + $sales->LaborCharges + $sales->ConvanceCharges - $sales->Bill_discount }} PKR</td>
+														<td class="text-left">{{round($subtotal + $sales->LaborCharges + $sales->ConvanceCharges - $sales->Bill_discount)}} PKR</td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
-								</div>
+								<div>
 							</div>
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
 								<a href="{{ route('print-sale-invoice', $sales->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>

@@ -45,8 +45,8 @@
                                                 <td>{{$row->Sales_remarks}}</td>
                                                 <td>{{$row->pur_ord_no}}</td>
                                                 <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
-                                                <td>{{$row->total_weight}}</td>
-                                                <td>{{$row->sed_sal}}</td>
+                                                <td>{{$row->weight_sum}}</td>
+                                                <td>{{$row->total_bill}}</td>
                                                 <td>{{$row->ConvanceCharges}}</td>
                                                 <td>{{$row->LaborCharges}}</td>
                                                 <td>{{$row->Bill_discount}}</td>

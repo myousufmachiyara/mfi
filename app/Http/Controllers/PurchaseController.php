@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Item_entry;
 use App\Models\AC;
 use App\Models\purchase;
-use App\Models\sales;
-use App\Models\sales_2;
 use App\Models\purchase_2;
 use App\Models\pur1_att;
 use Illuminate\Support\Facades\File;
@@ -23,7 +21,16 @@ class PurchaseController extends Controller
     public function index()
     {
         $pur1 = purchase::where('purchase.status',1)
+        ->join ('purchase_2', 'purchase_2.pur_cod' , '=', 'purchase.pur_id')
         ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
+        ->select(
+            'purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
+            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount',
+            \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
+            \DB::raw('SUM(purchase_2.pur_qty*purchase_2.pur_price) as total_bill'),
+        )
+        ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
+        'pur_bill_no','purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount')
         ->get();
         
         return view('purchase1.index',compact('pur1'));
@@ -69,18 +76,6 @@ class PurchaseController extends Controller
         }
         if ($request->has('bill_discount') && $request->bill_discount) {
             $pur1->pur_discount=$request->bill_discount;
-        }
-        if ($request->has('total_weight') && $request->total_weight) {
-            $pur1->total_weight=$request->total_weight;
-        }
-        if ($request->has('total_quantity') && $request->total_quantity) {
-            $pur1->total_quantity=$request->total_quantity;
-        }
-        if ($request->has('total_amount') && $request->total_amount) {
-            $pur1->bill_amount=$request->total_amount;
-        }
-        if ($request->has('net_amount') && $request->net_amount) {
-            $pur1->net_amount=$request->net_amount;
         }
 
         $pur1->save();
@@ -174,18 +169,6 @@ class PurchaseController extends Controller
         if ($request->has('bill_discount') && $request->bill_discount) {
             $pur1->pur_discount=$request->bill_discount;
         }
-        if ($request->has('total_weight') && $request->total_weight) {
-            $pur1->total_weight=$request->total_weight;
-        }
-        if ($request->has('total_quantity') && $request->total_quantity) {
-            $pur1->total_quantity=$request->total_quantity;
-        }
-        if ($request->has('total_amount') && $request->total_amount) {
-            $pur1->bill_amount=$request->total_amount;
-        }
-        if ($request->has('net_amount') && $request->net_amount) {
-            $pur1->net_amount=$request->net_amount;
-        }
 
         purchase::where('pur_id', $request->pur_id)->update([
             'pur_date'=>$pur1->pur_date,
@@ -198,10 +181,6 @@ class PurchaseController extends Controller
             'pur_convance_char'=>$pur1->pur_convance_char,
             'pur_labor_char'=>$pur1->pur_labor_char,
             'pur_discount'=>$pur1->pur_discount,
-            'total_weight'=>$pur1->total_weight,
-            'total_quantity'=>$pur1->total_quantity,
-            'bill_amount'=>$pur1->bill_amount,
-            'net_amount'=>$pur1->net_amount
         ]);
 
         purchase_2::where('pur_cod', $request->pur_id)->delete();
@@ -316,8 +295,6 @@ class PurchaseController extends Controller
                 ->join('item_entry','purchase_2.item_cod','=','item_entry.it_cod')
                 ->get();
 
-        $pdf = new TCPDF();
-
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 
         // Set document information
@@ -326,7 +303,6 @@ class PurchaseController extends Controller
         $pdf->SetTitle('Invoice-'.$purchase['pur_id']);
         $pdf->SetSubject('Invoice-'.$purchase['pur_id']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
-        $pdf->setPageOrientation('L');
                
         // Set header and footer fonts
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -470,34 +446,34 @@ class PurchaseController extends Controller
 
         // Column 2
         $pdf->SetXY(45.1, $currentY+10);
-        $pdf->MultiCell(50, 5,  $total_weight, 1, 'R');
+        $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(45.1, $currentY+16.82);
-        $pdf->MultiCell(50, 5, $total_quantity, 1,'R');
+        $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
 
         // Column 3
-        $pdf->SetXY(200, $currentY+10);
+        $pdf->SetXY(120, $currentY+10);
         $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(200, $currentY+16.82);
+        $pdf->SetXY(120, $currentY+16.82);
         $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(200, $currentY+23.5);
+        $pdf->SetXY(120, $currentY+23.5);
         $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(200, $currentY+30.18);
+        $pdf->SetXY(120, $currentY+30.18);
         $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(200, $currentY+36.86);
+        $pdf->SetXY(120, $currentY+36.86);
         $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
         
         // Column 4
-        $pdf->SetXY(240, $currentY+10);
-        $pdf->MultiCell(40, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(240, $currentY+16.82);
-        $pdf->MultiCell(40, 5, $purchase['pur_labor_char'], 1, 'R');
-        $pdf->SetXY(240, $currentY+23.5);
-        $pdf->MultiCell(40, 5, $purchase['pur_convance_char'], 1, 'R');
-        $pdf->SetXY(240, $currentY+30.18);
-        $pdf->MultiCell(40, 5, $purchase['pur_discount'], 1, 'R');
-        $pdf->SetXY(240, $currentY+36.86);
-        $net_amount=$total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount'];
-        $pdf->MultiCell(40, 5,  $net_amount, 1, 'R');
+        $pdf->SetXY(160, $currentY+10);
+        $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
+        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->MultiCell(35, 5, $purchase['pur_labor_char'], 1, 'R');
+        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->MultiCell(35, 5, $purchase['pur_convance_char'], 1, 'R');
+        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->MultiCell(35, 5, $purchase['pur_discount'], 1, 'R');
+        $pdf->SetXY(160, $currentY+36.86);
+        $net_amount=round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
+        $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
         $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');

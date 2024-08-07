@@ -26,8 +26,17 @@ class SalesController extends Controller
     public function index()
     {
         $sales = Sales::where('sales.status', 1)
-                        ->join('ac','sales.account_name','=','ac.ac_code')
-                        ->get();
+        ->join ('sales_2', 'sales_2.sales_inv_cod' , '=', 'sales.Sal_inv_no')
+        ->join('ac','sales.account_name','=','ac.ac_code')
+        ->select(
+            'sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
+            'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount',
+            \DB::raw('SUM(sales_2.Sales_qty) as weight_sum'),
+            \DB::raw('SUM(sales_2.Sales_qty*sales_2.sales_price) as total_bill'),
+        )
+        ->groupby('sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
+        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount')
+        ->get();
         return view('sales.index',compact('sales'));
     }
 
@@ -82,9 +91,6 @@ class SalesController extends Controller
         }
         if ($request->has('totalAmount') && $request->totalAmount) {
             $sales->sed_sal=$request->totalAmount;
-        }
-        if ($request->has('total_weight') && $request->total_weight) {
-            $sales->total_weight=$request->total_weight;
         }
 
         $sales->created_by=$userId;
@@ -267,7 +273,6 @@ class SalesController extends Controller
         $pdf->SetTitle('Invoice-'.$sales['Sal_inv_no']);
         $pdf->SetSubject('Invoice-'.$sales['Sal_inv_no']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
-        $pdf->setPageOrientation('L');
                
         // Set header and footer fonts
         $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -415,34 +420,34 @@ class SalesController extends Controller
 
         // Column 2
         $pdf->SetXY(45.1, $currentY+10);
-        $pdf->MultiCell(50, 5,  $total_weight, 1, 'R');
+        $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(45.1, $currentY+16.82);
-        $pdf->MultiCell(50, 5, $total_quantity, 1,'R');
+        $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
 
         // Column 3
-        $pdf->SetXY(200, $currentY+10);
+        $pdf->SetXY(120, $currentY+10);
         $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(200, $currentY+16.82);
+        $pdf->SetXY(120, $currentY+16.82);
         $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(200, $currentY+23.5);
+        $pdf->SetXY(120, $currentY+23.5);
         $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(200, $currentY+30.18);
+        $pdf->SetXY(120, $currentY+30.18);
         $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(200, $currentY+36.86);
+        $pdf->SetXY(120, $currentY+36.86);
         $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
         
         // Column 4
-        $pdf->SetXY(240, $currentY+10);
-        $pdf->MultiCell(40, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(240, $currentY+16.82);
-        $pdf->MultiCell(40, 5, $sales['LaborCharges'], 1, 'R');
-        $pdf->SetXY(240, $currentY+23.5);
-        $pdf->MultiCell(40, 5, $sales['ConvanceCharges'], 1, 'R');
-        $pdf->SetXY(240, $currentY+30.18);
-        $pdf->MultiCell(40, 5, $sales['Bill_discount'], 1, 'R');
-        $pdf->SetXY(240, $currentY+36.86);
+        $pdf->SetXY(160, $currentY+10);
+        $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
+        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->MultiCell(35, 5, $sales['LaborCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->MultiCell(35, 5, $sales['ConvanceCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->MultiCell(35, 5, $sales['Bill_discount'], 1, 'R');
+        $pdf->SetXY(160, $currentY+36.86);
         $net_amount=$total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount'];
-        $pdf->MultiCell(40, 5,  $net_amount, 1, 'R');
+        $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
         $pdf->Output('invoice_'.$sales['Sal_inv_no'].'.pdf', 'I');

@@ -37,23 +37,24 @@
                                         <tbody>
                                             @foreach ($pur1 as $key => $row)
                                             <tr>
-                                                <td>{{$row->pur_id }}</td>
+                                                <td>{{$row->pur_id}}</td>
                                                 <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                 <td>{{$row->ac_name}}</td>
                                                 <td>{{$row->cash_saler_name}}</td>
                                                 <td>{{$row->pur_remarks}}</td>
                                                 <td>{{$row->sale_against}}</td>
                                                 <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
-                                                <td>{{$row->total_weight}}</td>
-                                                <td>{{$row->bill_amount}}</td>
+                                                <td>{{$row->weight_sum}}</td>
+                                                <td>{{$row->total_bill}}</td>
                                                 <td>{{$row->pur_convance_char}}</td>
                                                 <td>{{$row->pur_labor_char}}</td>
                                                 <td>{{$row->pur_discount}}</td>
-                                                @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0)  
-                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($row->net_amount, 10, '.', ','), '0'), '.') }}</strong></td>
-                                                    @else
-                                                        <td><strong style="font-size:15px">{{ number_format(intval($row->net_amount))}}</strong></td>
-                                                    @endif
+                                                @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
+                                                @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
+                                                    <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                @else
+                                                    <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
+                                                @endif
                                                 <td class="actions">
                                                     <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger"> <i class="fas fa-print"></i></a>
                                                     <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
