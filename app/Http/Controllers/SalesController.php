@@ -262,9 +262,9 @@ class SalesController extends Controller
 
         $sale_items = Sales_2::where('sales_inv_cod',$id)
                 ->join('item_entry','sales_2.item_cod','=','item_entry.it_cod')
+                ->select('sales_2.*','item_entry.item_name')
                 ->get();
 
-        die($sale_items);
         $pdf = new TCPDF();
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -390,7 +390,7 @@ class SalesController extends Controller
                 $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
                 $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
                 $total_weight=$total_weight+$items['Sales_qty'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty']*$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.($items['Sales_qty']*$items['sales_price']).'</td>';
                 $total_amount=$total_amount+($items['Sales_qty']*$items['sales_price']);
                 $item_table .= '</tr>';
             }
@@ -404,7 +404,7 @@ class SalesController extends Controller
                 $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
                 $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
                 $total_weight=$total_weight+$items['Sales_qty'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty']*$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.($items['Sales_qty']*$items['sales_price']).'</td>';
                 $total_amount=$total_amount+($items['Sales_qty']*$items['sales_price']);
                 $item_table .= '</tr>';
             }
