@@ -122,7 +122,7 @@
 														<input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails(1,1)">
 													</td>
 													<td>
-														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
+														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
 														<select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
@@ -297,7 +297,7 @@
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
+			cell2.innerHTML = '<input type="number" id="item_qty'+index+'" onchange="rowTotal('+index+')"  name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
 			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
