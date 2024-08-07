@@ -146,7 +146,7 @@
 														<input type="number" id="price{{$key1}}" name="item_price[]" onchange="rowTotal({{$key1}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
-														<input type="number" id="amount{{$key1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty2 * $sale_item->sales_price}}"> 
+														<input type="number" id="amount{{$key1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
 														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty2 * $sale_item->sales_price) @endphp
 													</td>
 													<td>
