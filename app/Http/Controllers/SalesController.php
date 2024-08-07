@@ -112,9 +112,9 @@ class SalesController extends Controller
                     $sales_2->sales_inv_cod=$invoice_id;
                     $sales_2->item_cod=$request->item_code[$i];
                     $sales_2->remarks=$request->item_remarks[$i];
-                    $sales_2->Sales_qty=$request->item_qty[$i];
+                    $sales_2->Sales_qty2=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
-                    $sales_2->Sales_qty2=$request->item_weight[$i];
+                    $sales_2->Sales_qty=$request->item_weight[$i];
     
                     $sales_2->save();
                 }
@@ -225,9 +225,9 @@ class SalesController extends Controller
                     $sales_2->sales_inv_cod=$request->invoice_no;
                     $sales_2->item_cod=$request->item_code[$i];
                     $sales_2->remarks=$request->item_remarks[$i];
-                    $sales_2->Sales_qty=$request->item_qty[$i];
+                    $sales_2->Sales_qty2=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
-                    $sales_2->Sales_qty2=$request->item_weight[$i];
+                    $sales_2->Sales_qty=$request->item_weight[$i];
                     $sales_2->save();
                 }
             }
