@@ -264,6 +264,7 @@ class SalesController extends Controller
                 ->join('item_entry','sales_2.item_cod','=','item_entry.it_cod')
                 ->get();
 
+        die($sale_items);
         $pdf = new TCPDF();
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
