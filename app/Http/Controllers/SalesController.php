@@ -37,6 +37,7 @@ class SalesController extends Controller
         ->groupby('sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
         'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount')
         ->get();
+
         return view('sales.index',compact('sales'));
     }
 
