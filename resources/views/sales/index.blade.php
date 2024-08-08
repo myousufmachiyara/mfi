@@ -15,57 +15,59 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th>Inv #</th>
-                                                <th>Date</th>
-                                                <th>Account</th>
-                                                <th>Person Name</th>
-                                                <th>Remarks</th>
-                                                <th>Bill #</th>
-                                                <th>Att.</th>
-                                                <th>Weight (kg)</th>
-                                                <th>Bill Amount</th>
-                                                <th>Convance Charges</th>
-                                                <th>Labour Charges</th>
-                                                <th>Discount</th>
-                                                <th>Net Amount</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($sales as $key => $row)
-                                            <tr>
-                                                <td>{{$row->Sal_inv_no}}</td>
-                                                <td>{{$row->sa_date}}</td>
-                                                <td>{{$row->ac_name}}</td>
-                                                <td>{{$row->Cash_pur_name}}</td>
-                                                <td>{{$row->Sales_remarks}}</td>
-                                                <td>{{$row->pur_ord_no}}</td>
-                                                <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
-                                                <td>{{$row->weight_sum}}</td>
-                                                <td>{{$row->total_bill}}</td>
-                                                <td>{{$row->ConvanceCharges}}</td>
-                                                <td>{{$row->LaborCharges}}</td>
-                                                <td>{{$row->Bill_discount}}</td>
-                                                <td>{{$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount}}</td>
-                                                @if($row->bill_not==0)
-                                                    <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
-                                                @elseif($row->bill_not==1)
-                                                    <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
-                                                @endif
-                                                <td class="actions">
-                                                    <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                    <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
-                                                    <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
-												</td>
-                                            </tr>
-                                        </tbody>
-                                        @endforeach
-									</table>
+                                    <div class="modal-wrapper">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Inv #</th>
+                                                    <th>Date</th>
+                                                    <th>Account</th>
+                                                    <th>Person Name</th>
+                                                    <th>Remarks</th>
+                                                    <th>Bill #</th>
+                                                    <th>Att.</th>
+                                                    <th>Weight (kg)</th>
+                                                    <th>Bill Amount</th>
+                                                    <th>Convance Charges</th>
+                                                    <th>Labour Charges</th>
+                                                    <th>Discount</th>
+                                                    <th>Net Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($sales as $key => $row)
+                                                <tr>
+                                                    <td>{{$row->Sal_inv_no}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
+                                                    <td>{{$row->ac_name}}</td>
+                                                    <td>{{$row->Cash_pur_name}}</td>
+                                                    <td>{{$row->Sales_remarks}}</td>
+                                                    <td>{{$row->pur_ord_no}}</td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
+                                                    <td>{{$row->weight_sum}}</td>
+                                                    <td>{{$row->total_bill}}</td>
+                                                    <td>{{$row->ConvanceCharges}}</td>
+                                                    <td>{{$row->LaborCharges}}</td>
+                                                    <td>{{$row->Bill_discount}}</td>
+                                                    <td>{{$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount}}</td>
+                                                    @if($row->bill_not==0)
+                                                        <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
+                                                    @elseif($row->bill_not==1)
+                                                        <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
+                                                    @endif
+                                                    <td class="actions">
+                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
+                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -111,7 +113,7 @@
                 <div class="card-body">
                     <div class="modal-wrapper">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0" >
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>

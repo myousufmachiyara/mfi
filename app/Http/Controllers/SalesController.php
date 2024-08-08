@@ -35,7 +35,7 @@ class SalesController extends Controller
             \DB::raw('SUM(sales_2.Sales_qty*sales_2.sales_price) as total_bill'),
         )
         ->groupby('sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
-        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount')
+        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount', )
         ->get();
 
         return view('sales.index',compact('sales'));
