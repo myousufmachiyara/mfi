@@ -19,7 +19,7 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th>Inv</th>
                                                     <th>Date</th>
                                                     <th>Account</th>
                                                     <th>Person Name</th>
