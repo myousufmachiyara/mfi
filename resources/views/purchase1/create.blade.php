@@ -11,14 +11,14 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Purchase 1</h2>
+										<h2 class="card-title">New Purchase Invoice</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Invoice #</label>
-												<input type="text" placeholder="Invoice #" class="form-control" disabled>
+												<label class="col-form-label" >Invoice No.</label>
+												<input type="text" placeholder="(New Invoice)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -53,11 +53,11 @@
 												<input type="text" placeholder="Name of Person" name="cash_saler_name" class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
-												<label class="col-form-label" >Address</label>
-												<input type="text" placeholder="Address" name="cash_saler_address" class="form-control">
+												<label class="col-form-label" >Person Address</label>
+												<input type="text" placeholder="Person Address" name="cash_saler_address" class="form-control">
 											</div>
 											<div class="col-12 mb-2">
-												<label class="col-form-label">Purchase Remarks</label>
+												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control"></textarea>
 											</div>	
 									  </div>

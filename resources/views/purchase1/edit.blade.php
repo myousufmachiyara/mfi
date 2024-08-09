@@ -17,7 +17,7 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Invoice #</label>
+												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" name="pur_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
@@ -54,11 +54,11 @@
 												<input type="text" placeholder="Name of Person" name="cash_saler_name" value="{{$pur->cash_saler_name}}" class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
-												<label class="col-form-label" >Address</label>
-												<input type="text" placeholder="Address" name="cash_saler_address" value="{{$pur->cash_saler_address}}" class="form-control">
+												<label class="col-form-label" >Person Address</label>
+												<input type="text" placeholder="Person Address" name="cash_saler_address" value="{{$pur->cash_saler_address}}" class="form-control">
 											</div>
 											<div class="col-12 mb-2">
-												<label class="col-form-label">Purchase Remarks</label>
+												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" value="{{$pur->pur_remarks}}" placeholder="Remarks" class="form-control"></textarea>
 											</div>	
 									  </div>
@@ -71,7 +71,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Edit Purchase 1 Details</h2>
+										<h2 class="card-title">Edit Purchase Invoice Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >

@@ -11,14 +11,14 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Sale 1</h2>
+										<h2 class="card-title">New Sale Invoice</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
-												<input type="text" name="invoice_no" placeholder="Invoice No." class="form-control" disabled>
+												<input type="text" name="invoice_no" placeholder="(New Invoice)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
 											</div>
@@ -60,13 +60,13 @@
 											</div>
 
 											<div class="col-12 col-md-4 mb-3">
-												<label class="col-form-label">Address</label>
-												<input type="text" name="address" id="address" placeholder="Address" class="form-control">
+												<label class="col-form-label">Person Address</label>
+												<input type="text" name="address" id="address" placeholder="Person Address" class="form-control">
 											</div>
 
 											<div class="col-12 col-md-4 mb-3">
-												<label class="col-form-label">Cash Pur Phone</label>
-												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash Pur Phone" class="form-control">
+												<label class="col-form-label">Person Phone Number</label>
+												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Person Phone Number" class="form-control">
 											</div>
 
 											<div class="col-12 mb-3">
