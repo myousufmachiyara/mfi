@@ -347,7 +347,7 @@ class PurchaseController extends Controller
         $html = '<table>';
         $html .= '<tr>';
         $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
-        $html .= '<td>Date: '.$purchase['pur_date'].'</td>';
+        $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 

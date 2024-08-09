@@ -52,7 +52,7 @@
                                                     <td>{{$row->pur_discount}}</td>
                                                     @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
-                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif

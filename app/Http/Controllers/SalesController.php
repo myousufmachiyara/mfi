@@ -319,7 +319,7 @@ class SalesController extends Controller
         $html = '<table>';
         $html .= '<tr>';
         $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$sales['Sal_inv_no'].'</span></td>';
-        $html .= '<td>Date: '.$sales['sa_date'].'</td>';
+        $html .= '<td>Date: '.\Carbon\Carbon::parse($sales['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>pur_ord_no: '.$sales['pur_ord_no'].'</td>';
         $html .= '<td>Login: Hamza</td>';
         $html .= '</tr>';
