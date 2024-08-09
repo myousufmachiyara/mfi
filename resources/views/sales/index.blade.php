@@ -22,7 +22,7 @@
                                                     <th>Inv #</th>
                                                     <th>Date</th>
                                                     <th>Account</th>
-                                                    <th>Person Name</th>
+                                                    <th>Person Nam</th>
                                                     <th>Remarks</th>
                                                     <th>Bill #</th>
                                                     <th>Att.</th>
