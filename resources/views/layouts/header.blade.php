@@ -7,9 +7,9 @@
 
 		<title>MFI | Software</title>
 		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+		<meta name="description" content="MFI Software | Management System">
 		<meta name="author" content="okler.net">
-
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -25,6 +25,8 @@
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.css" />
 		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.theme.css" />
+		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
+		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="/assets/vendor/morris/morris.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
@@ -41,6 +43,6 @@
 		<link rel="stylesheet" href="/assets/css/custom.css">
 
 		<!-- Head Libs -->
-		<script src="/assets/vendor/modernizr/modernizr.js"></script>
+		<!-- <script src="/assets/vendor/modernizr/modernizr.js"></script> -->
 
 	</head>

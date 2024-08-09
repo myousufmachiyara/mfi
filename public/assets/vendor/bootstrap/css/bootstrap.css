@@ -1965,6 +1965,7 @@ progress {
 
 .table-bordered > :not(caption) > * {
   border-width: 1px 0;
+  font-size: 14px;
 }
 .table-bordered > :not(caption) > * > * {
   border-width: 0 1px;
@@ -1975,6 +1976,7 @@ progress {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
+  /* --bs-table-accent-bg: #CCC8C2; */
   --bs-table-accent-bg: var(--bs-table-striped-bg);
   color: var(--bs-table-striped-color);
 }
@@ -2130,6 +2132,7 @@ progress {
   margin-bottom: 0;
   font-size: inherit;
   line-height: 1.5;
+  color: #000;
 }
 
 .col-form-label-lg {

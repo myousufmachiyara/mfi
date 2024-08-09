@@ -63,7 +63,7 @@ a:active {
 /* Layout Base - Content Body */
 .content-body {
 	display: table-cell;
-	padding: 40px;
+	padding: 35px 10px;
 	position: relative;
 	vertical-align: top;
 }
@@ -457,9 +457,15 @@ a:active {
 	}
 
 	.content-body {
-		padding: 0 15px 15px;
+		padding: 80px 10px;
 	}
-
+	.card-header {
+		padding: 12px 17px 3px 17px !important;
+	}
+	.card-title{
+		line-height: 38px !important;
+		font-size: 20px !important;
+	}
 	.page-header {
 		margin: 0 -15px 20px;
 	}
@@ -6814,9 +6820,9 @@ html.sidebar-light:not(.dark) ul.nav-main li .nav-children li a:hover, html.side
 
 .btn {
 	font-size: 14.4px;
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	padding: 7.52px 12px;
-	padding: 0.47rem 0.75rem;
+	padding: 0.3rem 0.5rem;
 	cursor: pointer;
 }
 
@@ -7448,7 +7454,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 	background: #f6f6f6;
 	border-radius: 5px 5px 0 0 !important;
 	border-bottom: 1px solid #DADADA;
-	padding: 24px;
+	padding: 5px 20px;
 	position: relative;
 }
 
@@ -7509,7 +7515,7 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card-actions {
 	right: 15px;
 	position: absolute;
-	top: 15px;
+	top: 14px ;
 }
 
 .card-actions a,
@@ -7544,7 +7550,6 @@ html.dark .call-to-action.call-to-action-grey:before {
 .card-title {
 	color: #33353F;
 	font-size: 18px;
-	line-height: 18px;
 	padding: 0;
 	text-transform: none;
 	margin: 0;
@@ -9087,6 +9092,7 @@ html.dark .colorpicker:after {
 	border-collapse: collapse !important;
 	margin: 0 !important;
 	width: 100% !important;
+	margin-top: 5px !important
 }
 
 .dataTables_wrapper div.dataTables_info {
@@ -10973,7 +10979,8 @@ html.dark .dropzone:hover .dz-default span {
 
 /* Forms */
 form label {
-	font-weight: normal;
+	font-weight: 600;
+	color: #000;
 }
 
 textarea {
@@ -21631,4 +21638,15 @@ html.dark .mailbox-compose .bootstrap-tagsinput {
 
 html.dark .mailbox-compose .bootstrap-tagsinput > input {
 	color: #FFF;
+}
+/* Hide the spinners in Webkit browsers (Chrome, Safari, etc.) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the spinners in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }
