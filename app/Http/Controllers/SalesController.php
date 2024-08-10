@@ -30,12 +30,12 @@ class SalesController extends Controller
         ->join('ac','sales.account_name','=','ac.ac_code')
         ->select(
             'sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
-            'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount',
+            'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount', 'sales.bill_not',
             \DB::raw('SUM(sales_2.Sales_qty) as weight_sum'),
             \DB::raw('SUM(sales_2.Sales_qty*sales_2.sales_price) as total_bill'),
         )
         ->groupby('sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
-        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount', )
+        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount','sales.bill_not' )
         ->get();
 
         return view('sales.index',compact('sales'));
@@ -448,7 +448,7 @@ class SalesController extends Controller
         $pdf->SetXY(160, $currentY+30.18);
         $pdf->MultiCell(35, 5, $sales['Bill_discount'], 1, 'R');
         $pdf->SetXY(160, $currentY+36.86);
-        $net_amount=$total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount'];
+        $net_amount=round($total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF

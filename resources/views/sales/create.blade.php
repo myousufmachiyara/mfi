@@ -156,17 +156,17 @@
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance Charges</label>
-												<input type="number" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" step="any" class="form-control">
+												<input type="number" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" step="any" value="0" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
-												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" step="any" class="form-control">
+												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" step="any" value="0" class="form-control">
 											</div>
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
-												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" step="any" class="form-control">
+												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" step="any" value="0" class="form-control">
 											</div>
 
 										</div>

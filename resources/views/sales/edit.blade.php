@@ -190,7 +190,7 @@
 										</div>
 
 										<div class="row mb-3">
-											@php $net_amount= $total_amount + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount @endphp
+											@php $net_amount= round($total_amount + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount) @endphp
 											<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 												<span class="d-flex align-items-center justify-content-lg-end">

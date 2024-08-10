@@ -57,11 +57,13 @@
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif
-                                                    @if($row->bill_not==0)
+
+                                                    @if ($row->bill_not==0)
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
-                                                    @elseif($row->bill_not==1)
+                                                    @elseif ($row->bill_not==1)
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                     @endif
+
                                                     <td class="actions">
                                                         <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
                                                         <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
