@@ -448,7 +448,7 @@ class SalesController extends Controller
         $pdf->SetXY(160, $currentY+30.18);
         $pdf->MultiCell(35, 5, $sales['Bill_discount'], 1, 'R');
         $pdf->SetXY(160, $currentY+36.86);
-        $net_amount=$total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount'];
+        $net_amount=round($total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
