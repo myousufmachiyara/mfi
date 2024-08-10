@@ -20,7 +20,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Code</th>
-                                                <th>Name</th>
+                                                <th>Account Name</th>
                                                 <th>Receivable</th>
                                                 <th>Payable</th>
                                                 <th>Date</th>

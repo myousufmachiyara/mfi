@@ -11,7 +11,7 @@
 							<div class="col-12 mb-3">
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Item Entry</h2>
+										<h2 class="card-title">New Item Entry (Multiple)</h2>
 									</header>
 
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
@@ -21,8 +21,8 @@
 											<thead>
 												<tr>
 													<!-- <th width="4%">Code</th> -->
-													<th width="">Group</th>
-													<th width="">Name</th>
+													<th width="">Group Name</th>
+													<th width="">Item Name</th>
 													<th width="">Remarks</th>
 													<th width="6%">O.Stock</th>
 													<th width="6%">P.Price</th>
@@ -89,7 +89,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Items</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save All Items</button>
 											</div>
 										</div>
 									</footer>
