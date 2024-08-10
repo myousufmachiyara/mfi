@@ -41,7 +41,7 @@
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selectTwo class="form-control" autofocus name="ac_cod" required>
+													<select class="form-control" autofocus name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
 														@foreach($acc as $key => $row)	
 															<option value="{{$row->ac_code}}" {{ $pur->ac_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
