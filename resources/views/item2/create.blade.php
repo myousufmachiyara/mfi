@@ -41,7 +41,7 @@
 														<input type="number" class="form-control" disabled>
 													</td> -->
 													<td>
-														<select data-plugin-selectTwo class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
+														<select class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
 															<option value="0" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -52,7 +52,7 @@
 														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_remarks[]" required value=" ">
+														<input type="text" class="form-control" name="item_remarks[]" value=" ">
 													</td>
 													<td>
 														<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">
@@ -164,7 +164,7 @@
 			var cell13 = newRow.insertCell(12);
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
-			cell1.innerHTML  = '<select class="form-control" autofocus data-plugin-selectTwo onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" autofocus   onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option value="0" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+

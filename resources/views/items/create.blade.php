@@ -41,7 +41,7 @@
 														<input type="number" class="form-control" disabled>
 													</td> -->
 													<td>
-														<select data-plugin-selectTwo class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
+														<select class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
 															<option value="0" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -161,14 +161,14 @@
 			var cell12 = newRow.insertCell(11);
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
-			cell1.innerHTML  = '<select data-plugin-selectTwo class="form-control" autofocus onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option value="0" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
-			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]" required>';
+			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">';
 			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">';
 			cell6.innerHTML  = '<input type="date" class="form-control" style="max-width: 124px" name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>" >';
