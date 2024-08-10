@@ -11,7 +11,7 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Sale 1</h2>
+										<h2 class="card-title">Edit Sale Invoice</h2>
 									</header>
 
 									<div class="card-body">
@@ -67,13 +67,13 @@
 											</div>
 
 											<div class="col-12 col-md-4 mb-3">
-												<label class="col-form-label">Address</label>
-												<input type="text" name="address" id="address" placeholder="Address" class="form-control" value="{{$sales->cash_Pur_address}}">
+												<label class="col-form-label">Person Address</label>
+												<input type="text" name="address" id="address" placeholder="Person Address" class="form-control" value="{{$sales->cash_Pur_address}}">
 											</div>
 
 											<div class="col-12 col-md-4 mb-3">
-												<label class="col-form-label">Cash Pur Phone</label>
-												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Cash Pur Phone" class="form-control" value="{{$sales->cash_pur_phone}}">
+												<label class="col-form-label">Person Phone Number</label>
+												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Person Phone Number" class="form-control" value="{{$sales->cash_pur_phone}}">
 
 											</div>
 
@@ -91,7 +91,7 @@
 									<div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
-									<h2 class="card-title">Edit Sale 1 Details</h2>
+									<h2 class="card-title">Edit Sale Invoice Details</h2>
 								</header>
 								<section class="card">
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
