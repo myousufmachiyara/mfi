@@ -19,7 +19,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">Code</th>
-                                                <th>Name</th>
+                                                <th>Group Name</th>
                                                 <th class="text-end">Action</th>
                                             </tr>
                                         </thead>

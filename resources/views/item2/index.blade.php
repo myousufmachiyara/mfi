@@ -9,10 +9,10 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Items</h2>
+                                    <h2 class="card-title">All Item Pipes</h2>
                                     <form class="text-end" action="{{ route('create-item-2') }}" method="GET">
-                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> Add Single Item Pipe</button>
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> Add Multiple Items Pipe</button>
+                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single)</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Item (Multiple)</button>
                                     </form>
                                 </header>
 
@@ -21,8 +21,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="4%">Code</th>
-                                                <th width="13%">Group</th>
-                                                <th width="13%">Name</th>
+                                                <th width="13%">Group Name</th>
+                                                <th width="13%">Item Name</th>
                                                 <th width="13%">Remarks</th>
                                                 <th width="4%">Qty</th>
                                                 <th width="4%">Wt.</th>
