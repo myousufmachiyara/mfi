@@ -50,23 +50,13 @@
 									</a>
 								</li>	
 								<li>
-									<a class="nav-link" href="{{ route('create-item')}}">
-										New Item
-									</a>
-								</li>	
-								<li>
 									<a class="nav-link" href="{{ route('all-items')}}">
-										All Items
+										Items
 									</a>
 								</li>
 								<li>
-									<a class="nav-link" href="{{ route('create-item-2')}}">
-										New Item Pipes
-									</a>
-								</li>	
-								<li>
 									<a class="nav-link" href="{{ route('all-items-2')}}">
-										All Item Pipes
+										Item Pipes
 									</a>
 								</li>
 							</ul>

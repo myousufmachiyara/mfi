@@ -8,24 +8,12 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
-                                    <div class="row">
-                                    <div class="col-6">
-                                        <h2 class="card-title">All Items</h2>
-                                    </div>
-                                    <div class="card-actions col-6 text-end">
-    <button type="button" class="btn btn-primary mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" href="#createModal">
-        <i class="fas fa-plus"></i> New Item (Single)
-    </button>
-    <form action="{{ route('create-item') }}" method="GET" class="d-inline">
-        <button type="submit" class="btn btn-danger mb-1 mt-1">
-            <i class="fas fa-plus"></i> New Item (Multiple)
-        </button>
-    </form>
-</div>
-
-
-                                   
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">All Items</h2>
+                                    <form class="text-end" action="{{ route('create-item') }}" method="GET">
+                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
+                                    </form>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
