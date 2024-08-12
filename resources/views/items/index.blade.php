@@ -19,10 +19,10 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th width="4%">Code</th>
-                                                <th width="13%">Group Name</th>
+                                                <th width="4%">Code</th>                                              
                                                 <th width="13%">Item Name</th>
                                                 <th width="13%">Remarks</th>
+                                                <th width="13%">Group Name</th>
                                                 <th width="4%">Qty</th>
                                                 <th width="6%">P.Date</th>
                                                 <th width="2%">P.Price</th>
@@ -36,9 +36,9 @@
                                             @foreach ($items as $key => $row)
                                                 <tr>
                                                     <td>{{$row->it_cod}}</td>
-                                                    <td>{{$row->group_name}}</td>
-                                                    <td>{{$row->item_name}}</td>
+                                                    <td><strong>{{$row->item_name}}</strong></td>
                                                     <td>{{$row->item_remark}}</td>
+                                                    <td>{{$row->group_name}}</td>
                                                     @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
                                                         <td>{{$row->opp_qty}}</td>
                                                     @else
@@ -62,9 +62,15 @@
                                                         <td>{{ intval($row->labourprice) }}</td>
                                                     @endif
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -20,21 +20,28 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">ID</th>
-                                                <th width="15%">Head Name</th>
                                                 <th>Sub Head Name</th>
+                                                <th width="15%">Head Name</th>
                                                 <th class="text-end">Action</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($subheads as $key => $row)
                                                 <tr>
                                                     <td>{{$row->id}}</td>
-                                                    <td>{{$row->name}}</td>
                                                     <td>{{$row->sub_name}}</td>
+                                                    <td>{{$row->name}}</td>
                                                     <td class="actions text-end">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getCOASubHeadDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a class="mb-1 mt-1 me-1" onclick="getCOASubHeadDetails({{$row->id}})" href="#updateModal">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1" onclick="setId({{$row->id}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

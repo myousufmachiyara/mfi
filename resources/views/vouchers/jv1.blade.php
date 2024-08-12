@@ -18,7 +18,7 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th width="5%">Code</th>
+                                                <th width="5%">Voch#</th>
                                                 <th width="8%">Date</th>
                                                 <th width="15%">Account Debit</th>
                                                 <th width="15%">Account Credit</th>
@@ -43,10 +43,19 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                    <a class="mb-1 mt-1 me-1" href="{{ route('print-jv1', $row->auto_lager) }}"><i class="fas fa-print"></i></a>
-                                                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getJVSDetails({{$row->auto_lager}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->auto_lager}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a class="mb-1 mt-1 me-1" href="{{ route('print-jv1', $row->auto_lager) }}">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getJVSDetails({{$row->auto_lager}})" href="#updateModal">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->auto_lager}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
