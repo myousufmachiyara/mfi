@@ -25,13 +25,13 @@
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
                                                     <th>Bill #</th>
-                                                    <th>Att.</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
+                                                    <th>Att.</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -45,7 +45,6 @@
                                                     <td>{{$row->Cash_pur_name}}</td>
                                                     <td>{{$row->Sales_remarks}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
                                                     <td>{{$row->ConvanceCharges}}</td>
@@ -63,6 +62,7 @@
                                                     @elseif ($row->bill_not==1)
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                     @endif
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
                                                         <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>

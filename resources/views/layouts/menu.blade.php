@@ -156,6 +156,28 @@
 						</li>
 						<li class="dropdown">
 							<a class="nav-link dropdown-toggle" href="#">
+								Stock Pipe
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link" href="#">
+										Stock In
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">
+										Stock Out
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="{{ route('all-tbad-dabs')}}">
+										Stock Balance
+									</a>
+								</li>								
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
 								Reports
 							</a>
 							<ul class="dropdown-menu">

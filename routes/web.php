@@ -121,3 +121,10 @@ Route::get('/sales/attachements', [App\Http\Controllers\SalesController::class, 
 Route::get('/sales/download/{id}', [App\Http\Controllers\SalesController::class, 'downloadAtt'])->name('sale1-att-download');
 Route::delete('/sales/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
 Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
+
+
+//tbad bads
+Route::get('/tbad_dabs/all-tbad-dabs', [App\Http\Controllers\TBadDabsController::class, 'index'])->name('all-tbad-dabs');
+Route::get('/tbad_dabs/new-tbad-dabs', [App\Http\Controllers\TBadDabsController::class, 'create'])->name('create-tbad-dabs'); 
+Route::post('/tbad_dabs/tbad_dabs_entry/create', [App\Http\Controllers\TBadDabsController::class, 'store'])->name('store-tbad-dabs-entry');
+
