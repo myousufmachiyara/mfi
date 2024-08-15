@@ -64,16 +64,24 @@ class TBadDabsController extends Controller
     
         $tbad_id = TBadDabs::latest()->value('bad_dabs_id');
     
-        if ($request->has('items') && is_array($request->items)) {
-            foreach ($request->items as $index => $item) {
-                if (filled($request->item_code[$index])) {
+        if($request->has('items'))
+        {
+            for($i=0;$i<$request->items;$i++)
+            {
+                if(filled($request->item_name[$i]))
+                {
                     $tbad_dabs_2 = new TBadDabs2();
                     $tbad_dabs_2->bad_dabs_cod = $tbad_id;
-                    $tbad_dabs_2->item_cod = $request->item_code[$index];
-                    $tbad_dabs_2->remarks = $request->item_remarks[$index];
-                    $tbad_dabs_2->pc_add = $request->qty_add[$index];
-                    $tbad_dabs_2->pc_less = $request->qty_less[$index];
-    
+                    $tbad_dabs_2->item_cod = $request->item_code[$i];
+                    if ($request->item_remarks[$i]!=null) {
+                        $tbad_dabs_2->remarks=$request->item_remarks[$i];
+                    }
+                    if ($request->qty_add[$i]!=null) {
+                        $tbad_dabs_2->pc_add=$request->qty_add[$i];
+                    }
+                    if ($request->qty_less[$i]!=null) {
+                        $tbad_dabs_2->pc_less=$request->qty_less[$i];
+                    }
                     $tbad_dabs_2->save();
                 }
             }
