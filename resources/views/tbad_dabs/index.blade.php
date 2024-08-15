@@ -36,7 +36,22 @@
                                                     <td>{{$row->add_sum}}</td>
                                                     <td>{{$row->less_sum}}</td>
                                                     <td class="actions">
-                                               
+                                                        <a href="#" class="text-danger">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="#" class="">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('edit-tbad-dabs-entry', $row->bad_dabs_id) }}" class="">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->bad_dabs_id}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
 
                                                 </tr>
@@ -48,6 +63,34 @@
                             </section>
                         </div>
                     </div>
+
+                    <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+                        <form method="post" action="{{ route('delete-tbad-dabs') }}" enctype="multipart/form-data">
+                            @csrf
+                            <section class="card">
+                                <header class="card-header">
+                                    <h2 class="card-title">Delete Pipe Bed Dads</h2>
+                                </header>
+                                <div class="card-body">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-icon">
+                                            <i class="fas fa-question-circle"></i>
+                                        </div>
+                                        <div class="modal-text">
+                                            <p class="mb-0">Are you sure that you want to delete this Delete Pipe Bed Dads entry?</p>
+                                            <input name="delete_tbad_dabs_id" id="deleteID" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-end">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-default modal-dismiss">Cancel</button>
+                                        </div>
+                                    </div>
+                                </footer>
+            
                 </section>		
 			</div>
 		</section>
