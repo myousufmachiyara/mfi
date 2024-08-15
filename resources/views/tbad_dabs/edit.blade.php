@@ -5,37 +5,42 @@
         <div class="inner-wrapper">
             <section role="main" class="content-body">
                 @extends('../layouts.pageheader')
-                <form method="post" id="myForm" action="{{ route('store-tbad-dabs-entry') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="myForm" action="{{ route('update-tbad-dabs') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
-                        <div class="col-12 mb-3">								
+                        <div class="col-12 mb-3">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">New Pipe Bad Debts</h2>
+                                    <h2 class="card-title">Edit Pipe Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
                                         <div class="col-sm-12 col-md-2 mb-2">
-                                            <label class="col-form-label">New ID</label>
-                                            <input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
-                                            <input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-                                            <input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control">
+                                            <label class="col-form-label" >ID</label>
+                                            <input type="text" placeholder="ID" class="form-control" disabled value="{{$tbad_dabs->bad_dabs_id}}">
+                                            <input type="hidden" name="bad_dabs_id" placeholder="bad_dabs_id" class="form-control" value="{{$tbad_dabs->bad_dabs_id}}">
+                                            <input type="hidden" id="itemCount" name="items" class="form-control" >
                                         </div>
                                         <div class="col-sm-12 col-md-2 mb-2">
                                             <label class="col-form-label">Date</label>
-                                            <input type="date" name="date" required value="{{ now()->toDateString() }}" class="form-control">
+                                            <input type="date" name="date" value="{{$tbad_dabs->date}}" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-8 mb-2">
-                                            <label class="col-form-label">Reason Of Bad Debts</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control"></textarea>
+                                        <div class="col-12 mb-3">
+                                            <label class="col-form-label">Reason</label>
+                                            <textarea rows="4" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$tbad_dabs->reason}}</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
-
                         <div class="col-12 mb-3">
                             <section class="card">
+                                <header class="card-header">
+                                    <div class="card-actions">
+                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                    </div>
+                                    <h2 class="card-title">Edit Pipe Bad Dabs Details</h2>
+                                </header>
                                 <div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
@@ -49,31 +54,33 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tbad_dabsTable">
+                                            @foreach($tbad_dabs_items as $key1 => $tbad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
+                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$tbad_dabs_item->item_cod}}">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
-                                                        <option selected>Select Item</option>
-                                                        @foreach($items as $key => $row)
-                                                            <option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>
+                                                    <select class="form-control" id="item_name{{$key1}}" name="item_name2[]">
+                                                        <option>Select Item</option>
+                                                        @foreach($items as $key2 => $row)
+                                                        <option value="{{$row->it_cod}}" {{ $row->it_cod == $tbad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
+                                                    <input type="text" id="remarks{{$key1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyadd" name="qty_add[]" onchange="tableTotal()" placeholder="Qty Add" value="0" step="any" required class="form-control">
+                                                    <input type="number" id="qtyadd{{$key1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyless" name="qty_less[]" onchange="tableTotal()" placeholder="Qty Less" value="0" step="any" required class="form-control">
+                                                    <input type="number" id="qtyless{{$key1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}">
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -89,12 +96,11 @@
                                             <input type="number" id="total_less_show" placeholder="Total Less" class="form-control" step="any" disabled>
                                             <input type="hidden" id="totalless" name="totalless" step="any" placeholder="Total Less" class="form-control">
                                         </div>
-                                        
                                     </div>
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
-                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
                                 </footer>
@@ -102,6 +108,7 @@
                         </div>
                     </div>
                 </form>
+                       
                 <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
                     <section class="card">
                         <header class="card-header">
@@ -137,7 +144,9 @@
 
 <script>
 
-var index = 2;
+var itemCount, index
+
+
 
 $(document).ready(function() {
     $(window).keydown(function(event){
@@ -146,6 +155,7 @@ $(document).ready(function() {
             return false;
         }
     });
+    tableTotal();
 });
 
 function removeRow(button) {
