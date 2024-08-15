@@ -160,7 +160,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a class="nav-link" href="#">
+									<a class="nav-link" href="{{ route('all-tstock-in')}}">
 										Stock In
 									</a>
 								</li>

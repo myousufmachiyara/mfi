@@ -129,3 +129,20 @@ Route::get('/tbad_dabs/new-tbad-dabs', [App\Http\Controllers\TBadDabsController:
 Route::post('/tbad_dabs/tbad_dabs/create', [App\Http\Controllers\TBadDabsController::class, 'store'])->name('store-tbad-dabs-entry');
 Route::get('/tbad_dabs/tbad_dabs/view/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs-entry');
 
+
+
+//tstock in
+Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController::class, 'index'])->name('all-tstock-in');
+Route::get('/tstock_in/new-tstock_in', [App\Http\Controllers\TStockInController::class, 'create'])->name('create-tstock-in-invoice'); 
+Route::get('/tstock_in/edit-invoice/{id}', [App\Http\Controllers\SalesController::class, 'edit'])->name('edit-sale-invoice');
+Route::post('/tstock_in/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
+Route::post('/tstock_in/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
+Route::post('/tstock_in/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
+Route::get('/tstock_in/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
+Route::get('/tstock_in/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
+Route::get('/tstock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
+Route::get('/tstock_in/attachements', [App\Http\Controllers\SalesController::class, 'getAttachements'])->name('get-sale1-att');
+Route::get('/tstock_in/download/{id}', [App\Http\Controllers\SalesController::class, 'downloadAtt'])->name('sale1-att-download');
+Route::delete('/tstock_in/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
+Route::get('/tstock_in/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
+
