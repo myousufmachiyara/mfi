@@ -23,7 +23,7 @@
                                                     <th>Date</th>
                                                     <th>Reason</th>
                                                     <th>Total Add</th>
-                                                    <th>Total Less</th>>
+                                                    <th>Total Less</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
