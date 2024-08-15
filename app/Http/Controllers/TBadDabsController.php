@@ -96,29 +96,36 @@ class TBadDabsController extends Controller
         $tbad_dabs = TBadDabs::where('bad_dabs_id', $request->delete_tbad_dabs_id)->update(['status' => '0']);
         return redirect()->route('all-tbad-dabs');
     }
+
+    
     public function edit($id)
     {
-        $tbad_dabs = TBadDabs::where('bad_dabs_id',$id)->first();
-        $tbad_dabs_items = TBadDabs2::where('bad_dabs_cod',$id)->get();
-        $tbad_dabs_item_count=count($tbad_dabs_items);
+        $tbad_dabs = TBadDabs::where('bad_dabs_id', $id)->first();
+        $tbad_dabs_items = TBadDabs2::where('bad_dabs_cod', $id)->get();
+        $tbad_dabs_item_count = count($tbad_dabs_items);
         $items = Item_entry2::all();
-        return view('tbad_dabs.edit', compact('tbad_dabs','tbad_dabs_items','items','tbad_dabs_item_count'));
+    
+        // Calculate the total_add and total_less
+        $total_add = $tbad_dabs_items->sum('pc_add');
+        $total_less = $tbad_dabs_items->sum('pc_less');
+    
+        return view('tbad_dabs.edit', compact('tbad_dabs', 'tbad_dabs_items', 'items', 'tbad_dabs_item_count', 'total_add', 'total_less'));
     }
-  
+    
 
     public function update(Request $request)
     {
         $tbad_dabs = TBadDabs::where('bad_dabs_id',$request->bad_dabs_id)->get()->first();
 
         if ($request->has('date') && $request->date) {
-            $tbad_dabs->sa_date=$request->date;
+            $tbad_dabs->date=$request->date;
         }
         if ($request->has('reason') && $request->reason) {
             $tbad_dabs->reason=$request->reason;
         }
 
         TBadDabs::where('bad_dabs_id', $request->bad_dabs_id)->update([
-            'reason'=>$tbad_dabs->Sales_remarks,
+            'reason'=>$tbad_dabs->reason,
             'date'=>$tbad_dabs->date,
         ]);
         
@@ -134,7 +141,7 @@ class TBadDabsController extends Controller
                     $tbad_dabs_2 = new TBadDabs2();
                     $tbad_dabs_2->bad_dabs_cod=$request->bad_dabs_id;
                     $tbad_dabs_2->item_cod=$request->item_code[$i];
-                    $tbad_dabs_2->remarks=$request->item_remarks[$i];
+                    $tbad_dabs_2->remarks=$request->remarks[$i];
                     $tbad_dabs_2->pc_add=$request->qty_add[$i];
                     $tbad_dabs_2->pc_less=$request->qty_less[$i];
                     $tbad_dabs_2->save();

@@ -16,18 +16,18 @@
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
                                         <div class="col-sm-12 col-md-2 mb-2">
-                                            <label class="col-form-label" >ID</label>
+                                            <label class="col-form-label">ID</label>
                                             <input type="text" placeholder="ID" class="form-control" disabled value="{{$tbad_dabs->bad_dabs_id}}">
                                             <input type="hidden" name="bad_dabs_id" placeholder="bad_dabs_id" class="form-control" value="{{$tbad_dabs->bad_dabs_id}}">
-                                            <input type="hidden" id="itemCount" name="items" class="form-control" >
+                                            <input type="hidden" id="itemCount" name="items" class="form-control">
                                         </div>
                                         <div class="col-sm-12 col-md-2 mb-2">
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" value="{{$tbad_dabs->date}}" class="form-control">
                                         </div>
-                                        <div class="col-12 mb-3">
+                                        <div class="col-sm-12 col-md-8 mb-2">
                                             <label class="col-form-label">Reason</label>
-                                            <textarea rows="4" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$tbad_dabs->reason}}</textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$tbad_dabs->reason}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -57,10 +57,10 @@
                                             @foreach($tbad_dabs_items as $key1 => $tbad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$tbad_dabs_item->item_cod}}">
+                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name{{$key1}}" name="item_name2[]">
+                                                    <select class="form-control" id="item_name{{$key1}}" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $tbad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -71,10 +71,10 @@
                                                     <input type="text" id="remarks{{$key1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyadd{{$key1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}">
+                                                    <input type="number" id="qtyadd{{$key1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyless{{$key1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}">
+                                                    <input type="number" id="qtyless{{$key1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -85,22 +85,26 @@
                                     </table>
                                 </div>
                                 <footer class="card-footer">
-                                    <div class="row form-group mb-3">
-                                        <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-                                            <label class="col-form-label">Total Add</label>
-                                            <input type="number" id="total_add_show" placeholder="Total Add" class="form-control" step="any" disabled>
-                                            <input type="hidden" id="totaladd" name="totaladd" step="any" placeholder="Total Add" class="form-control">
+                                    <div class="row mb-3" style="float:right; margin-right: 10%;">
+                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                             <label class="col-form-label">Total Add</label>
+                                             <input type="number" id="total_add_show" step="any" placeholder="Total Add" class="form-control" disabled value=@php echo $total_add @endphp>
                                         </div>
-                                        <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+
+                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Less</label>
-                                            <input type="number" id="total_less_show" placeholder="Total Less" class="form-control" step="any" disabled>
-                                            <input type="hidden" id="totalless" name="totalless" step="any" placeholder="Total Less" class="form-control">
+                                            <input type="number" id="total_less_show" step="any" placeholder="Total Less" class="form-control" disabled value=@php echo $total_less @endphp>
+                                            <input type="hidden" id="total_less" name="total_less" step="any" placeholder="Total Less" class="form-control" value=@php echo $total_less @endphp>
                                         </div>
+
                                     </div>
+                                </footer> 
+                                
+                                <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
+                                            <button type="button" class="btn btn-warning mt-2"  onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
                                         </div>
                                     </div>
                                 </footer>
@@ -108,45 +112,33 @@
                         </div>
                     </div>
                 </form>
-                       
-                <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                    <section class="card">
-                        <header class="card-header">
-                            <h2 class="card-title">Save Entry</h2>
-                        </header>
-                        <div class="card-body">
-                            <div class="modal-wrapper">
-                                <div class="modal-icon">
-                                    <i class="fas fa-question-circle"></i>
-                                </div>
-                                <div class="modal-text">
-                                    <p class="mb-0">Are you sure that you want to delete this invoice?</p>
-                                    <input name="invoice_id" id="deleteID" hidden>
-                                </div>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <div class="row">
-                                <div class="col-md-12 text-end">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    <button class="btn btn-default modal-dismiss">Cancel</button>
-                                </div>
-                            </div>
-                        </footer>
-                    </section>
-                </div>
             </section>
         </div>
     </section>
     @extends('../layouts.footerlinks')
 </body>
 </html>
-
 <script>
+var itemCount=0, index;
+var totaladd=0, totalless=0;
 
-var itemCount, index
+var table = document.getElementById("tbad_dabsTable");
+var rowCount = table.rows.length;
 
+itemCount = rowCount;	
+document.getElementById("itemCount").value = itemCount;
 
+index = rowCount+1;
+
+for (var j=0;j<rowCount; j++){
+    less = table.rows[j].cells[4].querySelector('input').value;
+    totalless = totalless + Number(less);
+
+    add = table.rows[j].cells[3].querySelector('input').value;
+    totaladd = totaladd + Number(add);
+}
+$('#total_less_show').val(totalless);
+$('#total_add_show').val(totaladd);
 
 $(document).ready(function() {
     $(window).keydown(function(event){
@@ -155,72 +147,92 @@ $(document).ready(function() {
             return false;
         }
     });
-    tableTotal();
 });
 
 function removeRow(button) {
     var tableRows = $("#tbad_dabsTable tr").length;
-    if (tableRows > 1) {
-        $(button).closest('tr').remove();
+    if(tableRows>1){
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
         index--;
-        $('#itemCount').val(Number($('#itemCount').val()) - 1);
-        tableTotal();
-    }
+        var itemCount = Number($('#itemCount').val());
+        itemCount = itemCount-1;
+        $('#itemCount').val(itemCount);
+    }  
+    tableTotal();
 }
 
-function addNewRow() {
-    var lastRow = $('#myTable tr:last');
-    var latestValue = lastRow.find('select').val();
+function addNewRow(){
+    var lastRow =  $('#myTable tr:last');
+    latestValue = lastRow[0].cells[1].querySelector('select').value;
 
-    if (latestValue !== "Select Item") {
-        var table = $('#myTable').find('tbody');
-        var newRow = $('<tr>');
+    if(latestValue != "Select Item"){
+        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
 
-        newRow.append('<td><input type="number" id="item_code' + index + '" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-        newRow.append('<td><select class="form-control" id="item_name' + index + '" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
-        newRow.append('<td><input type="text" id="remarks' + index + '" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-        newRow.append('<td><input type="number" id="qtyadd' + index + '" name="qty_add[]" placeholder="Qty Add" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
-        newRow.append('<td><input type="number" id="qtyless' + index + '" name="qty_less[]" placeholder="Qty Less" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
-        newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
 
-        table.append(newRow);
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
+        cell2.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+                            '<option>Select Item</option>'+
+                            @foreach($items as $key => $row)	
+                                '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
+                            @endforeach
+                          '</select>';
+        cell3.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks[]" placeholder="Remarks" class="form-control">';
+        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" onchange="tableTotal()" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" onchange="tableTotal()" class="form-control">';
+        cell6.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+
+        var itemCount = Number($('#itemCount').val());
+        itemCount = itemCount+1;
+        $('#itemCount').val(itemCount);
         index++;
-        $('#itemCount').val(Number($('#itemCount').val()) + 1);
     }
 }
 
-function getItemDetails(row_no, option) {
-    var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
-    $.ajax({
-        type: "GET",
-        url: "/item/detail",
-        data: {id: itemId},
-        success: function(result) {
-            if (result.length > 0) {
+function tableTotal(){
+    totaladd=0, totalless=0;
+    for (var j=0;j<index-1; j++){
+        less = table.rows[j].cells[4].querySelector('input').value;
+        totalless = totalless + Number(less);
+
+        add = table.rows[j].cells[3].querySelector('input').value;
+        totaladd = totaladd + Number(add);
+    }
+    $('#total_less_show').val(totalless);
+    $('#total_add_show').val(totaladd);
+}
+
+function getItemDetails(row_no,option){
+		var itemId;
+		if(option==1){
+			itemId = document.getElementById("item_code"+row_no).value;
+		}
+		else if(option==2){
+			itemId = document.getElementById("item_name"+row_no).value;
+		}
+		$.ajax({
+			type: "GET",
+			url: "/item/detail",
+			data: {id:itemId},
+			success: function(result){
                 $('#item_code' + row_no).val(result[0]['it_cod']);
                 $('#item_name' + row_no).val(result[0]['it_cod']);
                 $('#remarks' + row_no).val(result[0]['item_remark']);
-                addNewRow();
-            }
-        },
-        error: function() {
-            alert("Error retrieving item details.");
-        }
-    });
-}
+                
+				addNewRow();
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+		
+	}
 
-function tableTotal() {
-    var totalAdd = 0;
-    var totalLess = 0;
-    $('#tbad_dabsTable tr').each(function() {
-        totalAdd += Number($(this).find('input[name="qty_add[]"]').val());
-        totalLess += Number($(this).find('input[name="qty_less[]"]').val());
-    });
-
-    $('#total_add_show').val(totalAdd);
-    $('#totaladd').val(totalAdd);
-    $('#total_less_show').val(totalLess);
-    $('#totalless').val(totalLess);
-}
 </script>
-

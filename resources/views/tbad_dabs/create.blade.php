@@ -78,19 +78,23 @@
                                     </table>
                                 </div>
                                 <footer class="card-footer">
-                                    <div class="row form-group mb-3">
-                                        <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+                                    <<div class="row mb-3" style="float:right; margin-right: 10%;">
+                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Add</label>
                                             <input type="number" id="total_add_show" placeholder="Total Add" class="form-control" step="any" disabled>
                                             <input type="hidden" id="totaladd" name="totaladd" step="any" placeholder="Total Add" class="form-control">
                                         </div>
-                                        <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+                                        
+                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Less</label>
                                             <input type="number" id="total_less_show" placeholder="Total Less" class="form-control" step="any" disabled>
                                             <input type="hidden" id="totalless" name="totalless" step="any" placeholder="Total Less" class="form-control">
                                         </div>
                                         
                                     </div>
+                                </footer>
+                                
+                                <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
                                             <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
