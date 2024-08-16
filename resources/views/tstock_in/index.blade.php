@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">Pipe Stock In</h2>
+                                    <h2 class="card-title">All Pipe Stock In</h2>
                                     <form class="text-end" action="{{ route('create-tstock-in-invoice') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> Pipe Stock In</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -22,12 +22,13 @@
                                                     <th>ID</th>
                                                     <th>Date</th>
                                                     <th>Company Name</th>
-                                                    <th>Person Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Mill Gate Pass#</th>
-                                                    <th>Purchase Inv#</th>
+                                                    <th>Pur_Inv #</th>
+                                                    <th>Mill_Inv/Gate</th>
                                                     <th>Total Qty</th>
+                                                    <th>Total Weight</th>
                                                     <th>Transporter</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -36,19 +37,32 @@
                                                 <tr>
                                                     <td>{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->ac_name}}</td>
-                                                    <td>{{$row->Cash_pur_name}}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->Sales_remarks}}</td>
-                                                    <td>{{$row->mill_gate}}</td>
                                                     <td>{{$row->pur_inv}}</td>
+                                                    <td>{{$row->mill_gate}}</td>
                                                     <td>{{$row->qty_sum}}</td>
+                                                    <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->transporter}}</td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-sale-invoice',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('edit-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -62,11 +76,11 @@
 			</div>
 		</section>
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-sale-invoice') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-tstock-in-invoice') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Invoice</h2>
+                        <h2 class="card-title">Delete Pipe Stock In</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -74,7 +88,7 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this invoice?</p>
+                                <p class="mb-0">Are you sure that you want to delete this Pipe Stock In?</p>
                                 <input name="invoice_id" id="deleteID" hidden>
                             </div>
                         </div>

@@ -5,20 +5,20 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" id="myForm" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('store-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Pipe Stock In</h2>
+										<h2 class="card-title">New Stock In Pipe</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Invoice no.</label>
-												<input type="text" name="invoice_no" placeholder="(New Invoice)" class="form-control" disabled>
+												<label class="col-form-label" >New ID</label>
+												<input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
 											</div>
@@ -28,12 +28,7 @@
 												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Bill No.</label>
-												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
-											</div>
-
-											<div class="col-12 col-md-2 mb-3">
+											<div class="col-sm-12 col-md-4">
 												<label class="col-form-label">Account Name</label>
 												<select class="form-control" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
@@ -42,21 +37,23 @@
 													@endforeach
 												</select>
 											</div>
-
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label">Name Of Person</label>
-												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control">
+											
+											<div class="col-sm-12 col-md-2">
+												<label class="col-form-label" >Purchase Inv#</label>
+												<input type="text" name="pur_inv" placeholder="Purchase Inv#" class="form-control">
+											</div>
+											<div class="col-sm-12 col-md-2">
+												<label class="col-form-label" >Mill Inv/Gate#</label>
+												<input type="text" name="mill_gate" placeholder="Mill Inv/Gate#" class="form-control">
+											</div>
+											<div class="col-sm-12 col-md-4">
+												<label class="col-form-label">File Attached</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 
-											<div class="col-12 col-md-4 mb-3">
-												<label class="col-form-label">Person Address</label>
-												<input type="text" name="address" id="address" placeholder="Person Address" class="form-control">
-											</div>
-
-
-											<div class="col-12 mb-3">
+											<div class="col-sm-12 col-md-8 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control"></textarea>
+												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control"></textarea>
 											</div>
 									  </div>
 									</div>
@@ -70,267 +67,180 @@
 											<thead>
 												<tr>
 													<th width="10%">Item Code</th>
-                                                    <th width="10%">Qty.</th>
 													<th width="20%">Item Name</th>
 													<th width="20%">Remarks</th>
-                                                    <th width="10%"></th>
+													<th width="15%">Qty</th>
+													<th width="10%">Weight</th>
+													<th width="10%"></th>
 												</tr>
 											</thead>
-											<tbody id="saleInvoiceTable">
-												<tr>
-													<td>
-														<input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
-													</td>
-                                                    <td>
-														<input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
-													</td>
-													<td>
-														<select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
-														<option selected>Select Item</option>
-															@foreach($items as $key => $row)	
-																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
-															@endforeach
-														</select>
-													</td>
-													<td>
-														<input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
-													</td>
-													<td>
-														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-														<!-- <button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button> -->
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<footer class="card-footer">
-										<div class="row form-group mb-3">
-
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Quantity</label>
-												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" step="any" disabled>
-											</div>
-
-										</div>
-										<div class="row mb-3">
-											<div class="col-sm-12 col-md-12 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
-												</span>
-											</div>
-										</div>
-									</footer>
-									<footer class="card-footer">
-										<div class="row form-group mb-2">
-											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
-											</div>
-										</div>
-									</footer>
-									<div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-											<section class="card">
-												<header class="card-header">
-													<h2 class="card-title">Stock In Pipe</h2>
-												</header>
-												<div class="card-body">
-													<div class="modal-wrapper">
-														<div class="modal-icon">
-															<i class="fas fa-question-circle"></i>
-														</div>
-														<div class="modal-text">
-															<p class="mb-0">Are you sure that you want to delete this invoice?</p>
-															<input name="invoice_id" id="deleteID" hidden>
-														</div>
-													</div>
-												</div>
-												<footer class="card-footer">
-													<div class="row">
-														<div class="col-md-12 text-end">
-															<button type="submit" class="btn btn-danger">Delete</button>
-															<button class="btn btn-default modal-dismiss">Cancel</button>
-														</div>
-													</div>
-												</footer>
-											</section>
-										</form>
-									</div>
-								</section>
-							</div>
-						</div>
-					</form>
-				</section>
-			</div>
-		</section>
-        @extends('../layouts.footerlinks')
-	</body>
+										    <tbody id="tstock_inTable">
+											 <tr>
+                                                <td>
+                                                    <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
+                                                        <option selected>Select Item</option>
+                                                        @foreach($items as $key => $row)
+                                                            <option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="qty" name="qty[]" onchange="tableTotal()" placeholder="Qty" value="0" step="any" required class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="weight" name="weight[]" onchange="tableTotal()" placeholder="Weight" value="0" step="any"  class="form-control">
+                                                </td>
+                                                <td>
+                                                    <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+                                                </td>
+                                             </tr>
+                                            </tbody>
+                                    </table>
+                                </div>
+                                <footer class="card-footer">
+                                    <<div class="row mb-3" style="float:right; margin-right: 10%;">
+                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                            <label class="col-form-label">Total Qty</label>
+                                            <input type="number" id="total_qty_show" placeholder="Total Qty" class="form-control" step="any" disabled>
+                                            <input type="hidden" id="totalqty" name="totalqty" step="any" placeholder="Total Qty" class="form-control">
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                            <label class="col-form-label">Total Weight</label>
+                                            <input type="number" id="total_weight_show" placeholder="Total weight" class="form-control" step="any" disabled>
+                                            <input type="hidden" id="totalweight" name="totalweight" step="any" placeholder="Total Weight" class="form-control">
+                                        </div>
+                                        
+                                    </div>
+                                </footer>
+                                
+                                <footer class="card-footer">
+                                    <div class="row form-group mb-2">
+                                        <div class="text-end">
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+                <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+                    <section class="card">
+                        <header class="card-header">
+                            <h2 class="card-title">Delete Entry</h2>
+                        </header>
+                        <div class="card-body">
+                            <div class="modal-wrapper">
+                                <div class="modal-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="modal-text">
+                                    <p class="mb-0">Are you sure that you want to delete this Entry?</p>
+                                    <input name="invoice_id" id="deleteID" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <div class="row">
+                                <div class="col-md-12 text-end">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </section>
+    @extends('../layouts.footerlinks')
+</body>
 </html>
+
 <script>
-	var index=2;
 
-	$(document).ready(function() {
-		$(window).keydown(function(event){
-			if(event.keyCode == 13) {
-				event.preventDefault();
-				return false;
-			}
-		});
-	});
+var index = 2;
 
-    function removeRow(button) {
-		var tableRows = $("#saleInvoiceTable tr").length;
-		if(tableRows>1){
-			var row = button.parentNode.parentNode;
-			row.parentNode.removeChild(row);
-			index--;
-			var itemCount = Number($('#itemCount').val());
-			itemCount = itemCount-1;
-			$('#itemCount').val(itemCount);
-		}   
-		tableTotal();
-    }
-
-    document.getElementById('removeRowBtn').addEventListener('click', function() {
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        if (table.rows.length > 0) {
-            table.deleteRow(table.rows.length - 1);
-        } else {
-            alert("No rows to delete!");
+$(document).ready(function() {
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
         }
     });
+});
 
-	function addNewRow(id){		
-		var lastRow =  $('#myTable tr:last');
-		latestValue=lastRow[0].cells[2].querySelector('select').value;
+function removeRow(button) {
+    var tableRows = $("#tstock_inTable tr").length;
+    if (tableRows > 1) {
+        $(button).closest('tr').remove();
+        index--;
+        $('#itemCount').val(Number($('#itemCount').val()) - 1);
+        tableTotal();
+    }
+}
 
-		if(latestValue!="Select Item"){
-			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-			var newRow = table.insertRow(table.rows.length);
+function addNewRow() {
+    var lastRow = $('#myTable tr:last');
+    var latestValue = lastRow.find('select').val();
 
-			var cell1 = newRow.insertCell(0);
-			var cell2 = newRow.insertCell(1);
-			var cell3 = newRow.insertCell(2);
-			var cell4 = newRow.insertCell(3);
-			var cell5 = newRow.insertCell(4);
-			var cell6 = newRow.insertCell(5);
-			var cell7 = newRow.insertCell(6);
-			var cell8 = newRow.insertCell(7);
+    if (latestValue !== "Select Item") {
+        var table = $('#myTable').find('tbody');
+        var newRow = $('<tr>');
 
-			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" onchange="getItemDetails('+index+','+1+')" placeholder="Code" class="form-control">';
-			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
-			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
-									'<option>Select Item</option>'+
-									@foreach($items as $key => $row)	
-										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-									@endforeach
-								'</select>';
-			cell4.innerHTML = '<input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control">';
-			cell5.innerHTML = '<input type="number" id="weight'+index+'" onchange="rowTotal('+index+')" name="item_weight[]"  placeholder="Weight (kgs)" value="0" step="any" required class="form-control">';
-			cell6.innerHTML = '<input type="number" id="price'+index+'" onchange="rowTotal('+index+')" name="item_price[]"  placeholder="Price" value="0" step="any" required class="form-control">';
-			cell7.innerHTML = '<input type="number" id="amount'+index+'" name="item_amount[]" placeholder="Amount" class="form-control" value="0" step="any" required disabled>';
-			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+        newRow.append('<td><input type="number" id="item_code' + index + '" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
+        newRow.append('<td><select class="form-control" id="item_name' + index + '" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
+        newRow.append('<td><input type="text" id="remarks' + index + '" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
+        newRow.append('<td><input type="number" id="qty' + index + '" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
+        newRow.append('<td><input type="number" id="weight' + index + '" name="weight[]" placeholder="weight" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
+        newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
 
-			index++;
+        table.append(newRow);
+        index++;
+        $('#itemCount').val(Number($('#itemCount').val()) + 1);
+    }
+}
 
-			var itemCount = Number($('#itemCount').val());
-			itemCount = itemCount+1;
-			$('#itemCount').val(itemCount);
-		}
-	}
-
-	function getItemDetails(row_no,option){
-		var itemId;
-		if(option==1){
-			itemId = document.getElementById("item_code"+row_no).value;
-		}
-		else if(option==2){
-			itemId = document.getElementById("item_name"+row_no).value;
-		}
-		$.ajax({
-			type: "GET",
-			url: "/item/detail",
-			data: {id:itemId},
-			success: function(result){
-				$('#item_code'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#price'+row_no).val(result[0]['sales_price']);
-
-				addNewRow();
-			},
-			error: function(){
-				alert("error");
-			}
-		});
-		
-	}
-
-	function getCOADetails(){
-		var coaId = document.getElementById("coa_name").value;
-		
-		$.ajax({
-			type: "GET",
-			url: "/coa/detail",
-			data: {id:coaId},
-			success: function(result){
-				// $('#address').val(result[0]['address']);
-				// $('#cash_pur_phone').val(result[0]['phone_no']);
-				// $('#remarks').val(result[0]['remarks']);
-			},
-			error: function(){
-				alert("error");
-			}
-		});
-	}
-
-	function rowTotal(index){
-		var weight = $('#weight'+index+'').val();
-		var price = $('#price'+index+'').val();
-		var amount = weight * price;
-		$('#amount'+index+'').val(amount);
-		tableTotal();
-	}
-
-	function tableTotal(){
-		var totalAmount=0;
-		var totalWeight=0;
-		var totalQuantity=0;
-		var tableRows = $("#saleInvoiceTable tr").length;
-		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-
-		for (var i = 0; i < tableRows; i++) {
-			var currentRow =  table.rows[i];
-			totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
-			totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
-			totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
+function getItemDetails(row_no, option) {
+    var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
+    $.ajax({
+        type: "GET",
+        url: "/item/detail",
+        data: {id: itemId},
+        success: function(result) {
+            if (result.length > 0) {
+                $('#item_code' + row_no).val(result[0]['it_cod']);
+                $('#item_name' + row_no).val(result[0]['it_cod']);
+                $('#remarks' + row_no).val(result[0]['item_remark']);
+				$('#weight' + row_no).val(result[0]['weight']);
+                addNewRow();
+            }
+        },
+        error: function() {
+            alert("Error retrieving item details.");
         }
+    });
+}
 
-		$('#totalAmount').val(totalAmount);
-		$('#total_amount_show').val(totalAmount);
-		$('#total_weight').val(totalWeight);
-		$('#total_weight_show').val(totalWeight);
-		$('#total_quantity').val(totalQuantity);
+function tableTotal() {
+    var totalqty = 0;
+    var totalweight = 0;
+    $('#tbad_dabsTable tr').each(function() {
+        totalqty += Number($(this).find('input[name="qty[]"]').val());
+        totalweight += Number($(this).find('input[name="weight[]"]').val());
+    });
 
-		netTotal();
-	}
-
-	function netTotal(){
-		var netTotal = 0;
-		var total = Number($('#totalAmount').val());
-		var convance_charges = Number($('#convance_charges').val());
-		var labour_charges = Number($('#labour_charges').val());
-		var bill_discount = Number($('#bill_discount').val());
-
-		netTotal = total + convance_charges + labour_charges - bill_discount;
-		netTotal = netTotal.toFixed(0);
-		FormattednetTotal = formatNumberWithCommas(netTotal);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
-	}
-
-	function formatNumberWithCommas(number) {
-    	// Convert number to string and add commas
-    	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-
+    $('#total_qty_show').val(totalqty);
+    $('#totalqty').val(totalqty);
+    $('#total_weight_show').val(totalweight);
+    $('#totalweight').val(totalweight);
+}
 </script>

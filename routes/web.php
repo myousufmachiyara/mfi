@@ -135,10 +135,10 @@ Route::post('/tbad_dabs/update', [App\Http\Controllers\TBadDabsController::class
 //tstock in
 Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController::class, 'index'])->name('all-tstock-in');
 Route::get('/tstock_in/new-tstock_in', [App\Http\Controllers\TStockInController::class, 'create'])->name('create-tstock-in-invoice'); 
-// Route::get('/tstock_in/edit-invoice/{id}', [App\Http\Controllers\SalesController::class, 'edit'])->name('edit-sale-invoice');
-// Route::post('/tstock_in/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
-// Route::post('/tstock_in/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
-// Route::post('/tstock_in/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
+Route::get('/tstock_in/edit-invoice/{id}', [App\Http\Controllers\TStockInController::class, 'edit'])->name('edit-tstock-in-invoice');
+Route::post('/tstock_in/tstock_in_invoice/create', [App\Http\Controllers\TStockInController::class, 'store'])->name('store-tstock-in-invoice');
+Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-stock-in-invoice');
+Route::post('/tstock_in/stockin/delete', [App\Http\Controllers\TStockInController::class, 'destroy'])->name('delete-tstock-in-invoice');
 // Route::get('/tstock_in/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
 // Route::get('/tstock_in/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
 // Route::get('/tstock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
