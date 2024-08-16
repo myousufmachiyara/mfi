@@ -219,7 +219,7 @@ function getItemDetails(row_no,option){
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/item2/detail",
 			data: {id:itemId},
 			success: function(result){
                 $('#item_code' + row_no).val(result[0]['it_cod']);

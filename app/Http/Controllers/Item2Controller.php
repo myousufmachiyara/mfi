@@ -143,7 +143,7 @@ class Item2Controller extends Controller
 
     public function getItemDetails(Request $request)
     {
-        $item_details = Item_entry2::where('it_cod', $request->id)->get()->first();
+        $item_details = Item_entry2::where('it_cod', $request->id)->get();
         return $item_details;
     }
 }

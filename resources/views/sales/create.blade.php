@@ -275,9 +275,9 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" onchange="getItemDetails('+index+','+1+')" placeholder="Code" class="form-control">';
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" onchange="getItemDetails('+index+','+1+')" placeholder="Code" class="form-control" required>';
 			cell2.innerHTML = '<input type="number" id="item_qty'+index+'"  onchange="rowTotal('+index+')" name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
-			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" required onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
 										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
