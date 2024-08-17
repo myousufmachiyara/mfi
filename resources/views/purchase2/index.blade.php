@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Purchase Invoices</h2>
-                                    <form class="text-end" action="{{ route('new-purchases1') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Invoice</button>
+                                    <h2 class="card-title">All Purchase 2 Invoices</h2>
+                                    <form class="text-end" action="{{ route('new-purchases2') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase 2 Invoice</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
