@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Purchase 2 Invoices</h2>
+                                    <h2 class="card-title">All Purchase Pipe Invoices</h2>
                                     <form class="text-end" action="{{ route('new-purchases2') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase 2 Invoice</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Pipe Invoice</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -21,17 +21,20 @@
                                                 <tr>
                                                     <th>Inv #</th>
                                                     <th>Date</th>
-                                                    <th>Account Name</th>
+                                                    <th>Company Name</th>
+                                                    <th>Mill Inv #</th>
+                                                    <th>Dispatch To</th>
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
                                                     <th>SaleInv #</th>
-                                                    <th>Att.</th>
+                                                    <th>Item Group</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
