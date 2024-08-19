@@ -89,46 +89,50 @@
 							</div>
 
 							<div class="col-4 mb-3">
-								<header class="card-header">
+								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">Commission Form</h2>
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="toggleSwitch" unchecked>
+									</div>
+                                    <!-- <button type="button" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Pipe Invoice</button> -->
 								</header>								
 								<section class="card">
 									<div class="card-body" style="background: #2023240f !important">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="0" class="form-control">
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="0" class="form-control comm-form-field">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >%</label>
-												<input type="number" value="0" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" class="form-control">
+												<input type="number" value="0" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >P.B</label>
-												<input type="number" value="0"  name="cd_disc" class="form-control">
+												<input type="number" value="0"  name="cd_disc" class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Target</label>
-												<input type="number" value="0" name="comm_disc" class="form-control">
+												<input type="number" value="0" name="comm_disc" class="form-control comm-form-field">
 											</div>
 
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Bill Amount After Discount</label>
-												<input type="number" value="0" id="BillAfterDisc" disabled class="form-control">
+												<input type="number" value="0" id="BillAfterDisc" disabled class="form-control comm-form-field">
 											</div>
 
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Amount</label>
-												<input type="number" value="0" name="comm_amount" class="form-control">
+												<input type="number" value="0" name="comm_amount" class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Item Group</label>
-												<select class="form-control" autofocus name="tax_item_name">
+												<select class="form-control comm-form-field" autofocus name="tax_item_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod }}">{{$row->group_name}}</option>
@@ -138,7 +142,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" placeholder="Remarks" class="form-control"></textarea>
+												<textarea rows="2" cols="50" name="remarks" placeholder="Remarks" class="form-control comm-form-field"></textarea>
 											</div>
 
 
@@ -304,6 +308,9 @@
 				return false;
 			}
 		});
+
+		document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
+		toggleInputs();
 	});
 
     function removeRow(button) {
@@ -491,4 +498,17 @@
 		$('#pur2_qty'+index+'').val(rowWeight);
 		rowTotal(index);
 	}
+
+	function toggleInputs() {
+		const isChecked = document.getElementById('toggleSwitch').checked;
+		const inputGroups = document.querySelectorAll('.comm-form-field');
+		console.log(inputGroups)
+		inputGroups.forEach(input => {
+			// Show or hide input groups based on the toggle switch state
+			if (input.id !== 'BillAfterDisc') {
+				input.disabled = !isChecked;
+			}
+		});
+	}
+
 </script>
