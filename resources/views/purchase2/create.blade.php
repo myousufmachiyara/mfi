@@ -92,9 +92,9 @@
 								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">Commission Form</h2>
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="toggleSwitch" unchecked>
+										<input class="form-check-input" type="checkbox" value="0" id="toggleSwitch">
+										<input type="hidden" class="form-control" name="isCommissionForm" value="0" id="isCommissionForm">
 									</div>
-                                    <!-- <button type="button" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Pipe Invoice</button> -->
 								</header>								
 								<section class="card">
 									<div class="card-body" style="background: #2023240f !important">
@@ -118,12 +118,10 @@
 												<input type="number" value="0" name="comm_disc" class="form-control comm-form-field">
 											</div>
 
-
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Bill Amount After Discount</label>
 												<input type="number" value="0" id="BillAfterDisc" disabled class="form-control comm-form-field">
 											</div>
-
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Amount</label>
@@ -145,8 +143,6 @@
 												<textarea rows="2" cols="50" name="remarks" placeholder="Remarks" class="form-control comm-form-field"></textarea>
 											</div>
 
-
-											
 											<!-- <div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Comm Month</label>
 												<input type="text" class="form-control">
@@ -502,13 +498,20 @@
 	function toggleInputs() {
 		const isChecked = document.getElementById('toggleSwitch').checked;
 		const inputGroups = document.querySelectorAll('.comm-form-field');
-		console.log(inputGroups)
 		inputGroups.forEach(input => {
 			// Show or hide input groups based on the toggle switch state
 			if (input.id !== 'BillAfterDisc') {
 				input.disabled = !isChecked;
 			}
 		});
+		
+		var switchElement = document.getElementById('toggleSwitch');
+		if(switchElement.checked){
+			$('#isCommissionForm').val(1);
+		}
+		else{
+			$('#isCommissionForm').val(0);
+		}
 	}
 
 </script>

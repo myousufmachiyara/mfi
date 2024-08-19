@@ -47,7 +47,15 @@ class Purchase2Controller extends Controller
 
     public function store(Request $request)
     {
-
+        $toggleValue = $request->isCommissionForm;
+         
+        if ($toggleValue === "1") {
+            die("is checked");
+        }
+        else{
+            die("unchecked");
+        }
+        
         $pur2 = new tpurchase();
 
         if ($request->has('sa_date') && $request->sa_date) {
