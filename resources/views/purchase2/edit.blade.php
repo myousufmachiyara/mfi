@@ -282,8 +282,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
 											</div>
 										</div>
 									</footer>
@@ -333,9 +333,13 @@
 			amount = table.rows[j].cells[8].querySelector('input').value; // Get the value of the input field in the specified cell
 			totalAmount = totalAmount + Number(amount);
 		}
-		$('#total_quantity').val(totalQuantity);
-		$('#total_weight').val(totalWeight);
-		$('#totalAmount').val(totalAmount);
+		FormattedTotalWeight = totalWeight.toFixed();
+		FormattedTotalQuantity = totalQuantity.toFixed();
+		FormattedTotalAmount = totalAmount.toFixed();
+
+		$('#total_quantity').val(FormattedTotalQuantity);
+		$('#total_weight').val(FormattedTotalWeight);
+		$('#totalAmount').val(FormattedTotalAmount);
 
 		var convance_charges = Number($('#convance_charges').val());
 		var labour_charges = Number($('#labour_charges').val());
@@ -396,7 +400,7 @@
 			cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
 			cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
 			cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-			cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+			cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
 			cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
@@ -494,11 +498,12 @@
 			totalWeight = totalWeight + Number(currentRow.cells[7].querySelector('input').value);
 			totalQuantity = totalQuantity + Number(currentRow.cells[3].querySelector('input').value);
         }
-		
+		FormattedTotalWeight = totalWeight.toFixed();
+
 		$('#totalAmount').val(totalAmount.toFixed());
 		$('#total_amount_show').val(totalAmount);
-		$('#total_weight').val(totalWeight);
-		$('#total_weight_show').val(totalWeight);
+		$('#total_weight').val(FormattedTotalWeight);
+		$('#total_weight_show').val(FormattedTotalWeight);
 		$('#total_quantity').val(totalQuantity);
 		$('#total_quantity_show').val(totalQuantity);
 		

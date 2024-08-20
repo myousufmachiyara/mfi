@@ -31,7 +31,7 @@ class Purchase2Controller extends Controller
             'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
             'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
             'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount',
-            \DB::raw('SUM(tpurchase_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(tpurchase_2.weight_pc*tpurchase_2.Sales_qty2) as weight_sum'),
             \DB::raw('SUM(tpurchase_2.weight_pc*tpurchase_2.sales_price) as total_bill'),
         )
         ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name','tpurchase.pur_ord_no',
@@ -380,7 +380,7 @@ class Purchase2Controller extends Controller
             }
         }
 
-        return redirect()->route('all-purchases1');
+        return redirect()->route('all-purchases2');
     }
 
     public function destroy(Request $request)
