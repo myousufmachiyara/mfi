@@ -21,20 +21,25 @@ class Purchase2Controller extends Controller
 {
     public function index()
     {
-        $pur1 = tpurchase::where('tpurchase.status',1)
+        $pur2 = tpurchase::where('tpurchase.status',1)
         ->join ('tpurchase_2', 'tpurchase_2.sales_inv_cod' , '=', 'tpurchase.Sale_inv_no')
-        ->join('ac', 'ac.ac_code', '=', 'tpurchase.account_name')
+        ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tpurchase.account_name')
+        ->join('ac as disp_to', 'disp_to.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
+        ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
+        ->leftjoin('item_group', 'item_group.item_group_cod', '=', 'tax_tpurchase_2.item')
         ->select(
-            'tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','ac.ac_name',
-            'pur_ord_no', 'tpurchase.ConvanceCharges', 'tpurchase.LaborCharges','tpurchase.Bill_discount',
-            \DB::raw('SUM(tpurchase_2.Sales_qty) as weight_sum'),
-            \DB::raw('SUM(tpurchase_2.Sales_qty*tpurchase_2.sales_price) as total_bill'),
+            'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
+            'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
+            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount',
+            \DB::raw('SUM(tpurchase_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(tpurchase_2.weight_pc*tpurchase_2.sales_price) as total_bill'),
         )
-        ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','ac.ac_name',
-            'pur_ord_no', 'tpurchase.ConvanceCharges', 'tpurchase.LaborCharges','tpurchase.Bill_discount')
+        ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name','tpurchase.pur_ord_no',
+            'disp_to.ac_name','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
+            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount')
         ->get();
-        
-        return view('purchase2.index',compact('pur1'));
+        // 'item_group.group_name'
+        return view('purchase2.index',compact('pur2'));
     }
 
     public function create(Request $request)
@@ -47,14 +52,6 @@ class Purchase2Controller extends Controller
 
     public function store(Request $request)
     {
-        $toggleValue = $request->isCommissionForm;
-         
-        if ($toggleValue === "1") {
-            die("is checked");
-        }
-        else{
-            die("unchecked");
-        }
         
         $pur2 = new tpurchase();
 
@@ -70,8 +67,8 @@ class Purchase2Controller extends Controller
         if ($request->has('account_name') && $request->account_name) {
             $pur2->account_name=$request->account_name;
         }
-        if ($request->has('account_name') && $request->account_name) {
-            $pur2->Cash_pur_name_ac=$request->account_name;
+        if ($request->has('disp_account_name') && $request->disp_account_name) {
+            $pur2->Cash_pur_name_ac=$request->disp_account_name;
         }
         if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
             $pur2->Cash_pur_name=$request->Cash_pur_name;
@@ -100,13 +97,13 @@ class Purchase2Controller extends Controller
         {
             for($i=0;$i<$request->items;$i++)
             {
-
                 if(filled($request->item_name[$i]))
                 {
                     $tpurchase_2 = new tpurchase_2();
 
                     $tpurchase_2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
                     $tpurchase_2->item_cod=$request->item_cod[$i];
+
                     if ($request->remarks[$i]!=null) {
                         $tpurchase_2->remarks=$request->remarks[$i];
                     }
@@ -116,8 +113,8 @@ class Purchase2Controller extends Controller
                     if ($request->pur2_per_unit[$i]!=null) {
                         $tpurchase_2->sales_price=$request->pur2_per_unit[$i];
                     }
-                    if ($request->pur2_qty[$i]!=null) {
-                        $tpurchase_2->weight_pc=$request->pur2_qty[$i];
+                    if ($request->weight_per_piece[$i]!=null) {
+                        $tpurchase_2->weight_pc=$request->weight_per_piece[$i];
                     }
                     if ($request->pur2_len[$i]!=null) {
                         $tpurchase_2->length=$request->pur2_len[$i];
@@ -129,9 +126,42 @@ class Purchase2Controller extends Controller
                         $tpurchase_2->discount=$request->pur2_percentage[$i];
                     }
                     
-                    $purchase_2->save();
+                    $tpurchase_2->save();
                 }
             }
+        }
+
+        $toggleValue = $request->isCommissionForm;
+         
+        if ($toggleValue === "1") {
+
+            $tax_pur2 = new tax_tpurchase_2();
+
+            $tax_pur2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
+
+            if ($request->has('bamount') && $request->bamount) {
+                $tax_pur2->bamount=$request->bamount;
+            }
+            if ($request->has('disc') && $request->disc) {
+                $tax_pur2->disc=$request->disc;
+            }
+            if ($request->has('cd_disc') && $request->cd_disc) {
+                $tax_pur2->cd_disc=$request->cd_disc;
+            }
+            if ($request->has('comm_disc') && $request->comm_disc) {
+                $tax_pur2->comm_disc=$request->comm_disc;
+            }
+            if ($request->has('comm_amount') && $request->comm_amount) {
+                $tax_pur2->comm_amount=$request->comm_amount;
+            }
+            if ($request->has('tax_item_name') && $request->tax_item_name) {
+                $tax_pur2->item=$request->tax_item_name;
+            }
+            if ($request->has('tax_remarks') && $request->tax_remarks) {
+                $tax_pur2->remarks=$request->tax_remarks;
+            }
+
+            $tax_pur2->save();
         }
 
         if($request->hasFile('att')){
@@ -151,12 +181,26 @@ class Purchase2Controller extends Controller
 
     public function edit($id)
     {
-        $items = Item_entry::all();
-        $acc = AC::all();
-        $pur = purchase::where('purchase.pur_id',$id)->first();
-        $pur_items = purchase_2::where('purchase_2.pur_cod',$id)->get();
+        $items = Item_entry2::all();
+        $item_group = Item_Groups::all();
+        $coa = AC::all();
+        $pur2 = tpurchase::where('tpurchase.Sale_inv_no',$id)
+        ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
+        ->select(
+            'tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no', 'tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
+            'tpurchase.ConvanceCharges','tpurchase.cash_Pur_address','tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.account_name',
+            'tpurchase.Cash_pur_name_ac','bamount', 'disc', 'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id',
+            'tax_tpurchase_2.remarks as tax_remarks'
+        )
+        ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no','tpurchase.Cash_pur_name',
+        'tpurchase.Sales_Remarks','tpurchase.cash_Pur_address','tpurchase.sales_against','tpurchase.ConvanceCharges','tpurchase.account_name',
+        'tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.Cash_pur_name_ac','bamount', 'disc',
+        'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id', 'tax_remarks' )
+        ->first();
 
-        return view('purchase1.edit',compact('items','acc','pur','pur_items'));
+        $pur2_item = tpurchase_2::where('tpurchase_2.sales_inv_cod',$id)->get();
+
+        return view('purchase2.edit',compact('pur2','pur2_item','items','coa','item_group'));
     }
 
     public function update(Request $request){

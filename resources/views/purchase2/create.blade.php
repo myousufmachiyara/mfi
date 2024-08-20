@@ -140,7 +140,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" placeholder="Remarks" class="form-control comm-form-field"></textarea>
+												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"></textarea>
 											</div>
 
 											<!-- <div class="col-sm-12 col-md-6 mb-2">
@@ -203,13 +203,15 @@
 														<input type="hidden" class="form-control" name="weight_per_piece[]" id="weight_per_piece1" onchange="CalculateRowWeight(1)" value="0" step="any" required>
 													</td>
 													<td>
-														<input type="number" class="form-control" name="pur2_qty[]" id="pur2_qty1" value="0"  step="any" required disabled>
+														<input type="number" class="form-control" id="pur2_qty1" value="0"  step="any" required disabled>
+														<input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0"  step="any" required>
 													</td>
 													<td>
 														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" required step="any" disabled>
 													</td>
 													<td>
-														<input type="date" class="form-control" name="pur2_price_date[]" disabled id="pur2_price_date1">
+														<input type="date" class="form-control" disabled id="pur2_price_date1">
+														<input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show1">
 													</td>
 
 													<td style="vertical-align: middle;">
@@ -252,6 +254,7 @@
 													<label class="col-form-label">Labour Charges</label>
 													<input type="text" id="labour_charges"  onchange="netTotal()" name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
+
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
@@ -263,6 +266,7 @@
 														</div>
 													</div>
 												</div>
+
 												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 													<span class="d-flex align-items-center justify-content-lg-end">
@@ -354,10 +358,10 @@
 			cell5.innerHTML  = '<input type="number" id="pur2_per_unit'+index+'" class="form-control" name="pur2_per_unit[]" value="0" step="any" required>';
 			cell6.innerHTML  = '<input type="number" id="pur2_len'+index+'" onchange="rowTotal('+index+')" class="form-control" name="pur2_len[]"  value="20" step="any" required>';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
-			cell8.innerHTML  = '<input type="number" class="form-control" name="pur2_qty[]" id="pur2_qty'+index+'" value="0" step="any" required disabled>';
-			cell9.innerHTML = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-			cell10.innerHTML = '<input type="date" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date'+index+'" required>';
-			cell11.innerHTML = 	'<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+			cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
+			cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
+			cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+			cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
 
@@ -385,6 +389,7 @@
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 				$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
+				$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
 				$('#weight_per_piece'+row_no).val(result[0]['weight']);
 				$('#weight_per_piece'+row_no+'').trigger('change')
 				addNewRow();
@@ -435,6 +440,7 @@
 
 		$('#amount'+index+'').val(amount);
 		$('#pur2_qty'+index+'').val(weight);
+		$('#pur2_qty_show'+index+'').val(weight);
 
 		tableTotal();
 	}

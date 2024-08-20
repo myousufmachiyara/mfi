@@ -39,31 +39,34 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pur1 as $key => $row)
+                                                @foreach ($pur2 as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->pur_id}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->ac_name}}</td>
-                                                    <td>{{$row->cash_saler_name}}</td>
-                                                    <td>{{$row->pur_remarks}}</td>
-                                                    <td>{{$row->sale_against}}</td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
+                                                    <td>{{$row->Sale_inv_no}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
+                                                    <td>{{$row->acc_name}}</td>
+                                                    <td>{{$row->pur_ord_no}}</td>
+                                                    <td>{{$row->disp_to}}</td>
+                                                    <td>{{$row->Cash_pur_name}}</td>
+                                                    <td>{{$row->Sales_Remarks}}</td>
+                                                    <td>{{$row->sales_against}}</td>
+                                                    <td>{{$row->group_name}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
-                                                    <td>{{$row->pur_convance_char}}</td>
-                                                    <td>{{$row->pur_labor_char}}</td>
-                                                    <td>{{$row->pur_discount}}</td>
-                                                    @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
+                                                    <td>{{$row->ConvanceCharges}}</td>
+                                                    <td>{{$row->LaborCharges}}</td>
+                                                    <td>{{$row->Bill_discount}}</td>
+                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->ConvanceCharges-$row->Bill_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                        <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
+                                                        <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('edit-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sale_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
