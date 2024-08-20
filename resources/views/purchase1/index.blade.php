@@ -25,13 +25,13 @@
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
                                                     <th>SaleInv #</th>
-                                                    <th>Att.</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -40,11 +40,10 @@
                                                 <tr>
                                                     <td>{{$row->pur_id}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->ac_name}}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->cash_saler_name}}</td>
                                                     <td>{{$row->pur_remarks}}</td>
                                                     <td>{{$row->sale_against}}</td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
                                                     <td>{{$row->pur_convance_char}}</td>
@@ -56,12 +55,25 @@
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                        <a href="{{ route('show-purchases1',$row->pur_id) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-purchases1',$row->pur_id) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('show-purchases1',$row->pur_id) }}" class="">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('edit-purchases1',$row->pur_id) }}" class="">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>

@@ -19,7 +19,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">Code</th>
-                                                <th>Name</th>
+                                                <th>Group Name</th>
                                                 <th>Remarks</th>
                                                 <th>Action</th>
                                             </tr>
@@ -31,9 +31,15 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->group_remarks}}</td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->item_group_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->item_group_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                       <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->item_group_cod}})" href="#updateModal">
+                                                          <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                         <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->item_group_cod}})" href="#deleteModal">
+                                                         <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

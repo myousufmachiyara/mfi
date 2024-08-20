@@ -9,59 +9,65 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">Journal Voucher 2</h2>
-                                    <form class="text-end" action="{{ route('new-jv2') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Voucher</button>
+                                    <h2 class="card-title">All Pipe Stock In</h2>
+                                    <form class="text-end" action="{{ route('create-tstock-in-invoice') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th width="5%">Voch#</th>
-                                                <th width="8%">Date</th>
-                                                <th width="40%">Narration</th>
-                                                <th>Total Debit</th>
-                                                <th>Total Credit</th>
-                                                <th>Att.</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($jv2 as $key => $row)
+                                    <div class="modal-wrapper">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$row->jv_no}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->narration}}</td>
-                                                    @if(substr(strval($row->total_debit), strpos(strval($row->total_debit), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->total_debit, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->total_debit))}}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->total_credit), strpos(strval($row->total_credit), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->total_credit, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->total_credit))}}</td>
-                                                    @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
+                                                    <th>ID</th>
+                                                    <th>Date</th>
+                                                    <th>Company Name</th>
+                                                    <th>Remarks</th>
+                                                    <th>Pur_Inv #</th>
+                                                    <th>Mill_Inv/Gate</th>
+                                                    <th>Total Qty</th>
+                                                    <th>Total Weight</th>
+                                                    <th>Transporter</th>
+                                                    <th>Att.</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($tstock_in as $key => $row)
+                                                <tr>
+                                                    <td>{{$row->Sal_inv_no}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
+                                                    <td>{{$row->Sales_remarks}}</td>
+                                                    <td>{{$row->pur_inv}}</td>
+                                                    <td>{{$row->mill_gate}}</td>
+                                                    <td>{{$row->qty_sum}}</td>
+                                                    <td>{{$row->weight_sum}}</td>
+                                                    <td>{{$row->transporter}}</td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('print-jv2', $row->jv_no) }}">
+                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('edit-jv2', $row->jv_no) }}">
+                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('edit-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->jv_no}})" href="#deleteModal">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal">
                                                             <i class="far fa-trash-alt" style="color:red"></i>
                                                         </a>
                                                     </td>
 
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-									</table>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -69,13 +75,12 @@
                 </section>		
 			</div>
 		</section>
-
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-jv2') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-tstock-in-invoice') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Journal Voucher</h2>
+                        <h2 class="card-title">Delete Pipe Stock In</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -83,8 +88,8 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this Journal Voucher?</p>
-                                <input name="delete_jv_no" id="deleteID" hidden>
+                                <p class="mb-0">Are you sure that you want to delete this Pipe Stock In?</p>
+                                <input name="invoice_id" id="deleteID" hidden>
                             </div>
                         </div>
                     </div>
@@ -108,7 +113,7 @@
                 <div class="card-body">
                     <div class="modal-wrapper">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0" >
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
@@ -117,7 +122,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="jv2_attachements">
+                            <tbody id="sale1_attachements">
 
                             </tbody>
                         </table>
@@ -141,25 +146,24 @@
     }
 
     function getAttachements(id){
-
-        var table = document.getElementById('jv2_attachements');
+        var table = document.getElementById('sale1_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/vouchers/jv2/attachements",
+            url: "/sales/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/vouchers/jv2/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/vouchers/jv2/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/sales/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/sales/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#jv2_attachements').append(html);
+                    $('#sale1_attachements').append(html);
                 });
             },
             error: function(){
@@ -173,7 +177,7 @@
             return;
         }
 
-        fetch('/vouchers/jv2/deleteAttachment/' + fileId, {
+        fetch('/sales/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -195,5 +199,4 @@
             alert(error.message);
         });
     }
-
 </script>
