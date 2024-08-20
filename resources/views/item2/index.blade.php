@@ -12,7 +12,7 @@
                                     <h2 class="card-title">All Item Pipes</h2>
                                     <form class="text-end" action="{{ route('create-item-2') }}" method="GET">
                                         <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single)</button>
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Item (Multiple)</button>
+                                        <button type="submit" class="btn btn-danger mt-2"> <i class="fas fa-plus"></i> New Item (Multiple)</button>
                                     </form>
                                 </header>
 
@@ -299,27 +299,27 @@
             url: "/item2/detail",
             data: {id:id},
             success: function(result){
-                var dateParts = result['opp_date'].split("-");
+                var dateParts = result[0]['opp_date'].split("-");
                 var year = dateParts[0];
                 var month = dateParts[1];
                 var day = dateParts[2];
                 var date = year + "-" + month + "-" + day;  
                 
-                $('#it_cod').val(result['it_cod']);
-                $('#it_cod_display').val(result['it_cod']);
-                $('#item_group').val(result['item_group']);
-                $('#item_name').val(result['item_name']);
-                $('#item_remark').val(result['item_remark']);
-                $('#qty').val(result['opp_qty']);
-                $('#weight').val(result['weight']);
-                $('#OPP_qty_cost').val(result['OPP_qty_cost']);
-                $('#pur_rate_date').val(result['pur_rate_date']);
-                $('#sales_price').val(result['sales_price']);
-                $('#sale_rate_date').val(result['sale_rate_date']);
-                $("#date" ).val(result['opp_date'])
-                $('#stock_level').val(result['stock_level']);
-                $('#labourprice').val(result['labourprice']);
-            },
+                $('#it_cod').val(result[0]['it_cod']);
+                $('#it_cod_display').val(result[0]['it_cod']);
+                $('#item_group').val(result[0]['item_group']);
+                $('#item_name').val(result[0]['item_name']);
+                $('#item_remark').val(result[0]['item_remark']);
+                $('#qty').val(result[0]['opp_qty']);
+                $('#weight').val(result[0]['weight']);
+                $('#OPP_qty_cost').val(result[0]['OPP_qty_cost']);
+                $('#pur_rate_date').val(result[0]['pur_rate_date']);
+                $('#sales_price').val(result[0]['sales_price']);
+                $('#sale_rate_date').val(result[0]['sale_rate_date']);
+                $("#date" ).val(result[0]['opp_date'])
+                $('#stock_level').val(result[0]['stock_level']);
+                $('#labourprice').val(result[0]['labourprice']);
+            },  
             error: function(){
                 alert("error");
             }

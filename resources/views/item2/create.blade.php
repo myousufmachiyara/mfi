@@ -42,7 +42,7 @@
 													</td> -->
 													<td>
 														<select class="form-control" autofocus name ="item_group[]" onchange="addNewRow(1)" required>
-															<option value="0" disabled selected>Select Group</option>
+															<option value="" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
 															@endforeach
@@ -145,7 +145,7 @@
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
-		if(latestValue!="0"){
+		if(latestValue!=""){
 			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 			var newRow = table.insertRow(table.rows.length);
 
@@ -165,7 +165,7 @@
 
 			// cell1.innerHTML  = '<input type="text" class="form-control" disabled>';
 			cell1.innerHTML  = '<select class="form-control" autofocus   onclick="addNewRow('+index+')" name ="item_group[]" required>'+
-									'<option value="0" disabled selected>Select Group</option>'+
+									'<option value="" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach

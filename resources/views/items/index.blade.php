@@ -12,7 +12,7 @@
                                     <h2 class="card-title">All Items</h2>
                                     <form class="text-end" action="{{ route('create-item') }}" method="GET">
                                         <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
+                                        <button type="submit" class="btn btn-danger mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
                                     </form>
                                 </header>
                                 <div class="card-body">
