@@ -82,7 +82,7 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-purchases1') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-purchases2') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
@@ -95,7 +95,7 @@
                             </div>
                             <div class="modal-text">
                                 <p class="mb-0">Are you sure that you want to delete this Purchase Invoice?</p>
-                                <input name="delete_purc1" id="deleteID" hidden>
+                                <input name="delete_purc2" id="deleteID" hidden>
                             </div>
                         </div>
                     </div>

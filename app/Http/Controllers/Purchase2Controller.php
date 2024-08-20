@@ -205,91 +205,178 @@ class Purchase2Controller extends Controller
 
     public function update(Request $request){
 
-        $pur1 = purchase::where('pur_id',$request->pur_id)->get()->first();
+        $pur2 = tpurchase::where('Sale_inv_no',$request->pur2_id)->get()->first();
 
-        if ($request->has('pur_date') && $request->pur_date) {
-            $pur1->pur_date=$request->pur_date;
+        if ($request->has('sa_date') && $request->sa_date) {
+            $pur2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_bill_no') && $request->pur_bill_no) {
-            $pur1->pur_bill_no=$request->pur_bill_no;
+        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
+            $pur2->pur_ord_no=$request->pur_ord_no;
         }
-        if ($request->has('pur_sale_inv') && $request->pur_sale_inv) {
-            $pur1->sale_against=$request->pur_sale_inv;
+        if ($request->has('sales_against') && $request->sales_against) {
+            $pur2->sales_against=$request->sales_against;
         }
-        if ($request->has('ac_cod') && $request->ac_cod) {
-            $pur1->ac_cod=$request->ac_cod;
+        if ($request->has('account_name') && $request->account_name) {
+            $pur2->account_name=$request->account_name;
         }
-        if ($request->has('cash_saler_name') && $request->cash_saler_name) {
-            $pur1->cash_saler_name=$request->cash_saler_name;
+        if ($request->has('disp_account_name') && $request->disp_account_name) {
+            $pur2->Cash_pur_name_ac=$request->disp_account_name;
         }
-        if ($request->has('cash_saler_address') && $request->cash_saler_address) {
-            $pur1->cash_saler_address=$request->cash_saler_address;
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+            $pur2->Cash_pur_name=$request->Cash_pur_name;
         }
-        if ($request->has('pur_remarks') && $request->pur_remarks) {
-            $pur1->pur_remarks=$request->pur_remarks;
+        if ($request->has('cash_Pur_address') && $request->cash_Pur_address) {
+            $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
-        if ($request->has('pur_convance_char') && $request->pur_convance_char) {
-            $pur1->pur_convance_char=$request->pur_convance_char;
+        if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
+            $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
-        if ($request->has('pur_labor_char') && $request->pur_labor_char) {
-            $pur1->pur_labor_char=$request->pur_labor_char;
+        if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
+            $pur2->ConvanceCharges=$request->ConvanceCharges;
         }
-        if ($request->has('bill_discount') && $request->bill_discount) {
-            $pur1->pur_discount=$request->bill_discount;
+        if ($request->has('LaborCharges') && $request->LaborCharges) {
+            $pur2->LaborCharges=$request->LaborCharges;
+        }
+        if ($request->has('Bill_discount') && $request->Bill_discount) {
+            $pur2->Bill_discount=$request->Bill_discount;
         }
 
-        purchase::where('pur_id', $request->pur_id)->update([
-            'pur_date'=>$pur1->pur_date,
-            'pur_bill_no'=>$pur1->pur_bill_no,
-            'sale_against'=>$pur1->pur_sale_inv,
-            'ac_cod'=>$pur1->ac_cod,
-            'cash_saler_name'=>$pur1->cash_saler_name,
-            'cash_saler_address'=>$pur1->cash_saler_address,
-            'pur_remarks'=>$pur1->pur_remarks,
-            'pur_convance_char'=>$pur1->pur_convance_char,
-            'pur_labor_char'=>$pur1->pur_labor_char,
-            'pur_discount'=>$pur1->pur_discount,
+        tpurchase::where('Sale_inv_no', $request->pur2_id)->update([
+            'sa_date'=>$pur2->sa_date,
+            'pur_ord_no'=>$pur2->pur_ord_no,
+            'sales_against'=>$pur2->sales_against,
+            'account_name'=>$pur2->account_name,
+            'Cash_pur_name_ac'=>$pur2->Cash_pur_name_ac,
+            'Cash_pur_name'=>$pur2->Cash_pur_name,
+            'cash_Pur_address'=>$pur2->cash_Pur_address,
+            'Sales_Remarks'=>$pur2->Sales_Remarks,
+            'ConvanceCharges'=>$pur2->ConvanceCharges,
+            'LaborCharges'=>$pur2->LaborCharges,
+            'Bill_discount'=>$pur2->Bill_discount,
         ]);
 
-        purchase_2::where('pur_cod', $request->pur_id)->delete();
+        tpurchase_2::where('sales_inv_cod', $request->pur2_id)->delete();
 
         if($request->has('items'))
         {
             for($i=0;$i<$request->items;$i++)
             {
-
                 if(filled($request->item_name[$i]))
                 {
-                    $purchase_2 = new purchase_2();
+                    $tpurchase_2 = new tpurchase_2();
 
-                    $purchase_2->pur_cod=$request->pur_id;
-                    $purchase_2->item_cod=$request->item_cod[$i];
+                    $tpurchase_2->sales_inv_cod=$request->pur2_id;
+                    $tpurchase_2->item_cod=$request->item_cod[$i];
+
                     if ($request->remarks[$i]!=null) {
-                        $purchase_2->remarks=$request->remarks[$i];
+                        $tpurchase_2->remarks=$request->remarks[$i];
                     }
-                    if ($request->pur_qty[$i]!=null) {
-                        $purchase_2->pur_qty=$request->pur_qty[$i];
+                    if ($request->pur2_qty2[$i]!=null) {
+                        $tpurchase_2->Sales_qty2=$request->pur2_qty2[$i];
                     }
-                    if ($request->pur_price[$i]!=null) {
-                        $purchase_2->pur_price=$request->pur_price[$i];
+                    if ($request->pur2_per_unit[$i]!=null) {
+                        $tpurchase_2->sales_price=$request->pur2_per_unit[$i];
                     }
-                    if ($request->pur_qty2[$i]!=null) {
-                        $purchase_2->pur_qty2=$request->pur_qty2[$i];
+                    if ($request->weight_per_piece[$i]!=null) {
+                        $tpurchase_2->weight_pc=$request->weight_per_piece[$i];
                     }
-                    $purchase_2->save();
+                    if ($request->pur2_len[$i]!=null) {
+                        $tpurchase_2->length=$request->pur2_len[$i];
+                    }
+                    if ($request->pur2_price_date[$i]!=null) {
+                        $tpurchase_2->rat_dat=$request->pur2_price_date[$i];
+                    }
+                    if ($request->pur2_percentage[$i]!=null) {
+                        $tpurchase_2->discount=$request->pur2_percentage[$i];
+                    }
+                    
+                    $tpurchase_2->save();
                 }
             }
         }
+
+        $toggleValue = $request->isCommissionForm;
+
+        if ($toggleValue === "1" ) {
+            
+            $tax_pur2 = tax_tpurchase_2::where('sales_inv_cod',$request->pur2_id)->get()->first();
+
+            if($tax_pur2->isEmpty()){
+
+                $new_tax_pur2 = new tax_tpurchase_2();
+
+                $new_tax_pur2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
+    
+                if ($request->has('bamount') && $request->bamount) {
+                    $new_tax_pur2->bamount=$request->bamount;
+                }
+                if ($request->has('disc') && $request->disc) {
+                    $new_tax_pur2->disc=$request->disc;
+                }
+                if ($request->has('cd_disc') && $request->cd_disc) {
+                    $new_tax_pur2->cd_disc=$request->cd_disc;
+                }
+                if ($request->has('comm_disc') && $request->comm_disc) {
+                    $new_tax_pur2->comm_disc=$request->comm_disc;
+                }
+                if ($request->has('comm_amount') && $request->comm_amount) {
+                    $new_tax_pur2->comm_amount=$request->comm_amount;
+                }
+                if ($request->has('tax_item_name') && $request->tax_item_name) {
+                    $new_tax_pur2->item=$request->tax_item_name;
+                }
+                if ($request->has('tax_remarks') && $request->tax_remarks) {
+                    $new_tax_pur2->remarks=$request->tax_remarks;
+                }
+    
+                $new_tax_pur2->save();
+            }
+
+            else{
+                if ($request->has('bamount') && $request->bamount) {
+                    $tax_pur2->bamount=$request->bamount;
+                }
+                if ($request->has('disc') && $request->disc) {
+                    $tax_pur2->disc=$request->disc;
+                }
+                if ($request->has('cd_disc') && $request->cd_disc) {
+                    $tax_pur2->cd_disc=$request->cd_disc;
+                }
+                if ($request->has('comm_disc') && $request->comm_disc) {
+                    $tax_pur2->comm_disc=$request->comm_disc;
+                }
+                if ($request->has('comm_amount') && $request->comm_amount) {
+                    $tax_pur2->comm_amount=$request->comm_amount;
+                }
+                if ($request->has('tax_item_name') && $request->tax_item_name) {
+                    $tax_pur2->item=$request->tax_item_name;
+                }
+                if ($request->has('tax_remarks') && $request->tax_remarks) {
+                    $tax_pur2->remarks=$request->tax_remarks;
+                }
+
+                tax_tpurchase_2::where('sales_inv_cod', $request->pur2_id)->update([
+                    'bamount'=>$tax_pur2->bamount,
+                    'disc'=>$tax_pur2->disc,
+                    'cd_disc'=>$tax_pur2->cd_disc,
+                    'comm_disc'=>$tax_pur2->comm_disc,
+                    'comm_amount'=>$tax_pur2->comm_amount,
+                    'item'=>$tax_pur2->item,
+                    'remarks'=>$tax_pur2->remarks,
+                ]);
+            }
+        }
+
 
         if($request->hasFile('att')){
             $files = $request->file('att');
             foreach ($files as $file)
             {
-                $purAtt = new pur1_att();
-                $purAtt->pur1_id = $request->pur_id;
+                $pur2Att = new pur2_att();
+                $pur2Att->pur2_id = $pur_2_id['Sale_inv_no'];
                 $extension = $file->getClientOriginalExtension();
-                $purAtt->att_path = $this->pur1Doc($file,$extension);
-                $purAtt->save();
+                $pur2Att->att_path = $this->pur2Doc($file,$extension);
+                $pur2Att->save();
             }
         }
 
@@ -298,8 +385,8 @@ class Purchase2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        $purc1 = purchase::where('pur_id', $request->delete_purc1)->update(['status' => '0']);
-        return redirect()->route('all-purchases1');
+        tpurchase::where('Sale_inv_no', $request->delete_purc2)->update(['status' => '0']);
+        return redirect()->route('all-purchases2');
     }
 
     public function show(string $id)

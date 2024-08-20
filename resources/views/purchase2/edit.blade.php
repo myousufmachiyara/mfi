@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-4 mb-3">								
@@ -19,7 +19,7 @@
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="(Edit Invoice)" class="form-control" value="{{$pur2->Sale_inv_no}}" disabled>
-												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sale_inv_no}}" name="pur_id">
+												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sale_inv_no}}" name="pur2_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
@@ -94,7 +94,7 @@
 									<h2 class="card-title">Commission Form</h2>
 									<div class="form-check form-switch">
 										@if($pur2->tax_id!=null)
-											<input class="form-check-input" type="checkbox" id="toggleSwitch" checked>
+											<!-- <input class="form-check-input" type="checkbox" id="toggleSwitch" checked> -->
 											<input type="hidden" class="form-control" name="isCommissionForm" value="1" id="isCommissionForm">
 										@else
 											<input class="form-check-input" type="checkbox" id="toggleSwitch" unchecked>
