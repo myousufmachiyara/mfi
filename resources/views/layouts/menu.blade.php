@@ -121,7 +121,7 @@
 									</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ route('all-purchases2')}}" >
 										Purchase 2
 									</a>
 								</li>

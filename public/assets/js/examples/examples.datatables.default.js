@@ -12,7 +12,8 @@ Theme Version: 	4.0.0
 
 		$('#datatable-default').dataTable({
 			dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
-			"order": [[ 0, "desc" ]]
+			"order": [[ 0, "desc" ]],
+			"pageLength": 25
 		});
 
 	};
