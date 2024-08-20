@@ -147,3 +147,20 @@ Route::post('/tstock_in/stockin/delete', [App\Http\Controllers\TStockInControlle
 // Route::delete('/tstock_in/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
 // Route::get('/tstock_in/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
 
+
+
+
+//tstock out
+Route::get('/tstock_out/all-tstock_out', [App\Http\Controllers\TStockOutController::class, 'index'])->name('all-tstock-out');
+Route::get('/tstock_out/new-tstock_out', [App\Http\Controllers\TStockOutController::class, 'create'])->name('create-tstock-out-invoice'); 
+Route::get('/tstock_out/edit-invoice/{id}', [App\Http\Controllers\TStockOutController::class, 'edit'])->name('edit-tstock-out-invoice');
+Route::post('/tstock_out/tstock_out_invoice/create', [App\Http\Controllers\TStockOutController::class, 'store'])->name('store-tstock-out-invoice');
+Route::post('/tstock_out/tstock_out_invoice/update', [App\Http\Controllers\TStockOutController::class, 'update'])->name('update-stock-out-invoice');
+Route::post('/tstock_out/stockout/delete', [App\Http\Controllers\TStockOutController::class, 'destroy'])->name('delete-tstock-out-invoice');
+// Route::get('/tstock_out/saleinvoice/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-sale-invoice');
+// Route::get('/tstock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-sale-invoice');
+// Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
+// Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-sale1-att');
+// Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('sale1-att-download');
+// Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('sale1-att-delete');
+// Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-sale1-att');
