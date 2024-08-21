@@ -16,12 +16,12 @@
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
-											<h2 class="h2 mt-0 mb-1 text-dark ">PURCHASE INVOICE NO:</h2>
-											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->pur_id}}</h4>
+											<h4 class="h4 mt-0 mb-1 text-dark ">PURCHASE INVOICE NO: </h4>
+											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->Sale_inv_no}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">
-												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
+												<img width="80px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
 										</div>
 									</div>
@@ -31,22 +31,47 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="bill-to">
-												<p class="h5 mb-1 text-dark font-weight-semibold">To:</p>
-												<h4 style="font-weight:500;color:black">
-													{{$pur->ac_name}}
-													<br/>
-													{{$pur->address}}
-													<br/>
-													{{$pur->phone_no}}
-													<br/>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Invoice Date: </span>
+													<span style="font-weight:400;color:black" class="value"> {{\Carbon\Carbon::parse($pur->sa_date)->format('d-m-y')}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">To: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->ac_name}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Address: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->address}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Phone No: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->phone_no}}</span>
 												</h4>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="bill-data text-end">
-												<h4 class="mb-0">
-													<span class="text-dark">Invoice Date:</span>
-													<span style="font-weight:300;color:black" class="value">{{\Carbon\Carbon::parse($pur->pur_date)->format('d-m-y')}}</span>
+											<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Name Of Person: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
+												</h4>
+												
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Dispatch To: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Sale Inv No: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Person Address: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
 											</div>
 										</div>
@@ -57,11 +82,12 @@
 									<thead>
 										<tr class="text-dark">
 											<th width="5%" class="font-weight-semibold">S.No</th>
-											<th class="text-center font-weight-semibold">Quantity</th>
 											<th width="22%" class="font-weight-semibold">Item</th>
 											<th width="22%" class="font-weight-semibold">Remarks</th>
-											<th class="text-center font-weight-semibold">Weight</th>
-											<th class="text-center font-weight-semibold">Price</th>
+											<th class="text-center font-weight-semibold">Quantity</th>
+											<th class="text-center font-weight-semibold">Price/Unit</th>
+											<th class="text-center font-weight-semibold">Length</th>
+											<th class="text-center font-weight-semibold">%</th>
 											<th class="text-center font-weight-semibold">Amount</th>
 										</tr>
 									</thead>
@@ -72,16 +98,17 @@
 										@foreach($pur2 as $key => $pur_item)
 										<tr>
 											<td>{{$key+1}}</td>
-											<td class="text-center">{{$pur_item->pur_qty2}}</td>
 											<td class="font-weight-semibold text-dark">{{$pur_item->item_name}}</td>
 											<td>{{$pur_item->remarks}}</td>
-											<td class="text-center">{{$pur_item->pur_qty}}</td>
-											<td class="text-center">{{$pur_item->pur_price}}</td>
-											<td class="text-center">{{$pur_item->pur_price * $pur_item->pur_qty}}</td>
+											<td class="text-center">{{$pur_item->Sales_qty2}}</td>
+											<td class="text-center">{{$pur_item->sales_price}}</td>
+											<td class="text-center">{{$pur_item->length}}</td>
+											<td class="text-center">{{$pur_item->discount}}</td>
+											<td class="text-center">{{(($pur_item->Sales_qty2 * $pur_item->sales_price)+( ($pur_item->Sales_qty2 * $pur_item->sales_price) * ($pur_item->discount/100))) * $pur_item->length}}</td>
 										</tr>
-										<?php $subtotal=$subtotal+($pur_item->pur_price * $pur_item->pur_qty) ?>
-										<?php $total_weight=$total_weight+ $pur_item->pur_qty ?>
-										<?php $total_quantity=$total_quantity+ $pur_item->pur_qty2 ?>
+										<?php $subtotal=$subtotal+((($pur_item->Sales_qty2 * $pur_item->sales_price)+( ($pur_item->Sales_qty2 * $pur_item->sales_price) * ($pur_item->discount/100))) * $pur_item->length) ?>
+										<?php $total_weight=$total_weight+($pur_item->Sales_qty2*$pur_item->weight_pc) ?>
+										<?php $total_quantity=$total_quantity+ $pur_item->Sales_qty2 ?>
 
 										@endforeach
 									</tbody>
@@ -117,18 +144,18 @@
 													</tr>
 													<tr>
 														<td colspan="2">Labour Charges</td>
-														<td class="text-left">{{$pur->pur_labor_char}} PKR</td>
+														<td class="text-left">{{$pur->LaborCharges}} PKR</td>
 													</tr>
 														<td colspan="2">Convance Charges</td>
-														<td class="text-left">{{$pur->pur_convance_char}} PKR</td>
+														<td class="text-left">{{$pur->ConvanceCharges}} PKR</td>
 													</tr>
 													</tr>
 														<td colspan="2">Discount</td>
-														<td class="text-left">{{$pur->pur_discount}} PKR</td>
+														<td class="text-left">{{$pur->Bill_discount}} PKR</td>
 													</tr>
 													<tr class="h5">
 														<td colspan="2">Net Amount</td>
-														<td class="text-left">{{round($subtotal + $pur->pur_labor_char + $pur->pur_convance_char - $pur->pur_discount)}} PKR</td>
+														<td class="text-left">{{round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount)}} PKR</td>
 													</tr>
 												</tbody>
 											</table>
@@ -138,8 +165,8 @@
 							</div>
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-purchases1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-purc1-invoice', $pur->pur_id) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
+								<a onclick="window.location='{{ route('all-purchases2') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+								<a href="{{ route('print-purc2-invoice', $pur->Sale_inv_no) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
 							</div>
 
 						</div>

@@ -36,7 +36,7 @@
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -58,7 +58,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" autofocus name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -107,21 +107,21 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="{{$pur2->bamount}}" class="form-control comm-form-field">
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >%</label>
-												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field">
+												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required>
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >P.B</label>
-												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" class="form-control comm-form-field">
+												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Target</label>
-												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" class="form-control comm-form-field">
+												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
@@ -131,12 +131,12 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Amount</label>
-												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" class="form-control comm-form-field">
+												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Item Group</label>
-												<select class="form-control comm-form-field" autofocus name="tax_item_name">
+												<select data-plugin-selecttwo class="form-control comm-form-field" required autofocus name="tax_item_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod}}" {{ $pur2->item == $row->item_group_cod ? 'selected' : '' }}>{{$row->group_name}}</option>
@@ -148,7 +148,6 @@
 												<label class="col-form-label" >Commission Remarks</label>
 												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"> {{$pur2->tax_remarks}} </textarea>
 											</div>
-
 									  </div>
 									</div>
 								</section>
@@ -186,7 +185,7 @@
 															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails(1,1)" required>
 														</td>
 														<td>
-															<select class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
+															<select data-plugin-selecttwo class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -200,14 +199,14 @@
 															<input type="number" class="form-control" name="pur2_qty2[]" id="pur2_qty2{{$pur2_key+1}}" onchange="CalculateRowWeight(1)" value="{{$pur2_items->Sales_qty2}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_per_unit[]" onchange="rowTotal(1)" id="pur2_per_unit{{$pur2_key+1}}" value="{{$pur2_items->sales_price}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_per_unit[]" onchange="rowTotal({{$pur2_key+1}})" id="pur2_per_unit{{$pur2_key+1}}" value="{{$pur2_items->sales_price}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_len[]" id="pur2_len{{$pur2_key+1}}" onchange="rowTotal(1)" value="{{$pur2_items->length}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_len[]" id="pur2_len{{$pur2_key+1}}" onchange="rowTotal({{$pur2_key+1}})" value="{{$pur2_items->length}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_percentage[]" id="pur2_percentage{{$pur2_key+1}}" onchange="rowTotal(1)" value="{{$pur2_items->discount}}" step="any" required>
-															<input type="hidden" class="form-control" name="weight_per_piece[]" id="weight_per_piece{{$pur2_key+1}}" onchange="CalculateRowWeight(1)" value="{{$pur2_items->weight_pc}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_percentage[]" id="pur2_percentage{{$pur2_key+1}}" onchange="rowTotal({{$pur2_key+1}})" value="{{$pur2_items->discount}}" step="any" required>
+															<input type="hidden" class="form-control" name="weight_per_piece[]" id="weight_per_piece{{$pur2_key+1}}" onchange="CalculateRowWeight({{$pur2_key+1}})" value="{{$pur2_items->weight_pc}}" step="any" required>
 														</td>
 														<td>
 															<input type="number" class="form-control" id="pur2_qty{{$pur2_key+1}}" step="any" value="{{$pur2_items->weight_pc * $pur2_items->Sales_qty2}}" required disabled>
@@ -298,6 +297,7 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
@@ -387,7 +387,7 @@
 
 
 			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -408,6 +408,8 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+
 		}
 	}
 

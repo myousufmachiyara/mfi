@@ -133,7 +133,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="pur1_attachements">
+                            <tbody id="pur2_attachements">
 
                             </tbody>
                         </table>
@@ -157,25 +157,25 @@
 
     function getAttachements(id){
 
-        var table = document.getElementById('pur1_attachements');
+        var table = document.getElementById('pur2_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/purchase1/attachements",
+            url: "/purchase2/attachements",
             data: {id:id},
             success: function(result){
                 console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/purchase1/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/purchase1/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/purchase2/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/purchase2/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#pur1_attachements').append(html);
+                    $('#pur2_attachements').append(html);
                 });
             },
             error: function(){
@@ -189,7 +189,7 @@
             return;
         }
 
-        fetch('/purchase1/deleteAttachment/' + fileId, {
+        fetch('/purchase2/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

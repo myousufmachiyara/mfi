@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use TCPDF;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,10 +11,9 @@ use Illuminate\Support\Facades\Response;
 use App\Traits\SaveImage;
 use App\Models\AC;
 use App\Models\Item_entry2;
-use App\Models\TStock_In;
-use App\Models\TStock_In_2;
-use App\Models\TStock_In_att;
-use TCPDF;
+use App\Models\tstock_in;
+use App\Models\tstock_in_2;
+use App\Models\tstock_in_att;
 
 
 class TStockInController extends Controller
@@ -25,7 +25,7 @@ class TStockInController extends Controller
 
     public function index()
     {
-        $tstock_in = TStock_In::where('tstock_in.status', 1)
+        $tstock_in = tstock_in::where('tstock_in.status', 1)
         ->join ('tstock_in_2', 'tstock_in_2.sales_inv_cod' , '=', 'tstock_in.Sal_inv_no')
         ->join('ac','tstock_in.account_name','=','ac.ac_code')
         ->select(
@@ -43,7 +43,7 @@ class TStockInController extends Controller
 
     public function destroy(Request $request)
     {
-        $tstock_in = TStock_In::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $tstock_in = tstock_in::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
         return redirect()->route('all-tstock-in');
     }
 
@@ -57,7 +57,7 @@ class TStockInController extends Controller
     public function store(Request $request)
     {
         $userId=1;
-        $tstock_in = new TStockIn();
+        $tstock_in = new tstock_in();
 
         // $tstock_in->Sal_inv_no;
         if ($request->has('date') && $request->date) {
@@ -90,7 +90,7 @@ class TStockInController extends Controller
 
         $tstock_in->save();
 
-        $latest_invoice = TStockIn::latest()->first();
+        $latest_invoice = tstock_in::latest()->first();
         $invoice_id = $latest_invoice['Sal_inv_no'];
 
         if($request->has('items'))
@@ -99,16 +99,27 @@ class TStockInController extends Controller
             {
                 if(filled($request->item_code[$i]))
                 {
-                    $tstock_in_2 = new TStockIn_2();
+                    $tstock_in_2 = new tstock_in_2();
                     $tstock_in_2->sales_inv_cod=$invoice_id;
                     $tstock_in_2->item_cod=$request->item_code[$i];
                     $tstock_in_2->remarks=$request->item_remarks[$i];
-                    $tstock_in_2->Sales_qty=$request->item_qty[$i];
-                    $tstock_in_2->sales_price=$request->item_price[$i];
-                    $tstock_in_2->weight_pc=$request->item_weight[$i];
+                    $tstock_in_2->Sales_qty=$request->qty[$i];
+                    $tstock_in_2->weight_pc=$request->weight[$i];
     
                     $tstock_in_2->save();
                 }
+            }
+        }
+
+        if($request->hasFile('att')){
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $tstock_in_att = new tstock_in_att();
+                $tstock_in_att->tstock_in_id = $invoice_id;
+                $extension = $file->getClientOriginalExtension();
+                $tstock_in_att->att_path = $this->tStockInDoc($file,$extension);
+                $tstock_in_att->save();
             }
         }
 
@@ -117,31 +128,28 @@ class TStockInController extends Controller
 
     public function show(string $id)
     {
-        $tstock_in = TStockIn::where('Sal_inv_no',$id)
+        $tstock_in = tstock_in::where('Sal_inv_no',$id)
                         ->join('ac','tstock_in.account_name','=','ac.ac_code')
                         ->first();
 
-        $tstock_in_items = TStockIn_2::where('sales_inv_cod',$id)
+        $tstock_in_items = tstock_in_2::where('sales_inv_cod',$id)
                         ->join('item_entry2','tstock_in_2.item_cod','=','item_entry2.it_cod')
                         ->get();
         return view('tstock_in.view',compact('tstock_in','tstock_in_items'));
     }
 
-
-    
     public function edit($id)
     {
-        $tstock_in = TStockIn::where('Sal_inv_no',$id)->first();
-        $tstock_in_items = TStockIn_2::where('sales_inv_cod',$id)->get();
-        $tstock_in_item_count=count($tstock_in_items);
+        $tstock_in = tstock_in::where('Sal_inv_no',$id)->first();
+        $tstock_in_items = tstock_in_2::where('sales_inv_cod',$id)->get();
         $items = Item_entry2::all();
         $coa = AC::all();
-        return view('tstock_in.edit', compact('tstock_in','tstock_in_items','items','coa','tstock_in_item_count'));
+        return view('tstock_in.edit', compact('tstock_in','tstock_in_items','items','coa'));
     }
 
     public function update(Request $request)
     {
-        $tstock_in = TStockIn::where('Sal_inv_no',$request->invoice_no)->get()->first();
+        $tstock_in = tstock_in::where('Sal_inv_no',$request->invoice_no)->get()->first();
 
         if ($request->has('date') && $request->date) {
             $tstock_in->sa_date=$request->date;
@@ -168,8 +176,7 @@ class TStockInController extends Controller
             $tstock_in->account_name=$request->account_name;
         }
 
-       
-        TStockIn::where('Sal_inv_no', $request->invoice_no)->update([
+        tstock_in::where('Sal_inv_no', $request->invoice_no)->update([
             'sa_date'=>$tstock_in->sa_date,
             'pur_inv'=>$tstock_in->pur_inv,
             'mill_gate'=>$tstock_in->mill_gate,
@@ -181,30 +188,78 @@ class TStockInController extends Controller
     
         ]);
         
-        TStockIn2::where('sales_inv_cod', $request->invoice_no)->delete();
+        tstock_in_2::where('sales_inv_cod', $request->invoice_no)->delete();
         
         if($request->has('items'))
         {
             for($i=0;$i<$request->items;$i++)
             {
-
                 if(filled($request->item_code[$i]))
                 {
-                    $tstock_in_2 = new TStockIn2();
-                    $tstock_in_2->sales_inv_cod=$request->invoice_no;
+                    $tstock_in_2 = new tstock_in_2();
+                    $tstock_in_2->sales_inv_cod=$invoice_id;
                     $tstock_in_2->item_cod=$request->item_code[$i];
                     $tstock_in_2->remarks=$request->item_remarks[$i];
                     $tstock_in_2->Sales_qty=$request->qty[$i];
-                    $tstock_in_2->weight=$request->item_weight[$i];
+                    $tstock_in_2->weight_pc=$request->weight[$i];
+    
                     $tstock_in_2->save();
                 }
             }
         }
 
+        if($request->hasFile('att')){
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $tstock_in_att = new tstock_in_att();
+                $tstock_in_att->tstock_in_id = $invoice_id;
+                $extension = $file->getClientOriginalExtension();
+                $tstock_in_att->att_path = $this->tStockInDoc($file,$extension);
+                $tstock_in_att->save();
+            }
+        }
+        
 
         return redirect()->route('all-tstock-in');
     }
 
+    public function getAttachements(Request $request)
+    {
+        $tstock_in_att = tstock_in_att::where('tstock_in_id', $request->id)->get();
+        
+        return $tstock_in_att;
+    }
 
-   }
+    public function deleteAtt($id)
+    {
+        $doc=tstock_in_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            $tstock_in_att = tstock_in_att::where('att_id', $id)->delete();
+            return response()->json(['message' => 'File deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'File not found.'], 404);
+        }	
+    }
+
+    public function view($id)
+    {
+        $doc=tstock_in_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (file_exists($filePath)) {
+            return Response::file($filePath);
+        } 
+    }
+
+    public function downloadAtt($id)
+    {
+        $doc=tstock_in_att::where('att_id', $id)->select('att_path')->first();
+        $filePath = public_path($doc['att_path']);
+        if (file_exists($filePath)) {
+            return Response::download($filePath);
+        } 
+    }
+}
 
