@@ -165,7 +165,7 @@
 									</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ route('all-tstock-out')}}">
 										Stock Out
 									</a>
 								</li>
