@@ -257,9 +257,9 @@
                     $('#item_name'+row_no).val(result[0]['it_cod']);
                     $('#remarks'+row_no).val(result[0]['item_remark']);
                     $('#weight'+row_no).val(result[0]['weight']);
-                    $('#qty'+row_no).val(result[0]['qty']);
-                    $('#row_total_weight' + row_no).val(result[0]['qty']*result[0]['weight']);
-                    $('#qty'+row_no).trigger('change');
+                    // $('#qty'+row_no).val(result[0]['qty']);
+                    // $('#row_total_weight' + row_no).val(result[0]['qty']*result[0]['weight']);
+                    // $('#qty'+row_no).trigger('change');
 
                     addNewRow();
                 }
