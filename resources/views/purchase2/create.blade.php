@@ -345,7 +345,7 @@
 
 
 					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-					cell2.innerHTML  = '<select  class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 											'<option value="" disabled selected>Select Item</option>'+
 											'@foreach($items as $key => $row)'+	
 												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -385,7 +385,7 @@
 					data: {id:itemId},
 					success: function(result){
 						$('#item_cod'+row_no).val(result[0]['it_cod']);
-						$('#item_name'+row_no).val(result[0]['it_cod']);
+						$('#item_name'+row_no).val(result[0]['it_cod']).trigger('change');
 						$('#remarks'+row_no).val(result[0]['item_remark']);
 						$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 						$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
