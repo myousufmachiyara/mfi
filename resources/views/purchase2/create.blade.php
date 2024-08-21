@@ -35,7 +35,7 @@
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -57,7 +57,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" autofocus name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -130,7 +130,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Item Group</label>
-												<select class="form-control comm-form-field" autofocus name="tax_item_name">
+												<select data-plugin-selecttwo class="form-control comm-form-field" autofocus name="tax_item_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod }}">{{$row->group_name}}</option>
@@ -179,7 +179,7 @@
 														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>
 													<td>
-														<select class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -292,232 +292,235 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+       
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+
+			var index=2;
+			var itemCount = Number($('#itemCount').val());
+
+			$(document).ready(function() {
+				$(window).keydown(function(event){
+					if(event.keyCode == 13) {
+						event.preventDefault();
+						return false;
+					}
+				});
+
+				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
+				toggleInputs();
+			});
+
+			function removeRow(button) {
+				var tableRows = $("#Purchase2Table tr").length;
+				if(tableRows>1){
+					var row = button.parentNode.parentNode;
+					row.parentNode.removeChild(row);
+					index--;	
+					itemCount = Number($('#itemCount').val());
+					itemCount = itemCount-1;
+					$('#itemCount').val(itemCount);
+				}  
+				tableTotal(); 
+			}
+
+			function addNewRow(){
+				var lastRow =  $('#myTable tr:last');
+				latestValue=lastRow[0].cells[1].querySelector('select').value;
+				if(latestValue!=""){
+					var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+					var newRow = table.insertRow(table.rows.length);
+
+					var cell1 = newRow.insertCell(0);
+					var cell2 = newRow.insertCell(1);
+					var cell3 = newRow.insertCell(2);
+					var cell4 = newRow.insertCell(3);
+					var cell5 = newRow.insertCell(4);
+					var cell6 = newRow.insertCell(5);
+					var cell7 = newRow.insertCell(6);
+					var cell8 = newRow.insertCell(7);
+					var cell9 = newRow.insertCell(8);
+					var cell10 = newRow.insertCell(9);
+					var cell11 = newRow.insertCell(10);
+
+
+					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
+					cell2.innerHTML  = '<select  class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+											'<option value="" disabled selected>Select Item</option>'+
+											'@foreach($items as $key => $row)'+	
+												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
+											'@endforeach'+
+										'</select>';
+					cell3.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
+					cell4.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur2_qty2'+index+'" value="0" name="pur2_qty2[]" step="any" required>';
+					cell5.innerHTML  = '<input type="number" id="pur2_per_unit'+index+'" class="form-control" name="pur2_per_unit[]" value="0" step="any" required>';
+					cell6.innerHTML  = '<input type="number" id="pur2_len'+index+'" onchange="rowTotal('+index+')" class="form-control" name="pur2_len[]"  value="20" step="any" required>';
+					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
+					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
+					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
+					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+
+					index++;
+
+					itemCount = Number($('#itemCount').val());
+					itemCount = itemCount+1;
+					$('#itemCount').val(itemCount);
+					$('#myTable select[data-plugin-selecttwo]').last().select2();
+
+				}
+			}
+
+			function getItemDetails(row_no,option){
+				var itemId;
+				if(option==1){
+					itemId = document.getElementById("item_cod"+row_no).value;
+				}
+				else if(option==2){
+					itemId = document.getElementById("item_name"+row_no).value;
+				}
+				$.ajax({
+					type: "GET",
+					url: "/item2/detail",
+					data: {id:itemId},
+					success: function(result){
+						$('#item_cod'+row_no).val(result[0]['it_cod']);
+						$('#item_name'+row_no).val(result[0]['it_cod']);
+						$('#remarks'+row_no).val(result[0]['item_remark']);
+						$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
+						$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
+						$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
+						$('#weight_per_piece'+row_no).val(result[0]['weight']);
+						$('#weight_per_piece'+row_no+'').trigger('change')
+						addNewRow();
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+
+			function CalBillAfterDisc(){
+				var basic_amount = parseFloat($('#basic_amount').val());
+				var basic_amount_disc = parseFloat($('#basic_amount_disc').val());
+
+				sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
+				$('#BillAfterDisc').val(sum);
+			}
+
+			function getCOADetails(){
+				var coaId = document.getElementById("coa_name").value;
+				
+				$.ajax({
+					type: "GET",
+					url: "/coa/detail",
+					data: {id:coaId},
+					success: function(result){
+						$('#address').val(result[0]['address']);
+						$('#cash_pur_phone').val(result[0]['phone_no']);
+						$('#remarks').val(result[0]['remarks']);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+
+			function rowTotal(index){
+
+				var pur2_qty2 = parseFloat($('#pur2_qty2'+index+'').val());
+				var sales_price = parseFloat($('#pur2_per_unit'+index+'').val());   
+				var discount = parseFloat($('#pur2_percentage'+index+'').val());
+				var length = parseFloat($('#pur2_len'+index+'').val());
+				var weight_per_piece = parseFloat($('#weight_per_piece'+index+'').val());
+
+				var amount = ((pur2_qty2 * sales_price)+((pur2_qty2 * sales_price) * (discount/100))) * length;
+
+				var weight = (pur2_qty2*weight_per_piece);
+
+				$('#amount'+index+'').val(amount);
+				$('#pur2_qty'+index+'').val(weight);
+				$('#pur2_qty_show'+index+'').val(weight);
+
+				tableTotal();
+			}
+
+			function tableTotal(){
+				var totalAmount=0;
+				var totalWeight=0;
+				var totalQuantity=0;
+				var tableRows = $("#Purchase2Table tr").length;
+				var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+				for (var i = 0; i < tableRows; i++) {
+					var currentRow =  table.rows[i];
+					totalAmount = totalAmount + Number(currentRow.cells[8].querySelector('input').value);
+					totalWeight = totalWeight + Number(currentRow.cells[7].querySelector('input').value);
+					totalQuantity = totalQuantity + Number(currentRow.cells[3].querySelector('input').value);
+				}
+				
+				$('#totalAmount').val(totalAmount.toFixed());
+				$('#total_amount_show').val(totalAmount);
+				$('#total_weight').val(totalWeight);
+				$('#total_weight_show').val(totalWeight);
+				$('#total_quantity').val(totalQuantity);
+				$('#total_quantity_show').val(totalQuantity);
+				
+				netTotal();
+			}
+
+			function netTotal(){
+				var netTotal = 0;
+				var total = Number($('#totalAmount').val());
+				var convance_charges = Number($('#convance_charges').val());
+				var labour_charges = Number($('#labour_charges').val());
+				var bill_discount = Number($('#bill_discount').val());
+
+				netTotal = total + convance_charges + labour_charges - bill_discount;
+				netTotal = netTotal.toFixed(0);
+				FormattednetTotal = formatNumberWithCommas(netTotal);
+				document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
+				$('#net_amount').val(netTotal);
+
+				var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
+				
+				$('#bill_perc').val(bill_perc);
+			}
+		
+			function formatNumberWithCommas(number) {
+				// Convert number to string and add commas
+				return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			function CalculateRowWeight(index){
+				var pur2_qty = $('#pur2_qty2'+index+'').val();
+				var weight_per_piece = $('#weight_per_piece'+index+'').val();
+
+				rowWeight= pur2_qty*weight_per_piece;
+				$('#pur2_qty'+index+'').val(rowWeight);
+				rowTotal(index);
+			}
+
+			function toggleInputs() {
+				const isChecked = document.getElementById('toggleSwitch').checked;
+				const inputGroups = document.querySelectorAll('.comm-form-field');
+				inputGroups.forEach(input => {
+					// Show or hide input groups based on the toggle switch state
+					if (input.id !== 'BillAfterDisc') {
+						input.disabled = !isChecked;
+					}
+				});
+				
+				var switchElement = document.getElementById('toggleSwitch');
+				if(switchElement.checked){
+					$('#isCommissionForm').val(1);
+				}
+				else{
+					$('#isCommissionForm').val(0);
+				}
+			}
+
+		</script>
+	@extends('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-
-	var index=2;
-	var itemCount = Number($('#itemCount').val());
-
-	$(document).ready(function() {
-		$(window).keydown(function(event){
-			if(event.keyCode == 13) {
-				event.preventDefault();
-				return false;
-			}
-		});
-
-		document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
-		toggleInputs();
-	});
-
-    function removeRow(button) {
-		var tableRows = $("#Purchase2Table tr").length;
-		if(tableRows>1){
-			var row = button.parentNode.parentNode;
-			row.parentNode.removeChild(row);
-			index--;	
-			itemCount = Number($('#itemCount').val());
-			itemCount = itemCount-1;
-			$('#itemCount').val(itemCount);
-		}  
-		tableTotal(); 
-    }
-
-	function addNewRow(){
-		var lastRow =  $('#myTable tr:last');
-		latestValue=lastRow[0].cells[1].querySelector('select').value;
-		if(latestValue!=""){
-			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-			var newRow = table.insertRow(table.rows.length);
-
-			var cell1 = newRow.insertCell(0);
-			var cell2 = newRow.insertCell(1);
-			var cell3 = newRow.insertCell(2);
-			var cell4 = newRow.insertCell(3);
-			var cell5 = newRow.insertCell(4);
-			var cell6 = newRow.insertCell(5);
-			var cell7 = newRow.insertCell(6);
-			var cell8 = newRow.insertCell(7);
-			var cell9 = newRow.insertCell(8);
-			var cell10 = newRow.insertCell(9);
-			var cell11 = newRow.insertCell(10);
-
-
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
-									'<option value="" disabled selected>Select Account</option>'+
-									'@foreach($items as $key => $row)'+	
-                                        '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-                                    '@endforeach'+
-								'</select>';
-			cell3.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell4.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur2_qty2'+index+'" value="0" name="pur2_qty2[]" step="any" required>';
-			cell5.innerHTML  = '<input type="number" id="pur2_per_unit'+index+'" class="form-control" name="pur2_per_unit[]" value="0" step="any" required>';
-			cell6.innerHTML  = '<input type="number" id="pur2_len'+index+'" onchange="rowTotal('+index+')" class="form-control" name="pur2_len[]"  value="20" step="any" required>';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
-			cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
-			cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-			cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
-			cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
-
-			index++;
-
-			itemCount = Number($('#itemCount').val());
-			itemCount = itemCount+1;
-			$('#itemCount').val(itemCount);
-		}
-	}
-
-	function getItemDetails(row_no,option){
-		var itemId;
-		if(option==1){
-			itemId = document.getElementById("item_cod"+row_no).value;
-		}
-		else if(option==2){
-			itemId = document.getElementById("item_name"+row_no).value;
-		}
-		$.ajax({
-			type: "GET",
-			url: "/item2/detail",
-			data: {id:itemId},
-			success: function(result){
-				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
-				$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
-				$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
-				$('#weight_per_piece'+row_no).val(result[0]['weight']);
-				$('#weight_per_piece'+row_no+'').trigger('change')
-				addNewRow();
-			},
-			error: function(){
-				alert("error");
-			}
-		});
-	}
-
-	function CalBillAfterDisc(){
-		var basic_amount = parseFloat($('#basic_amount').val());
-		var basic_amount_disc = parseFloat($('#basic_amount_disc').val());
-
-		sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
-		$('#BillAfterDisc').val(sum);
-	}
-
-	function getCOADetails(){
-		var coaId = document.getElementById("coa_name").value;
-		
-		$.ajax({
-			type: "GET",
-			url: "/coa/detail",
-			data: {id:coaId},
-			success: function(result){
-				$('#address').val(result[0]['address']);
-				$('#cash_pur_phone').val(result[0]['phone_no']);
-				$('#remarks').val(result[0]['remarks']);
-			},
-			error: function(){
-				alert("error");
-			}
-		});
-	}
-
-	function rowTotal(index){
-
-		var pur2_qty2 = parseFloat($('#pur2_qty2'+index+'').val());
-		var sales_price = parseFloat($('#pur2_per_unit'+index+'').val());   
-		var discount = parseFloat($('#pur2_percentage'+index+'').val());
-		var length = parseFloat($('#pur2_len'+index+'').val());
-		var weight_per_piece = parseFloat($('#weight_per_piece'+index+'').val());
-
-		var amount = ((pur2_qty2 * sales_price)+((pur2_qty2 * sales_price) * (discount/100))) * length;
-
-		var weight = (pur2_qty2*weight_per_piece);
-
-		$('#amount'+index+'').val(amount);
-		$('#pur2_qty'+index+'').val(weight);
-		$('#pur2_qty_show'+index+'').val(weight);
-
-		tableTotal();
-	}
-
-	function tableTotal(){
-		var totalAmount=0;
-		var totalWeight=0;
-		var totalQuantity=0;
-		var tableRows = $("#Purchase2Table tr").length;
-		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-
-		for (var i = 0; i < tableRows; i++) {
-			var currentRow =  table.rows[i];
-			totalAmount = totalAmount + Number(currentRow.cells[8].querySelector('input').value);
-			totalWeight = totalWeight + Number(currentRow.cells[7].querySelector('input').value);
-			totalQuantity = totalQuantity + Number(currentRow.cells[3].querySelector('input').value);
-        }
-		
-		$('#totalAmount').val(totalAmount.toFixed());
-		$('#total_amount_show').val(totalAmount);
-		$('#total_weight').val(totalWeight);
-		$('#total_weight_show').val(totalWeight);
-		$('#total_quantity').val(totalQuantity);
-		$('#total_quantity_show').val(totalQuantity);
-		
-		netTotal();
-	}
-
-	function netTotal(){
-		var netTotal = 0;
-		var total = Number($('#totalAmount').val());
-		var convance_charges = Number($('#convance_charges').val());
-		var labour_charges = Number($('#labour_charges').val());
-		var bill_discount = Number($('#bill_discount').val());
-
-		netTotal = total + convance_charges + labour_charges - bill_discount;
-		netTotal = netTotal.toFixed(0);
-		FormattednetTotal = formatNumberWithCommas(netTotal);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
-		$('#net_amount').val(netTotal);
-
-		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		
-		$('#bill_perc').val(bill_perc);
-	}
- 
-	function formatNumberWithCommas(number) {
-    	// Convert number to string and add commas
-    	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-
-	function CalculateRowWeight(index){
-		var pur2_qty = $('#pur2_qty2'+index+'').val();
-		var weight_per_piece = $('#weight_per_piece'+index+'').val();
-
-		rowWeight= pur2_qty*weight_per_piece;
-		$('#pur2_qty'+index+'').val(rowWeight);
-		rowTotal(index);
-	}
-
-	function toggleInputs() {
-		const isChecked = document.getElementById('toggleSwitch').checked;
-		const inputGroups = document.querySelectorAll('.comm-form-field');
-		inputGroups.forEach(input => {
-			// Show or hide input groups based on the toggle switch state
-			if (input.id !== 'BillAfterDisc') {
-				input.disabled = !isChecked;
-			}
-		});
-		
-		var switchElement = document.getElementById('toggleSwitch');
-		if(switchElement.checked){
-			$('#isCommissionForm').val(1);
-		}
-		else{
-			$('#isCommissionForm').val(0);
-		}
-	}
-
-</script>

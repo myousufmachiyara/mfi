@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
 
 class Purchase2Controller extends Controller
 {
+    use SaveImage;
+
     public function index()
     {
         $pur2 = tpurchase::where('tpurchase.status',1)
@@ -30,11 +32,11 @@ class Purchase2Controller extends Controller
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
             'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
-            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount',
-            \DB::raw('SUM(tpurchase_2.weight_pc*tpurchase_2.Sales_qty2) as weight_sum'),
-            \DB::raw('SUM(tpurchase_2.weight_pc*tpurchase_2.sales_price) as total_bill'),
+            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name',
+            \DB::raw('SUM(tpurchase_2.weight_pc * tpurchase_2.Sales_qty2) as weight_sum'),
+            \DB::raw('SUM(((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) + ((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) * (tpurchase_2.discount/100))) * tpurchase_2.length) as total_bill')
         )
-        ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name','tpurchase.pur_ord_no',
+        ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name','tpurchase.pur_ord_no','item_group.group_name',
             'disp_to.ac_name','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
             'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount')
         ->get();
@@ -301,11 +303,11 @@ class Purchase2Controller extends Controller
             
             $tax_pur2 = tax_tpurchase_2::where('sales_inv_cod',$request->pur2_id)->get()->first();
 
-            if($tax_pur2->isEmpty()){
+            if(is_null($tax_pur2)){
 
                 $new_tax_pur2 = new tax_tpurchase_2();
 
-                $new_tax_pur2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
+                $new_tax_pur2->sales_inv_cod=$request->pur2_id;
     
                 if ($request->has('bamount') && $request->bamount) {
                     $new_tax_pur2->bamount=$request->bamount;
@@ -373,7 +375,7 @@ class Purchase2Controller extends Controller
             foreach ($files as $file)
             {
                 $pur2Att = new pur2_att();
-                $pur2Att->pur2_id = $pur_2_id['Sale_inv_no'];
+                $pur2Att->pur2_id = $request->pur2_id;
                 $extension = $file->getClientOriginalExtension();
                 $pur2Att->att_path = $this->pur2Doc($file,$extension);
                 $pur2Att->save();
@@ -391,15 +393,19 @@ class Purchase2Controller extends Controller
 
     public function show(string $id)
     {
-        $pur = purchase::where('pur_id',$id)
-                ->join('ac','purchase.ac_cod','=','ac.ac_code')
+        $pur = tpurchase::where('Sale_inv_no',$id)
+                ->join('ac as acc_name','tpurchase.account_name','=','acc_name.ac_code')
+                ->join('ac as dispt_to','tpurchase.Cash_pur_name_ac','=','dispt_to.ac_code')
+                ->select('tpurchase.*','dispt_to.ac_name as disp_to','acc_name.ac_name as ac_name', 
+                'acc_name.address as address', 'acc_name.phone_no as phone_no')
                 ->first();
 
-        $pur2 = purchase_2::where('pur_cod',$id)
-                ->join('item_entry','purchase_2.item_cod','=','item_entry.it_cod')
+        $pur2 = tpurchase_2::where('sales_inv_cod',$id)
+                ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+                ->select('tpurchase_2.*','ie.item_name')
                 ->get();
 
-        return view('purchase1.view',compact('pur','pur2'));
+        return view('purchase2.view',compact('pur','pur2'));
     }
 
     public function getAttachements(Request $request)
@@ -411,11 +417,11 @@ class Purchase2Controller extends Controller
 
     public function deleteAtt($id)
     {
-        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $doc=pur2_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (File::exists($filePath)) {
             File::delete($filePath);
-            $pur1_att = pur1_att::where('att_id', $id)->delete();
+            $pur2_att = pur2_att::where('att_id', $id)->delete();
             return response()->json(['message' => 'File deleted successfully.']);
         } else {
             return response()->json(['message' => 'File not found.'], 404);
@@ -424,7 +430,7 @@ class Purchase2Controller extends Controller
 
     public function view($id)
     {
-        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $doc=pur2_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::file($filePath);
@@ -433,7 +439,7 @@ class Purchase2Controller extends Controller
 
     public function downloadAtt($id)
     {
-        $doc=pur1_att::where('att_id', $id)->select('att_path')->first();
+        $doc=pur2_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::download($filePath);
