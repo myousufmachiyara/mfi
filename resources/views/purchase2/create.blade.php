@@ -312,6 +312,7 @@
 			});
 
 			function removeRow(button) {
+				console.log("before remove");
 				var tableRows = $("#Purchase2Table tr").length;
 				if(tableRows>1){
 					var row = button.parentNode.parentNode;
@@ -366,7 +367,7 @@
 					itemCount = Number($('#itemCount').val());
 					itemCount = itemCount+1;
 					$('#itemCount').val(itemCount);
-					$('#myTable select[data-plugin-selecttwo]').last().select2();
+					$('#myTable select[data-plugin-selecttwo]').select2();
 
 				}
 			}
@@ -385,7 +386,7 @@
 					data: {id:itemId},
 					success: function(result){
 						$('#item_cod'+row_no).val(result[0]['it_cod']);
-						$('#item_name'+row_no).val(result[0]['it_cod']).trigger('change');
+						$('#item_name'+row_no).val(result[0]['it_cod']);
 						$('#remarks'+row_no).val(result[0]['item_remark']);
 						$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 						$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);

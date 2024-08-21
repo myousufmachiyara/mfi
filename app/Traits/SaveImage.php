@@ -82,5 +82,16 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/pur2/'),$filenamenew);
         return $filenamepath;
     }
+
+    public function tStockInDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/tstockin/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tstockin/'),$filenamenew);
+        return $filenamepath;
+    }
 }
 ?>

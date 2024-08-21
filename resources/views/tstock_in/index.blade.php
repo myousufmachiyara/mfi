@@ -122,7 +122,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="sale1_attachements">
+                            <tbody id="tstockIn_attachements">
 
                             </tbody>
                         </table>
@@ -146,24 +146,24 @@
     }
 
     function getAttachements(id){
-        var table = document.getElementById('sale1_attachements');
+        var table = document.getElementById('tstockIn_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/sales/attachements",
+            url: "/tstock_in/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/sales/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/sales/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tstock_in/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tstock_in/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#sale1_attachements').append(html);
+                    $('#tstockIn_attachements').append(html);
                 });
             },
             error: function(){
@@ -177,7 +177,7 @@
             return;
         }
 
-        fetch('/sales/deleteAttachment/' + fileId, {
+        fetch('/tstock_in/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

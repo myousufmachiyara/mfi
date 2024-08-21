@@ -199,14 +199,14 @@
 															<input type="number" class="form-control" name="pur2_qty2[]" id="pur2_qty2{{$pur2_key+1}}" onchange="CalculateRowWeight(1)" value="{{$pur2_items->Sales_qty2}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_per_unit[]" onchange="rowTotal(1)" id="pur2_per_unit{{$pur2_key+1}}" value="{{$pur2_items->sales_price}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_per_unit[]" onchange="rowTotal({{$pur2_key+1}})" id="pur2_per_unit{{$pur2_key+1}}" value="{{$pur2_items->sales_price}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_len[]" id="pur2_len{{$pur2_key+1}}" onchange="rowTotal(1)" value="{{$pur2_items->length}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_len[]" id="pur2_len{{$pur2_key+1}}" onchange="rowTotal({{$pur2_key+1}})" value="{{$pur2_items->length}}" step="any" required>
 														</td>
 														<td>
-															<input type="number" class="form-control" name="pur2_percentage[]" id="pur2_percentage{{$pur2_key+1}}" onchange="rowTotal(1)" value="{{$pur2_items->discount}}" step="any" required>
-															<input type="hidden" class="form-control" name="weight_per_piece[]" id="weight_per_piece{{$pur2_key+1}}" onchange="CalculateRowWeight(1)" value="{{$pur2_items->weight_pc}}" step="any" required>
+															<input type="number" class="form-control" name="pur2_percentage[]" id="pur2_percentage{{$pur2_key+1}}" onchange="rowTotal({{$pur2_key+1}})" value="{{$pur2_items->discount}}" step="any" required>
+															<input type="hidden" class="form-control" name="weight_per_piece[]" id="weight_per_piece{{$pur2_key+1}}" onchange="CalculateRowWeight({{$pur2_key+1}})" value="{{$pur2_items->weight_pc}}" step="any" required>
 														</td>
 														<td>
 															<input type="number" class="form-control" id="pur2_qty{{$pur2_key+1}}" step="any" value="{{$pur2_items->weight_pc * $pur2_items->Sales_qty2}}" required disabled>
@@ -297,6 +297,7 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
@@ -407,7 +408,7 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
-			$('#myTable select[data-plugin-selecttwo]').last().select2();
+			$('#myTable select[data-plugin-selecttwo]').select2();
 
 		}
 	}
@@ -426,7 +427,7 @@
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']).trigger('change');
+				$('#item_name'+row_no).val(result[0]['it_cod']);
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 				$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
