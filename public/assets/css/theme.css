@@ -127,7 +127,7 @@ a:active {
 	display: table-cell;
 	position: relative;
 	vertical-align: top;
-	width: 300px;
+	width: 250px;
 	z-index: 1010;
 }
 
@@ -1294,10 +1294,10 @@ a:active {
 
 .sidebar-left .sidebar-header .sidebar-title {
 	background: #1D2127;
-	color: #465162;
+	color: #fff;
 	padding: 15px;
 	font-size: 12.8px;
-	font-size: 0.8rem;
+	font-size: 1rem;
 }
 
 .sidebar-left .sidebar-header .sidebar-toggle {
@@ -6188,7 +6188,7 @@ ul.nav-main li a {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-size: 12.8px;
-	font-size: 0.8rem;
+	font-size: 1rem;
 }
 
 ul.nav-main li a span.badge {

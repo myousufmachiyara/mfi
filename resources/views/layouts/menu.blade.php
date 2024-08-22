@@ -13,13 +13,8 @@
 				<nav>
 					<ul class="nav nav-pills" id="mainNav">
 						<li class="active">
-							<a class="nav-link" href="layouts-default.html">
+							<a class="nav-link" href="/">
 								Home
-							</a>    
-						</li>
-						<li>
-							<a class="nav-link" href="layouts-default.html">
-								Dashboard
 							</a>    
 						</li>
 						<li class="dropdown">
