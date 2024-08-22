@@ -59,6 +59,7 @@ class TStockInController extends Controller
         $userId=1;
         $tstock_in = new tstock_in();
 
+
         // $tstock_in->Sal_inv_no;
         if ($request->has('date') && $request->date) {
             $tstock_in->sa_date=$request->date;
@@ -91,7 +92,7 @@ class TStockInController extends Controller
         $tstock_in->save();
 
         $latest_invoice = tstock_in::latest()->first();
-        $invoice_id = $latest_invoice['Sal_inv_no'];
+        $invoice_id = $latest_invoice['sal_inv_no'];
 
         if($request->has('items'))
         {

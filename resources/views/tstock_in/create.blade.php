@@ -92,7 +92,7 @@
                                                 </td>
                                                 <td>
                                                     <input type="number" id="qty1" name="qty[]" onchange="rowTotal(1)" placeholder="Qty" value="0" step="any" required class="form-control">
-                                                    <input type="hidden" id="weight1" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control">
+                                                    <input type="hidden" id="weight1" name="weight[]" placeholder="Weight" onchange="rowTotal(1)" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
                                                     <input type="number" id="row_total_weight1" placeholder="Weight" name="row_total_weight[]" disabled value="0" step="any"  class="form-control">
@@ -199,7 +199,7 @@
             newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
             newRow.append('<td><input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
             newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="hidden" id="weight'+index+'" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
-            newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight" value="0" step="any" required class="form-control" disabled></td>');
+            newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight" value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
             newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
 
             table.append(newRow);
@@ -223,9 +223,7 @@
                     $('#item_name'+row_no).val(result[0]['it_cod']);
                     $('#remarks'+row_no).val(result[0]['item_remark']);
                     $('#weight'+row_no).val(result[0]['weight']);
-                    $('#qty'+row_no).val(result[0]['qty']);
-                    $('#row_total_weight' + row_no).val(result[0]['qty']*result[0]['weight']);
-                    $('#qty'+row_no).trigger('change');
+                    $('#weight'+row_no).trigger('change');
 
                     addNewRow();
                 }
