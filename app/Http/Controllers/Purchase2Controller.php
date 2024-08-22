@@ -448,12 +448,12 @@ class Purchase2Controller extends Controller
 
     public function generatePDF($id)
     {
-        $purchase = purchase::where('pur_id',$id)
-        ->join('ac','purchase.ac_cod','=','ac.ac_code')
+        $purchase = tpurchase::where('Sale_inv_no',$id)
+        ->join('ac','tpurchase.account_name','=','ac.ac_code')
         ->first();
 
-        $purchase_items = purchase_2::where('pur_cod',$id)
-                ->join('item_entry','purchase_2.item_cod','=','item_entry.it_cod')
+        $purchase_items = tpurchase_2::where('sales_inv_cod',$id)
+                ->join('item_entry','tpurchase_2.item_cod','=','item_entry.it_cod')
                 ->get();
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
