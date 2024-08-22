@@ -158,9 +158,9 @@
     function getAttachements(id){
 
         var table = document.getElementById('pur2_attachements');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
+        // while (table.rows.length > 0) {
+        //     table.deleteRow(0);
+        // }
 
         $.ajax({
             type: "GET",

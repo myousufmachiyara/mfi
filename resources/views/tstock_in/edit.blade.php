@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" id="myForm" action="{{ route('store-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('update-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
@@ -17,8 +17,8 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >New ID</label>
-												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_in->Sal_inv_no }}" disabled>
+												<label class="col-form-label" >ID</label>
+												<input type="text" placeholder="(ID)" class="form-control" value="{{$tstock_in->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_in->Sal_inv_no }}" class="form-control" >
 											</div>

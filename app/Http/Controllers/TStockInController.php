@@ -92,7 +92,7 @@ class TStockInController extends Controller
         $tstock_in->save();
 
         $latest_invoice = tstock_in::latest()->first();
-        $invoice_id = $latest_invoice['sal_inv_no'];
+        $invoice_id = $latest_invoice['Sal_inv_no'];
 
         if($request->has('items'))
         {
@@ -198,7 +198,7 @@ class TStockInController extends Controller
                 if(filled($request->item_code[$i]))
                 {
                     $tstock_in_2 = new tstock_in_2();
-                    $tstock_in_2->sales_inv_cod=$invoice_id;
+                    $tstock_in_2->sales_inv_cod=$request->invoice_no;
                     $tstock_in_2->item_cod=$request->item_code[$i];
                     $tstock_in_2->remarks=$request->item_remarks[$i];
                     $tstock_in_2->Sales_qty=$request->qty[$i];
@@ -214,7 +214,7 @@ class TStockInController extends Controller
             foreach ($files as $file)
             {
                 $tstock_in_att = new tstock_in_att();
-                $tstock_in_att->tstock_in_id = $invoice_id;
+                $tstock_in_att->tstock_in_id = $request->invoice_no;
                 $extension = $file->getClientOriginalExtension();
                 $tstock_in_att->att_path = $this->tStockInDoc($file,$extension);
                 $tstock_in_att->save();
