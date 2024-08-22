@@ -11,14 +11,14 @@
 							<div class="col-4 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Purchase Details</h2>
+										<h2 class="card-title">Edit Purchase Details</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Invoice No.</label>
-												<input type="text" placeholder="(Edit Invoice)" class="form-control" value="{{$pur2->Sale_inv_no}}" disabled>
+												<input type="text" placeholder="(Edit Invoice)" class="form-control" value="{{$pur2->prefix}}{{$pur2->Sale_inv_no}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sale_inv_no}}" name="pur2_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>

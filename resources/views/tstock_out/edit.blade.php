@@ -11,14 +11,14 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock Out Pipe</h2>
+										<h2 class="card-title">Edit Stock Out Pipe</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >New ID</label>
-												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_out->Sal_inv_no }}" disabled>
+												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_out->prefix }}{{$tstock_out->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_out->Sal_inv_no }}" class="form-control" >
 											</div>

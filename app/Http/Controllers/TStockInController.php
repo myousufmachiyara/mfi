@@ -30,12 +30,12 @@ class TStockInController extends Controller
         ->join('ac','tstock_in.account_name','=','ac.ac_code')
         ->select(
             'tstock_in.Sal_inv_no','tstock_in.sa_date','tstock_in.Cash_pur_name','tstock_in.Sales_remarks','ac.ac_name',
-            'tstock_in.pur_inv', 'tstock_in.mill_gate', 'tstock_in.transporter','tstock_in.Cash_pur_address',
+            'tstock_in.pur_inv', 'tstock_in.mill_gate', 'tstock_in.transporter','tstock_in.Cash_pur_address','tstock_in.prefix',
             \DB::raw('SUM(tstock_in_2.Sales_qty) as qty_sum'),
             \DB::raw('SUM(tstock_in_2.Sales_qty*tstock_in_2.weight_pc) as weight_sum'),
         )
         ->groupby('tstock_in.Sal_inv_no','tstock_in.sa_date','tstock_in.Cash_pur_name','tstock_in.Sales_remarks','ac.ac_name',
-        'tstock_in.pur_inv', 'tstock_in.mill_gate', 'tstock_in.transporter','tstock_in.Cash_pur_address' )
+        'tstock_in.pur_inv', 'tstock_in.mill_gate', 'tstock_in.transporter','tstock_in.Cash_pur_address','tstock_in.prefix' )
         ->get();
 
         return view('tstock_in.index',compact('tstock_in'));

@@ -42,7 +42,7 @@
                                             <tbody>
                                                 @foreach ($pur2 as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->Sale_inv_no}}</td>
+                                                    <td>{{$row->prefix}}{{$row->Sale_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>

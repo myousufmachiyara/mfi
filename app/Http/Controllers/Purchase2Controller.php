@@ -31,13 +31,13 @@ class Purchase2Controller extends Controller
         ->leftjoin('item_group', 'item_group.item_group_cod', '=', 'tax_tpurchase_2.item')
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
-            'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
+            'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against','tpurchase.prefix',
             'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name',
             \DB::raw('SUM(tpurchase_2.weight_pc * tpurchase_2.Sales_qty2) as weight_sum'),
             \DB::raw('SUM(((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) + ((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) * (tpurchase_2.discount/100))) * tpurchase_2.length) as total_bill')
         )
         ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name','tpurchase.pur_ord_no','item_group.group_name',
-            'disp_to.ac_name','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
+            'disp_to.ac_name','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against','tpurchase.prefix' ,
             'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount')
         ->get();
         // 'item_group.group_name'
@@ -190,13 +190,13 @@ class Purchase2Controller extends Controller
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no', 'tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
-            'tpurchase.ConvanceCharges','tpurchase.cash_Pur_address','tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.account_name',
+            'tpurchase.ConvanceCharges','tpurchase.cash_Pur_address','tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.prefix','tpurchase.account_name',
             'tpurchase.Cash_pur_name_ac','bamount', 'disc', 'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id',
             'tax_tpurchase_2.remarks as tax_remarks'
         )
         ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no','tpurchase.Cash_pur_name',
         'tpurchase.Sales_Remarks','tpurchase.cash_Pur_address','tpurchase.sales_against','tpurchase.ConvanceCharges','tpurchase.account_name',
-        'tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.Cash_pur_name_ac','bamount', 'disc',
+        'tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.prefix','tpurchase.Cash_pur_name_ac','bamount', 'disc',
         'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id', 'tax_remarks' )
         ->first();
 
