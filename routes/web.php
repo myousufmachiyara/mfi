@@ -120,6 +120,8 @@ Route::get('/purchase2/attachements', [App\Http\Controllers\Purchase2Controller:
 Route::get('/purchase2/download/{id}', [App\Http\Controllers\Purchase2Controller::class, 'downloadAtt'])->name('purc2-att-download');
 Route::delete('/purchase2/deleteAttachment/{id}', [App\Http\Controllers\Purchase2Controller::class, 'deleteAtt'])->name('purc2-att-delete');
 Route::get('/purchase2/generatePDF/{id}', [App\Http\Controllers\Purchase2Controller::class, 'generatePDF'])->name('print-purc2-invoice');
+Route::get('/purchase2/getunclosed/', [App\Http\Controllers\Purchase2Controller::class, 'getunclosed'])->name('get-unclosed-purc2-invoice');
+Route::get('/purchase2/getItems/{id}', [App\Http\Controllers\Purchase2Controller::class, 'getItems'])->name('get-purc2-items');
 
 //sales
 Route::get('/sales/all-invoices', [App\Http\Controllers\SalesController::class, 'index'])->name('all-saleinvoices');

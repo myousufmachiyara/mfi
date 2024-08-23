@@ -32,7 +32,7 @@ class Purchase2Controller extends Controller
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
             'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against','tpurchase.prefix',
-            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name',
+            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name', 'tpurchase.sales_against',
             \DB::raw('SUM(tpurchase_2.weight_pc * tpurchase_2.Sales_qty2) as weight_sum'),
             \DB::raw('SUM(((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) + ((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) * (tpurchase_2.discount/100))) * tpurchase_2.length) as total_bill')
         )
@@ -62,6 +62,9 @@ class Purchase2Controller extends Controller
         }
         if ($request->has('pur_ord_no') && $request->pur_ord_no) {
             $pur2->pur_ord_no=$request->pur_ord_no;
+        }
+        if ($request->has('isInduced') && $request->isInduced==1) {
+            $pur2->sale_against=$request->sale_against;
         }
         if ($request->has('sales_against') && $request->sales_against) {
             $pur2->sales_against=$request->sales_against;
@@ -415,6 +418,34 @@ class Purchase2Controller extends Controller
         return $pur2_atts;
     }
 
+    public function getunclosed()
+    {
+        $unclosed_inv = tpurchase::where(function ($query) {
+            $query->where('sales_against', '')
+                  ->orWhereNull('sales_against');
+        })
+        ->join('ac', 'ac.ac_code', '=', 'tpurchase.account_name')
+        ->join('ac as dispt_acc', 'dispt_acc.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
+        ->select('tpurchase.*', 'ac.ac_name as acc_name','dispt_acc.ac_name as disp_acc')  // Select fields from both tables as needed
+        ->get();
+        return $unclosed_inv;
+    }
+
+    public function getItems($id){
+
+        $pur1= tpurchase::where('Sale_inv_no',$id)->get()->first();
+
+        $pur2 = tpurchase_2::where('sales_inv_cod',$id)
+        ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+        ->select('tpurchase_2.*','ie.item_name')
+        ->get();
+
+        return response()->json([
+            'pur1' => $pur1,
+            'pur2' => $pur2,
+        ]);
+    }
+
     public function deleteAtt($id)
     {
         $doc=pur2_att::where('att_id', $id)->select('att_path')->first();
@@ -453,7 +484,8 @@ class Purchase2Controller extends Controller
         ->first();
 
         $purchase_items = tpurchase_2::where('sales_inv_cod',$id)
-                ->join('item_entry','tpurchase_2.item_cod','=','item_entry.it_cod')
+                ->join('item_entry2','tpurchase_2.item_cod','=','item_entry2.it_cod')
+                ->select('tpurchase_2.*','item_entry2.item_name')
                 ->get();
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -461,8 +493,8 @@ class Purchase2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$purchase['pur_id']);
-        $pdf->SetSubject('Invoice-'.$purchase['pur_id']);
+        $pdf->SetTitle('Invoice-'.$purchase['Sale_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sale_inv_no']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
                
         // Set header and footer fonts
@@ -507,8 +539,10 @@ class Purchase2Controller extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
-        $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
+        $html .= '<td>Login: Hamza </td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -516,10 +550,10 @@ class Purchase2Controller extends Controller
 
         $html = '<table border="1" style="border-collapse: collapse;">';
         $html .= '<tr>';
-        $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name </td>';
+        $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name</td>';
         $html .= '<td width="30%">'.$purchase['ac_name'].'</td>';
         $html .= '<td width="20%">Name Of Person</td>';
-        $html .= '<td width="30%">'.$purchase['cash_saler_name'].'</td>';
+        $html .= '<td width="30%">'.$purchase['Cash_pur_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" >Address </td>';
@@ -535,7 +569,7 @@ class Purchase2Controller extends Controller
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td>Remarks </td>';
-        $html .= '<td width="80%">'.$purchase['pur_remarks'].'</td>';
+        $html .= '<td width="80%">'.$purchase['Sales_Remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -544,11 +578,12 @@ class Purchase2Controller extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:10%;">S/R</th>';
-        $html .= '<th style="width:10%">Qty</th>';
-        $html .= '<th style="width:20%">Item Name</th>';
+        $html .= '<th style="width:21%">Item Name</th>';
         $html .= '<th style="width:24%">Description</th>';
-        $html .= '<th style="width:12%">Price</th>';
-        $html .= '<th style="width:12%">Weight</th>';
+        $html .= '<th style="width:8%">Qty</th>';
+        $html .= '<th style="width:11%">Price</th>';
+        $html .= '<th style="width:7%">Len</th>';
+        $html .= '<th style="width:7%">%</th>';
         $html .= '<th style="width:12%">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
@@ -568,29 +603,31 @@ class Purchase2Controller extends Controller
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';
                 $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
-                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['pur_qty2'].'</td>';
-                $total_quantity=$total_quantity+$items['pur_qty2'];
-                $item_table .= '<td style="width:20%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
                 $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_price'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty'].'</td>';
-                $total_weight=$total_weight+$items['pur_qty'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty']*$items['pur_price'].'</td>';
-                $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
                 $item_table .= '</tr>';
             }
             else{
                 $item_table .= '<tr>';
                 $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
-                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['pur_qty2'].'</td>';
-                $total_quantity=$total_quantity+$items['pur_qty2'];
-                $item_table .= '<td style="width:20%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
                 $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_price'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty'].'</td>';
-                $total_weight=$total_weight+$items['pur_qty'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['pur_qty']*$items['pur_price'].'</td>';
-                $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
                 $item_table .= '</tr>';
             }
             $count++;
@@ -627,13 +664,13 @@ class Purchase2Controller extends Controller
         $pdf->SetXY(160, $currentY+10);
         $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
         $pdf->SetXY(160, $currentY+16.82);
-        $pdf->MultiCell(35, 5, $purchase['pur_labor_char'], 1, 'R');
+        $pdf->MultiCell(35, 5, $purchase['LaborCharges'], 1, 'R');
         $pdf->SetXY(160, $currentY+23.5);
-        $pdf->MultiCell(35, 5, $purchase['pur_convance_char'], 1, 'R');
+        $pdf->MultiCell(35, 5, $purchase['ConvanceCharges'], 1, 'R');
         $pdf->SetXY(160, $currentY+30.18);
-        $pdf->MultiCell(35, 5, $purchase['pur_discount'], 1, 'R');
+        $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
         $pdf->SetXY(160, $currentY+36.86);
-        $net_amount=round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
+        $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
