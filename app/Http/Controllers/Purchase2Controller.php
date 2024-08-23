@@ -63,6 +63,9 @@ class Purchase2Controller extends Controller
         if ($request->has('pur_ord_no') && $request->pur_ord_no) {
             $pur2->pur_ord_no=$request->pur_ord_no;
         }
+        if ($request->has('isInduced') && $request->isInduced==1) {
+            $pur2->sale_against=$request->sale_against;
+        }
         if ($request->has('sales_against') && $request->sales_against) {
             $pur2->sales_against=$request->sales_against;
         }
@@ -422,7 +425,8 @@ class Purchase2Controller extends Controller
                   ->orWhereNull('sales_against');
         })
         ->join('ac', 'ac.ac_code', '=', 'tpurchase.account_name')
-        ->select('tpurchase.*', 'ac.ac_name as acc_name')  // Select fields from both tables as needed
+        ->join('ac as dispt_acc', 'dispt_acc.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
+        ->select('tpurchase.*', 'ac.ac_name as acc_name','dispt_acc.ac_name as disp_acc')  // Select fields from both tables as needed
         ->get();
         return $unclosed_inv;
     }

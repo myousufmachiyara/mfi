@@ -24,6 +24,8 @@
 												<input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
+                                                <input type="hidden" id="isInduced" name="isInduced" value="0" class="form-control" >
+                                                <input type="hidden" id="sale_against" name="sale_against" value="0" class="form-control" >
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -282,7 +284,7 @@
                     html+= "<td>"+v['acc_name']+"</td>"
                     html+= "<td>"+v['sa_date']+"</td>"
                     html+= "<td>"+v['pur_ord_no']+"</td>"
-                    html+= "<td>"+v['Cash_pur_name_ac']+"</td>"
+                    html+= "<td>"+v['disp_acc']+"</td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedItems("+v['Sale_inv_no']+")'><i class='fas fa-check'></i></a></td>"
                     html+="</tr>";
                     $('#unclosed_purchases_list').append(html);
@@ -296,18 +298,18 @@
     }
 
     function inducedItems(id){
+        var ind_total_qty=0, ind_total_weight=0;
         var table = document.getElementById('tstock_inTable');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
-        index=1;
+        index=0;
         $('#itemCount').val(1);
 
         $.ajax({
             type: "GET",
             url: "/purchase2/getItems/"+id,
             success: function(result){
-                console.log(result['pur2']);
                 $('#stck_in_date').val(result['pur1']['sa_date']);
                 $('#stock_in_pur_inv').val(result['pur1']['Sale_inv_no']);
                 $('#stock_in_mill_bill').val(result['pur1']['pur_ord_no']);
@@ -315,6 +317,7 @@
                 $('#stck_in_coa_name').val(result['pur1']['account_name']).trigger('change');
 
                 $.each(result['pur2'], function(k,v){
+                    index++;
                     var table = $('#myTable').find('tbody');
                     var newRow = $('<tr>');
                     newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
@@ -327,10 +330,16 @@
                     table.append(newRow);
                     $('#item_name'+index).val(v['item_cod']);
 
-                    index++;
-                    $('#itemCount').val(Number($('#itemCount').val()) + 1);
+                    ind_total_qty= ind_total_qty + v['Sales_qty2']
+                    ind_total_weight= ind_total_weight + (v['Sales_qty2'] * v['weight_pc'])
                     $('#myTable select[data-plugin-selecttwo]').select2();
                 }); 
+                $("#total_qty").val(ind_total_qty);
+                $("#total_weight").val(ind_total_weight);
+                $("#isInduced").val(1);
+                $("#sale_against").val(id);
+                $('#itemCount').val(index);
+
                 $("#closeModal").trigger('click');
 
             },
