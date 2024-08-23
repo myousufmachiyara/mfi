@@ -53,7 +53,7 @@
 											</div>
 										</div>
 										<div class="col-md-6">
-											<div class="bill-data text-end">
+											<div class="bill-data">
 											<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Name Of Person: </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
