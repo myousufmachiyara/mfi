@@ -11,14 +11,14 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock In Pipe</h2>
+										<h2 class="card-title">Edit Stock In Pipe</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >ID</label>
-												<input type="text" placeholder="(ID)" class="form-control" value="{{$tstock_in->Sal_inv_no }}" disabled>
+												<input type="text" placeholder="(ID)" class="form-control" value="{{$tstock_in->prefix }}{{$tstock_in->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_in->Sal_inv_no }}" class="form-control" >
 											</div>
@@ -131,7 +131,7 @@
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
                                             <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
-                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
                                 </footer>

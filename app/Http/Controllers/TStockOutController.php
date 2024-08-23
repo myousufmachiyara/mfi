@@ -31,12 +31,12 @@ class TStockOutController extends Controller
         ->join('ac','tstock_out.account_name','=','ac.ac_code')
         ->select(
             'tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
-            'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address',
+            'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address','tstock_out.prefix',
             \DB::raw('SUM(tstock_out_2.Sales_qty) as qty_sum'),
             \DB::raw('SUM(tstock_out_2.Sales_qty*tstock_out_2.weight_pc) as weight_sum'),
         )
         ->groupby('tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
-        'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address' )
+        'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address' ,'tstock_out.prefix' )
         ->get();
 
         return view('tstock_out.index',compact('tstock_out'));
