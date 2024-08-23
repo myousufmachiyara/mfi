@@ -93,5 +93,16 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/tstockin/'),$filenamenew);
         return $filenamepath;
     }
+
+    public function tStockOutDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/tstockout/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tstockout/'),$filenamenew);
+        return $filenamepath;
+    }
 }
 ?>

@@ -153,7 +153,7 @@ Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController:
 Route::get('/tstock_in/new-tstock_in', [App\Http\Controllers\TStockInController::class, 'create'])->name('create-tstock-in-invoice'); 
 Route::get('/tstock_in/edit-invoice/{id}', [App\Http\Controllers\TStockInController::class, 'edit'])->name('edit-tstock-in-invoice');
 Route::post('/tstock_in/tstock_in_invoice/create', [App\Http\Controllers\TStockInController::class, 'store'])->name('store-tstock-in-invoice');
-Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-stock-in-invoice');
+Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-tstock-in-invoice');
 Route::post('/tstock_in/stockin/delete', [App\Http\Controllers\TStockInController::class, 'destroy'])->name('delete-tstock-in-invoice');
 Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
 Route::get('/tstock_in/download/{id}', [App\Http\Controllers\TStockInController::class, 'downloadAtt'])->name('tstock-in-att-download');
@@ -164,20 +164,18 @@ Route::get('/tstock_in/view/{id}', [App\Http\Controllers\TStockInController::cla
 // Route::get('/tstock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
 
 
-
-
-
 //tstock out
 Route::get('/tstock_out/all-tstock_out', [App\Http\Controllers\TStockOutController::class, 'index'])->name('all-tstock-out');
 Route::get('/tstock_out/new-tstock_out', [App\Http\Controllers\TStockOutController::class, 'create'])->name('create-tstock-out-invoice'); 
 Route::get('/tstock_out/edit-invoice/{id}', [App\Http\Controllers\TStockOutController::class, 'edit'])->name('edit-tstock-out-invoice');
 Route::post('/tstock_out/tstock_out_invoice/create', [App\Http\Controllers\TStockOutController::class, 'store'])->name('store-tstock-out-invoice');
-Route::post('/tstock_out/tstock_out_invoice/update', [App\Http\Controllers\TStockOutController::class, 'update'])->name('update-stock-out-invoice');
+Route::post('/tstock_out/tstock_out_invoice/update', [App\Http\Controllers\TStockOutController::class, 'update'])->name('update-tstock-out-invoice');
 Route::post('/tstock_out/stockout/delete', [App\Http\Controllers\TStockOutController::class, 'destroy'])->name('delete-tstock-out-invoice');
+Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-tstock-out-att');
+Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('tstock-out-att-download');
+Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
+Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-tstock-out-att');
 // Route::get('/tstock_out/saleinvoice/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-sale-invoice');
 // Route::get('/tstock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-sale-invoice');
 // Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
-// Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-sale1-att');
-// Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('sale1-att-download');
-// Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('sale1-att-delete');
-// Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-sale1-att');
+
