@@ -32,7 +32,7 @@ class Purchase2Controller extends Controller
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','acc_name.ac_name as acc_name','tpurchase.pur_ord_no',
             'disp_to.ac_name as disp_to','tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
-            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name',
+            'tpurchase.ConvanceCharges','tpurchase.LaborCharges','tpurchase.Bill_discount','item_group.group_name', 'tpurchase.sales_against',
             \DB::raw('SUM(tpurchase_2.weight_pc * tpurchase_2.Sales_qty2) as weight_sum'),
             \DB::raw('SUM(((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) + ((tpurchase_2.Sales_qty2 * tpurchase_2.sales_price) * (tpurchase_2.discount/100))) * tpurchase_2.length) as total_bill')
         )
