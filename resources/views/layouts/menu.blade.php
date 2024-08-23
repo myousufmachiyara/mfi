@@ -214,7 +214,7 @@
 	</div>
 
 	<!-- start: search & user box -->
-	<div class="header-right d-sm-none">	
+	<div class="header-right d-md-none">	
 		<span class="separator"></span>
 
 		<div id="userbox" class="userbox">
