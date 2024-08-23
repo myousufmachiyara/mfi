@@ -111,7 +111,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('all-purchases2')}}" >
+                    <a class="nav-link" href="{{ route('all-purchases2')}}" >
                         Purchase 2
                     </a>
                 </li>
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="nav-link" href="{{ route('all-sale2invoices')}}">
                         Sale 2
                     </a>
                 </li>

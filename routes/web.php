@@ -138,6 +138,20 @@ Route::get('/sales/download/{id}', [App\Http\Controllers\SalesController::class,
 Route::delete('/sales/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
 Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
 
+//sales 2
+Route::get('/sales2/all-invoices', [App\Http\Controllers\Sales2Controller::class, 'index'])->name('all-sale2invoices');
+Route::get('/sales2/new-invoice', [App\Http\Controllers\Sales2Controller::class, 'create'])->name('create-sale2-invoice'); 
+Route::get('/sales2/edit-invoice/{id}', [App\Http\Controllers\Sales2Controller::class, 'edit'])->name('edit-sale2-invoice');
+Route::post('/sales2/saleinvoice/create', [App\Http\Controllers\Sales2Controller::class, 'store'])->name('store-sale2-invoice');
+Route::post('/sales2/saleinvoice/update', [App\Http\Controllers\Sales2Controller::class, 'update'])->name('update-sale2-invoice');
+Route::post('/sales2/saleinvoice/delete', [App\Http\Controllers\Sales2Controller::class, 'destroy'])->name('delete-sale2-invoice');
+Route::get('/sales2/saleinvoice/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'show'])->name('show-sale2-invoice');
+Route::get('/sales2/saleinvoice/generatePDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sale2-invoice');
+Route::get('/sales2/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadPDF'])->name('download-sale2-invoice');
+Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sale2-att');
+Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sale2-att-download');
+Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sale2-att-delete');
+Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'view'])->name('show-sale2-att');
 
 //tbad bads
 Route::get('/tbad_dabs/all-tbad-dabs', [App\Http\Controllers\TBadDabsController::class, 'index'])->name('all-tbad-dabs');
@@ -146,7 +160,6 @@ Route::post('/tbad_dabs/create', [App\Http\Controllers\TBadDabsController::class
 Route::get('/tbad_dabs/edit/{id}', [App\Http\Controllers\TBadDabsController::class, 'edit'])->name('edit-tbad-dabs-entry');
 Route::post('/tbad_dabs/delete', [App\Http\Controllers\TBadDabsController::class, 'destroy'])->name('delete-tbad-dabs');
 Route::post('/tbad_dabs/update', [App\Http\Controllers\TBadDabsController::class, 'update'])->name('update-tbad-dabs');
-
 
 //tstock in
 Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController::class, 'index'])->name('all-tstock-in');
