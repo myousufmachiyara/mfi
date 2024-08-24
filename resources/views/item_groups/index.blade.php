@@ -18,9 +18,8 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th>S.No</th>
-                                                <th>Group Code</th>
-                                                <th>Name</th>
+                                                <th width="5%">Code</th>
+                                                <th>Group Name</th>
                                                 <th>Remarks</th>
                                                 <th>Action</th>
                                             </tr>
@@ -28,14 +27,19 @@
                                         <tbody>
                                             @foreach ($itemGroups as $key => $row)
                                                 <tr>
-                                                    <td>{{$key+1}}</td>
                                                     <td>{{$row->item_group_cod}}</td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->group_remarks}}</td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->item_group_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->item_group_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                       <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->item_group_cod}})" href="#updateModal">
+                                                          <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                         <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->item_group_cod}})" href="#deleteModal">
+                                                         <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -115,10 +119,14 @@
                         <h2 class="card-title">Update Group</h2>
                     </header>
                     <div class="card-body">
+                       <div class="form-group">
+                            <label>Group Code</label>
+                            <input type="number" class="form-control" id="group_id" required disabled>
+                        </div>
                         <div class="form-group">
                             <label>Group Name</label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
-                            <input type="hidden" class="form-control" id="update_group_id" placeholder="Name" name="item_group_cod" required>
+                            <input type="hidden" class="form-control" id="update_group_id" name="item_group_cod" required>
                         </div>
                         <div class="form-group">
                             <label>Remarks</label>
@@ -151,10 +159,10 @@
             url: "/item-group/detail",
             data: {id:groupID},
             success: function(result){
-                console.log(result)
-                $('#update_group_id').val(result[0]['item_group_cod']);
-                $('#update_group_name').val(result[0]['group_name']);
-                $('#update_group_remarks').val(result[0]['group_remarks']);
+                $('#group_id').val(result['item_group_cod']);
+                $('#update_group_id').val(result['item_group_cod']);
+                $('#update_group_name').val(result['group_name']);
+                $('#update_group_remarks').val(result['group_remarks']);
             },
             error: function(){
                 alert("error");
