@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Bad Dabs</h2>
-                                    <form class="text-end" action="{{ route('create-tbad-dabs') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Entry</button>
+                                    <h2 class="card-title">All Door Stock In</h2>
+                                    <form class="text-end" action="{{ route('create-stock-in-invoice') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -21,35 +21,44 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Date</th>
-                                                    <th>Reason</th>
-                                                    <th>Total Add</th>
-                                                    <th>Total Less</th>
+                                                    <th>Company Name</th>
+                                                    <th>Remarks</th>
+                                                    <th>Pur_Inv #</th>
+                                                    <th>Mill_Inv/Gate</th>
+                                                    <th>Total Qty</th>
+                                                    <th>Total Weight</th>
+                                                    <th>Transporter</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($tbad_dabs as $key => $row)
+                                                @foreach ($stock_in as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->bad_dabs_id}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->reason}}</td>
-                                                    <td>{{$row->add_sum}}</td>
-                                                    <td>{{$row->less_sum}}</td>
+                                                    <td>{{$row->Sal_inv_no}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
+                                                    <td>{{$row->Sales_remarks}}</td>
+                                                    <td>{{$row->pur_inv}}</td>
+                                                    <td>{{$row->mill_gate}}</td>
+                                                    <td>{{$row->qty_sum}}</td>
+                                                    <td>{{$row->weight_sum}}</td>
+                                                    <td>{{$row->transporter}}</td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="#" class="text-danger">
+                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a href="#" class="">
+                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a href="{{ route('edit-tbad-dabs-entry', $row->bad_dabs_id) }}" class="">
+                                                        <a href="{{ route('edit-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
-                                                        
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->bad_dabs_id}})" href="#deleteModal">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal">
                                                             <i class="far fa-trash-alt" style="color:red"></i>
                                                         </a>
                                                     </td>
@@ -63,43 +72,15 @@
                             </section>
                         </div>
                     </div>
-
-                    <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                        <form method="post" action="{{ route('delete-tbad-dabs') }}" enctype="multipart/form-data">
-                            @csrf
-                            <section class="card">
-                                <header class="card-header">
-                                    <h2 class="card-title">Delete Pipe Bed Dads</h2>
-                                </header>
-                                <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <div class="modal-icon">
-                                            <i class="fas fa-question-circle"></i>
-                                        </div>
-                                        <div class="modal-text">
-                                            <p class="mb-0">Are you sure that you want to delete this Delete Pipe Bed Dads entry?</p>
-                                            <input name="delete_tbad_dabs_id" id="deleteID" hidden>
-                                        </div>
-                                    </div>
-                                </div>
-                                <footer class="card-footer">
-                                    <div class="row">
-                                        <div class="col-md-12 text-end">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                            <button class="btn btn-default modal-dismiss">Cancel</button>
-                                        </div>
-                                    </div>
-                                </footer>
-            
                 </section>		
 			</div>
 		</section>
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-tbad-dabs') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-stock-in-invoice') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Invoice</h2>
+                        <h2 class="card-title">Delete Pipe Stock In</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -107,7 +88,7 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this invoice?</p>
+                                <p class="mb-0">Are you sure that you want to delete this Pipe Stock In?</p>
                                 <input name="invoice_id" id="deleteID" hidden>
                             </div>
                         </div>
@@ -124,7 +105,38 @@
             </form>
         </div>
 
-        
+        <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <section class="card">
+                <header class="card-header">
+                    <h2 class="card-title">All Attachements</h2>
+                </header>
+                <div class="card-body">
+                    <div class="modal-wrapper">
+
+                        <table class="table table-bordered table-striped mb-0" >
+                            <thead>
+                                <tr>
+                                    <th>Attachement Path</th>
+                                    <th>Download</th>
+                                    <th>View</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tstockIn_attachements">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-end">
+                            <button class="btn btn-default modal-dismiss">Cancel</button>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
         @extends('../layouts.footerlinks')
 	</body>
 </html>
@@ -134,24 +146,24 @@
     }
 
     function getAttachements(id){
-        var table = document.getElementById('sale1_attachements');
+        var table = document.getElementById('tstockIn_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/sales/attachements",
+            url: "/tstock_in/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/sales/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/sales/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tstock_in/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tstock_in/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#sale1_attachements').append(html);
+                    $('#tstockIn_attachements').append(html);
                 });
             },
             error: function(){
@@ -165,7 +177,7 @@
             return;
         }
 
-        fetch('/sales/deleteAttachment/' + fileId, {
+        fetch('/tstock_in/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

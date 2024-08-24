@@ -111,7 +111,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('all-purchases2')}}" >
+                    <a class="nav-link" href="{{ route('all-purchases2')}}" >
                         Purchase 2
                     </a>
                 </li>
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="nav-link" href="#">
                         Sale 2
                     </a>
                 </li>
@@ -157,12 +157,35 @@
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('all-tstock-out')}}">
+                    <a class="nav-link" href="{{ route('all-tstock-out')}}">
                         Stock Out
                     </a>
                 </li>
                 <li>
                     <a class="nav-link" href="{{ route('all-tbad-dabs')}}">
+                        Stock Balance
+                    </a>
+                </li>								
+            </ul>
+        </li>
+        <li class="nav-parent">
+            <a class="nav-link  " href="#">
+                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <span>Stock Doors</span>   
+            </a>
+            <ul class="nav nav-children">
+                <li>
+                    <a class="nav-link" href="{{ route('all-stock-in')}}">
+                        Stock In
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('all-stock-out')}}">
+                        Stock Out
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('all-bad-dabs')}}">
                         Stock Balance
                     </a>
                 </li>								

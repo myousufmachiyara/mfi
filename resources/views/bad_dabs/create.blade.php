@@ -5,7 +5,7 @@
         <div class="inner-wrapper">
             <section role="main" class="content-body">
                 @extends('../layouts.pageheader')
-                <form method="post" id="myForm" action="{{ route('store-tbad-dabs-entry') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="myForm" action="{{ route('store-bad-dabs-entry') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-3">								
@@ -48,7 +48,7 @@
                                                 <th width="10%"></th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tbad_dabsTable">
+                                        <tbody id="bad_dabsTable">
                                             <tr>
                                                 <td>
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
@@ -97,7 +97,7 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tbad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-bad-dabs') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
                                             <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ $(document).ready(function() {
 });
 
 function removeRow(button) {
-    var tableRows = $("#tbad_dabsTable tr").length;
+    var tableRows = $("#bad_dabsTable tr").length;
     if (tableRows > 1) {
         $(button).closest('tr').remove();
         index--;
@@ -187,7 +187,7 @@ function getItemDetails(row_no, option) {
     var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
     $.ajax({
         type: "GET",
-        url: "/item2/detail",
+        url: "/item/detail",
         data: {id: itemId},
         success: function(result) {
             if (result.length > 0) {
@@ -206,7 +206,7 @@ function getItemDetails(row_no, option) {
 function tableTotal() {
     var totalAdd = 0;
     var totalLess = 0;
-    $('#tbad_dabsTable tr').each(function() {
+    $('#bad_dabsTable tr').each(function() {
         totalAdd += Number($(this).find('input[name="qty_add[]"]').val());
         totalLess += Number($(this).find('input[name="qty_less[]"]').val());
     });
@@ -217,3 +217,4 @@ function tableTotal() {
     $('#totalless').val(totalLess);
 }
 </script>
+
