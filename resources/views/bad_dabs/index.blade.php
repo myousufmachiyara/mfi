@@ -9,8 +9,8 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Bad Dabs</h2>
-                                    <form class="text-end" action="{{ route('create-tbad-dabs') }}" method="GET">
+                                    <h2 class="card-title">All Doors Bad Dabs</h2>
+                                    <form class="text-end" action="{{ route('create-bad-dabs') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Entry</button>
                                     </form>
                                 </header>
@@ -28,7 +28,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($tbad_dabs as $key => $row)
+                                                @foreach ($bad_dabs as $key => $row)
                                                 <tr>
                                                     <td>{{$row->bad_dabs_id}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->date)->format('d-m-y') }}</td>
@@ -44,7 +44,7 @@
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a href="{{ route('edit-tbad-dabs-entry', $row->bad_dabs_id) }}" class="">
+                                                        <a href="{{ route('edit-bad-dabs-entry', $row->bad_dabs_id) }}" class="">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         
@@ -65,7 +65,7 @@
                     </div>
 
                     <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                        <form method="post" action="{{ route('delete-tbad-dabs') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('delete-bad-dabs') }}" enctype="multipart/form-data">
                             @csrf
                             <section class="card">
                                 <header class="card-header">
@@ -77,8 +77,8 @@
                                             <i class="fas fa-question-circle"></i>
                                         </div>
                                         <div class="modal-text">
-                                            <p class="mb-0">Are you sure that you want to delete this Delete Pipe Bed Dads entry?</p>
-                                            <input name="delete_tbad_dabs_id" id="deleteID" hidden>
+                                            <p class="mb-0">Are you sure that you want to delete this Delete Door Bed Dads entry?</p>
+                                            <input name="delete_bad_dabs_id" id="deleteID" hidden>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
 			</div>
 		</section>
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-tbad-dabs') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-bad-dabs') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">

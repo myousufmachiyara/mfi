@@ -173,6 +173,29 @@
 						</li>
 						<li class="dropdown">
 							<a class="nav-link dropdown-toggle" href="#">
+								Stock Doors
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="nav-link" href="{{ route('all-stock-in')}}">
+										Stock In
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ route('all-stock-out')}}">
+										Stock Out
+									</a>
+								</li>
+								<li>
+									<a class="nav-link" href="{{ route('all-bad-dabs')}}">
+										Stock Balance
+									</a>
+								</li>								
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a class="nav-link dropdown-toggle" href="#">
 								Reports
 							</a>
 							<ul class="dropdown-menu">

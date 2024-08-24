@@ -171,8 +171,31 @@
         <li class="nav-parent">
             <a class="nav-link" href="#">
                 <i class="bx bx-file" aria-hidden="true"></i>
+                <span>Stock Doors</span>   
+            </a>
+            <ul class="nav nav-children">
+                <li>
+                    <a class="nav-link" href="{{ route('all-stock-in')}}">
+                        Stock In
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('all-stock-out')}}">
+                        Stock Out
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('all-bad-dabs')}}">
+                        Stock Balance
+                    </a>
+                </li>								
+            </ul>
+        </li>
+        <li class="nav-parent">
+            <a class="nav-link  " href="#">
+                <i class="bx bx-file" aria-hidden="true"></i>
                 <span>Reports</span>  
-                
+          
             </a>
             <ul class="nav nav-children">
                 <li>

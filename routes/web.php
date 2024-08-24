@@ -193,3 +193,46 @@ Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::c
 // Route::get('/tstock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-sale-invoice');
 // Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 
+
+
+//bad bads
+Route::get('/bad_dabs/all-bad-dabs', [App\Http\Controllers\BadDabsController::class, 'index'])->name('all-bad-dabs');
+Route::get('/bad_dabs/new-bad-dabs', [App\Http\Controllers\BadDabsController::class, 'create'])->name('create-bad-dabs'); 
+Route::post('/bad_dabs/create', [App\Http\Controllers\BadDabsController::class, 'store'])->name('store-bad-dabs-entry');
+Route::get('/bad_dabs/edit/{id}', [App\Http\Controllers\BadDabsController::class, 'edit'])->name('edit-bad-dabs-entry');
+Route::post('/bad_dabs/delete', [App\Http\Controllers\BadDabsController::class, 'destroy'])->name('delete-bad-dabs');
+Route::post('/bad_dabs/update', [App\Http\Controllers\BadDabsController::class, 'update'])->name('update-bad-dabs');
+
+
+
+//stock in
+Route::get('/stock_in/all-stock_in', [App\Http\Controllers\StockInController::class, 'index'])->name('all-stock-in');
+Route::get('/stock_in/new-stock_in', [App\Http\Controllers\StockInController::class, 'create'])->name('create-stock-in-invoice'); 
+Route::get('/stock_in/edit-invoice/{id}', [App\Http\Controllers\StockInController::class, 'edit'])->name('edit-stock-in-invoice');
+Route::post('/stock_in/stock_in_invoice/create', [App\Http\Controllers\StockInController::class, 'store'])->name('store-stock-in-invoice');
+Route::post('/stock_in/stock_in_invoice/update', [App\Http\Controllers\StockInController::class, 'update'])->name('update-stock-in-invoice');
+Route::post('/stock_in/stockin/delete', [App\Http\Controllers\StockInController::class, 'destroy'])->name('delete-stock-in-invoice');
+Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
+Route::get('/stock_in/download/{id}', [App\Http\Controllers\StockInController::class, 'downloadAtt'])->name('stock-in-att-download');
+Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('sale1-stock-in-delete');
+Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
+// Route::get('/stock_in/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
+// Route::get('/stock_in/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
+// Route::get('/stock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
+
+
+//stock out
+Route::get('/stock_out/all-stock_out', [App\Http\Controllers\StockOutController::class, 'index'])->name('all-stock-out');
+Route::get('/stock_out/new-stock_out', [App\Http\Controllers\StockOutController::class, 'create'])->name('create-stock-out-invoice'); 
+Route::get('/stock_out/edit-invoice/{id}', [App\Http\Controllers\StockOutController::class, 'edit'])->name('edit-stock-out-invoice');
+Route::post('/stock_out/stock_out_invoice/create', [App\Http\Controllers\StockOutController::class, 'store'])->name('store-stock-out-invoice');
+Route::post('/stock_out/stock_out_invoice/update', [App\Http\Controllers\StockOutController::class, 'update'])->name('update-stock-out-invoice');
+Route::post('/stock_out/stockout/delete', [App\Http\Controllers\StockOutController::class, 'destroy'])->name('delete-stock-out-invoice');
+Route::get('/stock_out/attachements', [App\Http\Controllers\StockOutController::class, 'getAttachements'])->name('get-stock-out-att');
+Route::get('/stock_out/download/{id}', [App\Http\Controllers\StockOutController::class, 'downloadAtt'])->name('stock-out-att-download');
+Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOutController::class, 'deleteAtt'])->name('stock-out-att-delete');
+Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
+// Route::get('/stock_out/saleinvoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-sale-invoice');
+// Route::get('/stock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-sale-invoice');
+// Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
+
