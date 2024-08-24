@@ -8,7 +8,7 @@
 		</button>
 
 		<!-- start: header nav menu -->
-		<div class="header-nav collapse d-lg-none">
+		<!-- <div class="header-nav collapse d-none">
 			<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
 				<nav>
 					<ul class="nav nav-pills" id="mainNav">
@@ -208,13 +208,13 @@
 					</ul>	
 				</nav>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- end: header nav menu -->
 	</div>
 
 	<!-- start: search & user box -->
-	<div class="header-right d-sm-none">	
+	<div class="header-right">	
 		<span class="separator"></span>
 
 		<div id="userbox" class="userbox">

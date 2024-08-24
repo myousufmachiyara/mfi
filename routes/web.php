@@ -140,18 +140,19 @@ Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'vi
 
 //sales 2
 Route::get('/sales2/all-invoices', [App\Http\Controllers\Sales2Controller::class, 'index'])->name('all-sale2invoices');
-Route::get('/sales2/new-invoice', [App\Http\Controllers\Sales2Controller::class, 'create'])->name('create-sale2-invoice'); 
-Route::get('/sales2/edit-invoice/{id}', [App\Http\Controllers\Sales2Controller::class, 'edit'])->name('edit-sale2-invoice');
-Route::post('/sales2/saleinvoice/create', [App\Http\Controllers\Sales2Controller::class, 'store'])->name('store-sale2-invoice');
-Route::post('/sales2/saleinvoice/update', [App\Http\Controllers\Sales2Controller::class, 'update'])->name('update-sale2-invoice');
-Route::post('/sales2/saleinvoice/delete', [App\Http\Controllers\Sales2Controller::class, 'destroy'])->name('delete-sale2-invoice');
-Route::get('/sales2/saleinvoice/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'show'])->name('show-sale2-invoice');
-Route::get('/sales2/saleinvoice/generatePDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sale2-invoice');
-Route::get('/sales2/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadPDF'])->name('download-sale2-invoice');
-Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sale2-att');
-Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sale2-att-download');
-Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sale2-att-delete');
-Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'view'])->name('show-sale2-att');
+Route::get('/sales2/new', [App\Http\Controllers\Sales2Controller::class, 'create'])->name('new-sales2');
+Route::post('/sales2/create', [App\Http\Controllers\Sales2Controller::class, 'store'])->name('store-sales2');
+Route::get('/sales2/edit/{id}', [App\Http\Controllers\Sales2Controller::class, 'edit'])->name('edit-sales2');
+Route::post('/sales2/update', [App\Http\Controllers\Sales2Controller::class, 'update'])->name('update-sales2');
+Route::post('/sales2/delete', [App\Http\Controllers\Sales2Controller::class, 'destroy'])->name('delete-sales2');
+Route::get('/sales2/show/{id}', [App\Http\Controllers\Sales2Controller::class, 'show'])->name('show-sales2');
+Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'view'])->name('show-sales2-att');
+Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sales2-att');
+Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sales2-att-download');
+Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sales2-att-delete');
+Route::get('/sales2/generatePDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
+Route::get('/sales2/getunclosed/', [App\Http\Controllers\Sales2Controller::class, 'getunclosed'])->name('get-unclosed-sales2-invoice');
+Route::get('/sales2/getItems/{id}', [App\Http\Controllers\Sales2Controller::class, 'getItems'])->name('get-sales2-items');
 
 //tbad bads
 Route::get('/tbad_dabs/all-tbad-dabs', [App\Http\Controllers\TBadDabsController::class, 'index'])->name('all-tbad-dabs');
