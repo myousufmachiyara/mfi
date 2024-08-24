@@ -72,6 +72,17 @@ trait SaveImage{
         return $filenamepath;
     }
 
+    public function sale2Doc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/sale2/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/sale2/'),$filenamenew);
+        return $filenamepath;
+    }
+
     public function pur2Doc($file,$extension)
     {
         $img = $file;

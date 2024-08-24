@@ -8,7 +8,7 @@
 		</button>
 
 		<!-- start: header nav menu -->
-		<div class="header-nav collapse">
+		<!-- <div class="header-nav collapse d-none">
 			<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 header-nav-main-square">
 				<nav>
 					<ul class="nav nav-pills" id="mainNav">
@@ -138,7 +138,7 @@
 									</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ route('all-sale2invoices')}}">
 										Sale 2
 									</a>
 								</li>
@@ -231,7 +231,7 @@
 					</ul>	
 				</nav>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- end: header nav menu -->
 	</div>

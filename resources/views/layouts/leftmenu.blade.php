@@ -26,7 +26,7 @@
         </li>
         <li class="nav-parent">
             <a class="nav-link" href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <i class="bx bx-cylinder" aria-hidden="true"></i>
                 <span>Items</span>
             </a>
             <ul class="nav nav-children">
@@ -49,7 +49,7 @@
         </li>
         <li class="nav-parent">
             <a class="nav-link" href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <i class="bx bx-edit-alt" aria-hidden="true"></i>
                 <span>Accounts</span>                
             </a>
             <ul class="nav nav-children">
@@ -71,8 +71,8 @@
             </ul>
         </li>
         <li class="nav-parent">
-            <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+            <a class="nav-link" href="#">
+                <i class="bx bx-copy-alt" aria-hidden="true"></i>
                 <span>Vouchers</span>     
                 
             </a>
@@ -101,7 +101,7 @@
         </li>
         <li class="nav-parent">
             <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <i class="bx bx-purchase-tag" aria-hidden="true"></i>
                 <span>Purchase</span>     
             </a>
             <ul class="nav nav-children">
@@ -123,8 +123,8 @@
             </ul>
         </li>
         <li class="nav-parent">
-            <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+            <a class="nav-link" href="#">
+                <i class="bx bx-basket" aria-hidden="true"></i>
                 <span>Sale</span>   
             </a>
             <ul class="nav nav-children">
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('all-sale2invoices')}}">
                         Sale 2
                     </a>
                 </li>
@@ -147,7 +147,7 @@
         </li>
         <li class="nav-parent">
             <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <i class="bx bx-bar-chart" aria-hidden="true"></i>
                 <span>Stock Pipe</span>   
             </a>
             <ul class="nav nav-children">
@@ -169,8 +169,8 @@
             </ul>
         </li>
         <li class="nav-parent">
-            <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+            <a class="nav-link" href="#">
+                <i class="bx bx-file" aria-hidden="true"></i>
                 <span>Stock Doors</span>   
             </a>
             <ul class="nav nav-children">
@@ -193,9 +193,9 @@
         </li>
         <li class="nav-parent">
             <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+                <i class="bx bx-file" aria-hidden="true"></i>
                 <span>Reports</span>  
-                
+          
             </a>
             <ul class="nav nav-children">
                 <li>
@@ -211,8 +211,8 @@
             </ul>
         </li>
         <li class="nav-parent">
-            <a class="nav-link  " href="#">
-                <i class="bx bx-home-alt" aria-hidden="true"></i>
+            <a class="nav-link" href="#">
+                <i class="bx bx-right-arrow" aria-hidden="true"></i>
                 <span>Others</span>  
             </a>
             <ul class="nav nav-children">

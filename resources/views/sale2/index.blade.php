@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Purchase Pipe Invoices</h2>
-                                    <form class="text-end" action="{{ route('new-purchases2') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Pipe Invoice</button>
+                                    <h2 class="card-title">All Sale Pipe Invoices</h2>
+                                    <form class="text-end" action="{{ route('new-sales2') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Sale Pipe Invoice</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -23,11 +23,10 @@
                                                     <th>Date</th>
                                                     <th>Company Name</th>
                                                     <th>Mill Inv #</th>
-                                                    <th>Dispatch To</th>
+                                                    <th>Recieved By</th>
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
                                                     <th>SaleInv #</th>
-                                                    <th>Item Group</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
@@ -42,15 +41,14 @@
                                             <tbody>
                                                 @foreach ($pur2 as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->prefix}}{{$row->Sale_inv_no}}</td>
+                                                    <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>
-                                                    <td>{{$row->disp_to}}</td>
+                                                    <td>{{$row->comp_account}}</td>
                                                     <td>{{$row->Cash_pur_name}}</td>
                                                     <td>{{$row->Sales_Remarks}}</td>
                                                     <td>{{$row->sales_against}}</td>
-                                                    <td>{{$row->group_name}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
                                                     <td>{{$row->ConvanceCharges}}</td>
@@ -67,12 +65,12 @@
                                                     @else
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
                                                     @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal">View</a></td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                        <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sale_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <a href="{{ route('print-sales2-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
+                                                        <a href="{{ route('show-sales2',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
+                                                        <a href="{{ route('edit-sales2',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -88,7 +86,7 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-purchases2') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-sales2') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
@@ -100,7 +98,7 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this Purchase Invoice?</p>
+                                <p class="mb-0">Are you sure that you want to delete this Sale Invoice?</p>
                                 <input name="delete_purc2" id="deleteID" hidden>
                             </div>
                         </div>
@@ -164,15 +162,15 @@
 
         $.ajax({
             type: "GET",
-            url: "/purchase2/attachements",
+            url: "/sales2/attachements",
             data: {id:id},
             success: function(result){
                 console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/purchase2/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/purchase2/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/sales2/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/sales2/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#pur2_attachements').append(html);
