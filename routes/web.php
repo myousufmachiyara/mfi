@@ -237,3 +237,11 @@ Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::cla
 // Route::get('/stock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-sale-invoice');
 // Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 
+
+
+//complains
+Route::get('/complains/all-complains', [App\Http\Controllers\ComplainsController::class, 'index'])->name('all-complains');
+Route::post('/complains/create', [App\Http\Controllers\ComplainsController::class, 'store'])->name('store-complains');
+Route::post('/complains/delete', [App\Http\Controllers\ComplainsController::class, 'destroy'])->name('delete-complains');
+Route::post('/complains/update', [App\Http\Controllers\ComplainsController::class, 'update'])->name('update-complains');
+Route::get('/complains/detail', [App\Http\Controllers\ComplainsController::class, 'getcomplainsDetails'])->name('get-complains-details');
