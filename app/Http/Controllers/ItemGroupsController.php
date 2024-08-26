@@ -13,6 +13,7 @@ class ItemGroupsController extends Controller
         return view('item_groups.index',compact('itemGroups'));
     }
 
+
     public function store(Request $request)
     {
         $item_group = new Item_Groups();

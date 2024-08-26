@@ -21,6 +21,7 @@ Route::post('/item-groups/groups/delete', [App\Http\Controllers\ItemGroupsContro
 Route::post('/item-groups/groups/update', [App\Http\Controllers\ItemGroupsController::class, 'update'])->name('update-item-group');
 Route::get('/item-group/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
 
+
 //items
 Route::get('/items/all-items', [App\Http\Controllers\ItemsController::class, 'index'])->name('all-items');
 Route::get('/items/new-item', [App\Http\Controllers\ItemsController::class, 'create'])->name('create-item'); 
