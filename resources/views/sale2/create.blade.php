@@ -11,6 +11,9 @@
 							<div class="col-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 										<h2 class="card-title">Sale Details</h2>
 									</header>
 
