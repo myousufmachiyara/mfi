@@ -115,5 +115,17 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/tstockout/'),$filenamenew);
         return $filenamepath;
     }
+
+    public function compDoc($file, $extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/complains/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/complains/'),$filenamenew);
+        return $filenamepath;
+    }
+    
 }
 ?>

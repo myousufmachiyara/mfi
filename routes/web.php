@@ -245,3 +245,9 @@ Route::post('/complains/create', [App\Http\Controllers\ComplainsController::clas
 Route::post('/complains/delete', [App\Http\Controllers\ComplainsController::class, 'destroy'])->name('delete-complains');
 Route::post('/complains/update', [App\Http\Controllers\ComplainsController::class, 'update'])->name('update-complains');
 Route::get('/complains/detail', [App\Http\Controllers\ComplainsController::class, 'getcomplainsDetails'])->name('get-complains-details');
+Route::get('/complains/attachements', [App\Http\Controllers\ComplainsController::class, 'getAttachements'])->name('get-complains-att');
+Route::post('/complains/downloadAll', [App\Http\Controllers\ComplainsController::class, 'downloadAllAtt'])->name('complains-att-download-all');
+Route::get('/complains/print/{id}', [App\Http\Controllers\ComplainsController::class, 'print'])->name('print-complains');
+Route::get('/complains/download/{id}', [App\Http\Controllers\ComplainsController::class, 'downloadAtt'])->name('complains-att-download');
+Route::get('/complains/view/{id}', [App\Http\Controllers\ComplainsController::class, 'view'])->name('complains-att-view');
+Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\ComplainsController::class, 'deleteAtt'])->name('complains-att-delete');

@@ -26,7 +26,7 @@
                                                 <th>Custmer Name</th>
                                                 <th>MFI Inv#</th>
                                                 <th>Mill Inv#</th>
-                                                <th>Complain Detals</th>
+                                                <th>Complain Details</th>
                                                 <th>Resolve Date</th>
                                                 <th>Closing Remarks</th>
                                                 <th>Status</th>
@@ -59,9 +59,9 @@
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                     @endif
                                                     
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                       <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getGroupDetails({{$row->item_group_cod}})" href="#updateModal">
+                                                       <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getComplainsDetails({{$row->id}})" href="#updateModal">
                                                           <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                          <span class="separator"> | </span>
@@ -204,11 +204,11 @@
                         <div class="row form-group">
                             <div class="col-lg-6">
                                 <label>JV1 Code</label>
-                                <input type="number" class="form-control" placeholder="ID" id="update_id" required disabled>
+                                <input type="number" class="form-control" placeholder="ID" id="update_complain_id" required disabled>
                                 <input type="hidden" class="form-control" placeholder="ID" name="update_id" id="update_id_view" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="update_complain_date">Complain Date</label>
+                                <label>Complain Date</label>
                                 <input type="date" id="update_complain_date" class="form-control" placeholder="Date" name="update_inv_dat">
                             </div>
                             <div class="col-lg-6 mb-2">
@@ -251,7 +251,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="update_complain_status">Complain Status</label>
-                                <select id="update_complain_status" class="form-control" name="clear">
+                                <select id="update_complain_status" class="form-control" name="update_complain_status">
                                     <option value="" disabled>Select Status</option>
                                     <option value="0">Open</option>
                                     <option value="1">Closed</option>
@@ -274,6 +274,40 @@
                 </form>
             </section>
         </div>
+
+        
+        <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <section class="card">
+                <header class="card-header">
+                    <h2 class="card-title">All Attachements</h2>
+                </header>
+                <div class="card-body">
+                    <div class="modal-wrapper">
+
+                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                            <thead>
+                                <tr>
+                                    <th>Attachement Path</th>
+                                    <th>Download</th>
+                                    <th>View</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="complains_attachements">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-end">
+                            <button class="btn btn-default modal-dismiss">Cancel</button>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
         
         @extends('../layouts.footerlinks')
 	</body>
@@ -283,14 +317,45 @@
         $('#deleteID').val(id);
     }
 
+    function getAttachements(id){
+
+        var table = document.getElementById('complains_attachements');
+            while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/complains/attachements",
+            data: {id:id},
+            success: function(result){
+                console.log(result);
+                $.each(result, function(k,v){
+                    var html="<tr>";
+                    html+= "<td>"+v['att_path']+"</td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/complains/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/complains/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
+                    html+="</tr>";
+                    $('#complains_attachements').append(html);
+                });
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+    }
+
     function getComplainsDetails(id){
+        console.log("hello");
         $.ajax({
             type: "GET",
             url: "/complains/detail",
             data: {id:id},
         success: function(result) {
-            $('#update_complain_id').val(result.complain_id);
-            $('#update_complain_date').val(result.inv_dat);
+            console.log(result);
+            $('#update_complain_id').val(result.id);
+            $('#update_id_view').val(result.id);
             $('#update_mfi_purchase_number').val(result.mfi_pur_number);
             $('#update_mill_purchase_number').val(result.mill_pur_number);
             $('#update_company_name').val(result.company_name);
@@ -299,6 +364,7 @@
             $('#update_resolve_date').val(result.resolve_date);
             $('#update_resolve_remarks').val(result.resolve_remarks);
             $('#update_complain_status').val(result.clear);
+            $('#update_complain_date').val(result.inv_dat);
         },
         error: function(xhr, status, error) {
            
@@ -306,5 +372,31 @@
     });
 }
 
-    
+function deleteFile(fileId) {
+        if (!confirm('Are you sure you want to delete this file?')) {
+            return;
+        }
+
+        fetch('/complains/deleteAttachment/' + fileId, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('File deleted successfully.');
+                // Optionally, remove the element or reload the page
+                location.reload();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.message || 'An error occurred.');
+                });
+            }
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+    }
 </script>
