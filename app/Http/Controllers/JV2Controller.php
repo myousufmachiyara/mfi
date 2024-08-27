@@ -401,22 +401,28 @@ class JV2Controller extends Controller
         }	
     }
 
-    public function pendingInvoice($id){
-        // $pendingInv = vw_sales1_balamount::all();
-        
-        $results = Sales::where('sales.account_name', $id)
-            ->leftJoin('rec1_able_sal', 'sales.Sal_inv_no', '=', 'rec1_able_sal.Sal_inv_no')
-            ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
-            ->select(
-                'sales.Sal_inv_no',
-                DB::raw('(IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) AS b_amt'),
-                DB::raw('IFNULL(rec1_able_rec_voch_s.rec_amt, 0) AS r_amt'),
-                DB::raw('((IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) - IFNULL(rec1_able_rec_voch_s.rec_amt, 0)) AS bill_balance'),
-                'sales.account_name'
-            )
-            ->groupby('sales.Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance','sales.account_name') // Ensure $id is properly defined and sanitized
-            ->get();
+    // public function pendingInvoice($id){
 
+    //     $results = Sales::where('sales.account_name', $id)
+    //         ->leftJoin('rec1_able_sal', 'sales.Sal_inv_no', '=', 'rec1_able_sal.Sal_inv_no')
+    //         ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
+    //         ->select(
+    //             'sales.Sal_inv_no','sales.account_name',
+    //             DB::raw('rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) as b_amt'),
+    //             DB::raw('SUM(rec1_able_rec_voch_s.rec_amt as r_amt)'),
+    //             DB::raw('((rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) - (rec1_able_rec_voch_s.rec_amt)) as bill_balance'),
+    //         )
+    //         ->get();
+
+    //     return $results;
+    // }
+
+    public function pendingInvoice($id){
+        // Query to get the results from the view
+        $results = vw_sales1_balamount::where('account_name', $id)
+            ->select('Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance', 'account_name')
+            ->get();
+    
         return $results;
     }
 }
