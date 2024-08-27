@@ -406,10 +406,12 @@ class JV2Controller extends Controller
             ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
             ->select(
                 'sales.Sal_inv_no',
-                \DB::raw('(IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) AS b_amt'),
-                \DB::raw('IFNULL(rec1_able_rec_voch_s.rec_amt, 0) AS r_amt'),
-                \DB::raw('(IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) - IFNULL(rec1_able_rec_voch_s.rec_amt, 0) AS bill_balance')
+                DB::raw('(IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) AS b_amt'),
+                DB::raw('IFNULL(rec1_able_rec_voch_s.rec_amt, 0) AS r_amt'),
+                DB::raw('(IFNULL(rec1_able_sal.Bill_amount, 0) + IFNULL(sales.ConvanceCharges, 0) + IFNULL(sales.LaborCharges, 0)) - IFNULL(rec1_able_rec_voch_s.rec_amt, 0) AS bill_balance'),
+                'sales.account_name'
             )
+            ->where('sales.account_name', $id)  // Apply the where condition
             ->get();
         return $results;
     }
