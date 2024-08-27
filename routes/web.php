@@ -92,6 +92,7 @@ Route::get('/vouchers/jv2/attachements', [App\Http\Controllers\JV2Controller::cl
 Route::get('/vouchers/jv2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
 Route::get('/vouchers/jv2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
 Route::delete('/vouchers/jv2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
+Route::get('/vouchers/jv2/pendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'pendingInvoice'])->name('jv2-pend-invoices');
 
 //purchase 1
 Route::get('/purchase1/all-purchases', [App\Http\Controllers\PurchaseController::class, 'index'])->name('all-purchases1');
@@ -150,7 +151,7 @@ Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, '
 Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sales2-att');
 Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sales2-att-download');
 Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sales2-att-delete');
-Route::get('/sales2/generatePDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
+Route::get('/sales2/generatePDF/', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
 Route::get('/sales2/getunclosed/', [App\Http\Controllers\Sales2Controller::class, 'getunclosed'])->name('get-unclosed-sales2-invoice');
 Route::get('/sales2/getItems/{id}', [App\Http\Controllers\Sales2Controller::class, 'getItems'])->name('get-sales2-items');
 
@@ -194,7 +195,6 @@ Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::c
 // Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 
 
-
 //bad bads
 Route::get('/bad_dabs/all-bad-dabs', [App\Http\Controllers\BadDabsController::class, 'index'])->name('all-bad-dabs');
 Route::get('/bad_dabs/new-bad-dabs', [App\Http\Controllers\BadDabsController::class, 'create'])->name('create-bad-dabs'); 
@@ -202,7 +202,6 @@ Route::post('/bad_dabs/create', [App\Http\Controllers\BadDabsController::class, 
 Route::get('/bad_dabs/edit/{id}', [App\Http\Controllers\BadDabsController::class, 'edit'])->name('edit-bad-dabs-entry');
 Route::post('/bad_dabs/delete', [App\Http\Controllers\BadDabsController::class, 'destroy'])->name('delete-bad-dabs');
 Route::post('/bad_dabs/update', [App\Http\Controllers\BadDabsController::class, 'update'])->name('update-bad-dabs');
-
 
 
 //stock in

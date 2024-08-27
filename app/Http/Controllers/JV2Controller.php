@@ -8,6 +8,7 @@ use App\Models\AC;
 use App\Models\lager;
 use App\Models\lager0;
 use App\Models\jv2_att;
+use App\Models\vw_sales1_balamount;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -396,4 +397,8 @@ class JV2Controller extends Controller
         }	
     }
 
+    public function pendingInvoice($id){
+        $pendingInv = vw_sales1_balamount::all();
+        return $pendingInv;
+    }
 }

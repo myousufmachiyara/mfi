@@ -317,6 +317,8 @@
 				toggleInputs();
 			});
 
+
+
 			function removeRow(button) {
 				console.log("before remove");
 				var tableRows = $("#Purchase2Table tr").length;

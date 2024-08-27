@@ -403,8 +403,208 @@ class Sales2Controller extends Controller
         } 
     }
 
-    public function generatePDF($id)
-    {
+    public function showAllPDF($id){
+
+        $purchase = tsales::where('Sal_inv_no',$id)
+        ->join('ac','tsales.account_name','=','ac.ac_code')
+        ->first();
+
+        $purchase_items = tsales_2::where('sales_inv_cod',$id)
+                ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
+                ->select('tsales_2.*','item_entry2.item_name')
+                ->get();
+
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetKeywords('Invoice, TCPDF, PDF');
+               
+        // Set header and footer fonts
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        
+        // Set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        
+        // Set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+                
+        // Set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        
+        // Set font
+        $pdf->SetFont('helvetica', '', 10);
+        
+        // Add a page
+        $pdf->AddPage();
+           
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 5px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="text-align:center">Purchase Invoice</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+
+        $html = '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
+        $html .= '<td>Login: Hamza </td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table border="1" style="border-collapse: collapse;">';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name</td>';
+        $html .= '<td width="30%">'.$purchase['ac_name'].'</td>';
+        $html .= '<td width="20%">Name Of Person</td>';
+        $html .= '<td width="30%">'.$purchase['company_name'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" >Address </td>';
+        $html .= '<td width="30%">'.$purchase['address'].'</td>';
+        $html .= "<td width='20%'>Person's Address</td>";
+        $html .= '<td width="30%">'.$purchase['cash_Pur_address'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" >Phone </td>';
+        $html .= '<td width="30%">'.$purchase['phone_no'].'</td>';
+        $html .= "<td width='20%'>Person's Phone</td>";
+        $html .= '<td width="30%">'.$purchase['cash_pur_phone'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Remarks </td>';
+        $html .= '<td width="80%">'.$purchase['Sales_Remarks'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
+        $html .= '<tr>';
+        $html .= '<th style="width:10%;">S/R</th>';
+        $html .= '<th style="width:21%">Item Name</th>';
+        $html .= '<th style="width:24%">Description</th>';
+        $html .= '<th style="width:8%">Qty</th>';
+        $html .= '<th style="width:11%">Price</th>';
+        $html .= '<th style="width:7%">Len</th>';
+        $html .= '<th style="width:7%">%</th>';
+        $html .= '<th style="width:12%">Amount</th>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        
+        // Output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $item_table = '<table style="text-align:center">';
+        $count=1;
+        $total_weight=0;
+        $total_quantity=0;
+        $total_amount=0;
+        $net_amount=0;
+
+        foreach ($purchase_items as $items) {
+            if($count%2==0)
+            {
+                $item_table .= '<tr style="background-color:#f1f1f1">';
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
+                $item_table .= '</tr>';
+            }
+            else{
+                $item_table .= '<tr>';
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
+                $item_table .= '</tr>';
+            }
+            $count++;
+        }
+        $item_table .= '</table>';
+        $pdf->writeHTML($item_table, true, false, true, false, '');
+
+        $currentY = $pdf->GetY();
+
+        // Column 1
+        $pdf->SetXY(15, $currentY+10);
+        $pdf->MultiCell(30, 5, 'Total Weight(kg)', 1,1);
+        $pdf->MultiCell(30, 5, 'Total Quantity', 1,1);
+
+        // Column 2
+        $pdf->SetXY(45.1, $currentY+10);
+        $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
+        $pdf->SetXY(45.1, $currentY+16.82);
+        $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
+
+        // Column 3
+        $pdf->SetXY(120, $currentY+10);
+        $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
+        $pdf->SetXY(120, $currentY+16.82);
+        $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
+        $pdf->SetXY(120, $currentY+23.5);
+        $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
+        $pdf->SetXY(120, $currentY+30.18);
+        $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
+        $pdf->SetXY(120, $currentY+36.86);
+        $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
+        
+        // Column 4
+        $pdf->SetXY(160, $currentY+10);
+        $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
+        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->MultiCell(35, 5, $purchase['LaborCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->MultiCell(35, 5, $purchase['ConvanceCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
+        $pdf->SetXY(160, $currentY+36.86);
+        $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
+        $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
+        
+        // Close and output PDF
+        $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');
+
+    }
+
+    public function noLengthPDF($id){
         $purchase = tsales::where('Sale_inv_no',$id)
         ->join('ac','tsales.account_name','=','ac.ac_code')
         ->first();
@@ -601,5 +801,218 @@ class Sales2Controller extends Controller
         
         // Close and output PDF
         $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');
+    
+    }
+
+    public function onlyPriceQtyPDF($id){
+        $purchase = tsales::where('Sale_inv_no',$id)
+        ->join('ac','tsales.account_name','=','ac.ac_code')
+        ->first();
+
+        $purchase_items = tsales_2::where('sales_inv_cod',$id)
+                ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
+                ->select('tsales_2.*','item_entry2.item_name')
+                ->get();
+
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Invoice-'.$purchase['Sale_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sale_inv_no']);
+        $pdf->SetKeywords('Invoice, TCPDF, PDF');
+               
+        // Set header and footer fonts
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        
+        // Set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        
+        // Set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+                
+        // Set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        
+        // Set font
+        $pdf->SetFont('helvetica', '', 10);
+        
+        // Add a page
+        $pdf->AddPage();
+           
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 5px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="text-align:center">Purchase Invoice</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+
+        $html = '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
+        $html .= '<td>Login: Hamza </td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table border="1" style="border-collapse: collapse;">';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="border-right:1px dashed #000">Account Name</td>';
+        $html .= '<td width="30%">'.$purchase['ac_name'].'</td>';
+        $html .= '<td width="20%">Name Of Person</td>';
+        $html .= '<td width="30%">'.$purchase['company_name'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" >Address </td>';
+        $html .= '<td width="30%">'.$purchase['address'].'</td>';
+        $html .= "<td width='20%'>Person's Address</td>";
+        $html .= '<td width="30%">'.$purchase['cash_Pur_address'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" >Phone </td>';
+        $html .= '<td width="30%">'.$purchase['phone_no'].'</td>';
+        $html .= "<td width='20%'>Person's Phone</td>";
+        $html .= '<td width="30%">'.$purchase['cash_pur_phone'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Remarks </td>';
+        $html .= '<td width="80%">'.$purchase['Sales_Remarks'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
+        $html .= '<tr>';
+        $html .= '<th style="width:10%;">S/R</th>';
+        $html .= '<th style="width:21%">Item Name</th>';
+        $html .= '<th style="width:24%">Description</th>';
+        $html .= '<th style="width:8%">Qty</th>';
+        $html .= '<th style="width:11%">Price</th>';
+        $html .= '<th style="width:7%">Len</th>';
+        $html .= '<th style="width:7%">%</th>';
+        $html .= '<th style="width:12%">Amount</th>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        
+        // Output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $item_table = '<table style="text-align:center">';
+        $count=1;
+        $total_weight=0;
+        $total_quantity=0;
+        $total_amount=0;
+        $net_amount=0;
+
+        foreach ($purchase_items as $items) {
+            if($count%2==0)
+            {
+                $item_table .= '<tr style="background-color:#f1f1f1">';
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
+                $item_table .= '</tr>';
+            }
+            else{
+                $item_table .= '<tr>';
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
+                $item_table .= '<td style="width:21%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
+                $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
+                $item_table .= '<td style="width:8%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
+                $item_table .= '<td style="width:11%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['length'].'</td>';
+                $item_table .= '<td style="width:7%;border-right:1px dashed #000">'.$items['discount'].'</td>';
+                $total_weight=$total_weight+($items['Sales_qty2']*$items['weight_pc']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.(($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length'].'</td>';
+                $total_amount=$total_amount+((($items['Sales_qty2'] * $items['sales_price'])+(($items['Sales_qty2'] * $items['sales_price']) * ($items['discount']/100))) * $items['length']);
+                $item_table .= '</tr>';
+            }
+            $count++;
+        }
+        $item_table .= '</table>';
+        $pdf->writeHTML($item_table, true, false, true, false, '');
+
+        $currentY = $pdf->GetY();
+
+        // Column 1
+        $pdf->SetXY(15, $currentY+10);
+        $pdf->MultiCell(30, 5, 'Total Weight(kg)', 1,1);
+        $pdf->MultiCell(30, 5, 'Total Quantity', 1,1);
+
+        // Column 2
+        $pdf->SetXY(45.1, $currentY+10);
+        $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
+        $pdf->SetXY(45.1, $currentY+16.82);
+        $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
+
+        // Column 3
+        $pdf->SetXY(120, $currentY+10);
+        $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
+        $pdf->SetXY(120, $currentY+16.82);
+        $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
+        $pdf->SetXY(120, $currentY+23.5);
+        $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
+        $pdf->SetXY(120, $currentY+30.18);
+        $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
+        $pdf->SetXY(120, $currentY+36.86);
+        $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
+        
+        // Column 4
+        $pdf->SetXY(160, $currentY+10);
+        $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
+        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->MultiCell(35, 5, $purchase['LaborCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->MultiCell(35, 5, $purchase['ConvanceCharges'], 1, 'R');
+        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
+        $pdf->SetXY(160, $currentY+36.86);
+        $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
+        $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
+        
+        // Close and output PDF
+        $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');
+    }
+
+    public function generatePDF(Request $request)
+    {
+        if($request->print_type==1){
+            $this->showAllPDF($request->print_sale2);
+        }
+        elseif($request->print_type==2){
+            $this->noLengthPDF($request->print_sale2);
+        }
+        elseif($request->print_type==3){
+            $this->onlyPriceQtyPDF($request->print_sale2);
+        }
     }
 }

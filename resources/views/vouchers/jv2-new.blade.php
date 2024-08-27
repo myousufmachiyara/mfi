@@ -26,13 +26,38 @@
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
-											<div class="col-4 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+
+											<div class="col-4 mb-2">
+												<label class="col-form-label">Customer Name</label>
+												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus  name ="account_cod[]" onchange="getPendingInvoices()" required>
+													<option value="" disabled selected>Select Account</option>
+													@foreach($acc as $key1 => $row1)	
+														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+													@endforeach
+												</select>																			
 											</div>
+
 											<div class="col-12 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+												<table class="table table-bordered table-striped mb-0 mt-2">
+													<thead>
+														<tr>
+															<th></th>
+															<th width="">Inv #</th>
+															<th width="">Bill</th>
+															<th width="">Balance</th>
+															<th width="">Amount</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td width="2%"><input type="checkbox" id="inlineCheckbox1" value="option1"></td>
+															<td width="8%">1</td>
+															<td width="30%">5,443,000</td>
+															<td width="30%">1,225,000</td>
+															<td width="30%"><input type="number" class="form-control" ></td>
+														</tr>
+													</tbody>
+												</table>										
 											</div>
 									  </div>
 									</div>
@@ -99,6 +124,15 @@
 									</div>
 
 									<footer class="card-footer" >
+										<div class="col-3 mb-2">
+											<label class="col-form-label">Narration</label>
+											<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+										</div>
+										<div class="col-3 mb-3">
+											<label class="col-form-label">Attachements</label>
+											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+										</div>
+
 										<div class="row mb-3"  style="float:right">
 											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Debit</label>
@@ -269,6 +303,21 @@
 			totalCredit = totalCredit + Number(credit);
 		}
 		$('#total_credit').val(totalCredit);
+	}
+
+	function getPendingInvoices(){
+		var cust_id=$('#customer_name').val();
+
+		$.ajax({
+			type: "GET",
+			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+			success: function(result){
+				console.log(result);
+			},
+			error: function(){
+				alert("error");
+			}
+		});
 	}
 
 </script>
