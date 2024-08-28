@@ -71,7 +71,9 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<input type="text" placeholder="Sale Inv. No." value="{{$pur2->pur_against}}"  disabled class="form-control">
+												<input type="hidden" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->pur_against}}"  class="form-control">
+
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">

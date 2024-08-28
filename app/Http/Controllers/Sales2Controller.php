@@ -206,60 +206,26 @@ class Sales2Controller extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
+        $pur2->created_by=1;
 
-        tsales::where('Sale_inv_no', $request->pur2_id)->update([
+        // die(print_r($pur2));
+        
+        tsales::where('Sal_inv_no', $request->pur2_id)->update([
             'sa_date'=>$pur2->sa_date,
             'pur_ord_no'=>$pur2->pur_ord_no,
-            'pur_against'=>$pur2->sales_against,
+            'pur_against'=>$pur2->pur_against,
             'account_name'=>$pur2->account_name,
-            'company_name'=>$pur2->Cash_pur_name_ac,
-            'Cash_name'=>$pur2->Cash_pur_name,
+            'company_name'=>$pur2->company_name,
+            'Cash_name'=>$pur2->Cash_name,
             'cash_Pur_address'=>$pur2->cash_Pur_address,
             'Sales_Remarks'=>$pur2->Sales_Remarks,
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
+            'created_by' => $pur2->created_by,
         ]);
 
-        tsales_2::where('Sal_inv_no', $request->pur2_id)->delete();
-
-        if($request->has('items'))
-        {
-            for($i=0;$i<$request->items;$i++)
-            {
-                if(filled($request->item_name[$i]))
-                {
-                    $tsales_2 = new tsales_2();
-
-                    $tsales_2->sales_inv_cod=$request->pur2_id;
-                    $tsales_2->item_cod=$request->item_cod[$i];
-
-                    if ($request->remarks[$i]!=null) {
-                        $tsales_2->remarks=$request->remarks[$i];
-                    }
-                    if ($request->pur2_qty2[$i]!=null) {
-                        $tsales_2->Sales_qty2=$request->pur2_qty2[$i];
-                    }
-                    if ($request->pur2_per_unit[$i]!=null) {
-                        $tsales_2->sales_price=$request->pur2_per_unit[$i];
-                    }
-                    if ($request->weight_per_piece[$i]!=null) {
-                        $tsales_2->weight_pc=$request->weight_per_piece[$i];
-                    }
-                    if ($request->pur2_len[$i]!=null) {
-                        $tsales_2->length=$request->pur2_len[$i];
-                    }
-                    if ($request->pur2_price_date[$i]!=null) {
-                        $tsales_2->rat_dat=$request->pur2_price_date[$i];
-                    }
-                    if ($request->pur2_percentage[$i]!=null) {
-                        $tsales_2->discount=$request->pur2_percentage[$i];
-                    }
-                    
-                    $tsales_2->save();
-                }
-            }
-        }
+        tsales_2::where('sales_inv_cod', $request->pur2_id)->delete();
 
         if($request->has('items'))
         {
