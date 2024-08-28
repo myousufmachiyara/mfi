@@ -90,6 +90,7 @@ class Sales2Controller extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
+        $pur2->created_by=1;
 
         $pur2->save();
 
@@ -562,7 +563,7 @@ class Sales2Controller extends Controller
         $pdf->SetXY(160, $currentY+30.18);
         $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
         $pdf->SetXY(160, $currentY+36.86);
-        $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
+        $net_amount=number_format($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF

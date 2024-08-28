@@ -11,9 +11,7 @@ use App\Models\jv2_att;
 use App\Models\Sales;
 use App\Models\Sales_2;
 use App\Models\sales_ageing;
-use App\Models\rec1_able_sal;
-use App\Models\vw_sales1_balamount;
-use App\Models\rec1_able_rec_voch_s;
+use App\Models\vw_union_sale_1_2_opbal;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -442,8 +440,8 @@ class JV2Controller extends Controller
 
     public function pendingInvoice($id){
         // Query to get the results from the view
-        $results = vw_sales1_balamount::where('account_name', $id)
-            ->select('Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance', 'account_name')
+        $results = vw_union_sale_1_2_opbal::where('account_name', $id)
+            ->select('Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance', 'account_name','sa_date')
             ->orderby ('Sal_inv_no', 'desc')
             ->get();
     
