@@ -30,7 +30,7 @@
 
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Select Customer To See Prev Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus  name ="customer_name[]" onchange="getPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -106,11 +106,11 @@
 														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step=".00001">
+														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
 													</td>
 
 													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step=".00001">
+														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -237,8 +237,8 @@
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
 			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
-			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';
+			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
@@ -320,7 +320,7 @@
 					html+= "<td width='8%''><input type='number' class='form-control' value="+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"></td>"
 					html+= "<td width='30%'><input type='number' class='form-control' value="+v['b_amt']+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+v['b_amt']+"></td>"
 					html+= "<td width='30%'><input type='number' class='form-control' value="+v['bill_balance']+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+v['bill_balance']+"></td>"
-					html+= "<td width='30%'><input type='number' name='rec_amount[]' class='form-control' value='0' ></td>"
+					html+= "<td width='30%'><input type='number' name='rec_amount[]' class='form-control' value='0' step='any' ></td>"
 					html+="</tr>";
 					$('#pendingInvoices').append(html);
 				});
