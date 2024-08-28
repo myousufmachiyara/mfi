@@ -20,6 +20,7 @@
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="RC. #" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-4 mb-2">
@@ -28,8 +29,8 @@
 											</div>
 
 											<div class="col-4 mb-2">
-												<label class="col-form-label">Customer Name</label>
-												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus  name ="account_cod[]" onchange="getPendingInvoices()" required>
+												<label class="col-form-label">Select Customer To See Prev Invoices</label>
+												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus  name ="customer_name[]" onchange="getPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -48,13 +49,9 @@
 															<th width="">Amount</th>
 														</tr>
 													</thead>
-													<tbody>
+													<tbody id="pendingInvoices">
 														<tr>
-															<td width="2%"><input type="checkbox" id="inlineCheckbox1" value="option1"></td>
-															<td width="8%">1</td>
-															<td width="30%">5,443,000</td>
-															<td width="30%">1,225,000</td>
-															<td width="30%"><input type="number" class="form-control" ></td>
+
 														</tr>
 													</tbody>
 												</table>										
@@ -124,21 +121,20 @@
 									</div>
 
 									<footer class="card-footer" >
-										<div class="col-3 mb-2">
-											<label class="col-form-label">Narration</label>
-											<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
-										</div>
-										<div class="col-3 mb-3">
-											<label class="col-form-label">Attachements</label>
-											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-										</div>
-
-										<div class="row mb-3"  style="float:right">
-											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+										<div class="row mb-3" >
+											<div class="col-3 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+											</div>
+											<div class="col-3 mb-3">
+												<label class="col-form-label">Attachements</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+											<div class="col-sm-2 col-md-3 pb-sm-3 pb-md-0" style="float:right">
 												<label class="col-form-label">Total Debit</label>
 												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 											</div>
-											<div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+											<div class="col-sm-6 col-md-3 pb-sm-3 pb-md-0" style="float:right">
 												<label class="col-form-label">Total Credit</label>
 												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
 											</div>
@@ -307,17 +303,31 @@
 
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
+		$('#prevInvoices').val(1)
+		
+		var table = document.getElementById('pendingInvoices');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
 
 		$.ajax({
 			type: "GET",
 			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
 			success: function(result){
-				console.log(result);
+				$.each(result, function(k,v){
+					var html="<tr>";
+					html+= "<td style='vertical-align: middle;' width='2%'><input type='checkbox' name='selectedItems[]' value="+(k+1)+"></td>"
+					html+= "<td width='8%''><input type='number' class='form-control' value="+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"></td>"
+					html+= "<td width='30%'><input type='number' class='form-control' value="+v['b_amt']+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+v['b_amt']+"></td>"
+					html+= "<td width='30%'><input type='number' class='form-control' value="+v['bill_balance']+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+v['bill_balance']+"></td>"
+					html+= "<td width='30%'><input type='number' name='rec_amount[]' class='form-control' value='0' ></td>"
+					html+="</tr>";
+					$('#pendingInvoices').append(html);
+				});
 			},
 			error: function(){
 				alert("error");
 			}
 		});
 	}
-
 </script>

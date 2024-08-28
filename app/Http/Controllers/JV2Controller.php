@@ -10,6 +10,7 @@ use App\Models\lager0;
 use App\Models\jv2_att;
 use App\Models\Sales;
 use App\Models\Sales_2;
+use App\Models\sales_ageing;
 use App\Models\rec1_able_sal;
 use App\Models\vw_sales1_balamount;
 use App\Models\rec1_able_rec_voch_s;
@@ -96,6 +97,24 @@ class JV2Controller extends Controller
                     $lager->credit=$request->credit[$i];
                     $lager->save();
                 }
+            }
+        }
+
+        if($request->has('prevInvoices') && $request->prevInvoices==1)
+        {
+            for($i=0;$i<$request->selectedItems;$i++)
+            {
+
+                if($request->selectedItems[$i])
+                {
+                    $sales_ageing = new sales_ageing();
+                    $sales_ageing->jv2_id=$latest_jv2['jv_no'];
+                    $sales_ageing->sales_id=$request->invoice_nos[$i];
+                    $sales_ageing->acc_name=$request->customer_name;
+                    $sales_ageing->amount=$request->rec_amount[$i];
+                    $sales_ageing->save();
+                }
+                
             }
         }
         
@@ -421,6 +440,7 @@ class JV2Controller extends Controller
         // Query to get the results from the view
         $results = vw_sales1_balamount::where('account_name', $id)
             ->select('Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance', 'account_name')
+            ->orderby ('Sal_inv_no', 'desc')
             ->get();
     
         return $results;
