@@ -111,6 +111,7 @@ class JV2Controller extends Controller
                     $sales_ageing = new sales_ageing();
                     $sales_ageing->jv2_id=$latest_jv2['jv_no'];
                     $sales_ageing->sales_id=$request->invoice_nos[$i];
+                    $sales_ageing->sales_prefix=$request->prefix[$i];
                     $sales_ageing->acc_name=$request->customer_name;
                     $sales_ageing->amount=$request->rec_amount[$i];
                     $sales_ageing->created_by=1;

@@ -316,7 +316,6 @@
 			type: "GET",
 			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
 			success: function(result){
-				console.log(result)
 				$.each(result, function(k,v){
 					var html="<tr>";
 					html+= "<td style='vertical-align: middle;' width='2%'><input type='checkbox' name='selectedItems[]'></td>"
