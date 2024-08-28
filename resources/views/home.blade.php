@@ -37,7 +37,7 @@
 
 				<section role="main" class="content-body" >
 
-					<header class="page-header" >
+					<!-- <header class="page-header" >
 						<div class="right-wrapper text-end">
 							<ol class="breadcrumbs">
 								<li>
@@ -54,7 +54,7 @@
 
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
 						</div>
-					</header>
+					</header> -->
 					<!-- start: page -->
 					
 					<!-- end: page -->
