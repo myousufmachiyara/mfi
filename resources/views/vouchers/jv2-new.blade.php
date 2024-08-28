@@ -318,8 +318,8 @@
 					var html="<tr>";
 					html+= "<td style='vertical-align: middle;' width='2%'><input type='checkbox' name='selectedItems[]' value="+(k+1)+"></td>"
 					html+= "<td width='8%''><input type='number' class='form-control' value="+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"></td>"
-					html+= "<td width='30%'><input type='number' class='form-control' value="+v['b_amt']+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+v['b_amt']+"></td>"
-					html+= "<td width='30%'><input type='number' class='form-control' value="+v['bill_balance']+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+v['bill_balance']+"></td>"
+					html+= "<td width='30%'><input type='number' class='form-control' value="+round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+round(v['b_amt'])+"></td>"
+					html+= "<td width='30%'><input type='number' class='form-control' value="+round(v['bill_balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+round(v['bill_balance'])+"></td>"
 					html+= "<td width='30%'><input type='number' name='rec_amount[]' class='form-control' value='0' step='any' ></td>"
 					html+="</tr>";
 					$('#pendingInvoices').append(html);
