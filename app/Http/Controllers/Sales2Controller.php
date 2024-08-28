@@ -171,7 +171,7 @@ class Sales2Controller extends Controller
 
     public function update(Request $request){
 
-        $pur2 = tsales::where('Sale_inv_no',$request->pur2_id)->get()->first();
+        $pur2 = tsales::where('Sal_inv_no',$request->pur2_id)->get()->first();
 
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
