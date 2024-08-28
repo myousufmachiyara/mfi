@@ -319,12 +319,12 @@
 				$.each(result, function(k,v){
 					var html="<tr>";
 					html+= "<td style='vertical-align: middle;' width='2%'><input type='checkbox' name='selectedItems[]'></td>"
-					html+= "<td width='8%'><input type='text' class='form-control' value="+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"></td>"
+					html+= "<td width='8%'><input type='text' class='form-control' value="+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+(k+1)+"></td>"
 					html+= "<td width='8%'><input type='text' class='form-control' value="+v['prefix']+" disabled><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
 					html+= "<td width='8%'><input type='date' class='form-control' value="+v['sa_date']+" disabled><input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 					html+= "<td width='30%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 					html+= "<td width='30%'><input type='number' class='form-control' value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-					html+= "<td width='30%'><input type='number' name='rec_amount[]' class='form-control' value='0' step='any' ></td>"
+					html+= "<td width='30%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' ></td>"
 					html+="</tr>";
 					$('#pendingInvoices').append(html);
 				});

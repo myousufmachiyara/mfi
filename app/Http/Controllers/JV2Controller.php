@@ -104,16 +104,17 @@ class JV2Controller extends Controller
 
         if($request->has('prevInvoices') && $request->prevInvoices==1)
         {
-            for($i=0;$i<$selectedItemslength;$i++)
+            for($j=0;$j<$request->totalInvoices;$j++)
             {
-                if($request->selectedItems[$i])
+                if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
                 {
                     $sales_ageing = new sales_ageing();
+
                     $sales_ageing->jv2_id=$latest_jv2['jv_no'];
-                    $sales_ageing->sales_id=$request->invoice_nos[$i];
-                    $sales_ageing->sales_prefix=$request->prefix[$i];
+                    $sales_ageing->amount=$request->rec_amount[$j];
+                    $sales_ageing->sales_id=$request->invoice_nos[$j];
+                    $sales_ageing->sales_prefix=$request->prefix[$j];
                     $sales_ageing->acc_name=$request->customer_name;
-                    $sales_ageing->amount=$request->rec_amount[$i];
                     $sales_ageing->created_by=1;
                     $sales_ageing->save();
                 }
