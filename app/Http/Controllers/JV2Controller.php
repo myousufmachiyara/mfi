@@ -112,6 +112,7 @@ class JV2Controller extends Controller
                     $sales_ageing->sales_id=$request->invoice_nos[$i];
                     $sales_ageing->acc_name=$request->customer_name;
                     $sales_ageing->amount=$request->rec_amount[$i];
+                    $sales_ageing->created_by=1;
                     $sales_ageing->save();
                 }
                 
