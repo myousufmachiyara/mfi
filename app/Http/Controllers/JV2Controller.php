@@ -48,6 +48,7 @@ class JV2Controller extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'debit' => 'required',
             'credit' => 'required',
@@ -100,11 +101,13 @@ class JV2Controller extends Controller
             }
         }
 
+        $selectedItems = $request->input('selectedItems', []);
+        $selectedItemslength = count($selectedItems);
+
         if($request->has('prevInvoices') && $request->prevInvoices==1)
         {
-            for($i=0;$i<$request->selectedItems;$i++)
+            for($i=0;$i<$selectedItemslength;$i++)
             {
-
                 if($request->selectedItems[$i])
                 {
                     $sales_ageing = new sales_ageing();
