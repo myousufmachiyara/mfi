@@ -441,7 +441,7 @@ class JV2Controller extends Controller
     public function pendingInvoice($id){
         // Query to get the results from the view
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-            ->select('Sal_inv_no', 'b_amt', 'r_amt', 'bill_balance', 'account_name','sa_date')
+            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
             ->orderby ('Sal_inv_no', 'desc')
             ->get();
     
