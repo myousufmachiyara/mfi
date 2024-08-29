@@ -98,8 +98,8 @@
 										</table>
 									</div>
 
-									<footer class="card-footer" >
-										<div class="row mb-3 text-end" >
+									<footer class="card-footer"  >
+										<div class="row mb-3" style="justify-content:end">
 											<div class="col-sm-2 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Debit</label>
 												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
@@ -107,14 +107,6 @@
 											<div class="col-sm-6 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Credit</label>
 												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
-											</div>
-										</div>
-									</footer>
-									<footer class="card-footer">
-										<div class="row form-group mb-2">
-											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
 											</div>
 										</div>
 									</footer>
@@ -212,6 +204,19 @@
 											</div>
 									  </div>
 									</div>
+								</section>
+							</div>
+
+							<div class="col-12 mb-3">
+								<section class="card">
+									<footer class="card-footer">
+										<div class="row form-group mb-2">
+											<div class="text-end">
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
+											</div>
+										</div>
+									</footer>
 								</section>
 							</div>
 						</div>
@@ -382,14 +387,47 @@
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
 						var html="<tr>";
-						var date =  DateTime.fromISO(v['sa_date']);
 						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
-						html+= "<td width='15%'>"+date.toFormat('dd-mm-yy')+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
 						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
 						html+="</tr>";
 						$('#pendingInvoices').append(html);
+						counter++;
+					}
+				});
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+	}
+
+	function getPurPendingInvoices(){
+		var cust_id=$('#customer_name').val();
+		var counter=1;
+		$('#purprevInvoices').val(1)
+		
+		var table = document.getElementById('purpendingInvoices');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+		$.ajax({
+			type: "GET",
+			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+			success: function(result){
+				$.each(result, function(k,v){
+					if(Math.round(v['balance'])>0){
+						var html="<tr>";
+						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
+						html+="</tr>";
+						$('#purpendingInvoices').append(html);
 						counter++;
 					}
 				});
