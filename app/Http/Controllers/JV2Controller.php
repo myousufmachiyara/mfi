@@ -12,12 +12,12 @@ use App\Models\Sales;
 use App\Models\Sales_2;
 use App\Models\sales_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
+use App\Models\vw_union_pur_1_2_opbal;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
-
 
 class JV2Controller extends Controller
 {
@@ -440,6 +440,16 @@ class JV2Controller extends Controller
     public function pendingInvoice($id){
         // Query to get the results from the view
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
+            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
+            ->orderby ('sa_date', 'asc')
+            ->get();
+    
+        return $results;
+    }
+
+    public function purpendingInvoice($id){
+        // Query to get the results from the view
+        $results = vw_union_pur_1_2_opbal::where('account_name', $id)
             ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
             ->orderby ('sa_date', 'asc')
             ->get();
