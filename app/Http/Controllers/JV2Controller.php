@@ -99,9 +99,6 @@ class JV2Controller extends Controller
             }
         }
 
-        $selectedItems = $request->input('selectedItems', []);
-        $selectedItemslength = count($selectedItems);
-
         if($request->has('prevInvoices') && $request->prevInvoices==1)
         {
             for($j=0;$j<$request->totalInvoices;$j++)
