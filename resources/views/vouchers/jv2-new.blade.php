@@ -11,63 +11,41 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 										<h2 class="card-title">Journal Voucher 2</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-4 mb-2">
+											<div class="col-sm-12 col-md-3 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="RC. #" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-4 mb-2">
+											<div class="col-sm-12 col-md-3 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Select Customer To See Prev Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
-													<option value="" disabled selected>Select Account</option>
-													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
-													@endforeach
-												</select>																			
+											<div class="col-3 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
 											</div>
-
-											<div class="col-12 mb-2">
-												<table class="table table-bordered table-striped mb-0 mt-2">
-													<thead>
-														<tr>
-															<th width="">Inv #</th>
-															<th width="">Date</th>
-															<th width="">Bill Amount</th>
-															<th width="">Balance Amount</th>
-															<th width="">Amount</th>
-														</tr>
-													</thead>
-													<tbody id="pendingInvoices">
-														<tr>
-
-														</tr>
-													</tbody>
-												</table>										
+											<div class="col-3 mb-3">
+												<label class="col-form-label">Attachements</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 									  </div>
 									</div>
 								</section>
 							</div>
+
 							<div class="col-12 mb-3">
 								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-										<h2 class="card-title">JV2 Details</h2>
-									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -121,20 +99,12 @@
 									</div>
 
 									<footer class="card-footer" >
-										<div class="row mb-3" >
-											<div class="col-3 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
-											</div>
-											<div class="col-3 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-											<div class="col-sm-2 col-md-3 pb-sm-3 pb-md-0" style="float:right">
+										<div class="row mb-3 text-end" >
+											<div class="col-sm-2 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Debit</label>
 												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 											</div>
-											<div class="col-sm-6 col-md-3 pb-sm-3 pb-md-0" style="float:right">
+											<div class="col-sm-6 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Credit</label>
 												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
 											</div>
@@ -148,6 +118,100 @@
 											</div>
 										</div>
 									</footer>
+								</section>
+							</div>
+
+							<div class="col-6 mb-3">								
+								<section class="card">
+									<header class="card-header">
+										<h2 class="card-title">Sales Ageing</h2>
+									</header>
+
+									<div class="card-body">
+										<div class="row form-group mb-2">
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Previous Invoices</label>
+												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
+													<option value="" disabled selected>Select Account</option>
+													@foreach($acc as $key1 => $row1)	
+														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+													@endforeach
+												</select>																			
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Unadjusted Amount</label>
+												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+											</div>
+
+											<div class="col-12 mb-2">
+												<table class="table table-bordered table-striped mb-0 mt-2">
+													<thead>
+														<tr>
+															<th width="">Inv #</th>
+															<th width="">Date</th>
+															<th width="">Bill Amount</th>
+															<th width="">Remaining Amount</th>
+															<th width="">Amount</th>
+														</tr>
+													</thead>
+													<tbody id="pendingInvoices">
+														<tr>
+
+														</tr>
+													</tbody>
+												</table>										
+											</div>
+									  </div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-6 mb-3">								
+								<section class="card">
+									<header class="card-header">
+										<h2 class="card-title">Purchase Ageing</h2>
+									</header>
+
+									<div class="card-body">
+										<div class="row form-group mb-2">
+										
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Previous Invoices</label>
+												<select data-plugin-selecttwo class="form-control" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
+													<option value="" disabled selected>Select Account</option>
+													@foreach($acc as $key1 => $row1)	
+														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+													@endforeach
+												</select>																			
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Unadjusted Amount</label>
+												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
+											</div>
+
+											<div class="col-12 mb-2">
+												<table class="table table-bordered table-striped mb-0 mt-2">
+													<thead>
+														<tr>
+															<th width="">Inv #</th>
+															<th width="">Date</th>
+															<th width="">Bill Amount</th>
+															<th width="">Remaining Amount</th>
+															<th width="">Amount</th>
+														</tr>
+													</thead>
+													<tbody id="purpendingInvoices">
+														<tr>
+
+														</tr>
+													</tbody>
+												</table>										
+											</div>
+									  </div>
+									</div>
 								</section>
 							</div>
 						</div>
@@ -321,7 +385,7 @@
 						html+= "<td width='8%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
 						html+= "<td width='8%'><input type='date' class='form-control' value="+v['sa_date']+" disabled><input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 						html+= "<td width='30%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-						html+= "<td width='30%'><input type='number' class='form-control' value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+						html+= "<td width='30%'><input type='number' class='form-control' text-danger value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
 						html+= "<td width='30%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
 						html+="</tr>";
 						$('#pendingInvoices').append(html);
