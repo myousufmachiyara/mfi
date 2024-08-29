@@ -149,11 +149,11 @@
 												<table class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
-															<th width="">Inv #</th>
-															<th width="">Date</th>
-															<th width="">Bill Amount</th>
-															<th width="">Remaining Amount</th>
-															<th width="">Amount</th>
+															<th width="15%">Inv #</th>
+															<th width="15%">Date</th>
+															<th width="20%">Bill Amount</th>
+															<th width="20%">Remaining</th>
+															<th width="20%">Amount</th>
 														</tr>
 													</thead>
 													<tbody id="pendingInvoices">
@@ -382,11 +382,11 @@
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
 						var html="<tr>";
-						html+= "<td width='8%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
-						html+= "<td width='8%'><input type='date' class='form-control' value="+v['sa_date']+" disabled><input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
-						html+= "<td width='30%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-						html+= "<td width='30%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-						html+= "<td width='30%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
+						html+= "<td width='15%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+						html+= "<td width='15%'><input type='date' class='form-control' value="+v['sa_date']+" disabled><input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
 						html+="</tr>";
 						$('#pendingInvoices').append(html);
 						counter++;
