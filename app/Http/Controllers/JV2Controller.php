@@ -449,6 +449,7 @@ class JV2Controller extends Controller
 
     public function purpendingInvoice($id){
         // Query to get the results from the view
+        return "hello";
         $results = vw_union_pur_1_2_opbal::where('account_name', $id)
             ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
             ->orderby ('sa_date', 'asc')

@@ -418,6 +418,7 @@
 			type: "GET",
 			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
 			success: function(result){
+				console.log(result);
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
 						var html="<tr>";
