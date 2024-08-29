@@ -8,12 +8,16 @@ use App\Models\AC;
 use App\Models\lager;
 use App\Models\lager0;
 use App\Models\jv2_att;
+use App\Models\Sales;
+use App\Models\Sales_2;
+use App\Models\sales_ageing;
+use App\Models\vw_union_sale_1_2_opbal;
+use App\Models\vw_union_pur_1_2_opbal;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
-
 
 class JV2Controller extends Controller
 {
@@ -42,6 +46,7 @@ class JV2Controller extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'debit' => 'required',
             'credit' => 'required',
@@ -91,6 +96,26 @@ class JV2Controller extends Controller
                     $lager->credit=$request->credit[$i];
                     $lager->save();
                 }
+            }
+        }
+
+        if($request->has('prevInvoices') && $request->prevInvoices==1)
+        {
+            for($j=0;$j<$request->totalInvoices;$j++)
+            {
+                if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
+                {
+                    $sales_ageing = new sales_ageing();
+
+                    $sales_ageing->jv2_id=$latest_jv2['jv_no'];
+                    $sales_ageing->amount=$request->rec_amount[$j];
+                    $sales_ageing->sales_id=$request->invoice_nos[$j];
+                    $sales_ageing->sales_prefix=$request->prefix[$j];
+                    $sales_ageing->acc_name=$request->customer_name;
+                    $sales_ageing->created_by=1;
+                    $sales_ageing->save();
+                }
+                
             }
         }
         
@@ -396,4 +421,39 @@ class JV2Controller extends Controller
         }	
     }
 
+    // public function pendingInvoice($id){
+
+    //     $results = Sales::where('sales.account_name', $id)
+    //         ->leftJoin('rec1_able_sal', 'sales.Sal_inv_no', '=', 'rec1_able_sal.Sal_inv_no')
+    //         ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
+    //         ->select(
+    //             'sales.Sal_inv_no','sales.account_name',
+    //             DB::raw('rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) as b_amt'),
+    //             DB::raw('SUM(rec1_able_rec_voch_s.rec_amt as r_amt)'),
+    //             DB::raw('((rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) - (rec1_able_rec_voch_s.rec_amt)) as bill_balance'),
+    //         )
+    //         ->get();
+
+    //     return $results;
+    // }
+
+    public function pendingInvoice($id){
+        // Query to get the results from the view
+        $results = vw_union_sale_1_2_opbal::where('account_name', $id)
+            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
+            ->orderby ('sa_date', 'asc')
+            ->get();
+    
+        return $results;
+    }
+
+    public function purpendingInvoice($id){
+        // Query to get the results from the view
+        $results = vw_union_pur_1_2_opbal::where('account_name', $id)
+            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
+            ->orderby ('sa_date', 'asc')
+            ->get();
+    
+        return $results;
+    }
 }

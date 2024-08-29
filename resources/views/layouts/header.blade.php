@@ -17,6 +17,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.css" />
 		<link rel="stylesheet" href="/assets/vendor/animate/animate.compat.css">
 		<link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" />

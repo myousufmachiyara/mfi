@@ -11,33 +11,39 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 										<h2 class="card-title">Journal Voucher 2</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-4 mb-2">
+											<div class="col-sm-12 col-md-3 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="RC. #" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-4 mb-2">
+											<div class="col-sm-12 col-md-3 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
-											<div class="col-4 mb-3">
+
+											<div class="col-3 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+											</div>
+											<div class="col-3 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-											<div class="col-12 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
 											</div>
 									  </div>
 									</div>
 								</section>
 							</div>
+
 							<div class="col-12 mb-3">
 								<section class="card">
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
@@ -78,11 +84,11 @@
 														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step=".00001">
+														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
 													</td>
 
 													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step=".00001">
+														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
 													</td>
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -92,18 +98,117 @@
 										</table>
 									</div>
 
-									<footer class="card-footer" >
-										<div class="row mb-3"  style="float:right">
-											<div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+									<footer class="card-footer"  >
+										<div class="row mb-3" style="justify-content:end">
+											<div class="col-sm-2 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Debit</label>
 												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 											</div>
-											<div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+											<div class="col-sm-6 col-md-3 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Credit</label>
 												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
 											</div>
 										</div>
 									</footer>
+								</section>
+							</div>
+
+							<div class="col-6 mb-3">								
+								<section class="card">
+									<header class="card-header">
+										<h2 class="card-title">Sales Ageing</h2>
+									</header>
+
+									<div class="card-body">
+										<div class="row form-group mb-2">
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Previous Invoices</label>
+												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
+													<option value="" disabled selected>Select Account</option>
+													@foreach($acc as $key1 => $row1)	
+														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+													@endforeach
+												</select>																			
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Unadjusted Amount</label>
+												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+											</div>
+
+											<div class="col-12 mb-2">
+												<table class="table table-bordered table-striped mb-0 mt-2">
+													<thead>
+														<tr>
+															<th width="15%">Inv #</th>
+															<th width="15%">Date</th>
+															<th width="20%">Bill Amount</th>
+															<th width="20%">Remaining</th>
+															<th width="20%">Amount</th>
+														</tr>
+													</thead>
+													<tbody id="pendingInvoices">
+														<tr>
+
+														</tr>
+													</tbody>
+												</table>										
+											</div>
+									  </div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-6 mb-3">								
+								<section class="card">
+									<header class="card-header">
+										<h2 class="card-title">Purchase Ageing</h2>
+									</header>
+
+									<div class="card-body">
+										<div class="row form-group mb-2">
+										
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Previous Invoices</label>
+												<select data-plugin-selecttwo class="form-control" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
+													<option value="" disabled selected>Select Account</option>
+													@foreach($acc as $key1 => $row1)	
+														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+													@endforeach
+												</select>																			
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Unadjusted Amount</label>
+												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
+											</div>
+
+											<div class="col-12 mb-2">
+												<table class="table table-bordered table-striped mb-0 mt-2">
+													<thead>
+														<tr>
+															<th width="">Inv #</th>
+															<th width="">Date</th>
+															<th width="">Bill Amount</th>
+															<th width="">Remaining Amount</th>
+															<th width="">Amount</th>
+														</tr>
+													</thead>
+													<tbody id="purpendingInvoices">
+														<tr>
+
+														</tr>
+													</tbody>
+												</table>										
+											</div>
+									  </div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-12 mb-3">
+								<section class="card">
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
@@ -201,8 +306,8 @@
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
 			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
-			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
-			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';
+			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
+			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
@@ -265,4 +370,72 @@
 		$('#total_credit').val(totalCredit);
 	}
 
+	function getPendingInvoices(){
+		var cust_id=$('#customer_name').val();
+		var counter=1;
+		$('#prevInvoices').val(1)
+		
+		var table = document.getElementById('pendingInvoices');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+		$.ajax({
+			type: "GET",
+			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+			success: function(result){
+				$.each(result, function(k,v){
+					if(Math.round(v['balance'])>0){
+						var html="<tr>";
+						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
+						html+="</tr>";
+						$('#pendingInvoices').append(html);
+						counter++;
+					}
+				});
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+	}
+
+	function getPurPendingInvoices(){
+		var cust_id=$('#pur_customer_name').val();
+		var counter=1;
+		$('#purprevInvoices').val(1)
+		
+		var table = document.getElementById('purpendingInvoices');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+		$.ajax({
+			type: "GET",
+			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
+			success: function(result){
+				console.log(result);
+				$.each(result, function(k,v){
+					if(Math.round(v['balance'])>0){
+						var html="<tr>";
+						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='pur_invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='pur_prefix[]' class='form-control' value="+v['prefix']+"></td>"
+						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='pur_balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='pur_bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='pur_rec_amount[]' required></td>"
+						html+="</tr>";
+						$('#purpendingInvoices').append(html);
+						counter++;
+					}
+				});
+			},
+			error: function(){
+				alert("error");
+			}
+		});
+	}
 </script>

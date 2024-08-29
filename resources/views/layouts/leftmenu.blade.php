@@ -13,12 +13,12 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link">
+                    <a class="nav-link" target="_blank">
                         User Accounts
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link">
+                    <a class="nav-link" target="_blank">
                         User Roles
                     </a>
                 </li>							
@@ -31,17 +31,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-item-groups')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-item-groups')}}">
                         <span>Item Groups</span>
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="{{ route('all-items')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-items')}}">
                         Items
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-items-2')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-items-2')}}">
                         Item Pipes
                     </a>
                 </li>
@@ -54,17 +54,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{route('all-acc')}}">
+                    <a class="nav-link" target="_blank" href="{{route('all-acc')}}">
                         Chart Of Accounts
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="{{ route('all-acc-groups')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-acc-groups')}}">
                         COA Groups
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="{{ route('all-acc-sub-heads-groups')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-acc-sub-heads-groups')}}">
                         COA Sub Heads
                     </a>
                 </li>
@@ -78,22 +78,22 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-jv1')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-jv1')}}">
                         Journal Voucher 1
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="{{ route('all-jv2')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-jv2')}}">
                         Journal Voucher 2
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" target="_blank" href="#">
                         Receipts
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" target="_blank" href="#">
                         Payments
                     </a>
                 </li>
@@ -106,17 +106,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-purchases1')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-purchases1')}}">
                         Purchase 1
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-purchases2')}}" >
+                    <a class="nav-link" target="_blank" href="{{ route('all-purchases2')}}" >
                         Purchase 2
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/sales/new-invoice">
+                    <a class="nav-link" target="_blank" href="/sales/new-invoice">
                         Purchase Return
                     </a>
                 </li>								
@@ -129,17 +129,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-saleinvoices')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-saleinvoices')}}">
                         Sale 1
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-sale2invoices')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-sale2invoices')}}">
                         Sale 2
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" target="_blank" href="#">
                         Sale Return
                     </a>
                 </li>								
@@ -152,17 +152,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-tstock-in')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-tstock-in')}}">
                         Stock In
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-tstock-out')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-tstock-out')}}">
                         Stock Out
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-tbad-dabs')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-tbad-dabs')}}">
                         Stock Balance
                     </a>
                 </li>								
@@ -175,17 +175,17 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" href="{{ route('all-stock-in')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-stock-in')}}">
                         Stock In
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-stock-out')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-stock-out')}}">
                         Stock Out
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ route('all-bad-dabs')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-bad-dabs')}}">
                         Stock Balance
                     </a>
                 </li>								
@@ -199,12 +199,12 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link">
+                    <a class="nav-link" target="_blank">
                         Main Option
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link">
+                    <a class="nav-link" target="_blank">
                         Main Option
                     </a>
                 </li>							
@@ -217,12 +217,12 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link">
+                    <a class="nav-link" target="_blank">
                         Stock In/Out
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" href="{{ route('all-complains')}}">
+                    <a class="nav-link" target="_blank" href="{{ route('all-complains')}}">
                         Complains
                     </a>
                 </li>							

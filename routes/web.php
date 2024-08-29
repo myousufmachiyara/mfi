@@ -14,6 +14,13 @@ Route::get('/laravel-dashboard', function () {
     return view('template');
 });
 
+//users
+Route::get('/users/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
+
+// user roles
+Route::get('/user-role/all-roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('all-roles');
+
+
 //item groups
 Route::get('/item-groups/all-groups', [App\Http\Controllers\ItemGroupsController::class, 'index'])->name('all-item-groups');
 Route::post('/item-groups/groups/create', [App\Http\Controllers\ItemGroupsController::class, 'store'])->name('store-item-group');
@@ -93,6 +100,8 @@ Route::get('/vouchers/jv2/attachements', [App\Http\Controllers\JV2Controller::cl
 Route::get('/vouchers/jv2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
 Route::get('/vouchers/jv2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
 Route::delete('/vouchers/jv2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
+Route::get('/vouchers/jv2/pendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'pendingInvoice'])->name('jv2-pend-invoices');
+Route::get('/vouchers/jv2/purpendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'purpendingInvoice'])->name('jv2-pur-pend-invoices');
 
 //purchase 1
 Route::get('/purchase1/all-purchases', [App\Http\Controllers\PurchaseController::class, 'index'])->name('all-purchases1');
@@ -151,7 +160,7 @@ Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, '
 Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sales2-att');
 Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sales2-att-download');
 Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sales2-att-delete');
-Route::get('/sales2/generatePDF/{id}', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
+Route::get('/sales2/generatePDF/', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
 Route::get('/sales2/getunclosed/', [App\Http\Controllers\Sales2Controller::class, 'getunclosed'])->name('get-unclosed-sales2-invoice');
 Route::get('/sales2/getItems/{id}', [App\Http\Controllers\Sales2Controller::class, 'getItems'])->name('get-sales2-items');
 
@@ -190,11 +199,12 @@ Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController
 Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('tstock-out-att-download');
 Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
 Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-tstock-out-att');
+
 // Route::get('/tstock_out/saleinvoice/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-sale-invoice');
 // Route::get('/tstock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-sale-invoice');
 // Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
-
-
+Route::get('/tstock_out/getunclosed/', [App\Http\Controllers\TStockOutController::class, 'getunclosed'])->name('get-unclosed-tstock-out-invoice');
+Route::get('/tstock_out/getItems/{id}', [App\Http\Controllers\TStockOutController::class, 'getItems'])->name('get-tstock-out-items');
 
 //bad bads
 Route::get('/bad_dabs/all-bad-dabs', [App\Http\Controllers\BadDabsController::class, 'index'])->name('all-bad-dabs');
@@ -203,7 +213,6 @@ Route::post('/bad_dabs/create', [App\Http\Controllers\BadDabsController::class, 
 Route::get('/bad_dabs/edit/{id}', [App\Http\Controllers\BadDabsController::class, 'edit'])->name('edit-bad-dabs-entry');
 Route::post('/bad_dabs/delete', [App\Http\Controllers\BadDabsController::class, 'destroy'])->name('delete-bad-dabs');
 Route::post('/bad_dabs/update', [App\Http\Controllers\BadDabsController::class, 'update'])->name('update-bad-dabs');
-
 
 
 //stock in
@@ -235,6 +244,7 @@ Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOut
 Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
 // Route::get('/stock_out/saleinvoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-sale-invoice');
 // Route::get('/stock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-sale-invoice');
+// Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 // Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 
 

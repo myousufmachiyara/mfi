@@ -1,5 +1,10 @@
 @extends('../layouts.header')
-	<body>
+<style>
+    .select2-container{
+        width: 100% !important;
+    }
+</style>	
+<body>
 		<section class="body">
 			@extends('../layouts.menu')
 			<div class="inner-wrapper">
@@ -55,11 +60,12 @@
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
                                                     @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->ConvanceCharges-$row->Bill_discount)
-                                                    @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
+                                                    <td><strong style="font-size:15px">{{ round($net_amount)}}</strong></td>
+                                                    <!-- @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
-                                                    @endif
+                                                    @endif -->
                                                     @if($row->pur_ord_no!=null) 
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                     @else
@@ -67,7 +73,7 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-sales2-invoice', $row->Sal_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setPrintId({{$row->Sal_inv_no}})" href="#printModal"> <i class="fas fa-print"></i></a>
                                                         <a href="{{ route('show-sales2',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
                                                         <a href="{{ route('edit-sales2',$row->Sal_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
@@ -115,6 +121,36 @@
             </form>
         </div>
 
+        <div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
+            <form method="get" action="{{ route('print-sales2-invoice') }}" enctype="multipart/form-data">
+                @csrf
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Select Print Format</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <select data-plugin-selecttwo class="form-control" autofocus name="print_type" required>
+                                <option value="" disabled selected>Select Print Format</option>
+                                <option value="1" >Show All</option>
+                                <option value="2" >Exclude Item Length</option>
+                                <option value="3" >Only Quantity & Price</option>
+                            </select>
+                            <input type="hidden" name="print_sale2" id="printID" >
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-danger">Print</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
+
         <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
             <section class="card">
                 <header class="card-header">
@@ -152,6 +188,11 @@
     function setId(id){
         $('#deleteID').val(id);
     }
+    function setPrintId(id){
+        $('#printID').val(id);
+    }
+
+    
 
     function getAttachements(id){
 

@@ -41,6 +41,7 @@
 <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="/assets/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
 <script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+<script src="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 
 <!-- Theme Base, Components and Settings -->

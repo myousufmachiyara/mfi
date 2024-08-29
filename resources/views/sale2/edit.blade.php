@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-sales2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-6 mb-3">								
@@ -71,7 +71,9 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<input type="text" placeholder="Sale Inv. No." value="{{$pur2->pur_against}}"  disabled class="form-control">
+												<input type="hidden" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->pur_against}}"  class="form-control">
+
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">
