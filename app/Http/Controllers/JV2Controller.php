@@ -444,7 +444,7 @@ class JV2Controller extends Controller
         // Query to get the results from the view
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
             ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
-            ->orderby ('Sal_inv_no', 'desc')
+            ->orderby ('sa_date', 'desc')
             ->get();
     
         return $results;
