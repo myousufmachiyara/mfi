@@ -222,7 +222,7 @@
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" target="_blank">
+                    <a class="nav-link" target="_blank" href="{{ route('all-complains')}}">
                         Complains
                     </a>
                 </li>							

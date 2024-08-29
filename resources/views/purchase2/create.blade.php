@@ -34,7 +34,7 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name <span style="color: red;">*</span></label>
 												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -42,6 +42,7 @@
 													@endforeach
 												</select>
 											</div>
+											
 									  </div>
 									</div>
 								</section>

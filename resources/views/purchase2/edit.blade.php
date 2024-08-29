@@ -70,9 +70,11 @@
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<label class="col-form-label">Sale Inv#</label>
+												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
+												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
 											</div>
+											
 
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Person Address</label>
@@ -563,5 +565,18 @@
 			$('#isCommissionForm').val(0);
 		}
 	}
+
+	document.getElementById('edit-sale-inv').addEventListener('click', function () {
+        var inputField = document.getElementById('sale-inv-no');
+        if (inputField.disabled) {
+            inputField.disabled = false;
+            inputField.focus(); // Focus on the input when enabled
+            this.textContent = "Disable"; // Change the label to "Save" when editing
+        } else {
+            inputField.disabled = true;
+            this.textContent = "Enable"; // Change the label back to "Edit" after saving
+        }
+    });
+											
 
 </script>
