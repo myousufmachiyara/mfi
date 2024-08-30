@@ -264,4 +264,32 @@ class TStockOutController extends Controller
             return Response::download($filePath);
         } 
     }
+
+    public function getunclosed()
+    {
+        $unclosed_inv = tstock_out::where(function ($query) {
+            $query->where('pur_inv', '')
+                  ->orWhereNull('pur_inv')
+                  ->where('tstock_out.status',1);
+        })
+        ->join('ac', 'ac.ac_code', '=', 'tstock_out.account_name')
+        ->select('tstock_out.*', 'ac.ac_name as acc_name')  // Select fields from both tables as needed
+        ->get();
+        return $unclosed_inv;
+    }
+
+    public function getItems($id){
+
+        $pur1= tstock_out::where('Sal_inv_no',$id)->get()->first();
+
+        $pur2 = tstock_out_2::where('sales_inv_cod',$id)
+        ->join('item_entry2 as ie','tstock_out_2.item_cod','=','ie.it_cod')
+        ->select('tstock_out_2.*','ie.item_name','ie.sales_price','ie.sale_rate_date')
+        ->get();
+
+        return response()->json([
+            'pur1' => $pur1,
+            'pur2' => $pur2,
+        ]);
+    }
 }

@@ -11,6 +11,8 @@ use App\Models\AC;
 use App\Models\tsales;
 use App\Models\tsales_2;
 use App\Models\sale2_att;
+use App\Models\tpurchase;
+use App\Models\tstock_out;
 use Illuminate\Support\Facades\File;
 use App\Traits\SaveImage;
 use Illuminate\Support\Facades\Response;
@@ -59,9 +61,6 @@ class Sales2Controller extends Controller
         }
         if ($request->has('pur_ord_no') && $request->pur_ord_no) {
             $pur2->pur_ord_no=$request->pur_ord_no;
-        }
-        if ($request->has('isInduced') && $request->isInduced==1) {
-            $pur2->sale_against=$request->sale_against;
         }
         if ($request->has('sales_against') && $request->sales_against) {
             $pur2->pur_against=$request->sales_against;
@@ -144,6 +143,30 @@ class Sales2Controller extends Controller
                 $pur2Att->att_path = $this->sale2Doc($file,$extension);
                 $pur2Att->save();
             }
+        }
+
+        if($request->has('isInduced') && $request->isInduced == 1){
+            $tstock_out = new tstock_out();
+
+            $SalinducedID=$pur_2_id['Sal_inv_no'];
+            $prefix=$pur_2_id['prefix'];
+            $pur_inv = $prefix.''.$SalinducedID;
+            $tstock_out->pur_inv = $pur_inv;
+            tstock_out::where('Sal_inv_no', $request->inducedID)->update([
+                'pur_inv'=>$tstock_out->pur_inv,
+            ]);
+        }   
+
+        elseif($request->has('isInduced') && $request->isInduced == 2){
+            $tpurchase = new tpurchase();
+
+            $SalinducedID=$pur_2_id['Sal_inv_no'];
+            $prefix=$pur_2_id['prefix'];
+            $sales_against = $prefix.''.$SalinducedID;
+            $tpurchase->sales_against = $sales_against;
+            tpurchase::where('Sale_inv_no', $request->inducedID)->update([
+                'sales_against'=>$tpurchase->sales_against,
+            ]);
         }
 
         return redirect()->route('all-sale2invoices');
