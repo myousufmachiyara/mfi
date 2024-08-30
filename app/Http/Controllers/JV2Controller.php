@@ -26,7 +26,7 @@ class JV2Controller extends Controller
     public function index()
     {
         $jv2= Lager0::where('lager0.status', 1)
-        ->join('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+        ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
         ->select(
         'lager0.jv_no','lager0.jv_date','lager0.narration',
         \DB::raw('SUM(lager.debit) as total_debit'),

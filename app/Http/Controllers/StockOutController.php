@@ -27,7 +27,7 @@ class StockOutController extends Controller
     public function index()
     {
         $stock_out = stock_out::where('stock_out.status', 1)
-        ->join ('stock_out_2', 'stock_out_2.sales_inv_cod' , '=', 'stock_out.Sal_inv_no')
+        ->leftjoin ('stock_out_2', 'stock_out_2.sales_inv_cod' , '=', 'stock_out.Sal_inv_no')
         ->join('ac','stock_out.account_name','=','ac.ac_code')
         ->select(
             'stock_out.Sal_inv_no','stock_out.sa_date','stock_out.cash_pur_name','stock_out.Sales_remarks','ac.ac_name',

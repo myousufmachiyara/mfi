@@ -21,16 +21,16 @@ class PurchaseController extends Controller
     public function index()
     {
         $pur1 = purchase::where('purchase.status',1)
-        ->join ('purchase_2', 'purchase_2.pur_cod' , '=', 'purchase.pur_id')
+        ->leftjoin ('purchase_2', 'purchase_2.pur_cod' , '=', 'purchase.pur_id')
         ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
         ->select(
             'purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
-            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount',
+            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix',
             \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
             \DB::raw('SUM(purchase_2.pur_qty*purchase_2.pur_price) as total_bill'),
         )
         ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
-        'pur_bill_no','purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount')
+        'pur_bill_no','purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
         ->get();
         
         return view('purchase1.index',compact('pur1'));

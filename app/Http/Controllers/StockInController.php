@@ -27,7 +27,7 @@ class StockInController extends Controller
     public function index()
     {
         $stock_in = stock_in::where('stock_in.status', 1)
-        ->join ('stock_in_2', 'stock_in_2.sales_inv_cod' , '=', 'stock_in.Sal_inv_no')
+        ->leftjoin ('stock_in_2', 'stock_in_2.sales_inv_cod' , '=', 'stock_in.Sal_inv_no')
         ->join('ac','stock_in.account_name','=','ac.ac_code')
         ->select(
             'stock_in.Sal_inv_no','stock_in.sa_date','stock_in.Cash_pur_name','stock_in.Sales_remarks','ac.ac_name',

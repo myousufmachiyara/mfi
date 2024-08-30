@@ -26,16 +26,16 @@ class SalesController extends Controller
     public function index()
     {
         $sales = Sales::where('sales.status', 1)
-        ->join ('sales_2', 'sales_2.sales_inv_cod' , '=', 'sales.Sal_inv_no')
+        ->leftjoin ('sales_2', 'sales_2.sales_inv_cod' , '=', 'sales.Sal_inv_no')
         ->join('ac','sales.account_name','=','ac.ac_code')
         ->select(
             'sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
-            'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount', 'sales.bill_not',
+            'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount', 'sales.bill_not', 'sales.prefix',
             \DB::raw('SUM(sales_2.Sales_qty) as weight_sum'),
             \DB::raw('SUM(sales_2.Sales_qty*sales_2.sales_price) as total_bill'),
         )
         ->groupby('sales.Sal_inv_no','sales.sa_date','sales.Cash_pur_name','sales.Sales_remarks','ac.ac_name',
-        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount','sales.bill_not' )
+        'sales.pur_ord_no', 'sales.ConvanceCharges', 'sales.LaborCharges','sales.Bill_discount','sales.bill_not','sales.prefix' )
         ->get();
 
         return view('sales.index',compact('sales'));
