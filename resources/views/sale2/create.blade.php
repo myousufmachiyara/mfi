@@ -682,6 +682,7 @@
 
 							table.append(newRow);
 							$('#item_name'+index).val(v['item_cod']);
+							$('#itemCount').val(index);
 							index++;
 
 							ind_total_qty= ind_total_qty + v['sales_qty']
@@ -693,7 +694,6 @@
 						$("#total_weight").val(ind_total_weight);
 						$("#isInduced").val(1);
 						$("#sale_against").val(id);
-						$('#itemCount').val(index);
 
 						$("#closeModal").trigger('click');
 					},
