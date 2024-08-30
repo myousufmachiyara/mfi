@@ -244,7 +244,7 @@
 		<div id="getPurchase2" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
 			<section class="card">
 				<header class="card-header">
-					<h2 class="card-title">Unclosed Sale Pipes</h2>
+					<h2 class="card-title">Induced From Purchase Pipe</h2>
 				</header>
 				<div class="card-body">
 					<div class="modal-wrapper">
@@ -252,11 +252,11 @@
 						<table class="table table-bordered table-striped mb-0" >
 							<thead>
 								<tr>
-									<th>Inv #</th>
-									<th>Company</th>
+									<th>ID</th>
+									<th>Company Name</th>
 									<th>Date</th>
-									<th>Mill Inv No.</th>
-									<th>Dispatch To</th>
+									<th>Mill Inv #</th>
+									<th>Customer Name</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -569,6 +569,7 @@
 
 			function getFromPurchase2(){
 				var table = document.getElementById('unclosed_purchases_list');
+				
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
 				}
@@ -578,12 +579,12 @@
 					success: function(result){
 						$.each(result, function(k,v){
 							var html="<tr>";
-							html+= "<td>"+v['Sale_inv_no']+"</td>"
+							html+= "<td>"+v['prefix']+""+v['Sale_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
 							html+= "<td>"+v['sa_date']+"</td>"
 							html+= "<td>"+v['pur_ord_no']+"</td>"
 							html+= "<td>"+v['disp_acc']+"</td>"
-							html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedItems("+v['Sale_inv_no']+")'><i class='fas fa-check'></i></a></td>"
+							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedPurchase2Items("+v['Sale_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"
 							html+="</tr>";
 							$('#unclosed_purchases_list').append(html);
 						});
@@ -597,11 +598,11 @@
 
 			function inducedPurchase2Items(id){
 				var ind_total_qty=0, ind_total_weight=0;
-				var table = document.getElementById('tstock_inTable');
+				var table = document.getElementById('Purchase2Table');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
 				}
-				index=0;
+				index=1;
 				$('#itemCount').val(1);
 
 				$.ajax({
@@ -609,43 +610,72 @@
 					url: "/purchase2/getItems/"+id,
 					success: function(result){
 						$('#stck_in_date').val(result['pur1']['sa_date']);
-						$('#account_name').val(result['pur1']['account_name']);
-						$('#stock_in_mill_bill').val(result['pur1']['pur_ord_no']);
-						$('#stock_in_pur_remarks').val(result['pur1']['Sales_Remarks']);
-						$('#stck_in_coa_name').val(result['pur1']['account_name']).trigger('change');
+						$('#account_name').val(result['pur1']['Cash_pur_name_ac']).trigger('change');
+						$('#company_name').val(result['pur1']['account_name']).trigger('change');
+						$('#Cash_pur_name').val(result['pur1']['Cash_pur_name']);
+						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sale_inv_no']);
+						$('#inducedID').val(result['pur1']['Sale_inv_no']);
+						$('#inducedPrefix').val(result['pur1']['prefix']);
+						$('#cash_pur_address').val(result['pur1']['cash_Pur_address']);
 
 						$.each(result['pur2'], function(k,v){
-							index++;
 							var table = $('#myTable').find('tbody');
 							var newRow = $('<tr>');
-							newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
+							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
 							newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
-							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-							newRow.append('<td><input type="number" id="qty'+index+'" value="'+v['Sales_qty2']+'" name="qty[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="" id="weight'+index+'"  name="weight[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required class="form-control"></td>');
-							newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight"  value="'+v['Sales_qty2'] * v['weight_pc']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
-							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
+							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="remarks[]" placeholder="Remarks" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_qty2'+index+'" value="'+v['Sales_qty2']+'" name="pur2_qty2[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"></td>');
+							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');
+							newRow.append('<td><input type="number" id="pur2_len'+index+'" name="pur2_len[]" placeholder="Length" step="any" onchange="rowTotal('+index+')"  value="'+v['length']+'" required class="form-control" ></td>');
+							newRow.append('<td><input type="number" id="pur2_percentage'+index+'" name="pur2_percentage[]" placeholder="%" step="any" onchange="rowTotal('+index+')" value="'+v['discount']+'"  required class="form-control" ><input type="number" id="weight_per_piece'+index+'"  name="weight_per_piece[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required onchange="CalculateRowWeight('+index+')" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_qty'+index+'" name="pur2_qty[]" placeholder="weight" value="0" step="any"  required class="form-control"></td>');
+							newRow.append('<td><input type="number" id="amount'+index+'" name="amount[]" placeholder="Amount"  value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
+							newRow.append('<td><input type="date" id="pur2_price_date'+index+'" name="pur2_price_date[]" value="'+v['rat_dat']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled><input type="date"  value="'+v['rat_dat']+'" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'"></td>');
+							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button><button type="button" onclick="enablePrice('+index+')" class="btn btn-warning"><i class="bx bx-refresh" style="font-size:20px"></i></button></td>');
 
 							table.append(newRow);
 							$('#item_name'+index).val(v['item_cod']);
+							$('#itemCount').val(index);
+							$('#weight_per_piece'+index).trigger('change');
+							
+							index++;
 
 							ind_total_qty= ind_total_qty + v['Sales_qty2']
 							ind_total_weight= ind_total_weight + (v['Sales_qty2'] * v['weight_pc'])
 							$('#myTable select[data-plugin-selecttwo]').select2();
+
 						}); 
 						$("#total_qty").val(ind_total_qty);
 						$("#total_weight").val(ind_total_weight);
 						$("#isInduced").val(2);
 						$("#sale_against").val(id);
-						$('#itemCount').val(index);
-
 						$("#closeModal").trigger('click');
-
 					},
 					error: function(){
 						alert("error");
 					}
 				});
    			}
+
+			function enablePrice(row_no){
+				var itemId=$('#item_cod'+row_no).val();
+
+				$.ajax({
+					type: "GET",
+					url: "/item2/detail",
+					data: {id:itemId},
+					success: function(result){
+						$('#pur2_per_unit'+row_no).val(result[0]['sales_price']);
+						$('#pur2_price_date'+row_no).val(result[0]['sale_rate_date']);
+						$('#pur2_price_date_show'+row_no).val(result[0]['sale_rate_date']);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+
+
+			}
 
 			function inducedStockOutItems(id){
 				var ind_total_qty=0, ind_total_weight=0;

@@ -158,7 +158,15 @@ class Sales2Controller extends Controller
         }   
 
         elseif($request->has('isInduced') && $request->isInduced == 2){
+            $tpurchase = new tpurchase();
 
+            $SalinducedID=$pur_2_id['Sal_inv_no'];
+            $prefix=$pur_2_id['prefix'];
+            $sales_against = $prefix.''.$SalinducedID;
+            $tpurchase->sales_against = $sales_against;
+            tpurchase::where('Sale_inv_no', $request->inducedID)->update([
+                'sales_against'=>$tpurchase->sales_against,
+            ]);
         }
 
         return redirect()->route('all-sale2invoices');
