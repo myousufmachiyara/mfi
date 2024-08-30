@@ -16,7 +16,7 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-sm-12 col-md-1 mb-2">
 												<label class="col-form-label" >New ID</label>
 												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_out->prefix }}{{$tstock_out->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
@@ -29,7 +29,7 @@
 											</div>
 
 											<div class="col-sm-12 col-md-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Customer Name</label>
 												<select data-plugin-selecttwo class="form-control" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -45,7 +45,11 @@
 												<label class="col-form-label" >Gate Pass#</label>
 												<input type="text" name="mill_gate" value="{{$tstock_out->mill_gate}}" placeholder="Gate Pass#" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2">
+                                            <div class="col-sm-12 col-md-2">
+												<label class="col-form-label" >Transporter</label>
+												<input type="text" name="transporter" value="{{$tstock_out->transporter}}" placeholder="Transporter" class="form-control">
+											</div>
+											<div class="col-sm-12 col-md-1">
 												<label class="col-form-label" >Sale Inv#</label>
 												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
 											</div>
@@ -135,7 +139,7 @@
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
                                             <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-out') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
-                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
                                 </footer>
