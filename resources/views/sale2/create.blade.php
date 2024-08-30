@@ -24,6 +24,9 @@
 												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="(New Invoice)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+												<input type="hidden" id="isInduced" name="isInduced" value="0" class="form-control" >
+												<input type="hidden" id="inducedID" name="inducedID" class="form-control" >
+												<input type="hidden" id="inducedPrefix" name="inducedPrefix" class="form-control" >
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
@@ -224,7 +227,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-sale2invoices') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
 											</div>
 										</div>
@@ -547,7 +550,7 @@
 					success: function(result){
 						$.each(result, function(k,v){
 							var html="<tr>";
-							html+= "<td>"+v['Sal_inv_no']+"</td>"
+							html+= "<td>"+v['prefix']+""+v['Sal_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
 							html+= "<td>"+v['sa_date']+"</td>"
 							html+= "<td>"+v['mill_gate']+"</td>"
@@ -631,7 +634,7 @@
 						}); 
 						$("#total_qty").val(ind_total_qty);
 						$("#total_weight").val(ind_total_weight);
-						$("#isInduced").val(1);
+						$("#isInduced").val(2);
 						$("#sale_against").val(id);
 						$('#itemCount').val(index);
 
@@ -662,6 +665,8 @@
 						$('#company_name').val(8).trigger('change');
 						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
+						$('#inducedID').val(result['pur1']['Sal_inv_no']);
+						$('#inducedPrefix').val(result['pur1']['prefix']);
 						$('#cash_pur_address').val(result['pur1']['cash_pur_address']);
 						$('#Sales_Remarks').val(result['pur1']['sales_remarks']);
 
