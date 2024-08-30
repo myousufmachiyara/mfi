@@ -26,12 +26,12 @@
                                                 <tr>
                                                     <th>Inv #</th>
                                                     <th>Date</th>
-                                                    <th>Company Name</th>
-                                                    <th>Mill Inv #</th>
-                                                    <th>Recieved By</th>
+                                                    <th>Account Name</th>
+                                                    <th>Bill #</th>
+                                                    <th>Comapny Name</th>
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
-                                                    <th>SaleInv #</th>
+                                                    <th>Purchase Inv #</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
@@ -53,7 +53,7 @@
                                                     <td>{{$row->comp_account}}</td>
                                                     <td>{{$row->Cash_pur_name}}</td>
                                                     <td>{{$row->Sales_Remarks}}</td>
-                                                    <td>{{$row->sales_against}}</td>
+                                                    <td>{{$row->pur_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
                                                     <td>{{$row->ConvanceCharges}}</td>
@@ -66,7 +66,7 @@
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif -->
-                                                    @if($row->sales_against!=null) 
+                                                    @if($row->pur_ord_no!=null) 
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                     @else
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
@@ -96,7 +96,7 @@
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Purchase Invoice</h2>
+                        <h2 class="card-title">Delete Sale Invoice</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
