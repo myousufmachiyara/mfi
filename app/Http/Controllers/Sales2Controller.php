@@ -152,7 +152,6 @@ class Sales2Controller extends Controller
             $prefix=$pur_2_id['prefix'];
             $pur_inv = $prefix.''.$SalinducedID;
             $tstock_out->pur_inv = $pur_inv;
-            die($tstock_out->pur_inv);
             tstock_out::where('Sal_inv_no', $request->inducedID)->update([
                 'pur_inv'=>$tstock_out->pur_inv,
             ]);
