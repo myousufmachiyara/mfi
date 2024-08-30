@@ -555,7 +555,7 @@
 							html+= "<td>"+v['sa_date']+"</td>"
 							html+= "<td>"+v['mill_gate']+"</td>"
 							html+= "<td>"+v['cash_pur_name']+"</td>"
-							html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedStockOutItems("+v['Sal_inv_no']+")'><i class='fas fa-check'></i></a></td>"
+							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedStockOutItems("+v['Sal_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"
 							html+="</tr>";
 							$('#unclosed_purchases_list_from_stock_out').append(html);
 						});
