@@ -16,7 +16,7 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-sm-12 col-md-1 mb-2">
 												<label class="col-form-label" >New ID</label>
 												<input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
@@ -29,7 +29,7 @@
 											</div>
 
 											<div class="col-sm-12 col-md-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Customer Name</label>
 												<select data-plugin-selecttwo class="form-control" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -46,8 +46,12 @@
 												<label class="col-form-label" >Gate Pass#</label>
 												<input type="text" name="mill_gate" placeholder="Gate Passe#" class="form-control">
 											</div>
+                                            <div class="col-sm-12 col-md-2">
+												<label class="col-form-label" >Transporter</label>
+												<input type="text" name="transporter" placeholder="Transporter" class="form-control">
+											</div>
 											
-											<div class="col-sm-12 col-md-2">
+											<div class="col-sm-12 col-md-1">
 												<label class="col-form-label" >Sale Inv#</label>
 												<input type="text" name="pur_inv" placeholder="Sale Inv#" class="form-control" disabled>
 											</div>
