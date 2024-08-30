@@ -37,7 +37,7 @@
                                             @foreach ($acc as $key => $row)
                                                 <tr>
                                                     <td>{{$row->ac_code}}</td>
-                                                    <td>{{$row->ac_name}}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
                                                     @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
                                                         <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
@@ -53,11 +53,12 @@
                                                     <td>{{$row->address}}</td>
                                                     <td>{{$row->phone_no}}</td>
                                                     <td>{{$row->group_name}}</td>
-                                                    <td>{{$row->sub}}</td>
+                                                    <td><strong>{{$row->sub}}</strong></td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
                                                     @if($row->status==1)
                                                         <td class="actions">
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <span class="separator"> | </span>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
                                                         </td>
                                                     @else
