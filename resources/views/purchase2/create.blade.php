@@ -102,36 +102,36 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="0" class="form-control comm-form-field">
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" required value="0" step="any" class="form-control comm-form-field">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >%</label>
-												<input type="number" value="0" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" class="form-control comm-form-field">
+												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >P.B</label>
-												<input type="number" value="0"  name="cd_disc" class="form-control comm-form-field">
+												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Target</label>
-												<input type="number" value="0" name="comm_disc" class="form-control comm-form-field">
+												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Bill Amount After Discount</label>
-												<input type="number" value="0" id="BillAfterDisc" disabled class="form-control comm-form-field">
+												<input type="number" value="0" id="BillAfterDisc" step="any" required disabled class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Amount</label>
-												<input type="number" value="0" name="comm_amount" class="form-control comm-form-field">
+												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Item Group</label>
-												<select data-plugin-selecttwo class="form-control comm-form-field" autofocus name="tax_item_name">
+												<select data-plugin-selecttwo class="form-control comm-form-field" autofocus name="tax_item_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod }}">{{$row->group_name}}</option>
@@ -368,7 +368,7 @@
 					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
 					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
 					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" disabled class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
 					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 					index++;
