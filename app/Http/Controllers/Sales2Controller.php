@@ -148,12 +148,12 @@ class Sales2Controller extends Controller
         if($request->has('isInduced') && $request->isInduced == 1){
             $tstock_out = new tstock_out();
 
-            $inducedID=$pur_2_id['Sal_inv_no'];
+            $SalinducedID=$pur_2_id['Sal_inv_no'];
             $prefix=$pur_2_id['prefix'];
-            $pur_inv = $prefix.''.$inducedID;
+            $pur_inv = $prefix.''.$SalinducedID;
             $tstock_out->pur_inv = $pur_inv;
-
-            tstock_out::where('Sal_inv_no', $inducedID)->update([
+            die($tstock_out->pur_inv);
+            tstock_out::where('Sal_inv_no', $request->inducedID)->update([
                 'pur_inv'=>$tstock_out->pur_inv,
             ]);
         }   
