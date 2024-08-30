@@ -12,9 +12,10 @@
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getInvFromStockOut()" href="#getPur2FromStockOut" > From Stock Out </button>
+											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getFromPurchase2()" href="#getPurchase2" > From Purchase 2 </button>
 										</div>
-										<h2 class="card-title">Sale Details</h2>
+										<h2 class="card-title">Sale Pipe</h2>
 									</header>
 
 									<div class="card-body">
@@ -26,11 +27,11 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="sa_date" value="<?php echo date('Y-m-d'); ?>" id="stck_in_date" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" class="form-control">
+												<label class="col-form-label" >Bill No.</label>
+												<input type="text" placeholder="Bill No." name="pur_ord_no" id="stock_in_pur_inv" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -38,7 +39,7 @@
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" id="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -59,8 +60,8 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
+												<label class="col-form-label">Company Name</label>
+												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" id="company_name" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -69,16 +70,16 @@
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Name of Person</label>
-												<input type="text" placeholder="Name of Person" name="Cash_pur_name" class="form-control">
+												<input type="text" placeholder="Name of Person" name="Cash_pur_name" id="Cash_pur_name" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sal_inv_no" disabled class="form-control">
+												<label class="col-form-label" >Pur Inv. No.</label>
+												<input type="text" placeholder="Sale Inv. No." name="sal_inv_no" id="sal_inv_no" disabled class="form-control">
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Person Address</label>
-												<input type="text" placeholder="Person Address" name="cash_Pur_address" class="form-control">
+												<input type="text" placeholder="Person Address" name="cash_Pur_address" id="cash_pur_address" class="form-control">
 											</div>
 
 											<div class="col-12 mb-12">
@@ -93,6 +94,12 @@
 
 							<div class="col-12 mb-3">
 								<section class="card">
+									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
+										<h2 class="card-title">Sale Pipe Details</h2>
+									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -142,7 +149,6 @@
 													</td>
 													<td>
 														<input type="number" class="form-control" id="pur2_qty1" value="0"  step="any" required disabled>
-														<input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0"  step="any" required>
 													</td>
 													<td>
 														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" required step="any" disabled>
@@ -200,7 +206,7 @@
 															<input type="number" id="bill_discount" onchange="netTotal()" name="Bill_discount" placeholder="Bill Discount" class="form-control">
 														</div>
 														<div class="col-4">
-															<input type="number"  id="bill_perc" class="form-control" placeholder="0%" disabled>
+															<input type="text"  id="bill_perc" class="form-control" placeholder="0%" disabled>
 														</div>
 													</div>
 												</div>
@@ -230,7 +236,77 @@
 				</section>
 			</div>
 		</section>
-       
+
+		<div id="getPurchase2" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+			<section class="card">
+				<header class="card-header">
+					<h2 class="card-title">Unclosed Sale Pipes</h2>
+				</header>
+				<div class="card-body">
+					<div class="modal-wrapper">
+
+						<table class="table table-bordered table-striped mb-0" >
+							<thead>
+								<tr>
+									<th>Inv #</th>
+									<th>Company</th>
+									<th>Date</th>
+									<th>Mill Inv No.</th>
+									<th>Dispatch To</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="unclosed_purchases_list">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<footer class="card-footer">
+					<div class="row">
+						<div class="col-md-12 text-end">
+							<button class="btn btn-default modal-dismiss" id="closeModal">Cancel</button>
+						</div>
+					</div>
+				</footer>
+			</section>
+		</div>
+
+		<div id="getPur2FromStockOut" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+			<section class="card">
+				<header class="card-header">
+					<h2 class="card-title">Induced From Godown</h2>
+				</header>
+				<div class="card-body">
+					<div class="modal-wrapper">
+
+						<table class="table table-bordered table-striped mb-0" >
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Customer Name</th>
+									<th>Date</th>
+									<th>Gate Pass #</th>
+									<th>Person Name</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="unclosed_purchases_list_from_stock_out">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<footer class="card-footer">
+					<div class="row">
+						<div class="col-md-12 text-end">
+							<button class="btn btn-default modal-dismiss" id="closeModal">Cancel</button>
+						</div>
+					</div>
+				</footer>
+			</section>
+		</div>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 
@@ -245,12 +321,11 @@
 					}
 				});
 
-				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
-				toggleInputs();
+				// document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
+				// toggleInputs();
 			});
 
 			function removeRow(button) {
-				console.log("before remove");
 				var tableRows = $("#Purchase2Table tr").length;
 				if(tableRows>1){
 					var row = button.parentNode.parentNode;
@@ -294,10 +369,10 @@
 					cell4.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur2_qty2'+index+'" value="0" name="pur2_qty2[]" step="any" required>';
 					cell5.innerHTML  = '<input type="number" id="pur2_per_unit'+index+'" class="form-control" name="pur2_per_unit[]" value="0" step="any" required>';
 					cell6.innerHTML  = '<input type="number" id="pur2_len'+index+'" onchange="rowTotal('+index+')" class="form-control" name="pur2_len[]"  value="20" step="any" required>';
-					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
-					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
+					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
+					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled>';
 					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="date" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
 					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 					index++;
@@ -330,7 +405,8 @@
 						$('#pur2_price_date'+row_no).val(result[0]['sale_rate_date']);
 						$('#pur2_price_date_show'+row_no).val(result[0]['sale_rate_date']);
 						$('#weight_per_piece'+row_no).val(result[0]['weight']);
-						$('#weight_per_piece'+row_no+'').trigger('change')
+						$('#weight_per_piece'+row_no).trigger('change');
+
 						addNewRow();
 					},
 					error: function(){
@@ -458,6 +534,173 @@
 					$('#isCommissionForm').val(0);
 				}
 			}
+
+			function getInvFromStockOut(){
+				var table = document.getElementById('unclosed_purchases_list_from_stock_out');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				$.ajax({
+					type: "GET",
+					url: "/tstock_out/getunclosed/",
+					success: function(result){
+						$.each(result, function(k,v){
+							var html="<tr>";
+							html+= "<td>"+v['Sal_inv_no']+"</td>"
+							html+= "<td>"+v['acc_name']+"</td>"
+							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+v['mill_gate']+"</td>"
+							html+= "<td>"+v['cash_pur_name']+"</td>"
+							html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedStockOutItems("+v['Sal_inv_no']+")'><i class='fas fa-check'></i></a></td>"
+							html+="</tr>";
+							$('#unclosed_purchases_list_from_stock_out').append(html);
+						});
+								
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+    		}
+
+			function getFromPurchase2(){
+				var table = document.getElementById('unclosed_purchases_list');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				$.ajax({
+					type: "GET",
+					url: "/purchase2/getunclosed/",
+					success: function(result){
+						$.each(result, function(k,v){
+							var html="<tr>";
+							html+= "<td>"+v['Sale_inv_no']+"</td>"
+							html+= "<td>"+v['acc_name']+"</td>"
+							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+v['pur_ord_no']+"</td>"
+							html+= "<td>"+v['disp_acc']+"</td>"
+							html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedItems("+v['Sale_inv_no']+")'><i class='fas fa-check'></i></a></td>"
+							html+="</tr>";
+							$('#unclosed_purchases_list').append(html);
+						});
+								
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+    		}
+
+			function inducedPurchase2Items(id){
+				var ind_total_qty=0, ind_total_weight=0;
+				var table = document.getElementById('tstock_inTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				index=0;
+				$('#itemCount').val(1);
+
+				$.ajax({
+					type: "GET",
+					url: "/purchase2/getItems/"+id,
+					success: function(result){
+						$('#stck_in_date').val(result['pur1']['sa_date']);
+						$('#account_name').val(result['pur1']['account_name']);
+						$('#stock_in_mill_bill').val(result['pur1']['pur_ord_no']);
+						$('#stock_in_pur_remarks').val(result['pur1']['Sales_Remarks']);
+						$('#stck_in_coa_name').val(result['pur1']['account_name']).trigger('change');
+
+						$.each(result['pur2'], function(k,v){
+							index++;
+							var table = $('#myTable').find('tbody');
+							var newRow = $('<tr>');
+							newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
+							newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
+							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="qty'+index+'" value="'+v['Sales_qty2']+'" name="qty[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="" id="weight'+index+'"  name="weight[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required class="form-control"></td>');
+							newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight"  value="'+v['Sales_qty2'] * v['weight_pc']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
+							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
+
+							table.append(newRow);
+							$('#item_name'+index).val(v['item_cod']);
+
+							ind_total_qty= ind_total_qty + v['Sales_qty2']
+							ind_total_weight= ind_total_weight + (v['Sales_qty2'] * v['weight_pc'])
+							$('#myTable select[data-plugin-selecttwo]').select2();
+						}); 
+						$("#total_qty").val(ind_total_qty);
+						$("#total_weight").val(ind_total_weight);
+						$("#isInduced").val(1);
+						$("#sale_against").val(id);
+						$('#itemCount').val(index);
+
+						$("#closeModal").trigger('click');
+
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+   			}
+
+			function inducedStockOutItems(id){
+				var ind_total_qty=0, ind_total_weight=0;
+				var table = document.getElementById('Purchase2Table');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				index=1;
+				$('#itemCount').val(1);
+
+				$.ajax({
+					type: "GET",
+					url: "/tstock_out/getItems/"+id,
+					success: function(result){
+						$('#stck_in_date').val(result['pur1']['sa_date']);
+						$('#account_name').val(result['pur1']['account_name']).trigger('change');
+						$('#company_name').val(8).trigger('change');
+						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
+						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
+						$('#cash_pur_address').val(result['pur1']['cash_pur_address']);
+						$('#Sales_Remarks').val(result['pur1']['sales_remarks']);
+
+						$.each(result['pur2'], function(k,v){
+							var table = $('#myTable').find('tbody');
+							var newRow = $('<tr>');
+							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
+							newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
+							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="remarks[]" placeholder="Remarks" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_qty2'+index+'" value="'+v['sales_qty']+'" name="pur2_qty2[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"></td>');
+							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');
+							newRow.append('<td><input type="number" id="pur2_len'+index+'" name="pur2_len[]" placeholder="Length" step="any" onchange="rowTotal('+index+')" value="20" required class="form-control" ></td>');
+							newRow.append('<td><input type="number" id="pur2_percentage'+index+'" name="pur2_percentage[]" placeholder="%" step="any" onchange="rowTotal('+index+')"  required class="form-control" ><input type="number" id="weight_per_piece'+index+'"  name="weight_per_piece[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required onchange="CalculateRowWeight('+index+')" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_qty'+index+'" name="pur2_qty[]" placeholder="weight" value="0" step="any"  required class="form-control"></td>');
+							newRow.append('<td><input type="number" id="amount'+index+'" name="amount[]" placeholder="Amount"  value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
+							newRow.append('<td><input type="date" id="pur2_price_date'+index+'" name="pur2_price_date[]" value="'+v['sale_rate_date']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled><input type="date"  value="'+v['sale_rate_date']+'" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'"></td>');
+							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
+
+							table.append(newRow);
+							$('#item_name'+index).val(v['item_cod']);
+							index++;
+
+							ind_total_qty= ind_total_qty + v['sales_qty']
+							ind_total_weight= ind_total_weight + (v['sales_qty'] * v['weight_pc'])
+							$('#myTable select[data-plugin-selecttwo]').select2();
+
+						}); 
+						$("#total_qty").val(ind_total_qty);
+						$("#total_weight").val(ind_total_weight);
+						$("#isInduced").val(1);
+						$("#sale_against").val(id);
+						$('#itemCount').val(index);
+
+						$("#closeModal").trigger('click');
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+   			}
 
 		</script>
 	@extends('../layouts.footerlinks')
