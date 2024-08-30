@@ -61,12 +61,13 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Company Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" id="company_name" required disabled>
+												<select data-plugin-selecttwo class="form-control" autofocus id="company_name" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
 												</select>
+												<input type="hidden" name="disp_account_name" value="8" required class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Name of Person</label>
