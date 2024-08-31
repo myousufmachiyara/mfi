@@ -27,16 +27,16 @@
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
-
-											<div class="col-sm-12 col-md-3">
-												<label class="col-form-label">Customer Name</label>
-												<select data-plugin-selecttwo class="form-control" id="coa_name" name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
-													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-													@endforeach
-												</select>
-											</div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <label class="col-form-label">Customer Name</label>
+                                                <select data-plugin-selecttwo class="form-control" id="coa_name" name="account_name" required>
+                                                    <option value="" disabled selected>Select Account</option>
+                                                    @foreach($coa as $key => $row)
+                                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            
                                             <div class="col-sm-12 col-md-2">
 												<label class="col-form-label" >Name of Person</label>
 												<input type="text" name="cash_pur_name" placeholder="Name of Person" class="form-control">
@@ -182,6 +182,63 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
+    ////// ComboBox script start here /////
+    document.addEventListener('DOMContentLoaded', function() {
+    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
+    const coaNameSelector = '#coa_name';
+    let isTabPressed = false;
+
+    // Detect if Tab key is pressed
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+            isTabPressed = true;
+        }
+    });
+
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'Tab') {
+            isTabPressed = false;
+        }
+    });
+
+    // Apply the functionality to the coa_name select element
+    $(coaNameSelector).on('focus', function() {
+        if (!isTabPressed && typeof $(this).select2 === 'function') {
+            $(this).select2('open');
+        }
+    });
+
+    $(coaNameSelector).on('select2:open', function() {
+        setTimeout(function() {
+            const searchField = document.querySelector('.select2-search__field');
+            if (searchField) {
+                searchField.focus();
+            }
+        }, 100);
+    });
+
+    // Apply the functionality to all item_name elements
+    $(document).on('focus', selectElementPattern, function() {
+        if (!isTabPressed && typeof $(this).select2 === 'function') {
+            $(this).select2('open');
+        }
+    });
+
+    $(document).on('select2:open', selectElementPattern, function() {
+        setTimeout(function() {
+            const searchField = document.querySelector('.select2-search__field');
+            if (searchField) {
+                searchField.focus();
+            }
+        }, 100);
+    });
+});
+
+
+    ////// ComboBox script end here /////
+
+
 
     var index = 2;
 

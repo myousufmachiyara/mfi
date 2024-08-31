@@ -13,7 +13,7 @@ class ItemsController extends Controller
     public function index()
     {
         $items = Item_entry::where('item_entry.status', 1)
-                ->join('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
+                ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
                 ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
 

@@ -27,7 +27,7 @@ class TStockOutController extends Controller
     public function index()
     {
         $tstock_out = tstock_out::where('tstock_out.status', 1)
-        ->join ('tstock_out_2', 'tstock_out_2.sales_inv_cod' , '=', 'tstock_out.Sal_inv_no')
+        ->leftjoin ('tstock_out_2', 'tstock_out_2.sales_inv_cod' , '=', 'tstock_out.Sal_inv_no')
         ->join('ac','tstock_out.account_name','=','ac.ac_code')
         ->select(
             'tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',

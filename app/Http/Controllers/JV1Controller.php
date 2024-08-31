@@ -20,7 +20,7 @@ class JV1Controller extends Controller
     public function index()
     {
         $jv1 = jvsingel::where('jvsingel.status', 1)
-                ->join('ac as d_ac', 'd_ac.ac_code', '=', 'jvsingel.ac_dr_sid')
+                ->leftjoin('ac as d_ac', 'd_ac.ac_code', '=', 'jvsingel.ac_dr_sid')
                 ->join('ac as c_ac', 'c_ac.ac_code', '=', 'jvsingel.ac_cr_sid')
                 ->select('jvsingel.*', 
                 'd_ac.ac_name as debit_account', 

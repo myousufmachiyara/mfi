@@ -25,7 +25,7 @@ class Sales2Controller extends Controller
     public function index()
     {
         $pur2 = tsales::where('tsales.status',1)
-        ->join ('tsales_2', 'tsales_2.sales_inv_cod' , '=', 'tsales.Sal_inv_no')
+        ->leftjoin ('tsales_2', 'tsales_2.sales_inv_cod' , '=', 'tsales.Sal_inv_no')
         ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tsales.account_name')
         ->join('ac as comp_acc', 'comp_acc.ac_code', '=', 'tsales.company_name')
         ->select(

@@ -24,7 +24,7 @@ class Purchase2Controller extends Controller
     public function index()
     {
         $pur2 = tpurchase::where('tpurchase.status',1)
-        ->join ('tpurchase_2', 'tpurchase_2.sales_inv_cod' , '=', 'tpurchase.Sale_inv_no')
+        ->leftjoin ('tpurchase_2', 'tpurchase_2.sales_inv_cod' , '=', 'tpurchase.Sale_inv_no')
         ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tpurchase.account_name')
         ->join('ac as disp_to', 'disp_to.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')

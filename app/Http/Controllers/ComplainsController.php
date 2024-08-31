@@ -20,7 +20,7 @@ class ComplainsController extends Controller
     public function index()
     {
         $complains = complains::where('complains.status', 1)
-            ->join('ac as acc_name', 'acc_name.ac_code', '=', 'complains.company_name')
+            ->leftjoin('ac as acc_name', 'acc_name.ac_code', '=', 'complains.company_name')
             ->join('ac as disp_to', 'disp_to.ac_code', '=', 'complains.party_name')
             ->select(
                 'complains.id', 

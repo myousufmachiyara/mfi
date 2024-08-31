@@ -25,7 +25,7 @@ class TBadDabsController extends Controller
     public function index()
     {
         $tbad_dabs = TBadDabs::where('tbad_dabs.status', 1)
-        ->join ('tbad_dabs_2', 'tbad_dabs_2.bad_dabs_cod' , '=', 'tbad_dabs.bad_dabs_id')
+        ->leftjoin ('tbad_dabs_2', 'tbad_dabs_2.bad_dabs_cod' , '=', 'tbad_dabs.bad_dabs_id')
         ->select(
             'tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason',
             \DB::raw('SUM(tbad_dabs_2.pc_add) as add_sum'),
