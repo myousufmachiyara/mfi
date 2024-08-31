@@ -317,32 +317,6 @@
 		}
 	}
 
-
-	function validateItemName(inputElement)
-	{
-		var item_name = inputElement.value;
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-
-        $.ajax({
-            type: 'POST',
-			url: '/item/new-item/validate',
-            data: {'item_name': item_name},
-            success: function(response){
-				console.log(response)
-            },
-            error: function(response){
-                var errors = response.responseJSON.errors;
-                var errorMessage = 'Item Already Exists';
-                alert(errorMessage);
-            }
-        });
-    }
-
 	function totalDebit(){
 		var totalDebit=0;
 		var debit=0;
@@ -407,7 +381,7 @@
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
 		var counter=1;
-		$('#purprevInvoices').val(1)
+		$('#purprevInvoices').val(2)
 		
 		var table = document.getElementById('purpendingInvoices');
         while (table.rows.length > 0) {
@@ -418,7 +392,6 @@
 			type: "GET",
 			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
 			success: function(result){
-				console.log(result);
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
 						var html="<tr>";

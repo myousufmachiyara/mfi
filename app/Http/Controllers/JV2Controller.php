@@ -11,6 +11,7 @@ use App\Models\jv2_att;
 use App\Models\Sales;
 use App\Models\Sales_2;
 use App\Models\sales_ageing;
+use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
 use App\Traits\SaveImage;
@@ -114,6 +115,26 @@ class JV2Controller extends Controller
                     $sales_ageing->acc_name=$request->customer_name;
                     $sales_ageing->created_by=1;
                     $sales_ageing->save();
+                }
+                
+            }
+        }
+
+        if($request->has('prevInvoices') && $request->prevInvoices==2)
+        {
+            for($j=0;$j<$request->totalInvoices;$j++)
+            {
+                if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
+                {
+                    $pur_ageing = new purchase_ageing();
+
+                    $pur_ageing->jv2_id=$latest_jv2['jv_no'];
+                    $pur_ageing->amount=$request->rec_amount[$j];
+                    $pur_ageing->sales_id=$request->invoice_nos[$j];
+                    $pur_ageing->sales_prefix=$request->prefix[$j];
+                    $pur_ageing->acc_name=$request->customer_name;
+                    $pur_ageing->created_by=1;
+                    $pur_ageing->save();
                 }
                 
             }
