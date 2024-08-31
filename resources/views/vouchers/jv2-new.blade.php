@@ -381,7 +381,7 @@
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
 		var counter=1;
-		$('#prevInvoices').val(1)
+		$('pur_prevInvoices').val(1)
 		
 		var table = document.getElementById('purpendingInvoices');
         while (table.rows.length > 0) {
