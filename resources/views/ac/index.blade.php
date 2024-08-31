@@ -52,8 +52,8 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
                                                     <td>{{$row->address}}   {{$row->phone_no}}</td>
-                                                    <td style="color: red;">{{$row->credit_limit}}</td>
-                                                    <td style="color: red;">{{$row->days_limit}}-Days</td>
+                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->credit_limit}}</strong></td>
+                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td><strong>{{$row->sub}}</strong></td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
