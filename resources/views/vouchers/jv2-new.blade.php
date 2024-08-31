@@ -7,112 +7,113 @@
 					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
-						<div class="row">
-							<div class="col-12 mb-3">								
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+						<div class="col-12 mb-3">								
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+									</div>
+									<h2 class="card-title">Journal Voucher 2</h2>
+								</header>
+
+								<div class="card-body">
+									<div class="row form-group mb-2">
+										<div class="col-sm-12 col-md-1 mb-2">
+											<label class="col-form-label" >RC. #</label>
+											<input type="text" placeholder="RC. #" class="form-control" disabled>
+											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 										</div>
-										<h2 class="card-title">Journal Voucher 2</h2>
-									</header>
 
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-1 mb-2">
-												<label class="col-form-label" >RC. #</label>
-												<input type="text" placeholder="RC. #" class="form-control" disabled>
-												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
+										<div class="col-sm-12 col-md-2 mb-2">
+											<label class="col-form-label" >Date</label>
+											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+										</div>
+
+										<div class="col-5 mb-2">
+											<label class="col-form-label">Narration</label>
+											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+										</div>
+
+										<div class="col-4 mb-3">
+											<label class="col-form-label">Attachements</label>
+											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+										</div>
+
+										<div class="col-12 mb-3">
+											<div style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+												<table class="table table-bordered table-striped mb-0" id="myTable">
+													<thead>
+														<tr>
+															<!-- <th width="4%">Code</th> -->
+															<th width="">Account Name</th>
+															<th width="">Remarks</th>
+															<th width="">Bank Name</th>
+															<th width="">Instr. #</th>
+															<th width="">Chq Date</th>
+															<th width="">Debit</th>
+															<th width="">Credit</th>
+															<th width=""></th>
+														</tr>
+													</thead>
+													<tbody id="JV2Table">
+														<tr>
+															<td>
+																<select data-plugin-selecttwo class="form-control" autofocus  name ="account_cod[]" onchange="addNewRow(1)" required>
+																	<option value="" disabled selected>Select Account</option>
+																	@foreach($acc as $key => $row)	
+																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																	@endforeach
+																</select>
+															</td>	
+															<td>
+																<input type="text" class="form-control" name="remarks[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="bank_name[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="instrumentnumber[]">
+															</td>
+															<td>
+																<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+															</td>
+															<td>
+																<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
+															</td>
+
+															<td>
+																<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
+															</td>
+															<td style="vertical-align: middle;">
+																<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
+										<div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Date</label>
-												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
-											</div>
-
-											<div class="col-5 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
-											</div>
-											<div class="col-4 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-									  </div>
-									</div>
-								</section>
-							
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<div class="card-body" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
-										<table class="table table-bordered table-striped mb-0" id="myTable" >
-											<thead>
-												<tr>
-													<!-- <th width="4%">Code</th> -->
-													<th width="">Account Name</th>
-													<th width="">Remarks</th>
-													<th width="">Bank Name</th>
-													<th width="">Instr. #</th>
-													<th width="">Chq Date</th>
-													<th width="">Debit</th>
-													<th width="">Credit</th>
-													<th width=""></th>
-												</tr>
-											</thead>
-											<tbody id="JV2Table">
-												<tr>
-													<td>
-														<select class="form-control" autofocus  name ="account_cod[]" onchange="addNewRow(1)" required>
-															<option value="" disabled selected>Select Account</option>
-															@foreach($acc as $key => $row)	
-																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-															@endforeach
-														</select>
-													</td>	
-													<td>
-														<input type="text" class="form-control" name="remarks[]">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="bank_name[]">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="instrumentnumber[]">
-													</td>
-                                                    <td>
-														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
-                                                    </td>
-													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
-													</td>
-
-													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
-													</td>
-													<td style="vertical-align: middle;">
-														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-
-									<footer class="card-footer"  >
-										<div class="row mb-3" style="justify-content:end">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Debit</label>
-												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
-											</div>
-											<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Credit</label>
-												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+										<div class="col-12 mb-3" >
+											<div class="row" style="justify-content:end">
+												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Debit</label>
+													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
+												</div>
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Credit</label>
+													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+												</div>
 											</div>
 										</div>
-									</footer>
-								</section>
-							</div>
+
+										
+									</div>
+								</div>
+							</section>
 						</div>
+							
+						<div class="row">
 							<div class="col-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
@@ -155,7 +156,7 @@
 													</tbody>
 												</table>										
 											</div>
-									  </div>
+										</div>
 									</div>
 								</section>
 							</div>
@@ -202,7 +203,7 @@
 													</tbody>
 												</table>										
 											</div>
-									  </div>
+										</div>
 									</div>
 								</section>
 							</div>
