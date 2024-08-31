@@ -32,7 +32,7 @@
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
                                                     <th>Status</th>
-                                                    <th>StatusAtt.</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
