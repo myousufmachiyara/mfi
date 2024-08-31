@@ -23,6 +23,7 @@
 											<input type="text" placeholder="RC. #" class="form-control" disabled>
 											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
+											<input type="hidden" id="pur_prevInvoices" name="pur_prevInvoices" value="0" class="form-control">
 										</div>
 
 										<div class="col-sm-12 col-md-2 mb-2">
@@ -380,7 +381,7 @@
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
 		var counter=1;
-		$('#prevInvoices').val(2)
+		$('#prevInvoices').val(1)
 		
 		var table = document.getElementById('purpendingInvoices');
         while (table.rows.length > 0) {
