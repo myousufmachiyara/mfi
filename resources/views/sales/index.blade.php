@@ -31,8 +31,8 @@
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
-                                                    <th>Att.</th>
                                                     <th>Status</th>
+                                                    <th>StatusAtt.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
