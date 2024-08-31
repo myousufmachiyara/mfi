@@ -26,7 +26,8 @@
                                                 <th>Date</th>
                                                 <th>Remarks</th>
                                                 <th>Address</th>
-                                                <th>Phone No.</th>
+                                                <th>Credit Limit</th>
+                                                <th>Days Limit</th>
                                                 <th>Group</th>
                                                 <th>Account Type</th>
                                                 <th>Att.</th>
@@ -50,8 +51,9 @@
                                                     @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
-                                                    <td>{{$row->address}}</td>
-                                                    <td>{{$row->phone_no}}</td>
+                                                    <td>{{$row->address}}   {{$row->phone_no}}</td>
+                                                    <td style="color: red;">{{$row->credit_limit}}</td>
+                                                    <td style="color: red;">{{$row->days_limit}}-Days</td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td><strong>{{$row->sub}}</strong></td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
@@ -64,6 +66,7 @@
                                                     @else
                                                         <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
                                                     @endif
+                                                
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -206,15 +209,23 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control" value=" " placeholder="Remarks" name="remarks" >
+                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" >
                             </div>
-                            <div class="col-lg-12 mb-2">
+                            <div class="col-lg-6 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Credit Limit</label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit" value="0" name="credit_limit" >
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Credit Days</label>
+                                <input type="text" class="form-control"  placeholder="Credit Days" value="0" name="days_limit" >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
@@ -238,7 +249,7 @@
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
 
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <label>Attachement</label>
                                 <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
                             </div>
@@ -291,13 +302,21 @@
                                 <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
                             </div>
-                            <div class="col-lg-12 mb-2">
+                            <div class="col-lg-6 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Credit Limit</label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit." name="credit_limit" id="update_credit_limit">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Days Limit</label>
+                                <input type="text" class="form-control"  placeholder="Days Limit" name="days_limit" id="update_days_limit">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
@@ -391,6 +410,8 @@
                 $('#update_remarks').val(result['remarks']);
                 $('#update_address').val(result['address']);
                 $('#update_phone_no').val(result['phone_no']);
+                $('#update_credit_limit').val(result['credit_limit']);
+                $('#update_days_limit').val(result['days_limit']);
                 $('#update_group_cod').val(result['group_cod']);
                 $('#update_AccountType').val(result['AccountType']);
                 $('#update_att').val(result['att']);

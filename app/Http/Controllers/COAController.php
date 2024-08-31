@@ -74,6 +74,12 @@ class COAController extends Controller
         if ($request->has('phone_no') && $request->phone_no) {
             $acc->phone_no=$request->phone_no;
         }
+        if ($request->has('credit_limit') && $request->credit_limit) {
+            $acc->credit_limit=$request->credit_limit;
+        }
+        if ($request->has('days_limit') && $request->days_limit) {
+            $acc->days_limit=$request->days_limit;
+        }
         if ($request->has('group_cod') && $request->group_cod) {
             $acc->group_cod=$request->group_cod;
         }
@@ -135,6 +141,13 @@ class COAController extends Controller
         if ($request->has('phone_no') && $request->phone_no) {
             $acc->phone_no=$request->phone_no;
         }
+        if ($request->has('credit_limit') && $request->credit_limit) {
+            $acc->credit_limit=$request->credit_limit;
+        }
+        if ($request->has('days_limit') && $request->days_limit) {
+            $acc->days_limit=$request->days_limit;
+        }
+
         if ($request->has('group_cod') && $request->group_cod OR $request->group_cod==null) {
             $acc->group_cod=$request->group_cod;
         }
@@ -150,6 +163,8 @@ class COAController extends Controller
             'remarks'=>$acc->remarks,
             'address'=>$acc->address,
             'phone_no'=>$acc->phone_no,
+            'credit_limit'=>$acc->credit_limit,
+            'days_limit'=>$acc->days_limit,
             'group_cod'=>$acc->group_cod,
             'AccountType'=>$acc->AccountType,
         ]);
