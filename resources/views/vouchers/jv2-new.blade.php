@@ -17,7 +17,7 @@
 								</header>
 
 								<div class="card-body">
-									<div class="row form-group mb-2">
+									<div class="row form-group">
 										<div class="col-sm-12 col-md-1 mb-2">
 											<label class="col-form-label" >RC. #</label>
 											<input type="text" placeholder="RC. #" class="form-control" disabled>
@@ -40,8 +40,8 @@
 											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 										</div>
 
-										<div class="col-12 mb-3">
-											<div style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+										<div class="col-12">
+											<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
 												<table class="table table-bordered table-striped mb-0" id="myTable">
 													<thead>
 														<tr>
@@ -106,8 +106,6 @@
 												</div>
 											</div>
 										</div>
-
-										
 									</div>
 								</div>
 							</section>
@@ -382,7 +380,7 @@
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
 		var counter=1;
-		$('#purprevInvoices').val(2)
+		$('#prevInvoices').val(2)
 		
 		var table = document.getElementById('purpendingInvoices');
         while (table.rows.length > 0) {

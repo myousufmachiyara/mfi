@@ -185,7 +185,7 @@
 
     ////// ComboBox script start here /////
     document.addEventListener('DOMContentLoaded', function() {
-    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
+    const selectElementPattern = 'select[attribute^="data-plugin-selecttwo"]'; // Match all IDs that start with "item_name"
     const coaNameSelector = '#coa_name';
     let isTabPressed = false;
 

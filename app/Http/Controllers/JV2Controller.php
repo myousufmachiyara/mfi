@@ -122,7 +122,7 @@ class JV2Controller extends Controller
 
         if($request->has('prevInvoices') && $request->prevInvoices==2)
         {
-            for($j=0;$j<$request->totalInvoices;$j++)
+            for($j=0;$j<$request->pur_totalInvoices;$j++)
             {
                 if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
                 {
