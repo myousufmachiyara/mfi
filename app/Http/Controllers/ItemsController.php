@@ -14,9 +14,8 @@ class ItemsController extends Controller
     {
         $items = Item_entry::where('item_entry.status', 1)
                 ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
-                ->get();
+                ->paginate(15);
         $itemGroups = Item_Groups::where('status', 1)->get();
-
         return view('items.index',compact('items','itemGroups'));
     }
 
