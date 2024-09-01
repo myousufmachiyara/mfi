@@ -56,7 +56,7 @@
 						</div>
 					</header> -->
 					<!-- start: page -->
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-3 mb-4">
 							<section class="card card-featured-left card-featured-primary mb-3">
 								<div class="card-body">
@@ -460,7 +460,7 @@
 								</div>
 							</section>
 						</div>
-					</div>
+					</div> -->
 					<!-- end: page -->
 				</section>
 			</div>
