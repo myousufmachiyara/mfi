@@ -60,7 +60,7 @@
 													<tbody id="JV2Table">
 														<tr>
 															<td>
-																<select data-plugin-selecttwo class="form-control" autofocus  name ="account_cod[]" onchange="addNewRow(1)" required>
+																<select data-plugin-selecttwo class="form-control" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
 																	<option value="" disabled selected>Select Account</option>
 																	@foreach($acc as $key => $row)	
 																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -115,8 +115,12 @@
 						<div class="row">
 							<div class="col-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Sales Ageing</h2>
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">Select Customer Account</span></h2>
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="SaletoggleSwitch">
+										</div>
 									</header>
 
 									<div class="card-body">
@@ -162,8 +166,11 @@
 
 							<div class="col-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Purchase Ageing</h2>
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Purchase Ageing <span id="purchase_span" style="color:red;font-size: 16px;display:none">Text Here</span></h2>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+										</div>
 									</header>
 
 									<div class="card-body">
@@ -254,6 +261,12 @@
 			}
 
 		});	
+		
+		document.getElementById('SaletoggleSwitch').addEventListener('change', SaletoggleInputs);
+		document.getElementById('PurtoggleSwitch').addEventListener('change', PurtoggleInputs);
+		PurtoggleInputs();
+		SaletoggleInputs();
+
 	});
 
     function removeRow(button) {
@@ -296,7 +309,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -411,4 +424,39 @@
 			}
 		});
 	}
+
+	function PurtoggleInputs() {
+		const textInput = document.getElementById('pur_customer_name');
+        textInput.disabled = !this.checked;
+	}
+
+	function SaletoggleInputs() {
+		const textInput = document.getElementById('customer_name');
+		var table = document.getElementById("JV2Table"); // Get the table element
+        var rowCount = table.rows.length; 
+		var no_of_credits=0;
+
+		for (var i=0;i<rowCount; i++){	
+			selected_account = $('#account_cod'+(i+1)).val();
+			if (selected_account && no_of_credits<1) {
+				credit = table.rows[i].cells[6].querySelector('input').value;
+				if(credit>=1){
+					console.log(selected_account);
+					$('#customer_name').val(selected_account).trigger('change');
+					$('#sales_unadjusted_amount').val(credit);
+					no_of_credits = no_of_credits + 1;
+				}
+				document.getElementById('sale_span').style.display = 'none';				
+			} 
+			else if (no_of_credits>=1) {
+				$('#customer_name').val('').trigger('change');
+				$('#sales_unadjusted_amount').val(0);
+
+				textInput.disabled = !this.checked; 
+				document.getElementById('sale_span').style.display = 'block';
+				break;		
+			}
+		}
+	}
+
 </script>
