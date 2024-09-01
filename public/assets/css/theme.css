@@ -228,7 +228,9 @@ a:active {
 
 	/* Layout Fixed - Content Body */
 	html.fixed .content-body {
-		margin-left: 300px;
+		/* margin-left: 270px;
+		margin-right: 20px; */
+
 	}
 
 	html.fixed .content-body.has-toolbar {
@@ -236,7 +238,7 @@ a:active {
 	}
 
 	html.fixed.has-top-menu:not(.has-left-sidebar-half) .content-body {
-		margin-left: 0;
+		/* margin-left: 0; */
 	}
 
 	/* Layout Fixed - Page header */
@@ -13763,7 +13765,7 @@ html.dark .show-grid [class*="col"] {
 }
 
 .modal-icon .fa, .modal-icon .fab, .modal-icon .fal, .modal-icon .far, .modal-icon .fas {
-	font-size: 52px;
+	font-size: 40px;
 	position: relative;
 	top: -10px;
 	color: #CCC;
