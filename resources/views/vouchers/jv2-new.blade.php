@@ -60,7 +60,7 @@
 													<tbody id="JV2Table">
 														<tr>
 															<td>
-																<select data-plugin-selecttwo class="form-control" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+																<select data-plugin-selecttwo class="form-control select2-js" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
 																	<option value="" disabled selected>Select Account</option>
 																	@foreach($acc as $key => $row)	
 																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -128,7 +128,7 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -142,7 +142,7 @@
 											</div>
 
 											<div class="col-12 mb-2">
-												<table class="table table-bordered table-striped mb-0 mt-2">
+												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
 															<th width="15%">Inv #</th>
@@ -178,7 +178,7 @@
 										
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -309,7 +309,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -432,30 +432,34 @@
 
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
+		document.getElementById('sale_span').style.display = 'none';
+		
+		// clearing sales  ageing table and fields
+		$('#customer_name').val('').trigger('change');
+		$('#sales_unadjusted_amount').val(0);
+		$('#sales_ageing tbody').empty(); 
+
 		var table = document.getElementById("JV2Table"); // Get the table element
-        var rowCount = table.rows.length; 
+        var rowCount = table.rows.length;
 		var no_of_credits=0;
 
 		for (var i=0;i<rowCount; i++){	
 			selected_account = $('#account_cod'+(i+1)).val();
-			if (selected_account && no_of_credits<1) {
+			if (selected_account) {
 				credit = table.rows[i].cells[6].querySelector('input').value;
-				if(credit>=1){
-					console.log(selected_account);
+				if(credit>=1 && no_of_credits<1){
 					$('#customer_name').val(selected_account).trigger('change');
 					$('#sales_unadjusted_amount').val(credit);
 					no_of_credits = no_of_credits + 1;
+					textInput.disabled = !this.checked; 
 				}
-				document.getElementById('sale_span').style.display = 'none';				
+				else if(credit>=1 && no_of_credits>=1){
+					$('#customer_name').val('').trigger('change');
+					$('#sales_unadjusted_amount').val(0);
+					textInput.disabled = !this.checked; 
+					document.getElementById('sale_span').style.display = 'block';
+				}
 			} 
-			else if (no_of_credits>=1) {
-				$('#customer_name').val('').trigger('change');
-				$('#sales_unadjusted_amount').val(0);
-
-				textInput.disabled = !this.checked; 
-				document.getElementById('sale_span').style.display = 'block';
-				break;		
-			}
 		}
 	}
 

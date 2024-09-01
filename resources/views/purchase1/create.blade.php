@@ -43,7 +43,7 @@
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
 													<label class="col-form-label">Account Name</label>
-													<select class="form-control" autofocus name="ac_cod" required>
+													<select data-plugin-selecttwo class="form-control select-js" autofocus name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
 														@foreach($coa as $key => $row)	
 															<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>

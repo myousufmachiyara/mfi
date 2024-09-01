@@ -67,7 +67,7 @@
                                             	@foreach ($jv2_items as $jv_key => $jv2_items)
 													<tr>
 														<td>
-															<select class="form-control" autofocus name ="account_cod[]" onchange="addNewRow()" required>
+															<select data-plugin-selecttwo class="form-control select2-js" autofocus name ="account_cod[]" onchange="addNewRow()" required>
 																<option value="" disabled selected>Select Account</option>
 																@foreach($acc as $key => $row)	
 																	<option value="{{$row->ac_code}}" {{ $jv2_items->account_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -218,7 +218,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow()" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" autofocus onclick="addNewRow()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
