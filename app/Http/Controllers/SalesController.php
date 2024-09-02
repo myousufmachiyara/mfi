@@ -383,15 +383,15 @@ class SalesController extends Controller
             {
                 $item_table .= '<tr style="background-color:#f1f1f1">';
                 $item_table .= '<td style="width:10%;border-right:1px dashed #000;border-left:1px dashed #000">'.$count.'</td>';
-                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
-                $total_quantity=$total_quantity+$items['Sales_qty'];
+                $item_table .= '<td style="width:10%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
+                $total_quantity=$total_quantity+$items['Sales_qty2'];
                 $item_table .= '<td style="width:20%;border-right:1px dashed #000">'.$items['item_name'].'</td>';
                 $item_table .= '<td style="width:24%;border-right:1px dashed #000">'.$items['remarks'].'</td>';
                 $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['sales_price'].'</td>';
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty2'].'</td>';
-                $total_weight=$total_weight+$items['Sales_qty2'];
-                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.($items['Sales_qty2']*$items['sales_price']).'</td>';
-                $total_amount=$total_amount+($items['Sales_qty2']*$items['sales_price']);
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.$items['Sales_qty'].'</td>';
+                $total_weight=$total_weight+$items['Sales_qty'];
+                $item_table .= '<td style="width:12%;border-right:1px dashed #000">'.($items['Sales_qty']*$items['sales_price']).'</td>';
+                $total_amount=$total_amount+($items['Sales_qty']*$items['sales_price']);
                 $item_table .= '</tr>';
             }
             else{
