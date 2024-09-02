@@ -139,13 +139,13 @@ Route::get('/sales/edit-invoice/{id}', [App\Http\Controllers\SalesController::cl
 Route::post('/sales/saleinvoice/create', [App\Http\Controllers\SalesController::class, 'store'])->name('store-sale-invoice');
 Route::post('/sales/saleinvoice/update', [App\Http\Controllers\SalesController::class, 'update'])->name('update-sale-invoice');
 Route::post('/sales/saleinvoice/delete', [App\Http\Controllers\SalesController::class, 'destroy'])->name('delete-sale-invoice');
-Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
+Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'showNew'])->name('show-sale-invoice');
 Route::get('/sales/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
 Route::get('/sales/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
 Route::get('/sales/attachements', [App\Http\Controllers\SalesController::class, 'getAttachements'])->name('get-sale1-att');
 Route::get('/sales/download/{id}', [App\Http\Controllers\SalesController::class, 'downloadAtt'])->name('sale1-att-download');
 Route::delete('/sales/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
-Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'showNew'])->name('show-sale1-att');
+Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
 
 //sales 2
 Route::get('/sales2/all-invoices', [App\Http\Controllers\Sales2Controller::class, 'index'])->name('all-sale2invoices');
