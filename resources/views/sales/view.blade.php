@@ -69,16 +69,16 @@
 										@foreach($sale_items as $key => $sale_item)
 										<tr>
 											<td>{{$key+1}}</td>
-											<td class="text-center">{{$sale_item->Sales_qty2}}</td>
+											<td class="text-center">{{$sale_item->Sales_qty}}</td>
 											<td class="font-weight-semibold text-dark">{{$sale_item->item_name}}</td>
 											<td>{{$sale_item->remarks}}</td>
 											<td class="text-center">{{$sale_item->sales_price}}</td>
-											<td class="text-center">{{$sale_item->Sales_qty}}</td>
-											<td class="text-center">{{$sale_item->sales_price * $sale_item->Sales_qty}}</td>
+											<td class="text-center">{{$sale_item->Sales_qty2}}</td>
+											<td class="text-center">{{$sale_item->sales_price * $sale_item->Sales_qty2}}</td>
 										</tr>
-										<?php $subtotal=$subtotal+($sale_item->sales_price * $sale_item->Sales_qty) ?>
-										<?php $total_weight=$total_weight+ $sale_item->Sales_qty ?>
-										<?php $total_quantity=$total_quantity+ $sale_item->Sales_qty2 ?>
+										<?php $subtotal=$subtotal+($sale_item->sales_price * $sale_item->Sales_qty2) ?>
+										<?php $total_weight=$total_weight+ $sale_item->Sales_qty2 ?>
+										<?php $total_quantity=$total_quantity+ $sale_item->Sales_qty ?>
 
 										@endforeach
 									</tbody>
