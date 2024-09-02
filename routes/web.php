@@ -260,3 +260,21 @@ Route::get('/complains/print/{id}', [App\Http\Controllers\ComplainsController::c
 Route::get('/complains/download/{id}', [App\Http\Controllers\ComplainsController::class, 'downloadAtt'])->name('complains-att-download');
 Route::get('/complains/view/{id}', [App\Http\Controllers\ComplainsController::class, 'view'])->name('complains-att-view');
 Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\ComplainsController::class, 'deleteAtt'])->name('complains-att-delete');
+
+
+
+//quotation
+ Route::get('/quotation/all-quotation', [App\Http\Controllers\QuotationController::class, 'index'])->name('all-quotation');
+ Route::get('/quotation/new', [App\Http\Controllers\QuotationController::class, 'create'])->name('new-quotation');
+ Route::post('/quotation/create', [App\Http\Controllers\QuotationController::class, 'store'])->name('store-quotation');
+ Route::get('/quotation/edit/{id}', [App\Http\Controllers\QuotationController::class, 'edit'])->name('edit-quotation');
+ Route::post('/quotation/update', [App\Http\Controllers\QuotationController::class, 'update'])->name('update-quotation');
+ Route::post('/quotation/delete', [App\Http\Controllers\QuotationController::class, 'destroy'])->name('delete-quotation');
+  Route::get('/quotation/show/{id}', [App\Http\Controllers\QuotationController::class, 'show'])->name('show-quotation');
+  Route::get('/quotation/view/{id}', [App\Http\Controllers\QuotationController::class, 'view'])->name('show-quotation-att');
+ Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
+ Route::get('/quotation/download/{id}', [App\Http\Controllers\QuotationController::class, 'downloadAtt'])->name('quotation-att-download');
+ Route::delete('/quotation/deleteAttachment/{id}', [App\Http\Controllers\QuotationController::class, 'deleteAtt'])->name('quotation-att-delete');
+ Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
+ Route::get('/quotation/getunclosed/', [App\Http\Controllers\QuotationController::class, 'getunclosed'])->name('get-unclosed-quotation-invoice');
+ Route::get('/quotation/getItems/{id}', [App\Http\Controllers\QuotationController::class, 'getItems'])->name('get-quot2-items');

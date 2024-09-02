@@ -52,7 +52,12 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
                                                     <td>{{$row->address}}   {{$row->phone_no}}</td>
-                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->credit_limit}}</strong></td>
+                                                    @if(substr(strval($row->credit_limit), strpos(strval($row->credit_limit), '.') + 1) > 0)
+                                                        <td style="color: rgb(156, 32, 32);"><strong>{{ rtrim(rtrim(number_format($row->credit_limit, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                    @else
+                                                         <td style="color: rgb(156, 32, 32);"><strong>{{ number_format(intval($row->credit_limit))}}</strong></td>
+                                                    @endif
+
                                                     <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td><strong>{{$row->sub}}</strong></td>

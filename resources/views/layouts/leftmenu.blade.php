@@ -213,8 +213,8 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" target="_blank">
-                        Stock In/Out
+                    <a class="nav-link" target="_blank" href="{{ route('all-quotation')}}">
+                        Quotation
                     </a>
                 </li>	
                 <li>
