@@ -5,164 +5,81 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-quotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-4 mb-3">								
+							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Purchase Details</h2>
+										<h2 class="card-title">Edit Quotation</h2>
 									</header>
+									<div class="card-actions">
+										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+									</div>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Invoice No.</label>
-												<input type="text" placeholder="(Edit Invoice)" class="form-control" value="{{$pur2->prefix}}{{$pur2->Sale_inv_no}}" disabled>
+											<div class="col-sm-12 col-md-2 mb-2">
+												<label class="col-form-label" >Quotation No.</label>
+												<input type="text" placeholder="(Edit Quotation)" class="form-control" value="{{$pur2->prefix}}{{$pur2->Sale_inv_no}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sale_inv_no}}" name="pur2_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
+											
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Customer Name</label>
 												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
+													<option value="" disabled selected>Select Customer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
 												</select>
 											</div>
-									  </div>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-4 mb-3">								
-								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Dispatch Details</h2>
-									</header>
-
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
-													<option value="" disabled selected>Select Account</option>
-													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
-													@endforeach
-												</select>
+											<div class="col-sm-12 col-md-2 mb-2">
+												<label class="col-form-label" >PO#</label>
+												<input type="text" placeholder="PO#" name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
 											</div>
-											<div class="col-sm-3 col-md-6 mb-2">
-												<label class="col-form-label" >Name of Person</label>
-												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label">Sale Inv#</label>
 												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
 												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
 											</div>
 											
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
+												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
+													<option value="" disabled selected>Select Dispatch From</option>
+													@foreach($coa as $key => $row)	
+														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="col-sm-3 col-md-4 mb-2">
+												<label class="col-form-label" >Name of Person</label>
+												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
+											</div>
+											
 
-											<div class="col-sm-3 col-md-6 mb-2">
+											<div class="col-sm-3 col-md-4 mb-2">
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_Pur_address" value="{{$pur2->cash_Pur_address}}" class="form-control">
 											</div>
 
-											<div class="col-12 mb-12">
+											<div class="col-8 mb-12">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
-
-									  </div>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-4 mb-3">
-								<header class="card-header" style="display: flex;justify-content: space-between;">
-									<h2 class="card-title">Commission Form</h2>
-									<div class="form-check form-switch">
-										@if($pur2->tax_id!=null)
-											<!-- <input class="form-check-input" type="checkbox" id="toggleSwitch" checked> -->
-											<input type="hidden" class="form-control" name="isCommissionForm" value="1" id="isCommissionForm">
-										@else
-											<input class="form-check-input" type="checkbox" id="toggleSwitch" unchecked>
-											<input type="hidden" class="form-control" name="isCommissionForm" value="0" id="isCommissionForm">
-										@endif
-									</div>
-								</header>								
-								<section class="card">
-									<div class="card-body" style="background: #2023240f !important">
-										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
-											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >%</label>
-												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required>
-											</div>
-
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >P.B</label>
-												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Target</label>
-												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Bill Amount After Discount</label>
-												<input type="number" id="BillAfterDisc" disabled value="{{((($pur2->bamount * $pur2->disc )/100)+$pur2->bamount)}}" class="form-control comm-form-field">
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Amount</label>
-												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Item Group</label>
-												<select data-plugin-selecttwo class="form-control comm-form-field" required autofocus name="tax_item_name">
-													<option value="" disabled selected>Select Account</option>
-													@foreach($item_group as $key => $row)	
-														<option value="{{$row->item_group_cod}}" {{ $pur2->item == $row->item_group_cod ? 'selected' : '' }}>{{$row->group_name}}</option>
-													@endforeach
-												</select>											
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"> {{$pur2->tax_remarks}} </textarea>
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Attachements</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 									  </div>
 									</div>
-								</section>
-							</div>
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-										<h2 class="card-title">Edit Purchase 2 Invoice Details</h2>
-									</header>
+									
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -180,7 +97,7 @@
 													<th width=""></th>
 												</tr>
 											</thead>
-											<tbody id="Purchase2Table">
+											<tbody id="Quotation2Table">
 												@foreach ($pur2_item as $pur2_key => $pur2_items)
 													<tr>
 														<td>
@@ -283,8 +200,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-quotation') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Quotation</button>
 											</div>
 										</div>
 									</footer>
@@ -316,7 +233,7 @@
 
 		var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
 
-		var table = document.getElementById("Purchase2Table"); // Get the table element
+		var table = document.getElementById("Quotation2Table"); // Get the table element
         var rowCount = table.rows.length; // Get the total number of rows
 
 		itemCount = rowCount;
@@ -356,7 +273,7 @@
 	});
 
     function removeRow(button) {
-		var tableRows = $("#Purchase2Table tr").length;
+		var tableRows = $("#Quotation2Table tr").length;
 		if(tableRows>1){
 			var row = button.parentNode.parentNode;
 			row.parentNode.removeChild(row);
@@ -444,13 +361,7 @@
 		});
 	}
 
-	function CalBillAfterDisc(){
-		var basic_amount = parseFloat($('#basic_amount').val());
-		var basic_amount_disc = parseFloat($('#basic_amount_disc').val());
 
-		sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
-		$('#BillAfterDisc').val(sum);
-	}
 
 	function getCOADetails(){
 		var coaId = document.getElementById("coa_name").value;
@@ -493,7 +404,7 @@
 		var totalAmount=0;
 		var totalWeight=0;
 		var totalQuantity=0;
-		var tableRows = $("#Purchase2Table tr").length;
+		var tableRows = $("#Quotation2Table tr").length;
 		var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 
 		for (var i = 0; i < tableRows; i++) {
@@ -547,24 +458,7 @@
 		rowTotal(index);
 	}
 
-	function toggleInputs() {
-		const isChecked = document.getElementById('toggleSwitch').checked;
-		const inputGroups = document.querySelectorAll('.comm-form-field');
-		inputGroups.forEach(input => {
-			// Show or hide input groups based on the toggle switch state
-			if (input.id !== 'BillAfterDisc') {
-				input.disabled = !isChecked;
-			}
-		});
-		
-		var switchElement = document.getElementById('toggleSwitch');
-		if(switchElement.checked){
-			$('#isCommissionForm').val(1);
-		}
-		else{
-			$('#isCommissionForm').val(0);
-		}
-	}
+
 
 	document.getElementById('edit-sale-inv').addEventListener('click', function () {
         var inputField = document.getElementById('sale-inv-no');

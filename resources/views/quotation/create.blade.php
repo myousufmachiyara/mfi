@@ -32,7 +32,7 @@
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Custmer Name <span style="color: red;">*</span></label>
 												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
-													<option value="" disabled selected>Custmer Name</option>
+													<option value="" disabled selected>Select Custmer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -50,7 +50,7 @@
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
 												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
-													<option value="" disabled selected>Dispatch From</option>
+													<option value="" disabled selected>Select Dispatch From</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -232,7 +232,9 @@
 					}
 				});
 
-			
+				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
+				toggleInputs();
+			});
 
 
 
@@ -307,8 +309,8 @@
 				}
 				$.ajax({
 					type: "GET",
-					url: "",
-					data: /item2/detail{id:itemId},
+					url: "/item2/detail",
+					data: {id:itemId},
 					success: function(result){
 						$('#item_cod'+row_no).val(result[0]['it_cod']);
 						$('#item_name'+row_no).val(result[0]['it_cod']);
@@ -326,7 +328,8 @@
 				});
 			}
 
-		
+			
+
 			function getCOADetails(){
 				var coaId = document.getElementById("coa_name").value;
 				
@@ -420,7 +423,7 @@
 				rowTotal(index);
 			}
 
-
+			
 		</script>
 	@extends('../layouts.footerlinks')
 	</body>
