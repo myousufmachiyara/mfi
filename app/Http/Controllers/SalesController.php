@@ -137,7 +137,6 @@ class SalesController extends Controller
 
     public function show(string $id)
     {
-        die("hello");
         $sales = Sales::where('Sal_inv_no',$id)
                         ->join('ac','sales.account_name','=','ac.ac_code')
                         ->first();
