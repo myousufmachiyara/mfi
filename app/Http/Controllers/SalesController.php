@@ -143,7 +143,7 @@ class SalesController extends Controller
 
         $sale_items = Sales_2::where('sales_inv_cod',$id)
                         ->join('item_entry','sales_2.item_cod','=','item_entry.it_cod')
-                        ->select('sales_2.*,item_entry.item_name')
+                        ->select('sales_2.*','item_entry.item_name')
                         ->get();
 
         return view('sales.view',compact('sales','sale_items'));
