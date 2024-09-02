@@ -145,7 +145,6 @@ class SalesController extends Controller
                         ->select('sales_2.*','item_entry.item_name')
                         ->get();
         
-        die(print_r($sale_items));
         return view('sales.view',compact('sales','sale_items'));
     }
 
