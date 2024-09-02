@@ -137,14 +137,16 @@ class SalesController extends Controller
 
     public function show(string $id)
     {
+        die("hello");
         $sales = Sales::where('Sal_inv_no',$id)
                         ->join('ac','sales.account_name','=','ac.ac_code')
                         ->first();
-        
+
         $sale_items = Sales_2::where('sales_inv_cod',$id)
                         ->join('item_entry','sales_2.item_cod','=','item_entry.it_cod')
                         ->select('sales_2.*,item_entry.item_name')
                         ->get();
+
         return view('sales.view',compact('sales','sale_items'));
     }
 
