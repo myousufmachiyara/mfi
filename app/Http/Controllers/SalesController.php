@@ -135,7 +135,7 @@ class SalesController extends Controller
         return redirect()->route('all-saleinvoices');
     }
 
-    public function show(string $id)
+    public function showNew(string $id)
     {
         $sales = Sales::where('Sal_inv_no',$id)
                         ->join('ac','sales.account_name','=','ac.ac_code')
