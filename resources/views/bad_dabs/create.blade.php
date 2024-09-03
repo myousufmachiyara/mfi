@@ -183,7 +183,9 @@ function addNewRow() {
         table.append(newRow);
         index++;
         $('#itemCount').val(Number($('#itemCount').val()) + 1);
+        $('#myTable select[data-plugin-selecttwo]').select2();
     }
+
 }
 
 function getItemDetails(row_no, option) {

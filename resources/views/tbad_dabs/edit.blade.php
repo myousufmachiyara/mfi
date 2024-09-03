@@ -236,6 +236,8 @@ function addNewRow(){
         itemCount = itemCount+1;
         $('#itemCount').val(itemCount);
         index++;
+        $('#myTable select[data-plugin-selecttwo]').select2();
+
     }
 }
 

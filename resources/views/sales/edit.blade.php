@@ -372,6 +372,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			var itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+
 		}
 	}
 
