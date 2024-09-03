@@ -57,10 +57,10 @@
                                             @foreach($tbad_dabs_items as $key1 => $tbad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails('{{$key1}}','1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
+                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails({{$key1+1}},'1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails('{{$key1}}','2')" name="item_name2[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails({{$key1+1}},'2')" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $tbad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>

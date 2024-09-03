@@ -50,8 +50,8 @@ class TStockOutController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('tstock_out.create',compact('items','coa'));
     }
 
@@ -146,8 +146,9 @@ class TStockOutController extends Controller
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)->first();
         $tstock_out_items = tstock_out_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry2::all();
-        $coa = AC::all();
+
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('tstock_out.edit', compact('tstock_out','tstock_out_items','items','coa'));
     }
 

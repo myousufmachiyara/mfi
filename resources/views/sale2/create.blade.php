@@ -70,7 +70,7 @@
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
 												</select>
-												<input type="hidden" name="disp_account_name" value="8" required class="form-control">
+												<input type="hidden" name="disp_account_name" id="disp_account_name" required class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Name of Person</label>
@@ -373,10 +373,10 @@
 					cell4.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur2_qty2'+index+'" value="0" name="pur2_qty2[]" step="any" required>';
 					cell5.innerHTML  = '<input type="number" id="pur2_per_unit'+index+'" class="form-control" name="pur2_per_unit[]" value="0" step="any" required>';
 					cell6.innerHTML  = '<input type="number" id="pur2_len'+index+'" onchange="rowTotal('+index+')" class="form-control" name="pur2_len[]"  value="20" step="any" required>';
-					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
+					cell7.innerHTML  = '<input type="number" class="form-control" name="pur2_percentage[]" onchange="rowTotal('+index+')" id="pur2_percentage'+index+'" value="0" step="any" required> <input type="hidden" class="form-control" id="weight_per_piece'+index+'" name="weight_per_piece[]" onchange="CalculateRowWeight('+index+')" value="0" step="any" required>';
 					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled>';
 					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
-					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="date" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
+					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
 					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 					index++;
@@ -552,7 +552,7 @@
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sal_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
-							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+moment(v['sa_date']).format('DD-MM-YY')+"</td>"
 							html+= "<td>"+v['mill_gate']+"</td>"
 							html+= "<td>"+v['cash_pur_name']+"</td>"
 							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedStockOutItems("+v['Sal_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"
@@ -581,7 +581,7 @@
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sale_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
-							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+moment(v['sa_date']).format('DD-MM-YY')+"</td>"
 							html+= "<td>"+v['pur_ord_no']+"</td>"
 							html+= "<td>"+v['disp_acc']+"</td>"
 							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedPurchase2Items("+v['Sale_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"
@@ -612,14 +612,16 @@
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['Cash_pur_name_ac']).trigger('change');
 						$('#company_name').val(result['pur1']['account_name']).trigger('change');
+						$('#disp_account_name').val(result['pur1']['account_name']);
 						$('#Cash_pur_name').val(result['pur1']['Cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sale_inv_no']);
 						$('#inducedID').val(result['pur1']['Sale_inv_no']);
 						$('#inducedPrefix').val(result['pur1']['prefix']);
 						$('#cash_pur_address').val(result['pur1']['cash_Pur_address']);
 
+						var table = $('#myTable').find('tbody');
+
 						$.each(result['pur2'], function(k,v){
-							var table = $('#myTable').find('tbody');
 							var newRow = $('<tr>');
 							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
 							newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
@@ -627,10 +629,10 @@
 							newRow.append('<td><input type="number" id="pur2_qty2'+index+'" value="'+v['Sales_qty2']+'" name="pur2_qty2[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"></td>');
 							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');
 							newRow.append('<td><input type="number" id="pur2_len'+index+'" name="pur2_len[]" placeholder="Length" step="any" onchange="rowTotal('+index+')"  value="'+v['length']+'" required class="form-control" ></td>');
-							newRow.append('<td><input type="number" id="pur2_percentage'+index+'" name="pur2_percentage[]" placeholder="%" step="any" onchange="rowTotal('+index+')" value="'+v['discount']+'"  required class="form-control" ><input type="number" id="weight_per_piece'+index+'"  name="weight_per_piece[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required onchange="CalculateRowWeight('+index+')" class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_percentage'+index+'" name="pur2_percentage[]" placeholder="%" step="any" onchange="rowTotal('+index+')" value="'+v['discount']+'"  required class="form-control" ><input type="hidden" id="weight_per_piece'+index+'"  name="weight_per_piece[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required onchange="CalculateRowWeight('+index+')" class="form-control"></td>');
 							newRow.append('<td><input type="number" id="pur2_qty'+index+'" name="pur2_qty[]" placeholder="weight" value="0" step="any"  required class="form-control"></td>');
 							newRow.append('<td><input type="number" id="amount'+index+'" name="amount[]" placeholder="Amount"  value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
-							newRow.append('<td><input type="date" id="pur2_price_date'+index+'" name="pur2_price_date[]" value="'+v['rat_dat']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled><input type="date"  value="'+v['rat_dat']+'" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'"></td>');
+							newRow.append('<td><input type="date" id="pur2_price_date'+index+'" name="pur2_price_date[]" value="'+v['rat_dat']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled><input type="hidden"  value="'+v['rat_dat']+'" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'"></td>');
 							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button><button type="button" onclick="enablePrice('+index+')" class="btn btn-warning"><i class="bx bx-refresh" style="font-size:20px"></i></button></td>');
 
 							table.append(newRow);
@@ -692,7 +694,8 @@
 					success: function(result){
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['account_name']).trigger('change');
-						$('#company_name').val(8).trigger('change');
+						$('#company_name').val(24).trigger('change');
+						$('#disp_account_name').val(24);
 						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
 						$('#inducedID').val(result['pur1']['Sal_inv_no']);

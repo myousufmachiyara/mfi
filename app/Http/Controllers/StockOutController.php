@@ -50,8 +50,9 @@ class StockOutController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry::all();
-        $coa = AC::all();
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('stock_out.create',compact('items','coa'));
     }
 
@@ -146,8 +147,10 @@ class StockOutController extends Controller
     {
         $stock_out = stock_out::where('Sal_inv_no',$id)->first();
         $stock_out_items = stock_out_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry::all();
-        $coa = AC::all();
+
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('stock_out.edit', compact('stock_out','stock_out_items','items','coa'));
     }
 

@@ -48,6 +48,7 @@ class Purchase2Controller extends Controller
     {
         $items = Item_entry2::all();
         $item_group = Item_Groups::all();
+        $item_group = Item_Groups::whereBetween('item_group_cod', [1, 6])->get();
         $coa = AC::all();
         return view('purchase2.create',compact('items','coa','item_group'));
     }
@@ -186,9 +187,10 @@ class Purchase2Controller extends Controller
 
     public function edit($id)
     {
-        $items = Item_entry2::all();
         $item_group = Item_Groups::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         $pur2 = tpurchase::where('tpurchase.Sale_inv_no',$id)
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
         ->select(
@@ -438,7 +440,7 @@ class Purchase2Controller extends Controller
         $pur1= tpurchase::where('Sale_inv_no',$id)->get()->first();
 
         $pur2 = tpurchase_2::where('sales_inv_cod',$id)
-        ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+        ->leftjoin('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
         ->select('tpurchase_2.*','ie.item_name')
         ->get();
 

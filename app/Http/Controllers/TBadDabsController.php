@@ -40,8 +40,9 @@ class TBadDabsController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('tbad_dabs.create',compact('items','coa'));
     }
 
@@ -103,7 +104,7 @@ class TBadDabsController extends Controller
         $tbad_dabs = TBadDabs::where('bad_dabs_id', $id)->first();
         $tbad_dabs_items = TBadDabs2::where('bad_dabs_cod', $id)->get();
         $tbad_dabs_item_count = count($tbad_dabs_items);
-        $items = Item_entry2::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
     
         // Calculate the total_add and total_less
         $total_add = $tbad_dabs_items->sum('pc_add');
