@@ -70,7 +70,7 @@
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
 												</select>
-												<input type="hidden" name="disp_account_name" value="8" required class="form-control">
+												<input type="hidden" name="disp_account_name" id="disp_account_name" required class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Name of Person</label>
@@ -612,6 +612,7 @@
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['Cash_pur_name_ac']).trigger('change');
 						$('#company_name').val(result['pur1']['account_name']).trigger('change');
+						$('#disp_account_name').val(result['pur1']['account_name']);
 						$('#Cash_pur_name').val(result['pur1']['Cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sale_inv_no']);
 						$('#inducedID').val(result['pur1']['Sale_inv_no']);
@@ -694,6 +695,7 @@
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['account_name']).trigger('change');
 						$('#company_name').val(24).trigger('change');
+						$('#disp_account_name').val(24);
 						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
 						$('#inducedID').val(result['pur1']['Sal_inv_no']);
