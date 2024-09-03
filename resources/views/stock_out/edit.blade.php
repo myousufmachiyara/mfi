@@ -57,7 +57,7 @@
 
 											<div class="col-sm-12 col-md-8 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control">{{$tstock_out->Sales_remarks}}</textarea>
+												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$tstock_out->Sales_remarks}}</textarea>
 											</div>
 									  </div>
 									</div>

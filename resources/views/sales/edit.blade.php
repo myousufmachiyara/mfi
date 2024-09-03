@@ -79,7 +79,7 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control">{{$sales->Sales_remarks}}</textarea>
+												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$sales->Sales_remarks}}</textarea>
 											</div>
 									  </div>
 									</div>
