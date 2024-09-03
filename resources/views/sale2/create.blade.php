@@ -621,6 +621,7 @@
 						var table = $('#myTable').find('tbody');
 
 						$.each(result['pur2'], function(k,v){
+							console.log(v);
 							var newRow = $('<tr>');
 							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
 							newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
