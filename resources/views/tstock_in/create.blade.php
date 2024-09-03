@@ -58,7 +58,7 @@
 
 											<div class="col-sm-12 col-md-8 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" id="stock_in_pur_remarks" placeholder="Remarks" class="form-control"></textarea>
+												<textarea rows="2" cols="50" name="remarks" id="stock_in_pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>
 									  </div>
 									</div>

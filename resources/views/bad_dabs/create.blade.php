@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-8 mb-2">
                                             <label class="col-form-label">Reason Of Bad Debts</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control"></textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control cust-textarea"></textarea>
                                         </div>
                                     </div>
                                 </div>

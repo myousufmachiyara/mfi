@@ -33,7 +33,7 @@
 
 											<div class="col-5 mb-2">
 												<label class="col-form-label">Narration</label>
-												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
+												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
 											</div>
 											<div class="col-4 mb-3">
 												<label class="col-form-label">Attachements</label>
