@@ -68,11 +68,11 @@
 
 											<div class="col-8 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control">
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea">
 * All of these rates are at 20% tax as accommodated by laws of GOP.
 * This is not a sales tax invoice and no additional taxes should/will be adjusted in this amount.
-* All of these rates are tentative and subjected to change with the market.
-* Customers aren’t allowed to deduct any additional income tax from this amount while paying for the order.</textarea>
+* All of these rates are tentative and subjected to change without any prior notice.
+* Customers aren’t allowed to deduct any additional with holding tax from this amount while paying for the order.</textarea>
 											</div>
 											
 
@@ -230,11 +230,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 
-				document.getElementById('Sales_Remarks').addEventListener('keydown', function(e) {
-        			if (e.key === 'Enter') {
-           			 e.stopPropagation(); // Prevents the Enter key from propagating to other elements
-       				 }
-    			});
+				
 
 			var index=2;
 			var itemCount = Number($('#itemCount').val());
