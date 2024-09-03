@@ -35,7 +35,7 @@
 
 											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label">Status</label>
-												<select class="form-control mb-3" name="bill_status" required>
+												<select data-plugin-selecttwo class="form-control select2-js mb-3" name="bill_status" required>
 													@if($sales->bill_not==0)
 														<option value="0" selected>Bill Not Final</option>
 														<option value="1">Finalized</option>
@@ -53,7 +53,7 @@
 
 											<div class="col-12 col-md-2 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select class="form-control" id="coa_name" required name="account_name">
+												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" required name="account_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $row->ac_code == $sales->account_name ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -125,7 +125,7 @@
 														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
-														<select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
+														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
 															<option>Select Item</option>
 															@foreach($items as $key2 => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $sale_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
 			cell2.innerHTML = '<input type="number" id="item_qty'+index+'" onchange="rowTotal('+index+')"  name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
-			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+			cell3.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
 										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -372,6 +372,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			var itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+
 		}
 	}
 

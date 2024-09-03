@@ -57,7 +57,7 @@
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
                                                         <option selected>Select Item</option>
                                                         @foreach($items as $key => $row)
                                                             <option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>
@@ -213,7 +213,7 @@ function addNewRow() {
         var newRow = $('<tr>');
 
         newRow.append('<td><input type="number" id="item_code' + index + '" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-        newRow.append('<td><select class="form-control" id="item_name' + index + '" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
+        newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name' + index + '" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
         newRow.append('<td><input type="text" id="remarks' + index + '" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
         newRow.append('<td><input type="number" id="qtyadd' + index + '" name="qty_add[]" placeholder="Qty Add" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
         newRow.append('<td><input type="number" id="qtyless' + index + '" name="qty_less[]" placeholder="Qty Less" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
@@ -222,6 +222,8 @@ function addNewRow() {
         table.append(newRow);
         index++;
         $('#itemCount').val(Number($('#itemCount').val()) + 1);
+        $('#myTable select[data-plugin-selecttwo]').select2();
+
     }
 }
 

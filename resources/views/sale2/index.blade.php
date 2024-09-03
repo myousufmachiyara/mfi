@@ -130,7 +130,7 @@
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
-                            <select data-plugin-selecttwo class="form-control" autofocus name="print_type" required>
+                            <select data-plugin-selecttwo class="form-control select2-js" autofocus name="print_type" required>
                                 <option value="" disabled selected>Select Print Format</option>
                                 <option value="1" >Show All</option>
                                 <option value="2" >Exclude Item Length</option>

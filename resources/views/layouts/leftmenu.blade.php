@@ -13,15 +13,20 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link" target="_blank">
-                        User Accounts
+                    <a class="nav-link" target="_blank" href="{{ route('all-roles')}}">
+                        Roles
                     </a>
                 </li>	
                 <li>
                     <a class="nav-link" target="_blank">
-                        User Roles
+                        Designation
                     </a>
-                </li>							
+                </li>	
+                <li>
+                    <a class="nav-link" target="_blank" href="{{ route('all-users')}}">
+                        User Accounts
+                    </a>
+                </li>			
             </ul>
         </li>
         <li class="nav-parent">
@@ -88,15 +93,6 @@
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link" target="_blank" href="#">
-                        Receipts
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" target="_blank" href="#">
-                        Payments
-                    </a>
-                </li>
             </ul>
         </li>
         <li class="nav-parent">

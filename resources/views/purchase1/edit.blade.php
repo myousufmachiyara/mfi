@@ -97,7 +97,7 @@
 														<input type="text" class="form-control" name="pur_qty2[]" id="pur_qty2{{$pur1_key+1}}" value="{{$pur_items->pur_qty2}}">
 													</td>
 													<td>
-														<select class="form-control" autofocus name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control select-js" autofocus name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -341,6 +341,7 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
 		}
 	}
 

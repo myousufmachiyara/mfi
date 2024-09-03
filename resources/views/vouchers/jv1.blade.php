@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
-                                <select autofocus class="form-control" name ="ac_dr_sid" required>
+                                <select autofocus data-plugin-selecttwo class="form-control select2-js" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -127,7 +127,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Account Credit</label>
 
-                                <select autofocus class="form-control" name ="ac_cr_sid" required>
+                                <select autofocus data-plugin-selecttwo class="form-control select2-js" name ="ac_cr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit</label>
-                                <select class="form-control" autofocus name="update_ac_dr_sid" required id="update_ac_dr_sid">
+                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -190,7 +190,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Credit</label>
-                                <select class="form-control" autofocus name ="update_ac_cr_sid" required id="update_ac_cr_sid">
+                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name ="update_ac_cr_sid" required id="update_ac_cr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -305,10 +305,11 @@
             url: "/vouchers/jv1/detail",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $('#update_id').val(result['auto_lager']);
                 $('#update_id_view').val(result['auto_lager']);
-                $('#update_ac_cr_sid').val(result['ac_cr_sid']);
-                $('#update_ac_dr_sid').val(result['ac_dr_sid']);
+                $('#update_ac_cr_sid').val(result['ac_cr_sid']).trigger('change');
+                $('#update_ac_dr_sid').val(result['ac_dr_sid']).trigger('change');
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);

@@ -6106,3 +6106,41 @@ S2.define('jquery.select2',[
   // Return the Select2 instance for anyone who is importing it.
   return select2;
 }));
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const selectClassPattern = '.select2-js'; // Class selector for item_name elements
+  let isTabPressed = false;
+
+  // Detect if Tab key is pressed
+  document.addEventListener('keydown', function(event) {
+      if (event.key === 'Tab') {
+          isTabPressed = true;
+      }
+  });
+
+  document.addEventListener('keyup', function(event) {
+      if (event.key === 'Tab') {
+          isTabPressed = false;
+      }
+  });
+
+
+  // Apply the functionality to all item-name elements
+  $(document).on('focus', selectClassPattern, function() {
+      if (!isTabPressed && typeof $(this).select2 === 'function') {
+          $(this).select2('open');
+      }
+  });
+
+  $(document).on('select2:open', selectClassPattern, function() {
+      setTimeout(function() {
+          const searchField = document.querySelector('.select2-search__field');
+          if (searchField) {
+              searchField.focus();
+          }
+      }, 100);
+  });
+});

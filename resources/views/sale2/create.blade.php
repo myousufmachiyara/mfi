@@ -42,7 +42,7 @@
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" id="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="account_name" id="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -64,7 +64,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Company Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus id="company_name" required disabled>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus id="company_name" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -128,7 +128,7 @@
 														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -363,7 +363,7 @@
 
 
 					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 											'<option value="" disabled selected>Select Item</option>'+
 											'@foreach($items as $key => $row)'+	
 												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -622,7 +622,7 @@
 							var table = $('#myTable').find('tbody');
 							var newRow = $('<tr>');
 							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-							newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
+							newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
 							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="remarks[]" placeholder="Remarks" class="form-control"></td>');
 							newRow.append('<td><input type="number" id="pur2_qty2'+index+'" value="'+v['Sales_qty2']+'" name="pur2_qty2[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"></td>');
 							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');
@@ -704,7 +704,7 @@
 							var table = $('#myTable').find('tbody');
 							var newRow = $('<tr>');
 							newRow.append('<td><input type="number" id="item_cod'+index+'" value="'+v['item_cod']+'" name="item_cod[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-							newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
+							newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
 							newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="remarks[]" placeholder="Remarks" class="form-control"></td>');
 							newRow.append('<td><input type="number" id="pur2_qty2'+index+'" value="'+v['sales_qty']+'" name="pur2_qty2[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"></td>');
 							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');

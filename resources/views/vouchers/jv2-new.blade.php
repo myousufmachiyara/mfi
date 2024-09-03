@@ -7,29 +7,30 @@
 					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
-						<div class="row">
-							<div class="col-12 mb-3">								
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+						<div class="col-12 mb-3">								
+							<section class="card">
+								<header class="card-header">
+									<div class="card-actions">
+										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+									</div>
+									<h2 class="card-title">Journal Voucher 2</h2>
+								</header>
+
+								<div class="card-body">
+									<div class="row form-group">
+										<div class="col-sm-12 col-md-1 mb-2">
+											<label class="col-form-label" >RC. #</label>
+											<input type="text" placeholder="RC. #" class="form-control" disabled>
+											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+											<input type="hidden" id="pur_prevInvoices" name="pur_prevInvoices" value="0" class="form-control">
+											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 										</div>
-										<h2 class="card-title">Journal Voucher 2</h2>
-									</header>
 
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-1 mb-2">
-												<label class="col-form-label" >RC. #</label>
-												<input type="text" placeholder="RC. #" class="form-control" disabled>
-												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
-											</div>
+										<div class="col-sm-12 col-md-2 mb-2">
+											<label class="col-form-label" >Date</label>
+											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+										</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Date</label>
-												<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
-											</div>
 
 											<div class="col-5 mb-2">
 												<label class="col-form-label">Narration</label>
@@ -44,79 +45,91 @@
 								</section>
 							
 
-							<div class="col-12 mb-3">
-								<section class="card">
-									<div class="card-body" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
-										<table class="table table-bordered table-striped mb-0" id="myTable" >
-											<thead>
-												<tr>
-													<!-- <th width="4%">Code</th> -->
-													<th width="">Account Name</th>
-													<th width="">Remarks</th>
-													<th width="">Bank Name</th>
-													<th width="">Instr. #</th>
-													<th width="">Chq Date</th>
-													<th width="">Debit</th>
-													<th width="">Credit</th>
-													<th width=""></th>
-												</tr>
-											</thead>
-											<tbody id="JV2Table">
-												<tr>
-													<td>
-														<select class="form-control" autofocus  name ="account_cod[]" onchange="addNewRow(1)" required>
-															<option value="" disabled selected>Select Account</option>
-															@foreach($acc as $key => $row)	
-																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-															@endforeach
-														</select>
-													</td>	
-													<td>
-														<input type="text" class="form-control" name="remarks[]">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="bank_name[]">
-													</td>
-													<td>
-														<input type="text" class="form-control" name="instrumentnumber[]">
-													</td>
-                                                    <td>
-														<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
-                                                    </td>
-													<td>
-														<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
-													</td>
+										<div class="col-4 mb-3">
+											<label class="col-form-label">Attachements</label>
+											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+										</div>
 
-													<td>
-														<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
-													</td>
-													<td style="vertical-align: middle;">
-														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+										<div class="col-12">
+											<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+												<table class="table table-bordered table-striped mb-0" id="myTable">
+													<thead>
+														<tr>
+															<!-- <th width="4%">Code</th> -->
+															<th width="">Account Name</th>
+															<th width="">Remarks</th>
+															<th width="">Bank Name</th>
+															<th width="">Instr. #</th>
+															<th width="">Chq Date</th>
+															<th width="">Debit</th>
+															<th width="">Credit</th>
+															<th width=""></th>
+														</tr>
+													</thead>
+													<tbody id="JV2Table">
+														<tr>
+															<td>
+																<select data-plugin-selecttwo class="form-control select2-js" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+																	<option value="" disabled selected>Select Account</option>
+																	@foreach($acc as $key => $row)	
+																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																	@endforeach
+																</select>
+															</td>	
+															<td>
+																<input type="text" class="form-control" name="remarks[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="bank_name[]">
+															</td>
+															<td>
+																<input type="text" class="form-control" name="instrumentnumber[]">
+															</td>
+															<td>
+																<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+															</td>
+															<td>
+																<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
+															</td>
 
-									<footer class="card-footer"  >
-										<div class="row mb-3" style="justify-content:end">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Debit</label>
-												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
+															<td>
+																<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
+															</td>
+															<td style="vertical-align: middle;">
+																<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
-											<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Credit</label>
-												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+										<div>
+
+										<div class="col-12 mb-3" >
+											<div class="row" style="justify-content:end">
+												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Debit</label>
+													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
+												</div>
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Credit</label>
+													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+												</div>
 											</div>
 										</div>
-									</footer>
-								</section>
-							</div>
+									</div>
+								</div>
+							</section>
 						</div>
+							
+						<div class="row">
 							<div class="col-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Sales Ageing</h2>
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">Select Customer Account</span></h2>
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="SaletoggleSwitch">
+										</div>
 									</header>
 
 									<div class="card-body">
@@ -124,7 +137,7 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -138,7 +151,7 @@
 											</div>
 
 											<div class="col-12 mb-2">
-												<table class="table table-bordered table-striped mb-0 mt-2">
+												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
 															<th width="15%">Inv #</th>
@@ -155,15 +168,18 @@
 													</tbody>
 												</table>										
 											</div>
-									  </div>
+										</div>
 									</div>
 								</section>
 							</div>
 
 							<div class="col-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Purchase Ageing</h2>
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Purchase Ageing <span id="purchase_span" style="color:red;font-size: 16px;display:none">Text Here</span></h2>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+										</div>
 									</header>
 
 									<div class="card-body">
@@ -171,7 +187,7 @@
 										
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -202,7 +218,7 @@
 													</tbody>
 												</table>										
 											</div>
-									  </div>
+										</div>
 									</div>
 								</section>
 							</div>
@@ -254,6 +270,12 @@
 			}
 
 		});	
+		
+		document.getElementById('SaletoggleSwitch').addEventListener('change', SaletoggleInputs);
+		document.getElementById('PurtoggleSwitch').addEventListener('change', PurtoggleInputs);
+		PurtoggleInputs();
+		SaletoggleInputs();
+
 	});
 
     function removeRow(button) {
@@ -296,7 +318,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -314,34 +336,9 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
 		}
 	}
-
-
-	function validateItemName(inputElement)
-	{
-		var item_name = inputElement.value;
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-
-        $.ajax({
-            type: 'POST',
-			url: '/item/new-item/validate',
-            data: {'item_name': item_name},
-            success: function(response){
-				console.log(response)
-            },
-            error: function(response){
-                var errors = response.responseJSON.errors;
-                var errorMessage = 'Item Already Exists';
-                alert(errorMessage);
-            }
-        });
-    }
 
 	function totalDebit(){
 		var totalDebit=0;
@@ -407,7 +404,7 @@
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
 		var counter=1;
-		$('#purprevInvoices').val(1)
+		$('#pur_prevInvoices').val(1)
 		
 		var table = document.getElementById('purpendingInvoices');
         while (table.rows.length > 0) {
@@ -418,7 +415,6 @@
 			type: "GET",
 			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
 			success: function(result){
-				console.log(result);
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
 						var html="<tr>";
@@ -438,4 +434,43 @@
 			}
 		});
 	}
+
+	function PurtoggleInputs() {
+		const textInput = document.getElementById('pur_customer_name');
+        textInput.disabled = !this.checked;
+	}
+
+	function SaletoggleInputs() {
+		const textInput = document.getElementById('customer_name');
+		document.getElementById('sale_span').style.display = 'none';
+		
+		// clearing sales  ageing table and fields
+		$('#customer_name').val('').trigger('change');
+		$('#sales_unadjusted_amount').val(0);
+		$('#sales_ageing tbody').empty(); 
+
+		var table = document.getElementById("JV2Table"); // Get the table element
+        var rowCount = table.rows.length;
+		var no_of_credits=0;
+
+		for (var i=0;i<rowCount; i++){	
+			selected_account = $('#account_cod'+(i+1)).val();
+			if (selected_account) {
+				credit = table.rows[i].cells[6].querySelector('input').value;
+				if(credit>=1 && no_of_credits<1){
+					$('#customer_name').val(selected_account).trigger('change');
+					$('#sales_unadjusted_amount').val(credit);
+					no_of_credits = no_of_credits + 1;
+					textInput.disabled = !this.checked; 
+				}
+				else if(credit>=1 && no_of_credits>=1){
+					$('#customer_name').val('').trigger('change');
+					$('#sales_unadjusted_amount').val(0);
+					textInput.disabled = !this.checked; 
+					document.getElementById('sale_span').style.display = 'block';
+				}
+			} 
+		}
+	}
+
 </script>

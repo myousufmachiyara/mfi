@@ -17,22 +17,17 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.2/css/boxicons.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" />
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="/assets/vendor/animate/animate.compat.css">
-		<link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" />
-		<link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css" />
-		<link rel="stylesheet" href="/assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
-		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.css" />
-		<link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.theme.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
-		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
-		<link rel="stylesheet" href="/assets/vendor/morris/morris.css" />
-		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
-		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
-		<link rel="stylesheet" href="/assets/vendor/datatables/media/css/dataTables.bootstrap5.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/assets/css/theme.css" />
@@ -42,8 +37,4 @@
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="/assets/css/custom.css">
-
-		<!-- Head Libs -->
-		<script src="/assets/vendor/modernizr/modernizr.js"></script>
-
 	</head>
