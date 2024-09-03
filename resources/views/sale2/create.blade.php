@@ -693,7 +693,7 @@
 					success: function(result){
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['account_name']).trigger('change');
-						$('#company_name').val(8).trigger('change');
+						$('#company_name').val(24).trigger('change');
 						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
 						$('#inducedID').val(result['pur1']['Sal_inv_no']);
