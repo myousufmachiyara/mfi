@@ -101,10 +101,10 @@
 												@foreach ($pur2_item as $pur2_key => $pur2_items)
 													<tr>
 														<td>
-															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails(1,1)" required>
+															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)" required>
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
+															<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails({{$pur2_key+1}},2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>

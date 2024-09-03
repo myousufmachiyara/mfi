@@ -119,13 +119,13 @@
 												@foreach($sale_items as $key1 => $sale_item)
 												<tr>
 													<td>
-														<input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails(1,1)">
+														<input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails({{$key1+1}},1)">
 													</td>
 													<td>
-														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
+														<input type="number" id="item_qty{{$key1+1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1+1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
+														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},2)" name="item_name[]">
 															<option>Select Item</option>
 															@foreach($items as $key2 => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $sale_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -133,18 +133,18 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks{{$key1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
+														<input type="text" id="remarks{{$key1+1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
 													</td>
 													<td>
-														<input type="number" id="weight{{$key1}}" name="item_weight[]" onchange="rowTotal({{$key1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
+														<input type="number" id="weight{{$key1+1}}" name="item_weight[]" onchange="rowTotal({{$key1+1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
 														@php  $total_weight=$total_weight + $sale_item->Sales_qty  @endphp
 
 													</td>
 													<td>
-														<input type="number" id="price{{$key1}}" name="item_price[]" onchange="rowTotal({{$key1}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
+														<input type="number" id="price{{$key1+1}}" name="item_price[]" onchange="rowTotal({{$key1+1}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
-														<input type="number" id="amount{{$key1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
+														<input type="number" id="amount{{$key1+1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
 														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty * $sale_item->sales_price) @endphp
 													</td>
 													<td>
