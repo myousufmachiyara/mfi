@@ -321,10 +321,10 @@
                 $('#stock_in_mill_bill').val(result['pur1']['pur_ord_no']);
                 $('#stock_in_pur_remarks').val(result['pur1']['Sales_Remarks']);
                 $('#stck_in_coa_name').val(result['pur1']['account_name']).trigger('change');
+                var table = $('#myTable').find('tbody');
 
                 $.each(result['pur2'], function(k,v){
                     index++;
-                    var table = $('#myTable').find('tbody');
                     var newRow = $('<tr>');
                     newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
                     newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
