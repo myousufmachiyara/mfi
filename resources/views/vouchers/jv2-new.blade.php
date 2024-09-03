@@ -31,10 +31,19 @@
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
 
-										<div class="col-5 mb-2">
-											<label class="col-form-label">Narration</label>
-											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control" required></textarea>
-										</div>
+
+											<div class="col-5 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
+											</div>
+											<div class="col-4 mb-3">
+												<label class="col-form-label">Attachements</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+									  </div>
+									</div>
+								</section>
+							
 
 										<div class="col-4 mb-3">
 											<label class="col-form-label">Attachements</label>

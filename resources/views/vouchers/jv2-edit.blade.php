@@ -33,7 +33,7 @@
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control">{{$jv2->narration}}</textarea>
+												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
 											</div>
 
 									  </div>

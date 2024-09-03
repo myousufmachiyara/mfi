@@ -83,7 +83,7 @@
 
 											<div class="col-12 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control">{{$pur2->Sales_Remarks}}</textarea>
+												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
 
 									  </div>
@@ -148,7 +148,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"> {{$pur2->tax_remarks}} </textarea>
+												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"> {{$pur2->tax_remarks}} </textarea>
 											</div>
 									  </div>
 									</div>

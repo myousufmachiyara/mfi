@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-8 mb-2">
                                             <label class="col-form-label">Reason</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$tbad_dabs->reason}}</textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control cust-textarea">{{$tbad_dabs->reason}}</textarea>
                                         </div>
                                     </div>
                                 </div>

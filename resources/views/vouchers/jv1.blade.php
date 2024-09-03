@@ -145,7 +145,7 @@
                             </div>  
                             <div class="col-lg-12 mb-2">
                                 <label>Remarks</label>
-                                <textarea rows="4" cols="50" class="form-control" placeholder="Remarks" name="remarks"> </textarea>                            </div>
+                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" name="remarks"> </textarea>                            </div>
                             </div>
                         </div>
                         <footer class="card-footer">
@@ -208,7 +208,7 @@
                             </div>  
                             <div class="col-lg-12 mb-2">
                                 <label>Remarks</label>
-                                <textarea rows="4" cols="50" class="form-control" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
+                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
                             </div>
                         </div>
                     
