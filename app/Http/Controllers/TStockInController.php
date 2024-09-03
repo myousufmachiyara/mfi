@@ -14,6 +14,7 @@ use App\Models\Item_entry2;
 use App\Models\tstock_in;
 use App\Models\tstock_in_2;
 use App\Models\tstock_in_att;
+use App\Models\tpurchase;
 
 
 class TStockInController extends Controller
@@ -124,6 +125,18 @@ class TStockInController extends Controller
                 $tstock_in_att->save();
             }
         }
+
+        if($request->has('isInduced') && $request->isInduced == 1){
+
+            $tpurchase = new tpurchase();
+            $SalinducedID=$latest_invoice['Sal_inv_no'];
+            $prefix=$latest_invoice['prefix'];
+            $pur_inv = $prefix.''.$SalinducedID;
+            $tpurchase->sales_against = $pur_inv;
+            tpurchase::where('Sal_inv_no', $request->sale_against)->update([
+                'sale_against'=>$tpurchase->sales_against,
+            ]);
+        } 
 
         return redirect()->route('all-tstock-in');
     }
