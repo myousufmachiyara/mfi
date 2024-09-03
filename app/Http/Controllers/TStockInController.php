@@ -134,7 +134,7 @@ class TStockInController extends Controller
             $pur_inv = $prefix.''.$SalinducedID;
             $tpurchase->sales_against = $pur_inv;
             tpurchase::where('Sale_inv_no', $request->sale_against)->update([
-                'sale_against'=>$tpurchase->sales_against,
+                'sales_against'=>$tpurchase->sales_against,
             ]);
         } 
 
