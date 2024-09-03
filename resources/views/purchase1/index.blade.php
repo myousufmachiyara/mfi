@@ -19,7 +19,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>
@@ -38,6 +39,7 @@
                                             <tbody>
                                                 @foreach ($pur1 as $key => $row)
                                                 <tr>
+                                                    <td style="display:none">{{$row->pur_id}}</td>
                                                     <td>{{$row->prefix}}{{$row->pur_id}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>

@@ -19,7 +19,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>
@@ -39,6 +40,7 @@
                                             <tbody>
                                                 @foreach ($sales as $key => $row)
                                                 <tr>
+                                                    <td style="display:none">{{$row->Sal_inv_no}}</td>
                                                     <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>

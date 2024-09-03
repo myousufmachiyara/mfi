@@ -24,7 +24,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Bill #</th>
@@ -46,6 +47,7 @@
                                             <tbody>
                                                 @foreach ($pur2 as $key => $row)
                                                 <tr>
+                                                    <td style="display:none">{{$row->Sal_inv_no}}</td>
                                                     <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
@@ -185,6 +187,8 @@
 	</body>
 </html>
 <script>
+
+    
     function setId(id){
         $('#deleteID').val(id);
     }
@@ -193,7 +197,6 @@
     }
 
     
-
     function getAttachements(id){
 
         var table = document.getElementById('pur2_attachements');
