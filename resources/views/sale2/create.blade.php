@@ -552,7 +552,7 @@
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sal_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
-							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+moment(v['sa_date']).format('DD-MM-YY')+"</td>"
 							html+= "<td>"+v['mill_gate']+"</td>"
 							html+= "<td>"+v['cash_pur_name']+"</td>"
 							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedStockOutItems("+v['Sal_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"
@@ -581,7 +581,7 @@
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sale_inv_no']+"</td>"
 							html+= "<td>"+v['acc_name']+"</td>"
-							html+= "<td>"+v['sa_date']+"</td>"
+							html+= "<td>"+moment(v['sa_date']).format('DD-MM-YY')+"</td>"
 							html+= "<td>"+v['pur_ord_no']+"</td>"
 							html+= "<td>"+v['disp_acc']+"</td>"
 							html+= "<td class='text-center'><a class='btn btn-danger mb-1 mt-1 me-1' href='#' onclick='inducedPurchase2Items("+v['Sale_inv_no']+")'><i class='fas fa-check text-light'></i></a></td>"

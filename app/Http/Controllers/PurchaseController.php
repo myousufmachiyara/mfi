@@ -38,8 +38,9 @@ class PurchaseController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry::all();
-        $coa = AC::all();
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('purchase1.create',compact('items','coa'));
     }
 

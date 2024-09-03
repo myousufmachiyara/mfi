@@ -49,8 +49,9 @@ class TStockInController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('tstock_in.create',compact('items','coa'));
     }
 
@@ -143,8 +144,10 @@ class TStockInController extends Controller
     {
         $tstock_in = tstock_in::where('Sal_inv_no',$id)->first();
         $tstock_in_items = tstock_in_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry2::all();
-        $coa = AC::all();
+
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('tstock_in.edit', compact('tstock_in','tstock_in_items','items','coa'));
     }
 

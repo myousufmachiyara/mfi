@@ -32,7 +32,7 @@
 											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Customer Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="account_name" required>
 													<option value="" disabled selected>Select Customer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -51,7 +51,7 @@
 											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="disp_account_name" required>
 													<option value="" disabled selected>Select Dispatch From</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -104,7 +104,7 @@
 															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails(1,1)" required>
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
+															<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -306,7 +306,7 @@
 
 
 			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+

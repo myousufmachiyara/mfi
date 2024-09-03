@@ -186,9 +186,10 @@ class Purchase2Controller extends Controller
 
     public function edit($id)
     {
-        $items = Item_entry2::all();
         $item_group = Item_Groups::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         $pur2 = tpurchase::where('tpurchase.Sale_inv_no',$id)
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
         ->select(

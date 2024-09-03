@@ -150,8 +150,9 @@ class QuotationController extends Controller
 
 public function edit($id)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         $pur2 = quotation::where('quotation.Sale_inv_no',$id)->first();
         $pur2_item = quotation_2::where('quotation_2.sales_inv_cod',$id)->get();
 

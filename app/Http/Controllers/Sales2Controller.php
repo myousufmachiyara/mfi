@@ -45,9 +45,10 @@ class Sales2Controller extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
         $item_group = Item_Groups::all();
-        $coa = AC::all();
+        
         return view('sale2.create',compact('items','coa','item_group'));
     }
 
@@ -174,9 +175,10 @@ class Sales2Controller extends Controller
 
     public function edit($id)
     {
-        $items = Item_entry2::all();
         $item_group = Item_Groups::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         $pur2 = tsales::where('tsales.Sal_inv_no',$id)
         ->select(
             'tsales.Sal_inv_no','tsales.sa_date','tsales.pur_ord_no', 'tsales.company_name','tsales.Sales_Remarks','tsales.pur_against',

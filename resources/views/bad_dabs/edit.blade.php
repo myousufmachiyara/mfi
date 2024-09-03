@@ -60,7 +60,7 @@
                                                     <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails('{{$key1}}','1')" class="form-control" value="{{$bad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select data-plugin-selecttwo class="form-control select-js" id="item_name{{$key1}}" onchange="getItemDetails('{{$key1}}','2')" name="item_name2[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails('{{$key1}}','2')" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $bad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -178,7 +178,7 @@ function addNewRow(){
         var cell6 = newRow.insertCell(5);
 
         cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
                             '<option>Select Item</option>'+
                             @foreach($items as $key => $row)	
                                 '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+

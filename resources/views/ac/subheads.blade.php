@@ -94,7 +94,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Select Head</label>
-                            <select data-plugin-selecttwo class="form-control select-js" name ="main" required>
+                            <select data-plugin-selecttwo class="form-control select2-js" name ="main" required>
                                 <option value="" selected disabled>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>
@@ -132,7 +132,7 @@
                         </div>
                         <div class="form-group">
                             <label>Select Head</label>
-                            <select data-plugin-selecttwo class="form-control select-js" name="main" required id="update_head_name">
+                            <select data-plugin-selecttwo class="form-control select2-js" name="main" required id="update_head_name">
                                 <option disabled selected>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>

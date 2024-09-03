@@ -31,7 +31,7 @@
 											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Custmer Name <span style="color: red;">*</span></label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="account_name" required>
 													<option value="" disabled selected>Select Custmer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -49,7 +49,7 @@
 											</div>
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="disp_account_name" required>
 													<option value="" disabled selected>Select Dispatch From</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -285,7 +285,7 @@
 
 
 					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 											'<option value="" disabled selected>Select Item</option>'+
 											'@foreach($items as $key => $row)'+	
 												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+

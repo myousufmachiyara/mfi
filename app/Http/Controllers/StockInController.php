@@ -50,8 +50,9 @@ class StockInController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry::all();
-        $coa = AC::all();
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('stock_in.create',compact('items','coa'));
     }
 
@@ -144,8 +145,10 @@ class StockInController extends Controller
     {
         $stock_in = stock_in::where('Sal_inv_no',$id)->first();
         $stock_in_items = stock_in_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry::all();
-        $coa = AC::all();
+
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('stock_in.edit', compact('stock_in','stock_in_items','items','coa'));
     }
 
