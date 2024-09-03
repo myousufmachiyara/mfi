@@ -68,8 +68,14 @@
 
 											<div class="col-8 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control"></textarea>
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control">
+* All of these rates are at 20% tax as accommodated by laws of GOP.
+* This is not a sales tax invoice and no additional taxes should/will be adjusted in this amount.
+* All of these rates are tentative and subjected to change with the market.
+* Customers aren’t allowed to deduct any additional income tax from this amount while paying for the order.</textarea>
 											</div>
+											
+
 
 											
 											
@@ -95,6 +101,7 @@
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Price Date</th>
+													<th width="7%">Stock</th>
 													<th width=""></th>
 												</tr>
 											</thead>
@@ -104,7 +111,7 @@
 														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -138,7 +145,9 @@
 														<input type="date" class="form-control" disabled id="pur2_price_date1">
 														<input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show1">
 													</td>
-
+													<td>
+														<input type="number" class="form-control" id="stock1" name="stock[]" value="0" required step="any" disabled>
+													</td>	
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
@@ -221,6 +230,12 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
 
+				document.getElementById('Sales_Remarks').addEventListener('keydown', function(e) {
+        			if (e.key === 'Enter') {
+           			 e.stopPropagation(); // Prevents the Enter key from propagating to other elements
+       				 }
+    			});
+
 			var index=2;
 			var itemCount = Number($('#itemCount').val());
 
@@ -270,6 +285,7 @@
 					var cell9 = newRow.insertCell(8);
 					var cell10 = newRow.insertCell(9);
 					var cell11 = newRow.insertCell(10);
+					var cell12 = newRow.insertCell(11);
 
 
 					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
@@ -287,7 +303,8 @@
 					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
 					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
 					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
-					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+					cell11.innerHTML  = '<input type="number" class="form-control" id="stock'+index+'" name="stock[]" value="0" step="any" disabled>';
+					cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 					index++;
 
