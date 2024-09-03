@@ -48,6 +48,7 @@ class Purchase2Controller extends Controller
     {
         $items = Item_entry2::all();
         $item_group = Item_Groups::all();
+        $item_group = Item_Groups::whereBetween('item_group_cod', [1, 6])->get();
         $coa = AC::all();
         return view('purchase2.create',compact('items','coa','item_group'));
     }

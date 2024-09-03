@@ -324,7 +324,6 @@
                 var table = $('#myTable').find('tbody');
 
                 $.each(result['pur2'], function(k,v){
-                    console.log(v);
                     index++;
                     var newRow = $('<tr>');
                     newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
