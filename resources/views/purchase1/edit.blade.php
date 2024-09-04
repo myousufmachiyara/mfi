@@ -91,13 +91,13 @@
                                             	@foreach ($pur_items as $pur1_key => $pur_items)
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur1_key+1}}" value="{{$pur_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)">
+														<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur1_key+1}}" value="{{$pur_items->item_cod}}" onchange="getItemDetails({{$pur1_key+1}},1)">
 													</td>	
 													<td>
 														<input type="text" class="form-control" name="pur_qty2[]" id="pur_qty2{{$pur1_key+1}}" value="{{$pur_items->pur_qty2}}">
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" autofocus name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails({{$pur2_key+1}},2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js" autofocus name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails({{$pur1_key+1}},2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
