@@ -43,79 +43,72 @@
 									  </div>
 									</div>
 								</section>
-							
+									<div class="col-12">
+										<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+											<table class="table table-bordered table-striped mb-0" id="myTable">
+												<thead>
+													<tr>
+														<!-- <th width="4%">Code</th> -->
+														<th width="">Account Name</th>
+														<th width="">Remarks</th>
+														<th width="">Bank Name</th>
+														<th width="">Instr. #</th>
+														<th width="">Chq Date</th>
+														<th width="">Debit</th>
+														<th width="">Credit</th>
+														<th width=""></th>
+													</tr>
+												</thead>
+												<tbody id="JV2Table">
+													<tr>
+														<td>
+															<select data-plugin-selecttwo class="form-control select2-js" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+																<option value="" disabled selected>Select Account</option>
+																@foreach($acc as $key => $row)	
+																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																@endforeach
+															</select>
+														</td>	
+														<td>
+															<input type="text" class="form-control" name="remarks[]">
+														</td>
+														<td>
+															<input type="text" class="form-control" name="bank_name[]">
+														</td>
+														<td>
+															<input type="text" class="form-control" name="instrumentnumber[]">
+														</td>
+														<td>
+															<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+														</td>
+														<td>
+															<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
+														</td>
 
-										<div class="col-4 mb-3">
-											<label class="col-form-label">Attachements</label>
-											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+														<td>
+															<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
+														</td>
+														<td style="vertical-align: middle;">
+															<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
+									<div>
 
-										<div class="col-12">
-											<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
-												<table class="table table-bordered table-striped mb-0" id="myTable">
-													<thead>
-														<tr>
-															<!-- <th width="4%">Code</th> -->
-															<th width="">Account Name</th>
-															<th width="">Remarks</th>
-															<th width="">Bank Name</th>
-															<th width="">Instr. #</th>
-															<th width="">Chq Date</th>
-															<th width="">Debit</th>
-															<th width="">Credit</th>
-															<th width=""></th>
-														</tr>
-													</thead>
-													<tbody id="JV2Table">
-														<tr>
-															<td>
-																<select data-plugin-selecttwo class="form-control select2-js" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
-																	<option value="" disabled selected>Select Account</option>
-																	@foreach($acc as $key => $row)	
-																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-																	@endforeach
-																</select>
-															</td>	
-															<td>
-																<input type="text" class="form-control" name="remarks[]">
-															</td>
-															<td>
-																<input type="text" class="form-control" name="bank_name[]">
-															</td>
-															<td>
-																<input type="text" class="form-control" name="instrumentnumber[]">
-															</td>
-															<td>
-																<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
-															</td>
-															<td>
-																<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
-															</td>
-
-															<td>
-																<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
-															</td>
-															<td style="vertical-align: middle;">
-																<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+									<div class="col-12 mb-3" >
+										<div class="row" style="justify-content:end">
+											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<label class="col-form-label">Total Debit</label>
+												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 											</div>
-										<div>
-
-										<div class="col-12 mb-3" >
-											<div class="row" style="justify-content:end">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">Total Debit</label>
-													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
-												</div>
-												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">Total Credit</label>
-													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
-												</div>
+											<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+												<label class="col-form-label">Total Credit</label>
+												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
 											</div>
 										</div>
+									</div>
 									</div>
 								</div>
 							</section>

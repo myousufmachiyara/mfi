@@ -358,12 +358,12 @@
             $('#update_id_view').val(result.id);
             $('#update_mfi_purchase_number').val(result.mfi_pur_number);
             $('#update_mill_purchase_number').val(result.mill_pur_number);
-            $('#update_company_name').val(result.company_name);
-            $('#update_party_name').val(result.party_name);
+            $('#update_company_name').val(result.company_name).trigger('change');
+            $('#update_party_name').val(result.party_name).trigger('change');
             $('#update_complain_detail').val(result.complain_detail);
             $('#update_resolve_date').val(result.resolve_date);
             $('#update_resolve_remarks').val(result.resolve_remarks);
-            $('#update_complain_status').val(result.clear);
+            $('#update_complain_status').val(result.clear).trigger('change');
             $('#update_complain_date').val(result.inv_dat);
         },
         error: function(xhr, status, error) {
