@@ -12,6 +12,9 @@
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Edit Purchase Invoice</h2>
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 									</header>
 
 									<div class="card-body">
@@ -63,17 +66,8 @@
 											</div>	
 									  </div>
 									</div>
-								</section>
-							</div>
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-										<h2 class="card-title">Edit Purchase Invoice Details</h2>
-									</header>
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+							
+									<div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
