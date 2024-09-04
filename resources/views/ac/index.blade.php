@@ -406,6 +406,7 @@
             url: "/coa/acc/detail",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $('#ac_id').val(result['ac_code']);
                 $('#update_ac_id').val(result['ac_code']);
                 $('#update_ac_name').val(result['ac_name']);
@@ -417,8 +418,8 @@
                 $('#update_phone_no').val(result['phone_no']);
                 $('#update_credit_limit').val(result['credit_limit']);
                 $('#update_days_limit').val(result['days_limit']);
-                $('#update_group_cod').val(result['group_cod']);
-                $('#update_AccountType').val(result['AccountType']);
+                $('#update_group_cod').val(result['group_cod']).trigger('change');
+                $('#update_AccountType').val(result['AccountType']).trigger('change');
                 $('#update_att').val(result['att']);
             },
             error: function(){

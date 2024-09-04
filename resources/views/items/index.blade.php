@@ -296,7 +296,7 @@
                 
                 $('#it_cod').val(result[0]['it_cod']);
                 $('#it_cod_display').val(result[0]['it_cod']);
-                $('#item_group').val(result[0]['item_group']);
+                $('#item_group').val(result[0]['item_group']).trigger('change');
                 $('#item_name').val(result[0]['item_name']);
                 $('#item_remark').val(result[0]['item_remark']);
                 $('#qty').val(result[0]['opp_qty']);
