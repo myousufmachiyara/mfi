@@ -207,7 +207,7 @@ class StockInController extends Controller
         }
         
 
-        return redirect()->route('all-tstock-in');
+        return redirect()->route('all-stock-in');
     }
 
     public function getAttachements(Request $request)
