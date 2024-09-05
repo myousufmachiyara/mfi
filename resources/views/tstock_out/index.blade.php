@@ -9,8 +9,7 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Stock 
-                                        out
+                                    <h2 class="card-title">All Pipe/Garder Stock out
                                     </h2>
                                     <form class="text-end" action="{{ route('create-tstock-out-invoice') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock Out</button>
