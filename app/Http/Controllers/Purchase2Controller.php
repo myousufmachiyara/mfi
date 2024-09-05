@@ -217,10 +217,10 @@ class Purchase2Controller extends Controller
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
+        if ($request->has('pur_ord_no') && $request->pur_ord_no OR empty($request->pur_ord_no)) {
             $pur2->pur_ord_no=$request->pur_ord_no;
         }
-        if ($request->has('sales_against') && $request->sales_against) {
+        if ($request->has('sales_against') && $request->sales_against OR empty($request->sales_against)) {
             $pur2->sales_against=$request->sales_against;
         }
         if ($request->has('account_name') && $request->account_name) {
@@ -229,13 +229,13 @@ class Purchase2Controller extends Controller
         if ($request->has('disp_account_name') && $request->disp_account_name) {
             $pur2->Cash_pur_name_ac=$request->disp_account_name;
         }
-        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name OR empty($request->Cash_pur_name)) {
             $pur2->Cash_pur_name=$request->Cash_pur_name;
         }
-        if ($request->has('cash_Pur_address') && $request->cash_Pur_address) {
+        if ($request->has('cash_Pur_address') && $request->cash_Pur_address OR empty($request->cash_Pur_address)) {
             $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
-        if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
+        if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
         if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
@@ -275,7 +275,7 @@ class Purchase2Controller extends Controller
                     $tpurchase_2->sales_inv_cod=$request->pur2_id;
                     $tpurchase_2->item_cod=$request->item_cod[$i];
 
-                    if ($request->remarks[$i]!=null) {
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
                         $tpurchase_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur2_qty2[$i]!=null) {
@@ -290,7 +290,7 @@ class Purchase2Controller extends Controller
                     if ($request->pur2_len[$i]!=null) {
                         $tpurchase_2->length=$request->pur2_len[$i];
                     }
-                    if ($request->pur2_price_date[$i]!=null) {
+                    if ($request->pur2_price_date[$i]!=null OR empty($request->pur2_price_date[$i])) {
                         $tpurchase_2->rat_dat=$request->pur2_price_date[$i];
                     }
                     if ($request->pur2_percentage[$i]!=null) {
@@ -332,7 +332,7 @@ class Purchase2Controller extends Controller
                 if ($request->has('tax_item_name') && $request->tax_item_name) {
                     $new_tax_pur2->item=$request->tax_item_name;
                 }
-                if ($request->has('tax_remarks') && $request->tax_remarks) {
+                if ($request->has('tax_remarks') && $request->tax_remarks OR empty($request->tax_remarks)) {
                     $new_tax_pur2->remarks=$request->tax_remarks;
                 }
     

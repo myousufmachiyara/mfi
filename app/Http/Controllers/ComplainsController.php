@@ -111,21 +111,19 @@ class ComplainsController extends Controller
     public function update(Request $request)
     {
         
-
         // Find the existing complain
         $complains = complains::where('id', $request->update_id)->get()->first();
-        
 
         // Update fields if present
-        if ($request->has('update_inv_dat')) {
+        if ($request->has('update_inv_dat') OR empty($request->update_inv_dat)) {
             $complains->inv_dat = $request->update_inv_dat;
         }
 
-        if ($request->has('update_mfi_pur_number')) {
+        if ($request->has('update_mfi_pur_number') OR empty($request->update_mfi_pur_number)) {
             $complains->mfi_pur_number = $request->update_mfi_pur_number;
         }
 
-        if ($request->has('update_mill_pur_number')) {
+        if ($request->has('update_mill_pur_number') OR empty($request->update_mill_pur_number)) {
             $complains->mill_pur_number = $request->update_mill_pur_number;
         }
 
@@ -137,15 +135,15 @@ class ComplainsController extends Controller
             $complains->party_name = $request->update_party_name;
         }
 
-        if ($request->has('update_complain_detail')) {
+        if ($request->has('update_complain_detail') OR empty($request->update_complain_detail)) {
             $complains->complain_detail = $request->update_complain_detail;
         }
 
-        if ($request->has('update_resolve_date')) {
+        if ($request->has('update_resolve_date') OR empty($request->update_resolve_date)) {
             $complains->resolve_date = $request->update_resolve_date;
         }
 
-        if ($request->has('update_resolve_remarks')) {
+        if ($request->has('update_resolve_remarks') OR empty($request->update_resolve_remarks)) {
             $complains->resolve_remarks = $request->update_resolve_remarks;
         }
 

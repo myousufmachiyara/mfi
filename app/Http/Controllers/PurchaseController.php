@@ -26,11 +26,12 @@ class PurchaseController extends Controller
         ->select(
             'purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
             'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix',
+            'purchase.sale_against',
             \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
             \DB::raw('SUM(purchase_2.pur_qty*purchase_2.pur_price) as total_bill'),
         )
         ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
-        'pur_bill_no','purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
+        'pur_bill_no','purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
         ->get();
         
         return view('purchase1.index',compact('pur1'));
@@ -143,22 +144,23 @@ class PurchaseController extends Controller
         if ($request->has('pur_date') && $request->pur_date) {
             $pur1->pur_date=$request->pur_date;
         }
-        if ($request->has('pur_bill_no') && $request->pur_bill_no) {
+
+        if ($request->has('pur_bill_no') && $request->pur_bill_no OR empty($request->pur_bill_no)) {
             $pur1->pur_bill_no=$request->pur_bill_no;
         }
-        if ($request->has('pur_sale_inv') && $request->pur_sale_inv) {
+        if ($request->has('pur_sale_inv') && $request->pur_sale_inv OR empty($request->pur_sale_inv)) {
             $pur1->sale_against=$request->pur_sale_inv;
         }
         if ($request->has('ac_cod') && $request->ac_cod) {
             $pur1->ac_cod=$request->ac_cod;
         }
-        if ($request->has('cash_saler_name') && $request->cash_saler_name) {
+        if ($request->has('cash_saler_name') && $request->cash_saler_name OR empty($request->cash_saler_name)) {
             $pur1->cash_saler_name=$request->cash_saler_name;
         }
-        if ($request->has('cash_saler_address') && $request->cash_saler_address) {
+        if ($request->has('cash_saler_address') && $request->cash_saler_address OR empty($request->cash_saler_address)) {
             $pur1->cash_saler_address=$request->cash_saler_address;
         }
-        if ($request->has('pur_remarks') && $request->pur_remarks) {
+        if ($request->has('pur_remarks') && $request->pur_remarks OR empty($request->pur_remarks) ) {
             $pur1->pur_remarks=$request->pur_remarks;
         }
         if ($request->has('pur_convance_char') && $request->pur_convance_char) {
@@ -171,10 +173,11 @@ class PurchaseController extends Controller
             $pur1->pur_discount=$request->bill_discount;
         }
 
+
         purchase::where('pur_id', $request->pur_id)->update([
             'pur_date'=>$pur1->pur_date,
             'pur_bill_no'=>$pur1->pur_bill_no,
-            'sale_against'=>$pur1->pur_sale_inv,
+            'sale_against'=>$pur1->sale_against,
             'ac_cod'=>$pur1->ac_cod,
             'cash_saler_name'=>$pur1->cash_saler_name,
             'cash_saler_address'=>$pur1->cash_saler_address,
@@ -197,7 +200,7 @@ class PurchaseController extends Controller
 
                     $purchase_2->pur_cod=$request->pur_id;
                     $purchase_2->item_cod=$request->item_cod[$i];
-                    if ($request->remarks[$i]!=null) {
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
                         $purchase_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur_qty[$i]!=null) {

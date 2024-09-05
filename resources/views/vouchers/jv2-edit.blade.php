@@ -78,7 +78,7 @@
 															<input type="text" class="form-control" name="remarks[]" value="{{$jv2_items->remarks}}">
 														</td>
 														<td>
-															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->remarks}}">
+															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->bankname}}">
 														</td>
 														<td>
 															<input type="text" class="form-control" name="instrumentnumber[]" value="{{$jv2_items->instrumentnumber}}">

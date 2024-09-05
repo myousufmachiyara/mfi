@@ -56,7 +56,7 @@ class JV1Controller extends Controller
         if ($request->has('date') && $request->date) {
             $jv1->date=$request->date;
         }
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks  OR empty($request->remarks)) {
             $jv1->remarks=$request->remarks;
         }
         $jv1->save();

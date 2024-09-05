@@ -21,7 +21,7 @@ class ItemGroupsController extends Controller
         if ($request->has('group_name') && $request->group_name) {
             $item_group->group_name=$request->group_name;
         }
-        if ($request->has('group_remarks') && $request->group_remarks) {
+        if ($request->has('group_remarks') && $request->group_remarks OR empty($request->group_remarks)) {
             $item_group->group_remarks=$request->group_remarks;
         }
         $item_group->save();

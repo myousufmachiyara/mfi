@@ -159,22 +159,22 @@ class TStockOutController extends Controller
         if ($request->has('date') && $request->date) {
             $tstock_out->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv) {
+        if ($request->has('pur_inv') && $request->pur_inv OR empty($request->pur_inv)) {
             $tstock_out->pur_inv=$request->pur_inv;
         }
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $tstock_out->Sales_remarks=$request->remarks;
         }
-        if ($request->has('mill_gate') && $request->mill_gate) {
+        if ($request->has('mill_gate') && $request->mill_gate OR empty($request->mill_gate)) {
             $tstock_out->mill_gate=$request->mill_gate;
         }
-        if ($request->has('cash_pur_name') && $request->cash_pur_name) {
+        if ($request->has('cash_pur_name') && $request->cash_pur_name OR empty($request->cash_pur_name)) {
             $tstock_out->cash_pur_name=$request->cash_pur_name;
         }
-        if ($request->has('cash_pur_address') && $request->cash_pur_address) {
-            $tstock_out->cash_Pur_address=$request->cash_pur_address;
+        if ($request->has('cash_pur_address') && $request->cash_pur_address OR empty($request->cash_pur_address)) {
+            $tstock_out->cash_Pur_address=$request->cash_pur_address; 
         }
-        if ($request->has('transporter') && $request->transporter) {
+        if ($request->has('transporter') && $request->transporter OR empty($request->transporter)) {
             $tstock_out->transporter=$request->transporter;
         }
         if ($request->has('account_name') && $request->account_name) {
@@ -204,7 +204,9 @@ class TStockOutController extends Controller
                     $tstock_out_2 = new tstock_out_2();
                     $tstock_out_2->sales_inv_cod=$request->invoice_no;
                     $tstock_out_2->item_cod=$request->item_code[$i];
-                    $tstock_out_2->remarks=$request->item_remarks[$i];
+                    if ($request->item_remarks[$i]!=null OR empty($request->item_remarks[$i])) {
+                        $tstock_out_2->remarks=$request->item_remarks[$i];
+                    }
                     $tstock_out_2->Sales_qty=$request->qty[$i];
                     $tstock_out_2->weight_pc=$request->weight[$i];
     

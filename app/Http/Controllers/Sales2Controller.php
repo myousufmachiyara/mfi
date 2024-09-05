@@ -202,10 +202,10 @@ class Sales2Controller extends Controller
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
+        if ($request->has('pur_ord_no') && $request->pur_ord_no OR empty($request->pur_ord_no)) {
             $pur2->pur_ord_no=$request->pur_ord_no;
         }
-        if ($request->has('sales_against') && $request->sales_against) {
+        if ($request->has('sales_against') && $request->sales_against OR empty($request->sales_against)) {
             $pur2->pur_against=$request->sales_against;
         }
         if ($request->has('account_name') && $request->account_name) {
@@ -214,13 +214,13 @@ class Sales2Controller extends Controller
         if ($request->has('disp_account_name') && $request->disp_account_name) {
             $pur2->company_name=$request->disp_account_name;
         }
-        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name OR empty($request->Cash_pur_name)) {
             $pur2->Cash_name=$request->Cash_pur_name;
         }
-        if ($request->has('cash_Pur_address') && $request->cash_Pur_address) {
+        if ($request->has('cash_Pur_address') && $request->cash_Pur_address OR empty($request->cash_Pur_address)) {
             $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
-        if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
+        if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
         if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
@@ -264,7 +264,7 @@ class Sales2Controller extends Controller
                     $tsales_2->sales_inv_cod=$request->pur2_id;
                     $tsales_2->item_cod=$request->item_cod[$i];
 
-                    if ($request->remarks[$i]!=null) {
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
                         $tsales_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur2_qty2[$i]!=null) {
