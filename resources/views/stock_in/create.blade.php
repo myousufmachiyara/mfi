@@ -11,10 +11,7 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock In Pipe</h2>
-                                        <div class="card-actions">
-											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getPurchase2()" href="#getPurchase2"> Get Purchase 2 (Unclosed) </button>
-										</div>
+										<h2 class="card-title">New Stock In Door</h2>
 									</header>
 
 									<div class="card-body">
@@ -71,7 +68,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Stock In Details</h2>
+										<h2 class="card-title">Stock in Door Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -85,7 +82,7 @@
 													<th width="10%"></th>
 												</tr>
 											</thead>
-										    <tbody id="tstock_inTable">
+										    <tbody id="stock_inTable">
 											 <tr>
                                                 <td>
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
@@ -133,7 +130,7 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-stock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
                                             <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
                                         </div>
                                     </div>
@@ -142,39 +139,7 @@
                         </div>
                     </div>
                 </form>
-                <div id="getPurchase2" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                    <section class="card">
-                        <header class="card-header">
-                            <h2 class="card-title">All Unclosed Purchases</h2>
-                        </header>
-                        <div class="card-body">
-                            <div class="modal-wrapper">
-
-                                <table class="table table-bordered table-striped mb-0" >
-                                    <thead>
-                                        <tr>
-                                            <th>Inv #</th>
-                                            <th>Company</th>
-                                            <th>Date</th>
-                                            <th>Mill Inv No.</th>
-                                            <th>Dispatch To</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="unclosed_purchases_list">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <div class="row">
-                                <div class="col-md-12 text-end">
-                                    <button class="btn btn-default modal-dismiss" id="closeModal">Cancel</button>
-                                </div>
-                            </div>
-                        </footer>
-                    </section>
+     </section>
                 </div>
             </section>
         </div>
@@ -185,6 +150,63 @@
 </html>
 
 <script>
+
+    
+    ////// ComboBox script start here /////
+    document.addEventListener('DOMContentLoaded', function() {
+    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
+    const coaNameSelector = '#stck_in_coa_name';
+    let isTabPressed = false;
+
+    // Detect if Tab key is pressed
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+            isTabPressed = true;
+        }
+    });
+
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'Tab') {
+            isTabPressed = false;
+        }
+    });
+
+    // Apply the functionality to the coa_name select element
+    $(coaNameSelector).on('focus', function() {
+        if (!isTabPressed && typeof $(this).select2 === 'function') {
+            $(this).select2('open');
+        }
+    });
+
+    $(coaNameSelector).on('select2:open', function() {
+        setTimeout(function() {
+            const searchField = document.querySelector('.select2-search__field');
+            if (searchField) {
+                searchField.focus();
+            }
+        }, 100);
+    });
+
+    // Apply the functionality to all item_name elements
+    $(document).on('focus', selectElementPattern, function() {
+        if (!isTabPressed && typeof $(this).select2 === 'function') {
+            $(this).select2('open');
+        }
+    });
+
+    $(document).on('select2:open', selectElementPattern, function() {
+        setTimeout(function() {
+            const searchField = document.querySelector('.select2-search__field');
+            if (searchField) {
+                searchField.focus();
+            }
+        }, 100);
+    });
+});
+
+
+    ////// ComboBox script end here /////
+
 
     var index = 2;
 
@@ -198,7 +220,7 @@
     });
 
     function removeRow(button) {
-        var tableRows = $("#tstock_inTable tr").length;
+        var tableRows = $("#stock_inTable tr").length;
         if (tableRows > 1) {
             $(button).closest('tr').remove();
             index--;
@@ -235,7 +257,7 @@
 
         $.ajax({
             type: "GET",
-            url: "/item2/detail",
+            url: "/item/detail",
             data: {id: itemId},
             success: function(result) {
                 if (result.length > 0) {
@@ -266,7 +288,7 @@
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
-        $('#tstock_inTable tr').each(function() {
+        $('#stock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
             totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
         });
@@ -275,83 +297,4 @@
         $('#total_weight').val(totalweight.toFixed(0));
     }
 
-    function getPurchase2(){
-        var table = document.getElementById('unclosed_purchases_list');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
-        $.ajax({
-            type: "GET",
-            url: "/purchase2/getunclosed/",
-            success: function(result){
-                $.each(result, function(k,v){
-                    var html="<tr>";
-                    html+= "<td>"+v['Sale_inv_no']+"</td>"
-                    html+= "<td>"+v['acc_name']+"</td>"
-                    html+= "<td>"+v['sa_date']+"</td>"
-                    html+= "<td>"+v['pur_ord_no']+"</td>"
-                    html+= "<td>"+v['disp_acc']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-success' href='#' onclick='inducedItems("+v['Sale_inv_no']+")'><i class='fas fa-check'></i></a></td>"
-                    html+="</tr>";
-                    $('#unclosed_purchases_list').append(html);
-                });
-                        
-            },
-            error: function(){
-                alert("error");
-            }
-        });
-    }
-
-    function inducedItems(id){
-        var ind_total_qty=0, ind_total_weight=0;
-        var table = document.getElementById('tstock_inTable');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
-        index=0;
-        $('#itemCount').val(1);
-
-        $.ajax({
-            type: "GET",
-            url: "/purchase2/getItems/"+id,
-            success: function(result){
-                $('#stck_in_date').val(result['pur1']['sa_date']);
-                $('#stock_in_pur_inv').val(result['pur1']['Sale_inv_no']);
-                $('#stock_in_mill_bill').val(result['pur1']['pur_ord_no']);
-                $('#stock_in_pur_remarks').val(result['pur1']['Sales_Remarks']);
-                $('#stck_in_coa_name').val(result['pur1']['account_name']).trigger('change');
-                var table = $('#myTable').find('tbody');
-
-                $.each(result['pur2'], function(k,v){
-                    index++;
-                    var newRow = $('<tr>');
-                    newRow.append('<td><input type="number" id="item_code'+index+'" value="'+v['item_cod']+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-                    newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails('+index+',2)"><option>Select Item</option>@foreach($items as $key => $row)+<option value="{{$row->it_cod}}" >{{ $row->item_name }}</option>@endforeach</select></td>');
-                    newRow.append('<td><input type="text" id="remarks'+index+'" value="'+v['remarks']+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-                    newRow.append('<td><input type="number" id="qty'+index+'" value="'+v['Sales_qty2']+'" name="qty[]" placeholder="Qty" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="hidden" id="weight'+index+'"  name="weight[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required class="form-control"></td>');
-                    newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight"  value="'+v['Sales_qty2'] * v['weight_pc']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
-                    newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
-
-                    table.append(newRow);
-                    $('#item_name'+index).val(v['item_cod']);
-
-                    ind_total_qty= ind_total_qty + v['Sales_qty2']
-                    ind_total_weight= ind_total_weight + (v['Sales_qty2'] * v['weight_pc'])
-                    $('#myTable select[data-plugin-selecttwo]').select2();
-                }); 
-                $("#total_qty").val(ind_total_qty);
-                $("#total_weight").val(ind_total_weight);
-                $("#isInduced").val(1);
-                $("#sale_against").val(id);
-                $('#itemCount').val(index);
-
-                $("#closeModal").trigger('click');
-
-            },
-            error: function(){
-                alert("error");
-            }
-        });
-    }
 </script>
