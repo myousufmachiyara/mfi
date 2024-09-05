@@ -27,8 +27,8 @@
 												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
+												<label class="col-form-label" >Bill Inv. No.</label>
+												<input type="text" placeholder="Bill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Attachements</label>
