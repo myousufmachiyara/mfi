@@ -5,13 +5,13 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" id="myForm" action="{{ route('store-stock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('store-stock-out-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock In</h2>
+										<h2 class="card-title">New Stock Out</h2>
 									</header>
 
 									<div class="card-body">
@@ -58,7 +58,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Stock in Details</h2>
+										<h2 class="card-title">Stock out Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
