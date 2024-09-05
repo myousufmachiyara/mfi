@@ -367,7 +367,7 @@
 					type: "GET",
 					url: "/quotation/getavailablestock/"+item_id,
 					success: function(result){
-						$('#Stock'+row_no).val(result['opp_bal']);
+						$('#stock'+row_no).val(result['opp_bal']);
 					},
 					error: function(){
 						alert("error");
