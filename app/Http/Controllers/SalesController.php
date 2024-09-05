@@ -166,10 +166,10 @@ class SalesController extends Controller
         if ($request->has('date') && $request->date) {
             $sale1->sa_date=$request->date;
         }
-        if ($request->has('bill_no') && $request->bill_no) {
+        if ($request->has('bill_no') && $request->bill_no OR empty($request->bill_no)) {
             $sale1->pur_ord_no=$request->bill_no;
         }
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $sale1->Sales_remarks=$request->remarks;
         }
         if ($request->has('labour_charges') && $request->labour_charges) {
@@ -178,13 +178,13 @@ class SalesController extends Controller
         if ($request->has('convance_charges') && $request->convance_charges) {
             $sale1->ConvanceCharges=$request->convance_charges;
         }
-        if ($request->has('nop') && $request->nop) {
+        if ($request->has('nop') && $request->nop OR empty($request->nop)) {
             $sale1->Cash_pur_name=$request->nop;
         }
-        if ($request->has('address') && $request->address) {
+        if ($request->has('address') && $request->address OR empty($request->address))  {
             $sale1->cash_Pur_address=$request->address;
         }
-        if ($request->has('cash_pur_phone') && $request->cash_pur_phone) {
+        if ($request->has('cash_pur_phone') && $request->cash_pur_phone OR empty($request->cash_pur_phone)) {
             $sale1->cash_pur_phone=$request->cash_pur_phone;
         }
         if ($request->has('bill_discount') && $request->bill_discount) {
@@ -226,7 +226,9 @@ class SalesController extends Controller
                     $sales_2 = new Sales_2();
                     $sales_2->sales_inv_cod=$request->invoice_no;
                     $sales_2->item_cod=$request->item_code[$i];
-                    $sales_2->remarks=$request->item_remarks[$i];
+                    if ($request->item_remarks[$i]!=null OR empty($request->item_remarks[$i])) {
+                        $sales_2->remarks=$request->item_remarks[$i];
+                    }
                     $sales_2->Sales_qty2=$request->item_qty[$i];
                     $sales_2->sales_price=$request->item_price[$i];
                     $sales_2->Sales_qty=$request->item_weight[$i];

@@ -120,7 +120,7 @@ class BadDabsController extends Controller
         if ($request->has('date') && $request->date) {
             $bad_dabs->date=$request->date;
         }
-        if ($request->has('reason') && $request->reason) {
+        if ($request->has('reason') && $request->reason OR empty($request->reason)) {
             $bad_dabs->reason=$request->reason;
         }
 
@@ -141,7 +141,9 @@ class BadDabsController extends Controller
                     $bad_dabs_2 = new bad_dabs_2();
                     $bad_dabs_2->bad_dabs_cod=$request->bad_dabs_id;
                     $bad_dabs_2->item_cod=$request->item_code[$i];
-                    $bad_dabs_2->remarks=$request->remarks[$i];
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
+                        $bad_dabs_2->remarks=$request->remarks[$i];
+                    }
                     $bad_dabs_2->pc_add=$request->qty_add[$i];
                     $bad_dabs_2->pc_less=$request->qty_less[$i];
                     $bad_dabs_2->save();

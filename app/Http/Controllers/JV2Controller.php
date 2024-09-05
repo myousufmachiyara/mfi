@@ -179,7 +179,7 @@ class JV2Controller extends Controller
         if ($request->has('jv_date') && $request->jv_date) {
             $lager0->jv_date=$request->jv_date;
         }
-        if ($request->has('narration') && $request->narration) {
+        if ($request->has('narration') && $request->narration OR empty($request->narration)) {
             $lager0->narration=$request->narration;
         }
 
@@ -201,16 +201,16 @@ class JV2Controller extends Controller
 
                     $lager->auto_lager=$request->jv_no;
                     $lager->account_cod=$request->account_cod[$i];
-                    if ($request->remarks[$i]!=null) {
+                    if ($request->remarks[$i] OR empty($request->remarks[$i])) {
                         $lager->remarks=$request->remarks[$i];
                     }
-                    if ($request->bank_name[$i]!=null) {
+                    if ($request->bank_name[$i] OR empty($request->bank_name[$i])) {
                         $lager->bankname=$request->bank_name[$i];
                     }
-                    if ($request->instrumentnumber[$i]!=null) {
+                    if ($request->instrumentnumber[$i] OR empty($request->instrumentnumber[$i])) {
                         $lager->instrumentnumber=$request->instrumentnumber[$i];
                     }
-                    if ($request->chq_date[$i]!=null) {
+                    if ($request->chq_date[$i] OR empty($request->chq_date[$i])) {
                         $lager->chqdate=$request->chq_date[$i];
                     }
                     $lager->debit=$request->debit[$i];

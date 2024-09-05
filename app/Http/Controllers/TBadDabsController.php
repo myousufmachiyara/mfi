@@ -121,7 +121,7 @@ class TBadDabsController extends Controller
         if ($request->has('date') && $request->date) {
             $tbad_dabs->date=$request->date;
         }
-        if ($request->has('reason') && $request->reason) {
+        if ($request->has('reason') && $request->reason OR empty($request->reason)) {
             $tbad_dabs->reason=$request->reason;
         }
 
@@ -142,7 +142,9 @@ class TBadDabsController extends Controller
                     $tbad_dabs_2 = new TBadDabs2();
                     $tbad_dabs_2->bad_dabs_cod=$request->bad_dabs_id;
                     $tbad_dabs_2->item_cod=$request->item_code[$i];
-                    $tbad_dabs_2->remarks=$request->remarks[$i];
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
+                        $tbad_dabs_2->remarks=$request->remarks[$i];
+                    }
                     $tbad_dabs_2->pc_add=$request->qty_add[$i];
                     $tbad_dabs_2->pc_less=$request->qty_less[$i];
                     $tbad_dabs_2->save();

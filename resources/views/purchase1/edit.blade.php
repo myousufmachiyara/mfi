@@ -59,7 +59,7 @@
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" value="{{$pur->pur_remarks}}" placeholder="Remarks" class="form-control cust-textarea"></textarea>
+												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea">{{$pur->pur_remarks}}"</textarea>
 											</div>	
 									  </div>
 									</div>

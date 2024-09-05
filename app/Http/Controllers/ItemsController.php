@@ -91,7 +91,7 @@ class ItemsController extends Controller
         if ($request->has('item_name') && $request->item_name) {
             $item->item_name=$request->item_name;
         }
-        if ($request->has('item_remark') && $request->item_remark) {
+        if ($request->has('item_remark') && $request->item_remark OR empty($request->item_remark)) {
             $item->item_remark=$request->item_remark;
         }
         if ($request->has('qty') && $request->qty OR $request->qty==0) {

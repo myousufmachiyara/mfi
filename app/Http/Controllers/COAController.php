@@ -132,13 +132,13 @@ class COAController extends Controller
         if ($request->has('opp_date') && $request->opp_date) {
             $acc->opp_date=$request->opp_date;
         }
-        if ($request->has('remarks') && $request->remarks OR $request->group_cod==null) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $acc->remarks=$request->remarks;
         }
-        if ($request->has('address') && $request->address) {
+        if ($request->has('address') && $request->address OR empty($request->address)) {
             $acc->address=$request->address;
         }
-        if ($request->has('phone_no') && $request->phone_no) {
+        if ($request->has('phone_no') && $request->phone_no OR empty($request->phone_no)) {
             $acc->phone_no=$request->phone_no;
         }
         if ($request->has('credit_limit') && $request->credit_limit) {
@@ -148,7 +148,7 @@ class COAController extends Controller
             $acc->days_limit=$request->days_limit;
         }
 
-        if ($request->has('group_cod') && $request->group_cod OR $request->group_cod==null) {
+        if ($request->has('group_cod') && $request->group_cod OR empty($request->group_cod)) {
             $acc->group_cod=$request->group_cod;
         }
         if ($request->has('AccountType') && $request->AccountType) {
