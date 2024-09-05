@@ -367,7 +367,7 @@
 					type: "GET",
 					url: "/quotation/getavailablestock/"+item_id,
 					success: function(result){
-						console.log(result);
+						console.log(result['opp_bal']);
 					},
 					error: function(){
 						alert("error");
