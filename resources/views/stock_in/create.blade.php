@@ -11,7 +11,7 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock In Door</h2>
+										<h2 class="card-title">New Stock In</h2>
 									</header>
 
 									<div class="card-body">
@@ -21,8 +21,6 @@
 												<input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
-                                                <input type="hidden" id="isInduced" name="isInduced" value="0" class="form-control" >
-                                                <input type="hidden" id="sale_against" name="sale_against" value="0" class="form-control" >
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -40,14 +38,6 @@
 												</select>
 											</div>
 											
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Purchase Inv#</label>
-												<input type="text" name="pur_inv" id="stock_in_pur_inv" placeholder="Purchase Inv#" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Mill Inv/Gate#</label>
-												<input type="text" name="mill_gate" placeholder="Mill Inv/Gate#" id="stock_in_mill_bill" class="form-control">
-											</div>
 											<div class="col-sm-12 col-md-4">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
@@ -68,7 +58,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Stock in Door Details</h2>
+										<h2 class="card-title">Stock in Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -82,7 +72,7 @@
 													<th width="10%"></th>
 												</tr>
 											</thead>
-										    <tbody id="stock_inTable">
+										    <tbody id="tstock_inTable">
 											 <tr>
                                                 <td>
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
@@ -139,8 +129,6 @@
                         </div>
                     </div>
                 </form>
-     </section>
-                </div>
             </section>
         </div>
     </section>
@@ -150,63 +138,6 @@
 </html>
 
 <script>
-
-    
-    ////// ComboBox script start here /////
-    document.addEventListener('DOMContentLoaded', function() {
-    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
-    const coaNameSelector = '#stck_in_coa_name';
-    let isTabPressed = false;
-
-    // Detect if Tab key is pressed
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = true;
-        }
-    });
-
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = false;
-        }
-    });
-
-    // Apply the functionality to the coa_name select element
-    $(coaNameSelector).on('focus', function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(coaNameSelector).on('select2:open', function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-
-    // Apply the functionality to all item_name elements
-    $(document).on('focus', selectElementPattern, function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(document).on('select2:open', selectElementPattern, function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-});
-
-
-    ////// ComboBox script end here /////
-
 
     var index = 2;
 
@@ -220,7 +151,7 @@
     });
 
     function removeRow(button) {
-        var tableRows = $("#stock_inTable tr").length;
+        var tableRows = $("#tstock_inTable tr").length;
         if (tableRows > 1) {
             $(button).closest('tr').remove();
             index--;
@@ -248,7 +179,6 @@
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
-
         }
     }
 
@@ -288,7 +218,7 @@
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
-        $('#stock_inTable tr').each(function() {
+        $('#tstock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
             totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
         });
@@ -296,5 +226,4 @@
         $('#total_qty').val(totalqty.toFixed(0));
         $('#total_weight').val(totalweight.toFixed(0));
     }
-
 </script>

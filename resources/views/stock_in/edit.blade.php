@@ -5,13 +5,13 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" id="myForm" action="{{ route('update-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('update-stock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Stock In Pipe</h2>
+										<h2 class="card-title">Edit Stock In</h2>
 									</header>
 
 									<div class="card-body">
@@ -38,14 +38,6 @@
 												</select>
 											</div>
 											
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Purchase Inv#</label>
-												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_in->pur_inv}}" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Mill Inv/Gate#</label>
-												<input type="text" name="mill_gate" value="{{$tstock_in->mill_gate}}" placeholder="Mill Inv/Gate#" class="form-control">
-											</div>
 											<div class="col-sm-12 col-md-4">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
@@ -98,7 +90,7 @@
 															<input type="text" id="remarks{{$tstockin_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
 														</td>
 														<td>
-															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Qty" value="{{$tstock_items->sales_qty}}" step="any" required class="form-control">
+															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Qty" value="{{$tstock_items->Sales_qty}}" step="any" required class="form-control">
 															<input type="hidden" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
 														</td>
 														<td>
@@ -130,7 +122,7 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-stock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
                                             <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
@@ -175,63 +167,6 @@
 
 <script>
 
-    
-    ////// ComboBox script start here /////
-    document.addEventListener('DOMContentLoaded', function() {
-    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
-    const coaNameSelector = '#coa_name';
-    let isTabPressed = false;
-
-    // Detect if Tab key is pressed
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = true;
-        }
-    });
-
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = false;
-        }
-    });
-
-    // Apply the functionality to the coa_name select element
-    $(coaNameSelector).on('focus', function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(coaNameSelector).on('select2:open', function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-
-    // Apply the functionality to all item_name elements
-    $(document).on('focus', selectElementPattern, function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(document).on('select2:open', selectElementPattern, function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-});
-
-
-    ////// ComboBox script end here /////
-
-    
     var index = 2;
 	var itemCount = 0;
 
@@ -306,7 +241,7 @@
 
         $.ajax({
             type: "GET",
-            url: "/item2/detail",
+            url: "/item/detail",
             data: {id: itemId},
             success: function(result) {
                 if (result.length > 0) {
