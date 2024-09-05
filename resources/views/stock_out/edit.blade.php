@@ -5,49 +5,37 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" id="myForm" action="{{ route('update-tstock-out-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" id="myForm" action="{{ route('update-stock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Stock Out Pipe</h2>
+										<h2 class="card-title">Edit Stock In</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >New ID</label>
-												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_out->prefix }}{{$tstock_out->Sal_inv_no }}" disabled>
+												<label class="col-form-label" >ID</label>
+												<input type="text" placeholder="(ID)" class="form-control" value="{{$tstock_in->prefix }}{{$tstock_in->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
-												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_out->Sal_inv_no }}" class="form-control" >
+												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_in->Sal_inv_no }}" class="form-control" >
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="date" required  value="{{$tstock_out->sa_date}}" class="form-control">
+												<input type="date" name="date" required  value="{{$tstock_in->sa_date}}" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-3">
+											<div class="col-sm-12 col-md-4">
 												<label class="col-form-label">Account Name</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}" {{ $tstock_out->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
+														<option value="{{$row->ac_code}}" {{ $tstock_in->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
 												</select>
-											</div>
-                                            <div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Name of Person</label>
-												<input type="text" name="cash_pur_name" placeholder="Name of Person" value="{{$tstock_out->cash_pur_name}}" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-1">
-												<label class="col-form-label" >Gate Pass#</label>
-												<input type="text" name="mill_gate" value="{{$tstock_out->mill_gate}}" placeholder="Gate Pass#" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Sale Inv#</label>
-												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
 											</div>
 											
 											<div class="col-sm-12 col-md-4">
@@ -57,7 +45,7 @@
 
 											<div class="col-sm-12 col-md-8 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$tstock_out->Sales_remarks}}</textarea>
+												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$tstock_in->Sales_remarks}}</textarea>
 											</div>
 									  </div>
 									</div>
@@ -70,7 +58,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Edit Stock Out Details</h2>
+										<h2 class="card-title">Edit Stock In Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -84,14 +72,14 @@
 													<th width="10%"></th>
 												</tr>
 											</thead>
-										    <tbody id="tstock_outTable">
-												@foreach ($tstock_out_items as $tstockout_key => $tstock_items)
+										    <tbody id="tstock_inTable">
+												@foreach ($tstock_in_items as $tstockin_key => $tstock_items)
 													<tr>
 														<td>
-															<input type="number" id="item_code{{$tstockout_key+1}}" name="item_code[]" placeholder="Code" value="{{$tstock_items->item_cod}}" class="form-control" required onchange="getItemDetails({{$tstockout_key+1}},1)">
+															<input type="number" id="item_code{{$tstockin_key+1}}" name="item_code[]" placeholder="Code" value="{{$tstock_items->item_cod}}" class="form-control" required onchange="getItemDetails({{$tstockin_key+1}},1)">
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$tstockout_key+1}}" onchange="getItemDetails({{$tstockout_key+1}},2)" name="item_name[]" required>
+															<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$tstockin_key+1}}" onchange="getItemDetails({{$tstockin_key+1}},2)" name="item_name[]" required>
 																<option selected>Select Item</option>
 																@foreach($items as $key => $row)
 																	<option value="{{$row->it_cod}}" {{ $tstock_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -99,14 +87,14 @@
 															</select>
 														</td>
 														<td>
-															<input type="text" id="remarks{{$tstockout_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
+															<input type="text" id="remarks{{$tstockin_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
 														</td>
 														<td>
-															<input type="number" id="qty{{$tstockout_key+1}}" name="qty[]" onchange="rowTotal({{$tstockout_key+1}})" placeholder="Qty" value="{{$tstock_items->sales_qty}}" step="any" required class="form-control">
-															<input type="hidden" id="weight{{$tstockout_key+1}}" name="weight[]" onchange="rowTotal({{$tstockout_key+1}})" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
+															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Qty" value="{{$tstock_items->Sales_qty}}" step="any" required class="form-control">
+															<input type="hidden" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
 														</td>
 														<td>
-															<input type="number" id="row_total_weight{{$tstockout_key+1}}" placeholder="Weight" name="row_total_weight[]" disabled value="{{$tstock_items->sales_qty * $tstock_items->weight_pc}}" step="any"  class="form-control">
+															<input type="number" id="row_total_weight{{$tstockin_key+1}}" placeholder="Weight" name="row_total_weight[]" disabled value="{{$tstock_items->sales_qty * $tstock_items->weight_pc}}" step="any"  class="form-control">
 														</td>
 														<td>
 															<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -134,8 +122,8 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-out') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
-                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-stock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
                                 </footer>
@@ -178,6 +166,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
     var index = 2;
 	var itemCount = 0;
 
@@ -191,7 +180,7 @@
 
 		var totalWeight=0, totalQuantity=0,weight=0, quantity=0;
 
-		var table = document.getElementById("tstock_outTable"); // Get the table element
+		var table = document.getElementById("tstock_inTable"); // Get the table element
         var rowCount = table.rows.length; // Get the total number of rows
 		itemCount = rowCount;
 		index = rowCount+1;
@@ -215,7 +204,7 @@
     });
 
     function removeRow(button) {
-        var tableRows = $("#tstock_outTable tr").length;
+        var tableRows = $("#tstock_inTable tr").length;
         if (tableRows > 1) {
             $(button).closest('tr').remove();
             index--;
@@ -252,7 +241,7 @@
 
         $.ajax({
             type: "GET",
-            url: "/item2/detail",
+            url: "/item/detail",
             data: {id: itemId},
             success: function(result) {
                 if (result.length > 0) {
@@ -286,7 +275,7 @@
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
-        $('#tstock_outTable tr').each(function() {
+        $('#tstock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
             totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
         });

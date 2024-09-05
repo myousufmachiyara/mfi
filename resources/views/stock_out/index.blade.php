@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Door Stock out</h2>
+                                    <h2 class="card-title">All Doors Stock In</h2>
                                     <form class="text-end" action="{{ route('create-stock-out-invoice') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock Out</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -19,17 +19,13 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th style="display:none">ID</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
-                                                    <th>Account Name</th>
-                                                    <th>Name Of Person</th>
+                                                    <th>karigar Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Sale_Inv #</th>
-                                                    <th>Gate Pass#</th>
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
-                                                    <th>Transporter</th>
-                                                    <th>Status</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -37,32 +33,24 @@
                                             <tbody>
                                                 @foreach ($stock_out as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->Sal_inv_no}}</td>
+                                                    <td style="display:none">{{$row->Sal_inv_no}}</td>
+                                                    <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
-                                                    <td>{{$row->cash_pur_name}}</td>
                                                     <td>{{$row->Sales_remarks}}</td>
-                                                    <td>{{$row->pur_inv}}</td>
-                                                    <td>{{$row->mill_gate}}</td>
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
-                                                    <td>{{$row->transporter}}</td>
-                                                    @if($row->pur_inv!=null) 
-                                                    <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
-                                                @else
-                                                    <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
-                                                @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
+                                                        <!-- <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
+                                                        </a> -->
+                                                        <!-- <span class="separator"> | </span>
                                                         <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a href="{{ route('edit-tstock-out-invoice',$row->Sal_inv_no) }}" class="">
+                                                        </a> -->
+                                                        <!-- <span class="separator"> | </span> -->
+                                                        <a href="{{ route('edit-stock-out-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
@@ -88,7 +76,7 @@
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Door Stock Out</h2>
+                        <h2 class="card-title">Delete Door Stock In</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -96,7 +84,7 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this Door Stock Out?</p>
+                                <p class="mb-0">Are you sure that you want to delete this Door Stock In?</p>
                                 <input name="invoice_id" id="deleteID" hidden>
                             </div>
                         </div>
@@ -130,7 +118,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="stockout_attachements">
+                            <tbody id="tstockIn_attachements">
 
                             </tbody>
                         </table>
@@ -154,7 +142,7 @@
     }
 
     function getAttachements(id){
-        var table = document.getElementById('stockout_attachements');
+        var table = document.getElementById('stockIn_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
@@ -167,11 +155,11 @@
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tstock_out/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tstock_out/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/stock_out/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/stock_out/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#tstockout_attachements').append(html);
+                    $('#stockIn_attachements').append(html);
                 });
             },
             error: function(){
@@ -185,7 +173,7 @@
             return;
         }
 
-        fetch('/tstock_out/deleteAttachment/' + fileId, {
+        fetch('/stock_out/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

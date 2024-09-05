@@ -42,7 +42,7 @@ class StockInController extends Controller
     public function destroy(Request $request)
     {
         $stock_in = stock_in::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
-        return redirect()->route('all-tstock-in');
+        return redirect()->route('all-stock-in');
     }
 
     public function create(Request $request)
