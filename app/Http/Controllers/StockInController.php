@@ -135,13 +135,13 @@ class StockInController extends Controller
 
     public function edit($id)
     {
-        $stock_in = stock_in::where('Sal_inv_no',$id)->first();
-        $stock_in_items = stock_in_2::where('sales_inv_cod',$id)->get();
+        $tstock_in = stock_in::where('Sal_inv_no',$id)->first();
+        $tstock_in_items = stock_in_2::where('sales_inv_cod',$id)->get();
 
         $items = Item_entry::orderBy('item_name', 'asc')->get();
         $coa = AC::orderBy('ac_name', 'asc')->get();
 
-        return view('stock_in.edit', compact('stock_in','stock_in_items','items','coa'));
+        return view('stock_in.edit', compact('tstock_in','tstock_in_items','items','coa'));
     }
 
     public function update(Request $request)
