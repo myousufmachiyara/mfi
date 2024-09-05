@@ -9,10 +9,12 @@ use App\Models\AC;
 use App\Models\quotation;
 use App\Models\quotation_2;
 use App\Models\quotation_att;
+use App\Models\gd_pipe_item_stock9_much;
 use Illuminate\Support\Facades\File;
 use App\Traits\SaveImage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+
 
 class QuotationController extends Controller
 {
@@ -348,7 +350,11 @@ public function edit($id)
             return Response::download($filePath);
         } 
     }
-
-
+    
+    public function getavailablestock($id) {
+        $result = gd_pipe_item_stock9_much::where('it_cod', $id)->select('opp_bal')->first();
+        return $result;
+    }
+    
  }
 

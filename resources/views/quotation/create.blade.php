@@ -332,7 +332,8 @@
 						$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
 						$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
 						$('#weight_per_piece'+row_no).val(result[0]['weight']);
-						$('#weight_per_piece'+row_no+'').trigger('change')
+						$('#weight_per_piece'+row_no+'').trigger('change');
+						getavailablestock(result[0]['it_cod']);
 						addNewRow();
 					},
 					error: function(){
@@ -360,6 +361,23 @@
 					}
 				});
 			}
+
+			function getavailablestock(item_id){				
+				$.ajax({
+					type: "GET",
+					url: "/quotation/getavailablestock/"+item_id,
+					success: function(result){
+						console.log(result);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+
+
+
+
 
 			function rowTotal(index){
 

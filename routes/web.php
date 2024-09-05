@@ -278,3 +278,5 @@ Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\Complain
  Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
  Route::get('/quotation/getunclosed/', [App\Http\Controllers\QuotationController::class, 'getunclosed'])->name('get-unclosed-quotation-invoice');
  Route::get('/quotation/getItems/{id}', [App\Http\Controllers\QuotationController::class, 'getItems'])->name('get-quot2-items');
+ Route::get('/quotation/getavailablestock/{id}', [App\Http\Controllers\QuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
+
