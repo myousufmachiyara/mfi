@@ -27,8 +27,8 @@
 												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
+												<label class="col-form-label" >Bill Inv. No.</label>
+												<input type="text" placeholder="Bill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -219,7 +219,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-sale2invoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
 											</div>
 										</div>

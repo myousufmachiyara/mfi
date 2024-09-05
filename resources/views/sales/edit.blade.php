@@ -40,15 +40,11 @@
 
 											<div class="col-sm-12 col-md-2">
 												<label class="col-form-label">Status</label>
-												<select data-plugin-selecttwo class="form-control select2-js mb-3" name="bill_status" required>
-													@if($sales->bill_not==0)
-														<option value="0" selected>Bill Not Final</option>
-														<option value="1">Finalized</option>
-													@elseif($sales->bill_not==1)
-														<option value="0" >Bill Not Final</option>
-														<option value="1" selected>Finalized</option>
-													@endif
-												</select>													
+												<select class="form-control mb-3" id="bill_status" name="bill_status" required>
+													<option value="0" {{ $sales->bill_not == 0 ? 'selected' : '' }}>Bill Not Final</option>
+													<option value="1" {{ $sales->bill_not == 1 ? 'selected' : '' }}>Finalized</option>
+												</select>
+												
 											</div>
 
 											<div class="col-sm-12 col-md-4">

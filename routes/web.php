@@ -223,11 +223,11 @@ Route::post('/stock_in/stock_in_invoice/update', [App\Http\Controllers\StockInCo
 Route::post('/stock_in/stockin/delete', [App\Http\Controllers\StockInController::class, 'destroy'])->name('delete-stock-in-invoice');
 Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
 Route::get('/stock_in/download/{id}', [App\Http\Controllers\StockInController::class, 'downloadAtt'])->name('stock-in-att-download');
-Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('sale1-stock-in-delete');
-Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
-// Route::get('/stock_in/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
-// Route::get('/stock_in/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
-// Route::get('/stock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
+Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('stock-in-delete-att');
+Route::get('/stock_in/viewAtt/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
+Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'show'])->name('show-stock-in-invoice');
+// Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
+// Route::get('/stock_in/downloadPDF/{id}', [App\Http\Controllers\StockInController::class, 'downloadPDF'])->name('download-stock-in-invoice');
 
 
 //stock out

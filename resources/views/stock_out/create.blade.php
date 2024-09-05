@@ -11,7 +11,7 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">New Stock Out Door</h2>
+										<h2 class="card-title">New Stock Out</h2>
 									</header>
 
 									<div class="card-body">
@@ -25,31 +25,17 @@
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="date" id="stck_in_date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-3">
+											<div class="col-sm-12 col-md-4">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" name="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="stck_in_coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
 												</select>
-											</div>
-                                            <div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Name of Person</label>
-												<input type="text" name="cash_pur_name" placeholder="Name of Person" class="form-control">
-											</div>
-
-                                            <div class="col-sm-12 col-md-1">
-												<label class="col-form-label" >Gate Pass#</label>
-												<input type="text" name="mill_gate" placeholder="Gate Passe#" class="form-control">
-											</div>
-											
-											<div class="col-sm-12 col-md-2">
-												<label class="col-form-label" >Sale Inv#</label>
-												<input type="text" name="pur_inv" placeholder="Sale Inv#" class="form-control" disabled>
 											</div>
 											
 											<div class="col-sm-12 col-md-4">
@@ -59,7 +45,7 @@
 
 											<div class="col-sm-12 col-md-8 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
+												<textarea rows="2" cols="50" name="remarks" id="stock_in_pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>
 									  </div>
 									</div>
@@ -72,7 +58,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Stock Out Details</h2>
+										<h2 class="card-title">Stock out Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -86,7 +72,7 @@
 													<th width="10%"></th>
 												</tr>
 											</thead>
-										    <tbody id="stock_outTable">
+										    <tbody id="tstock_inTable">
 											 <tr>
                                                 <td>
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
@@ -103,11 +89,11 @@
                                                     <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qty1" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control">
-                                                   
+                                                    <input type="number" id="qty1" name="qty[]" onchange="rowTotal(1)" placeholder="Qty" value="0" step="any" required class="form-control">
+                                                    <input type="hidden" id="weight1" name="weight[]" placeholder="Weight" onchange="rowTotal(1)" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="weight1" name="weight[]" placeholder="Weight"  value="0" step="any" required class="form-control">
+                                                    <input type="number" id="row_total_weight1" placeholder="Weight" name="row_total_weight[]" disabled value="0" step="any"  class="form-control">
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -117,7 +103,7 @@
                                     </table>
                                 </div>
                                 <footer class="card-footer">
-                                    <<div class="row mb-3" style="float:right; margin-right: 10%;">
+                                    <div class="row mb-3" style="float:right; margin-right: 10%;">
                                         <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Qty</label>
                                             <input type="number" id="total_qty" placeholder="Total Qty" class="form-control" step="any" disabled>
@@ -134,7 +120,7 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-stock-out') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-stock-in') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
                                             <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Entry</button>
                                         </div>
                                     </div>
@@ -143,42 +129,13 @@
                         </div>
                     </div>
                 </form>
-                <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                    <section class="card">
-                        <header class="card-header">
-                            <h2 class="card-title">Delete Entry</h2>
-                        </header>
-                        <div class="card-body">
-                            <div class="modal-wrapper">
-                                <div class="modal-icon">
-                                    <i class="fas fa-question-circle"></i>
-                                </div>
-                                <div class="modal-text">
-                                    <p class="mb-0">Are you sure that you want to delete this Entry?</p>
-                                    <input name="invoice_id" id="deleteID" hidden>
-                                </div>
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <div class="row">
-                                <div class="col-md-12 text-end">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    <button class="btn btn-default modal-dismiss">Cancel</button>
-                                </div>
-                            </div>
-                        </footer>
-                    </section>
-                </div>
             </section>
         </div>
     </section>
+
     @extends('../layouts.footerlinks')
 </body>
 </html>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
 
@@ -194,7 +151,7 @@
     });
 
     function removeRow(button) {
-        var tableRows = $("#stock_outTable tr").length;
+        var tableRows = $("#tstock_inTable tr").length;
         if (tableRows > 1) {
             $(button).closest('tr').remove();
             index--;
@@ -214,15 +171,14 @@
             newRow.append('<td><input type="number" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
             newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
             newRow.append('<td><input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-            newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" ">');
-            newRow.append('<td><input type="number" id="weight'+index+'" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>')</td>');
+            newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="hidden" id="weight'+index+'" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
+            newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight" value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
             newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
 
             table.append(newRow);
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
-
         }
     }
 
@@ -238,6 +194,8 @@
                     $('#item_code'+row_no).val(result[0]['it_cod']);
                     $('#item_name'+row_no).val(result[0]['it_cod']);
                     $('#remarks'+row_no).val(result[0]['item_remark']);
+                    $('#weight'+row_no).val(result[0]['weight']);
+                    $('#weight'+row_no).trigger('change');
 
                     addNewRow();
                 }
@@ -248,14 +206,21 @@
         });
     }
 
+    function rowTotal(index){
+        var qty = parseFloat($('#qty'+index+'').val());
+        var weight = parseFloat($('#weight'+index+'').val());   
+        var totalWeight = (qty*weight); 
+        $('#row_total_weight'+index).val(totalWeight);
 
+        tableTotal();
+    }
     
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
-        $('#stock_outTable tr').each(function() {
+        $('#tstock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
-            totalweight += Number($(this).find('input[name="weight[]"]').val());
+            totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
         });
 
         $('#total_qty').val(totalqty.toFixed(0));

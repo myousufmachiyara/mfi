@@ -53,7 +53,7 @@
                                                     <td>{{$row->acc_name}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>
                                                     <td>{{$row->comp_account}}</td>
-                                                    <td>{{$row->Cash_pur_name}}</td>
+                                                    <td>{{$row->Cash_name}}</td>
                                                     <td>{{$row->Sales_Remarks}}</td>
                                                     <td>{{$row->pur_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
