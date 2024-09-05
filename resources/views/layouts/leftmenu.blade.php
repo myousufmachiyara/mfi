@@ -190,18 +190,18 @@
         <li class="nav-parent">
             <a class="nav-link  " href="#">
                 <i class="bx bx-file" aria-hidden="true"></i>
-                <span>Reports</span>  
+                <span>Purchase Orders</span>  
           
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link"  >
-                        Main Option
+                    <a class="nav-link"   href="#">
+                        P.O 
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link"  >
-                        Main Option
+                    <a class="nav-link"   href="{{ route('all-tpo')}}">
+                        P.O Pipe/Garder
                     </a>
                 </li>							
             </ul>
@@ -209,12 +209,32 @@
         <li class="nav-parent">
             <a class="nav-link" href="#">
                 <i class="bx bx-right-arrow" aria-hidden="true"></i>
+                <span>Quotations</span>  
+            </a>
+            <ul class="nav nav-children">
+                <li>
+                    <a class="nav-link"   href="#">
+                        Quotation 1
+                    </a>
+                </li>	
+                <li>
+                    <a class="nav-link"   href="{{ route('all-quotation')}}">
+                        Quotation 2
+                    </a>
+                </li>							
+            </ul>
+            
+        </li>
+
+        <li class="nav-parent">
+            <a class="nav-link" href="#">
+                <i class="bx bx-right-arrow" aria-hidden="true"></i>
                 <span>Others</span>  
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link"   href="{{ route('all-quotation')}}">
-                        Quotation
+                    <a class="nav-link"   href="#">
+                        Weight
                     </a>
                 </li>	
                 <li>
@@ -223,6 +243,7 @@
                     </a>
                 </li>							
             </ul>
+            
         </li>
     </ul>	
 </nav>

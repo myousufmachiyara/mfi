@@ -161,5 +161,17 @@ trait SaveImage{
     }
 
     
+    public function tpoDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/tpo/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tpo/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    
 }
 ?>
