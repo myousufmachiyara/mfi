@@ -50,6 +50,10 @@
 													<span class="text-dark">Phone No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->phone_no}}</span>
 												</h4>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Mill Inv No: &nbsp </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_ord_no}}</span>
+												</h4>
 											</div>
 										</div>
 										<div class="col-md-5">
