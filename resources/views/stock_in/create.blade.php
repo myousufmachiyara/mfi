@@ -89,11 +89,10 @@
                                                     <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qty1" name="qty[]" onchange="rowTotal(1)" placeholder="Qty" value="0" step="any" required class="form-control">
-                                                    <input type="hidden" id="weight1" name="weight[]" placeholder="Weight" onchange="rowTotal(1)" value="0" step="any" required class="form-control">
+                                                    <input type="number" id="qty1" onchange="tableTotal()" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="row_total_weight1" placeholder="Weight" name="row_total_weight[]" disabled value="0" step="any"  class="form-control">
+                                                    <input type="number" id="weight1" onchange="tableTotal()" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -171,14 +170,15 @@
             newRow.append('<td><input type="number" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
             newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
             newRow.append('<td><input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-            newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="hidden" id="weight'+index+'" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
-            newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight" value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
+            newRow.append('<td><input type="number" id="qty'+index+'" onchange="tableTotal()" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control"></td>');
+            newRow.append('<td><input type="number" id="weight'+index+'" onchange="tableTotal()" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
             newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
 
             table.append(newRow);
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
+            tableTotal();
         }
     }
 
@@ -194,8 +194,6 @@
                     $('#item_code'+row_no).val(result[0]['it_cod']);
                     $('#item_name'+row_no).val(result[0]['it_cod']);
                     $('#remarks'+row_no).val(result[0]['item_remark']);
-                    $('#weight'+row_no).val(result[0]['weight']);
-                    $('#weight'+row_no).trigger('change');
 
                     addNewRow();
                 }
@@ -205,22 +203,13 @@
             }
         });
     }
-
-    function rowTotal(index){
-        var qty = parseFloat($('#qty'+index+'').val());
-        var weight = parseFloat($('#weight'+index+'').val());   
-        var totalWeight = (qty*weight); 
-        $('#row_total_weight'+index).val(totalWeight);
-
-        tableTotal();
-    }
     
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
         $('#tstock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
-            totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
+            totalweight += Number($(this).find('input[name="weight[]"]').val());
         });
 
         $('#total_qty').val(totalqty.toFixed(0));

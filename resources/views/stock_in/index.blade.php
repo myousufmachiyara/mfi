@@ -118,7 +118,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="tstockIn_attachements">
+                            <tbody id="stockIn_attachements">
 
                             </tbody>
                         </table>

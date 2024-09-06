@@ -100,7 +100,6 @@ class StockInController extends Controller
                     }
                     $stock_in_2->Sales_qty=$request->qty[$i];
                     $stock_in_2->weight_pc=$request->weight[$i];
-    
                     $stock_in_2->save();
                 }
             }
@@ -213,7 +212,6 @@ class StockInController extends Controller
     public function getAttachements(Request $request)
     {
         $stock_in_att = stock_in_att::where('stock_in_id', $request->id)->get();
-        
         return $stock_in_att;
     }
 
