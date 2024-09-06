@@ -21,7 +21,7 @@
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">
-												<img width="80px" src="/assets/img/logo.png" alt="MFI Logo" />
+												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
 										</div>
 									</div>
