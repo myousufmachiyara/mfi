@@ -19671,7 +19671,7 @@ html.dark .fc-unthemed .fc-today {
 .invoice .bill-data .value {
 	display: inline-block;
 	margin-left: 10px;
-	width: 90px;
+	/* width: 90px; */
 }
 
 /* Invoice table */

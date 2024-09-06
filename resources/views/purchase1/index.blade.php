@@ -59,10 +59,10 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
+                                                        <!-- <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
                                                         </a>
-                                                        <span class="separator"> | </span>
+                                                        <span class="separator"> | </span> -->
                                                         <a href="{{ route('show-purchases1',$row->pur_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>

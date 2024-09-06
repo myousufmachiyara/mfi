@@ -118,7 +118,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="tstockIn_attachements">
+                            <tbody id="stockIn_attachements">
 
                             </tbody>
                         </table>
@@ -156,7 +156,7 @@
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/stock_in/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/stock_in/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/stock_in/viewAtt/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#stockIn_attachements').append(html);

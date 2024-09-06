@@ -238,13 +238,13 @@ class Purchase2Controller extends Controller
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
-        if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
+        if ($request->has('ConvanceCharges') && $request->ConvanceCharges OR $request->ConvanceCharges==0) {
             $pur2->ConvanceCharges=$request->ConvanceCharges;
         }
-        if ($request->has('LaborCharges') && $request->LaborCharges) {
+        if ($request->has('LaborCharges') && $request->LaborCharges OR $request->LaborCharges==0) {
             $pur2->LaborCharges=$request->LaborCharges;
         }
-        if ($request->has('Bill_discount') && $request->Bill_discount) {
+        if ($request->has('Bill_discount') && $request->Bill_discount OR $request->Bill_discount==0) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
 
@@ -406,7 +406,7 @@ class Purchase2Controller extends Controller
                 ->first();
 
         $pur2 = tpurchase_2::where('sales_inv_cod',$id)
-                ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+                ->join('item_entry2 as ie','tpurchase_2.item_cod','=','ie.it_cod')
                 ->select('tpurchase_2.*','ie.item_name')
                 ->get();
 
@@ -536,15 +536,14 @@ class Purchase2Controller extends Controller
         }';
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="text-align:center">Purchase Invoice</h1>';
+        $heading='<h1 style="text-align:center">Purchase Pipe Invoice</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
-        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['prefix']."".$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Mill Inv No: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
         $html .= '</tr>';
@@ -642,38 +641,38 @@ class Purchase2Controller extends Controller
         $currentY = $pdf->GetY();
 
         // Column 1
-        $pdf->SetXY(15, $currentY+10);
+        $pdf->SetXY(15, $currentY);
         $pdf->MultiCell(30, 5, 'Total Weight(kg)', 1,1);
         $pdf->MultiCell(30, 5, 'Total Quantity', 1,1);
 
         // Column 2
-        $pdf->SetXY(45.1, $currentY+10);
+        $pdf->SetXY(45.1, $currentY);
         $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
-        $pdf->SetXY(45.1, $currentY+16.82);
+        $pdf->SetXY(45.1, $currentY+6.8);
         $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
 
         // Column 3
-        $pdf->SetXY(120, $currentY+10);
+        $pdf->SetXY(120, $currentY);
         $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(120, $currentY+16.82);
+        $pdf->SetXY(120, $currentY+6.8);
         $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(120, $currentY+23.5);
+        $pdf->SetXY(120, $currentY+13.5);
         $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(120, $currentY+30.18);
+        $pdf->SetXY(120, $currentY+20.5);
         $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(120, $currentY+36.86);
+        $pdf->SetXY(120, $currentY+27.1);
         $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
         
         // Column 4
-        $pdf->SetXY(160, $currentY+10);
+        $pdf->SetXY(160, $currentY);
         $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->SetXY(160, $currentY+6.8);
         $pdf->MultiCell(35, 5, $purchase['LaborCharges'], 1, 'R');
-        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->SetXY(160, $currentY+13.5);
         $pdf->MultiCell(35, 5, $purchase['ConvanceCharges'], 1, 'R');
-        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->SetXY(160, $currentY+20.5);
         $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
-        $pdf->SetXY(160, $currentY+36.86);
+        $pdf->SetXY(160, $currentY+27.1);
         $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         

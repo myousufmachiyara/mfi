@@ -11,7 +11,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Doors Stock Out</h2>
                                     <form class="text-end" action="{{ route('create-stock-out-invoice') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock Out</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -54,7 +54,7 @@
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal">
+                                                        <a class="me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sal_inv_no}})" href="#deleteModal">
                                                             <i class="far fa-trash-alt" style="color:red"></i>
                                                         </a>
                                                     </td>
@@ -118,7 +118,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="tstockIn_attachements">
+                            <tbody id="stockIn_attachements">
 
                             </tbody>
                         </table>

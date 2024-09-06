@@ -21,7 +21,7 @@
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">
-												<img width="80px" src="/assets/img/logo.png" alt="MFI Logo" />
+												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
 										</div>
 									</div>
@@ -29,56 +29,59 @@
 
 								<div class="bill-info">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-7">
 											<div class="bill-to">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Invoice Date: </span>
+													<span class="text-dark">Invoice Date: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{\Carbon\Carbon::parse($pur->sa_date)->format('d-m-y')}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">To: </span>
+													<span class="text-dark">To: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->ac_name}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Address: </span>
+													<span class="text-dark">Address: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->address}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Phone No: </span>
+													<span class="text-dark">Phone No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->phone_no}}</span>
+												</h4>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Mill Inv No: &nbsp </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_ord_no}}</span>
 												</h4>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-5">
 											<div class="bill-data">
-											<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Name Of Person: </span>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Dispatch To: &nbsp </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
+												</h4>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Name Of Person: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
 												</h4>
 												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Dispatch To: </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
-												</h4>
-
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Sale Inv No: </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
-												</h4>
-
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Person Address: </span>
+													<span class="text-dark">Person Address: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
+												</h4>
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Sale Inv No: &nbsp </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
 												</h4>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<table class="table table-responsive-md invoice-items">
+								<table class="table table-responsive-md invoice-items table-striped" style="overflow-x: auto;">
 									<thead>
 										<tr class="text-dark">
 											<th width="5%" class="font-weight-semibold">S.No</th>
@@ -153,9 +156,10 @@
 														<td colspan="2">Discount</td>
 														<td class="text-left">{{$pur->Bill_discount}} PKR</td>
 													</tr>
+													<?php $netamount=round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
 													<tr class="h5">
 														<td colspan="2">Net Amount</td>
-														<td class="text-left">{{round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount)}} PKR</td>
+														<td class="text-left text-danger" style="font-weight:600">{{number_format($netamount)}} PKR</td>
 													</tr>
 												</tbody>
 											</table>
