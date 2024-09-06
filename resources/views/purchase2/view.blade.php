@@ -55,21 +55,21 @@
 										<div class="col-md-5">
 											<div class="bill-data">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Dispatch To: </span>
+													<span class="text-dark">Dispatch To: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
 												</h4>
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Name Of Person: </span>
+													<span class="text-dark">Name Of Person: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
 												</h4>
 												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Person Address: </span>
+													<span class="text-dark">Person Address: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Sale Inv No: </span>
+													<span class="text-dark">Sale Inv No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
 												</h4>
 											</div>
