@@ -172,6 +172,18 @@ trait SaveImage{
         return $filenamepath;
     }
 
+
+    public function poDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/po/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/po/'),$filenamenew);
+        return $filenamepath;
+    }
+
     
 }
 ?>
