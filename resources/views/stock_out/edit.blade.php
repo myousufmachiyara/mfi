@@ -11,8 +11,11 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Stock In</h2>
+										<h2 class="card-title">Edit Stock In Doors</h2>
 									</header>
+                                    <div class="card-actions">
+                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                    </div>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
@@ -29,9 +32,9 @@
 											</div>
 
 											<div class="col-sm-12 col-md-4">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Customer Name</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
+													<option value="" disabled selected>Customer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $tstock_in->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
@@ -49,17 +52,7 @@
 											</div>
 									  </div>
 									</div>
-								</section>
-							</div>
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-										<h2 class="card-title">Edit Stock Out Details</h2>
-									</header>
+							
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>

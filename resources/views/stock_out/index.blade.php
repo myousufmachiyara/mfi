@@ -22,7 +22,7 @@
                                                     <th style="display:none">ID</th>
                                                     <th>Code</th>
                                                     <th>Date</th>
-                                                    <th>karigar Name</th>
+                                                    <th>Custmer Name</th>
                                                     <th>Remarks</th>
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
