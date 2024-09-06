@@ -58,7 +58,7 @@
                                                     <td>{{$row->ConvanceCharges}}</td>
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
-                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->ConvanceCharges-$row->Bill_discount)
+                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->LaborCharges-$row->Bill_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
