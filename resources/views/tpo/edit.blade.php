@@ -43,7 +43,7 @@
 											
 											<div class="col-sm-3 col-md-3 mb-2">
 												<label class="col-form-label" >Name of Person</label>
-												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
+												<input type="text" placeholder="Name of Person" name="Cash_pur_name" id="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
@@ -129,7 +129,7 @@
 														</td>
 														
 														<td>
-															<input type="text" class="form-control" id="dispatchto{{$pur2_key+1}}" value="{{$pur2_items->dispatchto}}" name="dispatchto[]">
+															<input type="text" class="form-control" id="dispatchto{{$pur2_key+1}}" value="{{$pur2_items->dispatch_to}}" name="dispatchto[]">
 														</td>	
 
 														<td style="vertical-align: middle;">
@@ -284,7 +284,8 @@
 		if(latestValue!=""){
 			var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 			var newRow = table.insertRow(table.rows.length);
-
+			var curr_disp_to = $('#Cash_pur_name').val();
+		
 			var cell1 = newRow.insertCell(0);
 			var cell2 = newRow.insertCell(1);
 			var cell3 = newRow.insertCell(2);
@@ -314,7 +315,7 @@
 			cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
 			cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
 			cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
-			cell11.innerHTML  = '<input type="text" class="form-control" id="dispatchto'+index+'" name="dispatchto[]">';
+			cell11.innerHTML  = '<input type="text" class="form-control" id="dispatchto'+index+'" name="dispatchto[]" value="'+curr_disp_to+'">';
 			cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 			index++;
