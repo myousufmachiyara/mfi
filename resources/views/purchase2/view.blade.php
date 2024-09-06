@@ -152,9 +152,10 @@
 														<td colspan="2">Discount</td>
 														<td class="text-left">{{$pur->Bill_discount}} PKR</td>
 													</tr>
+													<?php $netamount=round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
 													<tr class="h5">
 														<td colspan="2">Net Amount</td>
-														<td class="text-left">{{round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount)}} PKR</td>
+														<td class="text-left text-danger">{{number_format($netamount)}} PKR</td>
 													</tr>
 												</tbody>
 											</table>
