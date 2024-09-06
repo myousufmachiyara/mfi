@@ -630,7 +630,7 @@
 							newRow.append('<td><input type="number" id="pur2_per_unit'+index+'" value="'+v['sales_price']+'" name="pur2_per_unit[]" placeholder="Sales Price" step="any" required class="form-control" ></td>');
 							newRow.append('<td><input type="number" id="pur2_len'+index+'" name="pur2_len[]" placeholder="Length" step="any" onchange="rowTotal('+index+')"  value="'+v['length']+'" required class="form-control" ></td>');
 							newRow.append('<td><input type="number" id="pur2_percentage'+index+'" name="pur2_percentage[]" placeholder="%" step="any" onchange="rowTotal('+index+')" value="'+v['discount']+'"  required class="form-control" ><input type="hidden" id="weight_per_piece'+index+'"  name="weight_per_piece[]" placeholder="Weight" value="'+v['weight_pc']+'" step="any" required onchange="CalculateRowWeight('+index+')" class="form-control"></td>');
-							newRow.append('<td><input type="number" id="pur2_qty'+index+'" name="pur2_qty[]" placeholder="weight" value="0" step="any"  required class="form-control"></td>');
+							newRow.append('<td><input type="number" id="pur2_qty'+index+'" name="pur2_qty[]" placeholder="weight" value="0" step="any"  required class="form-control disabled"></td>');
 							newRow.append('<td><input type="number" id="amount'+index+'" name="amount[]" placeholder="Amount"  value="0" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled></td>');
 							newRow.append('<td><input type="date" id="pur2_price_date'+index+'" name="pur2_price_date[]" value="'+v['rat_dat']+'" step="any" onchange="rowTotal('+index+')"  required class="form-control" disabled><input type="hidden"  value="'+v['rat_dat']+'" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'"></td>');
 							newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button><button type="button" onclick="enablePrice('+index+')" class="btn btn-warning"><i class="bx bx-refresh" style="font-size:20px"></i></button></td>');
@@ -638,8 +638,7 @@
 							table.append(newRow);
 							$('#item_name'+index).val(v['item_cod']);
 							$('#itemCount').val(index);
-							$('#weight_per_piece'+index).trigger('change');
-							
+							rowTotal(index);							
 							index++;
 
 							ind_total_qty= ind_total_qty + v['Sales_qty2']
@@ -721,6 +720,7 @@
 							table.append(newRow);
 							$('#item_name'+index).val(v['item_cod']);
 							$('#itemCount').val(index);
+							rowTotal(index);
 							index++;
 
 							ind_total_qty= ind_total_qty + v['sales_qty']

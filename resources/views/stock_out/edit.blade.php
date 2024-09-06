@@ -83,7 +83,7 @@
 															<input type="text" id="remarks{{$tstockin_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
 														</td>
 														<td>
-															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]"  onchange="tabletotal()" placeholder="Qty" value="{{$tstock_items->Sales_qty}}" step="any" required class="form-control">
+															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]"  onchange="tabletotal()" placeholder="Qty" value="{{$tstock_items->sales_qty}}" step="any" required class="form-control">
 														</td>
 														<td>
                                                             <input type="number" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="tabletotal()" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
@@ -241,11 +241,6 @@
                     $('#item_code'+row_no).val(result[0]['it_cod']);
                     $('#item_name'+row_no).val(result[0]['it_cod']);
                     $('#remarks'+row_no).val(result[0]['item_remark']);
-                    $('#weight'+row_no).val(result[0]['weight']);
-                    $('#weight'+row_no).trigger('change');
-
-                    // $('#qty'+row_no).val(result[0]['qty']);
-                    // $('#row_total_weight' + row_no).val(result[0]['qty']*result[0]['weight']);
 
                     addNewRow();
                 }
@@ -255,22 +250,13 @@
             }
         });
     }
-
-    function rowTotal(index){
-        var qty = parseFloat($('#qty'+index+'').val());
-        var weight = parseFloat($('#weight'+index+'').val());   
-        var totalWeight = (qty*weight); 
-        $('#row_total_weight'+index).val(totalWeight);
-
-        tableTotal();
-    }
     
     function tableTotal() {
         var totalqty = 0;
         var totalweight = 0;
         $('#tstock_inTable tr').each(function() {
             totalqty += Number($(this).find('input[name="qty[]"]').val());
-            totalweight += Number($(this).find('input[name="row_total_weight[]"]').val());
+            totalweight += Number($(this).find('input[name="weight[]"]').val());
         });
 
         $('#total_qty').val(totalqty.toFixed(0));

@@ -82,10 +82,10 @@
                                                     <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qty1" name="qty[]" onchange="tabletotal()" placeholder="Qty" value="0" step="any" required class="form-control">
+                                                    <input type="number" id="qty1" name="qty[]" onchange="tableTotal()" placeholder="Qty" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="weight1" name="weight[]" placeholder="Weight" onchange="tabletotal()" value="0" step="any" required class="form-control">
+                                                    <input type="number" id="weight1" name="weight[]" placeholder="Weight" onchange="tableTotal()" value="0" step="any" required class="form-control">
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -163,8 +163,8 @@
             newRow.append('<td><input type="number" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
             newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
             newRow.append('<td><input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
-            newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="tabletotal()"></td>');
-            newRow.append('<td><input type="number" id="weight'+index+'" onchange="tabletotal()" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
+            newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
+            newRow.append('<td><input type="number" id="weight'+index+'" onchange="tableTotal()" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
             newRow.append('<td><button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button></td>');
 
             table.append(newRow);
@@ -197,6 +197,7 @@
     }
     
     function tableTotal() {
+        console.log("hello");
         var totalqty = 0;
         var totalweight = 0;
         $('#tstock_inTable tr').each(function() {
