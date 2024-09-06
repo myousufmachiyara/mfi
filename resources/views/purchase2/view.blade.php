@@ -77,7 +77,7 @@
 									</div>
 								</div>
 
-								<table class="table table-responsive-md invoice-items">
+								<table class="table table-responsive-md invoice-items table-striped">
 									<thead>
 										<tr class="text-dark">
 											<th width="5%" class="font-weight-semibold">S.No</th>

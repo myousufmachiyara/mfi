@@ -406,7 +406,7 @@ class Purchase2Controller extends Controller
                 ->first();
 
         $pur2 = tpurchase_2::where('sales_inv_cod',$id)
-                ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+                ->join('item_entry2 as ie','tpurchase_2.item_cod','=','ie.it_cod')
                 ->select('tpurchase_2.*','ie.item_name')
                 ->get();
 
