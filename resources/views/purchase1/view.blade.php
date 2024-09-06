@@ -61,12 +61,12 @@
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Name Of Person: &nbsp</span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_saler_name}}</span>
 												</h4>
 												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Person Address: &nbsp</span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_saler_address}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
@@ -75,7 +75,7 @@
 												</h4>
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Remarks: &nbsp</span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->Sales_remarks}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_remarks}}</span>
 												</h4>
 											</div>
 										</div>
