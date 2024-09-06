@@ -29,7 +29,7 @@
 
 								<div class="bill-info">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-7">
 											<div class="bill-to">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Invoice Date: &nbsp </span>
@@ -52,7 +52,7 @@
 												</h4>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-5">
 											<div class="bill-data">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Dispatch To: </span>
@@ -67,7 +67,7 @@
 													<span class="text-dark">Person Address: </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
-												
+
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Sale Inv No: </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
