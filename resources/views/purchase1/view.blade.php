@@ -71,7 +71,7 @@
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Sale Inv No: &nbsp</span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_sale_inv}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->sale_against}}</span>
 												</h4>
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Remarks: &nbsp</span>
