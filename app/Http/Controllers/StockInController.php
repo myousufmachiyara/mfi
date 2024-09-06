@@ -30,7 +30,7 @@ class StockInController extends Controller
             'stock_in.Sal_inv_no','stock_in.sa_date','stock_in.Cash_pur_name','stock_in.Sales_remarks','ac.ac_name',
             'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address','stock_in.prefix',
             \DB::raw('SUM(stock_in_2.Sales_qty) as qty_sum'),
-            \DB::raw('SUM(stock_in_2.Sales_qty*stock_in_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(stock_in_2.weight_pc) as weight_sum'),
         )
         ->groupby('stock_in.Sal_inv_no','stock_in.sa_date','stock_in.Cash_pur_name','stock_in.Sales_remarks','ac.ac_name',
         'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address','stock_in.prefix' )
