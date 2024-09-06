@@ -77,7 +77,7 @@
 									</div>
 								</div>
 
-								<table class="table table-responsive-md invoice-items table-striped">
+								<table class="table table-responsive-md invoice-items table-striped" style="overflow-x: auto;">
 									<thead>
 										<tr class="text-dark">
 											<th width="5%" class="font-weight-semibold">S.No</th>
@@ -155,7 +155,7 @@
 													<?php $netamount=round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
 													<tr class="h5">
 														<td colspan="2">Net Amount</td>
-														<td class="text-left text-danger">{{number_format($netamount)}} PKR</td>
+														<td class="text-left text-danger h4">{{number_format($netamount)}} PKR</td>
 													</tr>
 												</tbody>
 											</table>
