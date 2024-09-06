@@ -32,46 +32,45 @@
 										<div class="col-md-6">
 											<div class="bill-to">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Invoice Date: </span>
+													<span class="text-dark">Invoice Date: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{\Carbon\Carbon::parse($pur->sa_date)->format('d-m-y')}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">To: </span>
+													<span class="text-dark">To: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->ac_name}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Address: </span>
+													<span class="text-dark">Address: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->address}}</span>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Phone No: </span>
+													<span class="text-dark">Phone No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->phone_no}}</span>
 												</h4>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="bill-data">
-											<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span class="text-dark">Dispatch To: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
+												</h4>
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Name Of Person: </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Cash_pur_name}}</span>
 												</h4>
 												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Dispatch To: </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->disp_to}}</span>
+													<span class="text-dark">Person Address: </span>
+													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
-
+												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span class="text-dark">Sale Inv No: </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
-												</h4>
-
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="text-dark">Person Address: </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
 											</div>
 										</div>
