@@ -542,8 +542,8 @@ class Purchase2Controller extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
-        $html .= '<td>Mill Inv No: '.$purchase['prefix']."".$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['prefix']."".$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Mill Inv No: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
         $html .= '</tr>';
