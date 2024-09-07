@@ -195,7 +195,7 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link"   href="#">
+                    <a class="nav-link"   href="{{ route('all-po')}}">
                         P.O 
                     </a>
                 </li>	

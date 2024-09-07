@@ -301,3 +301,17 @@ Route::get('/tpo/getunclosed/', [App\Http\Controllers\TpoController::class, 'get
 Route::get('/tpo/getItems/{id}', [App\Http\Controllers\TpoController::class, 'getItems'])->name('get-tpo-items');
 Route::get('/tpo/getavailablestock/{id}', [App\Http\Controllers\TpoController::class, 'getavailablestock'])->name('tpo-item-stock-bal');
 
+
+//po
+Route::get('/po/all-po1', [App\Http\Controllers\PoController::class, 'index'])->name('all-po');
+Route::get('/po/new', [App\Http\Controllers\PoController::class, 'create'])->name('new-po');
+Route::post('/po/create', [App\Http\Controllers\PoController::class, 'store'])->name('store-po');
+Route::get('/po/edit/{id}', [App\Http\Controllers\PoController::class, 'edit'])->name('edit-po');
+Route::post('/po/update', [App\Http\Controllers\PoController::class, 'update'])->name('update-po');
+Route::post('/po/delete', [App\Http\Controllers\PoController::class, 'destroy'])->name('delete-po');
+Route::get('/po/show/{id}', [App\Http\Controllers\PoController::class, 'show'])->name('show-po');
+Route::get('/po/view/{id}', [App\Http\Controllers\PoController::class, 'view'])->name('show-po-att');
+Route::get('/po/attachements', [App\Http\Controllers\PoController::class, 'getAttachements'])->name('get-po-att');
+Route::get('/po/download/{id}', [App\Http\Controllers\PoController::class, 'downloadAtt'])->name('po-att-download');
+Route::delete('/po/deleteAttachment/{id}', [App\Http\Controllers\PoController::class, 'deleteAtt'])->name('po-att-delete');
+Route::get('/po/generatePDF/{id}', [App\Http\Controllers\PoController::class, 'generatePDF'])->name('print-po-invoice');

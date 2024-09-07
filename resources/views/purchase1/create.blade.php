@@ -190,60 +190,7 @@
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-////// ComboBox script start here /////
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
-    const coaNameSelector = '#coa_name';
-    let isTabPressed = false;
-
-    // Detect if Tab key is pressed
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = true;
-        }
-    });
-
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = false;
-        }
-    });
-
-    // Apply the functionality to the coa_name select element
-    $(coaNameSelector).on('focus', function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(coaNameSelector).on('select2:open', function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-
-    // Apply the functionality to all item_name elements
-    $(document).on('focus', selectElementPattern, function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(document).on('select2:open', selectElementPattern, function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-});
-
-
-    ////// ComboBox script end here /////
+	
 	var index=2;
 	var itemCount = Number($('#itemCount').val());
 
@@ -286,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			var cell8 = newRow.insertCell(7);
 
 			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" name="pur_qty2[]" step="any" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" value="0" name="pur_qty2[]" step="any" required>';
 			cell3.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
