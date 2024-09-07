@@ -9,7 +9,7 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Bad Dabs</h2>
+                                    <h2 class="card-title">All Pipe/Garder Bad Dabs</h2>
                                     <form class="text-end" action="{{ route('create-tbad-dabs') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Entry</button>
                                     </form>
