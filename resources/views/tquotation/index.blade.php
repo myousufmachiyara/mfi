@@ -10,7 +10,7 @@
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Quotations</h2>
-                                    <form class="text-end" action="{{ route('new-quotation') }}" method="GET">
+                                    <form class="text-end" action="{{ route('new-tquotation') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Quotation</button>
                                     </form>
                                 </header>
@@ -71,7 +71,7 @@
                                                     <td class="actions">
                                                         <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
                                                         <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-quotation',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="{{ route('edit-tquotation',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sale_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
@@ -88,7 +88,7 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-quotation') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-tquotation') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
@@ -164,14 +164,14 @@
 
         $.ajax({
             type: "GET",
-            url: "/quotation/attachements",
+            url: "/tquotation/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/quotation/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/quotation/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tquotation/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tquotation/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#quotation_attachements').append(html);
@@ -188,7 +188,7 @@
             return;
         }
 
-        fetch('/quotation/deleteAttachment/' + fileId, {
+        fetch('/tquotation/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

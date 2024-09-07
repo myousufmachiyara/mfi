@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Item_entry2;
 use App\Models\Item_Groups;
 use App\Models\AC;
-use App\Models\quotation;
-use App\Models\quotation_2;
-use App\Models\quotation_att;
+use App\Models\tquotation;
+use App\Models\tquotation_2;
+use App\Models\tquotation_att;
 use App\Models\gd_pipe_item_stock9_much;
 use Illuminate\Support\Facades\File;
 use App\Traits\SaveImage;
@@ -16,31 +16,31 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 
-class QuotationController extends Controller
+class TtquotationController extends Controller
 {
     use SaveImage;
 
     public function index()
     {
-        $quot2 = quotation::where('quotation.status', 1)
-            ->leftjoin('quotation_2', 'quotation_2.sales_inv_cod', '=', 'quotation.Sale_inv_no')
-            ->join('ac as acc_name', 'acc_name.ac_code', '=', 'quotation.account_name')
-            ->join('ac as disp_to', 'disp_to.ac_code', '=', 'quotation.Cash_pur_name_ac')
+        $quot2 = tquotation::where('tquotation.status', 1)
+            ->leftjoin('tquotation_2', 'tquotation_2.sales_inv_cod', '=', 'tquotation.Sale_inv_no')
+            ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tquotation.account_name')
+            ->join('ac as disp_to', 'disp_to.ac_code', '=', 'tquotation.Cash_pur_name_ac')
             ->select(
-                'quotation.Sale_inv_no', 'quotation.sa_date', 'acc_name.ac_name as acc_name', 'quotation.pur_ord_no',
-                'disp_to.ac_name as disp_to', 'quotation.Cash_pur_name', 'quotation.Sales_Remarks', 'quotation.sales_against', 'quotation.prefix',
-                'quotation.ConvanceCharges', 'quotation.LaborCharges', 'quotation.Bill_discount',
-                \DB::raw('SUM(quotation_2.weight_pc * quotation_2.Sales_qty2) as weight_sum'),
-                \DB::raw('SUM(((quotation_2.Sales_qty2 * quotation_2.sales_price) + ((quotation_2.Sales_qty2 * quotation_2.sales_price) * (quotation_2.discount / 100))) * quotation_2.length) as total_bill')
+                'tquotation.Sale_inv_no', 'tquotation.sa_date', 'acc_name.ac_name as acc_name', 'tquotation.pur_ord_no',
+                'disp_to.ac_name as disp_to', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix',
+                'tquotation.ConvanceCharges', 'tquotation.LaborCharges', 'tquotation.Bill_discount',
+                \DB::raw('SUM(tquotation_2.weight_pc * tquotation_2.Sales_qty2) as weight_sum'),
+                \DB::raw('SUM(((tquotation_2.Sales_qty2 * tquotation_2.sales_price) + ((tquotation_2.Sales_qty2 * tquotation_2.sales_price) * (tquotation_2.discount / 100))) * tquotation_2.length) as total_bill')
             )
             ->groupby(
-                'quotation.Sale_inv_no', 'quotation.sa_date', 'acc_name.ac_name', 'quotation.pur_ord_no',
-                'disp_to.ac_name', 'quotation.Cash_pur_name', 'quotation.Sales_Remarks', 'quotation.sales_against', 'quotation.prefix',
-                'quotation.ConvanceCharges', 'quotation.LaborCharges', 'quotation.Bill_discount'
+                'tquotation.Sale_inv_no', 'tquotation.sa_date', 'acc_name.ac_name', 'tquotation.pur_ord_no',
+                'disp_to.ac_name', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix',
+                'tquotation.ConvanceCharges', 'tquotation.LaborCharges', 'tquotation.Bill_discount'
             )
             ->get();
     
-        return view('quotation.index', compact('quot2'));
+        return view('tquotation.index', compact('quot2'));
     }
     
 
@@ -48,13 +48,13 @@ class QuotationController extends Controller
     {
         $items = Item_entry2::all();
         $coa = AC::all();
-        return view('quotation.create',compact('items','coa'));
+        return view('tquotation.create',compact('items','coa'));
     }
 
     public function store(Request $request)
     {
         
-        $quot2 = new quotation();
+        $quot2 = new tquotation();
 
         if ($request->has('sa_date') && $request->sa_date) {
             $quot2->sa_date=$request->sa_date;
@@ -95,7 +95,7 @@ class QuotationController extends Controller
 
         $quot2->save();
 
-        $pur_2_id = quotation::latest()->first();
+        $pur_2_id = tquotation::latest()->first();
 
         if($request->has('items'))
          {
@@ -103,34 +103,34 @@ class QuotationController extends Controller
             {
                 if(filled($request->item_name[$i]))
                 {
-                    $quotation_2 = new quotation_2();
+                    $tquotation_2 = new tquotation_2();
 
-                    $quotation_2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
-                    $quotation_2->item_cod=$request->item_cod[$i];
+                    $tquotation_2->sales_inv_cod=$pur_2_id['Sale_inv_no'];
+                    $tquotation_2->item_cod=$request->item_cod[$i];
 
                     if ($request->remarks[$i]!=null) {
-                        $quotation_2->remarks=$request->remarks[$i];
+                        $tquotation_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur2_qty2[$i]!=null) {
-                        $quotation_2->Sales_qty2=$request->pur2_qty2[$i];
+                        $tquotation_2->Sales_qty2=$request->pur2_qty2[$i];
                     }
                     if ($request->pur2_per_unit[$i]!=null) {
-                        $quotation_2->sales_price=$request->pur2_per_unit[$i];
+                        $tquotation_2->sales_price=$request->pur2_per_unit[$i];
                     }
                     if ($request->weight_per_piece[$i]!=null) {
-                        $quotation_2->weight_pc=$request->weight_per_piece[$i];
+                        $tquotation_2->weight_pc=$request->weight_per_piece[$i];
                     }
                     if ($request->pur2_len[$i]!=null) {
-                        $quotation_2->length=$request->pur2_len[$i];
+                        $tquotation_2->length=$request->pur2_len[$i];
                     }
                     if ($request->pur2_price_date[$i]!=null) {
-                        $quotation_2->rat_dat=$request->pur2_price_date[$i];
+                        $tquotation_2->rat_dat=$request->pur2_price_date[$i];
                     }
                     if ($request->pur2_percentage[$i]!=null) {
-                        $quotation_2->discount=$request->pur2_percentage[$i];
+                        $tquotation_2->discount=$request->pur2_percentage[$i];
                     }
                     
-                    $quotation_2->save();
+                    $tquotation_2->save();
                 }
             }
          }     
@@ -139,15 +139,15 @@ class QuotationController extends Controller
             $files = $request->file('att');
             foreach ($files as $file)
             {
-                $pur2Att = new quotation_att();
+                $pur2Att = new tquotation_att();
                 $pur2Att->pur2_id = $pur_2_id['Sale_inv_no'];
                 $extension = $file->getClientOriginalExtension();
-                $pur2Att->att_path = $this->quotDoc($file,$extension);
+                $pur2Att->att_path = $this->tquotDoc($file,$extension);
                 $pur2Att->save();
             }
         }
 
-        return redirect()->route('all-quotation');
+        return redirect()->route('all-tquotation');
     }
 
 public function edit($id)
@@ -155,17 +155,17 @@ public function edit($id)
         $items = Item_entry2::orderBy('item_name', 'asc')->get();
         $coa = AC::orderBy('ac_name', 'asc')->get();
 
-        $pur2 = quotation::where('quotation.Sale_inv_no',$id)->first();
-        $pur2_item = quotation_2::where('quotation_2.sales_inv_cod',$id)->get();
+        $pur2 = tquotation::where('tquotation.Sale_inv_no',$id)->first();
+        $pur2_item = tquotation_2::where('tquotation_2.sales_inv_cod',$id)->get();
 
-        return view('quotation.edit',compact('pur2','pur2_item','items','coa'));
+        return view('tquotation.edit',compact('pur2','pur2_item','items','coa'));
     }
 
 
     public function update(Request $request)
     {
 
-        $pur2 = quotation::where('Sale_inv_no',$request->pur2_id)->get()->first();
+        $pur2 = tquotation::where('Sale_inv_no',$request->pur2_id)->get()->first();
 
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
@@ -201,7 +201,7 @@ public function edit($id)
             $pur2->Bill_discount=$request->Bill_discount;
         }
 
-        quotation::where('Sale_inv_no', $request->pur2_id)->update([
+        tquotation::where('Sale_inv_no', $request->pur2_id)->update([
             'sa_date'=>$pur2->sa_date,
             'pur_ord_no'=>$pur2->pur_ord_no,
             'sales_against'=>$pur2->sales_against,
@@ -215,7 +215,7 @@ public function edit($id)
             'Bill_discount'=>$pur2->Bill_discount,
         ]);
 
-        quotation_2::where('sales_inv_cod', $request->pur2_id)->delete();
+        tquotation_2::where('sales_inv_cod', $request->pur2_id)->delete();
 
         if($request->has('items'))
         {
@@ -223,34 +223,34 @@ public function edit($id)
             {
                 if(filled($request->item_name[$i]))
                 {
-                    $quotation_2 = new quotation_2();
+                    $tquotation_2 = new tquotation_2();
 
-                    $quotation_2->sales_inv_cod=$request->pur2_id;
-                    $quotation_2->item_cod=$request->item_cod[$i];
+                    $tquotation_2->sales_inv_cod=$request->pur2_id;
+                    $tquotation_2->item_cod=$request->item_cod[$i];
 
                     if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
-                        $quotation_2->remarks=$request->remarks[$i];
+                        $tquotation_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur2_qty2[$i]!=null) {
-                        $quotation_2->Sales_qty2=$request->pur2_qty2[$i];
+                        $tquotation_2->Sales_qty2=$request->pur2_qty2[$i];
                     }
                     if ($request->pur2_per_unit[$i]!=null) {
-                        $quotation_2->sales_price=$request->pur2_per_unit[$i];
+                        $tquotation_2->sales_price=$request->pur2_per_unit[$i];
                     }
                     if ($request->weight_per_piece[$i]!=null) {
-                        $quotation_2->weight_pc=$request->weight_per_piece[$i];
+                        $tquotation_2->weight_pc=$request->weight_per_piece[$i];
                     }
                     if ($request->pur2_len[$i]!=null) {
-                        $quotation_2->length=$request->pur2_len[$i];
+                        $tquotation_2->length=$request->pur2_len[$i];
                     }
                     if ($request->pur2_price_date[$i]!=null OR empty($request->pur2_price_date[$i])) {
-                        $quotation_2->rat_dat=$request->pur2_price_date[$i];
+                        $tquotation_2->rat_dat=$request->pur2_price_date[$i];
                     }
                     if ($request->pur2_percentage[$i]!=null) {
-                        $quotation_2->discount=$request->pur2_percentage[$i];
+                        $tquotation_2->discount=$request->pur2_percentage[$i];
                     }
                     
-                    $quotation_2->save();
+                    $tquotation_2->save();
                 }
             }
         }
@@ -261,44 +261,44 @@ public function edit($id)
             $files = $request->file('att');
             foreach ($files as $file)
             {
-                $pur2Att = new quotation_att();
+                $pur2Att = new tquotation_att();
                 $pur2Att->pur2_id = $request->pur2_id;
                 $extension = $file->getClientOriginalExtension();
-                $pur2Att->att_path = $this->quotDoc($file,$extension);
+                $pur2Att->att_path = $this->tquotDoc($file,$extension);
                 $pur2Att->save();
             }
         }
 
-        return redirect()->route('all-quotation');
+        return redirect()->route('all-tquotation');
     }
 
 
     public function destroy(Request $request)
     {
-        quotation::where('Sale_inv_no', $request->delete_quot2)->update(['status' => '0']);
-        return redirect()->route('all-quotation');
+        tquotation::where('Sale_inv_no', $request->delete_quot2)->update(['status' => '0']);
+        return redirect()->route('all-tquotation');
     }
 
     public function show(string $id)
     {
-        $pur = quotation::where('Sale_inv_no',$id)
-                ->join('ac as acc_name','quotation.account_name','=','acc_name.ac_code')
-                ->join('ac as dispt_to','quotation.Cash_pur_name_ac','=','dispt_to.ac_code')
-                ->select('quotation.*','dispt_to.ac_name as disp_to','acc_name.ac_name as ac_name', 
+        $pur = tquotation::where('Sale_inv_no',$id)
+                ->join('ac as acc_name','tquotation.account_name','=','acc_name.ac_code')
+                ->join('ac as dispt_to','tquotation.Cash_pur_name_ac','=','dispt_to.ac_code')
+                ->select('tquotation.*','dispt_to.ac_name as disp_to','acc_name.ac_name as ac_name', 
                 'acc_name.address as address', 'acc_name.phone_no as phone_no')
                 ->first();
 
-        $pur2 = quotation_2::where('sales_inv_cod',$id)
-                ->join('item_entry as ie','quotation_2.item_cod','=','ie.it_cod')
-                ->select('quotation_2.*','ie.item_name')
+        $pur2 = tquotation_2::where('sales_inv_cod',$id)
+                ->join('item_entry as ie','tquotation_2.item_cod','=','ie.it_cod')
+                ->select('tquotation_2.*','ie.item_name')
                 ->get();
 
-        return view('quotation.view',compact('pur','pur2'));
+        return view('tquotation.view',compact('pur','pur2'));
     }
 
     public function getAttachements(Request $request)
     {
-        $pur2_atts = quotation_att::where('pur2_id', $request->id)->get();
+        $pur2_atts = tquotation_att::where('pur2_id', $request->id)->get();
         
         return $pur2_atts;
     }
@@ -307,11 +307,11 @@ public function edit($id)
 
     public function getItems($id){
 
-        $quot1= quotation::where('Sale_inv_no',$id)->get()->first();
+        $quot1= tquotation::where('Sale_inv_no',$id)->get()->first();
 
-        $quot2 = quotation_2::where('sales_inv_cod',$id)
-        ->join('item_entry as ie','quotation_2.item_cod','=','ie.it_cod')
-        ->select('quotation_2.*','ie.item_name')
+        $quot2 = tquotation_2::where('sales_inv_cod',$id)
+        ->join('item_entry as ie','tquotation_2.item_cod','=','ie.it_cod')
+        ->select('tquotation_2.*','ie.item_name')
         ->get();
 
         return response()->json([
@@ -322,11 +322,11 @@ public function edit($id)
 
     public function deleteAtt($id)
     {
-        $doc=quotation_att::where('att_id', $id)->select('att_path')->first();
+        $doc=tquotation_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (File::exists($filePath)) {
             File::delete($filePath);
-            $pur2_att = quotation_att::where('att_id', $id)->delete();
+            $pur2_att = tquotation_att::where('att_id', $id)->delete();
             return response()->json(['message' => 'File deleted successfully.']);
         } else {
             return response()->json(['message' => 'File not found.'], 404);
@@ -335,7 +335,7 @@ public function edit($id)
 
     public function view($id)
     {
-        $doc=quotation_att::where('att_id', $id)->select('att_path')->first();
+        $doc=tquotation_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::file($filePath);
@@ -344,7 +344,7 @@ public function edit($id)
 
     public function downloadAtt($id)
     {
-        $doc=quotation_att::where('att_id', $id)->select('att_path')->first();
+        $doc=tquotation_att::where('att_id', $id)->select('att_path')->first();
         $filePath = public_path($doc['att_path']);
         if (file_exists($filePath)) {
             return Response::download($filePath);
