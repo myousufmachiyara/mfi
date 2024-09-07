@@ -25,7 +25,16 @@
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" value="{{$tbad_dabs->date}}" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-8 mb-2">
+                                        <div class="col-sm-12 col-md-2">
+                                            <label class="col-form-label">Item Type</label>
+                                            <select class="form-control mb-3" id="item_type" name="item_type" required>
+                                                <option value="1" {{ $tbad_dabs->item_type == 1 ? 'selected' : '' }}>Pipes</option>
+                                                <option value="2" {{ $tbad_dabs->item_type == 2 ? 'selected' : '' }}>Garder / TR</option>
+                                            </select>
+                                            
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
                                             <label class="col-form-label">Reason</label>
                                             <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control cust-textarea">{{$tbad_dabs->reason}}</textarea>
                                         </div>
