@@ -24,6 +24,7 @@
                                                     <th>Reason</th>
                                                     <th>Total Add</th>
                                                     <th>Total Less</th>
+                                                    <th>Item Type</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -35,6 +36,13 @@
                                                     <td>{{$row->reason}}</td>
                                                     <td>{{$row->add_sum}}</td>
                                                     <td>{{$row->less_sum}}</td>
+                                                    
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                @endif
+
                                                     <td class="actions">
                                                         <a href="#" class="text-danger">
                                                             <i class="fas fa-print"></i>

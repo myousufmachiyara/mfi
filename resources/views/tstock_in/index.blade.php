@@ -29,6 +29,7 @@
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
                                                     <th>Transporter</th>
+                                                    <th>Item Type</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -46,6 +47,13 @@
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->transporter}}</td>
+
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                @endif
+
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
                                                         <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">

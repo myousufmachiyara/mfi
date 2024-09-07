@@ -53,12 +53,20 @@
 												<label class="col-form-label" >Mill Inv/Gate#</label>
 												<input type="text" name="mill_gate" placeholder="Mill Inv/Gate#" id="stock_in_mill_bill" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-4">
+											<div class="col-sm-12 col-md-3">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 
-											<div class="col-sm-12 col-md-8 mb-2">
+                                            <div class="col-sm-12 col-md-2">
+												<label class="col-form-label">Item Type</label>
+												<select data-plugin-selecttwo class="form-control select2-js mb-3" name="item_type">
+													<option value="1">Pipes</option>
+													<option value="2">Garder / TR</option>
+												</select>												
+											</div>
+
+											<div class="col-sm-12 col-md-7 mb-2">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="2" cols="50" name="remarks" id="stock_in_pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>

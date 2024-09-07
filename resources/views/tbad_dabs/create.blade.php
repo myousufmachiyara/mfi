@@ -28,7 +28,16 @@
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" required value="{{ now()->toDateString() }}" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-8 mb-2">
+                                        <div class="col-sm-12 col-md-2">
+                                            <label class="col-form-label">Item Type</label>
+                                            <select data-plugin-selecttwo class="form-control select2-js mb-3" name="item_type">
+                                                <option value="1">Pipes</option>
+                                                <option value="2">Garder / TR</option>
+                                            </select>												
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
                                             <label class="col-form-label">Reason Of Bad Debts</label>
                                             <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control cust-textarea"></textarea>
                                         </div>

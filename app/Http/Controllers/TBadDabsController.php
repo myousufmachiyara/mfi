@@ -27,11 +27,11 @@ class TBadDabsController extends Controller
         $tbad_dabs = TBadDabs::where('tbad_dabs.status', 1)
         ->leftjoin ('tbad_dabs_2', 'tbad_dabs_2.bad_dabs_cod' , '=', 'tbad_dabs.bad_dabs_id')
         ->select(
-            'tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason',
+            'tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason','tbad_dabs.item_type',
             \DB::raw('SUM(tbad_dabs_2.pc_add) as add_sum'),
             \DB::raw('SUM(tbad_dabs_2.pc_less) as less_sum'),
         )
-        ->groupby('tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason')
+        ->groupby('tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason','tbad_dabs.item_type')
         ->get();
 
         return view('tbad_dabs.index',compact('tbad_dabs'));
@@ -56,6 +56,10 @@ class TBadDabsController extends Controller
         }
         if ($request->has('reason') && $request->reason) {
             $tbad_dabs->reason = $request->reason; 
+        }
+        
+        if ($request->has('item_type') && $request->item_type) {
+            $tbad_dabs->reason = $request->item_type; 
         }
     
         $tbad_dabs->created_by = $userId;
@@ -123,6 +127,9 @@ class TBadDabsController extends Controller
         }
         if ($request->has('reason') && $request->reason OR empty($request->reason)) {
             $tbad_dabs->reason=$request->reason;
+        }
+        if ($request->has('item_type') && $request->item_type) {
+            $tbad_dabs->item_type=$request->item_type;
         }
 
         TBadDabs::where('bad_dabs_id', $request->bad_dabs_id)->update([

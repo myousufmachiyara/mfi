@@ -31,6 +31,7 @@
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
                                                     <th>Transporter</th>
+                                                    <th>Item Type</th>
                                                     <th>Status</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
@@ -50,6 +51,14 @@
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->transporter}}</td>
+                                                    
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                @endif
+
+
                                                     @if($row->pur_inv!=null) 
                                                     <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                 @else
