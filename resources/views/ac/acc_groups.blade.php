@@ -87,7 +87,7 @@
                             <input type="number" class="form-control" placeholder="group code" disabled>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Account Group Name</label>
+                            <label>Account Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Name" name="acc_group_name" required>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             <input type="number" class="form-control" id="update_group_id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Account Group Name</label>
+                            <label>Account Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
                             <input type="hidden" class="form-control" id="group_id" name="group_cod" required>
                         </div>

@@ -93,7 +93,7 @@
                     </header>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Group Name</label>
+                            <label>Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Name" name="group_name" required>
                         </div>
                         <div class="form-group">
@@ -126,7 +126,7 @@
                             <input type="number" class="form-control" id="group_id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Group Name</label>
+                            <label>Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
                             <input type="hidden" class="form-control" id="update_group_id" name="item_group_cod" required>
                         </div>

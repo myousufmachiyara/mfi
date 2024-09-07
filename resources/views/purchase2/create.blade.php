@@ -34,9 +34,9 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name <span style="color: red;">*</span></label>
+												<label class="col-form-label">Company Name <span style="color: red;">*</span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
+													<option value="" disabled selected>Select Company Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -57,9 +57,9 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Customer Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
-													<option value="" disabled selected>Select Account</option>
+													<option value="" disabled selected>Select Customer Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 													@endforeach
@@ -101,21 +101,21 @@
 									<div class="card-body" style="background: #2023240f !important">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Basic Amount</label>
+												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >%</label>
+												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >P.B</label>
+												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Target</label>
+												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
@@ -125,12 +125,12 @@
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Amount</label>
+												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Item Group</label>
+												<label class="col-form-label" >Item Group<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control comm-form-field select2-js"  name="tax_item_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
@@ -166,13 +166,13 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty.</th>
-													<th width="7%">Price/Unit</th>
-													<th width="7%">Len.</th>
-													<th width="7%">%.</th>
+													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7,5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Len<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<!-- <th width="7%">Weight/Pc</th> -->
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
