@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 
-class TtquotationController extends Controller
+class TquotationController extends Controller
 {
     use SaveImage;
 
