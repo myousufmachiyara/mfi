@@ -11,7 +11,7 @@
                         <div class="col-12 mb-3">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">Edit Pipe Bad Debts</h2>
+                                    <h2 class="card-title">Edit Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
@@ -120,42 +120,6 @@
 </html>
 <script>
 
-
-////// ComboBox script start here /////
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElementPattern = 'select[id^="item_name"]'; // Match all IDs that start with "item_name"
-    let isTabPressed = false;
-
-    // Detect if Tab key is pressed
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = true;
-        }
-    });
-
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'Tab') {
-            isTabPressed = false;
-        }
-    });
-
-    // Apply the functionality to all item_name elements
-    $(document).on('focus', selectElementPattern, function() {
-        if (!isTabPressed && typeof $(this).select2 === 'function') {
-            $(this).select2('open');
-        }
-    });
-
-    $(document).on('select2:open', selectElementPattern, function() {
-        setTimeout(function() {
-            const searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        }, 100);
-    });
-});
-////// ComboBox script end here /////
 
 
 

@@ -195,7 +195,7 @@
             </a>
             <ul class="nav nav-children">
                 <li>
-                    <a class="nav-link"   href="#">
+                    <a class="nav-link"   href="{{ route('all-po')}}">
                         P.O 
                     </a>
                 </li>	
@@ -218,7 +218,7 @@
                     </a>
                 </li>	
                 <li>
-                    <a class="nav-link"   href="{{ route('all-quotation')}}">
+                    <a class="nav-link"   href="{{ route('all-tquotation')}}">
                         Quotation 2
                     </a>
                 </li>							

@@ -62,7 +62,7 @@
 												<tbody id="JV2Table">
 													<tr>
 														<td>
-															<select data-plugin-selecttwo class="form-control select2-js" autofocus  name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+															<select data-plugin-selecttwo class="form-control select2-js"   name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
 																<option value="" disabled selected>Select Account</option>
 																@foreach($acc as $key => $row)	
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -130,7 +130,7 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" autofocus name="customer_name" onchange="getPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -180,7 +180,7 @@
 										
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" autofocus name="pur_customer_name" onchange="getPurPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name"  name="pur_customer_name" onchange="getPurPendingInvoices()" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -311,7 +311,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" autofocus onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+

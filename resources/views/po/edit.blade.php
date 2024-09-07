@@ -5,13 +5,13 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-purchases1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
+					<form method="post" action="{{ route('update-po') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Purchase Invoice</h2>
+										<h2 class="card-title">Edit Purchase Order</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
@@ -20,8 +20,8 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Invoice No.</label>
-												<input type="text" placeholder="Invoice #" class="form-control" value="{{$pur->prefix}}{{$pur->pur_id}}" disabled>
+												<label class="col-form-label" >PO No.</label>
+												<input type="text" placeholder="PO #" class="form-control" value="{{$pur->prefix}}{{$pur->pur_id}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" name="pur_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
@@ -31,7 +31,7 @@
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
-												<input type="number" placeholder="Bill No." name="pur_bill_no" value="{{$pur->pur_bill_no}}" class="form-control">
+												<input type="number" placeholder="Bill No." name="pur_bill_no"  value="{{$pur->pur_bill_no}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Sale Inv.</label>
@@ -44,7 +44,7 @@
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo  class="form-control select2-js"autofocus name="ac_cod" required>
+													<select data-plugin-selecttwo  class="form-control select2-js"  name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
 														@foreach($acc as $key => $row)	
 															<option value="{{$row->ac_code}}" {{ $pur->ac_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -91,7 +91,7 @@
 														<input type="text" class="form-control" name="pur_qty2[]" id="pur_qty2{{$pur1_key+1}}" value="{{$pur_items->pur_qty2}}">
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails({{$pur1_key+1}},2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails({{$pur1_key+1}},2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -162,8 +162,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases1') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-po') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update PO</button>
 											</div>
 										</div>
 									</footer>
@@ -180,7 +180,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-
+	
 	var itemCount, index;
 
 	$(document).ready(function() {

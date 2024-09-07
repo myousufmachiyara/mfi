@@ -5,13 +5,13 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-quotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-tquotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Quotation</h2>
+										<h2 class="card-title">Edit Quotation Pipes/Garders</h2>
 									</header>
 									<div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
@@ -27,12 +27,12 @@
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
+												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" autofocus class="form-control">
 											</div>
 											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Customer Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
 													<option value="" disabled selected>Select Customer Name</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -51,7 +51,7 @@
 											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
-												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
 													<option value="" disabled selected>Select Dispatch From</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -200,7 +200,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-quotation') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-tquotation') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Quotation</button>
 											</div>
 										</div>
@@ -305,8 +305,8 @@
 			var cell11 = newRow.insertCell(10);
 
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+

@@ -5,37 +5,36 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-purchases1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
+					<form method="post" action="{{ route('store-po') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Purchase Invoice</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
+										<h2 class="card-title">New Purchase Order</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Invoice No.</label>
-												<input type="text" placeholder="Invoice #" class="form-control" value="{{$pur->prefix}}{{$pur->pur_id}}" disabled>
-												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" name="pur_id">
+												<label class="col-form-label" >PO No.</label>
+												<input type="text" placeholder="(New PO)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="pur_date" value="{{$pur->pur_date}}" autofocus class="form-control">
+												<input type="date" name="pur_date" autofocus value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
-												<input type="number" placeholder="Bill No." name="pur_bill_no" value="{{$pur->pur_bill_no}}" class="form-control">
+												<input type="text" placeholder="Bill No." name="pur_bill_no" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Sale Inv.</label>
-												<input type="text" placeholder="Sale Inv." name="pur_sale_inv" value="{{$pur->sale_against}}" class="form-control">
+												<input type="text" placeholder="Sale Inv." name="pur_sale_inv" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
@@ -44,29 +43,32 @@
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo  class="form-control select2-js"autofocus name="ac_cod" required>
+													<select data-plugin-selecttwo class="form-control select2-js"  name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
-														@foreach($acc as $key => $row)	
-															<option value="{{$row->ac_code}}" {{ $pur->ac_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
+														@foreach($coa as $key => $row)	
+															<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 														@endforeach
 													</select>
 												</td>
 											</div>
 											<div class="col-sm-3 col-md-3 mb-2">
 												<label class="col-form-label" >Name of Person</label>
-												<input type="text" placeholder="Name of Person" name="cash_saler_name" value="{{$pur->cash_saler_name}}" class="form-control">
+												<input type="text" placeholder="Name of Person" name="cash_saler_name" class="form-control">
 											</div>
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Person Address</label>
-												<input type="text" placeholder="Person Address" name="cash_saler_address" value="{{$pur->cash_saler_address}}" class="form-control">
+												<input type="text" placeholder="Person Address" name="cash_saler_address" class="form-control">
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea">{{$pur->pur_remarks}}</textarea>
+												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>	
 									  </div>
 									</div>
-							
+								</section>
+							</div>
+							<div class="col-12 mb-3">
+								<section class="card">
 									<div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -82,39 +84,39 @@
 												</tr>
 											</thead>
 											<tbody id="Purchase1Table">
-                                            	@foreach ($pur_items as $pur1_key => $pur_items)
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod{{$pur1_key+1}}" value="{{$pur_items->item_cod}}" onchange="getItemDetails({{$pur1_key+1}},1)">
+														<input type="text" class="form-control" autofocus name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>	
 													<td>
-														<input type="text" class="form-control" name="pur_qty2[]" id="pur_qty2{{$pur1_key+1}}" value="{{$pur_items->pur_qty2}}">
+														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0" required>
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" name="item_name[]" id="item_name{{$pur1_key+1}}" onchange="getItemDetails({{$pur1_key+1}},2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
-																<option value="{{$row->it_cod}}" {{ $row->it_cod == $pur_items->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
+																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
 															@endforeach
 														</select>													
 													</td>
 													<td>
-														<input type="text" class="form-control"  name="remarks[]" id="remarks{{$pur1_key+1}}" value="{{$pur_items->remarks}}">
+														<input type="text" class="form-control" id="remarks1" name="remarks[]">
 													</td>
                                                     <td>
-														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty{{$pur1_key+1}}"  onchange="rowTotal({{$pur1_key+1}})" step="any" value="{{$pur_items->pur_qty}}">
+														<input type="number" class="form-control" name="pur_qty[]" id="pur_qty1" onchange="rowTotal(1)" value="0" step="any" required>
                                                     </td>
 													<td>
-														<input type="number" class="form-control" name="pur_price[]" id="pur_price{{$pur1_key+1}}" value="{{$pur_items->pur_price}}"  step="any" onchange="rowTotal({{$pur1_key+1}})" value="0">
+														<input type="number" class="form-control" name="pur_price[]" id="pur_price1" onchange="rowTotal(1)" value="0" step="any" required>
 													</td>
+
 													<td>
-														<input type="number" class="form-control" name="amount[]" id="amount{{$pur1_key+1}}" value="{{ $pur_items->pur_qty * $pur_items->pur_price }}" onchange="tableTotal()" value="0" disabled>
+														<input type="number" class="form-control" id="amount1" onchange="tableTotal()" value="0" disabled required step="any">
 													</td>
+
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
 												</tr>
-												@endforeach
 											</tbody>
 										</table>
 									</div>
@@ -125,36 +127,45 @@
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
+													<input type="hidden" id="total_amount_show" name="total_amount" placeholder="Total Weight" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
-													<input type="text" id="total_weight" placeholder="Total Weight" value="{{$pur->total_weight}}" class="form-control" disabled>
+													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
+													<input type="hidden" id="total_weight_show" name="total_weight" placeholder="Total Weight" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
-													<input type="text" id="total_quantity" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control" disabled>
+													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
+													<input type="hidden" id="total_quantity_show" name="total_quantity" placeholder="Total Quantity" class="form-control">
 												</div>
+
+												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">GST</label>
+													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
+												</div> -->
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" value="{{$pur->pur_convance_char}}" placeholder="Convance Charges" class="form-control">
+													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" placeholder="Convance Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" value="{{$pur->pur_labor_char}}" placeholder="Labour Charges" class="form-control">
+													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" placeholder="Labour Charges" class="form-control">
 												</div>
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount</label>
-													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" value="{{$pur->pur_discount}}" placeholder="Bill Discount" class="form-control">
+													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control">
 												</div>
 												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
 													<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger"></span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
+													<input type="hidden" id="net_amount" name="net_amount" placeholder="Total Weight" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -162,8 +173,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases1') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-po') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
 											</div>
 										</div>
 									</footer>
@@ -180,8 +191,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-
-	var itemCount, index;
+	var index=2;
+	var itemCount = Number($('#itemCount').val());
 
 	$(document).ready(function() {
 		$(window).keydown(function(event){
@@ -190,39 +201,6 @@
 				return false;
 			}
 		});
-
-		var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
-
-		var table = document.getElementById("Purchase1Table"); // Get the table element
-        var rowCount = table.rows.length; // Get the total number of rows
-
-		itemCount = rowCount;
-		index = rowCount+1;
-
-		$('#itemCount').val(itemCount);
-
-		for (var j=0;j<rowCount; j++){
-
-			quantity = table.rows[j].cells[1].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalQuantity = totalQuantity + Number(quantity);
-
-			weight = table.rows[j].cells[4].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalWeight = totalWeight + Number(weight);
-
-			amount = table.rows[j].cells[6].querySelector('input').value; // Get the value of the input field in the specified cell
-			totalAmount = totalAmount + Number(amount);
-		}
-		$('#total_quantity').val(totalQuantity);
-		$('#total_weight').val(totalWeight);
-		$('#totalAmount').val(totalAmount);
-
-		var convance_charges = Number($('#convance_charges').val());
-		var labour_charges = Number($('#labour_charges').val());
-		var bill_discount = Number($('#bill_discount').val());
-
-		netAmount = totalAmount + convance_charges +  labour_charges - bill_discount;
-		FormattednetTotal = formatNumberWithCommas(netAmount);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 	});
 
     function removeRow(button) {
@@ -230,22 +208,13 @@
 		if(tableRows>1){
 			var row = button.parentNode.parentNode;
 			row.parentNode.removeChild(row);
+			index--;	
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount-1;
 			$('#itemCount').val(itemCount);
-			index--;
-		}   
-		tableTotal();
+		}  
+		tableTotal(); 
     }
-
-    document.getElementById('removeRowBtn').addEventListener('click', function() {
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        if (table.rows.length > 0) {
-            table.deleteRow(table.rows.length - 1);
-        } else {
-            alert("No rows to delete!");
-        }
-    });
 
 	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
@@ -263,18 +232,18 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')">';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step="any" value="0">';
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" value="0" name="pur_qty2[]" step="any" required>';
 			cell3.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
-									@foreach($items as $key => $row)
+									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
-                                    @endforeach
+                                    '@endforeach'+
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step="any">';
-			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any">';
-			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]" value="0" onchange="tableTotal()" step="any" disabled>';
+			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" value="0" onchange="rowTotal('+index+')" step="any" required>';
+			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any" required>';
+			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" onchange="tableTotal()" step="any" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
 
@@ -311,30 +280,23 @@
 		
 	}
 
-	function validateItemName(inputElement)
-	{
-		var item_name = inputElement.value;
-
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	function getCOADetails(){
+		var coaId = document.getElementById("coa_name").value;
+		
+		$.ajax({
+			type: "GET",
+			url: "/coa/detail",
+			data: {id:coaId},
+			success: function(result){
+				$('#address').val(result[0]['address']);
+				$('#cash_pur_phone').val(result[0]['phone_no']);
+				$('#remarks').val(result[0]['remarks']);
+			},
+			error: function(){
+				alert("error");
 			}
 		});
-
-        $.ajax({
-            type: 'POST',
-			url: '/item/new-item/validate',
-            data: {'item_name': item_name},
-            success: function(response){
-				console.log(response)
-            },
-            error: function(response){
-                var errors = response.responseJSON.errors;
-                var errorMessage = 'Item Already Exists';
-                alert(errorMessage);
-            }
-        });
-    }
+	}
 
 	function rowTotal(index){
 		var weight = $('#pur_qty'+index+'').val();
@@ -359,8 +321,12 @@
         }
 
 		$('#totalAmount').val(totalAmount);
+		$('#total_amount_show').val(totalAmount);
 		$('#total_weight').val(totalWeight);
-		$('#total_quantity').val(totalQuantity);		
+		$('#total_weight_show').val(totalWeight);
+		$('#total_quantity').val(totalQuantity);
+		$('#total_quantity_show').val(totalQuantity);
+		
 		netTotal();
 	}
 
@@ -375,15 +341,11 @@
 		netTotal = netTotal.toFixed(0);
 		FormattednetTotal = formatNumberWithCommas(netTotal);
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
+		$('#net_amount').val(netTotal);
 	}
  
 	function formatNumberWithCommas(number) {
     	// Convert number to string and add commas
     	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-
-	function goBack() {
-		window.history.back();
-	}
-
 </script>

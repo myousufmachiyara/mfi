@@ -9,9 +9,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Quotations</h2>
-                                    <form class="text-end" action="{{ route('new-quotation') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Quotation</button>
+                                    <h2 class="card-title">All Purchase Orders</h2>
+                                    <form class="text-end" action="{{ route('new-po') }}" method="GET">
+                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Order</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
@@ -19,61 +19,63 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th style="display:none">Qout #</th>
+                                                    <th style="display:none">Inv #</th>
                                                     <th>Code</th>
                                                     <th>Date</th>
-                                                    <th>Custmer Name</th>
-                                                    <th>PO #</th>
-                                                    <th>Dispatch From</th>
+                                                    <th>Company Name</th>
                                                     <th>Person Name</th>
                                                     <th>Remarks</th>
-                                                    <th>SaleInv #</th>
+                                                    <th>Pur Inv #</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
                                                     <th>Convance Charges</th>
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
-                                                    <th>Status</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($quot2 as $key => $row)
+                                                @foreach ($pur1 as $key => $row)
                                                 <tr>
-                                                    <td style="display:none">{{$row->Sale_inv_no}}</td>
-                                                    <td>{{$row->prefix}}{{$row->Sale_inv_no}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->acc_name}}</td>
-                                                    <td>{{$row->pur_ord_no}}</td>
-                                                    <td>{{$row->disp_to}}</td>
-                                                    <td>{{$row->Cash_pur_name}}</td>
-                                                    <td>{{$row->Sales_Remarks}}</td>
-                                                    <td>{{$row->sales_against}}</td>
+                                                    <td style="display:none">{{$row->pur_id}}</td>
+                                                    <td>{{$row->prefix}}{{$row->pur_id}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
+                                                    <td>{{$row->cash_saler_name}}</td>
+                                                    <td>{{$row->pur_remarks}}</td>
+                                                    <td>{{$row->sale_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
-                                                    <td>{{$row->ConvanceCharges}}</td>
-                                                    <td>{{$row->LaborCharges}}</td>
-                                                    <td>{{$row->Bill_discount}}</td>
-                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->ConvanceCharges-$row->Bill_discount)
+                                                    <td>{{$row->pur_convance_char}}</td>
+                                                    <td>{{$row->pur_labor_char}}</td>
+                                                    <td>{{$row->pur_discount}}</td>
+                                                    @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
                                                     @endif
-                                                    @if($row->sales_against!=null) 
-                                                        <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
-                                                    @else
-                                                        <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
-                                                    @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal">View</a></td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
-                                                        <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
-                                                        <a href="{{ route('edit-quotation',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sale_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        <!-- <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
+                                                            <i class="fas fa-print"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span> -->
+                                                        <a href="{{ route('show-po',$row->pur_id) }}" class="">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a href="{{ route('edit-po',$row->pur_id) }}" class="">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->pur_id}})" href="#deleteModal">
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
+                                                        </a>
                                                     </td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -88,11 +90,11 @@
 		</section>
 
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="{{ route('delete-quotation') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('delete-po') }}" enctype="multipart/form-data">
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Quotation</h2>
+                        <h2 class="card-title">Delete Purchase Order</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -100,8 +102,8 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this Quotation?</p>
-                                <input name="delete_quot2" id="deleteID" hidden>
+                                <p class="mb-0">Are you sure that you want to delete this Purchase Order?</p>
+                                <input name="delete_purc1" id="deleteID" hidden>
                             </div>
                         </div>
                     </div>
@@ -133,7 +135,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id="quotation_attachements">
+                            <tbody id="pur1_attachements">
 
                             </tbody>
                         </table>
@@ -157,24 +159,25 @@
 
     function getAttachements(id){
 
-        var table = document.getElementById('quotation_attachements');
+        var table = document.getElementById('pur1_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
 
         $.ajax({
             type: "GET",
-            url: "/quotation/attachements",
+            url: "/po/attachements",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/quotation/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/quotation/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/po/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/po/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
-                    $('#quotation_attachements').append(html);
+                    $('#pur1_attachements').append(html);
                 });
             },
             error: function(){
@@ -188,7 +191,7 @@
             return;
         }
 
-        fetch('/quotation/deleteAttachment/' + fileId, {
+        fetch('/po/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

@@ -95,7 +95,7 @@
 															<td class="text-left">{{$total_quantity}}</td>
 														</tr>
 														<tr>
-															<td colspan="2">Total Weight</td>
+															<td colspan="2">Total Weight(KGs)</td>
 															<td class="text-left">{{$total_weight}}</td>
 														</tr>
 			
