@@ -23,17 +23,17 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="">Group Name</th>
-													<th width="">Item Name</th>
-													<th width="">Remarks</th>
-													<th width="6%">O.Stock</th>
-													<th width="6%">P.Price</th>
-													<th width="">PR.Date</th>
-													<th width="6%">S.Price</th>
-													<th width="">SR.Date</th>
-													<th width="">Date</th>
-													<th width="6%">S.Level</th>
-													<th width="6%">L.Price</th>
+													<th width="">Group Name<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Item Name<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Remarks<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">O.Stock<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">P.Price<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">PR.Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">S.Price<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">SR.Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">S.Level<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">L.Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width=""></th>
 												</tr>
 											</thead>

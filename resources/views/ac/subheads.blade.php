@@ -93,7 +93,7 @@
                     </header>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Select Head</label>
+                            <label>Select Head<span style="color: red;"><strong>*</strong></span></label>
                             <select data-plugin-selecttwo class="form-control select2-js" name ="main" required>
                                 <option value="" selected disabled>Select Group</option>
                                 @foreach($heads as $key => $row)	
@@ -102,7 +102,7 @@
                             </select>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Sub Head Name</label>
+                            <label>Sub Head Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Sub Head Name" name="sub" required>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                             <input type="number" class="form-control" id="sub_head_id" name="id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Select Head</label>
+                            <label>Select Head<span style="color: red;"><strong>*</strong></span></label>
                             <select data-plugin-selecttwo class="form-control select2-js" name="main" required id="update_head_name">
                                 <option disabled selected>Select Group</option>
                                 @foreach($heads as $key => $row)	
@@ -141,7 +141,7 @@
                             <input type="hidden" class="form-control" id="update_sub_head_id" name="sub_head_id" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Sub Head Name</label>
+                            <label>Sub Head Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_sub_head_name" placeholder="Remarks" name="sub" required>
                         </div>
                     </div>

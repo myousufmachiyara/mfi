@@ -125,7 +125,7 @@
                                 <input type="number" id="complaint_id" class="form-control" placeholder="NEW ID" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="complain_date">Complaint Date</label>
+                                <label for="complain_date">Complaint Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" id="complain_date" class="form-control" placeholder="Date" name="inv_dat" value="{{ date('Y-m-d') }}" required>
                             </div>
                             <div class="col-lg-6 mb-2">
@@ -137,7 +137,7 @@
                                 <input type="text" id="mill_purchase_number" class="form-control" placeholder="Mill Purchase Number" name="mill_pur_number">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="company_name">Company Name</label>
+                                <label for="company_name">Company Name<span style="color: red;"><strong>*</strong></span></label>
                                 <select id="company_name" data-plugin-selecttwo class="form-control select2-js" name="company_name" required>
                                     <option value="" disabled selected>Select Company Name</option>
                                     @foreach($acc as $key => $row)    
@@ -146,7 +146,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="party_name">Party Name</label>
+                                <label for="party_name">Party Name<span style="color: red;"><strong>*</strong></span></label>
                                 <select id="party_name" data-plugin-selecttwo class="form-control select2-js" name="party_name" required>
                                     <option value="" disabled selected>Select Party Name</option>
                                     @foreach($acc as $key => $row)    
@@ -168,7 +168,7 @@
                                 <input type="date" id="resolve_date" class="form-control" placeholder="Resolve Date" name="resolve_date" disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="complain_status">Complaint Status</label>
+                                <label for="complain_status">Complaint Status<span style="color: red;"><strong>*</strong></span></label>
                                 <select id="complain_status" data-plugin-selecttwo class="form-control select2-js" name="clear" required disabled>
                                     <option value="" disabled>Select Status</option>
                                     <option value="0" selected>Open</option>
@@ -208,8 +208,8 @@
                                 <input type="hidden" class="form-control" placeholder="ID" name="update_id" id="update_id_view" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Complain Date</label>
-                                <input type="date" id="update_complain_date" class="form-control" placeholder="Date" name="update_inv_dat">
+                                <label>Complain Date<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="date" id="update_complain_date" class="form-control" placeholder="Date" name="update_inv_dat required">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="update_mfi_purchase_number">MFI Purchase Number</label>
@@ -220,8 +220,8 @@
                                 <input type="text" id="update_mill_purchase_number" class="form-control" placeholder="Mill Purchase Number" name="update_mill_pur_number">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="update_company_name">Company Name</label>
-                                <select id="update_company_name" data-plugin-selecttwo class="form-control select2-js" name="update_company_name">
+                                <label for="update_company_name">Company Name<span style="color: red;"><strong>*</strong></span></label>
+                                <select id="update_company_name" data-plugin-selecttwo class="form-control select2-js"  name="update_company_name" required>
                                     <option value="" disabled>Select Company Name</option>
                                     @foreach($acc as $key => $row)
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -229,8 +229,8 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="update_party_name">Party Name</label>
-                                <select id="update_party_name" data-plugin-selecttwo class="form-control select2-js" name="pupdate_arty_name">
+                                <label for="update_party_name">Party Name<span style="color: red;"><strong>*</strong></span></label>
+                                <select id="update_party_name" data-plugin-selecttwo class="form-control select2-js" name="pupdate_arty_name" required>
                                     <option value="" disabled>Select Party Name</option>
                                     @foreach($acc as $key => $row)
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -250,8 +250,8 @@
                                 <input type="date" id="update_resolve_date" class="form-control" placeholder="Resolve Date" name="update_resolve_date">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label for="update_complain_status">Complain Status</label>
-                                <select id="update_complain_status" data-plugin-selecttwo class="form-control select2-js" name="update_complain_status">
+                                <label for="update_complain_status">Complain Status<span style="color: red;"><strong>*</strong></span></label>
+                                <select id="update_complain_status" data-plugin-selecttwo class="form-control select2-js" name="update_complain_status" required>
                                     <option value="" disabled>Select Status</option>
                                     <option value="0">Open</option>
                                     <option value="1">Closed</option>

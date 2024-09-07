@@ -43,7 +43,7 @@
 											</div>
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
-													<label class="col-form-label">Account Name</label>
+													<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 													<select data-plugin-selecttwo  class="form-control select2-js"autofocus name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
 														@foreach($acc as $key => $row)	
@@ -71,12 +71,12 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="10%">Qty.</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Weight (kgs)</th>
-													<th width="10%">Price</th>
+													<th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Amount</th>
 													<th width="10%"></th>
 												</tr>
@@ -263,7 +263,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')">';
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
 			cell2.innerHTML  = '<input type="text" class="form-control" name="pur_qty2[]" step="any" value="0">';
 			cell3.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
@@ -272,8 +272,8 @@
                                     @endforeach
 								'</select>';
 			cell4.innerHTML  = '<input type="text" class="form-control" id="remarks'+index+'" name="remarks[]">';
-			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step="any">';
-			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any">';
+			cell5.innerHTML  = '<input type="number" id="pur_qty'+index+'" class="form-control" name="pur_qty[]" onchange="rowTotal('+index+')" value="0" step="any" required>';
+			cell6.innerHTML  = '<input type="number" id="pur_price'+index+'" class="form-control" name="pur_price[]"  value="0" onchange="rowTotal('+index+')" step="any" required>';
 			cell7.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control" name="amount[]" value="0" onchange="tableTotal()" step="any" disabled>';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 			index++;
