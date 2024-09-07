@@ -40,7 +40,7 @@
 											<tbody id="ItemsTable">
 												<tr>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" autofocus name="item_group[]" onchange="addNewRow(1)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  name="item_group[]" onchange="addNewRow(1)" required>
 															<option value="" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -48,7 +48,7 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
+														<input type="text" class="form-control" name="item_name[]" autofocus onchange="validateItemName(this)" required>
 													</td>
 													<td>
 														<input type="text" class="form-control" name="item_remarks[]" value=" ">
@@ -159,13 +159,13 @@
 			var cell11 = newRow.insertCell(10);
 			var cell12 = newRow.insertCell(11);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" autofocus onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option value="" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" autofocus onchange="validateItemName(this)" required>';
 			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">';
 			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">';

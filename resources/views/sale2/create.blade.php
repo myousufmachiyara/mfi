@@ -30,7 +30,7 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="<?php echo date('Y-m-d'); ?>" id="stck_in_date" class="form-control">
+												<input type="date" name="sa_date" autofocus value="<?php echo date('Y-m-d'); ?>" id="stck_in_date" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Bill No.</label>
@@ -42,7 +42,7 @@
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="account_name" id="account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" id="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -64,7 +64,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Company Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" autofocus id="company_name" required disabled>
+												<select data-plugin-selecttwo class="form-control select2-js"  id="company_name" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -125,10 +125,10 @@
 											<tbody id="Purchase2Table">
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
+														<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -362,8 +362,8 @@
 					var cell11 = newRow.insertCell(10);
 
 
-					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 											'<option value="" disabled selected>Select Item</option>'+
 											'@foreach($items as $key => $row)'+	
 												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+

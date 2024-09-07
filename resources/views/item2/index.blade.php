@@ -135,7 +135,7 @@
                                 <input type="hidden" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>                            </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
-                                <select data-plugin-selecttwo class="form-control select2-js" autofocus id="item_group" name ="item_group" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  id="item_group" name ="item_group" required>
                                     <option  value="" disabled selected>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name" required>
+                                <input type="text" class="form-control" id="item_name" autofocus placeholder="Item Name" name="item_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
@@ -220,7 +220,7 @@
                             <div class="col-lg-6 mb-2">
                                 <label>Item Group</label>
                                 <input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
-                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name ="item_group[]" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="item_group[]" required>
                                     <option  value="" disabled selected>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -229,7 +229,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Item Name</label>
-                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" onchange="validateItemName(this)" required>
+                                <input type="text" class="form-control" placeholder="Item Name" autofocus name="item_name[]" onchange="validateItemName(this)" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
