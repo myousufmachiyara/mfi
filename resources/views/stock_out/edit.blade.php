@@ -83,7 +83,7 @@
 															<input type="text" id="remarks{{$tstockin_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
 														</td>
 														<td>
-															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]"  onchange="tabletotal()" placeholder="Qty" value="{{$tstock_items->sales_qty}}" step="any" required class="form-control">
+															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]"  onchange="tabletotal()" placeholder="Qty" value="{{$tstock_items->Sales_qty}}" step="any" required class="form-control">
 														</td>
 														<td>
                                                             <input type="number" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="tabletotal()" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
