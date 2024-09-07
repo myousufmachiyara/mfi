@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class quotation_2 extends Model
+class tquotation_2 extends Model
 {
     use HasFactory;
-    protected $table = "quotation_2";
+    protected $table = "tquotation_2";
     protected $fillable = [
     ];
 }

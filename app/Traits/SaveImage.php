@@ -149,14 +149,14 @@ trait SaveImage{
         return $filenamepath;
     }
 
-    public function quotDoc($file,$extension)
+    public function tquotDoc($file,$extension)
     {
         $img = $file;
         $number = rand(1,999);
         $numb = $number / 7 ;
         $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
-        $filenamepath   = 'uploads/quotation/'.$filenamenew;
-        $filename       = $img->move(public_path('uploads/quotation/'),$filenamenew);
+        $filenamepath   = 'uploads/tquotation/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tquotation/'),$filenamenew);
         return $filenamepath;
     }
 

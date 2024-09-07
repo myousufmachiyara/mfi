@@ -263,22 +263,22 @@ Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\Complain
 
 
 
-//quotation
-Route::get('/quotation/all-quotation', [App\Http\Controllers\QuotationController::class, 'index'])->name('all-quotation');
-Route::get('/quotation/new', [App\Http\Controllers\QuotationController::class, 'create'])->name('new-quotation');
-Route::post('/quotation/create', [App\Http\Controllers\QuotationController::class, 'store'])->name('store-quotation');
-Route::get('/quotation/edit/{id}', [App\Http\Controllers\QuotationController::class, 'edit'])->name('edit-quotation');
-Route::post('/quotation/update', [App\Http\Controllers\QuotationController::class, 'update'])->name('update-quotation');
-Route::post('/quotation/delete', [App\Http\Controllers\QuotationController::class, 'destroy'])->name('delete-quotation');
- Route::get('/quotation/show/{id}', [App\Http\Controllers\QuotationController::class, 'show'])->name('show-quotation');
- Route::get('/quotation/view/{id}', [App\Http\Controllers\QuotationController::class, 'view'])->name('show-quotation-att');
-Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
-Route::get('/quotation/download/{id}', [App\Http\Controllers\QuotationController::class, 'downloadAtt'])->name('quotation-att-download');
-Route::delete('/quotation/deleteAttachment/{id}', [App\Http\Controllers\QuotationController::class, 'deleteAtt'])->name('quotation-att-delete');
-Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
-Route::get('/quotation/getunclosed/', [App\Http\Controllers\QuotationController::class, 'getunclosed'])->name('get-unclosed-quotation-invoice');
-Route::get('/quotation/getItems/{id}', [App\Http\Controllers\QuotationController::class, 'getItems'])->name('get-quot2-items');
-Route::get('/quotation/getavailablestock/{id}', [App\Http\Controllers\QuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
+//tquotation
+Route::get('/tquotation/all-tquotation', [App\Http\Controllers\TtquotationController::class, 'index'])->name('all-tquotation');
+Route::get('/tquotation/new', [App\Http\Controllers\TtquotationController::class, 'create'])->name('new-tquotation');
+Route::post('/tquotation/create', [App\Http\Controllers\TtquotationController::class, 'store'])->name('store-tquotation');
+Route::get('/tquotation/edit/{id}', [App\Http\Controllers\TtquotationController::class, 'edit'])->name('edit-tquotation');
+Route::post('/tquotation/update', [App\Http\Controllers\TtquotationController::class, 'update'])->name('update-tquotation');
+Route::post('/tquotation/delete', [App\Http\Controllers\TtquotationController::class, 'destroy'])->name('delete-tquotation');
+ Route::get('/tquotation/show/{id}', [App\Http\Controllers\TtquotationController::class, 'show'])->name('show-tquotation');
+ Route::get('/tquotation/view/{id}', [App\Http\Controllers\TtquotationController::class, 'view'])->name('show-tquotation-att');
+Route::get('/tquotation/attachements', [App\Http\Controllers\TtquotationController::class, 'getAttachements'])->name('get-tquotation-att');
+Route::get('/tquotation/download/{id}', [App\Http\Controllers\TtquotationController::class, 'downloadAtt'])->name('tquotation-att-download');
+Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TtquotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
+Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TtquotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
+Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TtquotationController::class, 'getunclosed'])->name('get-unclosed-tquotation-invoice');
+Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TtquotationController::class, 'getItems'])->name('get-quot2-items');
+Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TtquotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
 
 
 

@@ -5,7 +5,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('store-quotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('store-tquotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-12 mb-3">								
@@ -213,7 +213,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-quotation') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-tquotation') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Quotation</button>
 											</div>
 										</div>
@@ -365,7 +365,7 @@
 			function getavailablestock(item_id,row_no){				
 				$.ajax({
 					type: "GET",
-					url: "/quotation/getavailablestock/"+item_id,
+					url: "/tquotation/getavailablestock/"+item_id,
 					success: function(result){
 						$('#stock'+row_no).val(result['opp_bal']);
 					},
