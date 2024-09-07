@@ -264,21 +264,21 @@ Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\Complain
 
 
 //tquotation
-Route::get('/tquotation/all-tquotation', [App\Http\Controllers\TtquotationController::class, 'index'])->name('all-tquotation');
-Route::get('/tquotation/new', [App\Http\Controllers\TtquotationController::class, 'create'])->name('new-tquotation');
-Route::post('/tquotation/create', [App\Http\Controllers\TtquotationController::class, 'store'])->name('store-tquotation');
-Route::get('/tquotation/edit/{id}', [App\Http\Controllers\TtquotationController::class, 'edit'])->name('edit-tquotation');
-Route::post('/tquotation/update', [App\Http\Controllers\TtquotationController::class, 'update'])->name('update-tquotation');
-Route::post('/tquotation/delete', [App\Http\Controllers\TtquotationController::class, 'destroy'])->name('delete-tquotation');
- Route::get('/tquotation/show/{id}', [App\Http\Controllers\TtquotationController::class, 'show'])->name('show-tquotation');
- Route::get('/tquotation/view/{id}', [App\Http\Controllers\TtquotationController::class, 'view'])->name('show-tquotation-att');
-Route::get('/tquotation/attachements', [App\Http\Controllers\TtquotationController::class, 'getAttachements'])->name('get-tquotation-att');
-Route::get('/tquotation/download/{id}', [App\Http\Controllers\TtquotationController::class, 'downloadAtt'])->name('tquotation-att-download');
-Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TtquotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
-Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TtquotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
-Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TtquotationController::class, 'getunclosed'])->name('get-unclosed-tquotation-invoice');
-Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TtquotationController::class, 'getItems'])->name('get-quot2-items');
-Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TtquotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
+Route::get('/tquotation/all-tquotation', [App\Http\Controllers\TQuotationController::class, 'index'])->name('all-tquotation');
+Route::get('/tquotation/new', [App\Http\Controllers\TQuotationController::class, 'create'])->name('new-tquotation');
+Route::post('/tquotation/create', [App\Http\Controllers\TQuotationController::class, 'store'])->name('store-tquotation');
+Route::get('/tquotation/edit/{id}', [App\Http\Controllers\TQuotationController::class, 'edit'])->name('edit-tquotation');
+Route::post('/tquotation/update', [App\Http\Controllers\TQuotationController::class, 'update'])->name('update-tquotation');
+Route::post('/tquotation/delete', [App\Http\Controllers\TQuotationController::class, 'destroy'])->name('delete-tquotation');
+ Route::get('/tquotation/show/{id}', [App\Http\Controllers\TQuotationController::class, 'show'])->name('show-tquotation');
+ Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
+Route::get('/tquotation/attachements', [App\Http\Controllers\TQuotationController::class, 'getAttachements'])->name('get-tquotation-att');
+Route::get('/tquotation/download/{id}', [App\Http\Controllers\TQuotationController::class, 'downloadAtt'])->name('tquotation-att-download');
+Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TQuotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
+Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
+Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TQuotationController::class, 'getunclosed'])->name('get-unclosed-tquotation-invoice');
+Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TQuotationController::class, 'getItems'])->name('get-quot2-items');
+Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
 
 
 
