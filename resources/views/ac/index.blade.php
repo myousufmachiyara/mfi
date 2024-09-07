@@ -198,7 +198,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
+                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables</label>
@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
-                                <select data-plugin-selecttwo class="form-control select2-js" class="form-control" autofocus name ="group_cod">
+                                <select data-plugin-selecttwo class="form-control select2-js" class="form-control"  name ="group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -245,7 +245,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
-                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name ="AccountType" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="AccountType" required>
                                     <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -289,7 +289,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
+                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" id="update_ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables</label>
@@ -325,7 +325,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
-                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name="group_cod" id="update_group_cod">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -336,7 +336,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type</label>
-                                <select data-plugin-selecttwo class="form-control select2-js" autofocus name="AccountType" required id="update_AccountType">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
