@@ -9,7 +9,7 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Quotations</h2>
+                                    <h2 class="card-title">All Quotations Pipes/Garders</h2>
                                     <form class="text-end" action="{{ route('new-tquotation') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Quotation</button>
                                     </form>

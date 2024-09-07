@@ -11,7 +11,7 @@
                         <div class="col-12 mb-3">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">Edit Pipe Bad Debts</h2>
+                                    <h2 class="card-title">Edit Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">

@@ -11,7 +11,7 @@
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Quotation</h2>
+										<h2 class="card-title">Edit Quotation Pipes/Garders</h2>
 									</header>
 									<div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>

@@ -14,7 +14,7 @@
                                     <div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
-                                    <h2 class="card-title">New Pipe Bad Debts</h2>
+                                    <h2 class="card-title">New Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
