@@ -211,8 +211,6 @@
 </html>
 <script>
 
-
-
 	var itemCount=0, index;
 	var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
 

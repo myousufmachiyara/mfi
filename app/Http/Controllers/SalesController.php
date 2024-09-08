@@ -193,7 +193,7 @@ class SalesController extends Controller
         if ($request->has('account_name') && $request->account_name) {
             $sale1->account_name=$request->account_name;
         }
-        if ($request->has('bill_status') && $request->bill_status) {
+        if ($request->has('bill_status') && $request->bill_status OR $request->bill_status==0) {
             $sale1->bill_not=$request->bill_status;
         }
         if ($request->has('totalAmount') && $request->totalAmount) {

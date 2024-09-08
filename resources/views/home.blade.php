@@ -1,40 +1,9 @@
-@extends('layouts.header')
+@include('layouts.header')
 	<body>
 		<section class="body">
-			@extends('layouts.menu')
-
+			@include('layouts.pageheader')
 			<div class="inner-wrapper" style="padding-top: 50px;">
-				<aside id="sidebar-left" class="sidebar-left" >
-
-					<div class="sidebar-header">
-						<div class="sidebar-title">
-							<strong>MENU</strong>
-						</div>
-						<div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-							<i class="fas fa-bars" aria-label="Toggle sidebar"></i>
-						</div>
-					</div>
-
-					<div class="nano">
-						<div class="nano-content">
-							@include('layouts.leftmenu')
-						</div>
-
-						<script>
-							// Maintain Scroll Position
-							if (typeof localStorage !== 'undefined') {
-								if (localStorage.getItem('sidebar-left-position') !== null) {
-									var initialPosition = localStorage.getItem('sidebar-left-position'),
-										sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-
-									sidebarLeft.scrollTop = initialPosition;
-								}
-							}
-						</script>
-
-					</div>
-				</aside>
-
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body" style="margin-left: 270px;margin-right: 20px;">
 
 					<!-- <header class="page-header" >

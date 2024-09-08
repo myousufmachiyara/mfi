@@ -159,7 +159,6 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/tquotation/'),$filenamenew);
         return $filenamepath;
     }
-
     
     public function tpoDoc($file,$extension)
     {
@@ -172,7 +171,6 @@ trait SaveImage{
         return $filenamepath;
     }
 
-
     public function poDoc($file,$extension)
     {
         $img = $file;
@@ -183,7 +181,5 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/po/'),$filenamenew);
         return $filenamepath;
     }
-
-    
 }
 ?>
