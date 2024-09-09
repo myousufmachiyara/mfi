@@ -30,7 +30,7 @@ class StockOutController extends Controller
             'stock_out.Sal_inv_no','stock_out.sa_date','stock_out.Cash_pur_name','stock_out.Sales_remarks','ac.ac_name',
             'stock_out.pur_inv', 'stock_out.mill_gate', 'stock_out.transporter','stock_out.Cash_pur_address','stock_out.prefix',
             \DB::raw('SUM(stock_out_2.Sales_qty) as qty_sum'),
-            \DB::raw('SUM(stock_out_2.Sales_qty*stock_out_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(stock_out_2.weight_pc) as weight_sum'),
         )
         ->groupby('stock_out.Sal_inv_no','stock_out.sa_date','stock_out.Cash_pur_name','stock_out.Sales_remarks','ac.ac_name',
         'stock_out.pur_inv', 'stock_out.mill_gate', 'stock_out.transporter','stock_out.Cash_pur_address','stock_out.prefix' )
