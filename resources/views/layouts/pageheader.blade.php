@@ -17,9 +17,7 @@
 
 		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
-				<figure class="profile-picture">
-					<img src="/assets/img/!logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="/assets/img/!logged-user.jpg" />
-				</figure>
+				
 				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
 					<span class="name">User Name</span>
 					<span class="role">admin</span>
