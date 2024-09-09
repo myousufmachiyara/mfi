@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="col-12 mb-3">								
@@ -30,21 +29,16 @@
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
+										<div class="col-5 mb-2">
+											<label class="col-form-label">Narration</label>
+											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
+										</div>
+										<div class="col-4 mb-3">
+											<label class="col-form-label">Attachements</label>
+											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+										</div>
 
-
-											<div class="col-5 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
-											</div>
-											<div class="col-4 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-									  </div>
-									</div>
-								</section>
-									<div class="col-12">
-										<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+										<div class="col-12 mb-3">
 											<table class="table table-bordered table-striped mb-0" id="myTable">
 												<thead>
 													<tr>
@@ -95,25 +89,23 @@
 												</tbody>
 											</table>
 										</div>
-									<div>
 
-									<div class="col-12 mb-3" >
-										<div class="row" style="justify-content:end">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Debit</label>
-												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
-											</div>
-											<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Credit</label>
-												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+										<div class="col-12 mb-3" >
+											<div class="row" style="justify-content:end">
+												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Debit</label>
+													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
+												</div>
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Credit</label>
+													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+												</div>
 											</div>
 										</div>
 									</div>
-									</div>
 								</div>
-							</section>
+							</section>			
 						</div>
-							
 						<div class="row">
 							<div class="col-6 mb-3">								
 								<section class="card">
@@ -215,19 +207,18 @@
 									</div>
 								</section>
 							</div>
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<footer class="card-footer">
-										<div class="row form-group mb-2">
-											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
-											</div>
+						</div>
+						<div class="col-12 mb-3">
+							<section class="card">
+								<footer class="card-footer">
+									<div class="row form-group mb-2">
+										<div class="text-end">
+											<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
+											<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
 										</div>
-									</footer>
-								</section>
-							</div>
+									</div>
+								</footer>
+							</section>
 						</div>
 					</form>
 				</section>
