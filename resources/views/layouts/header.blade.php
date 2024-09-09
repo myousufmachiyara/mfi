@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="fixed js flexbox flexboxlegacy no-touch csstransforms csstransforms3d no-overflowscrolling webkit chrome win js no-mobile-device custom-scroll">
+<html class="fixed ">
 	<head>
 
 		<!-- Basic -->
