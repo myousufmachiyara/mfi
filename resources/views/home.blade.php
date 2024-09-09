@@ -1,11 +1,10 @@
-@include('layouts.header')
+@extends('layouts.header')
 	<body>
 		<section class="body">
 			@include('layouts.pageheader')
 			<div class="inner-wrapper" style="padding-top: 50px;">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body" style="margin-left: 270px;margin-right: 20px;">
-
 					<!-- <header class="page-header" >
 						<div class="right-wrapper text-end">
 							<ol class="breadcrumbs">
