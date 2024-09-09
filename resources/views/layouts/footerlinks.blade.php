@@ -1,22 +1,11 @@
 <script>
-    // Show loader when starting a page load
+    // Show loader on page load
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('.loader').style.display = 'none';
-    });
-    window.addEventListener('beforeunload', function() {
-        document.querySelector('.loader').style.display = 'block';
-    });
-    window.addEventListener('load', function() {
-        document.querySelector('.loader').style.display = 'none';
-    });
-    // Show loader before AJAX request
-    $(document).ajaxStart(function() {
-        $('.loader').show();
+        document.querySelector('.loader').style.display = 'flex';
     });
 
-    // Hide loader after AJAX request completes
-    $(document).ajaxStop(function() {
-        $('.loader').hide();
+    window.addEventListener('load', function() {
+        document.querySelector('.loader').style.display = 'none';
     });
 </script>
 <!-- jQuery -->
