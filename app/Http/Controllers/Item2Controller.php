@@ -16,7 +16,7 @@ class Item2Controller extends Controller
         //         ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
         //         ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
-        $items=null;
+        $items=[];
         return view('item2.index',compact('items','itemGroups'));
     }
 
