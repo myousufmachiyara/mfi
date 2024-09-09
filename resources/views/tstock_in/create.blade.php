@@ -36,7 +36,7 @@
 											</div>
 
 											<div class="col-sm-12 col-md-4">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="stck_in_coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -77,10 +77,10 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Qty</th>
+													<th width="15%">Qty<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Weight</th>
 													<th width="10%"></th>
 												</tr>

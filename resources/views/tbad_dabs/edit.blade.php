@@ -54,11 +54,11 @@
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
                                             <tr>
-                                                <th width="10%">Item Code</th>
-                                                <th width="30%">Item Name</th>
+                                                <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="30%">Item Name<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="20%">Remarks</th>
-                                                <th width="15%">Qty Add</th>
-                                                <th width="15%">Qty Less</th>
+                                                <th width="15%">Qty Add<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="15%">Qty Less<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="10%"></th>
                                             </tr>
                                         </thead>
@@ -193,16 +193,16 @@ function addNewRow(){
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" required onchange="getItemDetails('+index+','+1+')" class="form-control">';
+        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" required onchange="getItemDetails('+index+','+2+')" name="item_name">'+
                             '<option>Select Item</option>'+
                             @foreach($items as $key => $row)	
                                 '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
                             @endforeach
                           '</select>';
         cell3.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks[]" placeholder="Remarks" class="form-control">';
-        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" onchange="tableTotal()" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" onchange="tableTotal()" class="form-control">';
+        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" required onchange="tableTotal()" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" required onchange="tableTotal()" class="form-control">';
         cell6.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
         var itemCount = Number($('#itemCount').val());

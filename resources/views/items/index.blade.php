@@ -222,7 +222,7 @@
                                 <input type="text" class="form-control" placeholder="Item Name"  autofocus name="item_name[]" onchange="validateItemName(this)" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Remarks<span style="color: red;"><strong>*</strong></span></label>
+                                <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" value=" " name="item_remarks[]">
                             </div>
                             <div class="col-lg-6 mb-2">
