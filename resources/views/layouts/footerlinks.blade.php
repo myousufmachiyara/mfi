@@ -1,3 +1,24 @@
+<script>
+    // Show loader when starting a page load
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.loader').style.display = 'none';
+    });
+    window.addEventListener('beforeunload', function() {
+        document.querySelector('.loader').style.display = 'block';
+    });
+    window.addEventListener('load', function() {
+        document.querySelector('.loader').style.display = 'none';
+    });
+    // Show loader before AJAX request
+    $(document).ajaxStart(function() {
+        $('.loader').show();
+    });
+
+    // Hide loader after AJAX request completes
+    $(document).ajaxStop(function() {
+        $('.loader').hide();
+    });
+</script>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
