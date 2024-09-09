@@ -119,7 +119,7 @@ class PoController extends Controller
                 $purAtt = new po_att();
                 $purAtt->pur1_id = $pur_1_id['pur_id'];
                 $extension = $file->getClientOriginalExtension();
-                $purAtt->att_path = $this->pur1Doc($file,$extension);
+                $purAtt->att_path = $this->poDoc($file,$extension);
                 $purAtt->save();
             }
         }
@@ -224,7 +224,7 @@ class PoController extends Controller
                 $purAtt = new po_att();
                 $purAtt->pur1_id = $request->pur_id;
                 $extension = $file->getClientOriginalExtension();
-                $purAtt->att_path = $this->pur1Doc($file,$extension);
+                $purAtt->att_path = $this->poDoc($file,$extension);
                 $purAtt->save();
             }
         }
