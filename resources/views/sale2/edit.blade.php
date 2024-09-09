@@ -35,7 +35,7 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -57,7 +57,7 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -103,13 +103,13 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty.</th>
-													<th width="7%">Price/Unit</th>
-													<th width="7%">Len.</th>
-													<th width="7%">%.</th>
+													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Len<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Sale Date</th>

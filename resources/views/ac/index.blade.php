@@ -196,16 +196,16 @@
                                 <input type="number" class="form-control" placeholder="Account Code" name="ac_cod" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
+                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001">
+                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001">
+                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -224,12 +224,12 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Limit</label>
-                                <input type="text" class="form-control"  placeholder="Credit Limit" value="0" name="credit_limit" >
+                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit" value="0" name="credit_limit" required >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Days</label>
-                                <input type="text" class="form-control"  placeholder="Credit Days" value="0" name="days_limit" >
+                                <label>Credit Days<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Days" value="0" name="days_limit" required >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
@@ -243,7 +243,7 @@
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
+                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
                                 <select data-plugin-selecttwo class="form-control select2-js"  name ="AccountType" required>
                                     <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
@@ -287,16 +287,16 @@
                                 <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" id="update_ac_name" required>
+                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
+                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" required name="rec_able" id="update_rec_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
+                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" required id="update_pay_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -315,12 +315,12 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Limit</label>
-                                <input type="text" class="form-control"  placeholder="Credit Limit." name="credit_limit" id="update_credit_limit">
+                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit." required name="credit_limit" id="update_credit_limit">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Days Limit</label>
-                                <input type="text" class="form-control"  placeholder="Days Limit" name="days_limit" id="update_days_limit">
+                                <label>Days Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Days Limit" required name="days_limit" id="update_days_limit">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
@@ -334,7 +334,7 @@
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
+                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
                                 <select data-plugin-selecttwo class="form-control select2-js"  name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
