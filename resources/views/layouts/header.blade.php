@@ -46,7 +46,10 @@
             top: 50%;
             transform: translate(-50%, -50%);
             z-index: 9999;
-            display: none; /* Hidden by default */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9); /* Optional: semi-transparent background */
         }
         .loader div {
             width: 50px;
