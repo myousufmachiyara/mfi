@@ -198,6 +198,7 @@ class TStockInController extends Controller
         if ($request->has('item_type') && $request->item_type) {
             $tstock_in->item_type=$request->item_type;
         }
+        
         if ($request->has('account_name') && $request->account_name) {
             $tstock_in->account_name=$request->account_name;
         }
@@ -211,6 +212,7 @@ class TStockInController extends Controller
             'Cash_pur_name'=>$tstock_in->Cash_pur_name,
             'transporter'=>$tstock_in->transporter,
             'account_name'=>$tstock_in->account_name,
+            'item_type'=>$tstock_in->item_type,
     
         ]);
         

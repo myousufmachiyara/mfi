@@ -135,6 +135,7 @@ class TBadDabsController extends Controller
         TBadDabs::where('bad_dabs_id', $request->bad_dabs_id)->update([
             'reason'=>$tbad_dabs->reason,
             'date'=>$tbad_dabs->date,
+            'item_type'=>$tbad_dabs->item_type,
         ]);
         
         TBadDabs2::where('bad_dabs_cod', $request->bad_dabs_id)->delete();
