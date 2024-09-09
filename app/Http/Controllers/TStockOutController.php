@@ -197,6 +197,7 @@ class TStockOutController extends Controller
             'cash_pur_name'=>$tstock_out->cash_pur_name,
             'transporter'=>$tstock_out->transporter,
             'account_name'=>$tstock_out->account_name,
+            'item_type'=>$tstock_out->item_type,
     
         ]);
         
