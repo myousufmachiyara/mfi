@@ -56,7 +56,7 @@
 												<tbody id="JV2Table">
 													<tr>
 														<td>
-															<select data-plugin-selecttwo class="form-control select2-js"   name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+															<select data-plugin-selecttwo class="form-control select2-js" name ="account_cod[]" id="account_cod1" onchange="addNewRow()" required>
 																<option value="" disabled selected>Select Account</option>
 																@foreach($acc as $key => $row)	
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -285,7 +285,7 @@
         }
     });
 
-	function addNewRow(id){
+	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
@@ -302,7 +302,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onclick="addNewRow()" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
