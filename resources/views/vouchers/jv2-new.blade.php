@@ -441,16 +441,23 @@
 			var rowCount = table.rows.length;
 			var no_of_credits=0;
 
-			for (var i=0;i<rowCount; i++){	
+			for (var i=0;i<rowCount; i++){
+				console.log(rowCount)
+	
 				selected_account = $('#account_cod'+(i+1)).val();
+
 				if (selected_account) {
+					console.log(selected_account)
 					credit = table.rows[i].cells[6].querySelector('input').value;
+					console.log(selected_account+""+credit)
 					if(credit>=1 && no_of_credits<1){
+						console.log('in if condition')
 						$('#customer_name').val(selected_account).trigger('change');
 						$('#sales_unadjusted_amount').val(credit);
 						no_of_credits = no_of_credits + 1;
 					}
 					else if(credit>=1 && no_of_credits>=1){
+						console.log('in else if condition')
 						$('#customer_name').val(0).trigger('change');
 						$('#sales_unadjusted_amount').val(0);
 						document.getElementById('sale_span').style.display = 'block';
