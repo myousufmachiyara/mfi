@@ -123,7 +123,7 @@
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required disabled>
-													<option value="0" disabled>Select Account</option>
+													<option value="0">Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
@@ -454,8 +454,8 @@
 					else if(credit>=1 && no_of_credits>=1){
 						$('#customer_name').val(0).trigger('change');
 						$('#sales_unadjusted_amount').val(0);
-						$('#sales_ageing tbody').empty(); 
 						document.getElementById('sale_span').style.display = 'block';
+						$('#sales_ageing tbody').empty(); 
 						break;
 					}
 				} 
