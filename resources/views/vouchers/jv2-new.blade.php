@@ -286,6 +286,7 @@
     });
 
 	function addNewRow(){
+		alert("hello");
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
@@ -302,7 +303,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onclick="addNewRow()" name ="account_cod[]" id="account_cod'+index+'" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onchange="addNewRow()" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -438,7 +439,6 @@
 		var no_of_credits=0;
 
 		for (var i=0;i<rowCount; i++){	
-			console.log('started loop on table');
 			selected_account = $('#account_cod'+(i+1)).val();
 			if (selected_account) {
 				credit = table.rows[i].cells[6].querySelector('input').value;
