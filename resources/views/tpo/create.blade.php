@@ -75,7 +75,7 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
 													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>

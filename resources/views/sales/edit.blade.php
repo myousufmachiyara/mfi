@@ -53,7 +53,7 @@
 											</div>
 
 											<div class="col-12 col-md-2 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" required name="account_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -89,12 +89,12 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="10%">Qty.</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Weight (kgs)</th>
-													<th width="10%">Price</th>
+													<th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Amount</th>
 													<th width="10%"></th>
 												</tr>
@@ -110,13 +110,13 @@
 												@foreach($sale_items as $key1 => $sale_item)
 												<tr>
 													<td>
-														<input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails({{$key1+1}},1)">
+														<input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" required onchange="getItemDetails({{$key1+1}},1)">
 													</td>
 													<td>
-														<input type="number" id="item_qty{{$key1+1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1+1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
+														<input type="number" id="item_qty{{$key1+1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1+1}})" class="form-control" required  step="any" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
-														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},2)" name="item_name[]">
+														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},2)" required  name="item_name[]">
 															<option>Select Item</option>
 															@foreach($items as $key2 => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $sale_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -127,12 +127,12 @@
 														<input type="text" id="remarks{{$key1+1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
 													</td>
 													<td>
-														<input type="number" id="weight{{$key1+1}}" name="item_weight[]" onchange="rowTotal({{$key1+1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
+														<input type="number" id="weight{{$key1+1}}" name="item_weight[]" onchange="rowTotal({{$key1+1}})" placeholder="Weight (kgs)" required step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
 														@php  $total_weight=$total_weight + $sale_item->Sales_qty  @endphp
 
 													</td>
 													<td>
-														<input type="number" id="price{{$key1+1}}" name="item_price[]" onchange="rowTotal({{$key1+1}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
+														<input type="number" id="price{{$key1+1}}" name="item_price[]" onchange="rowTotal({{$key1+1}})" placeholder="Price" class="form-control" required step="any" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
 														<input type="number" id="amount{{$key1+1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
@@ -288,7 +288,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" required onchange="getItemDetails('+index+','+1+')" class="form-control">';
 			cell2.innerHTML = '<input type="number" id="item_qty'+index+'" onchange="rowTotal('+index+')"  name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
 			cell3.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+

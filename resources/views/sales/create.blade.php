@@ -48,7 +48,7 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-12 col-md-2 mb-3">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
@@ -84,12 +84,12 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="10%">Qty.</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Weight (kgs)</th>
-													<th width="10%">Price</th>
+													<th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Amount</th>
 													<th width="10%"></th>
 												</tr>
@@ -124,7 +124,6 @@
 													</td>
 													<td>
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
-														<!-- <button type="button" onclick="addNewRow(1)" class="btn btn-primary" tabindex="1"><i class="fas fa-plus"></i></button> -->
 													</td>
 												</tr>
 											</tbody>
@@ -149,10 +148,7 @@
 												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" step="any" disabled>
 											</div>
 
-											<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">GST</label>
-												<input type="text" id="gst" name="gst" onchange="netTotal()" placeholder="GST" class="form-control">
-											</div> -->
+										
 
 											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance Charges</label>

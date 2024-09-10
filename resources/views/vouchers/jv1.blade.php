@@ -115,7 +115,7 @@
                                 <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Debit</label>
+                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
                                 <select  data-plugin-selecttwo class="form-control select2-js" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
@@ -124,7 +124,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Credit</label>
+                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
 
                                 <select  data-plugin-selecttwo class="form-control select2-js" name ="ac_cr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
@@ -134,8 +134,8 @@
                                 </select>                            
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Amount</label>
-                                <input type="number" class="form-control" placeholder="Amount" value="0" step=".00001" name="amount">
+                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Amount" value="0" step="any" name="amount" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -179,7 +179,7 @@
                                 <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Debit</label>
+                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
                                 <select data-plugin-selecttwo class="form-control select2-js"  name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
@@ -188,7 +188,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Credit</label>
+                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
                                 <select data-plugin-selecttwo class="form-control select2-js"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
@@ -197,8 +197,8 @@
                                 </select>                            
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Amount</label>
-                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step=".00001" name="update_amount">
+                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step="any" name="update_amount" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
