@@ -432,11 +432,13 @@
 		document.getElementById('sale_span').style.display = 'none';
 
 		// clearing sales  ageing table and fields
-		$('#customer_name').val(0).trigger('change');
-		$('#sales_unadjusted_amount').val(0);
-		$('#sales_ageing tbody').empty(); 
-
+		
 		if ($('#SaletoggleSwitch').is(':checked')) {
+			
+			$('#customer_name').val(0).trigger('change');
+			$('#sales_unadjusted_amount').val(0);
+			$('#sales_ageing tbody').empty(); 
+
 			var table = document.getElementById("JV2Table"); // Get the table element
 			var rowCount = table.rows.length;
 			var no_of_credits=0;
