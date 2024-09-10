@@ -437,27 +437,29 @@
 		$('#sales_unadjusted_amount').val(0);
 		$('#sales_ageing tbody').empty(); 
 
-		var table = document.getElementById("JV2Table"); // Get the table element
-        var rowCount = table.rows.length;
-		var no_of_credits=0;
+		if ($('#SaletoggleSwitch').is(':checked')) {
+			var table = document.getElementById("JV2Table"); // Get the table element
+			var rowCount = table.rows.length;
+			var no_of_credits=0;
 
-		for (var i=0;i<rowCount; i++){	
-			selected_account = $('#account_cod'+(i+1)).val();
-			if (selected_account) {
-				credit = table.rows[i].cells[6].querySelector('input').value;
-				if(credit>=1 && no_of_credits<1){
-					$('#customer_name').val(selected_account).trigger('change');
-					$('#sales_unadjusted_amount').val(credit);
-					no_of_credits = no_of_credits + 1;
-				}
-				else if(credit>=1 && no_of_credits>=1){
-					$('#customer_name').val(null).trigger('change');
-					$('#sales_unadjusted_amount').val(0);
-					$('#sales_ageing tbody').empty(); 
-					document.getElementById('sale_span').style.display = 'block';
-					break;
-				}
-			} 
+			for (var i=0;i<rowCount; i++){	
+				selected_account = $('#account_cod'+(i+1)).val();
+				if (selected_account) {
+					credit = table.rows[i].cells[6].querySelector('input').value;
+					if(credit>=1 && no_of_credits<1){
+						$('#customer_name').val(selected_account).trigger('change');
+						$('#sales_unadjusted_amount').val(credit);
+						no_of_credits = no_of_credits + 1;
+					}
+					else if(credit>=1 && no_of_credits>=1){
+						$('#customer_name').val(null).trigger('change');
+						$('#sales_unadjusted_amount').val(0);
+						$('#sales_ageing tbody').empty(); 
+						document.getElementById('sale_span').style.display = 'block';
+						break;
+					}
+				} 
+			}
 		}
 	}
 
