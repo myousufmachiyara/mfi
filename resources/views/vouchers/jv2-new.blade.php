@@ -113,7 +113,7 @@
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">Select Customer Account</span></h2>
 
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" value="0" id="SaletoggleSwitch">
+											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
 										</div>
 									</header>
 
@@ -427,17 +427,18 @@
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
 		document.getElementById('sale_span').style.display = 'none';
-		
 		// clearing sales  ageing table and fields
 		$('#customer_name').val('').trigger('change');
 		$('#sales_unadjusted_amount').val(0);
 		$('#sales_ageing tbody').empty(); 
+		textInput.disabled = !this.checked; 
 
 		var table = document.getElementById("JV2Table"); // Get the table element
         var rowCount = table.rows.length;
 		var no_of_credits=0;
 
 		for (var i=0;i<rowCount; i++){	
+			console.log('started loop on table');
 			selected_account = $('#account_cod'+(i+1)).val();
 			if (selected_account) {
 				credit = table.rows[i].cells[6].querySelector('input').value;
