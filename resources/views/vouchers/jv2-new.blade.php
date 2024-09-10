@@ -354,7 +354,7 @@
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
 
-		if(cust_id!=null){
+		if(cust_id!=0){
 			var counter=1;
 			$('#prevInvoices').val(1)
 			
