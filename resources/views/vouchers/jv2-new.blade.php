@@ -429,9 +429,9 @@
 		document.getElementById('sale_span').style.display = 'none';
 
 		// clearing sales  ageing table and fields
-		$('#customer_name').val('').trigger('change');
+		$('#customer_name').val(null).trigger('change');
 		$('#sales_unadjusted_amount').val(0);
-		$('#pendingInvoices').empty(); 
+		$('#sales_ageing tbody').empty(); 
 
 		var table = document.getElementById("JV2Table"); // Get the table element
         var rowCount = table.rows.length;
@@ -447,8 +447,9 @@
 					no_of_credits = no_of_credits + 1;
 				}
 				else if(credit>=1 && no_of_credits>=1){
-					$('#customer_name').val('').trigger('change');
+					$('#customer_name').val(null).trigger('change');
 					$('#sales_unadjusted_amount').val(0);
+					$('#sales_ageing tbody').empty(); 
 					document.getElementById('sale_span').style.display = 'block';
 					break;
 				}
