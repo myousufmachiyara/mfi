@@ -286,7 +286,6 @@
     });
 
 	function addNewRow(){
-		alert("hello");
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
