@@ -430,6 +430,7 @@
 		document.getElementById('sale_span').style.display = 'none';
 		$('#pendingInvoices').empty();
 		$('#sales_unadjusted_amount').val(0);
+		$('#customer_name').val(0).trigger('change');
 
 		// clearing sales  ageing table and fields
 		
