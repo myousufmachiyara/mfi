@@ -123,7 +123,7 @@
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required disabled>
-													<option value="0">Select Account</option>
+													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
@@ -353,16 +353,13 @@
 
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
+		var table = document.getElementById('pendingInvoices');
+		$('#pendingInvoices').empty();
 
-		if(cust_id!==0){
+		if(cust_id!=0){
 			var counter=1;
 			$('#prevInvoices').val(1)
 			
-			var table = document.getElementById('pendingInvoices');
-			while (table.rows.length > 0) {
-				table.deleteRow(0);
-			}
-
 			$.ajax({
 				type: "GET",
 				url: "/vouchers/jv2/pendingInvoice/"+cust_id,
@@ -386,8 +383,8 @@
 				}
 			});
 		}
-
 	}
+
 
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
@@ -444,6 +441,7 @@
 
 			for (var i=0;i<rowCount; i++){	
 				selected_account = $('#account_cod'+(i+1)).val();
+				console.log(selected_account);
 				if (selected_account) {
 					credit = table.rows[i].cells[6].querySelector('input').value;
 					if(credit>=1 && no_of_credits<1){
