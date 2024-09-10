@@ -374,9 +374,10 @@
 							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 							html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-							html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
+							html+= "<td width='20%'><input type='number' class='form-control' value='0' id='rec_amount"+counter+"' step='any' name='rec_amount[]' required></td>"
 							html+="</tr>";
 							$('#pendingInvoices').append(html);
+							$('#rec_amount'+counter).attr('max', v['balance']);
 							counter++;
 						}
 					});
