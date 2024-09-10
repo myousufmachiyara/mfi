@@ -354,12 +354,10 @@
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
 		var table = document.getElementById('pendingInvoices');
-		$('#pendingInvoices').empty();
-		console.log('in pending inv function');
+		$('#pendingInvoices').html('');
+		$('#pendingInvoices').find('tr').remove();
 
 		if(cust_id!=0){
-			console.log('in not equal to 0 condition');
-
 			var counter=1;
 			$('#prevInvoices').val(1)
 			
@@ -431,22 +429,17 @@
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
 		document.getElementById('sale_span').style.display = 'none';
-		$('#pendingInvoices').empty();
 		$('#sales_unadjusted_amount').val(0);
 		$('#customer_name').val(0).trigger('change');
 
 		// clearing sales  ageing table and fields
 		
 		if ($('#SaletoggleSwitch').is(':checked')) {
-
-
 			var table = document.getElementById("JV2Table"); // Get the table element
 			var rowCount = table.rows.length;
 			var no_of_credits=0;
 
-			for (var i=0;i<rowCount; i++){
-				console.log(rowCount)
-	
+			for (var i=0;i<rowCount; i++){	
 				selected_account = $('#account_cod'+(i+1)).val();
 
 				if (selected_account) {
@@ -457,11 +450,9 @@
 						no_of_credits = no_of_credits + 1;
 					}
 					else if(credit>=1 && no_of_credits>=1){
-						console.log('in else if condition');
 						$('#customer_name').val(0).trigger('change');
 						$('#sales_unadjusted_amount').val(0);
 						document.getElementById('sale_span').style.display = 'block';
-						$('#pendingInvoices').empty();
 						break;
 					}
 				} 
