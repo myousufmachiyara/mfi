@@ -352,9 +352,11 @@
 	}
 
 	function getPendingInvoices(){
+		alert("in trigger function");
 		var cust_id=$('#customer_name').val();
 		var table = document.getElementById('pendingInvoices');
 		$('#pendingInvoices').empty();
+		alert("pendingInvoices table empty");
 
 		if(cust_id!=0){
 			var counter=1;
