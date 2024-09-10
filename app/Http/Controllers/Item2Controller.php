@@ -14,11 +14,12 @@ class Item2Controller extends Controller
     {
         $items = Item_entry2::where('item_entry2.status', 1)
                 ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
-                ->get();
+                ->paginate(25);
         $itemGroups = Item_Groups::where('status', 1)->get();
 
         return view('item2.index',compact('items','itemGroups'));
     }
+
 
     public function validation(Request $request)
     {
