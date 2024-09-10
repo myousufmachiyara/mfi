@@ -455,10 +455,10 @@
 					}
 					else if(credit>=1 && no_of_credits>=1){
 						$('#customer_name').val(0).trigger('change');
-						var test= $('#customer_name').val();
-						console.log(test);
 						$('#sales_unadjusted_amount').val(0);
 						document.getElementById('sale_span').style.display = 'block';
+						$('#pendingInvoices').empty();
+
 						break;
 					}
 				} 
