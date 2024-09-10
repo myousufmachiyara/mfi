@@ -110,7 +110,7 @@
 							<div class="col-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">Select Customer Account</span></h2>
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
 
 										<div class="form-check form-switch">
 											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
@@ -122,7 +122,7 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -427,11 +427,11 @@
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
 		document.getElementById('sale_span').style.display = 'none';
+
 		// clearing sales  ageing table and fields
 		$('#customer_name').val('').trigger('change');
 		$('#sales_unadjusted_amount').val(0);
 		$('#sales_ageing tbody').empty(); 
-		textInput.disabled = !this.checked; 
 
 		var table = document.getElementById("JV2Table"); // Get the table element
         var rowCount = table.rows.length;
@@ -445,13 +445,12 @@
 					$('#customer_name').val(selected_account).trigger('change');
 					$('#sales_unadjusted_amount').val(credit);
 					no_of_credits = no_of_credits + 1;
-					textInput.disabled = !this.checked; 
 				}
 				else if(credit>=1 && no_of_credits>=1){
 					$('#customer_name').val('').trigger('change');
 					$('#sales_unadjusted_amount').val(0);
-					textInput.disabled = !this.checked; 
 					document.getElementById('sale_span').style.display = 'block';
+					break;
 				}
 			} 
 		}
