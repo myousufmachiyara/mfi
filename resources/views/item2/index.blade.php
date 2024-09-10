@@ -81,6 +81,7 @@
                                             @endforeach
                                         </tbody>
 									</table>
+                                    <button>Next</button>                                        
                                 </div>
                             </section>
                         </div>
