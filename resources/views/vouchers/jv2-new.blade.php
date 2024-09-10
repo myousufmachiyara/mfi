@@ -431,7 +431,7 @@
 		// clearing sales  ageing table and fields
 		$('#customer_name').val('').trigger('change');
 		$('#sales_unadjusted_amount').val(0);
-		$('#sales_ageing tbody').empty(); 
+		$('#pendingInvoices').empty(); 
 
 		var table = document.getElementById("JV2Table"); // Get the table element
         var rowCount = table.rows.length;
