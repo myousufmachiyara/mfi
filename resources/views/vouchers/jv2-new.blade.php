@@ -441,7 +441,6 @@
 
 			for (var i=0;i<rowCount; i++){	
 				selected_account = $('#account_cod'+(i+1)).val();
-				console.log(selected_account);
 				if (selected_account) {
 					credit = table.rows[i].cells[6].querySelector('input').value;
 					if(credit>=1 && no_of_credits<1){
@@ -453,7 +452,6 @@
 						$('#customer_name').val(0).trigger('change');
 						$('#sales_unadjusted_amount').val(0);
 						document.getElementById('sale_span').style.display = 'block';
-						$('#sales_ageing tbody').empty(); 
 						break;
 					}
 				} 
