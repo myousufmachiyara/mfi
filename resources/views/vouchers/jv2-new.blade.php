@@ -352,11 +352,9 @@
 	}
 
 	function getPendingInvoices(){
-		alert("in trigger function");
 		var cust_id=$('#customer_name').val();
 		var table = document.getElementById('pendingInvoices');
 		$('#pendingInvoices').empty();
-		alert("pendingInvoices table empty");
 
 		if(cust_id!=0){
 			var counter=1;
@@ -430,14 +428,13 @@
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
 		document.getElementById('sale_span').style.display = 'none';
+		$('#pendingInvoices').empty();
+		$('#sales_unadjusted_amount').val(0);
 
 		// clearing sales  ageing table and fields
 		
 		if ($('#SaletoggleSwitch').is(':checked')) {
-			
-			$('#customer_name').val(0).trigger('change');
-			$('#sales_unadjusted_amount').val(0);
-			$('#sales_ageing tbody').empty(); 
+
 
 			var table = document.getElementById("JV2Table"); // Get the table element
 			var rowCount = table.rows.length;
