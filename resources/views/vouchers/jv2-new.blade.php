@@ -355,8 +355,11 @@
 		var cust_id=$('#customer_name').val();
 		var table = document.getElementById('pendingInvoices');
 		$('#pendingInvoices').empty();
+		console.log('in pending inv function');
 
 		if(cust_id!=0){
+			console.log('in not equal to 0 condition');
+
 			var counter=1;
 			$('#prevInvoices').val(1)
 			
@@ -454,11 +457,11 @@
 						no_of_credits = no_of_credits + 1;
 					}
 					else if(credit>=1 && no_of_credits>=1){
+						console.log('in else if condition');
 						$('#customer_name').val(0).trigger('change');
 						$('#sales_unadjusted_amount').val(0);
 						document.getElementById('sale_span').style.display = 'block';
 						$('#pendingInvoices').empty();
-
 						break;
 					}
 				} 
