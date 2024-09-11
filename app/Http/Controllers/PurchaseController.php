@@ -18,51 +18,51 @@ class PurchaseController extends Controller
     //
     use SaveImage;
 
-    // public function index()
-    // {
-    //     $pur1 = purchase::where('purchase.status',1)
-    //     ->leftjoin ('purchase_2', 'purchase_2.pur_cod' , '=', 'purchase.pur_id')
-    //     ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
-    //     ->select(
-    //         'purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
-    //         'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix',
-    //         'purchase.sale_against',
-    //         \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
-    //         \DB::raw('SUM(purchase_2.pur_qty*purchase_2.pur_price) as total_bill'),
-    //     )
-    //     ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
-    //     'pur_bill_no','purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
-    //     ->get();
-        
-    //     return view('purchase1.index',compact('pur1'));
-    // }
-
     public function index()
     {
-        purchase::where('purchase.status', 1)
-        ->leftJoin('purchase_2', 'purchase_2.pur_cod', '=', 'purchase.pur_id')
+        $pur1 = purchase::where('purchase.status',1)
+        ->leftjoin ('purchase_2', 'purchase_2.pur_cod' , '=', 'purchase.pur_id')
         ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
         ->select(
-            'purchase.pur_id', 'purchase.pur_date', 'purchase.cash_saler_name', 'purchase.pur_remarks', 'ac.ac_name',
-            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char', 'purchase.pur_discount', 'purchase.prefix',
+            'purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
+            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix',
             'purchase.sale_against',
             \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
-            \DB::raw('SUM(purchase_2.pur_qty * purchase_2.pur_price) as total_bill')
+            \DB::raw('SUM(purchase_2.pur_qty*purchase_2.pur_price) as total_bill'),
         )
-        ->groupBy(
-            'purchase.pur_id', 'purchase.pur_date', 'purchase.cash_saler_name', 'purchase.pur_remarks', 'ac.ac_name',
-            'pur_bill_no', 'purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char',
-            'purchase.pur_discount', 'purchase.prefix'
-        )
-        ->orderBy('purchase.pur_id')
-        ->chunk(50, function($chunk) use (&$pur1) {
-            foreach ($chunk as $purchase) {
-                $pur1[] = $purchase;  // Collect each chunk into the array
-            }
-        });
+        ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
+        'pur_bill_no','purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
+        ->paginate(100);
         
         return view('purchase1.index',compact('pur1'));
     }
+
+    // public function index()
+    // {
+    //     purchase::where('purchase.status', 1)
+    //     ->leftJoin('purchase_2', 'purchase_2.pur_cod', '=', 'purchase.pur_id')
+    //     ->join('ac', 'ac.ac_code', '=', 'purchase.ac_cod')
+    //     ->select(
+    //         'purchase.pur_id', 'purchase.pur_date', 'purchase.cash_saler_name', 'purchase.pur_remarks', 'ac.ac_name',
+    //         'pur_bill_no', 'purchase.pur_convance_char', 'purchase.pur_labor_char', 'purchase.pur_discount', 'purchase.prefix',
+    //         'purchase.sale_against',
+    //         \DB::raw('SUM(purchase_2.pur_qty) as weight_sum'),
+    //         \DB::raw('SUM(purchase_2.pur_qty * purchase_2.pur_price) as total_bill')
+    //     )
+    //     ->groupBy(
+    //         'purchase.pur_id', 'purchase.pur_date', 'purchase.cash_saler_name', 'purchase.pur_remarks', 'ac.ac_name',
+    //         'pur_bill_no', 'purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char',
+    //         'purchase.pur_discount', 'purchase.prefix'
+    //     )
+    //     ->orderBy('purchase.pur_id')
+    //     ->chunk(50, function($chunk) use (&$pur1) {
+    //         foreach ($chunk as $purchase) {
+    //             $pur1[] = $purchase;  // Collect each chunk into the array
+    //         }
+    //     });
+        
+    //     return view('purchase1.index',compact('pur1'));
+    // }
 
     public function create(Request $request)
     {
