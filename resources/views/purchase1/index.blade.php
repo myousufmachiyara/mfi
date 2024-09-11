@@ -16,7 +16,7 @@
                                 </header>
                                 <div class="card-body">
                                     <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
@@ -163,7 +163,7 @@
         const end = start + rowsPerPage;
         const paginatedData = items.slice(start, end);
 
-        const tbody = document.querySelector('#datatable-default tbody');
+        const tbody = document.querySelector('#datatable tbody');
         tbody.innerHTML = '';
 
         paginatedData.forEach(row => {
