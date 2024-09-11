@@ -169,6 +169,7 @@
         paginatedData.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
+                <td style="display:none"></td>
                 <td>${row.pur_id}</td>
                 <td>${row.pur_date}</td>
                 <td>${row.ac_name}</td>
