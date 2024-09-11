@@ -37,7 +37,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($pur1 as $key => $row)
+                                                <!-- @foreach ($pur1 as $key => $row)
                                                 <tr>
                                                     <td style="display:none">{{$row->pur_id}}</td>
                                                     <td>{{$row->prefix}}{{$row->pur_id}}</td>
@@ -59,10 +59,10 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <!-- <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
+                                                         <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
                                                         </a>
-                                                        <span class="separator"> | </span> -->
+                                                        <span class="separator"> | </span>
                                                         <a href="{{ route('show-purchases1',$row->pur_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
@@ -77,9 +77,10 @@
                                                     </td>
 
                                                 </tr>
-                                                @endforeach
+                                                @endforeach -->
                                             </tbody>
                                         </table>
+                                        <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
                                     </div>
                                 </div>
                             </section>
@@ -126,7 +127,7 @@
                 </header>
                 <div class="card-body">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
@@ -152,6 +153,83 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+<script>
+    const items = @json($pur1);
+    const rowsPerPage = 25; // Number of rows per page
+    let currentPage = 1;
+
+    function renderTable(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const paginatedData = items.slice(start, end);
+
+        const tbody = document.querySelector('#datatable-default tbody');
+        tbody.innerHTML = '';
+
+        paginatedData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.pur_id}</td>
+                <td>${row.pur_date}</td>
+                <td>${row.ac_name}</td>
+                <td>${row.cash_saler_name}</td>
+                <td>${row.pur_remarks}</td>
+                <td>${row.sale_against}</td>
+                <td>${row.weight_sum}</td>
+                <td>${row.total_bill}</td>
+                <td>${row.pur_convance_char}</td>
+                <td>${row.pur_labor_char}</td>
+                <td>${row.pur_discount}</td>
+                <td></td>
+                <td></td>
+                <td class="actions">
+                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails(${row.pur_id})" href="#updateModal">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <span class="separator"> | </span>
+                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId(${row.pur_id})" href="#deleteModal">
+                        <i class="far fa-trash-alt" style="color:red"></i>
+                    </a>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function setupPagination() {
+        const pageCount = Math.ceil(items.length / rowsPerPage);
+        const pagination = document.querySelector('#pagination');
+        pagination.innerHTML = '';
+
+        for (let i = 1; i <= pageCount; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.classList.add('paginate_button');
+            button.classList.add('page-item');
+
+            if (i === currentPage) {
+                button.classList.add('active');
+            }
+            button.addEventListener('click', () => {
+                currentPage = i;
+                renderTable(currentPage);
+                updatePaginationButtons();
+            });
+            pagination.appendChild(button);
+        }
+    }
+
+    function updatePaginationButtons() {
+        document.querySelectorAll('.paginate_button').forEach(button => {
+            button.classList.remove('active');
+        });
+        document.querySelectorAll('.paginate_button')[currentPage - 1].classList.add('active');
+    }
+
+    // Initial setup
+    setupPagination();
+    renderTable(currentPage);
+</script>
 <script>
     function setId(id){
         $('#deleteID').val(id);
