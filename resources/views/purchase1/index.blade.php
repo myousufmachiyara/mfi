@@ -1,7 +1,7 @@
-@include('../layouts.header')
+@include('layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.pageheader')
+            @include('layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
                     <div class="row">

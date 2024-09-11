@@ -1,4 +1,4 @@
-@include('../layouts.header')
+@include('layouts.header')
 	<body>
 		<section class="body">
         @include('layouts.pageheader')
