@@ -34,7 +34,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($items as $key => $row)
+                                            <!-- @foreach ($items as $key => $row)
                                                 <tr>
                                                     <td>{{$row->it_cod}}</td>
                                                     <td><strong>{{$row->item_name}}</strong></td>
@@ -78,10 +78,11 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @endforeach -->
                                         </tbody>
 									</table>
-                                    <button>Next</button>                                        
+                                    <div class="dataTables_paginate paging_simple_numbers" id="pagination"></div>
+
                                 </div>
                             </section>
                         </div>
@@ -289,6 +290,82 @@
 	</body>
 </html>
 <script>
+    const items = @json($items);
+    const rowsPerPage = 25; // Number of rows per page
+    let currentPage = 1;
+
+    function renderTable(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const paginatedData = items.slice(start, end);
+
+        const tbody = document.querySelector('#datatable-default tbody');
+        tbody.innerHTML = '';
+
+        paginatedData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.it_cod}</td>
+                <td>${row.item_name}</td>
+                <td>${row.item_remark}</td>
+                <td>${row.group_name}</td>
+                <td>${row.opp_qty}</td>
+                <td>${row.weight}</td>
+                <td>${row.pur_rate_date}</td>
+                <td>${row.OPP_qty_cost}</td>
+                <td>${row.sales_price}</td>
+                <td>${row.labourprice}</td>
+                <td></td>
+                 <td class="actions">
+                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails(${row.it_cod})" href="#updateModal">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <span class="separator"> | </span>
+                    <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId(${row.it_cod})" href="#deleteModal">
+                        <i class="far fa-trash-alt" style="color:red"></i>
+                    </a>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function setupPagination() {
+        const pageCount = Math.ceil(items.length / rowsPerPage);
+        const pagination = document.querySelector('#pagination');
+        pagination.innerHTML = '';
+
+        for (let i = 1; i <= pageCount; i++) {
+            const button = document.createElement('button');
+            button.textContent = i;
+            button.classList.add('paginate_button');
+            button.classList.add('page-item');
+
+            if (i === currentPage) {
+                button.classList.add('active');
+            }
+            button.addEventListener('click', () => {
+                currentPage = i;
+                renderTable(currentPage);
+                updatePaginationButtons();
+            });
+            pagination.appendChild(button);
+        }
+    }
+
+    function updatePaginationButtons() {
+        document.querySelectorAll('.paginate_button').forEach(button => {
+            button.classList.remove('active');
+        });
+        document.querySelectorAll('.paginate_button')[currentPage - 1].classList.add('active');
+    }
+
+    // Initial setup
+    setupPagination();
+    renderTable(currentPage);
+</script>
+<script>
+
     function setId(id){
         $('#deleteID').val(id);
     }
