@@ -1,7 +1,6 @@
 <header class="header header-nav-menu header-nav-top-line ">
-
 	<div class="logo-container">
-		<a href="../3.0.0" class="logo">						
+		<a href="/" class="logo">						
 			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
 		</a>					
 		<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						<i class="fas fa-bars" aria-label="Toggle sidebar"></i>					</div>
@@ -13,9 +12,6 @@
 
 		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
-				<figure class="profile-picture">
-					<img src="/assets/img/!logged-user.jpg" alt="Joseph Doe" class="rounded-circle" data-lock-picture="/assets/img/!logged-user.jpg" />
-				</figure>
 				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
 					<span class="name">User Name</span>
 					<span class="role">admin</span>

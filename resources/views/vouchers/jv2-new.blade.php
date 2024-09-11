@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('store-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="col-12 mb-3">								
@@ -30,21 +29,16 @@
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
+										<div class="col-5 mb-2">
+											<label class="col-form-label">Narration</label>
+											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
+										</div>
+										<div class="col-4 mb-3">
+											<label class="col-form-label">Attachements</label>
+											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+										</div>
 
-
-											<div class="col-5 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
-											</div>
-											<div class="col-4 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-									  </div>
-									</div>
-								</section>
-									<div class="col-12">
-										<div class="mb-3" style="overflow-x:auto;min-height:200px;max-height:350px;overflow-y:auto">
+										<div class="col-12 mb-3">
 											<table class="table table-bordered table-striped mb-0" id="myTable">
 												<thead>
 													<tr>
@@ -62,7 +56,7 @@
 												<tbody id="JV2Table">
 													<tr>
 														<td>
-															<select data-plugin-selecttwo class="form-control select2-js"   name ="account_cod[]" id="account_cod1" onchange="addNewRow(1)" required>
+															<select data-plugin-selecttwo class="form-control select2-js" name ="account_cod[]" id="account_cod1" onchange="addNewRow()" required>
 																<option value="" disabled selected>Select Account</option>
 																@foreach($acc as $key => $row)	
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -95,33 +89,31 @@
 												</tbody>
 											</table>
 										</div>
-									<div>
 
-									<div class="col-12 mb-3" >
-										<div class="row" style="justify-content:end">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Debit</label>
-												<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
-											</div>
-											<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
-												<label class="col-form-label">Total Credit</label>
-												<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+										<div class="col-12 mb-3" >
+											<div class="row" style="justify-content:end">
+												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Debit</label>
+													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
+												</div>
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">Total Credit</label>
+													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
+												</div>
 											</div>
 										</div>
 									</div>
-									</div>
 								</div>
-							</section>
+							</section>			
 						</div>
-							
 						<div class="row">
 							<div class="col-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">Select Customer Account</span></h2>
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
 
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" value="0" id="SaletoggleSwitch">
+											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
 										</div>
 									</header>
 
@@ -130,8 +122,8 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required>
-													<option value="" disabled selected>Select Account</option>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required disabled>
+													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
@@ -215,19 +207,18 @@
 									</div>
 								</section>
 							</div>
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<footer class="card-footer">
-										<div class="row form-group mb-2">
-											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
-											</div>
+						</div>
+						<div class="col-12 mb-3">
+							<section class="card">
+								<footer class="card-footer">
+									<div class="row form-group mb-2">
+										<div class="text-end">
+											<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-jv2') }}'"> <i class="fas fa-trash"></i> Discard Voucher</button>
+											<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Voucher</button>
 										</div>
-									</footer>
-								</section>
-							</div>
+									</div>
+								</footer>
+							</section>
 						</div>
 					</form>
 				</section>
@@ -294,7 +285,7 @@
         }
     });
 
-	function addNewRow(id){
+	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
 
@@ -311,7 +302,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onclick="addNewRow('+index+')" name ="account_cod[]" id="account_cod'+index+'" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" onchange="addNewRow()" name ="account_cod[]" id="account_cod'+index+'" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($acc as $key => $row)'+
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -362,37 +353,39 @@
 
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
-		var counter=1;
-		$('#prevInvoices').val(1)
-		
 		var table = document.getElementById('pendingInvoices');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
+		$('#pendingInvoices').html('');
+		$('#pendingInvoices').find('tr').remove();
 
-		$.ajax({
-			type: "GET",
-			url: "/vouchers/jv2/pendingInvoice/"+cust_id,
-			success: function(result){
-				$.each(result, function(k,v){
-					if(Math.round(v['balance'])>0){
-						var html="<tr>";
-						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
-						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
-						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='rec_amount[]' required></td>"
-						html+="</tr>";
-						$('#pendingInvoices').append(html);
-						counter++;
-					}
-				});
-			},
-			error: function(){
-				alert("error");
-			}
-		});
+		if(cust_id!=0){
+			var counter=1;
+			$('#prevInvoices').val(1)
+			
+			$.ajax({
+				type: "GET",
+				url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+				success: function(result){
+					$.each(result, function(k,v){
+						if(Math.round(v['balance'])>0){
+							var html="<tr>";
+							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='rec_amount[]' required></td>"
+							html+="</tr>";
+							$('#pendingInvoices').append(html);
+							counter++;
+						}
+					});
+				},
+				error: function(){
+					alert("error");
+				}
+			});
+		}
 	}
+
 
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
@@ -436,33 +429,34 @@
 	function SaletoggleInputs() {
 		const textInput = document.getElementById('customer_name');
 		document.getElementById('sale_span').style.display = 'none';
-		
-		// clearing sales  ageing table and fields
-		$('#customer_name').val('').trigger('change');
 		$('#sales_unadjusted_amount').val(0);
-		$('#sales_ageing tbody').empty(); 
+		$('#customer_name').val(0).trigger('change');
 
-		var table = document.getElementById("JV2Table"); // Get the table element
-        var rowCount = table.rows.length;
-		var no_of_credits=0;
+		// clearing sales  ageing table and fields
+		
+		if ($('#SaletoggleSwitch').is(':checked')) {
+			var table = document.getElementById("JV2Table"); // Get the table element
+			var rowCount = table.rows.length;
+			var no_of_credits=0;
 
-		for (var i=0;i<rowCount; i++){	
-			selected_account = $('#account_cod'+(i+1)).val();
-			if (selected_account) {
-				credit = table.rows[i].cells[6].querySelector('input').value;
-				if(credit>=1 && no_of_credits<1){
-					$('#customer_name').val(selected_account).trigger('change');
-					$('#sales_unadjusted_amount').val(credit);
-					no_of_credits = no_of_credits + 1;
-					textInput.disabled = !this.checked; 
-				}
-				else if(credit>=1 && no_of_credits>=1){
-					$('#customer_name').val('').trigger('change');
-					$('#sales_unadjusted_amount').val(0);
-					textInput.disabled = !this.checked; 
-					document.getElementById('sale_span').style.display = 'block';
-				}
-			} 
+			for (var i=0;i<rowCount; i++){	
+				selected_account = $('#account_cod'+(i+1)).val();
+
+				if (selected_account) {
+					credit = table.rows[i].cells[6].querySelector('input').value;
+					if(credit>=1 && no_of_credits<1){
+						$('#customer_name').val(selected_account).trigger('change');
+						$('#sales_unadjusted_amount').val(credit);
+						no_of_credits = no_of_credits + 1;
+					}
+					else if(credit>=1 && no_of_credits>=1){
+						$('#customer_name').val(0).trigger('change');
+						$('#sales_unadjusted_amount').val(0);
+						document.getElementById('sale_span').style.display = 'block';
+						break;
+					}
+				} 
+			}
 		}
 	}
 

@@ -1,10 +1,9 @@
 @extends('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('store-item-2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">

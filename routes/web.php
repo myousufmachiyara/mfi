@@ -280,10 +280,6 @@ Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TQuotationControlle
 Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TQuotationController::class, 'getItems'])->name('get-quot2-items');
 Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
 
-
-
-
-
 //tpo
 Route::get('/tpo/all-tpo', [App\Http\Controllers\TpoController::class, 'index'])->name('all-tpo');
 Route::get('/tpo/new', [App\Http\Controllers\TpoController::class, 'create'])->name('new-tpo');
@@ -291,8 +287,8 @@ Route::post('/tpo/create', [App\Http\Controllers\TpoController::class, 'store'])
 Route::get('/tpo/edit/{id}', [App\Http\Controllers\TpoController::class, 'edit'])->name('edit-tpo');
 Route::post('/tpo/update', [App\Http\Controllers\TpoController::class, 'update'])->name('update-tpo');
 Route::post('/tpo/delete', [App\Http\Controllers\TpoController::class, 'destroy'])->name('delete-tpo');
- Route::get('/tpo/show/{id}', [App\Http\Controllers\TpoController::class, 'show'])->name('show-tpo');
- Route::get('/tpo/view/{id}', [App\Http\Controllers\TpoController::class, 'view'])->name('show-tpo-att');
+Route::get('/tpo/show/{id}', [App\Http\Controllers\TpoController::class, 'show'])->name('show-tpo');
+Route::get('/tpo/view/{id}', [App\Http\Controllers\TpoController::class, 'view'])->name('show-tpo-att');
 Route::get('/tpo/attachements', [App\Http\Controllers\TpoController::class, 'getAttachements'])->name('get-tpo-att');
 Route::get('/tpo/download/{id}', [App\Http\Controllers\TpoController::class, 'downloadAtt'])->name('tpo-att-download');
 Route::delete('/tpo/deleteAttachment/{id}', [App\Http\Controllers\TpoController::class, 'deleteAtt'])->name('tpo-att-delete');

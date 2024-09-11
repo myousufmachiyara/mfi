@@ -4,7 +4,6 @@
         @extends('../layouts.menu')
         <div class="inner-wrapper">
             <section role="main" class="content-body">
-                @extends('../layouts.pageheader')
                 <form method="post" id="myForm" action="{{ route('update-bad-dabs') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
