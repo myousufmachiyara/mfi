@@ -154,6 +154,7 @@
 </html>
 <script>
     const items = @json($pur1);
+    console.log(items);
     const rowsPerPage = 100; // Number of rows per page
     let currentPage = 1;
 
