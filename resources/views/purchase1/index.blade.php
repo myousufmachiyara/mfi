@@ -154,7 +154,7 @@
 </html>
 <script>
     const items = @json($pur1);
-    const rowsPerPage = 1000; // Number of rows per page
+    const rowsPerPage = 100; // Number of rows per page
     let currentPage = 1;
 
     function renderTable(page) {
