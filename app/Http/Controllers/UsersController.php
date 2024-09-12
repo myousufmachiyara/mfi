@@ -22,13 +22,6 @@ class UsersController extends Controller
     //
     public function index()
     {
-        $acc = AC::join('sub_head_of_acc as shoa', 'shoa.id', '=', 'ac.AccountType')
-               ->leftjoin('ac_group as ag', 'ag.group_cod', '=', 'ac.group_cod')
-               ->select('ac.*' , 'ag.group_name', 'shoa.sub')
-               ->get();
-        $sub_head_of_acc = sub_head_of_acc::where('status', 1)->get();
-        $ac_group = ac_group::where('status', 1)->get();
-
-        return view('users.users',compact('acc','sub_head_of_acc','ac_group'));
+        return view('users.users');
     }
 }

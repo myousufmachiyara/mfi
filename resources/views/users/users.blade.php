@@ -33,7 +33,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($acc as $key => $row)
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
@@ -45,17 +44,13 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    @if($row->status==1)
-                                                        <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" onclick="getAccountDetails({{$row->ac_code}})" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times"></i></a>
-                                                        </td>
-                                                    @else
-                                                        <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
-                                                    @endif
+                                                    <td class="actions">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" onclick="getAccountDetails(1)" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails(1)" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-times"></i></a>
+                                                        <a href="{{ route('activate-acc',1)}}"><i style="color:green" class="fas fa-check"></i></a>
+                                                    </td>
                                                 </tr>
-                                            @endforeach
                                         </tbody>
 									</table>
                                 </div>
@@ -210,9 +205,6 @@
                                 <label>Designation</label>
                                 <select data-plugin-selectTwo class="form-control" autofocus>
                                     <option value="">Select Designation</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
@@ -287,9 +279,6 @@
                                 <label>Account Group</label>
                                 <select class="form-control" autofocus name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
@@ -298,9 +287,6 @@
                                 <label>Account Type</label>
                                 <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
-                                    @foreach($sub_head_of_acc as $key => $row)	
-                                        <option value="{{$row->id}}">{{$row->sub}}</option>
-                                    @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
@@ -369,9 +355,6 @@
                                 <label>Account Group</label>
                                 <select class="form-control" autofocus name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
@@ -380,9 +363,6 @@
                                 <label>Account Type</label>
                                 <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
-                                    @foreach($sub_head_of_acc as $key => $row)	
-                                        <option value="{{$row->id}}">{{$row->sub}}</option>
-                                    @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
