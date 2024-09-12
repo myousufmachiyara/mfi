@@ -19,7 +19,7 @@
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="searchColId">
                                                 <option value="default">Search All</option>
-                                                <option value="1">by Code</option>
+                                                <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
                                                 <option value="3">by Account</option>
                                                 <option value="4">by Person Name</option>
