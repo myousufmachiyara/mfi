@@ -29,7 +29,7 @@
                                                 <option value="7">by Bill Amount</option>
                                                 <option value="11">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" style="margin-right:10px">
+                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
                                             <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button>
                                         </div>
                                     </div>
@@ -174,25 +174,52 @@
 <script>
     function searchTable() {
         // Get the input value
-        const input = document.getElementById('search').value.toUpperCase();
+        const input = document.getElementById('searchInput').value.toUpperCase();
         const colId = $('#searchColId').val();
+
         // Get the table and rows
         const table = document.getElementById('searchableTable').getElementsByTagName('tbody')[0];
         const rows = table.getElementsByTagName('tr');
 
-        // Loop through all rows, except the header
-        for (let i = 1; i < rows.length; i++) {
-            const cells = rows[i].getElementsByTagName('td');
-            if (cells.length > 2) { // Ensure there are enough cells in the row
-                const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
-                // Check if the column text matches the input value
-                if (columnText.toUpperCase().indexOf(input) > -1) {
+        if(colId=="default"){
+            // Loop through all rows
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                
+                let found = false;
+                // Loop through each cell in the row
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
+                    if (cellText.toUpperCase().indexOf(input) > -1) {
+                        found = true;
+                        break; // If a match is found, no need to check other cells in this row
+                    }
+                }
+                
+                // Show or hide the row based on whether a match was found
+                if (found) {
                     rows[i].style.display = '';
                 } else {
                     rows[i].style.display = 'none';
                 }
             }
+        }   
+
+        else {
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                if (cells.length > 2) { // Ensure there are enough cells in the row
+                    const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
+                    // Check if the column text matches the input value
+                    if (columnText.toUpperCase().indexOf(input) > -1) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            }
         }
+       
     }
 </script>
 
