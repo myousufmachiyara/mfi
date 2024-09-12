@@ -184,15 +184,17 @@
         if(colId=="default"){
             // Loop through all rows
             for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                
+                const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
                 let found = false;
+                
                 // Loop through each cell in the row
                 for (let j = 0; j < cells.length; j++) {
                     const cellText = cells[j].textContent || cells[j].innerText;
+                    
+                    // Check if the cell text matches the input value
                     if (cellText.toUpperCase().indexOf(input) > -1) {
                         found = true;
-                        break; // If a match is found, no need to check other cells in this row
+                        break; // No need to check other cells in this row if a match is found
                     }
                 }
                 
