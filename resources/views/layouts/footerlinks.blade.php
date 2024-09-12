@@ -1,5 +1,5 @@
 <script>
-        // Show loader on page unload and before content is loaded
+    // Show loader on page unload and before content is loaded
     window.addEventListener('beforeunload', function() {
         document.querySelector('.loader').style.display = 'flex';
     });
