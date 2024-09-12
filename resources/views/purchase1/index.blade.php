@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+            @include('layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+				<section role="main" class="content-body">                    
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -14,9 +13,23 @@
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Invoice</button>
                                     </form>
                                 </header>
+                               
                                 <div class="card-body">
+                                    <div class="row" style="justify-content:end">
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px">
+                                                <option value="">Search By</option>
+                                                <option value="">All</option>
+                                                <option value="">Code</option>
+                                                <option value="">Account</option>
+
+                                            </select>
+                                            <input class="form-control" placeholder="Search" style="margin-right:10px">
+                                            <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter</button>
+                                        </div>
+                                    </div>
                                     <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                        <table class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
