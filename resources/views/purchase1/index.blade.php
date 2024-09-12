@@ -204,50 +204,49 @@
         // Get the table and rows
         const table = document.getElementById('searchableTable');
         const rows = table.getElementsByTagName('tr');
-        setTimeout(function() { 
-            if(colId=="default"){
+        if(colId=="default"){
+            
+            // Loop through all rows
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
+                let found = false;
                 
-                // Loop through all rows
-                for (let i = 0; i < rows.length; i++) {
-                    const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
-                    let found = false;
+                // Loop through each cell in the row
+                for (let j = 0; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
                     
-                    // Loop through each cell in the row
-                    for (let j = 0; j < cells.length; j++) {
-                        const cellText = cells[j].textContent || cells[j].innerText;
-                        
-                        // Check if the cell text matches the input value
-                        if (cellText.toUpperCase().indexOf(input) > -1) {
-                            found = true;
-                            break; // No need to check other cells in this row if a match is found
-                        }
+                    // Check if the cell text matches the input value
+                    if (cellText.toUpperCase().indexOf(input) > -1) {
+                        found = true;
+                        break; // No need to check other cells in this row if a match is found
                     }
-                    
-                    // Show or hide the row based on whether a match was found
-                    if (found) {
+                }
+                
+                // Show or hide the row based on whether a match was found
+                if (found) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }   
+
+        else {
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                if (cells.length > 2) { // Ensure there are enough cells in the row
+                    const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
+                    // Check if the column text matches the input value
+                    if (columnText.toUpperCase().indexOf(input) > -1) {
                         rows[i].style.display = '';
                     } else {
                         rows[i].style.display = 'none';
                     }
                 }
-            }   
-
-            else {
-                for (let i = 1; i < rows.length; i++) {
-                    const cells = rows[i].getElementsByTagName('td');
-                    if (cells.length > 2) { // Ensure there are enough cells in the row
-                        const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
-                        // Check if the column text matches the input value
-                        if (columnText.toUpperCase().indexOf(input) > -1) {
-                            rows[i].style.display = '';
-                        } else {
-                            rows[i].style.display = 'none';
-                        }
-                    }
-                }
             }
-            document.getElementById('loader').style.display = 'none';
-        }, 200);  
+        }
+        document.getElementById('loader').style.display = 'none';
+       
     }
 </script>
 
