@@ -19,15 +19,15 @@
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="searchColId">
                                                 <option value="default">Search All</option>
-                                                <option value="0">by Code</option>
-                                                <option value="1">by Date</option>
-                                                <option value="2">by Account</option>
-                                                <option value="3">by Person Name</option>
-                                                <option value="4">by Remarks</option>
-                                                <option value="5">by Sale Inv #</option>
-                                                <option value="6">by Weight</option>
-                                                <option value="7">by Bill Amount</option>
-                                                <option value="11">by Net Amount</option>
+                                                <option value="1">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">by Account</option>
+                                                <option value="4">by Person Name</option>
+                                                <option value="5">by Remarks</option>
+                                                <option value="6">by Sale Inv #</option>
+                                                <option value="7">by Weight</option>
+                                                <option value="8">by Bill Amount</option>
+                                                <option value="12">by Net Amount</option>
                                             </select>
                                             <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
                                             <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button>
