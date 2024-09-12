@@ -17,23 +17,24 @@
                                 <div class="card-body">
                                     <div class="row" style="justify-content:end">
                                         <div class="col-md-5" style="display:flex;">
-                                            <select class="form-control" style="margin-right:10px">
-                                                <option value="">Search All</option>
-                                                <option value="">by Code</option>
-                                                <option value="">by Date</option>
-                                                <option value="">by Account</option>
-                                                <option value="">by Person Name</option>
-                                                <option value="">by Remarks</option>
-                                                <option value="">by Weight</option>
-                                                <option value="">by Bill Amount</option>
-                                                <option value="">by Net Amount</option>
+                                            <select class="form-control" style="margin-right:10px" id="searchColId">
+                                                <option value="default">Search All</option>
+                                                <option value="0">by Code</option>
+                                                <option value="1">by Date</option>
+                                                <option value="2">by Account</option>
+                                                <option value="3">by Person Name</option>
+                                                <option value="4">by Remarks</option>
+                                                <option value="5">by Sale Inv #</option>
+                                                <option value="6">by Weight</option>
+                                                <option value="7">by Bill Amount</option>
+                                                <option value="11">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search" style="margin-right:10px">
-                                            <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter</button>
+                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" style="margin-right:10px">
+                                            <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button>
                                         </div>
                                     </div>
                                     <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
@@ -169,6 +170,32 @@
         @include('../layouts.footerlinks')
 	</body>
 </html>
+
+<script>
+    function searchTable() {
+        // Get the input value
+        const input = document.getElementById('search').value.toUpperCase();
+        const colId = $('#searchColId').val();
+        // Get the table and rows
+        const table = document.getElementById('searchableTable').getElementsByTagName('tbody')[0];
+        const rows = table.getElementsByTagName('tr');
+
+        // Loop through all rows, except the header
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName('td');
+            if (cells.length > 2) { // Ensure there are enough cells in the row
+                const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
+                // Check if the column text matches the input value
+                if (columnText.toUpperCase().indexOf(input) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    }
+</script>
+
 <script>
     function setId(id){
         $('#deleteID').val(id);
