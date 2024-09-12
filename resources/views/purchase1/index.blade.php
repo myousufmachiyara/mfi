@@ -1,7 +1,7 @@
 @include('../layouts.header')
 	<body>
         <style>
-            #searchloader {
+        #searchloader {
             display: none;
             position: fixed;
             left: 50%;
@@ -194,8 +194,8 @@
 
 <script>
     function searchTable() {
-
-        document.getElementById('searchloader').style.display = 'block';
+        const loader = document.getElementById('searchloader');
+        loader.style.display = 'block';
 
         // Get the input value
         const input = document.getElementById('searchInput').value.toUpperCase();
@@ -204,49 +204,50 @@
         // Get the table and rows
         const table = document.getElementById('searchableTable');
         const rows = table.getElementsByTagName('tr');
-        if(colId=="default"){
-            
-            // Loop through all rows
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
-                let found = false;
+        requestAnimationFrame(() => {
+            if(colId=="default"){
                 
-                // Loop through each cell in the row
-                for (let j = 0; j < cells.length; j++) {
-                    const cellText = cells[j].textContent || cells[j].innerText;
+                // Loop through all rows
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
+                    let found = false;
                     
-                    // Check if the cell text matches the input value
-                    if (cellText.toUpperCase().indexOf(input) > -1) {
-                        found = true;
-                        break; // No need to check other cells in this row if a match is found
+                    // Loop through each cell in the row
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent || cells[j].innerText;
+                        
+                        // Check if the cell text matches the input value
+                        if (cellText.toUpperCase().indexOf(input) > -1) {
+                            found = true;
+                            break; // No need to check other cells in this row if a match is found
+                        }
                     }
-                }
-                
-                // Show or hide the row based on whether a match was found
-                if (found) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }   
-
-        else {
-            for (let i = 1; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName('td');
-                if (cells.length > 2) { // Ensure there are enough cells in the row
-                    const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
-                    // Check if the column text matches the input value
-                    if (columnText.toUpperCase().indexOf(input) > -1) {
+                    
+                    // Show or hide the row based on whether a match was found
+                    if (found) {
                         rows[i].style.display = '';
                     } else {
                         rows[i].style.display = 'none';
                     }
                 }
+            }   
+
+            else {
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    if (cells.length > 2) { // Ensure there are enough cells in the row
+                        const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
+                        // Check if the column text matches the input value
+                        if (columnText.toUpperCase().indexOf(input) > -1) {
+                            rows[i].style.display = '';
+                        } else {
+                            rows[i].style.display = 'none';
+                        }
+                    }
+                }
             }
-        }
-        document.getElementById('searchloader').style.display = 'none';
-       
+            loader.style.display = 'none';
+        });
     }
 </script>
 
