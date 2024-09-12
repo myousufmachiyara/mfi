@@ -247,7 +247,7 @@
                 }
             }
             document.getElementById('loader').style.display = 'none';
-        }, 500);  
+        }, 200);  
     }
 </script>
 
