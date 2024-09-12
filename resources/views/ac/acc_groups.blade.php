@@ -1,4 +1,4 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
             @include('layouts.pageheader')
@@ -131,7 +131,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

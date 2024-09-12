@@ -284,7 +284,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

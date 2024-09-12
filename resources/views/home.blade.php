@@ -433,6 +433,6 @@
 				</section>
 			</div>
 		</section>
-        @extends('layouts.footerlinks')
+        @include('layouts.footerlinks')
 	</body>
 </html>

@@ -18,11 +18,15 @@
                                     <div class="row" style="justify-content:end">
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px">
-                                                <option value="">Search By</option>
-                                                <option value="">All</option>
-                                                <option value="">Code</option>
-                                                <option value="">Account</option>
-
+                                                <option value="">Search All</option>
+                                                <option value="">by Code</option>
+                                                <option value="">by Date</option>
+                                                <option value="">by Account</option>
+                                                <option value="">by Person Name</option>
+                                                <option value="">by Remarks</option>
+                                                <option value="">by Weight</option>
+                                                <option value="">by Bill Amount</option>
+                                                <option value="">by Net Amount</option>
                                             </select>
                                             <input class="form-control" placeholder="Search" style="margin-right:10px">
                                             <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter</button>
@@ -162,7 +166,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

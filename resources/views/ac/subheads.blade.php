@@ -1,8 +1,8 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
                     <div class="row">
@@ -156,7 +156,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
