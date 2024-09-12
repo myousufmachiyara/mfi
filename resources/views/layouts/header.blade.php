@@ -48,7 +48,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(255, 255, 255, 0.9); /* Optional: semi-transparent background */
+            /* background: rgba(255, 255, 255, 0.9);  */
+			background-color: transparent;
         }
         .loader div {
             width: 50px;
@@ -57,6 +58,7 @@
             border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+			/* background-color: transparent; */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
