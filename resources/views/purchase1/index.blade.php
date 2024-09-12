@@ -178,7 +178,7 @@
         const colId = $('#searchColId').val();
 
         // Get the table and rows
-        const table = document.getElementById('searchableTable').getElementsByTagName('tbody')[0];
+        const table = document.getElementById('searchableTable');
         const rows = table.getElementsByTagName('tr');
 
         if(colId=="default"){
