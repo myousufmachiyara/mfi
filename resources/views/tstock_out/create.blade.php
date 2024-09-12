@@ -225,7 +225,7 @@
             table.append(newRow);
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
-            $('#myTable select[data-plugin-selecttwo]').select2();
+            $('#select[data-plugin-selecttwo]').select2();
 
         }
     }
