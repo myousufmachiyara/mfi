@@ -1,78 +1,56 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-            @include('layouts.pageheader')
-            <div class="inner-wrapper">
+			@include('../layouts.menu')
+			<div class="inner-wrapper">
 				<section role="main" class="content-body">
+					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title mb-2">Chart Of Accounts</h2>
+                                    <h2 class="card-title mb-2">All Users</h2>
                                     <div class="card-actions">
-                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
-                                        <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button>
+                                        <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New User</button>
+                                        <!-- <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button> -->
                                     </div>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th>Code</th>
-                                                <th>Account Name</th>
-                                                <th>Receivable</th>
-                                                <th>Payable</th>
-                                                <th>Date</th>
-                                                <th>Remarks</th>
+                                                <th>ID</th>
+                                                <th>Image</th>
+                                                <th>Employee Name</th>
+                                                <th>Username</th>
+                                                <th>Designation</th>
+                                                <th>CNIC</th>
                                                 <th>Address</th>
-                                                <th>Credit Limit</th>
-                                                <th>Days Limit</th>
-                                                <th>Group</th>
-                                                <th>Account Type</th>
-                                                <th>Att.</th>
+                                                <th>Phone No.</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($acc as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->ac_code}}</td>
-                                                    <td><strong>{{$row->ac_name}}</strong></td>
-                                                    @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->rec_able))}}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->pay_able, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->pay_able))}}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->remarks}}</td>
-                                                    <td>{{$row->address}}   {{$row->phone_no}}</td>
-                                                    @if(substr(strval($row->credit_limit), strpos(strval($row->credit_limit), '.') + 1) > 0)
-                                                        <td style="color: rgb(156, 32, 32);"><strong>{{ rtrim(rtrim(number_format($row->credit_limit, 10, '.', ','), '0'), '.') }}</strong></td>
-                                                    @else
-                                                         <td style="color: rgb(156, 32, 32);"><strong>{{ number_format(intval($row->credit_limit))}}</strong></td>
-                                                    @endif
-
-                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
-                                                    <td>{{$row->group_name}}</td>
-                                                    <td><strong>{{$row->sub}}</strong></td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
-                                                    @if($row->status==1)
-                                                        <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            <span class="separator"> | </span>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
-                                                        </td>
-                                                    @else
-                                                        <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
-                                                    @endif
-                                                
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="actions">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" onclick="getAccountDetails(1)" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails(1)" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-times"></i></a>
+                                                        <a href="{{ route('activate-acc',1)}}"><i style="color:green" class="fas fa-check"></i></a>
+                                                    </td>
                                                 </tr>
-                                            @endforeach
                                         </tbody>
 									</table>
                                 </div>
@@ -88,7 +66,7 @@
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Delete Account</h2>
+                        <h2 class="card-title">Deactivate User</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
@@ -96,7 +74,7 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="modal-text">
-                                <p class="mb-0">Are you sure that you want to delete this account?</p>
+                                <p class="mb-0">Are you sure that you want to deactivate this user?</p>
                                 <input name="acc_id" id="deleteID" hidden>
                             </div>
                         </div>
@@ -104,7 +82,7 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Deactivate</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -187,83 +165,66 @@
                 <form method="post" id="addForm" action="{{ route('store-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
-                        <h2 class="card-title">Add New Account</h2>
+                        <h2 class="card-title">Add New User</h2>
                     </header>
                     <div class="card-body">
                         <div class="row form-group">
                             <div class="col-lg-6">
-                                <label>Account Code</label>
-                                <input type="number" class="form-control" placeholder="Account Code" name="ac_cod" required disabled>
+                                <label>User ID</label>
+                                <input type="number" class="form-control" placeholder="User ID" name="ac_cod" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" required>
+                                <label>Picture</label>
+                                <input type="file" class="form-control" name="att[]" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001" required>
+                                <label>Employee Name</label>
+                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="opp_date" value="<?php echo date('Y-m-d'); ?>" required>
-                            </div>  
-                            <div class="col-lg-6 mb-2">
-                                <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" >
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Address</label>
-                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
+                                <label>CNIC No.</label>
+                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control"  placeholder="Credit Limit" value="0" name="credit_limit" required >
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Account Name" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Days<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control"  placeholder="Credit Days" value="0" name="days_limit" required >
+                                <label>CNIC No.</label>
+                                <input type="text" class="form-control" placeholder="Account Name"  required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Group </label>
-                                <select data-plugin-selecttwo class="form-control select2-js" class="form-control"  name ="group_cod">
-                                    <option value="">Select Group</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
+                                <label>Address</label>
+                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Designation</label>
+                                <select data-plugin-selectTwo class="form-control" autofocus>
+                                    <option value="">Select Designation</option>
                                 </select>
-                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
-
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name ="AccountType" required>
-                                    <option value="" disabled selected>Select Account Type</option>
-                                    @foreach($sub_head_of_acc as $key => $row)	
-                                        <option value="{{$row->id}}">{{$row->sub}}</option>
-                                    @endforeach
-                                </select>
-                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" value="<?php echo date('Y-m-d'); ?>">
+                            </div> 
+                            <div class="col-lg-6 mb-2">
+                                <label>Username</label>
+                                <input type="text" class="form-control" placeholder="@username">
                             </div>
-
-                            <div class="col-lg-12 mb-2">
-                                <label>Attachement</label>
-                                <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                            <div class="col-lg-6 mb-2">
+                                <label>Password</label>
+                                <input type="text" class="form-control" placeholder="password">
                             </div>
-  
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Add New Account</button>
+                                <button type="submit" class="btn btn-primary">Add User</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -287,16 +248,16 @@
                                 <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
+                                <label>Account Name</label>
                                 <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" required name="rec_able" id="update_rec_able" step=".00001">
+                                <label>Receivables</label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" required id="update_pay_able" step=".00001">
+                                <label>Payables</label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -306,7 +267,7 @@
                                 <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
                             </div>
@@ -315,31 +276,93 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control"  placeholder="Credit Limit." required name="credit_limit" id="update_credit_limit">
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Days Limit<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control"  placeholder="Days Limit" required name="days_limit" id="update_days_limit">
-                            </div>
-                            <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name="group_cod" id="update_group_cod">
+                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
                                 </select>
                                 <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name="AccountType" required id="update_AccountType">
+                                <label>Account Type</label>
+                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
-                                    @foreach($sub_head_of_acc as $key => $row)	
-                                        <option value="{{$row->id}}">{{$row->sub}}</option>
-                                    @endforeach
+                                </select>
+                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
+                            </div>
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Attachements</label>
+                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Update Account</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </section>
+        </div>
+
+        <div id="userRolesModal" class="modal-block modal-block-primary mfp-hide">
+            <section class="card">
+                <form method="post" id="updateForm" action="{{ route('update-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                    @csrf
+                    <header class="card-header">
+                        <h2 class="card-title">Update Account</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Account Code</label>
+                                <input type="number" class="form-control" placeholder="Account Code" id="ac_id" required disabled>
+                                <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Account Name</label>
+                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Receivables</label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Payables</label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="opp_date" id="update_opp_date">
+                            </div>  
+                            <div class="col-lg-6 mb-2">
+                                <label>Remarks</label>
+                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label>Address</label>
+                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Phone No.</label>
+                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Account Group</label>
+                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
+                                    <option value="">Select Group</option>
+                                </select>
+                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
+                            </div>
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Account Type</label>
+                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
+                                    <option disabled selected>Select Account Type</option>
                                 </select>
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
@@ -405,7 +428,6 @@
             url: "/coa/acc/detail",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $('#ac_id').val(result['ac_code']);
                 $('#update_ac_id').val(result['ac_code']);
                 $('#update_ac_name').val(result['ac_name']);
@@ -415,10 +437,8 @@
                 $('#update_remarks').val(result['remarks']);
                 $('#update_address').val(result['address']);
                 $('#update_phone_no').val(result['phone_no']);
-                $('#update_credit_limit').val(result['credit_limit']);
-                $('#update_days_limit').val(result['days_limit']);
-                $('#update_group_cod').val(result['group_cod']).trigger('change');
-                $('#update_AccountType').val(result['AccountType']).trigger('change');
+                $('#update_group_cod').val(result['group_cod']);
+                $('#update_AccountType').val(result['AccountType']);
                 $('#update_att').val(result['att']);
             },
             error: function(){
