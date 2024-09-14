@@ -32,7 +32,7 @@
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
-                                                    <th>Att.</th>
+                                                    <th>Att.</th> 
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -80,6 +80,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                
                                     </div>
                                 </div>
                             </section>
@@ -126,7 +127,7 @@
                 </header>
                 <div class="card-body">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0" id="">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
@@ -152,6 +153,9 @@
         @extends('../layouts.footerlinks')
 	</body>
 </html>
+
+
+
 <script>
     function setId(id){
         $('#deleteID').val(id);
