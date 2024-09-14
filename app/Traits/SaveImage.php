@@ -159,6 +159,17 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/tquotation/'),$filenamenew);
         return $filenamepath;
     }
+
+    public function quotDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/quotDoc/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/quotDoc/'),$filenamenew);
+        return $filenamepath;
+    }
     
     public function tpoDoc($file,$extension)
     {
