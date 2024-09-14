@@ -35,6 +35,9 @@ class PurchaseController extends Controller
         ->get();
         
         return view('purchase1.index',compact('pur1'));
+
+
+     
     }
 
     public function create(Request $request)
