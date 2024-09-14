@@ -21,7 +21,9 @@
 		<link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+		<!-- <link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" /> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+
 		<link rel="stylesheet" href="/assets/vendor/datatables/media/css/dataTables.bootstrap5.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
@@ -46,7 +48,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(255, 255, 255, 0.9); /* Optional: semi-transparent background */
+            /* background: rgba(255, 255, 255, 0.9);  */
+			background-color: transparent;
         }
         .loader div {
             width: 50px;
@@ -55,6 +58,7 @@
             border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+			/* background-color: transparent; */
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }

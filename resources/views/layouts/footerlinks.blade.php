@@ -1,5 +1,5 @@
 <script>
-        // Show loader on page unload and before content is loaded
+    // Show loader on page unload and before content is loaded
     window.addEventListener('beforeunload', function() {
         document.querySelector('.loader').style.display = 'flex';
     });
@@ -26,7 +26,7 @@
 
 <!-- Vendor -->
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/common/common.js"></script>
+<!-- <script src="/assets/vendor/common/common.js"></script> -->
 <script src="/assets/vendor/select2/js/select2.js"></script>
 
 <!-- Theme Base, Components and Settings -->

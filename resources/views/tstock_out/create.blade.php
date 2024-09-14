@@ -1,10 +1,10 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
 					<form method="post" id="myForm" action="{{ route('store-tstock-out-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
@@ -177,7 +177,7 @@
             </section>
         </div>
     </section>
-    @extends('../layouts.footerlinks')
+    @include('../layouts.footerlinks')
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -225,7 +225,7 @@
             table.append(newRow);
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
-            $('#myTable select[data-plugin-selecttwo]').select2();
+            $('#select[data-plugin-selecttwo]').select2();
 
         }
     }
