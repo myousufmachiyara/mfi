@@ -16,7 +16,7 @@ class myPDF extends TCPDF
 
     public function Header()
     {
-        $this->SetFont('helvetica', 'B', 10);
+        $this->SetFont('helvetica','B', 10);
         $this->Cell(0, 10, '', 0, 1, 'C');
         $this->Ln(5);
         if ($this->getPage()>1) {

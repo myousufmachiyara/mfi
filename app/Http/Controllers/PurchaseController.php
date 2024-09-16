@@ -311,25 +311,7 @@ class PurchaseController extends Controller
         $pdf->SetTitle('Invoice-'.$purchase['pur_id']);
         $pdf->SetSubject('Invoice-'.$purchase['pur_id']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
-               
-        // // Set header and footer fonts
-        // $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        // $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-        
-        // // Set default monospaced font
-        // $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-        
-        // // Set margins
-        // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
-        // // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-                
-        // // Set image scale factor
-        // $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-        
-        // // Set font
-        // $pdf->SetFont('helvetica', '', 10);
-        
+                   
         // Add a page
         $pdf->AddPage();
            
@@ -387,9 +369,9 @@ class PurchaseController extends Controller
         $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['pur_remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
-    
+        
         $pdf->writeHTML($html, true, false, true, false, '');
-
+    
         $html = '<table border="0.3" style="text-align:center;margin-top:10px" >';
         $html .= '<tr>';
         $html .= '<th style="width:8%;font-size:10px;font-weight:bold;font-family:poppins">S/R</th>';
@@ -403,9 +385,6 @@ class PurchaseController extends Controller
         $html .= '</table>';
 
         $pdf->setTableHtml($html);
-
-        // Output the HTML content
-        // $pdf->writeHTML($html, true, false, true, false, '');
 
         $count=1;
         $total_weight=0;
@@ -457,46 +436,52 @@ class PurchaseController extends Controller
             $currentY = $pdf->GetY()+15;
         }
 
+        $pdf->SetFont('helvetica','', 10);
+
         // Column 1
         $pdf->SetXY(10, $currentY+10);
         $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
         $pdf->Cell(40, 5, 'Total Quantity', 1,1);
 
         // Column 2
-        $pdf->SetXY(50.1, $currentY+10);
+        $pdf->SetXY(50, $currentY+10);
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
-        $pdf->SetXY(50.1, $currentY+17.7);
+        $pdf->SetXY(50, $currentY+16.8);
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
+
         $pdf->SetXY(10, $currentY+30);
-        $html='<b><u><i style"max-width: 10mm;word-wrap: break-word;">'.$num_to_words.'</i></u></b>';
+        $html='<div style="width: 50mm; word-wrap: break-word; overflow: hidden;">
+                  <b><u><i>' . $num_to_words . '</i></u></b>
+               </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
+        $pdf->SetFont('helvetica','', 10);
 
         // Column 3
         $pdf->SetXY(120, $currentY+10);
         $pdf->Cell(45, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(120, $currentY+17.7);
+        $pdf->SetXY(120, $currentY+16.8);
         $pdf->Cell(45, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(120, $currentY+25.3);
+        $pdf->SetXY(120, $currentY+23.7);
         $pdf->Cell(45, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(120, $currentY+33);
+        $pdf->SetXY(120, $currentY+30.5);
         $pdf->Cell(45, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(120, $currentY+40.7);
+        $pdf->SetXY(120, $currentY+37.3);
         $pdf->Cell(45, 5, 'Net Amount', 1,1);
         
         // Column 4
         $pdf->SetXY(165, $currentY+10);
         $pdf->Cell(35, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(165, $currentY+17.7);
+        $pdf->SetXY(165, $currentY+16.8);
         $pdf->Cell(35, 5, $purchase['pur_labor_char'], 1, 'R');
-        $pdf->SetXY(165, $currentY+25.3);
+        $pdf->SetXY(165, $currentY+23.7);
         $pdf->Cell(35, 5, $purchase['pur_convance_char'], 1, 'R');
-        $pdf->SetXY(165, $currentY+33);
+        $pdf->SetXY(165, $currentY+30.5);
         $pdf->Cell(35, 5, $purchase['pur_discount'], 1, 'R');
-        $pdf->SetXY(165, $currentY+40.7);
+        $pdf->SetXY(165, $currentY+37.3);
         $net_amount=round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
