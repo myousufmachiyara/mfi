@@ -183,7 +183,9 @@
         @include('../layouts.footerlinks')
 	</body>
 	<script>
-		var words=convertCurrencyToWords(<?php echo $netamount?>);
-		$('#numberInWords').val(words);
+		var netAmount = <?php echo json_encode($netamount); ?>;
+		var words = convertCurrencyToWords(netAmount);
+		document.getElementById('numberInWords').innerHTML = words;
 	</script>
+	
 </html>
