@@ -4,7 +4,7 @@ namespace App\Services;
 
 use TCPDF;
 
-class MyPDF extends TCPDF
+class myPDF extends TCPDF
 {
 
     private $tableHtml = ''; // Variable to store the HTML for the table
