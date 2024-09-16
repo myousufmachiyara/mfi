@@ -17,7 +17,7 @@
 									<div class="row">
 										<div class="col-sm-6 mt-3">
 											<h2 class="h2 mt-0 mb-1" style="color:#17365D">PURCHASE INVOICE NO:</h2>
-											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->pur_id}}</h4>
+											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->prefix}}{{$pur->pur_id}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">

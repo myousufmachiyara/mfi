@@ -363,6 +363,8 @@ class JV2Controller extends Controller
         
     // Set text color to #17365D (RGB: 23, 54, 93)
     $pdf->SetTextColor(23, 54, 93);
+    // Set font to bold
+    $pdf->SetFont('helvetica', 'B', 12);
 
     // Column 3
     $pdf->SetXY(175, $currentY+10);
@@ -371,13 +373,15 @@ class JV2Controller extends Controller
     // Reset text color back to default (black) for subsequent cells
     $pdf->SetTextColor(0, 0, 0);
 
+    
+
     // Column 3
     $pdf->SetXY(203, $currentY+10);
-    $pdf->MultiCell(40, 5, $total_debit, 1, 'C');
+    $pdf->MultiCell(40, 5, number_format($total_debit), 1, 'C');
 
     // Column 4
     $pdf->SetXY(243, $currentY+10);
-    $pdf->MultiCell(40, 5, $total_credit, 1, 'C');
+    $pdf->MultiCell(40, 5, number_format($total_credit), 1, 'C');
 
         
         $ $currentY = $pdf->GetY();
