@@ -432,12 +432,12 @@ class PurchaseController extends Controller
         
         if(($pdf->getPageHeight()-$pdf->GetY())<47){
             $pdf->AddPage();
-            $this->SetY(40);
+            $pdf->SetY(40);
             $currentY = $pdf->GetY()+15;
         }
 
         $pdf->SetFont('helvetica','B', 10);
-        $this->SetTextColor(23, 54, 93);
+        $pdf->SetTextColor(23, 54, 93);
 
         $pdf->SetXY(10, $currentY+10);
         $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
@@ -448,7 +448,7 @@ class PurchaseController extends Controller
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(50, $currentY+16.8);
         $pdf->SetFont('helvetica','', 10);
-        $this->SetTextColor(0, 0, 0);
+        $pdf->SetTextColor(0, 0, 0);
 
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
