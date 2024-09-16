@@ -397,12 +397,12 @@ class PurchaseController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:8%;border-right:0.3px dashed #000;border-left:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center;">'.$count.'</td>';
-                $html .= '<td style="width:8%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty2'].'</td>';
+                $html .= '<td style="width:8%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_qty2'].'</td>';
                 $total_quantity=$total_quantity+$items['pur_qty2'];
                 $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['item_name'].'</td>';
                 $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_price'].'</td>';
-                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty'].'</td>';
+                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_price'].'</td>';
+                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_qty'].'</td>';
                 $total_weight=$total_weight+$items['pur_qty'];
                 $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty']*$items['pur_price'].'</td>';
                 $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
