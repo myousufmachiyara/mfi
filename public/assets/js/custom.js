@@ -13,11 +13,12 @@ function convertCurrencyToWords(number) {
     const Billion = Thousand * Million;
     const Trillion = Thousand * Billion;
 
-    if (number === 0) return "Zero";
+    if (number === 0) return "Zero Rupees Only";
+    
     const isNegative = number < 0;
     number = Math.abs(number);
 
-    let result = isNegative ? "(negative) " : "";
+    let result = "";
 
     // Trillions
     if (number >= Trillion) {
@@ -48,13 +49,20 @@ function convertCurrencyToWords(number) {
         result += convertDigitGroup(number);
     }
 
-    return result.trim() + " Rupees Only";
+    result = result.trim() + " Rupees Only";
+    
+    // Handle negative case
+    return isNegative ? "Negative " + result : result;
 }
 
 function convertDigitGroup(number) {
     const hundreds = Math.floor(number / 100);
     const remainder = number % 100;
     let result = "";
+
+    if (number === 1) {  // Special case for "One"
+        return "One";
+    }
 
     if (hundreds > 0) {
         result += convertSingleDigit(hundreds) + " Hundred ";

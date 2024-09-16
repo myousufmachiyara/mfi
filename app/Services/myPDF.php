@@ -18,10 +18,11 @@ class myPDF extends TCPDF
     {
         $this->SetFont('helvetica','B', 10);
         $this->Cell(0, 10, '', 0, 1, 'C');
-        if ($this->getPage()>1) {
+        if ($this->getPage() > 1) {
+            $this->SetMargins(10, 17, 10); // 10mm left, 50mm top, 10mm right            
             $this->setCellPadding(1.2); // Set padding for all cells in the table
             $this->writeHTML($this->tableHtml, true, false, true, false, '');
-            $this->SetTopMargin(40);
+
         }
     }
 
@@ -70,59 +71,69 @@ class myPDF extends TCPDF
     }
  
 
+    
     function convertCurrencyToWords($number) {
         $Thousand = 1000;
         $Million = $Thousand * $Thousand;
         $Billion = $Thousand * $Million;
         $Trillion = $Thousand * $Billion;
-
-        if ($number == 0) return "Zero";
+    
+        if ($number == 0) {
+            return "Zero Rupees Only";
+        }
+    
         $isNegative = $number < 0;
         $number = abs($number);
-
-        $result = $isNegative ? "(negative) " : "";
-        
+    
+        $result = "";
+    
         // Trillions
         if ($number >= $Trillion) {
             $result .= $this->convertDigitGroup(floor($number / $Trillion)) . " Trillion ";
             $number %= $Trillion;
         }
-        
+    
         // Billions
         if ($number >= $Billion) {
             $result .= $this->convertDigitGroup(floor($number / $Billion)) . " Billion ";
             $number %= $Billion;
         }
-        
+    
         // Millions
         if ($number >= $Million) {
             $result .= $this->convertDigitGroup(floor($number / $Million)) . " Million ";
             $number %= $Million;
         }
-        
+    
         // Thousands
         if ($number >= $Thousand) {
             $result .= $this->convertDigitGroup(floor($number / $Thousand)) . " Thousand ";
             $number %= $Thousand;
         }
-
+    
         // Hundreds and below
         if ($number > 0) {
             $result .= $this->convertDigitGroup($number);
         }
-
-        return trim($result) . " Rupees Only";
+    
+        $result = trim($result) . " Rupees Only";
+    
+        return $isNegative ? "Negative " . $result : $result;
     }
-
+    
     function convertDigitGroup($number) {
         $hundreds = floor($number / 100);
         $remainder = $number % 100;
         $result = "";
-
+    
+        if ($number == 1) {  // Special case for "One"
+            return "One";
+        }
+    
         if ($hundreds > 0) {
             $result .= $this->convertSingleDigit($hundreds) . " Hundred ";
         }
-
+    
         if ($remainder > 0) {
             if ($remainder < 20) {
                 $result .= $this->convertTens($remainder);
@@ -133,10 +144,10 @@ class myPDF extends TCPDF
                 }
             }
         }
-
+    
         return trim($result);
     }
-
+    
     function convertSingleDigit($digit) {
         $digits = [
             0 => "",
@@ -150,10 +161,10 @@ class myPDF extends TCPDF
             8 => "Eight",
             9 => "Nine"
         ];
-
+    
         return $digits[$digit];
     }
-
+    
     function convertTens($number) {
         $tens = [
             10 => "Ten",
@@ -175,8 +186,11 @@ class myPDF extends TCPDF
             80 => "Eighty",
             90 => "Ninety"
         ];
-
-        return isset($tens[$number]) ? $tens[$number] : "";
+    
+        return $tens[$number] ?? "";
     }
+    
+ 
+    
 
 }

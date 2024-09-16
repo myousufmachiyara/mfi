@@ -218,19 +218,23 @@ class JV1Controller extends Controller
         }';
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline">Journal Voucher 1</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Journal Voucher 1</h1>';
+
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins"> Voucher No: <span style="text-decoration: underline;">'.$jv1['auto_lager'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins"> Voucher No: <span style="text-decoration: underline;color:black;">'.$jv1['auto_lager'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($jv1['date'])->format('d-m-y') . '</span></td>';
         $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="margin-bottom:1rem">';
+       
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins"> Date: '.\Carbon\Carbon::parse($jv1['date'])->format('d-m-y').'</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Remarks: '.$jv1['remarks'].'</td>';
+        $html .= '<td width="10%" style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Remarks:</td>';
+        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$jv1['remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -240,9 +244,9 @@ class JV1Controller extends Controller
 
         $html = '<table border="1" style="border-collapse: collapse;" >';
         $html .= '<tr>';
-        $html .= '<th style="width:40%;">Account Debit</th>';
-        $html .= '<th style="width:40%">Account Credit</th>';
-        $html .= '<th style="width:20%">Amount</th>';
+        $html .= '<th style="width:40%;color:#17365D;font-weight:bold;">Account Debit</th>';
+        $html .= '<th style="width:40%;color:#17365D;font-weight:bold;">Account Credit</th>';
+        $html .= '<th style="width:20%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
         
@@ -253,10 +257,11 @@ class JV1Controller extends Controller
         $total_debit=0;
 
         $html .= '<table cellspacing="0" cellpadding="5">';
-        $html .= '<tr style="background-color:#f1f1f1">';
+        $html .= '<tr>';
         $html .= '<td style="width:40%;">'.$jv1['debit_account'].'</td>';
         $html .= '<td style="width:40%;">'.$jv1['credit_account'].'</td>';
-        $html .= '<td style="width:20%;">'.$jv1['amount'].'</td>';
+        $html .= '<td style="width:20%;">' . number_format($jv1['amount'], 0) . '</td>';
+
         $html .= '</tr>';
         
         $html .= '</table>';
@@ -275,7 +280,7 @@ class JV1Controller extends Controller
         // $numberText=$f->format($number);
         // $formattedWords = ucwords(strtolower($numberText));
 
-        $words='<h1 style="text-decoration:underline;font-style:italic">'.$num_to_words.'</h1>';
+        $words='<h1 style="text-decoration:underline;font-style:italic;color:#17365D">'.$num_to_words.'</h1>';
         $pdf->writeHTML($words, true, false, true, false, '');
 
 
@@ -285,6 +290,8 @@ class JV1Controller extends Controller
             'T' => array('width' => 0.75),  // Only top border with width 0.75
         );
 
+        // Set text color
+        $pdf->SetTextColor(23, 54, 93); // RGB values for #17365D
         // First Cell
         $pdf->SetXY(50, $currentY+50);
         $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
