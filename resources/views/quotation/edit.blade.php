@@ -5,13 +5,13 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					<form method="post" action="{{ route('update-quotation-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Sale Invoice</h2>
+										<h2 class="card-title">Edit Quotation</h2>
 
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
@@ -305,7 +305,12 @@
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
 
+			 // Set focus on the new item_code input field
+			 document.getElementById('item_code' + (index - 1)).focus();
+			
 		}
+		
+
 	}
 
 
