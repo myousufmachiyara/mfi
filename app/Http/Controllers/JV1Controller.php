@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use TCPDF;
+use App\Services\myPDF;
 use App\Models\AC;
 use NumberFormatter;
 use App\Models\jv1_att;
@@ -192,7 +192,7 @@ class JV1Controller extends Controller
         'c_ac.ac_name as credit_account')
         ->first();
 
-        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new MyPDF();
 
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -202,30 +202,11 @@ class JV1Controller extends Controller
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
                
-        // Set header and footer fonts
-        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-        
-        // Set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-        
-        // Set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_RIGHT);
-        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-                
-        // Set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-        
-        // Set font
-        $pdf->SetFont('helvetica', '', 10);
-        
         // Add a page
         $pdf->AddPage();
            
         $pdf->setCellPadding(1.2); // Set padding for all cells in the table
 
-        // margin top
         $margin_top = '.margin-top {
             margin-top: 10px;
         }';
@@ -233,33 +214,31 @@ class JV1Controller extends Controller
 
         // margin bottom
         $margin_bottom = '.margin-bottom {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }';
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="text-align:center">Journal Voucher 1</h1>';
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline">Journal Voucher 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-
-        $html = '<table>';
+        $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td width="50%">Voucher No: <span style="text-decoration: underline;">'.$jv1['auto_lager'].'</span></td>';
-        $html .= '<td width="50%" style="text-align:right">Date: '.$jv1['date'].'</td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins"> Voucher No: <span style="text-decoration: underline;">'.$jv1['auto_lager'].'</span></td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins"> Date: '.\Carbon\Carbon::parse($jv1['date'])->format('d-m-y').'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Remarks: '.$jv1['remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
-        $pdf->writeHTML($html, true, false, true, false, '');
-
-        $html = '<table>';
-        $html .= '<tr>';
-        $html .= '<td>Remarks: '.$jv1['remarks'].'</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
+        // $pdf->writeHTML($html, true, false, true, false, '');
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
+        $html = '<table border="1" style="border-collapse: collapse;" >';
         $html .= '<tr>';
         $html .= '<th style="width:40%;">Account Debit</th>';
         $html .= '<th style="width:40%">Account Credit</th>';
@@ -267,33 +246,36 @@ class JV1Controller extends Controller
         $html .= '</tr>';
         $html .= '</table>';
         
-        // Output the HTML content
-        $pdf->writeHTML($html, true, false, true, false, '');
+        // $pdf->writeHTML($html, true, false, true, false, '');
 
         $count=1;
         $total_credit=0;
         $total_debit=0;
 
-        $item_table =  '<table style="text-align:center">';
-        $item_table .= '<tr style="background-color:#f1f1f1">';
-        $item_table .= '<td style="width:40%;">'.$jv1['debit_account'].'</td>';
-        $item_table .= '<td style="width:40%;">'.$jv1['credit_account'].'</td>';
-        $item_table .= '<td style="width:20%;">'.$jv1['amount'].'</td>';
-        $item_table .= '</tr>';
+        $html .= '<table cellspacing="0" cellpadding="5">';
+        $html .= '<tr style="background-color:#f1f1f1">';
+        $html .= '<td style="width:40%;">'.$jv1['debit_account'].'</td>';
+        $html .= '<td style="width:40%;">'.$jv1['credit_account'].'</td>';
+        $html .= '<td style="width:20%;">'.$jv1['amount'].'</td>';
+        $html .= '</tr>';
         
-        $item_table .= '</table>';
-        $pdf->writeHTML($item_table, true, false, true, false, '');
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
 
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         // Column 3
-        $number = floor($jv1['amount']); // Remove decimals (round down)
-        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-        $numberText=$f->format($number);
-        $formattedWords = ucwords(strtolower($numberText));
-        $words='<h1 style="text-decoration:underline;font-style:italic">'.$formattedWords.' Only</h1>';
+        $roundedTotal= round($jv1['amount']);
+        $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
+
+        // $number = floor($jv1['amount']); // Remove decimals (round down)
+        // $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+        // $numberText=$f->format($number);
+        // $formattedWords = ucwords(strtolower($numberText));
+
+        $words='<h1 style="text-decoration:underline;font-style:italic">'.$num_to_words.'</h1>';
         $pdf->writeHTML($words, true, false, true, false, '');
 
 

@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-use TCPDF;
 
 use Illuminate\Http\Request;
 use App\Models\Item_entry;
