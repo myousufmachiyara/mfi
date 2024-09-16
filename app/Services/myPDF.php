@@ -22,7 +22,7 @@ class myPDF extends TCPDF
         if ($this->getPage()>1) {
             $this->setCellPadding(1.2); // Set padding for all cells in the table
             $this->writeHTML($this->tableHtml, true, false, true, false, '');
-            $this->SetY(40);
+            $this->SetY(100);
         }
     }
 
