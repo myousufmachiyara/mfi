@@ -36,7 +36,7 @@
                                                     <td>{{$row->credit_account}}</td>
                                                     <td >{{$row->remarks}}</td>
                                                     @if (strpos($row->amount, '.') !== false && substr($row->amount, strpos($row->amount, '.') + 1) > '0')
-                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 2, '.', ',') }}</strong></td>
+                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
                                                 @else
                                                     <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
                                                 @endif
