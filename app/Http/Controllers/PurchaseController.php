@@ -436,9 +436,8 @@ class PurchaseController extends Controller
             $currentY = $pdf->GetY()+15;
         }
 
-        $pdf->SetFont('helvetica','', 10);
 
-        // Column 1
+        $pdf->SetFont('helvetica','B', 10);
         $pdf->SetXY(10, $currentY+10);
         $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
         $pdf->Cell(40, 5, 'Total Quantity', 1,1);
@@ -447,20 +446,20 @@ class PurchaseController extends Controller
         $pdf->SetXY(50, $currentY+10);
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(50, $currentY+16.8);
+        $pdf->SetFont('helvetica','', 10);
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
+        $pdf->SetFont('helvetica','BI', 14);
 
         $pdf->SetXY(10, $currentY+30);
-        $html='<div style="width: 50mm; word-wrap: break-word; overflow: hidden;">
-                  <b><u><i>' . $num_to_words . '</i></u></b>
-               </div>';
-        $pdf->writeHTML($html, true, false, true, false, '');
-
+        $width = 100;
+        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
         $pdf->SetFont('helvetica','', 10);
 
         // Column 3
+        $pdf->SetFont('helvetica','B', 10);
         $pdf->SetXY(120, $currentY+10);
         $pdf->Cell(45, 5, 'Total Amount', 1,1);
         $pdf->SetXY(120, $currentY+16.8);
@@ -473,6 +472,7 @@ class PurchaseController extends Controller
         $pdf->Cell(45, 5, 'Net Amount', 1,1);
         
         // Column 4
+        $pdf->SetFont('helvetica','', 10);
         $pdf->SetXY(165, $currentY+10);
         $pdf->Cell(35, 5, $total_amount, 1, 'R');
         $pdf->SetXY(165, $currentY+16.8);
@@ -483,6 +483,7 @@ class PurchaseController extends Controller
         $pdf->Cell(35, 5, $purchase['pur_discount'], 1, 'R');
         $pdf->SetXY(165, $currentY+37.3);
         $net_amount=round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
+        $pdf->SetFont('helvetica','B', 10);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
         // Close and output PDF
