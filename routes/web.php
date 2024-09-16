@@ -272,8 +272,8 @@ Route::post('/tquotation/create', [App\Http\Controllers\TQuotationController::cl
 Route::get('/tquotation/edit/{id}', [App\Http\Controllers\TQuotationController::class, 'edit'])->name('edit-tquotation');
 Route::post('/tquotation/update', [App\Http\Controllers\TQuotationController::class, 'update'])->name('update-tquotation');
 Route::post('/tquotation/delete', [App\Http\Controllers\TQuotationController::class, 'destroy'])->name('delete-tquotation');
- Route::get('/tquotation/show/{id}', [App\Http\Controllers\TQuotationController::class, 'show'])->name('show-tquotation');
- Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
+Route::get('/tquotation/show/{id}', [App\Http\Controllers\TQuotationController::class, 'show'])->name('show-tquotation');
+Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
 Route::get('/tquotation/attachements', [App\Http\Controllers\TQuotationController::class, 'getAttachements'])->name('get-tquotation-att');
 Route::get('/tquotation/download/{id}', [App\Http\Controllers\TQuotationController::class, 'downloadAtt'])->name('tquotation-att-download');
 Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TQuotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
@@ -281,6 +281,24 @@ Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TQuotationContr
 Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TQuotationController::class, 'getunclosed'])->name('get-unclosed-tquotation-invoice');
 Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TQuotationController::class, 'getItems'])->name('get-quot2-items');
 Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
+
+
+
+//quotation
+Route::get('/quotation/all-quotation', [App\Http\Controllers\QuotationController::class, 'index'])->name('all-quotation');
+Route::get('/quotation/new-quotation', [App\Http\Controllers\QuotationController::class, 'create'])->name('create-quotation-invoice'); 
+Route::get('/quotation/edit-invoice/{id}', [App\Http\Controllers\QuotationController::class, 'edit'])->name('edit-quotation-invoice');
+Route::post('/quotation/quotationinvoice/create', [App\Http\Controllers\QuotationController::class, 'store'])->name('store-quotation-invoice');
+Route::post('/quotation/quotationinvoice/update', [App\Http\Controllers\QuotationController::class, 'update'])->name('update-quotation-invoice');
+Route::post('/quotation/quotationinvoice/delete', [App\Http\Controllers\QuotationController::class, 'destroy'])->name('delete-quotation-invoice');
+Route::get('/quotation/quotationinvoice/view/{id}', [App\Http\Controllers\QuotationController::class, 'showNew'])->name('show-quotation-invoice');
+Route::get('/quotation/quotationinvoice/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
+Route::get('/quotation/quotationinvoice/downloadPDF/{id}', [App\Http\Controllers\QuotationController::class, 'downloadPDF'])->name('download-quotation-invoice');
+Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
+Route::get('/quotation/download/{id}', [App\Http\Controllers\QuotationController::class, 'downloadAtt'])->name('quotation-att-download');
+Route::delete('/quotation/deleteAttachment/{id}', [App\Http\Controllers\QuotationController::class, 'deleteAtt'])->name('quotation-att-delete');
+Route::get('/quotation/view/{id}', [App\Http\Controllers\QuotationController::class, 'view'])->name('show-quotation-att');
+
 
 //tpo
 Route::get('/tpo/all-tpo', [App\Http\Controllers\TpoController::class, 'index'])->name('all-tpo');
