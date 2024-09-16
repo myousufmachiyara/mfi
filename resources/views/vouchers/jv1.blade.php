@@ -35,10 +35,11 @@
                                                     <td>{{$row->debit_account}}</td>
                                                     <td>{{$row->credit_account}}</td>
                                                     <td >{{$row->remarks}}</td>
-                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)  
-                                                        <td>{{ rtrim(rtrim(number_format($row->amount, 10, '.', ','), '0'), '.') }}</td>
+                                             
+                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0) 
+                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($row->amount), '0'), '.') }}</strong></td>
                                                     @else
-                                                        <td>{{ number_format(intval($row->amount))}}</td>
+                                                        <td><strong style="font-size:15px">{{ number_format(intval($row->amount))}}</strong></td>
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
