@@ -7,12 +7,6 @@ use TCPDF;
 class MyPDF extends TCPDF
 {
 
-    private $total_weight=0; 
-    private $total_quantity=0; 
-    private $total_amount=0; 
-    private $pur_labor_char=0; 
-    private $pur_convance_char=0; 
-    private $pur_discount=0;
     private $tableHtml = ''; // Variable to store the HTML for the table
 
     // Set table HTML
