@@ -19,6 +19,8 @@ Route::get('/users/all-users', [App\Http\Controllers\UsersController::class, 'in
 
 // user roles
 Route::get('/user-role/all-roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('all-roles');
+Route::get('/user-role/new-role', [App\Http\Controllers\UserRoleController::class, 'create'])->name('new-role');
+Route::post('/user-role/create-role', [App\Http\Controllers\UserRoleController::class, 'store'])->name('create-role');
 
 
 //item groups

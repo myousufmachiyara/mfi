@@ -30,11 +30,6 @@
                                 </a>
                             </li>	
                             <li>
-                                <a class="nav-link"  >
-                                    Designation
-                                </a>
-                            </li>	
-                            <li>
                                 <a class="nav-link"   href="{{ route('all-users')}}">
                                     User Accounts
                                 </a>
@@ -124,10 +119,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link"   href="/sales/new-invoice">
-                                    Purchase Return
+                                <a class="nav-link" href="#">
+                                    Purchase 1 Return
                                 </a>
-                            </li>								
+                            </li>	
+                            <li>
+                                <a class="nav-link" href="#">
+                                    Purchase 2 Return
+                                </a>
+                            </li>									
                         </ul>
                     </li>
                     <li class="nav-parent">
@@ -147,10 +147,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link"   href="#">
-                                    Sale Return
+                                <a class="nav-link" href="#">
+                                    Sale 1 Return
                                 </a>
-                            </li>								
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#">
+                                    Sale 2 Return
+                                </a>
+                            </li>									
                         </ul>
                     </li>
                     <li class="nav-parent">
