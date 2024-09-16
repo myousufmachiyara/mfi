@@ -337,7 +337,7 @@ class PurchaseController extends Controller
         $html .= '<tr>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Invoice No: &nbsp;<span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Date: &nbsp;<span>'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">pur_ord_no: <span style="text-decoration: underline;"></span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">pur_ord_no: <span style="text-decoration: underline;">'.$purchase['pur_bill_no'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Login: &nbsp; <span style="text-decoration: underline;">Hamza</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
