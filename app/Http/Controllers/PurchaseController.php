@@ -454,7 +454,7 @@ class PurchaseController extends Controller
 
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
-        $pdf->SetFont('helvetica','BI', 14);
+        $pdf->SetFont('helvetica','BIU', 14);
         $pdf->SetTextColor(23, 54, 93);
 
         $pdf->SetXY(10, $currentY+30);

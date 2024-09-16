@@ -133,7 +133,8 @@
 														</tr>
 													</tbody>
 												</table>
-												<h3 id="numberInWords"></h3>
+												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+
 											</div>
 										</div>
 									</div>
