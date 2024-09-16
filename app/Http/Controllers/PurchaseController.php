@@ -471,7 +471,7 @@ class PurchaseController extends Controller
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
         $pdf->SetXY(10, $currentY+30);
-        $html='<b><u><i style"max-width: 50mm;word-wrap: break-word;">'.$num_to_words.'</i></u></b>';
+        $html='<b><u><i style"max-width: 10mm;word-wrap: break-word;">'.$num_to_words.'</i></u></b>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
 
