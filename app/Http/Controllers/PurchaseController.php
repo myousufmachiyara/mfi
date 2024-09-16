@@ -432,6 +432,7 @@ class PurchaseController extends Controller
         
         if(($pdf->getPageHeight()-$pdf->GetY())<47){
             $pdf->AddPage();
+            $this->SetY(40);
             $currentY = $pdf->GetY()+15;
         }
 
