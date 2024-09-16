@@ -335,10 +335,10 @@ class PurchaseController extends Controller
 
         $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span>'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">pur_ord_no: <span style="text-decoration: underline;">'.$purchase['pur_bill_no'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;">Hamza</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;color:#000">'.$purchase['pur_id'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">pur_ord_no: <span style="text-decoration: underline;color:#000">'.$purchase['pur_bill_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;color:#000">Hamza</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -373,13 +373,13 @@ class PurchaseController extends Controller
     
         $html = '<table border="0.3" style="text-align:center;margin-top:10px" >';
         $html .= '<tr>';
-        $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins">S/R</th>';
-        $html .= '<th style="width:8%;font-size:10px;font-weight:bold;font-family:poppins">Qty</th>';
-        $html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins">Item Name</th>';
-        $html .= '<th style="width:24%;font-size:10px;font-weight:bold;font-family:poppins">Description</th>';
-        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins">Price</th>';
-        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins">Weight</th>';
-        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins">Amount</th>';
+        $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
+        $html .= '<th style="width:8%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
+        $html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+        $html .= '<th style="width:24%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
+        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price</th>';
+        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Weight</th>';
+        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
