@@ -329,16 +329,16 @@ class PurchaseController extends Controller
 
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline">Purchase Invoice</h1>';
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Invoice</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Invoice No: &nbsp;<span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Date: &nbsp;<span>'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">pur_ord_no: <span style="text-decoration: underline;">'.$purchase['pur_bill_no'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins">Login: &nbsp; <span style="text-decoration: underline;">Hamza</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;">'.$purchase['pur_id'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span>'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">pur_ord_no: <span style="text-decoration: underline;">'.$purchase['pur_bill_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;">Hamza</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -346,25 +346,25 @@ class PurchaseController extends Controller
 
         $html .= '<table border="0.1px" style="border-collapse: collapse;">';
         $html .= '<tr>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins">Account Name </td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Account Name </td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_name'].'</td>';
-        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;">Name Of Person</td>';
+        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Name Of Person</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_saler_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;" >Address </td>';
+        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D" >Address </td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['address'].'</td>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins">Persons Address</td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Persons Address</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_saler_address'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;">Phone </td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['phone_no'].'</td>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;">Persons Phone</td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Persons Phone</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_pur_phone'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;">Remarks </td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Remarks </td>';
         $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['pur_remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
@@ -437,6 +437,8 @@ class PurchaseController extends Controller
         }
 
         $pdf->SetFont('helvetica','B', 10);
+        $this->SetTextColor(23, 54, 93);
+
         $pdf->SetXY(10, $currentY+10);
         $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
         $pdf->Cell(40, 5, 'Total Quantity', 1,1);
@@ -446,11 +448,14 @@ class PurchaseController extends Controller
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(50, $currentY+16.8);
         $pdf->SetFont('helvetica','', 10);
+        $this->SetTextColor(0, 0, 0);
+
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
         $pdf->SetFont('helvetica','BI', 14);
+        $pdf->SetTextColor(23, 54, 93);
 
         $pdf->SetXY(10, $currentY+30);
         $width = 100;
@@ -459,6 +464,8 @@ class PurchaseController extends Controller
 
         // Column 3
         $pdf->SetFont('helvetica','B', 10);
+        $pdf->SetTextColor(23, 54, 93);
+
         $pdf->SetXY(120, $currentY+10);
         $pdf->Cell(45, 5, 'Total Amount', 1,1);
         $pdf->SetXY(120, $currentY+16.8);
@@ -472,6 +479,8 @@ class PurchaseController extends Controller
         
         // Column 4
         $pdf->SetFont('helvetica','', 10);
+        $pdf->SetTextColor(0, 0, 0);
+
         $pdf->SetXY(165, $currentY+10);
         $pdf->Cell(35, 5, $total_amount, 1, 'R');
         $pdf->SetXY(165, $currentY+16.8);

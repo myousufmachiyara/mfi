@@ -31,6 +31,7 @@ class myPDF extends TCPDF
 
         // Set font
         $this->SetFont('helvetica', 'I', 13);
+        $this->SetTextColor(23, 54, 93);
     
         // Get the page width
         $pageWidth = $this->getPageWidth();
@@ -52,7 +53,7 @@ class myPDF extends TCPDF
     
         // Draw the border
         $this->SetLineWidth(1);
-        $this->SetDrawColor(0, 0, 0); // Black color
+        $this->SetDrawColor(23, 54, 93); // Black color
         $this->Line(10, $this->getY(), $pageWidth - 10, $this->getY()); // Top border of the footer
     
         // Company website on the left
