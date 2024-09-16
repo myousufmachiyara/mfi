@@ -427,72 +427,72 @@ class PurchaseController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-
         $currentY = $pdf->GetY();
         
-        if(($pdf->getPageHeight()-$pdf->GetY())<47){
+        if(($pdf->getPageHeight()-$pdf->GetY())<57){
             $pdf->AddPage();
-            $pdf->SetY(40);
             $currentY = $pdf->GetY()+15;
         }
 
         $pdf->SetFont('helvetica','B', 10);
         $pdf->SetTextColor(23, 54, 93);
 
-        $pdf->SetXY(10, $currentY+10);
+        $pdf->SetXY(10, $currentY);
         $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
         $pdf->Cell(40, 5, 'Total Quantity', 1,1);
 
-        // Column 2
+        // // Column 2
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetXY(50, $currentY+10);
+        $pdf->SetXY(50, $currentY);
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
-        $pdf->SetXY(50, $currentY+16.8);
+        $pdf->SetXY(50, $currentY+6.8);
         $pdf->SetFont('helvetica','', 10);
 
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
         $roundedTotal= round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
-        $pdf->SetFont('helvetica','BIU', 14);
-        $pdf->SetTextColor(23, 54, 93);
-
-        $pdf->SetXY(10, $currentY+30);
-        $width = 100;
-        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
-        $pdf->SetFont('helvetica','', 10);
+       
 
         // Column 3
         $pdf->SetFont('helvetica','B', 10);
         $pdf->SetTextColor(23, 54, 93);
 
-        $pdf->SetXY(120, $currentY+10);
+        $pdf->SetXY(120, $currentY);
         $pdf->Cell(45, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(120, $currentY+16.8);
+        $pdf->SetXY(120, $currentY+6.8);
         $pdf->Cell(45, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(120, $currentY+23.7);
+        $pdf->SetXY(120, $currentY+13.7);
         $pdf->Cell(45, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(120, $currentY+30.5);
+        $pdf->SetXY(120, $currentY+20.5);
         $pdf->Cell(45, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(120, $currentY+37.3);
+        $pdf->SetXY(120, $currentY+27.3);
         $pdf->Cell(45, 5, 'Net Amount', 1,1);
         
-        // Column 4
+        // // Column 4
         $pdf->SetFont('helvetica','', 10);
         $pdf->SetTextColor(0, 0, 0);
 
-        $pdf->SetXY(165, $currentY+10);
+        $pdf->SetXY(165, $currentY);
         $pdf->Cell(35, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(165, $currentY+16.8);
+        $pdf->SetXY(165, $currentY+6.8);
         $pdf->Cell(35, 5, $purchase['pur_labor_char'], 1, 'R');
-        $pdf->SetXY(165, $currentY+23.7);
+        $pdf->SetXY(165, $currentY+13.7);
         $pdf->Cell(35, 5, $purchase['pur_convance_char'], 1, 'R');
-        $pdf->SetXY(165, $currentY+30.5);
+        $pdf->SetXY(165, $currentY+20.5);
         $pdf->Cell(35, 5, $purchase['pur_discount'], 1, 'R');
-        $pdf->SetXY(165, $currentY+37.3);
+        $pdf->SetXY(165, $currentY+27.3);
         $net_amount=number_format(round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']));
         $pdf->SetFont('helvetica','B', 10);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
+        
+        $pdf->SetFont('helvetica','BIU', 14);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY+20);
+        $width = 100;
+        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
+        $pdf->SetFont('helvetica','', 10);
         
         // Close and output PDF
         $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');

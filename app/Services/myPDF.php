@@ -18,10 +18,11 @@ class myPDF extends TCPDF
     {
         $this->SetFont('helvetica','B', 10);
         $this->Cell(0, 10, '', 0, 1, 'C');
-        if ($this->getPage()>1) {
+        if ($this->getPage() > 1) {
+            $this->SetMargins(10, 17, 10); // 10mm left, 50mm top, 10mm right            
             $this->setCellPadding(1.2); // Set padding for all cells in the table
             $this->writeHTML($this->tableHtml, true, false, true, false, '');
-            $this->SetTopMargin(40);
+
         }
     }
 
