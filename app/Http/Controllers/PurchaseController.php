@@ -444,11 +444,11 @@ class PurchaseController extends Controller
         $pdf->Cell(40, 5, 'Total Quantity', 1,1);
 
         // Column 2
+        $pdf->SetTextColor(0, 0, 0);
         $pdf->SetXY(50, $currentY+10);
         $pdf->Cell(42, 5,  $total_weight, 1, 'R');
         $pdf->SetXY(50, $currentY+16.8);
         $pdf->SetFont('helvetica','', 10);
-        $pdf->SetTextColor(0, 0, 0);
 
         $pdf->Cell(42, 5, $total_quantity, 1,'R');
 
