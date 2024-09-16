@@ -374,8 +374,8 @@ class PurchaseController extends Controller
         $html = '<table border="0.3" style="text-align:center;margin-top:10px" >';
         $html .= '<tr>';
         $html .= '<th style="width:8%;font-size:10px;font-weight:bold;font-family:poppins">S/R</th>';
-        $html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins">Qty</th>';
-        $html .= '<th style="width:22%;font-size:10px;font-weight:bold;font-family:poppins">Item Name</th>';
+        $html .= '<th style="width:8%;font-size:10px;font-weight:bold;font-family:poppins">Qty</th>';
+        $html .= '<th style="width:24%;font-size:10px;font-weight:bold;font-family:poppins">Item Name</th>';
         $html .= '<th style="width:24%;font-size:10px;font-weight:bold;font-family:poppins">Description</th>';
         $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins">Price</th>';
         $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins">Weight</th>';
@@ -397,9 +397,9 @@ class PurchaseController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:8%;border-right:0.3px dashed #000;border-left:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center;">'.$count.'</td>';
-                $html .= '<td style="width:10%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty2'].'</td>';
+                $html .= '<td style="width:8%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty2'].'</td>';
                 $total_quantity=$total_quantity+$items['pur_qty2'];
-                $html .= '<td style="width:22%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['item_name'].'</td>';
+                $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['item_name'].'</td>';
                 $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['remarks'].'</td>';
                 $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_price'].'</td>';
                 $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty'].'</td>';
@@ -411,12 +411,12 @@ class PurchaseController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:8%;border-right:0.3px dashed #000;border-left:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$count.'</td>';
-                $html .= '<td style="width:10%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty2'].'</td>';
+                $html .= '<td style="width:8%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_qty2'].'</td>';
                 $total_quantity=$total_quantity+$items['pur_qty2'];
-                $html .= '<td style="width:22%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['item_name'].'</td>';
+                $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['item_name'].'</td>';
                 $html .= '<td style="width:24%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_price'].'</td>';
-                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty'].'</td>';
+                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_price'].'</td>';
+                $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;text-align:center">'.$items['pur_qty'].'</td>';
                 $total_weight=$total_weight+$items['pur_qty'];
                 $html .= '<td style="width:12%;border-right:0.3px dashed #000;font-size:10px;font-family:poppins;">'.$items['pur_qty']*$items['pur_price'].'</td>';
                 $total_amount=$total_amount+($items['pur_qty']*$items['pur_price']);
@@ -481,7 +481,7 @@ class PurchaseController extends Controller
         $pdf->SetXY(165, $currentY+30.5);
         $pdf->Cell(35, 5, $purchase['pur_discount'], 1, 'R');
         $pdf->SetXY(165, $currentY+37.3);
-        $net_amount=round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']);
+        $net_amount=number_format(round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']));
         $pdf->SetFont('helvetica','B', 10);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
