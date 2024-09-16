@@ -225,11 +225,16 @@ class JV1Controller extends Controller
 
         $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;color:#17365D;font-family:poppins"> Voucher No: <span style="text-decoration: underline;color:black;">'.$jv1['auto_lager'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: '.\Carbon\Carbon::parse($jv1['date'])->format('d-m-y').'</td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins"> Voucher No: <span style="text-decoration: underline;color:black;">'.$jv1['auto_lager'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($jv1['date'])->format('d-m-y') . '</span></td>';
         $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="margin-bottom:1rem">';
+       
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;color:#17365D;font-family:poppins">Remarks: <span style="text-decoration: underline;color:black;">'.$jv1['remarks'].'</span></td>';
+        $html .= '<td width="10%" style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Remarks:</td>';
+        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$jv1['remarks'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
