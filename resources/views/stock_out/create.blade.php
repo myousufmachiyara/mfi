@@ -171,6 +171,9 @@
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
+
+            // Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
         }
         tableTotal()
     }
