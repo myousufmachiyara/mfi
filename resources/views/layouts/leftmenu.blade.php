@@ -18,47 +18,63 @@
                             <span>Home</span>
                         </a>    
                     </li>
+                    @if(((session('user_access')[0]['module_id'])==1 && (session('user_access')[0]['view'])==1) OR ((session('user_access')[1]['module_id'])==2 && (session('user_access')[1]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="bx bx-user" aria-hidden="true"></i>
                             <span>Users</span>
                         </a>
                         <ul class="nav nav-children">
+                            @if((session('user_access')[0]['module_id'])==1 && (session('user_access')[0]['view'])==1)
                             <li>
                                 <a class="nav-link"   href="{{ route('all-roles')}}">
                                     Roles
                                 </a>
                             </li>	
+                            @endif
+                            @if((session('user_access')[1]['module_id'])==2 && (session('user_access')[1]['view'])==1)
                             <li>
                                 <a class="nav-link"   href="{{ route('all-users')}}">
                                     User Accounts
                                 </a>
-                            </li>			
+                            </li>
+                            @endif			
                         </ul>
                     </li>
+                    @endif
+                    @if(((session('user_access')[2]['module_id'])==3 && (session('user_access')[2]['view'])==1) OR ((session('user_access')[3]['module_id'])==4 && (session('user_access')[3]['view'])==1) OR ((session('user_access')[4]['module_id'])==5 && (session('user_access')[4]['view'])==1))
+
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="bx bx-cylinder" aria-hidden="true"></i>
                             <span>Items</span>
                         </a>
                         <ul class="nav nav-children">
+                            @if(((session('user_access')[2]['module_id'])==3 && (session('user_access')[2]['view'])==1))
                             <li>
                                 <a class="nav-link"   href="{{ route('all-item-groups')}}">
                                     <span>Item Groups</span>
                                 </a>
                             </li>	
+                            @endif
+                            @if((session('user_access')[3]['module_id'])==4 && (session('user_access')[3]['view'])==1)
                             <li>
                                 <a class="nav-link"   href="{{ route('all-items')}}">
                                     Items
                                 </a>
                             </li>
+                            @endif
+                            @if((session('user_access')[4]['module_id'])==5 && (session('user_access')[4]['view'])==1)
+
                             <li>
                                 <a class="nav-link"   href="{{ route('all-items-2')}}">
                                     Item Pipes
                                 </a>
                             </li>
+                            @endif
                         </ul>
                     </li>
+                    @endif
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i class="bx bx-edit-alt" aria-hidden="true"></i>

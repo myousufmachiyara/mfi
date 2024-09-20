@@ -18,10 +18,12 @@
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Role Id</label>
 												<input type="text" placeholder="(New Role)" class="form-control" disabled>
+												<input type="hidden" value={{$modulesCount}} name="modules_count" class="form-control">
+
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
-												<label class="col-form-label" >Role Name</label>
-												<input type="text" name="role_name" class="form-control">
+												<label class="col-form-label">Role Name</label>
+												<input type="text" name="role_name" required class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Role Shortcode</label>
@@ -37,23 +39,23 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-                                                    <th style="display:none">Module ID</th>
 													<th>Module Name</th>
 													<th>Create</th>
+													<th>View</th>
 													<th>Update</th>
 													<th>Delete</th>
-													<th>View</th>
+													<th>Report</th>
 												</tr>
 											</thead>
 											<tbody id="UserRoleTable">
                                                 @foreach ($modules as $key => $row)
                                                     <tr>
-                                                        <td style="display:none">{{$row->id}}</th>
-                                                        <td>{{$row->name}}</td>	
-                                                        <td><input type="checkbox" class="" name="{{$row->slug}}[]"></td>
-                                                        <td><input type="checkbox" class="" name="{{$row->slug}}[]"></td>
-                                                        <td><input type="checkbox" class="" name="{{$row->slug}}[]"></td>
-                                                        <td><input type="checkbox" class="" name="{{$row->slug}}[]"></td>
+                                                        <td><input type="hidden"   value="{{$row->id}}" name="module[{{$row->id}}]">{{$row->name}}</td>	
+                                                        <td><input type="checkbox" name="create[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" name="view[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" name="update[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" name="delete[{{$row->id}}]"></td>
+														<td><input type="checkbox" name="report[{{$row->id}}]"></td>
                                                     </tr>
                                                 @endforeach
 											</tbody>
