@@ -469,7 +469,7 @@ class PurchaseController extends Controller
         // $pdf->SetXY(120, $currentY+27.3);
         // $pdf->Cell(45, 5, 'Net Amount', 1,1);
         // Change font size to 12 for "Net Amount"
-        $pdf->SetFont('helvetica', 'B', 11);  
+        $pdf->SetFont('helvetica', 'B', 12);  
         $pdf->SetXY(120, $currentY+27.3);
         $pdf->Cell(45, 5, 'Net Amount', 1, 1);
         
