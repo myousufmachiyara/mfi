@@ -35,11 +35,13 @@
                                                     <td>{{$row->debit_account}}</td>
                                                     <td>{{$row->credit_account}}</td>
                                                     <td >{{$row->remarks}}</td>
-                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)  
-                                                        <td>{{ rtrim(rtrim(number_format($row->amount, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->amount))}}</td>
-                                                    @endif
+                                                    @if (strpos($row->amount, '.') !== false && substr($row->amount, strpos($row->amount, '.') + 1) > '0')
+                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
+                                                @else
+                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
+                                                @endif
+                                                
+                                                
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1" href="{{ route('print-jv1', $row->auto_lager) }}">
