@@ -25,15 +25,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="actions">
-                                                    <a class="mb-1 mt-1 me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                </td>
-                                            </tr>
+                                            @foreach ($roles as $key => $row)
+                                                <tr>
+                                                    <td>{{$row->id}}</td>
+                                                    <td>{{$row->name}}</td>
+                                                    <td>{{$row->shortcode}}</td>
+                                                    <td>15</td>
+                                                    <td class="actions">
+                                                        <a class="mb-1 mt-1 me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
 									</table>
                                 </div>

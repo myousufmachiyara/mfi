@@ -20,10 +20,9 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Image</th>
                                                 <th>Employee Name</th>
                                                 <th>Username</th>
-                                                <th>Designation</th>
+                                                <th>Role</th>
                                                 <th>CNIC</th>
                                                 <th>Address</th>
                                                 <th>Phone No.</th>
@@ -33,24 +32,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" onclick="getAccountDetails(1)" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails(1)" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-times"></i></a>
-                                                        <a href="{{ route('activate-acc',1)}}"><i style="color:green" class="fas fa-check"></i></a>
-                                                    </td>
-                                                </tr>
+                                                @foreach($users as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->id}}</td>
+                                                        <td>{{$row->name}}</td>
+                                                        <td>{{$row->username}}</td>
+                                                        <td>{{$row->role_name}}</td>
+                                                        <td>{{$row->cnic_no}}</td>
+                                                        <td>{{$row->address}}</td>
+                                                        <td>{{$row->phone_no}}</td>
+                                                        <td>{{$row->email}}</td>
+                                                        <td>{{$row->status}}</td>
+                                                        @if($row->status==1)
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="getAccountDetails(1)" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails(1)" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" ><i class="fas fa-eye"></i></a>
+                                                        </td>
+                                                        @elseif($row->status==0)
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" style="font-size:1.3rem" href="#"><i class="bx bx-user-check"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a>
+                                                        </td>
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
                                         </tbody>
 									</table>
                                 </div>
@@ -162,7 +168,7 @@
 
         <div id="addModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" id="addForm" action="{{ route('store-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="addForm" action="{{ route('new-user') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Add New User</h2>
@@ -171,53 +177,51 @@
                         <div class="row form-group">
                             <div class="col-lg-6">
                                 <label>User ID</label>
-                                <input type="number" class="form-control" placeholder="User ID" name="ac_cod" required disabled>
+                                <input type="number" class="form-control" placeholder="User ID" name="user_id" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Picture</label>
-                                <input type="file" class="form-control" name="att[]" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Employee Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>CNIC No.</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
+                                <input type="text" class="form-control" placeholder="Employee Name"  name="name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
-                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
+                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" required >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Account Name" >
+                                <input type="email" class="form-control" placeholder="Email Name" name="email" >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC No.</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  required>
+                                <input type="text" class="form-control" placeholder="CNIC No." name="cnic_no" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Designation</label>
-                                <select data-plugin-selectTwo class="form-control" autofocus>
-                                    <option value="">Select Designation</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>">
                             </div> 
                             <div class="col-lg-6 mb-2">
                                 <label>Username</label>
-                                <input type="text" class="form-control" placeholder="@username">
+                                <input type="text" class="form-control" placeholder="@username" name="username">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Password</label>
-                                <input type="text" class="form-control" placeholder="password">
+                                <input type="password" class="form-control" placeholder="password" name="password">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Role</label>
+                                <select class="form-control" name="role_id">
+                                    @foreach ($roles as $key => $row)
+                                        <option value={{$row->id}}>{{$row->name}}</option>
+                                   @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -394,27 +398,27 @@
     
     $(document).ready(function(){
     
-        $('#addForm').on('submit', function(e){
-            e.preventDefault();
+        // $('#addForm').on('submit', function(e){
+        //     e.preventDefault();
 
-            var formData = $(this).serialize();
+        //     var formData = $(this).serialize();
 
-            $.ajax({
-                type: 'POST',
-                url: '/coa/acc/validate',
-                data: formData,
-                success: function(response){
-                    var form = document.getElementById('addForm');
-                    form.submit();
-                },
-                error: function(response){
-                    var errors = response.responseJSON.errors;
-                    var errorMessage = 'Account Already Exists';
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/coa/acc/validate',
+        //         data: formData,
+        //         success: function(response){
+        //             var form = document.getElementById('addForm');
+        //             form.submit();
+        //         },
+        //         error: function(response){
+        //             var errors = response.responseJSON.errors;
+        //             var errorMessage = 'Account Already Exists';
 
-                    alert(errorMessage);
-                }
-            });
-        });
+        //             alert(errorMessage);
+        //         }
+        //     });
+        // });
 
     });
 
