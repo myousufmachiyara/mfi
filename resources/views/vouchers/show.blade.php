@@ -60,7 +60,7 @@
 										<tr>
 											<td class="font-weight-semibold text-dark text-center">{{$jv1->debit_account}}</td>
 											<td class="font-weight-semibold text-dark text-center">{{$jv1->credit_account}}</td>
-											<td class="font-weight-semibold text-dark text-center">{{round($jv1->amount)}}</td>
+											<td class="font-weight-semibold text-dark text-center">{{number_format($jv1->amount)}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -70,7 +70,7 @@
 									<div class="col-8">
 										<div class="row">
 											<div class="col-6">
-												<h3 style="color:#17365D; text-decoration: underline; font-size: 28px;" id="numberInWords"></h3>
+												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 
 											</div>
 										</div>
@@ -96,9 +96,11 @@
 
 
 	<script>
+		
 		var netAmount = <?php echo json_encode($jv1->amount); ?>;
 		var words = convertCurrencyToWords(netAmount);
 		document.getElementById('numberInWords').innerHTML = words;
+
 	</script>
 	
 	
