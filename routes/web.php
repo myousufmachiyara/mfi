@@ -87,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/vouchers/jv1/print/{id}', [App\Http\Controllers\JV1Controller::class, 'print'])->name('print-jv1');
     Route::get('/vouchers/jv1/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
     Route::get('/vouchers/jv1/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
+    Route::get('/vouchers/show/{id}', [App\Http\Controllers\JV1Controller::class, 'show'])->name('show-jv1');
     Route::delete('/vouchers/jv1/deleteAttachment/{id}', [App\Http\Controllers\JV1Controller::class, 'deleteAtt'])->name('jv1-att-delete');
 
     // Journal Voucher 2
