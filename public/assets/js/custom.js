@@ -60,10 +60,34 @@ function convertDigitGroup(number) {
     const remainder = number % 100;
     let result = "";
 
-    if (number === 1) {  // Special case for "One"
+    if (number === 1) {
         return "One";
     }
-
+    if (number === 2) {
+        return "Two";
+    }
+    if (number === 3) {
+        return "Three";
+    }
+    if (number === 4) {
+        return "Four";
+    }
+    if (number === 5) {
+        return "Five";
+    }
+    if (number === 6) {
+        return "Six";
+    }
+    if (number === 7) {
+        return "Seven";
+    }
+    if (number === 8) {
+        return "Eight";
+    }
+    if (number === 9) {
+        return "Nine";
+    }
+    
     if (hundreds > 0) {
         result += convertSingleDigit(hundreds) + " Hundred ";
     }

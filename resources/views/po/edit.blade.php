@@ -30,12 +30,12 @@
 												<input type="date" name="pur_date" value="{{$pur->pur_date}}" autofocus class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Bill No.</label>
-												<input type="number" placeholder="Bill No." name="pur_bill_no"  value="{{$pur->pur_bill_no}}" class="form-control">
+												<label class="col-form-label" >Qoutation No.</label>
+												<input type="text" placeholder="Qoutation No." name="pur_bill_no"  value="{{$pur->pur_bill_no}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Sale Inv.</label>
-												<input type="text" placeholder="Sale Inv." name="pur_sale_inv" value="{{$pur->sale_against}}" class="form-control">
+												<label class="col-form-label" >Purchase Inv.</label>
+												<input type="text" placeholder="Purchase Inv." name="pur_sale_inv" value="{{$pur->sale_against}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
