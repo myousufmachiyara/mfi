@@ -209,6 +209,8 @@ class UsersController extends Controller
             $user_access = $user_permission->toArray();
     
             session([
+                'user_id' => $user['id'],
+                'user_name' => $user['name'],
                 'user_role' => $user_roles['role_id'],
                 'user_access' => $user_access,
             ]);
