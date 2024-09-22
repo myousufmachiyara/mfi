@@ -307,9 +307,9 @@ class PurchaseController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$purchase['pur_id']);
-        $pdf->SetSubject('Invoice-'.$purchase['pur_id']);
-        $pdf->SetKeywords('Invoice, TCPDF, PDF');
+        $pdf->SetTitle('Purchase Invoice-'.$purchase['prefix'].$purchase['pur_id']);
+        $pdf->SetSubject('Purchase Invoice-'.$purchase['prefix'].$purchase['pur_id']);
+        $pdf->SetKeywords('Purchase Invoice, TCPDF, PDF');
                    
         // Add a page
         $pdf->AddPage();
@@ -337,7 +337,7 @@ class PurchaseController extends Controller
         $html .= '<tr>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;color:#000">'.$purchase['prefix'].$purchase['pur_id'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($purchase['pur_date'])->format('d-m-y').'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">pur_ord_no: <span style="text-decoration: underline;color:#000">'.$purchase['pur_bill_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Mill Inv No: <span style="text-decoration: underline;color:#000">'.$purchase['pur_bill_no'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;color:#000">Hamza</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
@@ -466,8 +466,12 @@ class PurchaseController extends Controller
         $pdf->Cell(45, 5, 'Convance Charges', 1,1);
         $pdf->SetXY(120, $currentY+20.5);
         $pdf->Cell(45, 5, 'Discount(Rs)', 1,1);
+        // $pdf->SetXY(120, $currentY+27.3);
+        // $pdf->Cell(45, 5, 'Net Amount', 1,1);
+        // Change font size to 12 for "Net Amount"
+        $pdf->SetFont('helvetica', 'B', 12);  
         $pdf->SetXY(120, $currentY+27.3);
-        $pdf->Cell(45, 5, 'Net Amount', 1,1);
+        $pdf->Cell(45, 5, 'Net Amount', 1, 1);
         
         // // Column 4
         $pdf->SetFont('helvetica','', 10);
@@ -483,7 +487,7 @@ class PurchaseController extends Controller
         $pdf->Cell(35, 5, $purchase['pur_discount'], 1, 'R');
         $pdf->SetXY(165, $currentY+27.3);
         $net_amount=number_format(round($total_amount+$purchase['pur_labor_char']+$purchase['pur_convance_char']-$purchase['pur_discount']));
-        $pdf->SetFont('helvetica','B', 10);
+        $pdf->SetFont('helvetica','B', 12);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
         $pdf->SetFont('helvetica','BIU', 14);
@@ -495,6 +499,6 @@ class PurchaseController extends Controller
         $pdf->SetFont('helvetica','', 10);
         
         // Close and output PDF
-        $pdf->Output('invoice_'.$purchase['pur_id'].'.pdf', 'I');
+        $pdf->Output('Purchase Invoice_'.$purchase['prefix'].$purchase['pur_id'].'.pdf', 'I');
     }
 }

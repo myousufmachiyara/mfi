@@ -26,7 +26,7 @@
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="pur_date" autofocus value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="pur_date"  value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
@@ -86,7 +86,7 @@
 											<tbody id="Purchase1Table">
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod1" onchange="getItemDetails(1,1)" required>
+														<input type="text" class="form-control" name="item_cod[]"  id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>	
 													<td>
 														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0" required>
@@ -232,7 +232,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'"  onchange="getItemDetails('+index+','+1+')" required>';
 			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" value="0" name="pur_qty2[]" step="any" required>';
 			cell3.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
@@ -253,7 +253,7 @@
 			$('#myTable select[data-plugin-selecttwo]').select2();
 
 			// Set focus on the new item_code input field
-		document.getElementById('item_code' + (index - 1)).focus();
+		document.getElementById('item_cod' + (index - 1)).focus();
         
 		}
 	}

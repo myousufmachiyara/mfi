@@ -44,7 +44,7 @@
                                                 
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('print-jv1', $row->auto_lager) }}">
+                                                        <a class="mb-1 mt-1 me-1" href="{{ route('show-jv1', $row->auto_lager) }}">
                                                             <i class="fas fa-print"></i>
                                                         </a>
                                                         <span class="separator"> | </span>

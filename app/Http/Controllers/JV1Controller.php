@@ -31,6 +31,21 @@ class JV1Controller extends Controller
         return view('vouchers.jv1',compact('jv1','acc'));
     }
 
+    public function show(string $id)
+    {
+        // Retrieve the record with joined debit and credit account details
+        $jv1 = jvsingel::where('jvsingel.auto_lager', $id)
+                ->join('ac as d_ac', 'd_ac.ac_code', '=', 'jvsingel.ac_dr_sid')
+                ->join('ac as c_ac', 'c_ac.ac_code', '=', 'jvsingel.ac_cr_sid')
+                ->select('jvsingel.*', 
+                'd_ac.ac_name as debit_account', 
+                'c_ac.ac_name as credit_account')
+                ->first();
+    
+        // Point to the correct Blade view file: show.blade.php
+        return view('vouchers.show', compact('jv1'));
+    }
+    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
