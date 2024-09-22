@@ -24,7 +24,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
 
-
 <!-- Vendor -->
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="/assets/vendor/common/common.js"></script> -->

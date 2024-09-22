@@ -21139,13 +21139,13 @@ html.dark .search-content .search-results-list a:hover {
 	height: 100vh;
 	margin: 0 auto;
 	max-width: 500px;
-	padding: 0 15px;
+	/* padding: 0 15px; */
 	width: 100%;
 }
 
 .body-sign .center-sign {
 	display: table-cell;
-	padding-top: 20px;
+	/* padding-top: 20px; */
 	vertical-align: middle;
 }
 

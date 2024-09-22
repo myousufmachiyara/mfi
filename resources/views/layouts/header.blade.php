@@ -27,6 +27,7 @@
 		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
 
+
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/assets/css/theme.css" />
 
