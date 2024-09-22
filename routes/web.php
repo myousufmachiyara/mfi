@@ -89,9 +89,6 @@
         Route::post('/tstock_out/create', [App\Http\Controllers\TStockOutController::class, 'store'])->name('store-tstock-out-invoice');
         Route::get('/tstock_in/new', [App\Http\Controllers\TStockInController::class, 'create'])->name('create-tstock-in-invoice'); 
         Route::post('/tstock_in/create', [App\Http\Controllers\TStockInController::class, 'store'])->name('store-tstock-in-invoice');
-        Route::post('/items/new-item/validate', [App\Http\Controllers\ItemsController::class, 'validation'])->name('validate-item');
-        Route::post('/item2/new-item/validate', [App\Http\Controllers\Item2Controller::class, 'validation'])->name('validate-item-2');
-        Route::post('/coa/acc/validate', [App\Http\Controllers\COAController::class, 'validation'])->name('validate-acc');
         Route::get('/vouchers2/pendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'pendingInvoice'])->name('jv2-pend-invoices');
         Route::get('/vouchers2/purpendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'purpendingInvoice'])->name('jv2-pur-pend-invoices');
     });
@@ -174,19 +171,19 @@
 
     Route::middleware(['checkPermission:att'])->group(function () {
 
-        Route::get('/coa/acc/attachements', [App\Http\Controllers\COAController::class, 'getAttachements'])->name('get-acc-att');
-        Route::get('/coa/acc/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
-        Route::get('/coa/acc/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
-        Route::delete('/coa/acc/deleteAtt/{id}', [App\Http\Controllers\COAController::class, 'deleteAtt'])->name('coa-att-delete');
-        Route::post('/coa/acc/downloadAll', [App\Http\Controllers\COAController::class, 'downloadAllAtt'])->name('coa-att-download-all');
-        Route::get('/vouchers/jv1/attachements', [App\Http\Controllers\JV1Controller::class, 'getAttachements'])->name('get-jv1-att');
-        Route::get('/vouchers/jv1/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
-        Route::get('/vouchers/jv1/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
-        Route::delete('/vouchers/jv1/deleteAttachment/{id}', [App\Http\Controllers\JV1Controller::class, 'deleteAtt'])->name('jv1-att-delete');
-        Route::get('/vouchers/jv2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
-        Route::get('/vouchers/jv2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
-        Route::get('/vouchers/jv2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
-        Route::delete('/vouchers/jv2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
+        Route::get('/coa/attachements', [App\Http\Controllers\COAController::class, 'getAttachements'])->name('get-acc-att');
+        Route::get('/coa/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
+        Route::get('/coa/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
+        Route::delete('/coa/deleteAtt/{id}', [App\Http\Controllers\COAController::class, 'deleteAtt'])->name('coa-att-delete');
+        Route::post('/coa/downloadAll', [App\Http\Controllers\COAController::class, 'downloadAllAtt'])->name('coa-att-download-all');
+        Route::get('/vouchers/attachements', [App\Http\Controllers\JV1Controller::class, 'getAttachements'])->name('get-jv1-att');
+        Route::get('/vouchers/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
+        Route::get('/vouchers/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
+        Route::delete('/vouchers/deleteAttachment/{id}', [App\Http\Controllers\JV1Controller::class, 'deleteAtt'])->name('jv1-att-delete');
+        Route::get('/vouchers2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
+        Route::get('/vouchers2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
+        Route::get('/vouchers2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
+        Route::delete('/vouchers2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
         Route::get('/purchase1/view/{id}', [App\Http\Controllers\PurchaseController::class, 'view'])->name('show-purchases1-att');
         Route::get('/purchase1/attachements', [App\Http\Controllers\PurchaseController::class, 'getAttachements'])->name('get-purc1-att');
         Route::get('/purchase1/download/{id}', [App\Http\Controllers\PurchaseController::class, 'downloadAtt'])->name('purc1-att-download');
@@ -289,7 +286,10 @@
         Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
         Route::get('/complains/detail', [App\Http\Controllers\ComplainsController::class, 'getcomplainsDetails'])->name('get-complains-details');
         Route::get('/coa/detail', [App\Http\Controllers\COAController::class, 'getAccountDetails'])->name('get-acc-details');
-
+        Route::post('/items/new-item/validate', [App\Http\Controllers\ItemsController::class, 'validation'])->name('validate-item');
+        Route::post('/item2/new-item/validate', [App\Http\Controllers\Item2Controller::class, 'validation'])->name('validate-item-2');
+        Route::post('/coa/acc/validate', [App\Http\Controllers\COAController::class, 'validation'])->name('validate-acc');
+ 
         Route::get('/unauthorized', function () {
             return view('unauthorized');
         })->name('unauthorized');

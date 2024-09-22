@@ -157,7 +157,7 @@
     function getGroupDetails(groupID){
         $.ajax({
             type: "GET",
-            url: "/item-group/detail",
+            url: "/item-groups/detail",
             data: {id:groupID},
             success: function(result){
                 $('#group_id').val(result['item_group_cod']);

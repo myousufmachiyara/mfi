@@ -283,7 +283,7 @@
     function getItemDetails(id){
         $.ajax({
             type: "GET",
-            url: "/item/detail",
+            url: "/items/detail",
             data: {id:id},
             success: function(result){
                 var dateParts = result[0]['opp_date'].split("-");
@@ -324,7 +324,7 @@
 
         $.ajax({
             type: 'POST',
-			url: '/item/new-item/validate',
+			url: '/items/new-item/validate',
             data: {'item_name': item_name},
             success: function(response){
 				console.log(response)

@@ -142,7 +142,7 @@
     function getDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/coa-groups/detail",
+            url: "/coa-groups/detail",
             data: {id:id},
             success: function(result){
                 console.log(result)

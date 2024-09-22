@@ -378,7 +378,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/coa/acc/validate',
+                url: '/coa/validate',
                 data: formData,
                 success: function(response){
                     var form = document.getElementById('addForm');
@@ -402,7 +402,7 @@
     function getAccountDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/acc/detail",
+            url: "/coa/detail",
             data: {id:id},
             success: function(result){
                 console.log(result);
@@ -436,14 +436,14 @@
 
         $.ajax({
             type: "GET",
-            url: "/coa/acc/attachements",
+            url: "/coa/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/acc/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/acc/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#acc_attachements').append(html);
@@ -465,7 +465,7 @@
             return;
         }
 
-        fetch('/coa/acc/deleteAtt/' + fileId, {
+        fetch('/coa/deleteAtt/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
