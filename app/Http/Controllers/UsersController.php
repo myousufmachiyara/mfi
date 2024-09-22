@@ -201,7 +201,11 @@ class UsersController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            $user_roles = user_roles::where('user_id',$user['id'])->first();
+            $user_roles = user_roles::where('user_id',$user['id'])
+            ->join('roles','roles.id','=','user_roles.role_id')
+            ->select('user_roles.*','roles.name as role_name')
+            ->first();
+
             $user_permission = role_access::where('role_id',$user_roles['role_id'])
             ->select('module_id','view')
             ->get();
@@ -211,6 +215,7 @@ class UsersController extends Controller
             session([
                 'user_id' => $user['id'],
                 'user_name' => $user['name'],
+                'role_name' => $user_roles['role_name'],
                 'user_role' => $user_roles['role_id'],
                 'user_access' => $user_access,
             ]);
