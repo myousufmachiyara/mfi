@@ -92,7 +92,7 @@
 			</div>
 			<div class="col-6 d-none d-lg-block">
 				<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
-					<div class="item"><img src="/assets/img/sample-1.webp" alt=""></div>
+					<div class="item"><img src="/assets/img/sample-1.jpg" alt=""></div>
 					<!-- <div class="item"><img src="/assets/img/sample-2.webp" alt=""></div> -->
 				</div>
 			</div>
