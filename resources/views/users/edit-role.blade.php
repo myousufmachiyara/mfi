@@ -4,7 +4,7 @@
         @include('../layouts.pageheader')
             <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					<form method="post" action="{{ route('create-role') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-role') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
@@ -17,17 +17,18 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Role Id</label>
-												<input type="text" placeholder="(New Role)" class="form-control" disabled>
-												<input type="hidden" value={{$modulesCount}} name="modules_count" class="form-control">
+												<input type="text" placeholder="(New Role)" value={{$role->id}} class="form-control" disabled>
+												<input type="hidden" name="role_id" value={{$role->id}} class="form-control">
+												<input type="hidden" value={{$count}} name="modules_count" class="form-control">
 
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label">Role Name</label>
-												<input type="text" name="role_name" required class="form-control">
+												<input type="text" name="role_name" value={{$role->name}} required class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Role Shortcode</label>
-												<input type="text" placeholder="Shortcode" name="shortcode" class="form-control">
+												<input type="text" placeholder="Shortcode" name="shortcode" value={{$role->shortcode}} class="form-control">
 											</div>
 									  </div>
 									</div>
@@ -35,7 +36,7 @@
 							</div>
 							<div class="col-12 mb-3">
 								<section class="card">
-									<div class="card-body">
+									<div class="card-body" style="overflow-x:auto;">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -49,17 +50,17 @@
 													<th>Report</th>
 												</tr>
 											</thead>
-											<tbody id="UserRoleTable" >
-                                                @foreach ($modules as $key => $row)
+											<tbody id="UserRoleTable">
+                                                @foreach ($role_access as $key => $row)
                                                     <tr>
-                                                        <td><input type="hidden" value="{{$row->id}}" name="module[{{$row->id}}]">{{$row->name}}</td>	
-                                                        <td><input type="checkbox" name="create[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="view[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="update[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="delete[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="att[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="print[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="report[{{$row->id}}]"></td>
+                                                        <td><input type="hidden"   value="{{$row->module_id}}" name="module[{{$row->module_id}}]">{{$row->module_name}}</td>	
+														<td><input type="checkbox" name="create[{{$row->module_id}}]" {{ $row->add == 1 ? 'checked' : '' }}></td>
+                                                        <td><input type="checkbox" name="view[{{$row->module_id}}]"   {{ $row->view == 1 ? 'checked' : '' }}></td>
+                                                        <td><input type="checkbox" name="update[{{$row->module_id}}]" {{ $row->edit == 1 ? 'checked' : '' }}></td>
+                                                        <td><input type="checkbox" name="delete[{{$row->module_id}}]" {{ $row->delete == 1 ? 'checked' : '' }}></td>
+														<td><input type="checkbox" name="att[{{$row->module_id}}]" {{ $row->att == 1 ? 'checked' : '' }}></td>
+                                                        <td><input type="checkbox" name="print[{{$row->module_id}}]" {{ $row->print == 1 ? 'checked' : '' }}></td>
+														<td><input type="checkbox" name="report[{{$row->module_id}}]" {{ $row->report == 1 ? 'checked' : '' }}></td>
                                                     </tr>
                                                 @endforeach
 											</tbody>
@@ -70,7 +71,7 @@
 										<div class="row form-group mb-2">
 											<div class="text-end">
 												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-roles') }}'"> <i class="fas fa-trash"></i> Discard</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Role</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Role</button>
 											</div>
 										</div>
 									</footer>

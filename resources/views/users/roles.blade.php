@@ -32,7 +32,7 @@
                                                     <td>{{$row->shortcode}}</td>
                                                     <td>15</td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="{{ route('edit-role', $row->id) }}" class="mb-1 mt-1 me-1"><i class="fas fa-pencil-alt"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
