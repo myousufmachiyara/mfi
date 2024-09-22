@@ -5,10 +5,6 @@
     Route::get('/', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
 
-    Route::get('/unauthorized', function () {
-        return view('unauthorized');
-    })->name('unauthorized');
-
     Route::middleware(['checkPermission:view'])->group(function () {
 
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
@@ -293,4 +289,8 @@
         Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
         Route::get('/complains/detail', [App\Http\Controllers\ComplainsController::class, 'getcomplainsDetails'])->name('get-complains-details');
         Route::get('/coa/detail', [App\Http\Controllers\COAController::class, 'getAccountDetails'])->name('get-acc-details');
+
+        Route::get('/unauthorized', function () {
+            return view('unauthorized');
+        })->name('unauthorized');
     });
