@@ -219,7 +219,6 @@ class JV2Controller extends Controller
                 }
             }
         }
-        die(print_r($request->file('att')));
 
         if($request->hasFile('att')){
             $files = $request->file('att');
