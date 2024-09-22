@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\modules;
 use App\Models\roles;
 use App\Models\role_access;
+use App\Models\user_roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,10 @@ class UserRoleController extends Controller
     
     public function index(){
 
-        $roles = roles::get();
+        $roles = roles::leftJoin('user_roles', 'user_roles.role_id', '=', 'roles.id')
+        ->select('roles.id','roles.name','roles.shortcode', \DB::raw('COUNT(user_roles.user_id) as user_count'))
+        ->groupBy('roles.id','roles.name','roles.shortcode') 
+        ->get();
 
         return view('users.roles',compact('roles'));
     }

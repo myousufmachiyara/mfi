@@ -30,7 +30,7 @@
                                                     <td>{{$row->id}}</td>
                                                     <td>{{$row->name}}</td>
                                                     <td>{{$row->shortcode}}</td>
-                                                    <td>15</td>
+                                                    <td>{{$row->user_count}}</td>
                                                     <td class="actions">
                                                         <a href="{{ route('edit-role', $row->id) }}" class="mb-1 mt-1 me-1"><i class="fas fa-pencil-alt"></i></a>
                                                     </td>
