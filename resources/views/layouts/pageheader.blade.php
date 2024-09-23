@@ -6,8 +6,11 @@
 		<a href="/home" class="logo">						
 			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
 		</a>					
-		<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						
-			<i class="fas fa-bars" aria-label="Toggle sidebar" style="line-height:2.3"></i>					
+		<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+			<i class="fas fa-user d-lg-none" aria-label="Toggle sidebar" style="line-height:2.3"></i>		
+			<span class="separator"></span>					
+			<i class="fas fa-bars" aria-label="Toggle sidebar" style="line-height:2.3"></i>		
+
 		</div>
 	</div>
 
