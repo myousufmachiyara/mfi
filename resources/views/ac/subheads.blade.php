@@ -1,8 +1,7 @@
 @include('../layouts.header')
 	<body>
-
 		<section class="body">
-			@include('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
                     <div class="row">
