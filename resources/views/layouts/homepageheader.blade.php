@@ -13,9 +13,9 @@
 
 	<div class="header-right">	
 		<span class="separator"></span>
-		<div id="userbox" class="userbox" style="margin:0px 72px 0 0">
+		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
-				<div class="profile-info" style="margin: 0px 0 0px">
+				<div class="profile-info">
 					<span class="name">{{session('user_name')}}</span>
 					<span class="role">{{session('role_name')}}</span>
 				</div>
@@ -23,9 +23,10 @@
 				<i class="fa custom-caret"></i>
 			</a>
 
-			<div class="dropdown-menu" style="width: 120px;">
+			<div class="dropdown-menu">
 				<ul class="list-unstyled">
 					<li class="divider"></li>
+
 					<li>
 						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
 					</li>
