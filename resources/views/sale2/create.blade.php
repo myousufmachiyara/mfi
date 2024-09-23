@@ -12,7 +12,7 @@
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sale Pipe</h2>
 										<div class="card-actions">
-											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getInvFromStockOut()" href="#getPur2FromStockOut" > From Stock Out </button>
+											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal mb-2" onclick="getInvFromStockOut()" href="#getPur2FromStockOut" > From Stock Out </button>
 											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getFromPurchase2()" href="#getPurchase2" > From Purchase 2 </button>
 										</div>
 									</header>
