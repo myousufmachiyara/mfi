@@ -36,7 +36,7 @@
 							<div class="col-12 mb-3">
 								<section class="card">
 									<div class="card-body">
-										<table class="table table-bordered table-striped mb-0" id="myTable" >
+										<table class="table table-bordered table-striped mb-0" id="myTable" style="overflow-x:auto" >
 											<thead>
 												<tr>
 													<th>Module Name</th>
