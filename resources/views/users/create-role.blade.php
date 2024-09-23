@@ -1,10 +1,8 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-        @include('../layouts.pageheader')
+        <!-- @include('../layouts.pageheader') -->
             <div class="inner-wrapper">
-				@include('layouts.leftmenu')
-
 				<section role="main" class="content-body">
 					<form method="post" action="{{ route('create-role') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf

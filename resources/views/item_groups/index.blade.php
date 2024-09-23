@@ -7,12 +7,11 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Group</button>
                                     </div>
                                     <h2 class="card-title">Item Groups</h2>
-                                    
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
