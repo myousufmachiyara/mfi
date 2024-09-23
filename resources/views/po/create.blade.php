@@ -268,7 +268,7 @@
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/items/detail",
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
