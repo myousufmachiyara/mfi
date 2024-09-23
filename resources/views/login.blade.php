@@ -49,7 +49,7 @@
 					<div style="padding-top:1.5rem;">
 						<h2 class="mb-0 text-primary">Welcome Back</h2>
 						<p class="text-dark mb-4">Please enter your username and password to continue</p>
-						<div style="width:70%;padding: 40px 30px 40px !important;display:inline-block">
+						<div class="col-sm-8" style="padding: 40px 30px 40px !important;display:inline-block">
 							<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 								@csrf							
 								<div class="form-group">
