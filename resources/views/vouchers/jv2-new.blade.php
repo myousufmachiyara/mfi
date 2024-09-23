@@ -135,7 +135,7 @@
 												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2">
+											<div class="col-12 mb-2" style="overflow-x: auto;">
 												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -185,7 +185,7 @@
 												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2">
+											<div class="col-12 mb-2" style="overflow-x: auto;">
 												<table class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
