@@ -8,7 +8,7 @@
 			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
 		</a>	
 
-		<div id="userbox" class="userbox">
+		<div id="userbox" class="userbox header-right">
 			<a href="#" data-bs-toggle="dropdown">
 				<div class="profile-info">
 					<span class="name">{{session('user_name')}}</span>
