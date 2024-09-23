@@ -7,7 +7,7 @@
 					<form method="post" action="{{ route('store-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-4 mb-3">								
+							<div class="col-12 col-md-4 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Purchase Details</h2>
@@ -47,7 +47,7 @@
 								</section>
 							</div>
 
-							<div class="col-4 mb-3">								
+							<div class="col-12 col-md-4 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Dispatch Details</h2>
@@ -88,7 +88,7 @@
 								</section>
 							</div>
 
-							<div class="col-4 mb-3">
+							<div class="col-12 col-md-4 mb-3">
 								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">Commission Form</h2>
 									<div class="form-check form-switch">
