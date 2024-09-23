@@ -195,7 +195,7 @@ function getItemDetails(row_no, option) {
     var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
     $.ajax({
         type: "GET",
-        url: "/item/detail",
+        url: "/items/detail",
         data: {id: itemId},
         success: function(result) {
             if (result.length > 0) {

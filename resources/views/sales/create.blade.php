@@ -1,10 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" id="myForm" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
@@ -309,7 +308,7 @@ var index=2;
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/items/detail",
 			data: {id:itemId},
 			success: function(result){
 				$('#item_code'+row_no).val(result[0]['it_cod']);

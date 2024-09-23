@@ -183,7 +183,7 @@
 
         $.ajax({
             type: "GET",
-            url: "/item/detail",
+            url: "/items/detail",
             data: {id: itemId},
             success: function(result) {
                 if (result.length > 0) {
