@@ -241,8 +241,7 @@
 					<h2 class="card-title">Induced From Purchase Pipe</h2>
 				</header>
 				<div class="card-body">
-					<div class="modal-wrapper">
-
+					<div class="modal-wrapper" style="overflow-x:auto">
 						<table class="table table-bordered table-striped mb-0" >
 							<thead>
 								<tr>
@@ -276,8 +275,7 @@
 					<h2 class="card-title">Induced From Godown</h2>
 				</header>
 				<div class="card-body">
-					<div class="modal-wrapper">
-
+					<div class="modal-wrapper" style="overflow-x:auto">
 						<table class="table table-bordered table-striped mb-0" >
 							<thead>
 								<tr>
