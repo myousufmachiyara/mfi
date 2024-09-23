@@ -1,7 +1,7 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-        @include('../layouts.pageheader')
+            @include('../layouts.pageheader')
             <div class="inner-wrapper">
 				<section role="main" class="content-body">
 					<form method="post" id="myForm" action="{{ route('store-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
