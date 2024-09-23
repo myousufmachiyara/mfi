@@ -11,21 +11,21 @@
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Edit Stock Out Pipe/Garder</h2>
+                                        <div class="card-actions">
+                                            <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                        </div>
 									</header>
-                                    <div class="card-actions">
-                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-                                    </div>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-1 mb-2">
+											<div class="col-6 col-md-1 mb-2">
 												<label class="col-form-label" >New ID</label>
 												<input type="text" placeholder="(NEW ID)" class="form-control" value="{{$tstock_out->prefix }}{{$tstock_out->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_out->Sal_inv_no }}" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required  value="{{$tstock_out->sa_date}}" class="form-control">
 											</div>
@@ -43,20 +43,20 @@
 												<label class="col-form-label" >Name of Person</label>
 												<input type="text" name="cash_pur_name" placeholder="Name of Person" value="{{$tstock_out->cash_pur_name}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-1">
+											<div class="col-6 col-md-1">
 												<label class="col-form-label" >Gate Pass#</label>
 												<input type="text" name="mill_gate" value="{{$tstock_out->mill_gate}}" placeholder="Gate Pass#" class="form-control">
 											</div>
-                                            <div class="col-sm-12 col-md-2">
+                                            <div class="col-6 col-md-2">
 												<label class="col-form-label" >Transporter</label>
 												<input type="text" name="transporter" value="{{$tstock_out->transporter}}" placeholder="Transporter" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-1">
+											<div class="col-6 col-md-1">
 												<label class="col-form-label" >Sale Inv#</label>
 												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
 											</div>
 											
-											<div class="col-sm-12 col-md-3">
+											<div class="col-6 col-md-3">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
@@ -123,12 +123,12 @@
                                 </div>
                                 <footer class="card-footer">
                                     <div class="row mb-3" style="float:right; margin-right: 10%;">
-                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Qty</label>
                                             <input type="number" id="total_qty" placeholder="Total Qty" class="form-control" step="any" disabled>
                                         </div>
                                         
-                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Weight</label>
                                             <input type="number" id="total_weight" placeholder="Total weight" class="form-control" step="any" disabled>
                                         </div>
