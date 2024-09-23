@@ -10,13 +10,13 @@
 							<div class="invoice">
 								<header class="clearfix">
 									<div class="row">
-										<div class="col-sm-6">
+										<div class="col-6 mt-3 mb-3">
 											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Voucher NO:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">JV1-{{$jv1->auto_lager}}</h4>
 										</div>
-										<div class="col-sm-6 text-end mb-3">
+										<div class="col-6 text-end mt-3 mb-3">
 											<div class="ib">
-												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
+												<img width="90px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
 										</div>
 									</div>
@@ -42,41 +42,38 @@
 										</div>
 									</div>
 								</div>
-
-								<table class="table table-responsive-md table-striped invoice-items" style="font-size: 18px;">
-									<thead>
-										<tr class="text-dark">
-											<th width="40%" class="text-center font-weight-semibold" style="color:#17365D;">Account Debit</th>
-											<th width="40%" class="text-center font-weight-semibold" style="color:#17365D;">Account Credit</th>
-											<th width="20%" class="text-center font-weight-semibold" style="color:#17365D;">Amount</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td class="font-weight-semibold text-dark text-center">{{$jv1->debit_account}}</td>
-											<td class="font-weight-semibold text-dark text-center">{{$jv1->credit_account}}</td>
-											<td class="font-weight-semibold text-dark text-center">{{number_format($jv1->amount)}}</td>
-										</tr>
-									</tbody>
-								</table>
-								
+								<div class="overflow-x:auto">
+									<table class="table table-responsive-md table-striped invoice-items" style="font-size: 18px;">
+										<thead>
+											<tr class="text-dark">
+												<th width="40%" class="text-center font-weight-semibold" style="color:#17365D;">Account Debit</th>
+												<th width="40%" class="text-center font-weight-semibold" style="color:#17365D;">Account Credit</th>
+												<th width="20%" class="text-center font-weight-semibold" style="color:#17365D;">Amount</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="font-weight-semibold text-dark text-center">{{$jv1->debit_account}}</td>
+												<td class="font-weight-semibold text-dark text-center">{{$jv1->credit_account}}</td>
+												<td class="font-weight-semibold text-dark text-center">{{number_format($jv1->amount)}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 
 								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
-
-											</div>
-										</div>
+									<div class="col-12 col-lg-8">
+										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 									</div>
-									
+									<div class="col-12 col-lg-4 text-end" >
+										<a onclick="window.location='{{ route('all-jv1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+										<a href="{{ route('print-jv1', $jv1->auto_lager) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
+									</div>
 								<div>
 							</div>
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-jv1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-jv1', $jv1->auto_lager) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
+								
 							</div>
 
 						</div>
