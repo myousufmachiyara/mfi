@@ -48,7 +48,7 @@
                                                 <option value="8">by Bill Amount</option>
                                                 <option value="12">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
+                                            <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
                                             <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
                                         </div>
                                     </div>
