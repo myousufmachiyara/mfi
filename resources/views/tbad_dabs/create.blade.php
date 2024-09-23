@@ -1,10 +1,9 @@
 @include('../layouts.header')
 <body>
     <section class="body">
-        @include('../layouts.menu')
+        @include('../layouts.pageheader')
         <div class="inner-wrapper">
             <section role="main" class="content-body">
-                @include('../layouts.pageheader')
                 <form method="post" id="myForm" action="{{ route('store-tbad-dabs-entry') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
