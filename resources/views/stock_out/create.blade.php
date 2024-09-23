@@ -1,10 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" id="myForm" action="{{ route('store-stock-out-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
