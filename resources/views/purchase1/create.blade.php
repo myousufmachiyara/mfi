@@ -13,7 +13,7 @@
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">New Purchase Invoice</h2>
+										<h2 class="card-title">New Purchase 1</h2>
 									</header>
 
 									<div class="card-body">
