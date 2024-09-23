@@ -9,13 +9,13 @@
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Stock In Pipe/Garder</h2>
+                                        <div class="card-actions">
+                                            <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                        </div>
 									</header>
-                                    <div class="card-actions">
-                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-                                    </div>
-
+                                  
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-2 mb-2">
