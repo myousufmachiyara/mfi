@@ -7,11 +7,10 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display:flex;justify-content:space-between">
                                     <h2 class="card-title mb-2">All Users</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New User</button>
-                                        <!-- <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button> -->
                                     </div>
                                 </header>
                                 <div class="card-body">
