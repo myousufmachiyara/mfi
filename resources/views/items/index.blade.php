@@ -6,9 +6,16 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                <header class="card-header d-none d-lg-block d-md-block" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Items</h2>
-                                    <form class="card-action" action="{{ route('create-item') }}" method="GET">
+                                    <form class="text-end" action="{{ route('create-item') }}" method="GET">
+                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
+                                        <button type="submit" class="btn btn-danger mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
+                                    </form>
+                                </header>
+                                <header class="card-header d-block d-lg-none d-md-none" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">All Items</h2>
+                                    <form class="text-end" action="{{ route('create-item') }}" method="GET">
                                         <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
                                         <button type="submit" class="btn btn-danger mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
                                     </form>
