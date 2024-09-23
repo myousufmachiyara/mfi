@@ -17,7 +17,7 @@
 
 								<div class="card-body">
 									<div class="row form-group">
-										<div class="col-sm-6 col-md-1 mb-2">
+										<div class="col-6 col-md-1 mb-2">
 											<label class="col-form-label" >RC. #</label>
 											<input type="text" placeholder="RC. #" class="form-control" disabled>
 											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
@@ -25,7 +25,7 @@
 											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 										</div>
 
-										<div class="col-sm-6 col-md-2 mb-2">
+										<div class="col-6 col-md-2  mb-2">
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
