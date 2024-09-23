@@ -10,20 +10,20 @@
                         <div class="col-12 mb-3">								
                             <section class="card">
                                 <header class="card-header">
+                                    <h2 class="card-title">New Pipe/Garder Bad Debts</h2>
                                     <div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
-                                    <h2 class="card-title">New Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">New ID</label>
                                             <input type="text" name="invoice_no" placeholder="(NEW ID)" class="form-control" disabled>
                                             <input type="hidden" id="itemCount" name="items" value="1" class="form-control">
                                             <input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" required value="{{ now()->toDateString() }}" class="form-control">
                                         </div>
@@ -90,13 +90,13 @@
                                 </div>
                                 <footer class="card-footer">
                                     <<div class="row mb-3" style="float:right; margin-right: 10%;">
-                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Add</label>
                                             <input type="number" id="total_add_show" placeholder="Total Add" class="form-control" step="any" disabled>
                                             <input type="hidden" id="totaladd" name="totaladd" step="any" placeholder="Total Add" class="form-control">
                                         </div>
                                         
-                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Less</label>
                                             <input type="number" id="total_less_show" placeholder="Total Less" class="form-control" step="any" disabled>
                                             <input type="hidden" id="totalless" name="totalless" step="any" placeholder="Total Less" class="form-control">
