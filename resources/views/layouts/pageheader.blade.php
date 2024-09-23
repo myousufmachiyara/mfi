@@ -11,14 +11,11 @@
 		</div>
 	</div>
 
-	<!-- start: search & user box -->
 	<div class="header-right">	
 		<span class="separator"></span>
-
 		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
-				
-				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+				<div class="profile-info">
 					<span class="name">{{session('user_name')}}</span>
 					<span class="role">{{session('role_name')}}</span>
 				</div>
@@ -33,11 +30,16 @@
 						<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
 					</li> -->
 					<li>
+						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
+					</li>
+					<li>
+						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
+					</li>
+					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<!-- end: search & user box -->
 </header>

@@ -13,7 +13,7 @@
                                         <button type="button" class="modal-with-form btn btn-primary mt-2" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
                                     </div>
                                 </header>
-                                <div class="card-body">
+                                <div class="card-body" >
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>

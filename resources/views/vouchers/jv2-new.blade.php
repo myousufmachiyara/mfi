@@ -8,16 +8,16 @@
 						@csrf
 						<div class="col-12 mb-3">								
 							<section class="card">
-								<header class="card-header">
+								<header class="card-header" style="display: flex;justify-content: space-between;">
+									<h2 class="card-title">Add JV 2</h2>
 									<div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
-									<h2 class="card-title">Journal Voucher 2</h2>
 								</header>
 
 								<div class="card-body">
 									<div class="row form-group">
-										<div class="col-sm-12 col-md-1 mb-2">
+										<div class="col-sm-6 col-md-1 mb-2">
 											<label class="col-form-label" >RC. #</label>
 											<input type="text" placeholder="RC. #" class="form-control" disabled>
 											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
@@ -25,20 +25,20 @@
 											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 										</div>
 
-										<div class="col-sm-12 col-md-2 mb-2">
+										<div class="col-sm-6 col-md-2 mb-2">
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
-										<div class="col-5 mb-2">
+										<div class="col-sm-12 col-md-5 mb-2">
 											<label class="col-form-label">Narration</label>
 											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
 										</div>
-										<div class="col-4 mb-3">
+										<div class="col-sm-12 col-md-4 mb-3">
 											<label class="col-form-label">Attachements</label>
 											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 										</div>
 
-										<div class="col-12 mb-3">
+										<div class="col-12 mb-3" style="overflow-x: auto;">
 											<table class="table table-bordered table-striped mb-0" id="myTable">
 												<thead>
 													<tr>
@@ -92,7 +92,7 @@
 
 										<div class="col-12 mb-3" >
 											<div class="row" style="justify-content:end">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Debit</label>
 													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 												</div>
@@ -107,7 +107,7 @@
 							</section>			
 						</div>
 						<div class="row">
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
@@ -158,7 +158,7 @@
 								</section>
 							</div>
 
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Purchase Ageing <span id="purchase_span" style="color:red;font-size: 16px;display:none">Text Here</span></h2>

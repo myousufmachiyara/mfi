@@ -1,7 +1,7 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-        @include('../layouts.pageheader')
+        <!-- @include('../layouts.pageheader') -->
             <div class="inner-wrapper">
 				<section role="main" class="content-body">
 					<form method="post" action="{{ route('create-role') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
@@ -35,8 +35,8 @@
 							</div>
 							<div class="col-12 mb-3">
 								<section class="card">
-									<div class="card-body">
-										<table class="table table-bordered table-striped mb-0" id="myTable" >
+									<div class="card-body" style="overflow-x: auto;">
+										<table class="table table-bordered table-striped mb-0" id="myTable"  >
 											<thead>
 												<tr>
 													<th>Module Name</th>
