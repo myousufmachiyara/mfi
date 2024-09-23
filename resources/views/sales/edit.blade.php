@@ -9,9 +9,8 @@
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Sale Invoice</h2>
-
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
@@ -20,24 +19,24 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" placeholder="Invoice No." class="form-control" disabled value="{{$sales->prefix}}{{$sales->Sal_inv_no}}">
 												<input type="hidden" name="invoice_no" placeholder="Invoice No." class="form-control" value="{{$sales->Sal_inv_no}}">
 												<input type="hidden" id="itemCount" name="items" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required class="form-control" value="{{$sales->sa_date}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control" value="{{$sales->pur_ord_no}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label">Status</label>
 												<select class="form-control mb-3" id="bill_status" name="bill_status" required>
 													<option value="0" {{ $sales->bill_not == 0 ? 'selected' : '' }}>Bill Not Final</option>
@@ -46,7 +45,7 @@
 												
 											</div>
 
-											<div class="col-sm-12 col-md-4">
+											<div class="col-12 col-md-4">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
@@ -61,7 +60,7 @@
 												</select>
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-12 col-md-2 mb-2">
 												<label class="col-form-label">Name Of Person</label>
 												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control" value="{{$sales->Cash_pur_name}}">
 											</div>
@@ -84,7 +83,7 @@
 									  </div>
 									</div>
 							
-									<div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
+									<div class="card-body" style="overflow-x:auto;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -147,44 +146,42 @@
 									</div>
 									<footer class="card-footer">
 										<div class="row form-group mb-3">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
 										 		<input type="number" id="total_amount_show" step="any" placeholder="Total Amount" class="form-control" disabled step="any" value=@php echo $total_amount @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
 												<input type="number" id="total_weight_show" step="any" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_weight @endphp >
 												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control" value=@php echo $total_weight @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
 												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_quantity @endphp >
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance</label>
 												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control" step="any" value="{{$sales->ConvanceCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
 												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control" step="any" value="{{$sales->LaborCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
 												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control" step="any" value="{{$sales->Bill_discount}}">
 											</div>
-										</div>
 
-										<div class="row mb-3">
 											@php $net_amount= round($total_amount + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount) @endphp
-											<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
+											<div class="col-12 pb-sm-3 pb-md-0 text-end">
+												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+												<span>
+													<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
 												</span>
 											</div>
 										</div>

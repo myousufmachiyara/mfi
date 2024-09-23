@@ -9,7 +9,7 @@
 						<div class="row">	
 							<div class="col-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" >
 										<h2 class="card-title">Edit Sale 2 Details</h2>
 									</header>
 
