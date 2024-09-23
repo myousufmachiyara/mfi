@@ -209,7 +209,7 @@
 													</div>
 												</div>
 
-												<div class="col-6 col-md-12 pb-sm-3 pb-md-0 text-end">
+												<div class="col-12 col-md-12 pb-sm-3 pb-md-0 text-end">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
 													<span class="">
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
