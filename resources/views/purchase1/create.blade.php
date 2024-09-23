@@ -157,7 +157,7 @@
 												<div class="col-12 pb-sm-3 pb-md-0 text-end">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
 													<span>
-														<strong class="text-4  text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 													<input type="hidden" id="net_amount" name="net_amount" placeholder="Total Weight" class="form-control">
 												</div>
