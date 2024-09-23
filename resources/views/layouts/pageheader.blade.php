@@ -9,41 +9,38 @@
 		<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						
 			<i class="fas fa-bars" aria-label="Toggle sidebar" style="line-height:2.3"></i>					
 		</div>
-	</div>
+		<div class="header-right">	
+			<span class="separator"></span>
 
-	<!-- start: search & user box -->
-	<div class="header-right">	
-		<span class="separator"></span>
+			<div id="userbox" class="userbox">
+				<a href="#" data-bs-toggle="dropdown">
+					
+					<div class="profile-info">
+						<span class="name">{{session('user_name')}}</span>
+						<span class="role">{{session('role_name')}}</span>
+					</div>
 
-		<div id="userbox" class="userbox">
-			<a href="#" data-bs-toggle="dropdown">
-				
-				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-					<span class="name">{{session('user_name')}}</span>
-					<span class="role">{{session('role_name')}}</span>
+					<i class="fa custom-caret"></i>
+				</a>
+
+				<div class="dropdown-menu">
+					<ul class="list-unstyled">
+						<li class="divider"></li>
+						<!-- <li>
+							<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
+						</li> -->
+						<li>
+							<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
+						</li>
+						<li>
+							<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
+						</li>
+						<li>
+							<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
+						</li>
+					</ul>
 				</div>
-
-				<i class="fa custom-caret"></i>
-			</a>
-
-			<div class="dropdown-menu">
-				<ul class="list-unstyled">
-					<li class="divider"></li>
-					<!-- <li>
-						<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
-					</li> -->
-					<li>
-						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
-					</li>
-					<li>
-						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
-					</li>
-					<li>
-						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
-					</li>
-				</ul>
 			</div>
 		</div>
-	</div>
-	<!-- end: search & user box -->
+	</div>	
 </header>
