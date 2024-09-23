@@ -41,7 +41,7 @@
 	<body style="background:#fff;">
 		<!-- start: page -->
 		<div class="row">
-			<div class="col-12 col-md-6">
+			<div class="col-8 col-md-6">
 				<section class="body-sign" style="max-width:400px !important;">
 					<div class="center-sign ">
 						<div class="text-center">

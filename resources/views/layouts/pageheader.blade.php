@@ -33,6 +33,12 @@
 						<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
 					</li> -->
 					<li>
+						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
+					</li>
+					<li>
+						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
+					</li>
+					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
 				</ul>
