@@ -9,12 +9,12 @@
 						<div class="row">	
 							<div class="col-md-6 col-sm-12  mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Sale Pipe</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getInvFromStockOut()" href="#getPur2FromStockOut" > From Stock Out </button>
 											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal" onclick="getFromPurchase2()" href="#getPurchase2" > From Purchase 2 </button>
 										</div>
-										<h2 class="card-title">Sale Pipe</h2>
 									</header>
 
 									<div class="card-body">
@@ -97,11 +97,11 @@
 
 							<div class="col-12 mb-3">
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Sale Pipe Details</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">Sale Pipe Details</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
