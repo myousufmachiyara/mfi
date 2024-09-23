@@ -11,7 +11,7 @@
                                     <h2 class="card-title mb-2">COA</h2>
                                     <div class="card-actions">
                                         <button type="button" class="mb-2 modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
-                                        <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-print">  </i>  Report</button>
+                                        <button type="button" class="mb-2 btn btn-danger" onclick="printReport()"> <i class="fas fa-print">  </i>  Report</button>
                                     </div>
                                 </header>
                                 <div class="card-body">
