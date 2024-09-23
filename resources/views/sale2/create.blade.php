@@ -1,14 +1,13 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('store-sales2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
@@ -54,7 +53,7 @@
 								</section>
 							</div>
 
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Company Details</h2>
@@ -230,7 +229,6 @@
 									</footer>
 								</section>
 							</div>
-
 						</div>
 					</form>
 				</section>
