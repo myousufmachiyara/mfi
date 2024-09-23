@@ -29,11 +29,11 @@
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
-										<div class="col-5 col-sm-12 mb-2">
+										<div class="col-sm-12 col-md-5 mb-2">
 											<label class="col-form-label">Narration</label>
 											<textarea rows="1" cols="50" name="narration" id="narration" placeholder="Narration" class="form-control cust-textarea" required></textarea>
 										</div>
-										<div class="col-4 col-sm-12 mb-3">
+										<div class="col-sm-12 col-md-4 mb-3">
 											<label class="col-form-label">Attachements</label>
 											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 										</div>
