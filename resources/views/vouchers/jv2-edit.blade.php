@@ -1,10 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
