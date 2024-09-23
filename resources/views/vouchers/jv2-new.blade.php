@@ -107,7 +107,7 @@
 							</section>			
 						</div>
 						<div class="row">
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
@@ -158,7 +158,7 @@
 								</section>
 							</div>
 
-							<div class="col-6 mb-3">								
+							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Purchase Ageing <span id="purchase_span" style="color:red;font-size: 16px;display:none">Text Here</span></h2>
