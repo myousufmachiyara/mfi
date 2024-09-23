@@ -13,9 +13,9 @@
 
 	<div class="header-right">	
 		<span class="separator"></span>
-		<div id="userbox" class="userbox">
+		<div id="userbox" class="userbox" style="margin:0px 72px 0 0">
 			<a href="#" data-bs-toggle="dropdown">
-				<div class="profile-info">
+				<div class="profile-info" style="margin: 0px 0 0px">
 					<span class="name">{{session('user_name')}}</span>
 					<span class="role">{{session('role_name')}}</span>
 				</div>
@@ -23,12 +23,9 @@
 				<i class="fa custom-caret"></i>
 			</a>
 
-			<div class="dropdown-menu">
+			<div class="dropdown-menu" style="width: 120px;">
 				<ul class="list-unstyled">
 					<li class="divider"></li>
-					<!-- <li>
-						<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
-					</li> -->
 					<li>
 						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
 					</li>
