@@ -54,7 +54,7 @@
                                     </div>
                                     <div id="searchloader"></div>
 
-                                    <div class="modal-wrapper">
+                                    <div class="modal-wrapper" style="overflow-x: auto;">
                                         <table class="table table-bordered table-striped mb-0" id="searchableTable">
                                             <thead>
                                                 <tr>
