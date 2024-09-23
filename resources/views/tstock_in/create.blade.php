@@ -12,7 +12,7 @@
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">New Stock In Pipe/Garder</h2>
                                         <div class="card-actions">
-											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal mb-2" onclick="getPurchase2()" href="#getPurchase2"> Get Unclosed Purchase 2 </button>
+											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal mb-2" onclick="getPurchase2()" href="#getPurchase2"> Get Unclosed Purchase2 </button>
 											<button type="button" class="btn btn-primary mb-2" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
