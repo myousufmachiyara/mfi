@@ -135,7 +135,7 @@
 												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2" style="overflow-x: auto;">
+											<div class="col-12 mb-2" style="overflow-x:auto;">
 												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -366,7 +366,7 @@
 			
 			$.ajax({
 				type: "GET",
-				url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+				url: "/vouchers2/pendingInvoice/"+cust_id,
 				success: function(result){
 					$.each(result, function(k,v){
 						if(Math.round(v['balance'])>0){
@@ -402,7 +402,7 @@
 
 		$.ajax({
 			type: "GET",
-			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
+			url: "/vouchers2/purpendingInvoice/"+cust_id,
 			success: function(result){
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){
