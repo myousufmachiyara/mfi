@@ -27,7 +27,7 @@
                                                 <th>Address</th>
                                                 <th>Phone No.</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
+                                                <th>Doc.</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -42,17 +42,17 @@
                                                         <td>{{$row->address}}</td>
                                                         <td>{{$row->phone_no}}</td>
                                                         <td>{{$row->email}}</td>
-                                                        <td>{{$row->status}}</td>
+                                                        <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View</a></td>
                                                         @if($row->status==1)
                                                         <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="getAccountDetails(1)" href="#userRolesModal"><i class="fa fa-user-lock"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails(1)" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" ><i class="fas fa-eye"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" ><i class="fa fa-user-lock"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
                                                         <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" style="font-size:1.3rem" href="#"><i class="bx bx-user-check"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" href="#activateUser" onclick="setActivateID({{$row->id}})"><i class="fa fa-user-check"></i></a>
+                                                            <!-- <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a> -->
                                                         </td>
                                                         @endif
                                                     </tr>
@@ -89,6 +89,66 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-danger">Deactivate</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
+        
+        <div id="deactivateUser" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('deactivate-user') }}" enctype="multipart/form-data">
+                @csrf
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Deactivate User</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="modal-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="modal-text">
+                                <p class="mb-0">Are you sure that you want to deactivate this user?</p>
+                                <input type="hidden" name="deactivate_user" id="deactivate_user" >
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-danger">Deactivate</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
+
+        <div id="activateUser" class="zoom-anim-dialog modal-block modal-block-primary mfp-hide">
+            <form method="post" action="{{ route('activate-user') }}" enctype="multipart/form-data">
+                @csrf
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Activate User</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="modal-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="modal-text">
+                                <p class="mb-0">Are you sure that you want to Activate this user?</p>
+                                <input type="hidden" name="activate_user" id="activate_user" >
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Activate</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -176,13 +236,13 @@
                     <div class="card-body">
                         <div class="row form-group">
                             <div class="col-lg-6">
-                                <label>User ID</label>
+                                <label>Employee ID</label>
                                 <input type="number" class="form-control" placeholder="User ID" name="user_id" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Picture</label>
-                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
-                            </div>
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>">
+                            </div> 
                             <div class="col-lg-6 mb-2">
                                 <label>Employee Name</label>
                                 <input type="text" class="form-control" placeholder="Employee Name"  name="name" required>
@@ -199,29 +259,38 @@
                                 <label>CNIC No.</label>
                                 <input type="text" class="form-control" placeholder="CNIC No." name="cnic_no" required>
                             </div>
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>">
-                            </div> 
-                            <div class="col-lg-6 mb-2">
-                                <label>Username</label>
-                                <input type="text" class="form-control" placeholder="@username" name="username">
+                                <label>Picture</label>
+                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="password" name="password">
+                                <label>CNIC Front</label>
+                                <input type="file" class="form-control" name="cnic_front" multiple accept="image/png, image/jpeg">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>CNIC Back</label>
+                                <input type="file" class="form-control" name="cnic_back" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Role</label>
-                                <select class="form-control" name="role_id">
+                                <select class="form-control" name="role_id" required>
+                                    <option value="" selected disabled>Select User Role</option>
                                     @foreach ($roles as $key => $row)
                                         <option value={{$row->id}}>{{$row->name}}</option>
                                    @endforeach
                                 </select>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Login Username</label>
+                                <input type="text" class="form-control" placeholder="@username" name="username">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Login Password</label>
+                                <input type="password" class="form-control" placeholder="password" name="password">
                             </div>
                         </div>
                     </div>
@@ -239,148 +308,69 @@
 
         <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" id="updateForm" action="{{ route('update-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" id="updateForm" action="{{ route('update-user') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
-                        <h2 class="card-title">Update Account</h2>
+                        <h2 class="card-title">Update User</h2>
                     </header>
                     <div class="card-body">
                         <div class="row form-group">
                             <div class="col-lg-6">
-                                <label>Account Code</label>
-                                <input type="number" class="form-control" placeholder="Account Code" id="ac_id" required disabled>
-                                <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
+                                <label>Employee ID</label>
+                                <input type="number" class="form-control" placeholder="User ID" id="update_user_id" required disabled>
+                                <input type="hidden" class="form-control" name="user_id" id="show_update_user_id">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="opp_date" id="update_opp_date">
-                            </div>  
+                                <input type="date" class="form-control" placeholder="Date" name="date" id="update_date" value="<?php echo date('Y-m-d'); ?>">
+                            </div> 
                             <div class="col-lg-6 mb-2">
-                                <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
-                            </div>
-                            <div class="col-lg-12 mb-2">
-                                <label>Address</label>
-                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
+                                <label>Employee Name</label>
+                                <input type="text" class="form-control" placeholder="Employee Name" id="update_emp_name" name="name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
-                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
+                                <input type="text" class="form-control"  placeholder="Phone No." id="update_phone_no" name="phone_no" required >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Group</label>
-                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
-                                    <option value="">Select Group</option>
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email Name" id="update_email_add" name="email" >
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>CNIC No.</label>
+                                <input type="text" class="form-control" placeholder="CNIC No." id="update_cnic_no" name="cnic_no" required>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label>Address</label>
+                                <textarea type="text" class="form-control" rows="2" id="update_add" placeholder="Address" name="address"></textarea>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Picture</label>
+                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>CNIC Front</label>
+                                <input type="file" class="form-control" name="cnic_front" multiple accept="image/png, image/jpeg">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>CNIC Back</label>
+                                <input type="file" class="form-control" name="cnic_back" multiple accept="image/png, image/jpeg">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Role</label>
+                                <select class="form-control" name="role_id" required id="update_role">
+                                    <option value="" selected disabled>Select User Role</option>
+                                    @foreach ($roles as $key => $row)
+                                        <option value={{$row->id}}>{{$row->name}}</option>
+                                    @endforeach
                                 </select>
-                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
-                            </div>
-
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
-                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
-                                    <option disabled selected>Select Account Type</option>
-                                </select>
-                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
-                            </div>
-
-                            <div class="col-lg-6 mb-2">
-                                <label>Attachements</label>
-                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
                             </div>
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Update Account</button>
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
-                            </div>
-                        </div>
-                    </footer>
-                </form>
-            </section>
-        </div>
-
-        <div id="userRolesModal" class="modal-block modal-block-primary mfp-hide">
-            <section class="card">
-                <form method="post" id="updateForm" action="{{ route('update-acc') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                    @csrf
-                    <header class="card-header">
-                        <h2 class="card-title">Update Account</h2>
-                    </header>
-                    <div class="card-body">
-                        <div class="row form-group">
-                            <div class="col-lg-6">
-                                <label>Account Code</label>
-                                <input type="number" class="form-control" placeholder="Account Code" id="ac_id" required disabled>
-                                <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="opp_date" id="update_opp_date">
-                            </div>  
-                            <div class="col-lg-6 mb-2">
-                                <label>Remarks</label>
-                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
-                            </div>
-                            <div class="col-lg-12 mb-2">
-                                <label>Address</label>
-                                <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Phone No.</label>
-                                <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Group</label>
-                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
-                                    <option value="">Select Group</option>
-                                </select>
-                                <a href="{{ route('all-acc-groups') }}">Add New A.Group</a>
-                            </div>
-
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
-                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
-                                    <option disabled selected>Select Account Type</option>
-                                </select>
-                                <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
-                            </div>
-
-                            <div class="col-lg-6 mb-2">
-                                <label>Attachements</label>
-                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-                            </div>
-                        </div>
-                    </div>
-                    <footer class="card-footer">
-                        <div class="row">
-                            <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Update Account</button>
+                                <button type="submit" class="btn btn-primary">Add User</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -426,6 +416,14 @@
         $('#deleteID').val(id);
     }
 
+    function setDeactivateID(id){
+        $('#deactivate_user').val(id);
+    }
+    
+    function setActivateID(id){
+        $('#activate_user').val(id);
+    } 
+
     function getAccountDetails(id){
         $.ajax({
             type: "GET",
@@ -444,6 +442,28 @@
                 $('#update_group_cod').val(result['group_cod']);
                 $('#update_AccountType').val(result['AccountType']);
                 $('#update_att').val(result['att']);
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+	}
+
+    function getUserDetails(id){
+        $.ajax({
+            type: "GET",
+            url: "/user/details",
+            data: {id:id},
+            success: function(result){
+                console.log(result);
+                // $('#update_user_id').val(result['ac_code']);
+                // $('#show_update_user_id').val(result['ac_code']);
+                // $('#update_emp_name').val(result['ac_code']);
+                // $('#update_phone_no').val(result['ac_name']);
+                // $('#update_email_add').val(result['rec_able']);
+                // $('#update_cnic_no').val(result['pay_able']);
+                // $('#update_add').val(result['opp_date']);
+                // $('#update_role').val(result['remarks']);
             },
             error: function(){
                 alert("error");

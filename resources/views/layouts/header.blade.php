@@ -6,8 +6,6 @@
 		<meta charset="UTF-8">
 
 		<title>MFI | Software</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="MFI Software | Management System">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -28,6 +26,7 @@
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
+
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/assets/css/theme.css" />

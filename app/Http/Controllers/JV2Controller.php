@@ -222,6 +222,7 @@ class JV2Controller extends Controller
 
         if($request->hasFile('att')){
             $files = $request->file('att');
+            
             foreach ($files as $file)
             {
                 $jv2_att = new jv2_att();

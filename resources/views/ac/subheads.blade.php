@@ -168,7 +168,7 @@
     function getCOASubHeadDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/coa-sub-heads/detail",
+            url: "/coa-sub-heads/detail",
             data: {id:id},
             success: function(result){
                 $('#sub_head_id').val(result['id']);

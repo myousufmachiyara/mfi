@@ -22,6 +22,8 @@
 		<link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/magnific-popup/magnific-popup.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+		<link rel="stylesheet" href="/assets/vendor/owl.carousel/assets/owl.carousel.css" />
+		<link rel="stylesheet" href="/assets/vendor/owl.carousel/assets/owl.theme.default.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/assets/css/theme.css" />
@@ -36,53 +38,66 @@
 		<script src="/assets/vendor/modernizr/modernizr.js"></script>
 
 	</head>
-	<body>
+	<body style="background:#fff;">
 		<!-- start: page -->
-		<section class="body-sign" style="max-width:410px !important">
-			<div class="center-sign">
-				<a href="/" class="logo float-left">
-					<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
-				</a>
+		<div class="row">
+			<div class="col-12 col-md-6">
+				<section class="body-sign" style="max-width:400px !important;">
+					<div class="center-sign ">
+						<div class="text-center">
+							<a href="/" class="logo">
+								<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
+							</a>
+						</div>
+						
+						<div class="panel card-sign" style="padding-top:1.5rem">
+							<h2 class="mb-0 text-primary">Welcome Back</h2>
+							<p class="text-dark mb-4">Please enter your username and password to continue</p>
+							<div class="card-body" style="padding: 40px 30px 40px !important">
+								<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+									@csrf							
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
+												<i class="bx bx-user text-4"></i>
+											</span>
+											<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+										</div>
+									</div>
 
-				<div class="panel card-sign">
-					<div class="card-body" style="padding: 28px 20px 20px !important">
-						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
-							@csrf							
-							<div class="form-group mb-3">
-								<label>Username</label>
-								<div class="input-group">
-									<input name="username" type="text" class="form-control form-control-lg" />
-									<span class="input-group-text">
-										<i class="bx bx-user text-4"></i>
-									</span>
-								</div>
-							</div>
+									<div class="form-group mb-3">
+										<div class="clearfix">
+											<!-- <a href="pages-recover-password.html" class="float-end">Lost Password?</a> -->
+										</div>
+										<div class="input-group">
+											<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
+												<i class="bx bx-lock text-4"></i>
+											</span>
+											<input name="password" class="form-control" type="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+										</div>
+									</div>
 
-							<div class="form-group mb-3">
-								<div class="clearfix">
-									<label class="float-left">Password</label>
-									<!-- <a href="pages-recover-password.html" class="float-end">Lost Password?</a> -->
-								</div>
-								<div class="input-group">
-									<input name="password" type="password" class="form-control form-control-lg" />
-									<span class="input-group-text">
-										<i class="bx bx-lock text-4"></i>
-									</span>
-								</div>
+									<div class="row">
+										<div class="col-sm-12 text-center">
+											<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
+										</div>
+									</div>
+								</form>
 							</div>
+						</div>
 
-							<div class="row">
-								<div class="col-sm-12 text-end">
-									<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px">Sign In</button>
-								</div>
-							</div>
-						</form>
+						<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
 					</div>
-				</div>
-
-				<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
+				</section>
 			</div>
-		</section>
+			<div class="col-6 d-none d-lg-block">
+				<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
+					<div class="item"><img src="/assets/img/sample-1.jpg" alt=""></div>
+					<!-- <div class="item"><img src="/assets/img/sample-2.webp" alt=""></div> -->
+				</div>
+			</div>
+		</div>
+
 		<!-- end: page -->
 
 		<!-- Vendor -->
@@ -95,6 +110,7 @@
 		<script src="/assets/vendor/nanoscroller/nanoscroller.js"></script>
 		<script src="/assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
 		<script src="/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		<script src="/assets/vendor/owl.carousel/owl.carousel.js"></script>
 
 		<!-- Specific Page Vendor -->
 

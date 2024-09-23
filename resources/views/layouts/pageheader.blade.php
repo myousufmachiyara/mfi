@@ -19,8 +19,8 @@
 			<a href="#" data-bs-toggle="dropdown">
 				
 				<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-					<span class="name">User Name</span>
-					<span class="role">admin</span>
+					<span class="name">{{session('user_name')}}</span>
+					<span class="role">{{session('role_name')}}</span>
 				</div>
 
 				<i class="fa custom-caret"></i>
