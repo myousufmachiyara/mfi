@@ -166,7 +166,7 @@
         Route::post('/tbad_dabs/delete', [App\Http\Controllers\TBadDabsController::class, 'destroy'])->name('delete-tbad-dabs');
         Route::post('/sales2/delete', [App\Http\Controllers\Sales2Controller::class, 'destroy'])->name('delete-sales2');
         Route::post('/tstock_in/delete', [App\Http\Controllers\TStockInController::class, 'destroy'])->name('delete-tstock-in-invoice');
-
+        Route::post('/tstock_out/delete', [App\Http\Controllers\TStockOutController::class, 'destroy'])->name('delete-tstock-out-invoice');
     });
 
     Route::middleware(['checkPermission:att'])->group(function () {
