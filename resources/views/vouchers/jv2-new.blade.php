@@ -38,7 +38,7 @@
 											<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 										</div>
 
-										<div class="col-12 mb-3" >
+										<div class="col-12 mb-3" style="overflow-x: auto;">
 											<table class="table table-bordered table-striped mb-0" id="myTable">
 												<thead>
 													<tr>
@@ -92,7 +92,7 @@
 
 										<div class="col-12 mb-3" >
 											<div class="row" style="justify-content:end">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Debit</label>
 													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 												</div>
