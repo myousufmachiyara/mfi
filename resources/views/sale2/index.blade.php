@@ -1,15 +1,14 @@
 @include('../layouts.header')
-<style>
-    .select2-container{
-        width: 100% !important;
-    }
-</style>	
-<body>
+    <style>
+        .select2-container{
+            width: 100% !important;
+        }
+    </style>	
+    <body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
