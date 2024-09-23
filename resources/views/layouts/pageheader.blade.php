@@ -11,12 +11,10 @@
 		</div>
 	</div>
 
-	<div class="header-right">	
+	<div class="header-right d-none d-lg-block">	
 		<span class="separator"></span>
-
 		<div id="userbox" class="userbox">
 			<a href="#" data-bs-toggle="dropdown">
-				
 				<div class="profile-info">
 					<span class="name">{{session('user_name')}}</span>
 					<span class="role">{{session('role_name')}}</span>
