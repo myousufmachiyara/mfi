@@ -40,62 +40,53 @@
 	</head>
 	<body style="background:#fff;">
 		<!-- start: page -->
-		<div class="row">
-			<div class="container">
-				<div class="col-12 col-md-6">
-					<section class="body-sign" style="max-width:400px !important;">
-						<div class="center-sign ">
-							<div class="text-center">
-								<a href="/" class="logo">
-									<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
-								</a>
-							</div>
-							
-							<div class="panel card-sign" style="padding-top:1.5rem">
-								<h2 class="mb-0 text-primary">Welcome Back</h2>
-								<p class="text-dark mb-4">Please enter your username and password to continue</p>
-								<div class="card-body" style="padding: 40px 30px 40px !important">
-									<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
-										@csrf							
-										<div class="form-group">
-											<div class="input-group">
-												<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
-													<i class="bx bx-user text-4"></i>
-												</span>
-												<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-											</div>
-										</div>
-
-										<div class="form-group mb-3">
-											<div class="clearfix">
-												<!-- <a href="pages-recover-password.html" class="float-end">Lost Password?</a> -->
-											</div>
-											<div class="input-group">
-												<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
-													<i class="bx bx-lock text-4"></i>
-												</span>
-												<input name="password" class="form-control" type="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-sm-12 text-center">
-												<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
-											</div>
-										</div>
-									</form>
+		<div style="display:flex">
+			<div class="col-12 col-md-6">
+				<section class="text-center">
+					<a href="/" class="logo">
+						<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
+					</a>					
+					<div style="padding-top:1.5rem;">
+						<h2 class="mb-0 text-primary">Welcome Back</h2>
+						<p class="text-dark mb-4">Please enter your username and password to continue</p>
+						<div style="width:70%;padding: 40px 30px 40px !important;display:inline-block">
+							<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+								@csrf							
+								<div class="form-group">
+									<div class="input-group">
+										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
+											<i class="bx bx-user text-4"></i>
+										</span>
+										<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									</div>
 								</div>
-							</div>
 
-							<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
+								<div class="form-group mb-3">
+									<div class="clearfix">
+										<!-- <a href="pages-recover-password.html" class="float-end">Lost Password?</a> -->
+									</div>
+									<div class="input-group">
+										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
+											<i class="bx bx-lock text-4"></i>
+										</span>
+										<input name="password" class="form-control" type="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12 text-center">
+										<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
+									</div>
+								</div>
+							</form>
 						</div>
-					</section>
-				</div>
-				<div class="col-6 d-none d-lg-block">
-					<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
-						<div class="item"><img src="/assets/img/sample-1.jpg" alt=""></div>
-						<!-- <div class="item"><img src="/assets/img/sample-2.webp" alt=""></div> -->
 					</div>
+					<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
+				</section>
+			</div>
+			<div class="col-md-6 d-none d-lg-block ">
+				<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
+					<div class="item"><img src="/assets/img/sample-1.jpg" alt=""></div>
 				</div>
 			</div>
 		</div>
