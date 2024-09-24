@@ -4764,7 +4764,7 @@ html.header-dark .header .separator {
 	}
 
 	.header.header-nav-menu.header-nav-top-line {
-		height: initial;
+		/* height: initial; */
 		border-bottom: 0;
 	}
 
