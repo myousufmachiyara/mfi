@@ -171,7 +171,6 @@ function addNewRow() {
     if (latestValue !== "Select Item") {
         var table = $('#myTable').find('tbody');
         var newRow = $('<tr>');
-
         newRow.append('<td><input type="number" id="item_code' + index + '" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
         newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name' + index + '" name="item_name[]" required onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
         newRow.append('<td><input type="text" id="remarks' + index + '" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
