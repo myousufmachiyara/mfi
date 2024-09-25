@@ -1,7 +1,7 @@
 @include('../layouts.header')
 <body>
     <section class="body">
-        @include('../layouts.menu')
+        @include('layouts.pageheader')
         <div class="inner-wrapper">
             <section role="main" class="content-body">
                 <form method="post" id="myForm" action="{{ route('update-bad-dabs') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
@@ -14,13 +14,13 @@
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">ID</label>
                                             <input type="text" placeholder="ID" class="form-control" disabled value="{{$bad_dabs->bad_dabs_id}}">
                                             <input type="hidden" name="bad_dabs_id" placeholder="bad_dabs_id" class="form-control" value="{{$bad_dabs->bad_dabs_id}}">
                                             <input type="hidden" id="itemCount" name="items" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" value="{{$bad_dabs->date}}" class="form-control">
                                         </div>
@@ -34,13 +34,13 @@
                         </div>
                         <div class="col-12 mb-3">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">Edit Door Bad Dabs Details</h2>
                                     <div class="card-actions">
                                         <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
                                     </div>
-                                    <h2 class="card-title">Edit Door Bad Dabs Details</h2>
                                 </header>
-                                <div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+                                <div class="card-body" style="overflow-x:auto;max-height:450px;overflow-y:auto">
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
                                             <tr>
@@ -85,12 +85,12 @@
                                 </div>
                                 <footer class="card-footer">
                                     <div class="row mb-3" style="float:right; margin-right: 10%;">
-                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                              <label class="col-form-label">Total Add</label>
                                              <input type="number" id="total_add_show" step="any" placeholder="Total Add" class="form-control" disabled value=@php echo $total_add @endphp>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Less</label>
                                             <input type="number" id="total_less_show" step="any" placeholder="Total Less" class="form-control" disabled value=@php echo $total_less @endphp>
                                             <input type="hidden" id="total_less" name="total_less" step="any" placeholder="Total Less" class="form-control" value=@php echo $total_less @endphp>

@@ -1,17 +1,16 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('update-purchases1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Edit Purchase Invoice</h2>
+									<header class="card-header" style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">Edit Purchase 1</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
@@ -19,21 +18,21 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="Invoice #" class="form-control" value="{{$pur->prefix}}{{$pur->pur_id}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur->pur_id}}" name="pur_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="pur_date" value="{{$pur->pur_date}}"  class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" placeholder="Bill No." name="pur_bill_no" value="{{$pur->pur_bill_no}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Sale Inv.</label>
 												<input type="text" placeholder="Sale Inv." name="pur_sale_inv" value="{{$pur->sale_against}}" class="form-control">
 											</div>
@@ -122,38 +121,38 @@
 									<footer class="card-footer" >
 										<div class="row">
 											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" value="{{$pur->total_weight}}" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" name="total_quantity" value="{{$pur->total_quantity}}" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
 													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" value="{{$pur->pur_convance_char}}" placeholder="Convance Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
 													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" value="{{$pur->pur_labor_char}}" placeholder="Labour Charges" class="form-control">
 												</div>
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount</label>
 													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" value="{{$pur->pur_discount}}" placeholder="Bill Discount" class="form-control">
 												</div>
-												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-													<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger"></span></strong>
+												<div class="col-12 pb-sm-3 pb-md-0 text-end">
+													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+													<span>
+														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 												</div>
 											</div>

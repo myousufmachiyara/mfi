@@ -8,10 +8,10 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title mb-2">Chart Of Accounts</h2>
+                                    <h2 class="card-title mb-2">COA</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
-                                        <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button>
+                                        <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-print">  </i>  Report</button>
                                     </div>
                                 </header>
                                 <div class="card-body">

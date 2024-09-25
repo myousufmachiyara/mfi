@@ -27,9 +27,9 @@
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Purchase Invoices</h2>
+                                    <h2 class="card-title">All Purchases</h2>
                                     <form class="text-end" action="{{ route('new-purchases1') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Invoice</button>
+                                        <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice</button>
                                     </form>
                                 </header>
                                
@@ -48,7 +48,7 @@
                                                 <option value="8">by Bill Amount</option>
                                                 <option value="12">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
+                                            <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
                                             <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
                                         </div>
                                     </div>

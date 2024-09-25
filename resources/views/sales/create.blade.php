@@ -9,7 +9,7 @@
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">New Sale Invoice</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
@@ -18,24 +18,24 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
 												<input type="text" name="invoice_no" placeholder="(New Invoice)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label">Status</label>
 												<select data-plugin-selecttwo class="form-control select2-js mb-3" name="bill_status">
 													<option value="0">Bill Not Final</option>
@@ -130,48 +130,46 @@
 									</div>
 									<footer class="card-footer">
 										<div class="row form-group mb-3">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
 										 		<input type="number" id="total_amount_show" placeholder="Total Amount" class="form-control" step="any" disabled>
 												<input type="hidden" id="totalAmount" name="totalAmount" step="any" placeholder="Total Amount" class="form-control">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
 												<input type="number" id="total_weight_show"  placeholder="Total Weight" class="form-control" step="any" disabled>
 												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
 												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" step="any" disabled>
 											</div>
 
 										
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance Charges</label>
 												<input type="number" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" step="any" value="0" class="form-control">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
 												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" step="any" value="0" class="form-control">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
 												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" step="any" value="0" class="form-control">
 											</div>
 
 										</div>
-										<div class="row mb-3">
-											<div class="col-sm-12 col-md-12 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
-												</span>
-											</div>
+										<div class="col-sm-12 col-md-12 pb-sm-3 pb-md-0 text-end">
+											<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+											<span>
+												<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
+											</span>
 										</div>
 									</footer>
 									<footer class="card-footer">

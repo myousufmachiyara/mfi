@@ -1,32 +1,31 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" id="myForm" action="{{ route('update-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Stock In Pipe/Garder</h2>
+                                        <div class="card-actions">
+                                            <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                        </div>
 									</header>
-                                    <div class="card-actions">
-                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-                                    </div>
-
+                                  
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >ID</label>
 												<input type="text" placeholder="(ID)" class="form-control" value="{{$tstock_in->prefix }}{{$tstock_in->Sal_inv_no }}" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control" >
 												<input type="hidden" id="printInvoice" name="invoice_no"  value="{{$tstock_in->Sal_inv_no }}" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required  value="{{$tstock_in->sa_date}}" class="form-control">
 											</div>
@@ -41,11 +40,11 @@
 												</select>
 											</div>
 											
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Purchase Inv#</label>
 												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_in->pur_inv}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Mill Inv/Gate#</label>
 												<input type="text" name="mill_gate" value="{{$tstock_in->mill_gate}}" placeholder="Mill Inv/Gate#" class="form-control">
 											</div>
@@ -116,12 +115,12 @@
                                 </div>
                                 <footer class="card-footer">
                                     <div class="row mb-3" style="float:right; margin-right: 10%;">
-                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Qty</label>
                                             <input type="number" id="total_qty" placeholder="Total Qty" class="form-control" step="any" disabled>
                                         </div>
                                         
-                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Weight</label>
                                             <input type="number" id="total_weight" placeholder="Total weight" class="form-control" step="any" disabled>
                                         </div>

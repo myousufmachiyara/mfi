@@ -172,6 +172,7 @@
 
     Route::middleware(['checkPermission:att'])->group(function () {
 
+        Route::get('/user/attachements', [App\Http\Controllers\UsersController::class, 'getAttachements'])->name('get-user-att');
         Route::get('/coa/attachements', [App\Http\Controllers\COAController::class, 'getAttachements'])->name('get-acc-att');
         Route::get('/coa/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
         Route::get('/coa/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');

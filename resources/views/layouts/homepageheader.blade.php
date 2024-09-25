@@ -26,9 +26,7 @@
 			<div class="dropdown-menu">
 				<ul class="list-unstyled">
 					<li class="divider"></li>
-					<!-- <li>
-						<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="bx bx-lock"></i> Lock Screen</a>
-					</li> -->
+
 					<li>
 						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
 					</li>

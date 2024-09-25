@@ -1,21 +1,20 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Purchase Pipe Invoices</h2>
+                                    <h2 class="card-title">All Purchase Pipe</h2>
                                     <form class="text-end" action="{{ route('new-purchases2') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Pipe Invoice</button>
+                                        <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice</button>
                                     </form>
                                 </header>
-                                <div class="card-body">
-                                    <div class="modal-wrapper">
+                                <div class="card-body" >
+                                    <div class="modal-wrapper" >
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>

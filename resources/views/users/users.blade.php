@@ -1,18 +1,16 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+        @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display:flex;justify-content:space-between">
                                     <h2 class="card-title mb-2">All Users</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New User</button>
-                                        <!-- <button type="button" class="btn btn-danger" onclick="printReport()"> <i class="fas fa-file-pdf">  </i>  Print Report</button> -->
                                     </div>
                                 </header>
                                 <div class="card-body">
@@ -168,6 +166,7 @@
                             <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                 <thead>
                                     <tr>
+                                        <th>Name</th>
                                         <th>Attachement Path</th>
                                         <th>Download</th>
                                         <th>View</th>
@@ -183,12 +182,6 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                                    @csrf   -->
-                                    <input type="hidden" id="download_id" name="download_id">                              
-                                    <!-- <button type="button" class="btn btn-danger">Delete All</button> -->
-                                    <button class="btn btn-default modal-dismiss">Cancel</button>
-                                <!-- </form> -->
                             </div>
                         </div>
                     </footer>
@@ -322,43 +315,43 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="date" id="update_date" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" class="form-control" placeholder="Date" name="update_date" id="update_date" value="<?php echo date('Y-m-d'); ?>">
                             </div> 
                             <div class="col-lg-6 mb-2">
                                 <label>Employee Name</label>
-                                <input type="text" class="form-control" placeholder="Employee Name" id="update_emp_name" name="name" required>
+                                <input type="text" class="form-control" placeholder="Employee Name" id="update_emp_name" name="update_emp_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Phone No.</label>
-                                <input type="text" class="form-control"  placeholder="Phone No." id="update_phone_no" name="phone_no" required >
+                                <input type="text" class="form-control"  placeholder="Phone No." id="update_phone_no" name="update_phone_no" required >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Name" id="update_email_add" name="email" >
+                                <input type="email" class="form-control" placeholder="Email Name" id="update_email_add" name="update_email_add" >
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC No.</label>
-                                <input type="text" class="form-control" placeholder="CNIC No." id="update_cnic_no" name="cnic_no" required>
+                                <input type="text" class="form-control" placeholder="CNIC No." id="update_cnic_no" name="update_cnic_no" required>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <label>Address</label>
-                                <textarea type="text" class="form-control" rows="2" id="update_add" placeholder="Address" name="address"></textarea>
+                                <textarea type="text" class="form-control" rows="2" id="update_add" placeholder="Address" name="update_add"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Picture</label>
-                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="update_att" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Front</label>
-                                <input type="file" class="form-control" name="cnic_front" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="update_cnic_front" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Back</label>
-                                <input type="file" class="form-control" name="cnic_back" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="update_cnic_back" multiple accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Role</label>
-                                <select class="form-control" name="role_id" required id="update_role">
+                                <select class="form-control" name="update_role" required id="update_role">
                                     <option value="" selected disabled>Select User Role</option>
                                     @foreach ($roles as $key => $row)
                                         <option value={{$row->id}}>{{$row->name}}</option>
@@ -370,7 +363,7 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Add User</button>
+                                <button type="submit" class="btn btn-primary">Update User</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
@@ -456,14 +449,14 @@
             data: {id:id},
             success: function(result){
                 console.log(result);
-                // $('#update_user_id').val(result['ac_code']);
-                // $('#show_update_user_id').val(result['ac_code']);
-                // $('#update_emp_name').val(result['ac_code']);
-                // $('#update_phone_no').val(result['ac_name']);
-                // $('#update_email_add').val(result['rec_able']);
-                // $('#update_cnic_no').val(result['pay_able']);
-                // $('#update_add').val(result['opp_date']);
-                // $('#update_role').val(result['remarks']);
+                $('#update_user_id').val(result['user']['id']);
+                $('#show_update_user_id').val(result['user']['id']);
+                $('#update_emp_name').val(result['user']['name']);
+                $('#update_phone_no').val(result['user']['phone_no']);
+                $('#update_email_add').val(result['user']['email']);
+                $('#update_cnic_no').val(result['user']['cnic_no']);
+                $('#update_add').val(result['user']['address']);
+                $('#update_role').val(result['user_role']['role_id']);
             },
             error: function(){
                 alert("error");
@@ -471,34 +464,51 @@
         });
 	}
 
-    function getAttachements(id){
+    // function getAttachements(id){
 
-        var table = document.getElementById('acc_attachements');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
+    //     var table = document.getElementById('acc_attachements');
+    //     while (table.rows.length > 0) {
+    //         table.deleteRow(0);
+    //     }
 
-        $.ajax({
-            type: "GET",
-            url: "/coa/acc/attachements",
-            data: {id:id},
-            success: function(result){
-                $.each(result, function(k,v){
-                    var html="<tr>";
-                    html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/acc/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/acc/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
-                    html+="</tr>";
-                    $('#acc_attachements').append(html);
-                });
-                $('#download_id').val(result[0]['ac_code']);
-            },
-            error: function(){
-                alert("error");
-            }
-        });
-	}
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/user/attachements",
+    //         data: {id:id},
+    //         success: function(result){
+    //             console.log(result);
+    //             $.each(result, function(k,v){
+    //                 var html="<tr>";
+    //                 if(k==0){
+    //                     html+= "<td>Profile Picture</td>"
+    //                     html+= "<td>"+v['picture']+"</td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+    //                 }
+    //                 elseif(k==1){
+    //                     html+= "<td>CNIC Front</td>"
+    //                     html+= "<td>"+v['cnic_front']+"</td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+    //                 }
+    //                 elseif(k==2){
+    //                     html+= "<td>CNIC Back</td>"
+    //                     html+= "<td>"+v['cnic_back']+"</td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+    //                 }
+    //                 html+="</tr>";
+    //                 $('#acc_attachements').append(html);
+    //             });
+    //         },
+    //         error: function(){
+    //             alert("error");
+    //         }
+    //     });
+	// }
 
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";

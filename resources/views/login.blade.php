@@ -69,8 +69,11 @@
 										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
 											<i class="bx bx-lock text-4"></i>
 										</span>
-										<input name="password" class="form-control" type="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+										<input name="password" class="form-control" type="password" id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+
 									</div>
+									<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
+
 								</div>
 
 								<div class="row">
@@ -116,5 +119,15 @@
 		<!-- Theme Initialization Files -->
 		<script src="/assets/js/theme.init.js"></script>
 
+		<script>
+        	function showPassword() {
+				var x = document.getElementById("password");
+				if (x.type === "password") {
+					x.type = "text";
+				} else {
+					x.type = "password";
+				}
+			}
+    	</script>
 	</body>
 </html>

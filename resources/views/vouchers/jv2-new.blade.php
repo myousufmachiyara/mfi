@@ -17,7 +17,7 @@
 
 								<div class="card-body">
 									<div class="row form-group">
-										<div class="col-sm-6 col-md-1 mb-2">
+										<div class="col-6 col-md-1 mb-2">
 											<label class="col-form-label" >RC. #</label>
 											<input type="text" placeholder="RC. #" class="form-control" disabled>
 											<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
@@ -25,7 +25,7 @@
 											<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 										</div>
 
-										<div class="col-sm-6 col-md-2 mb-2">
+										<div class="col-6 col-md-2  mb-2">
 											<label class="col-form-label" >Date</label>
 											<input type="date" name="jv_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 										</div>
@@ -92,11 +92,11 @@
 
 										<div class="col-12 mb-3" >
 											<div class="row" style="justify-content:end">
-												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Debit</label>
 													<input type="number" id="total_debit" name="total_debit" placeholder="Total Debit" class="form-control" disabled>
 												</div>
-												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Credit</label>
 													<input type="number" id="total_credit" name="total_credit" placeholder="Total Credit" class="form-control" disabled>
 												</div>
@@ -135,7 +135,7 @@
 												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2">
+											<div class="col-12 mb-2" style="overflow-x:auto;">
 												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -185,7 +185,7 @@
 												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2">
+											<div class="col-12 mb-2" style="overflow-x: auto;">
 												<table class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -366,7 +366,7 @@
 			
 			$.ajax({
 				type: "GET",
-				url: "/vouchers/jv2/pendingInvoice/"+cust_id,
+				url: "/vouchers2/pendingInvoice/"+cust_id,
 				success: function(result){
 					$.each(result, function(k,v){
 						if(Math.round(v['balance'])>0){
@@ -402,7 +402,7 @@
 
 		$.ajax({
 			type: "GET",
-			url: "/vouchers/jv2/purpendingInvoice/"+cust_id,
+			url: "/vouchers2/purpendingInvoice/"+cust_id,
 			success: function(result){
 				$.each(result, function(k,v){
 					if(Math.round(v['balance'])>0){

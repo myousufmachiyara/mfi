@@ -1,14 +1,13 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('store-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-4 mb-3">								
+							<div class="col-12 col-md-4 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Purchase Details</h2>
@@ -16,20 +15,20 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="(New Invoice)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="sa_date" autofocus value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Mill Inv. No.</label>
 												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-3">
+											<div class="col-6 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
@@ -48,7 +47,7 @@
 								</section>
 							</div>
 
-							<div class="col-4 mb-3">								
+							<div class="col-12 col-md-4 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Dispatch Details</h2>
@@ -89,7 +88,7 @@
 								</section>
 							</div>
 
-							<div class="col-4 mb-3">
+							<div class="col-12 col-md-4 mb-3">
 								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">Commission Form</h2>
 									<div class="form-check form-switch">
@@ -100,31 +99,31 @@
 								<section class="card">
 									<div class="card-body" style="background: #2023240f !important">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field">
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field">
 											</div>
 
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Bill Amount After Discount</label>
 												<input type="number" value="0" id="BillAfterDisc" step="any" required disabled class="form-control comm-form-field">
 											</div>
 
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field">
 											</div>
@@ -143,12 +142,6 @@
 												<label class="col-form-label" >Commission Remarks</label>
 												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"></textarea>
 											</div>
-
-											<!-- <div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Comm Month</label>
-												<input type="text" class="form-control">
-											</div> -->
-
 									  </div>
 									</div>
 								</section>
@@ -156,11 +149,12 @@
 
 							<div class="col-12 mb-3">
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">New Purchase Pipe</h2>
+
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">New Purchase Pipe Invoice</h2>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
@@ -232,37 +226,32 @@
 									<footer class="card-footer" >
 										<div class="row">
 											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">GST</label>
-													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
-												</div> -->
-
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
 													<input type="text" id="convance_charges" onchange="netTotal()" name="ConvanceCharges" placeholder="Convance Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
 													<input type="text" id="labour_charges"  onchange="netTotal()" name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-12 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
@@ -274,9 +263,9 @@
 													</div>
 												</div>
 
-												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-													<span class="d-flex align-items-center justify-content-lg-end">
+												<div class="col-12 pb-sm-3 pb-md-0 text-end">
+													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+													<span>
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 												</div>
