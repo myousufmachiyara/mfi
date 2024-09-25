@@ -1,16 +1,15 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Stock 
-                                        out
+                                    <h2 class="card-title">All Pipe/Garder Stock out
                                     </h2>
                                     <form class="text-end" action="{{ route('create-tstock-out-invoice') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock Out</button>
@@ -21,7 +20,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th style="display:none">ID</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Name Of Person</th>
@@ -31,6 +31,7 @@
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
                                                     <th>Transporter</th>
+                                                    <th>Item Type</th>
                                                     <th>Status</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
@@ -39,6 +40,7 @@
                                             <tbody>
                                                 @foreach ($tstock_out as $key => $row)
                                                 <tr>
+                                                    <td style="display:none" >{{$row->Sal_inv_no}}</td>
                                                     <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
@@ -49,6 +51,14 @@
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->transporter}}</td>
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                    @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                    @else
+                                                    <td>none</td>
+                                                    @endif
+
                                                     @if($row->pur_inv!=null) 
                                                     <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                 @else
@@ -147,7 +157,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

@@ -1,18 +1,17 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                 <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">COA Groups</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Group</button>
                                     </div>
-                                    <h2 class="card-title">COA Groups</h2>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
@@ -30,6 +29,7 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td class="actions text-end">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getDetails({{$row->group_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                        <span class="separator"> | </span>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->group_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
                                                     </td>
                                                 </tr>
@@ -86,7 +86,7 @@
                             <input type="number" class="form-control" placeholder="group code" disabled>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Account Group Name</label>
+                            <label>Account Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Name" name="acc_group_name" required>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                             <input type="number" class="form-control" id="update_group_id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Account Group Name</label>
+                            <label>Account Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
                             <input type="hidden" class="form-control" id="group_id" name="group_cod" required>
                         </div>
@@ -131,7 +131,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
@@ -142,7 +142,7 @@
     function getDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/coa-groups/detail",
+            url: "/coa-groups/detail",
             data: {id:id},
             success: function(result){
                 console.log(result)

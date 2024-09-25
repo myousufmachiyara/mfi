@@ -1,17 +1,20 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 <body>
     <section class="body">
-        @extends('../layouts.menu')
+        @include('../layouts.menu')
         <div class="inner-wrapper">
             <section role="main" class="content-body">
-                @extends('../layouts.pageheader')
+                @include('../layouts.pageheader')
                 <form method="post" id="myForm" action="{{ route('store-tbad-dabs-entry') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-3">								
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">New Pipe Bad Debts</h2>
+                                    <div class="card-actions">
+										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+									</div>
+                                    <h2 class="card-title">New Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
@@ -25,9 +28,18 @@
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" required value="{{ now()->toDateString() }}" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-8 mb-2">
+                                        <div class="col-sm-12 col-md-2">
+                                            <label class="col-form-label">Item Type</label>
+                                            <select data-plugin-selecttwo class="form-control select2-js mb-3" name="item_type">
+                                                <option value="1">Pipes</option>
+                                                <option value="2">Garder / TR</option>
+                                            </select>												
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
                                             <label class="col-form-label">Reason Of Bad Debts</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control"></textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason Of Bad Debts" class="form-control cust-textarea"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -40,11 +52,11 @@
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
                                             <tr>
-                                                <th width="10%">Item Code</th>
-                                                <th width="30%">Item Name</th>
+                                                <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="30%">Item Name<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="20%">Remarks</th>
-                                                <th width="15%">Qty Add</th>
-                                                <th width="15%">Qty Less</th>
+                                                <th width="15%">Qty Add<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="15%">Qty Less<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="10%"></th>
                                             </tr>
                                         </thead>
@@ -54,7 +66,7 @@
                                                     <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
                                                         <option selected>Select Item</option>
                                                         @foreach($items as $key => $row)
                                                             <option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>
@@ -135,11 +147,16 @@
             </section>
         </div>
     </section>
-    @extends('../layouts.footerlinks')
+    @include('../layouts.footerlinks')
 </body>
 </html>
 
 <script>
+
+
+
+   
+
 
 var index = 2;
 
@@ -171,7 +188,7 @@ function addNewRow() {
         var newRow = $('<tr>');
 
         newRow.append('<td><input type="number" id="item_code' + index + '" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-        newRow.append('<td><select class="form-control" id="item_name' + index + '" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
+        newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name' + index + '" name="item_name[]" required onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
         newRow.append('<td><input type="text" id="remarks' + index + '" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
         newRow.append('<td><input type="number" id="qtyadd' + index + '" name="qty_add[]" placeholder="Qty Add" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
         newRow.append('<td><input type="number" id="qtyless' + index + '" name="qty_less[]" placeholder="Qty Less" value="0" step="any" required class="form-control" onchange="tableTotal()"></td>');
@@ -180,6 +197,11 @@ function addNewRow() {
         table.append(newRow);
         index++;
         $('#itemCount').val(Number($('#itemCount').val()) + 1);
+        $('#myTable select[data-plugin-selecttwo]').select2();
+
+        // Set focus on the new item_code input field
+		document.getElementById('item_code' + (index - 1)).focus();
+
     }
 }
 

@@ -12,7 +12,7 @@ class COASubHeadsController extends Controller
     public function index()
     {
         $subheads = sub_head_of_acc::where('status', 1)
-        ->join('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
+        ->leftjoin('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
         ->select('hoa.heads as name', 'sub_head_of_acc.id as id', 'sub_head_of_acc.sub as sub_name')
         ->get();
 

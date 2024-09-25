@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+            @include('layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -14,7 +13,7 @@
                                         <button type="button" class="modal-with-form btn btn-primary mt-2" href="#addModal"> <i class="fas fa-plus"></i> New Voucher</button>
                                     </div>
                                 </header>
-                                <div class="card-body">
+                                <div class="card-body" >
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
@@ -36,15 +35,17 @@
                                                     <td>{{$row->debit_account}}</td>
                                                     <td>{{$row->credit_account}}</td>
                                                     <td >{{$row->remarks}}</td>
-                                                    @if(substr(strval($row->amount), strpos(strval($row->amount), '.') + 1)>0)  
-                                                        <td>{{ rtrim(rtrim(number_format($row->amount, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->amount))}}</td>
-                                                    @endif
+                                                    @if (strpos($row->amount, '.') !== false && substr($row->amount, strpos($row->amount, '.') + 1) > '0')
+                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
+                                                @else
+                                                    <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
+                                                @endif
+                                                
+                                                
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('print-jv1', $row->auto_lager) }}">
-                                                            <i class="fas fa-print"></i>
+                                                        <a class="mb-1 mt-1 me-1" href="{{ route('show-jv1', $row->auto_lager) }}">
+                                                            <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getJVSDetails({{$row->auto_lager}})" href="#updateModal">
@@ -116,8 +117,8 @@
                                 <input type="date" class="form-control" placeholder="Date" name="date" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Debit</label>
-                                <select autofocus class="form-control" name ="ac_dr_sid" required>
+                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
+                                <select  data-plugin-selecttwo class="form-control select2-js" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -125,9 +126,9 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Credit</label>
+                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
 
-                                <select autofocus class="form-control" name ="ac_cr_sid" required>
+                                <select  data-plugin-selecttwo class="form-control select2-js" name ="ac_cr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -135,8 +136,8 @@
                                 </select>                            
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Amount</label>
-                                <input type="number" class="form-control" placeholder="Amount" value="0" step=".00001" name="amount">
+                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Amount" value="0" step="any" name="amount" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -145,7 +146,7 @@
                             </div>  
                             <div class="col-lg-12 mb-2">
                                 <label>Remarks</label>
-                                <textarea rows="4" cols="50" class="form-control" placeholder="Remarks" name="remarks"> </textarea>                            </div>
+                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" name="remarks"> </textarea>                            </div>
                             </div>
                         </div>
                         <footer class="card-footer">
@@ -180,8 +181,8 @@
                                 <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Debit</label>
-                                <select class="form-control" autofocus name="update_ac_dr_sid" required id="update_ac_dr_sid">
+                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -189,8 +190,8 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Credit</label>
-                                <select class="form-control" autofocus name ="update_ac_cr_sid" required id="update_ac_cr_sid">
+                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -198,8 +199,8 @@
                                 </select>                            
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Amount</label>
-                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step=".00001" name="update_amount">
+                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step="any" name="update_amount" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
@@ -208,7 +209,7 @@
                             </div>  
                             <div class="col-lg-12 mb-2">
                                 <label>Remarks</label>
-                                <textarea rows="4" cols="50" class="form-control" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
+                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
                             </div>
                         </div>
                     
@@ -262,7 +263,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
@@ -279,14 +280,14 @@
 
         $.ajax({
             type: "GET",
-            url: "/vouchers/jv1/attachements",
+            url: "/vouchers/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/vouchers/jv1/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/vouchers/jv1/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/vouchers/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/vouchers/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#jv1_attachements').append(html);
@@ -302,13 +303,14 @@
     function getJVSDetails(id){
         $.ajax({
             type: "GET",
-            url: "/vouchers/jv1/detail",
+            url: "/vouchers/detail",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $('#update_id').val(result['auto_lager']);
                 $('#update_id_view').val(result['auto_lager']);
-                $('#update_ac_cr_sid').val(result['ac_cr_sid']);
-                $('#update_ac_dr_sid').val(result['ac_dr_sid']);
+                $('#update_ac_cr_sid').val(result['ac_cr_sid']).trigger('change');
+                $('#update_ac_dr_sid').val(result['ac_dr_sid']).trigger('change');
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);
@@ -324,7 +326,7 @@
             return;
         }
 
-        fetch('/vouchers/jv1/deleteAttachment/' + fileId, {
+        fetch('/vouchers/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

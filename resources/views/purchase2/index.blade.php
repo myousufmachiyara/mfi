@@ -1,10 +1,10 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -19,7 +19,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Company Name</th>
                                                     <th>Mill Inv #</th>
@@ -42,6 +43,7 @@
                                             <tbody>
                                                 @foreach ($pur2 as $key => $row)
                                                 <tr>
+                                                    <td style="display:none">{{$row->Sale_inv_no}}</td>
                                                     <td>{{$row->prefix}}{{$row->Sale_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
@@ -56,7 +58,7 @@
                                                     <td>{{$row->ConvanceCharges}}</td>
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
-                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->ConvanceCharges-$row->Bill_discount)
+                                                    @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->LaborCharges-$row->Bill_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
@@ -69,7 +71,7 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a>
+                                                        <!-- <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a> -->
                                                         <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
                                                         <a href="{{ route('edit-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-pencil-alt"></i></a>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->Sale_inv_no}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
@@ -147,7 +149,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
@@ -167,7 +169,6 @@
             url: "/purchase2/attachements",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"

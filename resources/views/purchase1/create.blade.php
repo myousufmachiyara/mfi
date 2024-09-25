@@ -1,16 +1,19 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('store-purchases1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 										<h2 class="card-title">New Purchase Invoice</h2>
 									</header>
 
@@ -23,7 +26,7 @@
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="pur_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
+												<input type="date" name="pur_date"  value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Bill No.</label>
@@ -39,8 +42,8 @@
 											</div>
 											<div class="col-sm-12 col-md-3 mb-3">
 												<td>
-													<label class="col-form-label">Account Name</label>
-													<select class="form-control" autofocus name="ac_cod" required>
+													<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
+													<select data-plugin-selecttwo class="form-control select2-js"  name="ac_cod" required>
 														<option value="" disabled selected>Select Account</option>
 														@foreach($coa as $key => $row)	
 															<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -58,7 +61,7 @@
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control"></textarea>
+												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>	
 									  </div>
 									</div>
@@ -66,16 +69,16 @@
 							</div>
 							<div class="col-12 mb-3">
 								<section class="card">
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+									<div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="10%">Qty.</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Weight (kgs)</th>
-													<th width="10%">Price</th>
+													<th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Amount</th>
 													<th width="10%"></th>
 												</tr>
@@ -83,13 +86,13 @@
 											<tbody id="Purchase1Table">
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" id="item_cod1" onchange="getItemDetails(1,1)" required>
+														<input type="text" class="form-control" name="item_cod[]"  id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>	
 													<td>
 														<input type="text" class="form-control" onchange="rowTotal(1)" id="pur_qty21" name="pur_qty2[]" value="0" required>
 													</td>
 													<td>
-														<select class="form-control" autofocus id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
 															<option value="" selected disabled>Select Item</option>
 															@foreach($items as $key => $row)	
 																<option value="{{$row->it_cod}}">{{$row->item_name}}</option>
@@ -182,12 +185,12 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
+	
 	var index=2;
 	var itemCount = Number($('#itemCount').val());
 
@@ -229,9 +232,9 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" name="pur_qty2[]" step="any" required>';
-			cell3.innerHTML  = '<select class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'"  onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" onchange="rowTotal('+index+')" id="pur_qty2'+index+'" value="0" name="pur_qty2[]" step="any" required>';
+			cell3.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name ="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -247,6 +250,11 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+
+			// Set focus on the new item_code input field
+		document.getElementById('item_cod' + (index - 1)).focus();
+        
 		}
 	}
 
@@ -260,7 +268,7 @@
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/items/detail",
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);

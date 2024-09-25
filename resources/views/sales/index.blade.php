@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -19,7 +18,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>
@@ -31,15 +31,16 @@
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
-                                                    <th>Att.</th>
                                                     <th>Status</th>
+                                                    <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($sales as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->Sal_inv_no}}</td>
+                                                    <td style="display:none">{{$row->Sal_inv_no}}</td>
+                                                    <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->Cash_pur_name}}</td>
@@ -51,11 +52,12 @@
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
                                                     @php ($net_amount=$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount)
-                                                    @if(substr(strval($net_amount), strpos(strval($net_amount), '.') + 1)>0) 
+                                                    <td><strong style="font-size:15px">{{ round($net_amount)}}</strong></td>
+                                                    <!-- @if(substr(strval($net_amount), strpos(strval($net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
-                                                    @endif
+                                                    @endif -->
 
                                                     @if ($row->bill_not==0)
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
@@ -155,7 +157,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

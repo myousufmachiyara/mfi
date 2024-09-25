@@ -1,15 +1,15 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Bad Dabs</h2>
+                                    <h2 class="card-title">All Pipe/Garder Bad Dabs</h2>
                                     <form class="text-end" action="{{ route('create-tbad-dabs') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Entry</button>
                                     </form>
@@ -24,6 +24,7 @@
                                                     <th>Reason</th>
                                                     <th>Total Add</th>
                                                     <th>Total Less</th>
+                                                    <th>Item Type</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -35,6 +36,13 @@
                                                     <td>{{$row->reason}}</td>
                                                     <td>{{$row->add_sum}}</td>
                                                     <td>{{$row->less_sum}}</td>
+                                                    
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                @endif
+
                                                     <td class="actions">
                                                         <a href="#" class="text-danger">
                                                             <i class="fas fa-print"></i>
@@ -125,7 +133,7 @@
         </div>
 
         
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

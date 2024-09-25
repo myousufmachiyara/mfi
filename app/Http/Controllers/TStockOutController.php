@@ -27,16 +27,16 @@ class TStockOutController extends Controller
     public function index()
     {
         $tstock_out = tstock_out::where('tstock_out.status', 1)
-        ->join ('tstock_out_2', 'tstock_out_2.sales_inv_cod' , '=', 'tstock_out.Sal_inv_no')
+        ->leftjoin ('tstock_out_2', 'tstock_out_2.sales_inv_cod' , '=', 'tstock_out.Sal_inv_no')
         ->join('ac','tstock_out.account_name','=','ac.ac_code')
         ->select(
             'tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
-            'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address','tstock_out.prefix',
+            'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address','tstock_out.prefix','tstock_out.item_type',
             \DB::raw('SUM(tstock_out_2.Sales_qty) as qty_sum'),
             \DB::raw('SUM(tstock_out_2.Sales_qty*tstock_out_2.weight_pc) as weight_sum'),
         )
         ->groupby('tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
-        'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address' ,'tstock_out.prefix' )
+        'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address' ,'tstock_out.prefix','tstock_out.item_type' )
         ->get();
 
         return view('tstock_out.index',compact('tstock_out'));
@@ -50,8 +50,8 @@ class TStockOutController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('tstock_out.create',compact('items','coa'));
     }
 
@@ -84,6 +84,10 @@ class TStockOutController extends Controller
         }
         if ($request->has('transporter') && $request->transporter) {
             $tstock_out->transporter=$request->transporter;
+        }
+        
+        if ($request->has('item_type') && $request->item_type) {
+            $tstock_out->item_type=$request->item_type;
         }
         if ($request->has('account_name') && $request->account_name) {
             $tstock_out->account_name=$request->account_name;
@@ -146,8 +150,9 @@ class TStockOutController extends Controller
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)->first();
         $tstock_out_items = tstock_out_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry2::all();
-        $coa = AC::all();
+
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('tstock_out.edit', compact('tstock_out','tstock_out_items','items','coa'));
     }
 
@@ -158,23 +163,26 @@ class TStockOutController extends Controller
         if ($request->has('date') && $request->date) {
             $tstock_out->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv) {
+        if ($request->has('pur_inv') && $request->pur_inv OR empty($request->pur_inv)) {
             $tstock_out->pur_inv=$request->pur_inv;
         }
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $tstock_out->Sales_remarks=$request->remarks;
         }
-        if ($request->has('mill_gate') && $request->mill_gate) {
+        if ($request->has('mill_gate') && $request->mill_gate OR empty($request->mill_gate)) {
             $tstock_out->mill_gate=$request->mill_gate;
         }
-        if ($request->has('cash_pur_name') && $request->cash_pur_name) {
+        if ($request->has('cash_pur_name') && $request->cash_pur_name OR empty($request->cash_pur_name)) {
             $tstock_out->cash_pur_name=$request->cash_pur_name;
         }
-        if ($request->has('cash_pur_address') && $request->cash_pur_address) {
-            $tstock_out->cash_Pur_address=$request->cash_pur_address;
+        if ($request->has('cash_pur_address') && $request->cash_pur_address OR empty($request->cash_pur_address)) {
+            $tstock_out->cash_Pur_address=$request->cash_pur_address; 
         }
-        if ($request->has('transporter') && $request->transporter) {
+        if ($request->has('transporter') && $request->transporter OR empty($request->transporter)) {
             $tstock_out->transporter=$request->transporter;
+        }
+        if ($request->has('item_type') && $request->item_type OR empty($request->item_type)) {
+            $tstock_out->item_type=$request->item_type;
         }
         if ($request->has('account_name') && $request->account_name) {
             $tstock_out->account_name=$request->account_name;
@@ -189,6 +197,7 @@ class TStockOutController extends Controller
             'cash_pur_name'=>$tstock_out->cash_pur_name,
             'transporter'=>$tstock_out->transporter,
             'account_name'=>$tstock_out->account_name,
+            'item_type'=>$tstock_out->item_type,
     
         ]);
         
@@ -203,7 +212,9 @@ class TStockOutController extends Controller
                     $tstock_out_2 = new tstock_out_2();
                     $tstock_out_2->sales_inv_cod=$request->invoice_no;
                     $tstock_out_2->item_cod=$request->item_code[$i];
-                    $tstock_out_2->remarks=$request->item_remarks[$i];
+                    if ($request->item_remarks[$i]!=null OR empty($request->item_remarks[$i])) {
+                        $tstock_out_2->remarks=$request->item_remarks[$i];
+                    }
                     $tstock_out_2->Sales_qty=$request->qty[$i];
                     $tstock_out_2->weight_pc=$request->weight[$i];
     
@@ -228,7 +239,8 @@ class TStockOutController extends Controller
         return redirect()->route('all-tstock-out');
     }
 
-    public function getAttachements(Request $request)
+    
+     public function getAttachements(Request $request)
     {
         $tstock_out_att = tstock_out_att::where('tstock_out_id', $request->id)->get();
         return $tstock_out_att;
@@ -263,5 +275,33 @@ class TStockOutController extends Controller
         if (file_exists($filePath)) {
             return Response::download($filePath);
         } 
+    }
+
+    public function getunclosed()
+    {
+        $unclosed_inv = tstock_out::where(function ($query) {
+            $query->where('pur_inv', '')
+                  ->orWhereNull('pur_inv')
+                  ->where('tstock_out.status',1);
+        })
+        ->join('ac', 'ac.ac_code', '=', 'tstock_out.account_name')
+        ->select('tstock_out.*', 'ac.ac_name as acc_name')  // Select fields from both tables as needed
+        ->get();
+        return $unclosed_inv;
+    }
+
+    public function getItems($id){
+
+        $pur1= tstock_out::where('Sal_inv_no',$id)->get()->first();
+
+        $pur2 = tstock_out_2::where('sales_inv_cod',$id)
+        ->join('item_entry2 as ie','tstock_out_2.item_cod','=','ie.it_cod')
+        ->select('tstock_out_2.*','ie.item_name','ie.sales_price','ie.sale_rate_date')
+        ->get();
+
+        return response()->json([
+            'pur1' => $pur1,
+            'pur2' => $pur2,
+        ]);
     }
 }

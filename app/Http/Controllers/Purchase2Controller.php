@@ -24,7 +24,7 @@ class Purchase2Controller extends Controller
     public function index()
     {
         $pur2 = tpurchase::where('tpurchase.status',1)
-        ->join ('tpurchase_2', 'tpurchase_2.sales_inv_cod' , '=', 'tpurchase.Sale_inv_no')
+        ->leftjoin ('tpurchase_2', 'tpurchase_2.sales_inv_cod' , '=', 'tpurchase.Sale_inv_no')
         ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tpurchase.account_name')
         ->join('ac as disp_to', 'disp_to.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
@@ -48,6 +48,7 @@ class Purchase2Controller extends Controller
     {
         $items = Item_entry2::all();
         $item_group = Item_Groups::all();
+        $item_group = Item_Groups::whereBetween('item_group_cod', [1, 6])->get();
         $coa = AC::all();
         return view('purchase2.create',compact('items','coa','item_group'));
     }
@@ -186,9 +187,10 @@ class Purchase2Controller extends Controller
 
     public function edit($id)
     {
-        $items = Item_entry2::all();
         $item_group = Item_Groups::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         $pur2 = tpurchase::where('tpurchase.Sale_inv_no',$id)
         ->leftjoin('tax_tpurchase_2', 'tax_tpurchase_2.sales_inv_cod', '=', 'tpurchase.Sale_inv_no')
         ->select(
@@ -215,10 +217,10 @@ class Purchase2Controller extends Controller
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
+        if ($request->has('pur_ord_no') && $request->pur_ord_no OR empty($request->pur_ord_no)) {
             $pur2->pur_ord_no=$request->pur_ord_no;
         }
-        if ($request->has('sales_against') && $request->sales_against) {
+        if ($request->has('sales_against') && $request->sales_against OR empty($request->sales_against)) {
             $pur2->sales_against=$request->sales_against;
         }
         if ($request->has('account_name') && $request->account_name) {
@@ -227,22 +229,22 @@ class Purchase2Controller extends Controller
         if ($request->has('disp_account_name') && $request->disp_account_name) {
             $pur2->Cash_pur_name_ac=$request->disp_account_name;
         }
-        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name OR empty($request->Cash_pur_name)) {
             $pur2->Cash_pur_name=$request->Cash_pur_name;
         }
-        if ($request->has('cash_Pur_address') && $request->cash_Pur_address) {
+        if ($request->has('cash_Pur_address') && $request->cash_Pur_address OR empty($request->cash_Pur_address)) {
             $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
-        if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
+        if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
-        if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
+        if ($request->has('ConvanceCharges') && $request->ConvanceCharges OR $request->ConvanceCharges==0) {
             $pur2->ConvanceCharges=$request->ConvanceCharges;
         }
-        if ($request->has('LaborCharges') && $request->LaborCharges) {
+        if ($request->has('LaborCharges') && $request->LaborCharges OR $request->LaborCharges==0) {
             $pur2->LaborCharges=$request->LaborCharges;
         }
-        if ($request->has('Bill_discount') && $request->Bill_discount) {
+        if ($request->has('Bill_discount') && $request->Bill_discount OR $request->Bill_discount==0) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
 
@@ -273,7 +275,7 @@ class Purchase2Controller extends Controller
                     $tpurchase_2->sales_inv_cod=$request->pur2_id;
                     $tpurchase_2->item_cod=$request->item_cod[$i];
 
-                    if ($request->remarks[$i]!=null) {
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
                         $tpurchase_2->remarks=$request->remarks[$i];
                     }
                     if ($request->pur2_qty2[$i]!=null) {
@@ -288,7 +290,7 @@ class Purchase2Controller extends Controller
                     if ($request->pur2_len[$i]!=null) {
                         $tpurchase_2->length=$request->pur2_len[$i];
                     }
-                    if ($request->pur2_price_date[$i]!=null) {
+                    if ($request->pur2_price_date[$i]!=null OR empty($request->pur2_price_date[$i])) {
                         $tpurchase_2->rat_dat=$request->pur2_price_date[$i];
                     }
                     if ($request->pur2_percentage[$i]!=null) {
@@ -330,7 +332,7 @@ class Purchase2Controller extends Controller
                 if ($request->has('tax_item_name') && $request->tax_item_name) {
                     $new_tax_pur2->item=$request->tax_item_name;
                 }
-                if ($request->has('tax_remarks') && $request->tax_remarks) {
+                if ($request->has('tax_remarks') && $request->tax_remarks OR empty($request->tax_remarks)) {
                     $new_tax_pur2->remarks=$request->tax_remarks;
                 }
     
@@ -404,7 +406,7 @@ class Purchase2Controller extends Controller
                 ->first();
 
         $pur2 = tpurchase_2::where('sales_inv_cod',$id)
-                ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+                ->join('item_entry2 as ie','tpurchase_2.item_cod','=','ie.it_cod')
                 ->select('tpurchase_2.*','ie.item_name')
                 ->get();
 
@@ -422,7 +424,9 @@ class Purchase2Controller extends Controller
     {
         $unclosed_inv = tpurchase::where(function ($query) {
             $query->where('sales_against', '')
-                  ->orWhereNull('sales_against');
+                  ->orWhereNull('sales_against')
+                  ->where('tpurchase.status',1);
+
         })
         ->join('ac', 'ac.ac_code', '=', 'tpurchase.account_name')
         ->join('ac as dispt_acc', 'dispt_acc.ac_code', '=', 'tpurchase.Cash_pur_name_ac')
@@ -436,7 +440,7 @@ class Purchase2Controller extends Controller
         $pur1= tpurchase::where('Sale_inv_no',$id)->get()->first();
 
         $pur2 = tpurchase_2::where('sales_inv_cod',$id)
-        ->join('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
+        ->leftjoin('item_entry as ie','tpurchase_2.item_cod','=','ie.it_cod')
         ->select('tpurchase_2.*','ie.item_name')
         ->get();
 
@@ -532,15 +536,14 @@ class Purchase2Controller extends Controller
         }';
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="text-align:center">Purchase Invoice</h1>';
+        $heading='<h1 style="text-align:center">Purchase Pipe Invoice</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
-        $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['prefix']."".$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Mill Inv No: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
         $html .= '</tr>';
@@ -638,38 +641,38 @@ class Purchase2Controller extends Controller
         $currentY = $pdf->GetY();
 
         // Column 1
-        $pdf->SetXY(15, $currentY+10);
+        $pdf->SetXY(15, $currentY);
         $pdf->MultiCell(30, 5, 'Total Weight(kg)', 1,1);
         $pdf->MultiCell(30, 5, 'Total Quantity', 1,1);
 
         // Column 2
-        $pdf->SetXY(45.1, $currentY+10);
+        $pdf->SetXY(45.1, $currentY);
         $pdf->MultiCell(42, 5,  $total_weight, 1, 'R');
-        $pdf->SetXY(45.1, $currentY+16.82);
+        $pdf->SetXY(45.1, $currentY+6.8);
         $pdf->MultiCell(42, 5, $total_quantity, 1,'R');
 
         // Column 3
-        $pdf->SetXY(120, $currentY+10);
+        $pdf->SetXY(120, $currentY);
         $pdf->MultiCell(40, 5, 'Total Amount', 1,1);
-        $pdf->SetXY(120, $currentY+16.82);
+        $pdf->SetXY(120, $currentY+6.8);
         $pdf->MultiCell(40, 5, 'Labour Charges', 1,1);
-        $pdf->SetXY(120, $currentY+23.5);
+        $pdf->SetXY(120, $currentY+13.5);
         $pdf->MultiCell(40, 5, 'Convance Charges', 1,1);
-        $pdf->SetXY(120, $currentY+30.18);
+        $pdf->SetXY(120, $currentY+20.5);
         $pdf->MultiCell(40, 5, 'Discount(Rs)', 1,1);
-        $pdf->SetXY(120, $currentY+36.86);
+        $pdf->SetXY(120, $currentY+27.1);
         $pdf->MultiCell(40, 5, 'Net Amount', 1,1);
         
         // Column 4
-        $pdf->SetXY(160, $currentY+10);
+        $pdf->SetXY(160, $currentY);
         $pdf->MultiCell(35, 5, $total_amount, 1, 'R');
-        $pdf->SetXY(160, $currentY+16.82);
+        $pdf->SetXY(160, $currentY+6.8);
         $pdf->MultiCell(35, 5, $purchase['LaborCharges'], 1, 'R');
-        $pdf->SetXY(160, $currentY+23.5);
+        $pdf->SetXY(160, $currentY+13.5);
         $pdf->MultiCell(35, 5, $purchase['ConvanceCharges'], 1, 'R');
-        $pdf->SetXY(160, $currentY+30.18);
+        $pdf->SetXY(160, $currentY+20.5);
         $pdf->MultiCell(35, 5, $purchase['Bill_discount'], 1, 'R');
-        $pdf->SetXY(160, $currentY+36.86);
+        $pdf->SetXY(160, $currentY+27.1);
         $net_amount=round($total_amount+$purchase['LaborCharges']+$purchase['ConvanceCharges']-$purchase['Bill_discount']);
         $pdf->MultiCell(35, 5,  $net_amount, 1, 'R');
         

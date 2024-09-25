@@ -18,25 +18,22 @@ use App\Models\stock_in_att;
 
 class StockInController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    use SaveImage;
 
+    use SaveImage;
 
     public function index()
     {
         $stock_in = stock_in::where('stock_in.status', 1)
-        ->join ('stock_in_2', 'stock_in_2.sales_inv_cod' , '=', 'stock_in.Sal_inv_no')
+        ->leftjoin ('stock_in_2', 'stock_in_2.sales_inv_cod' , '=', 'stock_in.Sal_inv_no')
         ->join('ac','stock_in.account_name','=','ac.ac_code')
         ->select(
             'stock_in.Sal_inv_no','stock_in.sa_date','stock_in.Cash_pur_name','stock_in.Sales_remarks','ac.ac_name',
-            'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address',
+            'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address','stock_in.prefix',
             \DB::raw('SUM(stock_in_2.Sales_qty) as qty_sum'),
-            \DB::raw('SUM(stock_in_2.Sales_qty*stock_in_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(stock_in_2.weight_pc) as weight_sum'),
         )
         ->groupby('stock_in.Sal_inv_no','stock_in.sa_date','stock_in.Cash_pur_name','stock_in.Sales_remarks','ac.ac_name',
-        'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address' )
+        'stock_in.pur_inv', 'stock_in.mill_gate', 'stock_in.transporter','stock_in.Cash_pur_address','stock_in.prefix' )
         ->get();
 
         return view('stock_in.index',compact('stock_in'));
@@ -50,8 +47,9 @@ class StockInController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry::all();
-        $coa = AC::all();
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('stock_in.create',compact('items','coa'));
     }
 
@@ -65,23 +63,16 @@ class StockInController extends Controller
         if ($request->has('date') && $request->date) {
             $stock_in->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv) {
-            $stock_in->pur_inv=$request->pur_inv;
-        }
-        if ($request->has('remarks') && $request->remarks) {
+
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks) ) {
             $stock_in->Sales_remarks=$request->remarks;
         }
-        if ($request->has('mill_gate') && $request->mill_gate) {
-            $stock_in->mill_gate=$request->mill_gate;
-        }
-        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name OR empty($request->Cash_pur_name) ) {
             $stock_in->Cash_pur_name=$request->Cash_pur_name;
         }
-        if ($request->has('cash_pur_address') && $request->cash_pur_address) {
+        if ($request->has('cash_pur_address') && $request->cash_pur_address OR empty($request->cash_pur_address) ) {
             $stock_in->cash_Pur_address=$request->cash_pur_address;
-        }
-        if ($request->has('transporter') && $request->transporter) {
-            $stock_in->transporter=$request->transporter;
         }
         if ($request->has('account_name') && $request->account_name) {
             $stock_in->account_name=$request->account_name;
@@ -104,10 +95,11 @@ class StockInController extends Controller
                     $stock_in_2 = new stock_in_2();
                     $stock_in_2->sales_inv_cod=$invoice_id;
                     $stock_in_2->item_cod=$request->item_code[$i];
-                    $stock_in_2->remarks=$request->item_remarks[$i];
+                    if ($request->item_remarks[$i]!=null OR empty($request->item_remarks[$i])) {
+                        $stock_in_2->remarks=$request->item_remarks[$i];
+                    }
                     $stock_in_2->Sales_qty=$request->qty[$i];
                     $stock_in_2->weight_pc=$request->weight[$i];
-    
                     $stock_in_2->save();
                 }
             }
@@ -120,7 +112,7 @@ class StockInController extends Controller
                 $stock_in_att = new stock_in_att();
                 $stock_in_att->stock_in_id = $invoice_id;
                 $extension = $file->getClientOriginalExtension();
-                $stock_in_att->att_path = $this->stockInDoc($file,$extension);
+                $stock_in_att->att_path = $this->StockInDoc($file,$extension);
                 $stock_in_att->save();
             }
         }
@@ -128,25 +120,27 @@ class StockInController extends Controller
         return redirect()->route('all-stock-in');
     }
 
-    public function show(string $id)
-    {
-        $stock_in = stock_in::where('Sal_inv_no',$id)
-                        ->join('ac','stock_in.account_name','=','ac.ac_code')
-                        ->first();
+    // public function show(string $id)
+    // {
+    //     $stock_in = stock_in::where('Sal_inv_no',$id)
+    //                     ->join('ac','stock_in.account_name','=','ac.ac_code')
+    //                     ->first();
 
-        $stock_in_items = stock_in_2::where('sales_inv_cod',$id)
-                        ->join('Item_entry','stock_in_2.item_cod','=','Item_entry.it_cod')
-                        ->get();
-        return view('stock_in.view',compact('stock_in','stock_in_items'));
-    }
+    //     $stock_in_items = stock_in_2::where('sales_inv_cod',$id)
+    //                     ->join('Item_entry','stock_in_2.item_cod','=','Item_entry.it_cod')
+    //                     ->get();
+    //     return view('stock_in.view',compact('stock_in','stock_in_items'));
+    // }
 
     public function edit($id)
     {
-        $stock_in = stock_in::where('Sal_inv_no',$id)->first();
-        $stock_in_items = stock_in_2::where('sales_inv_cod',$id)->get();
-        $items = Item_entry::all();
-        $coa = AC::all();
-        return view('stock_in.edit', compact('stock_in','stock_in_items','items','coa'));
+        $tstock_in = stock_in::where('Sal_inv_no',$id)->first();
+        $tstock_in_items = stock_in_2::where('sales_inv_cod',$id)->get();
+
+        $items = Item_entry::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
+        return view('stock_in.edit', compact('tstock_in','tstock_in_items','items','coa'));
     }
 
     public function update(Request $request)
@@ -156,23 +150,16 @@ class StockInController extends Controller
         if ($request->has('date') && $request->date) {
             $stock_in->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv) {
-            $stock_in->pur_inv=$request->pur_inv;
-        }
+
         if ($request->has('remarks') && $request->remarks) {
             $stock_in->Sales_remarks=$request->remarks;
         }
-        if ($request->has('mill_gate') && $request->mill_gate) {
-            $stock_in->mill_gate=$request->mill_gate;
-        }
+
         if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
             $stock_in->Cash_pur_name=$request->Cash_pur_name;
         }
         if ($request->has('cash_pur_address') && $request->cash_pur_address) {
             $stock_in->cash_Pur_address=$request->cash_pur_address;
-        }
-        if ($request->has('transporter') && $request->transporter) {
-            $stock_in->transporter=$request->transporter;
         }
         if ($request->has('account_name') && $request->account_name) {
             $stock_in->account_name=$request->account_name;
@@ -180,14 +167,10 @@ class StockInController extends Controller
 
         stock_in::where('Sal_inv_no', $request->invoice_no)->update([
             'sa_date'=>$stock_in->sa_date,
-            'pur_inv'=>$stock_in->pur_inv,
-            'mill_gate'=>$stock_in->mill_gate,
             'Sales_remarks'=>$stock_in->Sales_remarks,
             'cash_Pur_address'=>$stock_in->cash_Pur_address,
             'Cash_pur_name'=>$stock_in->Cash_pur_name,
-            'transporter'=>$stock_in->transporter,
             'account_name'=>$stock_in->account_name,
-    
         ]);
         
         stock_in_2::where('sales_inv_cod', $request->invoice_no)->delete();
@@ -217,7 +200,7 @@ class StockInController extends Controller
                 $stock_in_att = new stock_in_att();
                 $stock_in_att->stock_in_id = $request->invoice_no;
                 $extension = $file->getClientOriginalExtension();
-                $stock_in_att->att_path = $this->stockInDoc($file,$extension);
+                $stock_in_att->att_path = $this->StockInDoc($file,$extension);
                 $stock_in_att->save();
             }
         }
@@ -229,7 +212,6 @@ class StockInController extends Controller
     public function getAttachements(Request $request)
     {
         $stock_in_att = stock_in_att::where('stock_in_id', $request->id)->get();
-        
         return $stock_in_att;
     }
 
@@ -264,4 +246,3 @@ class StockInController extends Controller
         } 
     }
 }
-

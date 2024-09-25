@@ -1,18 +1,21 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
 					<form method="post" id="myForm" action="{{ route('update-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header">
-										<h2 class="card-title">Edit Stock In Pipe</h2>
+										<h2 class="card-title">Edit Stock In Pipe/Garder</h2>
 									</header>
+                                    <div class="card-actions">
+                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                    </div>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
@@ -29,8 +32,8 @@
 											</div>
 
 											<div class="col-sm-12 col-md-4">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" id="coa_name" name="account_name" required>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $tstock_in->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -46,36 +49,35 @@
 												<label class="col-form-label" >Mill Inv/Gate#</label>
 												<input type="text" name="mill_gate" value="{{$tstock_in->mill_gate}}" placeholder="Mill Inv/Gate#" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-4">
+											<div class="col-sm-12 col-md-3">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 
-											<div class="col-sm-12 col-md-8 mb-2">
+                                            <div class="col-sm-12 col-md-2">
+												<label class="col-form-label">Item Type</label>
+												<select class="form-control mb-3" id="item_type" name="item_type" required>
+													<option value="1" {{ $tstock_in->item_type == 1 ? 'selected' : '' }}>Pipes</option>
+													<option value="2" {{ $tstock_in->item_type == 2 ? 'selected' : '' }}>Garder / TR</option>
+												</select>
+												
+											</div>
+
+											<div class="col-sm-12 col-md-7 mb-2">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control">{{$tstock_in->Sales_remarks}}</textarea>
+												<textarea rows="2" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$tstock_in->Sales_remarks}}</textarea>
 											</div>
 									  </div>
 									</div>
-								</section>
-							</div>
-
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header">
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-										<h2 class="card-title">Edit Stock In Details</h2>
-									</header>
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+						
+									<div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Qty</th>
+													<th width="15%">Qty<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Weight</th>
 													<th width="10%"></th>
 												</tr>
@@ -87,7 +89,7 @@
 															<input type="number" id="item_code{{$tstockin_key+1}}" name="item_code[]" placeholder="Code" value="{{$tstock_items->item_cod}}" class="form-control" required onchange="getItemDetails({{$tstockin_key+1}},1)">
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control" id="item_name{{$tstockin_key+1}}" onchange="getItemDetails({{$tstockin_key+1}},2)" name="item_name[]" required>
+															<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$tstockin_key+1}}" onchange="getItemDetails({{$tstockin_key+1}},2)" name="item_name[]" required>
 																<option selected>Select Item</option>
 																@foreach($items as $key => $row)
 																	<option value="{{$row->it_cod}}" {{ $tstock_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -98,7 +100,7 @@
 															<input type="text" id="remarks{{$tstockin_key+1}}" name="item_remarks[]" placeholder="Remarks" value="{{$tstock_items->remarks}}" class="form-control">
 														</td>
 														<td>
-															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Qty" value="{{$tstock_items->sales_qty}}" step="any" required class="form-control">
+															<input type="number" id="qty{{$tstockin_key+1}}" name="qty[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Qty" value="{{$tstock_items->Sales_qty}}" step="any" required class="form-control">
 															<input type="hidden" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
 														</td>
 														<td>
@@ -168,12 +170,16 @@
             </section>
         </div>
     </section>
-    @extends('../layouts.footerlinks')
+    @include('../layouts.footerlinks')
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
+    
+
+    
     var index = 2;
 	var itemCount = 0;
 
@@ -229,7 +235,7 @@
             var newRow = $('<tr>');
 
             newRow.append('<td><input type="number" id="item_code'+index+'" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(' + index + ', 1)"></td>');
-            newRow.append('<td><select data-plugin-selecttwo class="form-control" id="item_name'+index+'" name="item_name[]" onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
+            newRow.append('<td><select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" name="item_name[]" required onchange="getItemDetails(' + index + ', 2)"><option>Select Item</option>@foreach($items as $key => $row)<option value="{{ $row->it_cod }}">{{ $row->item_name }}</option>@endforeach</select></td>');
             newRow.append('<td><input type="text" id="remarks'+index+'" name="item_remarks[]" placeholder="Remarks" class="form-control"></td>');
             newRow.append('<td><input type="number" id="qty'+index+'" name="qty[]" placeholder="Qty" value="0" step="any" required class="form-control" onchange="rowTotal('+index+')"><input type="hidden" id="weight'+index+'" name="weight[]" placeholder="Weight" value="0" step="any" required class="form-control"></td>');
             newRow.append('<td><input type="number" id="row_total_weight'+index+'" name="row_total_weight[]" placeholder="weight" value="0" step="any" onchange="rowTotal('+index+')" required class="form-control" disabled></td>');
@@ -239,6 +245,9 @@
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
+
+            // Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
 
         }
     }

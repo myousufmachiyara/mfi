@@ -1,10 +1,10 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
@@ -24,7 +24,7 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
+												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" autofocus class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Mill Inv. No.</label>
@@ -35,9 +35,9 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
+												<label class="col-form-label">Company Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
+													<option value="" disabled selected>Select Company Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
@@ -57,9 +57,9 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
-													<option value="" disabled selected>Select Account</option>
+												<label class="col-form-label">Customer Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="disp_account_name" required>
+													<option value="" disabled selected>Select Customer Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
@@ -70,9 +70,11 @@
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<label class="col-form-label">Sale Inv#</label>
+												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
+												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
 											</div>
+											
 
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Person Address</label>
@@ -81,7 +83,7 @@
 
 											<div class="col-12 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control">{{$pur2->Sales_Remarks}}</textarea>
+												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
 
 									  </div>
@@ -106,21 +108,21 @@
 									<div class="card-body" style="background: #2023240f !important">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
+												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" autofocus value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >%</label>
+												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required>
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >P.B</label>
+												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Target</label>
+												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field">
 											</div>
 
@@ -130,13 +132,13 @@
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Amount</label>
+												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Item Group</label>
-												<select data-plugin-selecttwo class="form-control comm-form-field" required autofocus name="tax_item_name">
+												<label class="col-form-label" >Item Group<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control comm-form-field select2-js" required  name="tax_item_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod}}" {{ $pur2->item == $row->item_group_cod ? 'selected' : '' }}>{{$row->group_name}}</option>
@@ -146,7 +148,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"> {{$pur2->tax_remarks}} </textarea>
+												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"> {{$pur2->tax_remarks}} </textarea>
 											</div>
 									  </div>
 									</div>
@@ -165,13 +167,13 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty.</th>
-													<th width="7%">Price/Unit</th>
-													<th width="7%">Len.</th>
-													<th width="7%">%.</th>
+													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Len.<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Price Date</th>
@@ -182,10 +184,10 @@
 												@foreach ($pur2_item as $pur2_key => $pur2_items)
 													<tr>
 														<td>
-															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails(1,1)" required>
+															<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)" required>
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
+															<select data-plugin-selecttwo class="form-control select2-js"  id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails({{$pur2_key+1}},2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -294,7 +296,7 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -386,8 +388,8 @@
 			var cell11 = newRow.insertCell(10);
 
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -409,6 +411,9 @@
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
+			// Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
+        
 
 		}
 	}
@@ -563,5 +568,18 @@
 			$('#isCommissionForm').val(0);
 		}
 	}
+
+	document.getElementById('edit-sale-inv').addEventListener('click', function () {
+        var inputField = document.getElementById('sale-inv-no');
+        if (inputField.disabled) {
+            inputField.disabled = false;
+            inputField.focus(); // Focus on the input when enabled
+            this.textContent = "Disable"; // Change the label to "Save" when editing
+        } else {
+            inputField.disabled = true;
+            this.textContent = "Enable"; // Change the label back to "Edit" after saving
+        }
+    });
+											
 
 </script>

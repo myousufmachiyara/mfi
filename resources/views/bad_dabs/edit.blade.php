@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 <body>
     <section class="body">
-        @extends('../layouts.menu')
+        @include('../layouts.menu')
         <div class="inner-wrapper">
             <section role="main" class="content-body">
-                @extends('../layouts.pageheader')
                 <form method="post" id="myForm" action="{{ route('update-bad-dabs') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
@@ -27,7 +26,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-8 mb-2">
                                             <label class="col-form-label">Reason</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$bad_dabs->reason}}</textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control cust-textarea">{{$bad_dabs->reason}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -45,11 +44,11 @@
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
                                             <tr>
-                                                <th width="10%">Item Code</th>
-                                                <th width="30%">Item Name</th>
+                                                <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="30%">Item Name<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="20%">Remarks</th>
-                                                <th width="15%">Qty Add</th>
-                                                <th width="15%">Qty Less</th>
+                                                <th width="15%">Qty Add<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="15%">Qty Less<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="10%"></th>
                                             </tr>
                                         </thead>
@@ -57,10 +56,10 @@
                                             @foreach($bad_dabs_items as $key1 => $bad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails('{{$key1}}','1')" class="form-control" value="{{$bad_dabs_item->item_cod}}" required>
+                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails({{$key1+1}},'1')" class="form-control" value="{{$bad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails('{{$key1}}','2')" name="item_name2[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails({{$key1+1}},'2')" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $bad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -115,7 +114,7 @@
             </section>
         </div>
     </section>
-    @extends('../layouts.footerlinks')
+    @include('../layouts.footerlinks')
 </body>
 </html>
 <script>
@@ -177,23 +176,30 @@ function addNewRow(){
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-        cell2.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" required onchange="getItemDetails('+index+','+1+')" class="form-control">';
+        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" required onchange="getItemDetails('+index+','+2+')" name="item_name">'+
                             '<option>Select Item</option>'+
                             @foreach($items as $key => $row)	
                                 '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
                             @endforeach
                           '</select>';
         cell3.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks[]" placeholder="Remarks" class="form-control">';
-        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" onchange="tableTotal()" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" onchange="tableTotal()" class="form-control">';
+        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" required onchange="tableTotal()" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" required onchange="tableTotal()" class="form-control">';
         cell6.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
         var itemCount = Number($('#itemCount').val());
         itemCount = itemCount+1;
         $('#itemCount').val(itemCount);
         index++;
+        $('#myTable select[data-plugin-selecttwo]').select2();
+
+        // Set focus on the new item_code input field
+		document.getElementById('item_code' + (index - 1)).focus();
+        
+
     }
+
 }
 
 function tableTotal(){
@@ -219,7 +225,7 @@ function getItemDetails(row_no,option){
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/items/detail",
 			data: {id:itemId},
 			success: function(result){
                 $('#item_code' + row_no).val(result[0]['it_cod']);

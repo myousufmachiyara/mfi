@@ -1,10 +1,28 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
+        <style>
+        #searchloader {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
 		<section class="body">
-			@extends('../layouts.menu')
+            @include('layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+				<section role="main" class="content-body">                    
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -14,12 +32,34 @@
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Purchase Invoice</button>
                                     </form>
                                 </header>
+                               
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div class="row" style="justify-content:end">
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="searchColId">
+                                                <option value="default">Search All</option>
+                                                <option value="0">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">by Account</option>
+                                                <option value="4">by Person Name</option>
+                                                <option value="5">by Remarks</option>
+                                                <option value="6">by Sale Inv #</option>
+                                                <option value="7">by Weight</option>
+                                                <option value="8">by Bill Amount</option>
+                                                <option value="12">by Net Amount</option>
+                                            </select>
+                                            <input class="form-control" placeholder="Search By..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
+                                            <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
+                                        </div>
+                                    </div>
+                                    <div id="searchloader"></div>
+
+                                    <div class="modal-wrapper" style="overflow-x: auto;">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Inv #</th>
+                                                    <th style="display:none">Inv #</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>
@@ -31,14 +71,15 @@
                                                     <th>Labour Charges</th>
                                                     <th>Discount</th>
                                                     <th>Net Amount</th>
-                                                    <th>Att.</th>
+                                                    <th>Att.</th> 
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($pur1 as $key => $row)
                                                 <tr>
-                                                    <td>{{$row->pur_id}}</td>
+                                                    <td style="display:none">{{$row->pur_id}}</td>
+                                                    <td>{{$row->prefix}}{{$row->pur_id}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->cash_saler_name}}</td>
@@ -57,10 +98,10 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->pur_id}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
+                                                        <!-- <a href="{{ route('print-purc1-invoice', $row->pur_id) }}" class="text-danger">
                                                             <i class="fas fa-print"></i>
                                                         </a>
-                                                        <span class="separator"> | </span>
+                                                        <span class="separator"> | </span> -->
                                                         <a href="{{ route('show-purchases1',$row->pur_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
@@ -78,6 +119,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                
                                     </div>
                                 </div>
                             </section>
@@ -124,7 +166,7 @@
                 </header>
                 <div class="card-body">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0" id="">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
@@ -147,9 +189,70 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
+
+
+<script>
+    function searchTable() {
+        const loader = document.getElementById('searchloader');
+        loader.style.display = 'block';
+
+        // Get the input value
+        const input = document.getElementById('searchInput').value.toUpperCase();
+        const colId = $('#searchColId').val();
+
+        // Get the table and rows
+        const table = document.getElementById('searchableTable');
+        const rows = table.getElementsByTagName('tr');
+        requestAnimationFrame(() => {
+            if(colId=="default"){
+                
+                // Loop through all rows
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
+                    let found = false;
+                    
+                    // Loop through each cell in the row
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent || cells[j].innerText;
+                        
+                        // Check if the cell text matches the input value
+                        if (cellText.toUpperCase().indexOf(input) > -1) {
+                            found = true;
+                            break; // No need to check other cells in this row if a match is found
+                        }
+                    }
+                    
+                    // Show or hide the row based on whether a match was found
+                    if (found) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            }   
+
+            else {
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    if (cells.length > 2) { // Ensure there are enough cells in the row
+                        const columnText = cells[colId].textContent || cells[colId].innerText; // 2 for the third column
+                        // Check if the column text matches the input value
+                        if (columnText.toUpperCase().indexOf(input) > -1) {
+                            rows[i].style.display = '';
+                        } else {
+                            rows[i].style.display = 'none';
+                        }
+                    }
+                }
+            }
+            loader.style.display = 'none';
+        });
+    }
+</script>
+
 <script>
     function setId(id){
         $('#deleteID').val(id);

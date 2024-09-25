@@ -1,15 +1,15 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
-                                    <h2 class="card-title">All Pipe Stock In</h2>
+                                    <h2 class="card-title">All Pipe/Garder Stock In</h2>
                                     <form class="text-end" action="{{ route('create-tstock-in-invoice') }}" method="GET">
                                         <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Stock In</button>
                                     </form>
@@ -19,7 +19,8 @@
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th style="display:none">ID</th>
+                                                    <th>Code</th>
                                                     <th>Date</th>
                                                     <th>Company Name</th>
                                                     <th>Remarks</th>
@@ -28,6 +29,7 @@
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
                                                     <th>Transporter</th>
+                                                    <th>Item Type</th>
                                                     <th>Att.</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -35,6 +37,7 @@
                                             <tbody>
                                                 @foreach ($tstock_in as $key => $row)
                                                 <tr>
+                                                    <td style="display:none">{{$row->Sal_inv_no}}</td>
                                                     <td>{{$row->prefix}}{{$row->Sal_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
@@ -44,6 +47,13 @@
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->transporter}}</td>
+
+                                                    @if ($row->item_type==1)
+                                                    <td><strong>Pipes</strong></td>
+                                                @elseif ($row->item_type==2)
+                                                    <td><strong>Garder / TR</strong></td>
+                                                @endif
+
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
                                                         <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
@@ -137,7 +147,7 @@
                 </footer>
             </section>
         </div>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>

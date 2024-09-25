@@ -1,14 +1,13 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title mb-2">Chart Of Accounts</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New Account</button>
@@ -26,7 +25,8 @@
                                                 <th>Date</th>
                                                 <th>Remarks</th>
                                                 <th>Address</th>
-                                                <th>Phone No.</th>
+                                                <th>Credit Limit</th>
+                                                <th>Days Limit</th>
                                                 <th>Group</th>
                                                 <th>Account Type</th>
                                                 <th>Att.</th>
@@ -37,7 +37,7 @@
                                             @foreach ($acc as $key => $row)
                                                 <tr>
                                                     <td>{{$row->ac_code}}</td>
-                                                    <td>{{$row->ac_name}}</td>
+                                                    <td><strong>{{$row->ac_name}}</strong></td>
                                                     @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
                                                         <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
                                                     @else
@@ -50,19 +50,27 @@
                                                     @endif
                                                     <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->remarks}}</td>
-                                                    <td>{{$row->address}}</td>
-                                                    <td>{{$row->phone_no}}</td>
+                                                    <td>{{$row->address}}   {{$row->phone_no}}</td>
+                                                    @if(substr(strval($row->credit_limit), strpos(strval($row->credit_limit), '.') + 1) > 0)
+                                                        <td style="color: rgb(156, 32, 32);"><strong>{{ rtrim(rtrim(number_format($row->credit_limit, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                    @else
+                                                         <td style="color: rgb(156, 32, 32);"><strong>{{ number_format(intval($row->credit_limit))}}</strong></td>
+                                                    @endif
+
+                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
                                                     <td>{{$row->group_name}}</td>
-                                                    <td>{{$row->sub}}</td>
+                                                    <td><strong>{{$row->sub}}</strong></td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
                                                     @if($row->status==1)
                                                         <td class="actions">
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <span class="separator"> | </span>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
                                                         </td>
                                                     @else
                                                         <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
                                                     @endif
+                                                
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -188,16 +196,16 @@
                                 <input type="number" class="form-control" placeholder="Account Code" name="ac_cod" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
-                                <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" required>
+                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001">
+                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" step=".00001" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001">
+                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" step=".00001" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -205,9 +213,9 @@
                             </div>  
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
-                                <input type="text" class="form-control" value=" " placeholder="Remarks" name="remarks" >
+                                <input type="text" class="form-control"  placeholder="Remarks" name="remarks" >
                             </div>
-                            <div class="col-lg-12 mb-2">
+                            <div class="col-lg-6 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address"></textarea>
                             </div>
@@ -216,8 +224,16 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" >
                             </div>
                             <div class="col-lg-6 mb-2">
+                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit" value="0" name="credit_limit" required >
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Credit Days<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Days" value="0" name="days_limit" required >
+                            </div>
+                            <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
-                                <select data-plugin-selectTwo class="form-control" autofocus name ="group_cod">
+                                <select data-plugin-selecttwo class="form-control select2-js" class="form-control"  name ="group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -227,8 +243,8 @@
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
-                                <select data-plugin-selectTwo class="form-control" autofocus name ="AccountType" required>
+                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="AccountType" required>
                                     <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -237,7 +253,7 @@
                                 <a href="{{ route('all-acc-sub-heads-groups') }}">Add New A.Type</a>
                             </div>
 
-                            <div class="col-lg-6 mb-2">
+                            <div class="col-lg-12 mb-2">
                                 <label>Attachement</label>
                                 <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
                             </div>
@@ -271,16 +287,16 @@
                                 <input type="number" class="form-control"  name="ac_cod" id="update_ac_id" required hidden>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Account Name</label>
+                                <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" placeholder="Account Name"  name="ac_name" id="update_ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Receivables</label>
-                                <input type="number" class="form-control" placeholder="Receivables" value="0" name="rec_able" id="update_rec_able" step=".00001">
+                                <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Receivables" value="0" required name="rec_able" id="update_rec_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Payables</label>
-                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" id="update_pay_able" step=".00001">
+                                <label>Payables<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Payables" value="0" name="pay_able" required id="update_pay_able" step=".00001">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
@@ -290,7 +306,7 @@
                                 <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" name="remarks" id="update_remarks">
                             </div>
-                            <div class="col-lg-12 mb-2">
+                            <div class="col-lg-6 mb-2">
                                 <label>Address</label>
                                 <textarea type="text" class="form-control" rows="2" placeholder="Address" name="address" id="update_address"></textarea>
                             </div>
@@ -299,8 +315,16 @@
                                 <input type="text" class="form-control"  placeholder="Phone No." name="phone_no" id="update_phone_no">
                             </div>
                             <div class="col-lg-6 mb-2">
+                                <label>Credit Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Credit Limit." required name="credit_limit" id="update_credit_limit">
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Days Limit<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control"  placeholder="Days Limit" required name="days_limit" id="update_days_limit">
+                            </div>
+                            <div class="col-lg-6 mb-2">
                                 <label>Account Group</label>
-                                <select class="form-control" autofocus name="group_cod" id="update_group_cod">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="group_cod" id="update_group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -310,8 +334,8 @@
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Account Type</label>
-                                <select class="form-control" autofocus name="AccountType" required id="update_AccountType">
+                                <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="AccountType" required id="update_AccountType">
                                     <option disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -338,7 +362,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -354,7 +378,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/coa/acc/validate',
+                url: '/coa/validate',
                 data: formData,
                 success: function(response){
                     var form = document.getElementById('addForm');
@@ -378,9 +402,10 @@
     function getAccountDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/acc/detail",
+            url: "/coa/detail",
             data: {id:id},
             success: function(result){
+                console.log(result);
                 $('#ac_id').val(result['ac_code']);
                 $('#update_ac_id').val(result['ac_code']);
                 $('#update_ac_name').val(result['ac_name']);
@@ -390,8 +415,10 @@
                 $('#update_remarks').val(result['remarks']);
                 $('#update_address').val(result['address']);
                 $('#update_phone_no').val(result['phone_no']);
-                $('#update_group_cod').val(result['group_cod']);
-                $('#update_AccountType').val(result['AccountType']);
+                $('#update_credit_limit').val(result['credit_limit']);
+                $('#update_days_limit').val(result['days_limit']);
+                $('#update_group_cod').val(result['group_cod']).trigger('change');
+                $('#update_AccountType').val(result['AccountType']).trigger('change');
                 $('#update_att').val(result['att']);
             },
             error: function(){
@@ -409,14 +436,14 @@
 
         $.ajax({
             type: "GET",
-            url: "/coa/acc/attachements",
+            url: "/coa/attachements",
             data: {id:id},
             success: function(result){
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/acc/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/acc/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/coa/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/coa/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#acc_attachements').append(html);
@@ -438,7 +465,7 @@
             return;
         }
 
-        fetch('/coa/acc/deleteAtt/' + fileId, {
+        fetch('/coa/deleteAtt/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

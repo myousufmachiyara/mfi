@@ -1,10 +1,10 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+			@include('../layouts.menu')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
@@ -33,7 +33,7 @@
 											</div>
 											<div class="col-12 mb-2">
 												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control">{{$jv2->narration}}</textarea>
+												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
 											</div>
 
 									  </div>
@@ -67,7 +67,7 @@
                                             	@foreach ($jv2_items as $jv_key => $jv2_items)
 													<tr>
 														<td>
-															<select class="form-control" autofocus name ="account_cod[]" onchange="addNewRow()" required>
+															<select data-plugin-selecttwo class="form-control select2-js"  name ="account_cod[]" onchange="addNewRow()" required>
 																<option value="" disabled selected>Select Account</option>
 																@foreach($acc as $key => $row)	
 																	<option value="{{$row->ac_code}}" {{ $jv2_items->account_cod == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -78,7 +78,7 @@
 															<input type="text" class="form-control" name="remarks[]" value="{{$jv2_items->remarks}}">
 														</td>
 														<td>
-															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->remarks}}">
+															<input type="text" class="form-control" name="bank_name[]" value="{{$jv2_items->bankname}}">
 														</td>
 														<td>
 															<input type="text" class="form-control" name="instrumentnumber[]" value="{{$jv2_items->instrumentnumber}}">
@@ -129,7 +129,7 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -218,7 +218,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow()" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -235,6 +235,11 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+
+			// Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
+
 		}
 	}
 

@@ -1,10 +1,8 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+        @include('layouts.pageheader')			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
@@ -128,8 +126,8 @@
                                 <input type="hidden" class="form-control" id="it_cod" placeholder="Item Code" name="it_cod" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Item Group</label>
-                                <select class="form-control" autofocus id="item_group" name ="item_group" required>
+                                <label>Item Group<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  id="item_group" name ="item_group" required>
                                     <option value="" disabled selected>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -137,47 +135,47 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Item Name</label>
-                                <input type="text" class="form-control" id="item_name" placeholder="Item Name" name="item_name" required>
+                                <label>Item Name<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control" id="item_name" autofocus placeholder="Item Name" name="item_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
                                 <input type="text" class="form-control" value=" " id="item_remark" placeholder="Remarks" name="item_remark">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Opening Stock</label>
+                                <label>Opening Stock<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" id="qty" placeholder="Stock" name="qty" step=".00001" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Purchase Price</label>
+                                <label>Purchase Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" id="OPP_qty_cost" placeholder="Purchase Price" name="OPP_qty_cost" step=".00001" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Purchase Rate Date</label>
+                                <label>Purchase Rate Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" id="pur_rate_date" placeholder="Date"  name="pur_rate_date" required value="<?php echo date('Y-m-d'); ?>">
                             </div>  
 
                             <div class="col-lg-6 mb-2">
-                                <label>Sale Price</label>
+                                <label>Sale Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" id="sales_price" placeholder="Sale Price" name="sales_price" step=".00001" required>
                             </div>
 
                             <div class="col-lg-6 mb-2">
-                                <label>Sale Rate Date</label>
+                                <label>Sale Rate Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" id="sale_rate_date" placeholder="Date"  name="sale_rate_date" required value="<?php echo date('Y-m-d'); ?>">
                             </div>  
 
                             <div class="col-lg-6 mb-2">
-                                <label>Date</label>
+                                <label>Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Stock Level</label>
+                                <label>Stock Level<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" id="stock_level" placeholder="Stock Level" name="stock_level" step=".00001" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Labour Price</label>
+                                <label>Labour Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="text" class="form-control" id="labourprice"  placeholder="Labour Price" name="labourprice" step=".00001" required>
                             </div>  
                         </div>
@@ -208,9 +206,9 @@
                                 <input type="number" class="form-control" placeholder="Item Code" name="it_cod" required disabled>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Item Group</label>
+                                <label>Item Group<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="hidden" id="itemCount" name="items" value="1" placeholder="Code" class="form-control">
-                                <select class="form-control" autofocus name="item_group[]" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="item_group[]" required>
                                     <option value="" disabled selected>Select Group</option>
                                     @foreach($itemGroups as $key => $row)	
                                         <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -218,43 +216,43 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Item Name</label>
-                                <input type="text" class="form-control" placeholder="Item Name"  name="item_name[]" onchange="validateItemName(this)" required>
+                                <label>Item Name<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="text" class="form-control" placeholder="Item Name"  autofocus name="item_name[]" onchange="validateItemName(this)" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Remarks</label>
                                 <input type="text" class="form-control"  placeholder="Remarks" value=" " name="item_remarks[]">
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Opening Stock</label>
+                                <label>Opening Stock<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="number" class="form-control" placeholder="Stock" value="0" name="item_stock[]" required step=".00001" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Purchase Price</label>
+                                <label>Purchase Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="number" class="form-control" placeholder="Purchase Price" value="0" name="item_pur_cost[]" required step=".00001" >
                             </div>
                             <div class="col-lg-6 mb-2">
-                                <label>Purchase Rate Date</label>
+                                <label>Purchase Rate Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" placeholder="Date"  name="purchase_rate_date[]" required value="<?php echo date('Y-m-d'); ?>">
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Sale Price</label>
+                                <label>Sale Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="number" class="form-control" placeholder="Sale Price" value="0" step=".00001"  name="item_s_price[]" required>
                             </div>
                             <div class="col-lg-6 mb-2">
-                            <label>Sale Rate Date</label>
+                            <label>Sale Rate Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" placeholder="Date" name="sale_rate_date[]" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Date</label>
+                                <label>Date<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="date" class="form-control" placeholder="Date"  name="item_date[]" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Stock Level</label>
+                                <label>Stock Level<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="number" class="form-control" placeholder="Stock Level" value="0" step=".00001"  name="item_stock_level[]" required>
                             </div>  
                             <div class="col-lg-6 mb-2">
-                                <label>Labour Price</label>
+                                <label>Labour Price<span style="color: red;"><strong>*</strong></span></label>
                                 <input type="number" class="form-control" placeholder="Labour Price" value="0" step=".00001"  name="item_l_price[]" required >
                             </div>  
                         </div>
@@ -271,7 +269,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -285,7 +283,7 @@
     function getItemDetails(id){
         $.ajax({
             type: "GET",
-            url: "/item/detail",
+            url: "/items/detail",
             data: {id:id},
             success: function(result){
                 var dateParts = result[0]['opp_date'].split("-");
@@ -296,7 +294,7 @@
                 
                 $('#it_cod').val(result[0]['it_cod']);
                 $('#it_cod_display').val(result[0]['it_cod']);
-                $('#item_group').val(result[0]['item_group']);
+                $('#item_group').val(result[0]['item_group']).trigger('change');
                 $('#item_name').val(result[0]['item_name']);
                 $('#item_remark').val(result[0]['item_remark']);
                 $('#qty').val(result[0]['opp_qty']);
@@ -326,7 +324,7 @@
 
         $.ajax({
             type: 'POST',
-			url: '/item/new-item/validate',
+			url: '/items/new-item/validate',
             data: {'item_name': item_name},
             success: function(response){
 				console.log(response)

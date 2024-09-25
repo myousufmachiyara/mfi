@@ -25,13 +25,13 @@ class TBadDabsController extends Controller
     public function index()
     {
         $tbad_dabs = TBadDabs::where('tbad_dabs.status', 1)
-        ->join ('tbad_dabs_2', 'tbad_dabs_2.bad_dabs_cod' , '=', 'tbad_dabs.bad_dabs_id')
+        ->leftjoin ('tbad_dabs_2', 'tbad_dabs_2.bad_dabs_cod' , '=', 'tbad_dabs.bad_dabs_id')
         ->select(
-            'tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason',
+            'tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason','tbad_dabs.item_type',
             \DB::raw('SUM(tbad_dabs_2.pc_add) as add_sum'),
             \DB::raw('SUM(tbad_dabs_2.pc_less) as less_sum'),
         )
-        ->groupby('tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason')
+        ->groupby('tbad_dabs.bad_dabs_id','tbad_dabs.date','tbad_dabs.reason','tbad_dabs.item_type')
         ->get();
 
         return view('tbad_dabs.index',compact('tbad_dabs'));
@@ -40,8 +40,9 @@ class TBadDabsController extends Controller
 
     public function create(Request $request)
     {
-        $items = Item_entry2::all();
-        $coa = AC::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+
         return view('tbad_dabs.create',compact('items','coa'));
     }
 
@@ -55,6 +56,10 @@ class TBadDabsController extends Controller
         }
         if ($request->has('reason') && $request->reason) {
             $tbad_dabs->reason = $request->reason; 
+        }
+        
+        if ($request->has('item_type') && $request->item_type) {
+            $tbad_dabs->reason = $request->item_type; 
         }
     
         $tbad_dabs->created_by = $userId;
@@ -103,7 +108,7 @@ class TBadDabsController extends Controller
         $tbad_dabs = TBadDabs::where('bad_dabs_id', $id)->first();
         $tbad_dabs_items = TBadDabs2::where('bad_dabs_cod', $id)->get();
         $tbad_dabs_item_count = count($tbad_dabs_items);
-        $items = Item_entry2::all();
+        $items = Item_entry2::orderBy('item_name', 'asc')->get();
     
         // Calculate the total_add and total_less
         $total_add = $tbad_dabs_items->sum('pc_add');
@@ -120,13 +125,17 @@ class TBadDabsController extends Controller
         if ($request->has('date') && $request->date) {
             $tbad_dabs->date=$request->date;
         }
-        if ($request->has('reason') && $request->reason) {
+        if ($request->has('reason') && $request->reason OR empty($request->reason)) {
             $tbad_dabs->reason=$request->reason;
+        }
+        if ($request->has('item_type') && $request->item_type) {
+            $tbad_dabs->item_type=$request->item_type;
         }
 
         TBadDabs::where('bad_dabs_id', $request->bad_dabs_id)->update([
             'reason'=>$tbad_dabs->reason,
             'date'=>$tbad_dabs->date,
+            'item_type'=>$tbad_dabs->item_type,
         ]);
         
         TBadDabs2::where('bad_dabs_cod', $request->bad_dabs_id)->delete();
@@ -141,7 +150,9 @@ class TBadDabsController extends Controller
                     $tbad_dabs_2 = new TBadDabs2();
                     $tbad_dabs_2->bad_dabs_cod=$request->bad_dabs_id;
                     $tbad_dabs_2->item_cod=$request->item_code[$i];
-                    $tbad_dabs_2->remarks=$request->remarks[$i];
+                    if ($request->remarks[$i]!=null OR empty($request->remarks[$i])) {
+                        $tbad_dabs_2->remarks=$request->remarks[$i];
+                    }
                     $tbad_dabs_2->pc_add=$request->qty_add[$i];
                     $tbad_dabs_2->pc_less=$request->qty_less[$i];
                     $tbad_dabs_2->save();
