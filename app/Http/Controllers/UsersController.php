@@ -282,4 +282,25 @@ class UsersController extends Controller
 
         return $user_att;
     }
+
+    public function changeCredentials(Request $request){
+        $user = users::where('id', $request->user_cred_id)
+        ->select('username','password')
+        ->first();
+
+        if ($request->has('update_user_username') && $request->update_user_username) {
+            $user->username=$request->update_user_username;
+        }
+
+        if ($request->has('update_user_password') && $request->update_user_password) {
+            $user->password=Hash::make($request->update_user_password);
+        }
+
+        users::where('id', $request->user_cred_id)->update([
+            'username'=> $user->username,
+            'password' => $user->password,
+        ]);
+
+        return redirect()->route('all-users');
+    }
 }
