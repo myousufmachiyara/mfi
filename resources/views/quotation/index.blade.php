@@ -10,7 +10,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Quotations</h2>
                                     <form class="text-end" action="{{ route('create-quotation-invoice') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Quotation</button>
+                                        <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Quotation</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
