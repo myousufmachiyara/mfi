@@ -1,20 +1,19 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
+		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 					<form method="post" action="{{ route('store-tpo') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
+										<h2 class="card-title">New Purchase Orders Pipe/Garders</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
-										<h2 class="card-title">New Purchase Orders Pipe/Garders</h2>
 									</header>
 
 									<div class="card-body">
