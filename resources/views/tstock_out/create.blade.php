@@ -179,12 +179,7 @@
     @include('../layouts.footerlinks')
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-
-
-
     var index = 2;
 
     $(document).ready(function() {
@@ -224,7 +219,8 @@
             table.append(newRow);
             index++;
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
-            $('#select[data-plugin-selecttwo]').select2();
+
+            $('#myTable select[data-plugin-selecttwo]').select2();
 
             // Set focus on the new item_code input field
 			document.getElementById('item_code' + (index - 1)).focus();

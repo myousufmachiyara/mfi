@@ -135,7 +135,7 @@
 												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2" style="overflow-x:auto;">
+											<div class="col-12 mb-2" >
 												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -185,7 +185,7 @@
 												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
 											</div>
 
-											<div class="col-12 mb-2" style="overflow-x: auto;">
+											<div class="col-12 mb-2">
 												<table class="table table-bordered table-striped mb-0 mt-2">
 													<thead>
 														<tr>
@@ -227,7 +227,6 @@
         @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 	var index=2;
@@ -435,7 +434,7 @@
 		$('#sales_unadjusted_amount').val(0);
 		$('#customer_name').val(0).trigger('change');
 
-		// clearing sales  ageing table and fields
+		// clearing sales ageing table and fields
 		
 		if ($('#SaletoggleSwitch').is(':checked')) {
 			var table = document.getElementById("JV2Table"); // Get the table element

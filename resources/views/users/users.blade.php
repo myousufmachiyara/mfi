@@ -44,7 +44,7 @@
                                                         @if($row->status==1)
                                                         <td class="actions">
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" ><i class="fa fa-user-lock"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
@@ -258,15 +258,15 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Picture</label>
-                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Front</label>
-                                <input type="file" class="form-control" name="cnic_front" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="cnic_front" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Back</label>
-                                <input type="file" class="form-control" name="cnic_back" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="cnic_back" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Role</label>
@@ -372,10 +372,41 @@
             </section>
         </div>
 
+        <div id="updateCred" class="modal-block modal-block-primary mfp-hide">
+            <section class="card">
+                <form method="post" action="{{ route('change-user-credentials') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                    @csrf
+                    <header class="card-header">
+                        <h2 class="card-title">Update User Login Details</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">    
+                            <div class="col-lg-6 mb-2">
+                                <label>Username</label>
+                                <input type="text" class="form-control" placeholder="username" id="update_user_username" name="update_user_username" required>
+                                <input type="hidden" class="form-control" name="user_cred_id" id="user_cred_id">
+                            </div> 
+                            <div class="col-lg-6 mb-2">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="password" name="update_user_password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Change Details</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </section>
+        </div>
+
         @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     
@@ -412,6 +443,12 @@
     function setDeactivateID(id){
         $('#deactivate_user').val(id);
     }
+
+    function setUserCredID(id,username){
+        $('#user_cred_id').val(id);
+        $('#update_user_username').val(username);
+    }
+    
     
     function setActivateID(id){
         $('#activate_user').val(id);
@@ -464,51 +501,57 @@
         });
 	}
 
-    // function getAttachements(id){
+    function getAttachements(id){
 
-    //     var table = document.getElementById('acc_attachements');
-    //     while (table.rows.length > 0) {
-    //         table.deleteRow(0);
-    //     }
+        var table = document.getElementById('acc_attachements');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
 
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "/user/attachements",
-    //         data: {id:id},
-    //         success: function(result){
-    //             console.log(result);
-    //             $.each(result, function(k,v){
-    //                 var html="<tr>";
-    //                 if(k==0){
-    //                     html+= "<td>Profile Picture</td>"
-    //                     html+= "<td>"+v['picture']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 elseif(k==1){
-    //                     html+= "<td>CNIC Front</td>"
-    //                     html+= "<td>"+v['cnic_front']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 elseif(k==2){
-    //                     html+= "<td>CNIC Back</td>"
-    //                     html+= "<td>"+v['cnic_back']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 html+="</tr>";
-    //                 $('#acc_attachements').append(html);
-    //             });
-    //         },
-    //         error: function(){
-    //             alert("error");
-    //         }
-    //     });
-	// }
+        $.ajax({
+            type: "GET",
+            url: "/user/attachements",
+            data: {id:id},
+            success: function(result){
+                $.each(result, function(k,v){                    
+                    if(v['picture']!=null){
+                        var html="<tr>";
+                        html+= "<td>Profile Picture</td>"
+                        html+= "<td>"+v['picture']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    if(v['cnic_front']!=null){
+                        var html="<tr>";
+                        html+= "<td>CNIC Front</td>"
+                        html+= "<td>"+v['cnic_front']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    if(v['cnic_back']!=null){
+                        var html="<tr>";
+                        html+= "<td>CNIC Back</td>"
+                        html+= "<td>"+v['cnic_back']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    
+                });
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+	}
 
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";
