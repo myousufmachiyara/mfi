@@ -164,13 +164,13 @@ class PoController extends Controller
         if ($request->has('pur_remarks') && $request->pur_remarks OR empty($request->pur_remarks) ) {
             $pur1->pur_remarks=$request->pur_remarks;
         }
-        if ($request->has('pur_convance_char') && $request->pur_convance_char) {
+        if ($request->has('pur_convance_char') && $request->pur_convance_char OR $request->pur_convance_char==0) {
             $pur1->pur_convance_char=$request->pur_convance_char;
         }
-        if ($request->has('pur_labor_char') && $request->pur_labor_char) {
+        if ($request->has('pur_labor_char') && $request->pur_labor_char OR $request->pur_labor_char==0) {
             $pur1->pur_labor_char=$request->pur_labor_char;
         }
-        if ($request->has('bill_discount') && $request->bill_discount) {
+        if ($request->has('bill_discount') && $request->bill_discount OR $request->bill_discount==0) {
             $pur1->pur_discount=$request->bill_discount;
         }
 

@@ -314,19 +314,19 @@ class Purchase2Controller extends Controller
 
                 $new_tax_pur2->sales_inv_cod=$request->pur2_id;
     
-                if ($request->has('bamount') && $request->bamount) {
+                if ($request->has('bamount') && $request->bamount OR $request->bamount==0) {
                     $new_tax_pur2->bamount=$request->bamount;
                 }
-                if ($request->has('disc') && $request->disc) {
+                if ($request->has('disc') && $request->disc OR $request->disc==0) {
                     $new_tax_pur2->disc=$request->disc;
                 }
-                if ($request->has('cd_disc') && $request->cd_disc) {
+                if ($request->has('cd_disc') && $request->cd_disc OR $request->cd_disc==0) {
                     $new_tax_pur2->cd_disc=$request->cd_disc;
                 }
-                if ($request->has('comm_disc') && $request->comm_disc) {
+                if ($request->has('comm_disc') && $request->comm_disc OR $request->comm_disc==0) {
                     $new_tax_pur2->comm_disc=$request->comm_disc;
                 }
-                if ($request->has('comm_amount') && $request->comm_amount) {
+                if ($request->has('comm_amount') && $request->comm_amount OR $request->comm_amount==0) {
                     $new_tax_pur2->comm_amount=$request->comm_amount;
                 }
                 if ($request->has('tax_item_name') && $request->tax_item_name) {
@@ -340,25 +340,25 @@ class Purchase2Controller extends Controller
             }
 
             else{
-                if ($request->has('bamount') && $request->bamount) {
+                if ($request->has('bamount') && $request->bamount OR $request->bamount==0) {
                     $tax_pur2->bamount=$request->bamount;
                 }
-                if ($request->has('disc') && $request->disc) {
+                if ($request->has('disc') && $request->disc OR $request->disc==0) {
                     $tax_pur2->disc=$request->disc;
                 }
-                if ($request->has('cd_disc') && $request->cd_disc) {
+                if ($request->has('cd_disc') && $request->cd_disc OR $request->cd_disc==0) {
                     $tax_pur2->cd_disc=$request->cd_disc;
                 }
-                if ($request->has('comm_disc') && $request->comm_disc) {
+                if ($request->has('comm_disc') && $request->comm_disc OR $request->comm_disc==0) {
                     $tax_pur2->comm_disc=$request->comm_disc;
                 }
-                if ($request->has('comm_amount') && $request->comm_amount) {
+                if ($request->has('comm_amount') && $request->comm_amount OR $request->comm_amount==0) {
                     $tax_pur2->comm_amount=$request->comm_amount;
                 }
                 if ($request->has('tax_item_name') && $request->tax_item_name) {
                     $tax_pur2->item=$request->tax_item_name;
                 }
-                if ($request->has('tax_remarks') && $request->tax_remarks) {
+                if ($request->has('tax_remarks') && $request->tax_remarks  OR empty($request->tax_remarks)) {
                     $tax_pur2->remarks=$request->tax_remarks;
                 }
 

@@ -151,7 +151,7 @@ class StockInController extends Controller
             $stock_in->sa_date=$request->date;
         }
 
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $stock_in->Sales_remarks=$request->remarks;
         }
 

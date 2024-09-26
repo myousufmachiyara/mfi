@@ -177,22 +177,22 @@ class TStockInController extends Controller
         if ($request->has('date') && $request->date) {
             $tstock_in->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv) {
+        if ($request->has('pur_inv') && $request->pur_inv OR empty($request->pur_inv)) {
             $tstock_in->pur_inv=$request->pur_inv;
         }
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $tstock_in->Sales_remarks=$request->remarks;
         }
-        if ($request->has('mill_gate') && $request->mill_gate) {
+        if ($request->has('mill_gate') && $request->mill_gate OR empty($request->mill_gate)) {
             $tstock_in->mill_gate=$request->mill_gate;
         }
-        if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
+        if ($request->has('Cash_pur_name') && $request->Cash_pur_name OR empty($request->Cash_pur_name)) {
             $tstock_in->Cash_pur_name=$request->Cash_pur_name;
         }
-        if ($request->has('cash_pur_address') && $request->cash_pur_address) {
+        if ($request->has('cash_pur_address') && $request->cash_pur_address OR empty($request->cash_pur_address)) {
             $tstock_in->cash_Pur_address=$request->cash_pur_address;
         }
-        if ($request->has('transporter') && $request->transporter) {
+        if ($request->has('transporter') && $request->transporter OR empty($request->transporter)) {
             $tstock_in->transporter=$request->transporter;
         }
         if ($request->has('item_type') && $request->item_type) {

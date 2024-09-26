@@ -138,16 +138,16 @@
 
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" name="pur_convance_char" value="{{$pur->pur_convance_char}}" placeholder="Convance Charges" class="form-control">
+													<input type="text" id="convance_charges" required onchange="netTotal()" name="pur_convance_char" value="{{$pur->pur_convance_char}}" placeholder="Convance Charges" class="form-control">
 												</div>
 
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" name="pur_labor_char" value="{{$pur->pur_labor_char}}" placeholder="Labour Charges" class="form-control">
+													<input type="text" id="labour_charges" required  onchange="netTotal()" name="pur_labor_char" value="{{$pur->pur_labor_char}}" placeholder="Labour Charges" class="form-control">
 												</div>
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount</label>
-													<input type="text" id="bill_discount"  onchange="netTotal()" name="bill_discount" value="{{$pur->pur_discount}}" placeholder="Bill Discount" class="form-control">
+													<input type="text" id="bill_discount"  required onchange="netTotal()" name="bill_discount" value="{{$pur->pur_discount}}" placeholder="Bill Discount" class="form-control">
 												</div>
 												<div class="col-12 pb-sm-3 pb-md-0 text-end">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
