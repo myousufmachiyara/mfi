@@ -172,10 +172,10 @@ class QuotationController extends Controller
         if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $sale1->Sales_remarks=$request->remarks;
         }
-        if ($request->has('labour_charges') && $request->labour_charges) {
+        if ($request->has('labour_charges') && $request->labour_charges OR $request->labour_charges==0) {
             $sale1->LaborCharges=$request->labour_charges;
         }
-        if ($request->has('convance_charges') && $request->convance_charges) {
+        if ($request->has('convance_charges') && $request->convance_charges OR $request->convance_charges==0) {
             $sale1->ConvanceCharges=$request->convance_charges;
         }
         if ($request->has('nop') && $request->nop OR empty($request->nop)) {
@@ -187,7 +187,7 @@ class QuotationController extends Controller
         if ($request->has('cash_pur_phone') && $request->cash_pur_phone OR empty($request->cash_pur_phone)) {
             $sale1->cash_pur_phone=$request->cash_pur_phone;
         }
-        if ($request->has('bill_discount') && $request->bill_discount) {
+        if ($request->has('bill_discount') && $request->bill_discount OR $request->bill_discount==0) {
             $sale1->Bill_discount=$request->bill_discount;
         }
         if ($request->has('account_name') && $request->account_name) {

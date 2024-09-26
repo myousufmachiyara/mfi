@@ -250,19 +250,19 @@
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
+													<input type="text" required id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
+													<input type="text" required id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
-															<input type="number" id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
+															<input type="number" required id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
 														</div>
 														<div class="col-4">
 															<input type="text" id="bill_perc" class="form-control" placeholder="0%" disabled>

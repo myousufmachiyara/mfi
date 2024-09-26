@@ -223,13 +223,13 @@ class Sales2Controller extends Controller
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
-        if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
+        if ($request->has('ConvanceCharges') && $request->ConvanceCharges OR $request->ConvanceCharges==0) {
             $pur2->ConvanceCharges=$request->ConvanceCharges;
         }
-        if ($request->has('LaborCharges') && $request->LaborCharges) {
+        if ($request->has('LaborCharges') && $request->LaborCharges OR $request->LaborCharges==0) {
             $pur2->LaborCharges=$request->LaborCharges;
         }
-        if ($request->has('Bill_discount') && $request->Bill_discount) {
+        if ($request->has('Bill_discount') && $request->Bill_discount OR $request->Bill_discount==0) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
         $pur2->created_by=1;

@@ -152,7 +152,7 @@ class StockOutController extends Controller
             $stock_out->sa_date=$request->date;
         }
 
-        if ($request->has('remarks') && $request->remarks) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $stock_out->Sales_remarks=$request->remarks;
         }
 
