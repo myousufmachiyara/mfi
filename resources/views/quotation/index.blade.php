@@ -1,10 +1,9 @@
 @extends('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+        @extends('../layouts.pageheader')
+        <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
