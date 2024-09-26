@@ -7,11 +7,11 @@
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">Complains</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Complain</button>
                                     </div>
-                                    <h2 class="card-title">Complains</h2>
                                     
                                 </header>
                                 <div class="card-body">
