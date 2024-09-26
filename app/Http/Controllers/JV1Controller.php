@@ -43,7 +43,7 @@ class JV1Controller extends Controller
                 ->first();
     
         // Point to the correct Blade view file: show.blade.php
-        return view('vouchers.show', compact('jv1'));
+        return view('vouchers.jv1-show', compact('jv1'));
     }
     
     public function store(Request $request)
