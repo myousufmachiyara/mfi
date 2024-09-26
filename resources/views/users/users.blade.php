@@ -311,11 +311,11 @@
                             <div class="col-lg-6">
                                 <label>Employee ID</label>
                                 <input type="number" class="form-control" placeholder="User ID" id="update_user_id" required disabled>
-                                <input type="hidden" class="form-control" name="user_id" id="show_update_user_id">
+                                <input type="hidden" class="form-control" name="update_user_id" id="show_update_user_id">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" name="update_date" id="update_date" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" class="form-control" placeholder="Date" name="update_date" id="update_date">
                             </div> 
                             <div class="col-lg-6 mb-2">
                                 <label>Employee Name</label>
@@ -488,6 +488,7 @@
                 console.log(result);
                 $('#update_user_id').val(result['user']['id']);
                 $('#show_update_user_id').val(result['user']['id']);
+                $('#update_date').val(result['user']['date']);
                 $('#update_emp_name').val(result['user']['name']);
                 $('#update_phone_no').val(result['user']['phone_no']);
                 $('#update_email_add').val(result['user']['email']);

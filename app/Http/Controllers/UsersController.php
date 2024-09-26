@@ -164,7 +164,7 @@ class UsersController extends Controller
         if ($request->has('update_email_add') && $request->update_email_add) {
             $user->email=$request->update_email_add;
         }
-        if ($request->has('update_cnic_no') && $request->update_cnic_no) {
+        if ($request->has('update_cnic_no') && $request->update_cnic_no ) {
             $user->cnic_no=$request->update_date;
         }
         if ($request->has('update_add') && $request->update_add) {
