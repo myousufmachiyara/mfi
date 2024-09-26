@@ -10,7 +10,7 @@
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Purchase Order</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
