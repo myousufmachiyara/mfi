@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Name<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="text" class="form-control" placeholder="Account Name" autofocus name="ac_name" required>
+                                <input type="text" class="form-control" placeholder="Account Name" name="ac_name" required>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Receivables<span style="color: red;"><strong>*</strong></span></label>
@@ -233,7 +233,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
-                                <select data-plugin-selecttwo class="form-control select2-js" class="form-control"  name ="group_cod">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="group_cod" required>
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -244,7 +244,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Account Type<span style="color: red;"><strong>*</strong></span></label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name ="AccountType" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="AccountType" required>
                                     <option value="" disabled selected>Select Account Type</option>
                                     @foreach($sub_head_of_acc as $key => $row)	
                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -365,8 +365,6 @@
         @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script>
     
     $(document).ready(function(){
@@ -405,7 +403,6 @@
             url: "/coa/detail",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $('#ac_id').val(result['ac_code']);
                 $('#update_ac_id').val(result['ac_code']);
                 $('#update_ac_name').val(result['ac_name']);

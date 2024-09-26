@@ -26,7 +26,7 @@
 
 <!-- Vendor -->
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="/assets/vendor/common/common.js"></script> -->
+<script src="/assets/vendor/common/common.js"></script>
 <script src="/assets/vendor/select2/js/select2.js"></script>
 
 <!-- Theme Base, Components and Settings -->

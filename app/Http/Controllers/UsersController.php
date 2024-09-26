@@ -41,9 +41,9 @@ class UsersController extends Controller
 
     public function createUser(Request $request)
     {
-        $att_path = null;
-        $cnic_front_path = null;
-        $cnic_back_path = null;
+        $att_path = '';
+        $cnic_front_path = '';
+        $cnic_back_path = '';
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -64,21 +64,21 @@ class UsersController extends Controller
         if ($request->hasFile('att') && $request->file('att')) {
             $file = $request->file('att');
             $extension = $file->getClientOriginalExtension();
-            $att_path = $this->UserProfile($file, $extension);
+            $this->att_path = $this->UserProfile($file, $extension);
         }
 
         if ($request->hasFile('cnic_front') && $request->file('cnic_front')) {
             $file = $request->file('cnic_front');
             $extension = $file->getClientOriginalExtension();
-            $cnic_front_path = $this->UserProfile($file, $extension);
+            $this->cnic_front_path = $this->UserProfile($file, $extension);
         }
 
         if ($request->hasFile('cnic_back') && $request->file('cnic_back')) {
             $file = $request->file('cnic_back');
             $extension = $file->getClientOriginalExtension();
-            $cnic_back_path = $this->UserProfile($file, $extension);
+            $this->cnic_back_path = $this->UserProfile($file, $extension);
         }
-
+        
         try {
             $user = users::create([
                 'name' => $request->name,
@@ -89,9 +89,9 @@ class UsersController extends Controller
                 'phone_no' => $request->phone_no,
                 'address' => $request->address, 
                 'date' => $request->date,      
-                'profile' => $att_path,
-                'cnic_front' => $cnic_front_path,
-                'cnic_back' => $cnic_back_path,
+                'picture' => $this->att_path,
+                'cnic_front' => $this->cnic_front_path,
+                'cnic_back' => $this->cnic_back_path,
             ]);
 
             $user_id=users::latest()->select('id')->first()->id;

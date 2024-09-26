@@ -258,15 +258,15 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Picture</label>
-                                <input type="file" class="form-control" name="att" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Front</label>
-                                <input type="file" class="form-control" name="cnic_front" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="cnic_front" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>CNIC Back</label>
-                                <input type="file" class="form-control" name="cnic_back" multiple accept="image/png, image/jpeg">
+                                <input type="file" class="form-control" name="cnic_back" accept="image/png, image/jpeg">
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Role</label>
@@ -407,7 +407,6 @@
         @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     
@@ -502,51 +501,57 @@
         });
 	}
 
-    // function getAttachements(id){
+    function getAttachements(id){
 
-    //     var table = document.getElementById('acc_attachements');
-    //     while (table.rows.length > 0) {
-    //         table.deleteRow(0);
-    //     }
+        var table = document.getElementById('acc_attachements');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
 
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "/user/attachements",
-    //         data: {id:id},
-    //         success: function(result){
-    //             console.log(result);
-    //             $.each(result, function(k,v){
-    //                 var html="<tr>";
-    //                 if(k==0){
-    //                     html+= "<td>Profile Picture</td>"
-    //                     html+= "<td>"+v['picture']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 elseif(k==1){
-    //                     html+= "<td>CNIC Front</td>"
-    //                     html+= "<td>"+v['cnic_front']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 elseif(k==2){
-    //                     html+= "<td>CNIC Back</td>"
-    //                     html+= "<td>"+v['cnic_back']+"</td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-    //                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
-    //                 }
-    //                 html+="</tr>";
-    //                 $('#acc_attachements').append(html);
-    //             });
-    //         },
-    //         error: function(){
-    //             alert("error");
-    //         }
-    //     });
-	// }
+        $.ajax({
+            type: "GET",
+            url: "/user/attachements",
+            data: {id:id},
+            success: function(result){
+                $.each(result, function(k,v){                    
+                    if(v['picture']!=null){
+                        var html="<tr>";
+                        html+= "<td>Profile Picture</td>"
+                        html+= "<td>"+v['picture']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    if(v['cnic_front']!=null){
+                        var html="<tr>";
+                        html+= "<td>CNIC Front</td>"
+                        html+= "<td>"+v['cnic_front']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    if(v['cnic_back']!=null){
+                        var html="<tr>";
+                        html+= "<td>CNIC Back</td>"
+                        html+= "<td>"+v['cnic_back']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='/user/att/download/"+id+"'><i class='fas fa-download'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/user/att/view/"+id+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                        html+="</tr>";
+                        $('#acc_attachements').append(html);
+                    }
+                    
+                });
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+	}
 
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";

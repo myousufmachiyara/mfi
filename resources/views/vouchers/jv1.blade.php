@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
-                                <select  data-plugin-selecttwo class="form-control select2-js" name ="ac_dr_sid" required>
+                                <select data-plugin-selecttwo class="form-control select2-js" name ="ac_dr_sid" required>
                                     <option value="" disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
