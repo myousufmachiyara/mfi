@@ -18,12 +18,12 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >PO No.</label>
 												<input type="text" placeholder="(New PO)" class="form-control" disabled>
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="sa_date" value="<?php echo date('Y-m-d'); ?>" class="form-control">
 											</div>
@@ -58,7 +58,7 @@
 												
 											</div>
 
-											<div class="col-8 mb-12">
+											<div class="col-12 col-md-8 mb-12">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea">
 * All of these rates are at 20% tax as accommodated by laws of GOP.
@@ -66,7 +66,6 @@
 * All of these rates are tentative and subjected to change without any prior notice.
 * Customers aren’t allowed to deduct any additional with holding tax from this amount while paying for the order.</textarea>
 											</div>
-											
 									  </div>
 									</div>
 						
@@ -148,17 +147,17 @@
 									<footer class="card-footer" >
 										<div class="row">
 											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
@@ -168,17 +167,17 @@
 													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
 												</div> -->
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
 													<input type="text" id="convance_charges" onchange="netTotal()" name="ConvanceCharges" placeholder="Convance Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
 													<input type="text" id="labour_charges"  onchange="netTotal()" name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-12 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
@@ -190,9 +189,9 @@
 													</div>
 												</div>
 
-												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-													<span class="d-flex align-items-center justify-content-lg-end">
+												<div class="col-12 pb-sm-3 pb-md-0 text-end">
+													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+													<span>
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 												</div>
