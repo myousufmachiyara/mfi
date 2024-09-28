@@ -1,16 +1,15 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
+		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
 					<form method="post" action="{{ route('update-quotation-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Quotation</h2>
 
 										<div class="card-actions">
@@ -21,24 +20,24 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Quotation no.</label>
 												<input type="text" placeholder="Quotation No." class="form-control" disabled value="{{$sales->prefix}}{{$sales->Sal_inv_no}}">
 												<input type="hidden" name="invoice_no" placeholder="Invoice No." class="form-control" value="{{$sales->Sal_inv_no}}">
 												<input type="hidden" id="itemCount" name="items" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required class="form-control" value="{{$sales->sa_date}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control" value="{{$sales->pur_ord_no}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >PO No.</label>
 												<input type="text" name="bill_no" placeholder="PO No." class="form-control" value="{{$sales->pur_ord_no}}">
 											</div>
@@ -149,39 +148,37 @@
 										 		<input type="number" id="total_amount_show" step="any" placeholder="Total Amount" class="form-control" disabled step="any" value=@php echo $total_amount @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
 												<input type="number" id="total_weight_show" step="any" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_weight @endphp >
 												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control" value=@php echo $total_weight @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
 												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_quantity @endphp >
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance</label>
 												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control" step="any" value="{{$sales->ConvanceCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
 												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control" step="any" value="{{$sales->LaborCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-12 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
 												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control" step="any" value="{{$sales->Bill_discount}}">
 											</div>
-										</div>
 
-										<div class="row mb-3">
 											@php $net_amount= round($total_amount + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount) @endphp
-											<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
+											<div class="col-12 pb-sm-3 pb-md-0 text-end">
+												<h3 class="font-weight-bold mt-3 mb-0 text-5  text-primary">Net Amount</h3>
+												<span>
+													<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
 												</span>
 											</div>
 										</div>

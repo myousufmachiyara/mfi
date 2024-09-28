@@ -83,7 +83,7 @@
 															<input type="number" class="form-control" name="credit[]" onchange="totalCredit()" required value="0" step="any">
 														</td>
 														<td style="vertical-align: middle;">
-															<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+															<button type="button" onclick="removeRow(this)" class="btn btn-danger"><i class="fas fa-times"></i></button>
 														</td>
 													</tr>
 												</tbody>
@@ -275,14 +275,14 @@
 		totalCredit();
     }
 
-    document.getElementById('removeRowBtn').addEventListener('click', function() {
-        var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-        if (table.rows.length > 0) {
-            table.deleteRow(table.rows.length - 1);
-        } else {
-            alert("No rows to delete!");
-        }
-    });
+    // document.getElementById('removeRowBtn').addEventListener('click', function() {
+    //     var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+    //     if (table.rows.length > 0) {
+    //         table.deleteRow(table.rows.length - 1);
+    //     } else {
+    //         alert("No rows to delete!");
+    //     }
+    // });
 
 	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
@@ -313,16 +313,13 @@
 			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
-			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" ><i class="fas fa-times"></i></button>';
 			index++;
 
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
-
-			// Set focus on the new item_code input field
-			document.getElementById('item_code' + (index - 1)).focus();
 		}
 	}
 
@@ -429,35 +426,48 @@
 	}
 
 	function SaletoggleInputs() {
-		const textInput = document.getElementById('customer_name');
-		document.getElementById('sale_span').style.display = 'none';
-		$('#sales_unadjusted_amount').val(0);
-		$('#customer_name').val(0).trigger('change');
-
-		// clearing sales ageing table and fields
 		
+		var unadjusted_amount=0;
+		var credited_account=0;
+		var no_of_credits=0;
+
+		$('#sales_unadjusted_amount').val(unadjusted_amount);
+		$('#customer_name').val(0).trigger('change');
+		document.getElementById('sale_span').style.display = 'none';
+
+		var saleAgingtable = document.getElementById("pendingInvoices"); 
+		while (saleAgingtable.rows.length > 0) {
+			saleAgingtable.deleteRow(0);
+		}
+
 		if ($('#SaletoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); // Get the table element
+			var table = document.getElementById("JV2Table"); 
 			var rowCount = table.rows.length;
-			var no_of_credits=0;
 
 			for (var i=0;i<rowCount; i++){	
 				selected_account = $('#account_cod'+(i+1)).val();
 
 				if (selected_account) {
+
 					credit = table.rows[i].cells[6].querySelector('input').value;
+
 					if(credit>=1 && no_of_credits<1){
-						$('#customer_name').val(selected_account).trigger('change');
-						$('#sales_unadjusted_amount').val(credit);
+						credited_account = selected_account;
+						unadjusted_amount = credit;
 						no_of_credits = no_of_credits + 1;
 					}
 					else if(credit>=1 && no_of_credits>=1){
-						$('#customer_name').val(0).trigger('change');
-						$('#sales_unadjusted_amount').val(0);
+						credited_account = 0;
+						unadjusted_amount = 0;
 						document.getElementById('sale_span').style.display = 'block';
 						break;
 					}
 				} 
+			}
+
+			if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
+				$('#customer_name').val(credited_account).trigger('change');
+				$('#sales_unadjusted_amount').val(unadjusted_amount);
 			}
 		}
 	}

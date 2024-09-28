@@ -22,7 +22,6 @@ class myPDF extends TCPDF
             $this->SetMargins(10, 17, 10); // 10mm left, 50mm top, 10mm right            
             $this->setCellPadding(1.2); // Set padding for all cells in the table
             $this->writeHTML($this->tableHtml, true, false, true, false, '');
-
         }
     }
 
@@ -69,8 +68,6 @@ class myPDF extends TCPDF
         $this->SetX($rightX);
         $this->Cell($rightTextWidth, 10, $pageNumber, 0, 0, 'R');
     }
- 
-
     
     function convertCurrencyToWords($number) {
         $Thousand = 1000;

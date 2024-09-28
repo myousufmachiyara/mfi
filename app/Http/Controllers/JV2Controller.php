@@ -262,8 +262,6 @@ class JV2Controller extends Controller
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
 
-        
-        
         // Add a page
         $pdf->AddPage();
            
@@ -285,28 +283,18 @@ class JV2Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-
-      
-
-
-        $html = '<table style="margin-bottom:1rem">';
+        $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins"> Voucher No: <span style="text-decoration: underline;color:black;">'.$jv2['jv_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Voucher No: <span style="text-decoration: underline;color:black;">'.$jv2['jv_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($jv2['jv_date'])->format('d-m-y') . '</span></td>';
         $html .= '</tr>';
-        $html .= '</table>';
-     
-        $html .= '<table style="margin-bottom:1rem">';
-       
         $html .= '<tr>';
         $html .= '<td width="10%" style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Remarks:</td>';
         $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$jv2['narration'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
-
         $pdf->writeHTML($html, true, false, true, false, '');
-
 
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
@@ -318,15 +306,14 @@ class JV2Controller extends Controller
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
-        
-        // Output the HTML content
-        //$pdf->writeHTML($html, true, false, true, false, '');
 
-        $html .= '<table style="text-align:center">';
+        $pdf->setTableHtml($html);
+
         $count=1;
         $total_credit=0;
         $total_debit=0;
 
+        $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
         foreach ($jv2_items as $items) {
             if($count%2==0)
             {
@@ -360,32 +347,31 @@ class JV2Controller extends Controller
 
         $currentY = $pdf->GetY();
 
+        if(($pdf->getPageHeight()-$pdf->GetY())<50){
+            $pdf->AddPage();
+            $currentY = $pdf->GetY();
+        }
 
-        
-    // Set text color to #17365D (RGB: 23, 54, 93)
-    $pdf->SetTextColor(23, 54, 93);
-    // Set font to bold
-    $pdf->SetFont('helvetica', 'B', 12);
+        // Set text color to #17365D (RGB: 23, 54, 93)
+        $pdf->SetTextColor(23, 54, 93);
+        // Set font to bold
+        $pdf->SetFont('helvetica', 'B', 12);
 
-    // Column 3
-    $pdf->SetXY(175, $currentY+10);
-    $pdf->MultiCell(28, 5, 'Total', 1, 'C');
+        // Column 3
+        $pdf->SetXY(175, $currentY+30);
+        $pdf->MultiCell(28, 5, 'Total', 1, 'C');
 
-    // Reset text color back to default (black) for subsequent cells
-    $pdf->SetTextColor(0, 0, 0);
+        // Reset text color back to default (black) for subsequent cells
+        $pdf->SetTextColor(0, 0, 0);
 
-    
 
-    // Column 3
-    $pdf->SetXY(203, $currentY+10);
-    $pdf->MultiCell(40, 5, number_format($total_debit), 1, 'C');
+        // Column 3
+        $pdf->SetXY(203, $currentY+30);
+        $pdf->MultiCell(40, 5, number_format($total_debit), 1, 'C');
 
-    // Column 4
-    $pdf->SetXY(243, $currentY+10);
-    $pdf->MultiCell(40, 5, number_format($total_credit), 1, 'C');
-
-        
-        $ $currentY = $pdf->GetY();
+        // Column 4
+        $pdf->SetXY(243, $currentY+30);
+        $pdf->MultiCell(40, 5, number_format($total_credit), 1, 'C');
 
         $style = array(
             'T' => array('width' => 0.75),  // Only top border with width 0.75
@@ -394,11 +380,11 @@ class JV2Controller extends Controller
         // Set text color
         $pdf->SetTextColor(23, 54, 93); // RGB values for #17365D
         // First Cell
-        $pdf->SetXY(50, $currentY+50);
+        $pdf->SetXY(15, $currentY+30);
         $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
 
         // Second Cell
-        $pdf->SetXY(200, $currentY+50);
+        $pdf->SetXY(100, $currentY+30);
         $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
     }

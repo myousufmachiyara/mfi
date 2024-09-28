@@ -1,13 +1,12 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
+        @include('../layouts.pageheader')
+            <div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
-                            <section class="card">
+                            <section class="card" style="display: flex;justify-content: space-between;">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Purchase Orders Pipe/Garder</h2>
                                     <form class="text-end" action="{{ route('new-tpo') }}" method="GET">

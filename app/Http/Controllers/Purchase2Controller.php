@@ -562,55 +562,55 @@ class Purchase2Controller extends Controller
         
         $pdf->writeHTML($html, true, false, true, false, '');
     
-    $html = '<table border="0.3" style="text-align:center;margin-top:10px">';
-$html .= '<tr>';
-$html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
-$html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
-$html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
-$html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
-$html .= '<th style="width:11%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price/Unit</th>';
-$html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Len</th>';
-$html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">%</th>';
-$html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
-$html .= '</tr>';
-$html .= '</table>';
+        $html = '<table border="0.3" style="text-align:center;margin-top:10px">';
+        $html .= '<tr>';
+        $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
+        $html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+        $html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
+        $html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
+        $html .= '<th style="width:11%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price/Unit</th>';
+        $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Len</th>';
+        $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">%</th>';
+        $html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
+        $html .= '</tr>';
+        $html .= '</table>';
 
-$pdf->setTableHtml($html);
+        $pdf->setTableHtml($html);
 
-$count = 1;
-$total_weight = 0;
-$total_quantity = 0;
-$total_amount = 0;
+        $count = 1;
+        $total_weight = 0;
+        $total_quantity = 0;
+        $total_amount = 0;
 
-$html .= '<table cellspacing="0" cellpadding="5">';
-foreach ($purchase_items as $items) {
-    // Determine background color based on odd/even rows
-    $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
+        $html .= '<table cellspacing="0" cellpadding="5">';
+        foreach ($purchase_items as $items) {
+            // Determine background color based on odd/even rows
+            $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
 
-    $html .= '<tr style="' . $bg_color . '">';
-    $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
-    $html .= '<td style="width:26%;border-right:1px dashed #000">' . $items['item_name'] . '</td>';
-    $html .= '<td style="width:20%;border-right:1px dashed #000">' . $items['remarks'] . '</td>';
-    $html .= '<td style="width:10%;border-right:1px dashed #000; text-align:center">' . $items['Sales_qty2'] . '</td>';
-    $total_quantity += $items['Sales_qty2'];
-    $html .= '<td style="width:11%;border-right:1px dashed #000; text-align:center">' . $items['sales_price'] . '</td>';
-    $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $items['length'] . '</td>';
-    $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $items['discount'] . '</td>';
+            $html .= '<tr style="' . $bg_color . '">';
+            $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
+            $html .= '<td style="width:26%;border-right:1px dashed #000">' . $items['item_name'] . '</td>';
+            $html .= '<td style="width:20%;border-right:1px dashed #000">' . $items['remarks'] . '</td>';
+            $html .= '<td style="width:10%;border-right:1px dashed #000; text-align:center">' . $items['Sales_qty2'] . '</td>';
+            $total_quantity += $items['Sales_qty2'];
+            $html .= '<td style="width:11%;border-right:1px dashed #000; text-align:center">' . $items['sales_price'] . '</td>';
+            $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $items['length'] . '</td>';
+            $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $items['discount'] . '</td>';
 
-    // Calculate the total weight and amount
-    $total_weight += $items['Sales_qty2'] * $items['weight_pc'];
-    $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
-    $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
-    $total_amount += $amount;
+            // Calculate the total weight and amount
+            $total_weight += $items['Sales_qty2'] * $items['weight_pc'];
+            $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
+            $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
+            $total_amount += $amount;
 
-    $html .= '</tr>';
-    $count++;
-}
-$html .= '</table>';
+            $html .= '</tr>';
+            $count++;
+        }
+        $html .= '</table>';
 
-$pdf->writeHTML($html, true, false, true, false, '');
-$currentY = $pdf->GetY();
-    
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $currentY = $pdf->GetY();
+            
         if(($pdf->getPageHeight()-$pdf->GetY())<57){
             $pdf->AddPage();
             $currentY = $pdf->GetY()+15;
