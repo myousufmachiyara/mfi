@@ -322,7 +322,7 @@ class Sales2Controller extends Controller
                 ->first();
 
         $pur2 = tsales_2::where('sales_inv_cod',$id)
-                ->join('item_entry as ie','tsales_2.item_cod','=','ie.it_cod')
+                ->join('item_entry2 as ie','tsales_2.item_cod','=','ie.it_cod')
                 ->select('tsales_2.*','ie.item_name')
                 ->get();
 
