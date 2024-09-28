@@ -358,7 +358,7 @@ class JV2Controller extends Controller
         $pdf->SetFont('helvetica', 'B', 12);
 
         // Column 3
-        $pdf->SetXY(175, $currentY+30);
+        $pdf->SetXY(175, $currentY+5);
         $pdf->MultiCell(28, 5, 'Total', 1, 'C');
 
         // Reset text color back to default (black) for subsequent cells
@@ -366,11 +366,11 @@ class JV2Controller extends Controller
 
 
         // Column 3
-        $pdf->SetXY(203, $currentY+30);
+        $pdf->SetXY(203, $currentY+5);
         $pdf->MultiCell(40, 5, number_format($total_debit), 1, 'C');
 
         // Column 4
-        $pdf->SetXY(243, $currentY+30);
+        $pdf->SetXY(243, $currentY+5);
         $pdf->MultiCell(40, 5, number_format($total_credit), 1, 'C');
 
         $style = array(
@@ -380,11 +380,11 @@ class JV2Controller extends Controller
         // Set text color
         $pdf->SetTextColor(23, 54, 93); // RGB values for #17365D
         // First Cell
-        $pdf->SetXY(15, $currentY+30);
+        $pdf->SetXY(15, $currentY+5);
         $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
 
         // Second Cell
-        $pdf->SetXY(100, $currentY+30);
+        $pdf->SetXY(100, $currentY+5);
         $pdf->Cell(50, 0, "Customer's Signature", $style, 1, 'C');
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
     }
