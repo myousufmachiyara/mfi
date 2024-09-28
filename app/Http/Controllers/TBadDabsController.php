@@ -59,7 +59,7 @@ class TBadDabsController extends Controller
         }
         
         if ($request->has('item_type') && $request->item_type) {
-            $tbad_dabs->reason = $request->item_type; 
+            $tbad_dabs->item_type = $request->item_type; 
         }
     
         $tbad_dabs->created_by = $userId;

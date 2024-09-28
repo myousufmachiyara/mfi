@@ -178,7 +178,7 @@
 											<div class="col-12 pb-sm-3 pb-md-0 text-end">
 												<h3 class="font-weight-bold mt-3 mb-0 text-5  text-primary">Net Amount</h3>
 												<span>
-													<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
+													<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger"> @php echo number_format($net_amount, 0) @endphp</span></strong>
 												</span>
 											</div>
 										</div>
@@ -187,7 +187,6 @@
 										<div class="row form-group mb-2">
 											<div class="text-end">
 												<button type="button" class="btn btn-warning mt-2"  onclick="window.location='{{ route('all-quotation') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Quotation</button>
 											</div>
 										</div>
