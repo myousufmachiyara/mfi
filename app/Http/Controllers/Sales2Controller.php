@@ -30,14 +30,14 @@ class Sales2Controller extends Controller
         ->join('ac as comp_acc', 'comp_acc.ac_code', '=', 'tsales.company_name')
         ->select(
             'tsales.Sal_inv_no','tsales.sa_date','acc_name.ac_name as acc_name','tsales.pur_ord_no',
-            'comp_acc.ac_name as comp_account','tsales.company_name','tsales.Sales_Remarks','tsales.pur_against','tsales.prefix',
+            'comp_acc.ac_name as comp_account','tsales.company_name','tsales.Sales_Remarks','tsales.Cash_name','tsales.pur_against','tsales.prefix',
             'tsales.ConvanceCharges','tsales.LaborCharges','tsales.Bill_discount', 'tsales.pur_against',
             \DB::raw('SUM(tsales_2.weight_pc * tsales_2.Sales_qty2) as weight_sum'),
             \DB::raw('SUM(((tsales_2.Sales_qty2 * tsales_2.sales_price) + ((tsales_2.Sales_qty2 * tsales_2.sales_price) * (tsales_2.discount/100))) * tsales_2.length) as total_bill')
         )
         ->groupby('tsales.Sal_inv_no','tsales.sa_date','acc_name','tsales.pur_ord_no',
             'comp_account','tsales.company_name','tsales.Sales_Remarks','tsales.pur_against','tsales.prefix',
-            'tsales.ConvanceCharges','tsales.LaborCharges','tsales.Bill_discount', 'tsales.pur_against',)
+            'tsales.ConvanceCharges','tsales.LaborCharges','tsales.Bill_discount', 'tsales.pur_against','tsales.Cash_name',)
         ->get();
 
         return view('sale2.index',compact('pur2'));
@@ -165,7 +165,7 @@ class Sales2Controller extends Controller
             $prefix=$pur_2_id['prefix'];
             $sales_against = $prefix.''.$SalinducedID;
             $tpurchase->sales_against = $sales_against;
-            tpurchase::where('Sale_inv_no', $request->inducedID)->update([
+            tpurchase::where('Sal_inv_no', $request->inducedID)->update([
                 'sales_against'=>$tpurchase->sales_against,
             ]);
         }
@@ -234,7 +234,7 @@ class Sales2Controller extends Controller
         }
         $pur2->created_by=1;
 
-        // die(print_r($pur2));
+        
         
         tsales::where('Sal_inv_no', $request->pur2_id)->update([
             'sa_date'=>$pur2->sa_date,
@@ -308,13 +308,13 @@ class Sales2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        tsales::where('Sale_inv_no', $request->delete_purc2)->update(['status' => '0']);
+        tsales::where('Sal_inv_no', $request->delete_purc2)->update(['status' => '0']);
         return redirect()->route('all-sale2invoices');
     }
 
     public function show(string $id)
     {
-        $pur = tsales::where('Sale_inv_no',$id)
+        $pur = tsales::where('Sal_inv_no',$id)
                 ->join('ac as acc_name','tsales.account_name','=','acc_name.ac_code')
                 ->join('ac as dispt_to','tsales.company_name','=','dispt_to.ac_code')
                 ->select('tsales.*','dispt_to.ac_name as disp_to','acc_name.ac_name as ac_name', 
@@ -351,7 +351,7 @@ class Sales2Controller extends Controller
 
     public function getItems($id){
 
-        $pur1= tsales::where('Sale_inv_no',$id)->get()->first();
+        $pur1= tsales::where('Sal_inv_no',$id)->get()->first();
 
         $pur2 = tsales_2::where('sales_inv_cod',$id)
         ->join('item_entry as ie','tsales_2.item_cod','=','ie.it_cod')
@@ -457,7 +457,7 @@ class Sales2Controller extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sal_inv_no'].'</span></td>';
         $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
@@ -597,7 +597,7 @@ class Sales2Controller extends Controller
     }
 
     public function noLengthPDF($id){
-        $purchase = tsales::where('Sale_inv_no',$id)
+        $purchase = tsales::where('Sal_inv_no',$id)
         ->join('ac','tsales.account_name','=','ac.ac_code')
         ->first();
 
@@ -611,8 +611,8 @@ class Sales2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$purchase['Sale_inv_no']);
-        $pdf->SetSubject('Invoice-'.$purchase['Sale_inv_no']);
+        $pdf->SetTitle('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sal_inv_no']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
                
         // Set header and footer fonts
@@ -657,7 +657,7 @@ class Sales2Controller extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sal_inv_no'].'</span></td>';
         $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
@@ -797,7 +797,7 @@ class Sales2Controller extends Controller
     }
 
     public function onlyPriceQtyPDF($id){
-        $purchase = tsales::where('Sale_inv_no',$id)
+        $purchase = tsales::where('Sal_inv_no',$id)
         ->join('ac','tsales.account_name','=','ac.ac_code')
         ->first();
 
@@ -811,8 +811,8 @@ class Sales2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Invoice-'.$purchase['Sale_inv_no']);
-        $pdf->SetSubject('Invoice-'.$purchase['Sale_inv_no']);
+        $pdf->SetTitle('Invoice-'.$purchase['Sal_inv_no']);
+        $pdf->SetSubject('Invoice-'.$purchase['Sal_inv_no']);
         $pdf->SetKeywords('Invoice, TCPDF, PDF');
                
         // Set header and footer fonts
@@ -857,7 +857,7 @@ class Sales2Controller extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td>Invoice No: <span style="text-decoration: underline;">'.$purchase['Sal_inv_no'].'</span></td>';
         $html .= '<td>pur_ord_no: '.$purchase['pur_ord_no'].'</td>';
         $html .= '<td>Date: '.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</td>';
         $html .= '<td>Login: Hamza </td>';
