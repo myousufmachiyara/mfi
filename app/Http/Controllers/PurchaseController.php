@@ -32,7 +32,7 @@ class PurchaseController extends Controller
         )
         ->groupby('purchase.pur_id','purchase.pur_date','purchase.cash_saler_name','purchase.pur_remarks','ac.ac_name',
         'pur_bill_no','purchase.pur_convance_char', 'purchase.sale_against', 'purchase.pur_labor_char','purchase.pur_discount','purchase.prefix')
-        ->get();
+        ->paginate(2000);
         
         return view('purchase1.index',compact('pur1'));
 

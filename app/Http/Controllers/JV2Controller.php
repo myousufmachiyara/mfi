@@ -34,7 +34,7 @@ class JV2Controller extends Controller
         \DB::raw('SUM(lager.credit) as total_credit')
         )
         ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
-        ->paginate(2000);
+        ->get();
 
         return view('vouchers.jv2',compact('jv2'));
     }
