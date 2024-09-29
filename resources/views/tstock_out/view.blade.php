@@ -1,11 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-
+		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
 
                     <section class="card">
 
@@ -105,8 +103,8 @@
 											<td>{{$key+1}}</td>
 											<td class="font-weight-semibold text-dark">{{$item->item_name}}</td>
 											<td>{{$item->remarks}}</td>
-											<td class="text-center">{{$item->Sales_qty}}</td>
-											<td class="text-center">{{($item->Sales_qty * $item->weight_pc)}}</td>
+											<td class="text-center">{{$item->sales_qty}}</td>
+											<td class="text-center">{{($item->sales_qty * $item->weight_pc)}}</td>
 										</tr>
 										<?php $total_weight += $item->Sales_qty * $item->weight_pc ?>
 										<?php $total_quantity += $item->Sales_qty ?>
