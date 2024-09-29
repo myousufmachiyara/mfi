@@ -195,10 +195,10 @@
 <script>
 $(document).ready(function() {
     // Initialize DataTable
-    const table = $('#searchableTable').DataTable();
+    const table = $('#datatable-default').DataTable();
 
     // Custom search for each column
-    $('#searchableTable thead th').each(function(i) {
+    $('#datatable-default thead th').each(function(i) {
         const title = $(this).text();
         $(this).append('<br><input type="text" placeholder="Search ' + title + '" />');
 
@@ -223,7 +223,7 @@ $(document).ready(function() {
         const colId = $('#searchColId').val();
 
         // Get the table and rows
-        const table = document.getElementById('searchableTable');
+        const table = document.getElementById('datatable-default');
         const rows = table.getElementsByTagName('tr');
 
         requestAnimationFrame(() => {
