@@ -78,7 +78,7 @@
 												</h4>
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Remarks: &nbsp </span>
-													<span style="font-weight:400;color:black" class="value"> {{$tstock_out->Sales_remarks}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$tstock_out->sales_remarks}}</span>
 												</h4>
 											</div>
 										</div>
@@ -106,8 +106,8 @@
 											<td class="text-center">{{$item->sales_qty}}</td>
 											<td class="text-center">{{($item->sales_qty * $item->weight_pc)}}</td>
 										</tr>
-										<?php $total_weight += $item->Sales_qty * $item->weight_pc ?>
-										<?php $total_quantity += $item->Sales_qty ?>
+										<?php $total_weight += $item->sales_qty * $item->weight_pc ?>
+										<?php $total_quantity += $item->sales_qty ?>
 										@endforeach
 										
 
