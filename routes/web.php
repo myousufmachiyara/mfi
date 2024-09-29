@@ -44,6 +44,8 @@
         Route::get('/purchase1/show/{id}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('show-purchases1');
         Route::get('/vouchers/show/{id}', [App\Http\Controllers\JV1Controller::class, 'show'])->name('show-jv1');
         Route::get('/tbad_dabs/show/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs');
+        Route::get('/tstock_in/tstock_in_invoice/view/{id}', [App\Http\Controllers\TStockInController::class, 'show'])->name('show-tstock-in-invoice');
+        Route::get('/tstock_out/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-tstock-out-invoice');
     });
 
     Route::middleware(['checkPermission:add'])->group(function () {
@@ -264,6 +266,8 @@
         Route::get('/sales2/generatePDF/', [App\Http\Controllers\Sales2Controller::class, 'generatePDF'])->name('print-sales2-invoice');
         Route::get('/sales/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
         Route::get('/sales/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
+        Route::get('/tstock_in/tstock_in_invoice/generatePDF/{id}', [App\Http\Controllers\TStockInController::class, 'generatePDF'])->name('print-tstock-in-invoice');
+        Route::get('/tstock_out/tstock_out/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-tstock-out-invoice');
     });
 
     Route::middleware(['auth'])->group(function () {

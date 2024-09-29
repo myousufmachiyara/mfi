@@ -193,8 +193,8 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::get('/tstock_in/download/{id}', [App\Http\Controllers\TStockInController::class, 'downloadAtt'])->name('tstock-in-att-download');
     Route::delete('/tstock_in/deleteAttachment/{id}', [App\Http\Controllers\TStockInController::class, 'deleteAtt'])->name('sale1-tstock-in-delete');
     Route::get('/tstock_in/view/{id}', [App\Http\Controllers\TStockInController::class, 'view'])->name('show-tstock-in-att'); 
-    // Route::get('/tstock_in/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'show'])->name('show-sale-invoice');
-    // Route::get('/tstock_in/saleinvoice/generatePDF/{id}', [App\Http\Controllers\SalesController::class, 'generatePDF'])->name('print-sale-invoice');
+    Route::get('/tstock_in/tstock_in_invoice/view/{id}', [App\Http\Controllers\TStockInController::class, 'show'])->name('show-tstock-in-invoice');
+    Route::get('/tstock_in/tstock_in_invoice/generatePDF/{id}', [App\Http\Controllers\TStockInController::class, 'generatePDF'])->name('print-tstock-in-invoice');
     // Route::get('/tstock_in/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\SalesController::class, 'downloadPDF'])->name('download-sale-invoice');
 
 
@@ -209,9 +209,8 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('tstock-out-att-download');
     Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
     Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-tstock-out-att');
-
-    // Route::get('/tstock_out/saleinvoice/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-sale-invoice');
-    // Route::get('/tstock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-sale-invoice');
+    Route::get('/tstock_out/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-tstock-out-invoice');
+    Route::get('/tstock_out/tstock_out/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-tstock-out-invoice');
     // Route::get('/tstock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
     Route::get('/tstock_out/getunclosed/', [App\Http\Controllers\TStockOutController::class, 'getunclosed'])->name('get-unclosed-tstock-out-invoice');
     Route::get('/tstock_out/getItems/{id}', [App\Http\Controllers\TStockOutController::class, 'getItems'])->name('get-tstock-out-items');

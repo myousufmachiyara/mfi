@@ -14,6 +14,7 @@ use App\Models\Item_entry2;
 use App\Models\tstock_out;
 use App\Models\tstock_out_2;
 use App\Models\tstock_out_att;
+use App\Services\myPDF;
 
 
 
@@ -145,7 +146,6 @@ class TStockOutController extends Controller
                         ->get();
         return view('tstock_out.view',compact('tstock_out','tstock_out_items'));
     }
-
     public function edit($id)
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)->first();

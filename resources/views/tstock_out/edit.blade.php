@@ -53,7 +53,7 @@
 											</div>
 											<div class="col-6 col-md-1">
 												<label class="col-form-label" >Sale Inv#</label>
-												<input type="text" name="pur_inv" placeholder="Purchase Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
+												<input type="text" name="pur_inv" placeholder="Sale Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
 											</div>
 											
 											<div class="col-6 col-md-3">
