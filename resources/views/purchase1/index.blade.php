@@ -48,7 +48,7 @@
                                                 <option value="8">by Bill Amount</option>
                                                 <option value="12">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
+                                            <input class="form-control" placeholder="Search Here..." onkeyup="debouncedFilterTable()" id="searchInput" style="margin-right:10px">
                                             <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
                                         </div>
                                     </div>
@@ -193,8 +193,44 @@
 	</body>
 </html>
 
-
 <script>
+    let debounceTimer;
+
+    function debouncedFilterTable() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(searchTable, 300); // Adjust the delay as needed
+    }
+
+    // function filterTable() {
+    //     const input = document.getElementById("searchInput").value.toUpperCase();
+    //     const table = document.getElementById("dataTable");
+    //     const rows = table.getElementsByTagName("tr");
+        
+    //     const displayStatus = [];
+
+    //     for (let i = 1; i < rows.length; i++) { // Skip header row
+    //         const cells = rows[i].getElementsByTagName("td");
+    //         let found = false;
+
+    //         // Check each cell in the row
+    //         for (let j = 0; j < cells.length; j++) {
+    //             const cellText = cells[j].textContent || cells[j].innerText;
+    //             if (cellText.toUpperCase().indexOf(input) > -1) {
+    //                 found = true;
+    //                 break; // Stop searching this row if a match is found
+    //             }
+    //         }
+            
+    //         // Cache the display status for the row
+    //         displayStatus.push({ row: rows[i], display: found });
+    //     }
+
+    //     // Apply display changes in one go
+    //     displayStatus.forEach(item => {
+    //         item.row.style.display = item.display ? '' : 'none';
+    //     });
+    // }
+
     function searchTable() {
         const loader = document.getElementById('searchloader');
         loader.style.display = 'block';
@@ -206,6 +242,7 @@
         // Get the table and rows
         const table = document.getElementById('searchableTable');
         const rows = table.getElementsByTagName('tr');
+
         requestAnimationFrame(() => {
             if(colId=="default"){
                 
