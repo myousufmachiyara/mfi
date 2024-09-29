@@ -176,11 +176,40 @@
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
 								<a onclick="window.location='{{ route('all-sale2invoices') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a href="{{ route('print-sales2-invoice', $pur->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
-							
+								<a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sal_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
 							</div>
 
 						</div>
 
+						<div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
+							<form method="get" action="{{ route('print-sales2-invoice') }}" enctype="multipart/form-data">
+								@csrf
+								<section class="card">
+									<header class="card-header">
+										<h2 class="card-title">Select Print Format</h2>
+									</header>
+									<div class="card-body">
+										<div class="modal-wrapper">
+											<select data-plugin-selecttwo class="form-control select2-js" autofocus name="print_type" required>
+												<option value="" disabled selected>Select Print Format</option>
+												<option value="1" >Show All</option>
+												<option value="2" >Exclude Item Length</option>
+												<option value="3" >Only Quantity & Price</option>
+											</select>
+											<input type="hidden" name="print_sale2" id="printID" >
+										</div>
+									</div>
+									<footer class="card-footer">
+										<div class="row">
+											<div class="col-md-12 text-end">
+												<button type="submit" class="btn btn-danger">Print</button>
+												<button class="btn btn-default modal-dismiss">Cancel</button>
+											</div>
+										</div>
+									</footer>
+								</section>
+							</form>
+						</div>
 					</section>
 				</section>
 			</div>
@@ -193,6 +222,11 @@
 		var netAmount = <?php echo json_encode($netamount); ?>;
 		var words = convertCurrencyToWords(netAmount);
 		document.getElementById('numberInWords').innerHTML = words;
+
+
+		function setPrintId(id){
+			$('#printID').val(id);
+		}
 	</script>
 	
 </html>
