@@ -43,11 +43,7 @@
                                                 @endif
 
                                                     <td class="actions">
-                                                        <a href="#" class="text-danger">
-                                                            <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a href="#" class="">
+                                                        <a href="{{ route('show-tbad-dabs', $row->bad_dabs_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>

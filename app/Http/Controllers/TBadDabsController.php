@@ -59,7 +59,7 @@ class TBadDabsController extends Controller
         }
         
         if ($request->has('item_type') && $request->item_type) {
-            $tbad_dabs->reason = $request->item_type; 
+            $tbad_dabs->item_type = $request->item_type; 
         }
     
         $tbad_dabs->created_by = $userId;
@@ -161,6 +161,18 @@ class TBadDabsController extends Controller
         }
 
         return redirect()->route('all-tbad-dabs');
+    }
+
+    public function show(string $id)
+    {
+        $tbad_dabs = TBadDabs::where('bad_dabs_id', $id)->first();
+
+        $tbad_dabs2 = TBadDabs2::where('bad_dabs_cod',$id)
+                ->join('item_entry2 as ie','tbad_dabs_2.item_cod','=','ie.it_cod')
+                ->select('tbad_dabs_2.*','ie.item_name')
+                ->get();
+
+        return view('tbad_dabs.view',compact('tbad_dabs','tbad_dabs2'));
     }
 
 

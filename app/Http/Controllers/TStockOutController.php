@@ -14,6 +14,7 @@ use App\Models\Item_entry2;
 use App\Models\tstock_out;
 use App\Models\tstock_out_2;
 use App\Models\tstock_out_att;
+use App\Services\myPDF;
 
 
 
@@ -135,6 +136,7 @@ class TStockOutController extends Controller
     }
 
     public function show(string $id)
+    
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)
                         ->join('ac','tstock_out.account_name','=','ac.ac_code')

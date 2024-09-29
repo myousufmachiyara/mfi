@@ -53,24 +53,10 @@
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
                                                     @php ($net_amount=$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount)
-                                                    <td><strong style="font-size:15px">{{ round($net_amount)}}</strong></td>
-                                                    <!-- @if(substr(strval($net_amount), strpos(strval($net_amount), '.') + 1)>0) 
-                                                        <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
-                                                    @else
-                                                        <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
-                                                    @endif -->
-
-                                                    <!-- @if ($row->bill_not==0)
-                                                        <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Final </td>
-                                                    @elseif ($row->bill_not==1)
-                                                        <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
-                                                    @endif -->
+                                                    <td><strong style="font-size:15px">{{ number_format(round($net_amount), 0) }}</strong></td>
+                                    
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
-                                                        <a href="{{ route('print-quotation-invoice', $row->Sal_inv_no) }}" class="text-danger">
-                                                            <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
                                                         <a href="{{ route('show-quotation-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
