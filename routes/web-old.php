@@ -181,6 +181,8 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::post('/tbad_dabs/delete', [App\Http\Controllers\TBadDabsController::class, 'destroy'])->name('delete-tbad-dabs');
     Route::post('/tbad_dabs/update', [App\Http\Controllers\TBadDabsController::class, 'update'])->name('update-tbad-dabs');
     Route::get('/tbad_dabs/show/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs');
+    Route::get('/tbad_dabs/tbad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\TBadDabsController::class, 'generatePDF'])->name('print-tbad-dabs-invoice');
+
 
     //tstock in
     Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController::class, 'index'])->name('all-tstock-in');

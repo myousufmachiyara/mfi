@@ -17,7 +17,6 @@ use App\Models\tstock_out_att;
 use App\Services\myPDF;
 
 
-
 class TStockOutController extends Controller
 {
     /**
