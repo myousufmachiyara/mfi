@@ -51,7 +51,8 @@ class COAController extends Controller
     {
         $acc = new AC();
 
-        $acc->created_by=1;
+        $acc->created_by = session('user_id');
+        $acc->updated_by = 0;
 
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
@@ -106,7 +107,10 @@ class COAController extends Controller
     
     public function destroy(Request $request)
     {
-        $acc = AC::where('ac_code', $request->acc_id)->update(['status' => '0']);
+        $acc = AC::where('ac_code', $request->acc_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-acc');
     }
 
@@ -120,6 +124,9 @@ class COAController extends Controller
     {
         
         $acc = AC::where('ac_code', $request->ac_cod)->get()->first();
+
+        $acc->updated_by = session('user_id');
+
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
         }
@@ -167,6 +174,7 @@ class COAController extends Controller
             'days_limit'=>$acc->days_limit,
             'group_cod'=>$acc->group_cod,
             'AccountType'=>$acc->AccountType,
+            'updated_by'=> $acc->updated_by,
         ]);
 
         

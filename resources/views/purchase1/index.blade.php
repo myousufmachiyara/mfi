@@ -34,7 +34,7 @@
                                 </header>
                                
                                 <div class="card-body">
-                                    <div class="row" style="justify-content:end">
+                                    <!-- <div class="row" style="justify-content:end">
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="searchColId">
                                                 <option value="default">Search All</option>
@@ -49,13 +49,13 @@
                                                 <option value="12">by Net Amount</option>
                                             </select>
                                             <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
-                                            <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
+                                            <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button>
                                         </div>
                                     </div>
-                                    <div id="searchloader"></div>
+                                    <div id="searchloader"></div> -->
 
                                     <div class="modal-wrapper" style="overflow-x: auto;">
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
@@ -192,8 +192,27 @@
         @include('../layouts.footerlinks')
 	</body>
 </html>
+<script>
+$(document).ready(function() {
+    // Initialize DataTable
+    const table = $('#datatable-default').DataTable();
 
+    // Custom search for each column
+    $('#datatable-default thead th').each(function(i) {
+        const title = $(this).text();
+        $(this).append('<br><input type="text" placeholder="Search ' + title + '" />');
 
+        $('input', this).on('keyup change', function() {
+            if (table.column(i).search() !== this.value) {
+                table
+                    .column(i)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+});
+</script>
 <script>
     function searchTable() {
         const loader = document.getElementById('searchloader');
@@ -204,8 +223,9 @@
         const colId = $('#searchColId').val();
 
         // Get the table and rows
-        const table = document.getElementById('searchableTable');
+        const table = document.getElementById('datatable-default');
         const rows = table.getElementsByTagName('tr');
+
         requestAnimationFrame(() => {
             if(colId=="default"){
                 
