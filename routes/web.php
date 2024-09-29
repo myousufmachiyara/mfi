@@ -46,6 +46,8 @@
         Route::get('/tbad_dabs/show/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs');
         Route::get('/tstock_in/tstock_in_invoice/view/{id}', [App\Http\Controllers\TStockInController::class, 'show'])->name('show-tstock-in-invoice');
         Route::get('/tstock_out/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-tstock-out-invoice');
+        Route::get('/bad_dabs/show/{id}', [App\Http\Controllers\BadDabsController::class, 'show'])->name('show-bad-dabs');
+        Route::get('/stock_out/stock_out_invoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-stock-out-invoice');
     });
 
     Route::middleware(['checkPermission:add'])->group(function () {
@@ -269,6 +271,9 @@
         Route::get('/tbad_dabs/tbad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\TBadDabsController::class, 'generatePDF'])->name('print-tbad-dabs-invoice');
         Route::get('/tstock_in/tstock_in_invoice/generatePDF/{id}', [App\Http\Controllers\TStockInController::class, 'generatePDF'])->name('print-tstock-in-invoice');
         Route::get('/tstock_out/tstock_out/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-tstock-out-invoice');
+        Route::get('/bad_dabs/bad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\BadDabsController::class, 'generatePDF'])->name('print-bad-dabs-invoice');
+        Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
+        Route::get('/stock_out/stock_out_invoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-stock-out-invoice');
     });
 
     Route::middleware(['auth'])->group(function () {
