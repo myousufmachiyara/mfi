@@ -103,7 +103,7 @@
 															<input type="hidden" id="weight{{$tstockin_key+1}}" name="weight[]" onchange="rowTotal({{$tstockin_key+1}})" placeholder="Weight" value="{{$tstock_items->weight_pc}}" step="any" required class="form-control">
 														</td>
 														<td>
-															<input type="number" id="row_total_weight{{$tstockin_key+1}}" placeholder="Weight" name="row_total_weight[]" disabled value="{{$tstock_items->sales_qty * $tstock_items->weight_pc}}" step="any"  class="form-control">
+															<input type="number" id="row_total_weight{{$tstockin_key+1}}" placeholder="Weight" name="row_total_weight[]" disabled value="{{$tstock_items->Sales_qty * $tstock_items->weight_pc}}" step="any"  class="form-control">
 														</td>
 														<td>
 															<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
