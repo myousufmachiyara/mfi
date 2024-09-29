@@ -21726,12 +21726,3 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
-
-.two-line-ellipsis {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: 3em; /* Adjust based on line height */
-  }
