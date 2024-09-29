@@ -136,6 +136,7 @@ class TStockOutController extends Controller
     }
 
     public function show(string $id)
+    
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)
                         ->join('ac','tstock_out.account_name','=','ac.ac_code')
@@ -146,6 +147,7 @@ class TStockOutController extends Controller
                         ->get();
         return view('tstock_out.view',compact('tstock_out','tstock_out_items'));
     }
+
     public function edit($id)
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)->first();
