@@ -16,8 +16,8 @@
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
-											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Bad Dabs Pipes/Garder ID:</h2>
-											<h4 class="h4 m-0 text-dark font-weight-bold">{{$tbad_dabs->bad_dabs_id}}</h4>
+											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Bad Dabs Doors ID:</h2>
+											<h4 class="h4 m-0 text-dark font-weight-bold">{{$bad_dabs->bad_dabs_id}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">
@@ -34,7 +34,7 @@
 												
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Reason: &nbsp </span>
-													<span style="font-weight:400;color:black" class="value"> {{$tbad_dabs->reason}}</span>
+													<span style="font-weight:400;color:black" class="value"> {{$bad_dabs->reason}}</span>
 												</h4>
 											</div>
 										</div>
@@ -42,22 +42,9 @@
 											<div class="bill-data">
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Date: &nbsp </span>
-													<span style="font-weight:400;color:black" class="value">  {{\Carbon\Carbon::parse($tbad_dabs->sa_date)->format('d-m-y')}}</span>
+													<span style="font-weight:400;color:black" class="value">  {{\Carbon\Carbon::parse($bad_dabs->sa_date)->format('d-m-y')}}</span>
 												</h4>
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span style="color:#17365D">Item Type: &nbsp;</span>
-												
-													@if ($tbad_dabs->item_type == 1)
-														<span style="font-weight:400;color:black" class="value">Pipes</span>
-													@elseif ($tbad_dabs->item_type == 2)
-														<span style="font-weight:400;color:black" class="value">Garder / TR</span>
-													@else
-														<span style="font-weight:400;color:black" class="value">Unknown</span>
-													@endif
-												</h4>
-												
-												
-		
+								
 											</div>
 										</div>
 									</div>
@@ -75,16 +62,16 @@
 									@php($qty_add = 0)
 									@php($qty_less = 0)
 									<tbody>
-										@foreach($tbad_dabs2 as $key => $tbad_dabs_item)
+										@foreach($bad_dabs_2 as $key => $bad_dabs_item)
 										<tr>
 											<td>{{$key+1}}</td>
-											<td class="font-weight-semibold text-dark">{{$tbad_dabs_item->item_name}}</td>
-											<td>{{$tbad_dabs_item->remarks}}</td>
-											<td class="text-center">{{$tbad_dabs_item->pc_add}}</td>
-											<td class="text-center">{{$tbad_dabs_item->pc_less}}</td>
+											<td class="font-weight-semibold text-dark">{{$bad_dabs_item->item_name}}</td>
+											<td>{{$bad_dabs_item->remarks}}</td>
+											<td class="text-center">{{$bad_dabs_item->pc_add}}</td>
+											<td class="text-center">{{$bad_dabs_item->pc_less}}</td>
 										</tr>
-										<?php $qty_less=$qty_less+$tbad_dabs_item->pc_less ?>
-										<?php $qty_add=$qty_add+ $tbad_dabs_item->pc_add ?>
+										<?php $qty_less=$qty_less+$bad_dabs_item->pc_less ?>
+										<?php $qty_add=$qty_add+ $bad_dabs_item->pc_add ?>
 
 										@endforeach
 									</tbody>
@@ -115,8 +102,8 @@
 								</div>
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-tbad-dabs') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-tbad-dabs-invoice', $tbad_dabs->bad_dabs_id) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
+								<a onclick="window.location='{{ route('all-bad-dabs') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+								<a href="{{ route('print-bad-dabs-invoice', $bad_dabs->bad_dabs_id) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a>
 							</div>
 
 						</div>

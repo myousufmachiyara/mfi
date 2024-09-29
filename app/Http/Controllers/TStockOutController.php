@@ -17,7 +17,6 @@ use App\Models\tstock_out_att;
 use App\Services\myPDF;
 
 
-
 class TStockOutController extends Controller
 {
     /**
@@ -33,8 +32,8 @@ class TStockOutController extends Controller
         ->select(
             'tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
             'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address','tstock_out.prefix','tstock_out.item_type',
-            \DB::raw('SUM(tstock_out_2.Sales_qty) as qty_sum'),
-            \DB::raw('SUM(tstock_out_2.Sales_qty*tstock_out_2.weight_pc) as weight_sum'),
+            \DB::raw('SUM(tstock_out_2.sales_qty) as qty_sum'),
+            \DB::raw('SUM(tstock_out_2.sales_qty*tstock_out_2.weight_pc) as weight_sum'),
         )
         ->groupby('tstock_out.Sal_inv_no','tstock_out.sa_date','tstock_out.cash_pur_name','tstock_out.Sales_remarks','ac.ac_name',
         'tstock_out.pur_inv', 'tstock_out.mill_gate', 'tstock_out.transporter','tstock_out.Cash_pur_address' ,'tstock_out.prefix','tstock_out.item_type' )
@@ -165,8 +164,8 @@ class TStockOutController extends Controller
         if ($request->has('date') && $request->date) {
             $tstock_out->sa_date=$request->date;
         }
-        if ($request->has('pur_inv') && $request->pur_inv OR empty($request->pur_inv)) {
-            $tstock_out->pur_inv=$request->pur_inv;
+        if ($request->has('hidden_pur_inv') && $request->hidden_pur_inv OR empty($request->hidden_pur_inv)) {
+            $tstock_out->pur_inv=$request->hidden_pur_inv;
         }
         if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $tstock_out->Sales_remarks=$request->remarks;
@@ -305,5 +304,162 @@ class TStockOutController extends Controller
             'pur1' => $pur1,
             'pur2' => $pur2,
         ]);
+    }
+
+
+    public function generatePDF($id)
+    {
+        $tstock_out = tstock_out::where('Sal_inv_no',$id)
+        ->join('ac','tstock_out.account_name','=','ac.ac_code')
+        ->first();
+
+        $tstock_out_items = tstock_out_2::where('sales_inv_cod',$id)
+                ->join('item_entry2','tstock_out_2.item_cod','=','item_entry2.it_cod')
+                ->select('tstock_out_2.*','item_entry2.item_name')
+                ->get();
+
+        $pdf = new MyPDF();
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('TStock Out-'.$tstock_out['prefix'].$tstock_out['Sal_inv_no']);
+        $pdf->SetSubject('TStock Out-'.$tstock_out['prefix'].$tstock_out['Sal_inv_no']);
+        $pdf->SetKeywords('TStock Out, TCPDF, PDF');
+                   
+        // Add a page
+        $pdf->AddPage();
+           
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 4px;
+        }';
+
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Stock In Pipe/Garder</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $html = '<table style="margin-bottom:1rem">';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">ID: &nbsp;<span style="text-decoration: underline;color:#000">'.$tstock_out['prefix'].$tstock_out['Sal_inv_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($tstock_out['sa_date'])->format('d-m-y').'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Gate Pass No: <span style="text-decoration: underline;color:#000">'.$tstock_out['mill_gate'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;color:#000">Hamza</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        // $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html .= '<table border="0.1px" style="border-collapse: collapse;">';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Comapny Name </td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$tstock_out['ac_name'].'</td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Type</td>';
+
+        if ($tstock_out['item_type'] == 1) {
+            $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">Pipes</td>';
+        } elseif ($tstock_out['item_type'] == 2) {
+            $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">Garder / TR</td>';
+        } else {
+            $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">Unknown</td>';
+        }
+        
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D" >Address </td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$tstock_out['address'].'</td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Transporter</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$tstock_out['transporter'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$tstock_out['phone_no'].'</td>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Sale Invoice</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$tstock_out['pur_inv'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Remarks </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$tstock_out['sales_remarks'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        $html = '<table border="0.3" style="text-align:center;margin-top:10px">';
+        $html .= '<tr>';
+        $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
+        $html .= '<th style="width:36%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+        $html .= '<th style="width:33%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
+        $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
+        $html .= '<th style="width:14%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Weight</th>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->setTableHtml($html);
+
+        $count = 1;
+        $total_weight = 0;
+        $total_quantity = 0;
+        $total_amount = 0;
+
+        $html .= '<table cellspacing="0" cellpadding="5">';
+        foreach ($tstock_out_items as $items) {
+            // Determine background color based on odd/even rows
+            $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
+
+            $html .= '<tr style="' . $bg_color . '">';
+            $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
+            $html .= '<td style="width:36%;border-right:1px dashed #000">' . $items['item_name'] . '</td>';
+            $html .= '<td style="width:33%;border-right:1px dashed #000">' . $items['remarks'] . '</td>';
+            $html .= '<td style="width:12%;border-right:1px dashed #000; text-align:center">' . $items['sales_qty'] . '</td>';
+            $total_quantity += $items['sales_qty'];
+
+            // Calculate the total weight and amount
+            $weight= $items['sales_qty'] * $items['weight_pc'];
+            $html .= '<td style="width:14%;border-right:1px dashed #000; text-align:center">' . $weight . '</td>';
+            $total_weight += $weight;
+
+            $html .= '</tr>';
+            $count++;
+        }
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $currentY = $pdf->GetY();
+            
+        if(($pdf->getPageHeight()-$pdf->GetY())<57){
+            $pdf->AddPage();
+            $currentY = $pdf->GetY()+15;
+        }
+
+        $pdf->SetFont('helvetica','B', 10);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY);
+        $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
+        $pdf->Cell(40, 5, 'Total Quantity', 1,1);
+
+        // // Column 2
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(50, $currentY);
+        $pdf->Cell(42, 5,  $total_weight, 1, 'R');
+        $pdf->SetXY(50, $currentY+6.8);
+        $pdf->SetFont('helvetica','', 10);
+
+        $pdf->Cell(42, 5, $total_quantity, 1,'R');
+
+        
+        // Close and output PDF
+        $pdf->Output('TStock Out_'.$tstock_out['prefix'].$tstock_out['Sal_inv_no'].'.pdf', 'I');
     }
 }

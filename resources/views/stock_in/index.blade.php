@@ -40,15 +40,12 @@
                                                     <td>{{$row->qty_sum}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
-                                                    <td class="actions">
-                                                        <!-- <a href="{{ route('print-sale-invoice', $row->Sal_inv_no) }}" class="text-danger">
-                                                            <i class="fas fa-print"></i>
-                                                        </a> -->
-                                                        <!-- <span class="separator"> | </span>
-                                                        <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a> -->
-                                                        <!-- <span class="separator"> | </span> -->
+                                                    <td class="actions"> 
+                                                        
+                                                        <a href="{{ route('show-stock-in-invoice',$row->Sal_inv_no) }}" class="">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <span class="separator"> | </span>
                                                         <a href="{{ route('edit-stock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>

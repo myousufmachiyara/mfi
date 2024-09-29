@@ -181,6 +181,8 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::post('/tbad_dabs/delete', [App\Http\Controllers\TBadDabsController::class, 'destroy'])->name('delete-tbad-dabs');
     Route::post('/tbad_dabs/update', [App\Http\Controllers\TBadDabsController::class, 'update'])->name('update-tbad-dabs');
     Route::get('/tbad_dabs/show/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs');
+    Route::get('/tbad_dabs/tbad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\TBadDabsController::class, 'generatePDF'])->name('print-tbad-dabs-invoice');
+
 
     //tstock in
     Route::get('/tstock_in/all-tstock_in', [App\Http\Controllers\TStockInController::class, 'index'])->name('all-tstock-in');
@@ -222,6 +224,10 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::get('/bad_dabs/edit/{id}', [App\Http\Controllers\BadDabsController::class, 'edit'])->name('edit-bad-dabs-entry');
     Route::post('/bad_dabs/delete', [App\Http\Controllers\BadDabsController::class, 'destroy'])->name('delete-bad-dabs');
     Route::post('/bad_dabs/update', [App\Http\Controllers\BadDabsController::class, 'update'])->name('update-bad-dabs');
+    Route::get('/bad_dabs/show/{id}', [App\Http\Controllers\BadDabsController::class, 'show'])->name('show-bad-dabs');
+    Route::get('/bad_dabs/bad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\BadDabsController::class, 'generatePDF'])->name('print-bad-dabs-invoice');
+
+
 
 
     //stock in
@@ -236,7 +242,7 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('stock-in-delete-att');
     Route::get('/stock_in/viewAtt/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
     Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'show'])->name('show-stock-in-invoice');
-    // Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
+    Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
     // Route::get('/stock_in/downloadPDF/{id}', [App\Http\Controllers\StockInController::class, 'downloadPDF'])->name('download-stock-in-invoice');
 
 
@@ -251,8 +257,8 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::get('/stock_out/download/{id}', [App\Http\Controllers\StockOutController::class, 'downloadAtt'])->name('stock-out-att-download');
     Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOutController::class, 'deleteAtt'])->name('stock-out-att-delete');
     Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
-    // Route::get('/stock_out/saleinvoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-sale-invoice');
-    // Route::get('/stock_out/saleinvoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-sale-invoice');
+    Route::get('/stock_out/stock_out_invoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-stock-out-invoice');
+     Route::get('/stock_out/stock_out_invoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-stock-out-invoice');
     // Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
     // Route::get('/stock_out/saleinvoice/downloadPDF/{id}', [App\Http\Controllers\StockOutController::class, 'downloadPDF'])->name('download-sale-invoice');
 

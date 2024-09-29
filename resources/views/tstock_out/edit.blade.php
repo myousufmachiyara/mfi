@@ -47,13 +47,19 @@
 												<label class="col-form-label" >Gate Pass#</label>
 												<input type="text" name="mill_gate" value="{{$tstock_out->mill_gate}}" placeholder="Gate Pass#" class="form-control">
 											</div>
-                                            <div class="col-6 col-md-2">
+                                            <div class="col-6 col-md-1">
 												<label class="col-form-label" >Transporter</label>
 												<input type="text" name="transporter" value="{{$tstock_out->transporter}}" placeholder="Transporter" class="form-control">
 											</div>
-											<div class="col-6 col-md-1">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Sale Inv#</label>
-												<input type="text" name="pur_inv" placeholder="Sale Inv#" value="{{$tstock_out->pur_inv}}" class="form-control" disabled>
+                                                <label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-pur-inv">Enable</label>
+
+                                                <!-- First Input Field (visible and disabled initially) -->
+												<input type="text" placeholder="Sale Inv#" name="pur_inv" value="{{$tstock_out->pur_inv}}" id="pur-inv" disabled class="form-control">
+												
+												<!-- Hidden Input Field -->
+												<input type="hidden" placeholder="Sale Inv#" class="form-control" value="{{$tstock_out->pur_inv}}" name="hidden_pur_inv" id="hidden-pur-inv">
 											</div>
 											
 											<div class="col-6 col-md-3">
@@ -139,7 +145,7 @@
                                 <footer class="card-footer">
                                     <div class="row form-group mb-2">
                                         <div class="text-end">
-                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-out') }}'"> <i class="fas fa-trash"></i> Discard Entry</button>
+                                            <button type="button" class="btn btn-danger mt-2" onclick="window.location='{{ route('all-tstock-out') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
                                             <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Entry</button>
                                         </div>
                                     </div>
@@ -303,5 +309,24 @@
         $('#total_qty').val(totalqty.toFixed(0));
         $('#total_weight').val(totalweight.toFixed(0));
     }
+
+
+    document.getElementById('edit-pur-inv').addEventListener('click', function () {
+        var inputField = document.getElementById('pur-inv');
+        if (inputField.disabled) {
+            inputField.disabled = false;
+            inputField.focus(); // Focus on the input when enabled
+            this.textContent = "Disable"; // Change the label to "Save" when editing
+        } else {
+            inputField.disabled = true;
+            this.textContent = "Enable"; // Change the label back to "Edit" after saving
+        }
+    });
+
+		 // Update the hidden input field on change of the first input field
+		 document.getElementById('pur-inv').addEventListener('input', function() {
+        var hiddenSaleInvInput = document.getElementById('hidden-pur-inv');
+        hiddenSaleInvInput.value = this.value;  // Update the hidden input with the new value
+    });
 
 </script>

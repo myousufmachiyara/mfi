@@ -35,11 +35,7 @@
                                                     <td>{{$row->add_sum}}</td>
                                                     <td>{{$row->less_sum}}</td>
                                                     <td class="actions">
-                                                        <a href="#" class="text-danger">
-                                                            <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a href="#" class="">
+                                                        <a href="{{ route('show-bad-dabs', $row->bad_dabs_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
