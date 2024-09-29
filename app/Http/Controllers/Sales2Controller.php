@@ -72,6 +72,9 @@ class Sales2Controller extends Controller
         if ($request->has('disp_account_name') && $request->disp_account_name) {
             $pur2->company_name=$request->disp_account_name;
         }
+        if ($request->has('sal_inv_no') && $request->sal_inv_no) {
+            $pur2->pur_against=$request->sal_inv_no;
+        }
         if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
             $pur2->Cash_name=$request->Cash_pur_name;
         }
@@ -90,6 +93,7 @@ class Sales2Controller extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
+
         $pur2->created_by=1;
 
         $pur2->save();
