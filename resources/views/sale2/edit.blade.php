@@ -57,7 +57,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
-												<select data-plugin-selecttwo class="form-control select2-js" required>
+												<select data-plugin-selecttwo class="form-control select2-js" disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->company_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
