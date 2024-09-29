@@ -57,7 +57,7 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
 												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
-												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
+												<select data-plugin-selecttwo class="form-control select2-js" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->company_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -71,8 +71,8 @@
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Purchase Inv. No.</label>
 												<input type="text" placeholder="Purchase Inv. No." value="{{$pur2->pur_against}}"  disabled class="form-control">
-												<input type="hidden" placeholder="Purchase Inv. No." name="sales_against" value="{{$pur2->pur_against}}"  class="form-control">
-
+												<input type="hidden" name="sales_against" value="{{$pur2->pur_against}}"  class="form-control">
+												<input type="hidden" name="disp_account_name" value="{{$pur2->company_name}}"  class="form-control">
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">
