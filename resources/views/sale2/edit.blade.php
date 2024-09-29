@@ -7,7 +7,7 @@
 					<form method="post" action="{{ route('update-sales2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-6 mb-3">								
+							<div class="col-12 col-md-6 mb-3">								
 								<section class="card">
 									<header class="card-header" >
 										<h2 class="card-title">Edit Sale 2 Details</h2>
@@ -47,7 +47,7 @@
 								</section>
 							</div>
 
-							<div class="col-6 mb-3">								
+							<div class="col-12 col-md-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Company Details</h2>
@@ -169,32 +169,32 @@
 									<footer class="card-footer" >
 										<div class="row">
 											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
 													<input type="text" id="convance_charges"  required onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
 													<input type="text" id="labour_charges"  required onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-sm-12 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
@@ -206,9 +206,9 @@
 													</div>
 												</div>
 
-												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-													<span class="d-flex align-items-center justify-content-lg-end">
+												<div class="col-sm-12 col-md-12 pb-sm-3 pb-md-0 text-end">
+													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+													<span>
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 												</div>
