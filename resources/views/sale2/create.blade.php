@@ -77,7 +77,8 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Pur Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sal_inv_no" id="sal_inv_no" disabled class="form-control">
+												<input type="text" placeholder="Sale Inv. No." id="show_sal_inv_no" disabled class="form-control">
+												<input type="hidden" placeholder="Sale Inv. No." name="sal_inv_no" id="sal_inv_no" class="form-control">
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">
@@ -692,6 +693,7 @@
 						$('#disp_account_name').val(24);
 						$('#Cash_pur_name').val(result['pur1']['cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
+						$('#show_sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sal_inv_no']);
 						$('#inducedID').val(result['pur1']['Sal_inv_no']);
 						$('#inducedPrefix').val(result['pur1']['prefix']);
 						$('#cash_pur_address').val(result['pur1']['cash_pur_address']);

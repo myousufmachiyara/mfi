@@ -73,6 +73,9 @@ class Sales2Controller extends Controller
         if ($request->has('disp_account_name') && $request->disp_account_name) {
             $pur2->company_name=$request->disp_account_name;
         }
+        if ($request->has('sal_inv_no') && $request->sal_inv_no) {
+            $pur2->pur_against=$request->sal_inv_no;
+        }
         if ($request->has('Cash_pur_name') && $request->Cash_pur_name) {
             $pur2->Cash_name=$request->Cash_pur_name;
         }
@@ -91,6 +94,7 @@ class Sales2Controller extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
+
         $pur2->created_by=1;
 
         $pur2->save();
@@ -399,10 +403,13 @@ class Sales2Controller extends Controller
     public function showAllPDF($id)
 
     {
-           $purchase = tsales::where('Sal_inv_no',$id)
-        ->join('ac','tsales.account_name','=','ac.ac_code')
+        $purchase = tsales::where('Sal_inv_no', $id)
+        ->leftJoin('ac as account', 'account.ac_code', '=', 'tsales.account_name')
+        ->leftJoin('ac as company', 'company.ac_code', '=', 'tsales.company_name')
+        ->select('tsales.*', 'account.ac_name as ac_name', 'company.ac_name as company_name')
         ->first();
 
+        
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
                 ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
                 ->select('tsales_2.*','item_entry2.item_name')
@@ -459,13 +466,13 @@ class Sales2Controller extends Controller
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D" >Address </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['address'].'</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_Pur_address'].'</td>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Company Name</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['company_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['phone_no'].'</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_phone'].'</td>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Purchase Invoice#</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['pur_against'].'</td>';
         $html .= '</tr>';
