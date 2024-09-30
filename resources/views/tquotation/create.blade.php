@@ -225,14 +225,9 @@
 				</section>
 			</div>
 		</section>
-       
-		 
+    
 		<script>
-
-				
-
 			var index=2;
-			var itemCount = Number($('#itemCount').val());
 
 			$(document).ready(function() {
 				$(window).keydown(function(event){
@@ -241,12 +236,7 @@
 						return false;
 					}
 				});
-
-				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
-				toggleInputs();
 			});
-
-
 
 			function removeRow(button) {
 				console.log("before remove");
