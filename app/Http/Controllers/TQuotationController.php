@@ -352,7 +352,7 @@ public function edit($id)
     }
     
     public function getavailablestock($id) {
-        $result = gd_pipe_item_stock9_much::where('it_cod', $id)->select('opp_bal')->first();
+        $result = gd_pipe_item_stock9_much::where('it_cod', $id)->select('opp_bal')->get();
         return $result;
     }
     
