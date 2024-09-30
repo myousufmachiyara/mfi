@@ -403,8 +403,8 @@ class Sales2Controller extends Controller
     public function showAllPDF($id)
 
     {
-           $purchase = tsales::where('Sal_inv_no',$id)
-        ->join('ac','tsales.account_name','=','ac.ac_code')
+        $purchase = tsales::where('Sal_inv_no',$id)
+        ->join('ac','ac.ac_code','=','tsales.account_name')
         ->first();
 
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
