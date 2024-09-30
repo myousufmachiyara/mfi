@@ -360,7 +360,7 @@
 					type: "GET",
 					url: "/tquotation/getavailablestock/"+item_id,
 					success: function(result){
-						console.log("hello");
+						console.log(result);
 						$('#stock'+row_no).val(result['opp_bal']);
 					},
 					error: function(){
