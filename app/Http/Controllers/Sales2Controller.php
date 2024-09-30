@@ -403,11 +403,11 @@ class Sales2Controller extends Controller
     public function showAllPDF($id)
 
     {
-        $purchase = tsales::where('Sal_inv_no',$id)
-        ->leftjoin('ac as ac','ac.ac_code','=','tsales.account_name')
-        ->leftjoin('ac as comp','comp.ac_code','=','tsales.company_name')
-        ->select('tsales.*','ac.ac_name as ac_name ','comp.ac_name as company_name')
-        ->get();
+        $purchase = tsales::where('Sal_inv_no', $id)
+        ->leftJoin('ac as account', 'account.ac_code', '=', 'tsales.account_name')
+        ->leftJoin('ac as company', 'company.ac_code', '=', 'tsales.company_name')
+        ->select('tsales.*', 'account.ac_name as ac_name', 'company.ac_name as company_name')
+        ->first();
 
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
                 ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
