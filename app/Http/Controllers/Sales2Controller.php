@@ -404,8 +404,8 @@ class Sales2Controller extends Controller
 
     {
         $purchase = tsales::where('Sal_inv_no',$id)
-        ->join('ac','ac.ac_code','=','tsales.account_name')
-        ->join('ac as comp','comp.ac_code','=','tsales.company_name')
+        ->leftjoin('ac','ac.ac_code','=','tsales.account_name')
+        ->leftjoin('ac as comp','comp.ac_code','=','tsales.company_name')
         ->select('tsales.*','ac.ac_name as ac_name ','comp.ac_name as company_name')
         ->first();
 
