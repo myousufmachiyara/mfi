@@ -406,10 +406,10 @@ class Sales2Controller extends Controller
         $purchase = tsales::where('Sal_inv_no', $id)
         ->leftJoin('ac as account', 'account.ac_code', '=', 'tsales.account_name')
         ->leftJoin('ac as company', 'company.ac_code', '=', 'tsales.company_name')
-        ->select('tsales.*', 'account.ac_name as ac_name', 'company.ac_name as company_name')
+        ->select('tsales.*', 'account.ac_name as ac_name', 'account.address as ac_add' , 'account.phone_no as ac_phone_no' ,'company.ac_name as company_name')
         ->first();
 
-        
+
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
                 ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
                 ->select('tsales_2.*','item_entry2.item_name')
@@ -466,13 +466,13 @@ class Sales2Controller extends Controller
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D" >Address </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_Pur_address'].'</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_add'].'</td>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Company Name</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['company_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['cash_phone'].'</td>';
+        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_phone_no'].'</td>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Purchase Invoice#</td>';
         $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['pur_against'].'</td>';
         $html .= '</tr>';
