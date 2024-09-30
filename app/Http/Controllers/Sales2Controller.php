@@ -435,7 +435,7 @@ class Sales2Controller extends Controller
 
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Invoice</h1>';
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Invoice</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
@@ -596,7 +596,7 @@ class Sales2Controller extends Controller
         $pdf->SetFont('helvetica','', 10);
         
         // Close and output PDF
-        $pdf->Output('Purchase Invoice_'.$purchase['prefix'].$purchase['Sal_inv_no'].'.pdf', 'I');
+        $pdf->Output('Sale Invoice_'.$purchase['prefix'].$purchase['Sal_inv_no'].'.pdf', 'I');
     }
     
     //{
