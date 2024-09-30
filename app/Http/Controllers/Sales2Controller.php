@@ -409,6 +409,7 @@ class Sales2Controller extends Controller
         ->select('tsales.*', 'account.ac_name as ac_name', 'company.ac_name as company_name')
         ->first();
 
+        
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
                 ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
                 ->select('tsales_2.*','item_entry2.item_name')
