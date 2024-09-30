@@ -336,7 +336,7 @@
 						$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
 						$('#weight_per_piece'+row_no).val(result[0]['weight']);
 						$('#weight_per_piece'+row_no+'').trigger('change');
-						// getavailablestock(result[0]['it_cod'],row_no);
+						getavailablestock(result[0]['it_cod'],row_no);
 						addNewRow();
 					},
 					error: function(){
@@ -370,6 +370,7 @@
 					type: "GET",
 					url: "/tquotation/getavailablestock/"+item_id,
 					success: function(result){
+						console.log("hello");
 						$('#stock'+row_no).val(result['opp_bal']);
 					},
 					error: function(){
