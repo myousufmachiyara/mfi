@@ -407,7 +407,7 @@ class Sales2Controller extends Controller
         ->leftjoin('ac as ac','ac.ac_code','=','tsales.account_name')
         ->leftjoin('ac as comp','comp.ac_code','=','tsales.company_name')
         ->select('tsales.*','ac.ac_name as ac_name ','comp.ac_name as company_name')
-        ->first();
+        ->get();
 
         $purchase_items = tsales_2::where('sales_inv_cod',$id)
                 ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
