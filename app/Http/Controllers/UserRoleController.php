@@ -54,10 +54,10 @@ class UserRoleController extends Controller
             $role_access->view = $request->has("view.$i") ? ($request["view"][$i] === "on" ? 1 : 0) : 0;
             $role_access->edit = $request->has("update.$i") ? ($request["update"][$i] === "on" ? 1 : 0) : 0;
             $role_access->delete = $request->has("delete.$i") ? ($request["delete"][$i] === "on" ? 1 : 0) : 0;
-            $role_access->att = $request->has("att.$i") ? ($request["att"][$i] === "on" ? 1 : 0) : 0;
+            $role_access->att_add = $request->has("att_add.$i") ? ($request["att_add"][$i] === "on" ? 1 : 0) : 0;
+            $role_access->att_delete = $request->has("att_delete.$i") ? ($request["att_delete"][$i] === "on" ? 1 : 0) : 0;
             $role_access->print = $request->has("print.$i") ? ($request["print"][$i] === "on" ? 1 : 0) : 0;
             $role_access->report = $request->has("report.$i") ? ($request["report"][$i] === "on" ? 1 : 0) : 0;
-
             $role_access->save();
         }
 
@@ -101,7 +101,8 @@ class UserRoleController extends Controller
             $role_access->view = $request->has("view.$i") ? ($request["view"][$i] === "on" ? 1 : 0) : 0;
             $role_access->edit = $request->has("update.$i") ? ($request["update"][$i] === "on" ? 1 : 0) : 0;
             $role_access->delete = $request->has("delete.$i") ? ($request["delete"][$i] === "on" ? 1 : 0) : 0;
-            $role_access->att = $request->has("att.$i") ? ($request["att"][$i] === "on" ? 1 : 0) : 0;
+            $role_access->att_add = $request->has("att_add.$i") ? ($request["att_add"][$i] === "on" ? 1 : 0) : 0;
+            $role_access->att_delete = $request->has("att_delete.$i") ? ($request["att_delete"][$i] === "on" ? 1 : 0) : 0;
             $role_access->print = $request->has("print.$i") ? ($request["print"][$i] === "on" ? 1 : 0) : 0;
             $role_access->report = $request->has("report.$i") ? ($request["report"][$i] === "on" ? 1 : 0) : 0;
             $role_access->save();

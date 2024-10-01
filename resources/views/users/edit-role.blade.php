@@ -45,7 +45,8 @@
 													<th>View</th>
 													<th>Update</th>
 													<th>Delete</th>
-													<th>Attachements</th>
+													<th>Att. Add</th>
+													<th>Att. Delete</th>
 													<th>Print</th>
 													<th>Report</th>
 												</tr>
@@ -58,7 +59,8 @@
                                                         <td><input type="checkbox" name="view[{{$row->module_id}}]"   {{ $row->view == 1 ? 'checked' : '' }}></td>
                                                         <td><input type="checkbox" name="update[{{$row->module_id}}]" {{ $row->edit == 1 ? 'checked' : '' }}></td>
                                                         <td><input type="checkbox" name="delete[{{$row->module_id}}]" {{ $row->delete == 1 ? 'checked' : '' }}></td>
-														<td><input type="checkbox" name="att[{{$row->module_id}}]" {{ $row->att == 1 ? 'checked' : '' }}></td>
+														<td><input type="checkbox" name="att_add[{{$row->module_id}}]" {{ $row->att_add == 1 ? 'checked' : '' }}></td>
+														<td><input type="checkbox" name="att_delete[{{$row->module_id}}]" {{ $row->att_delete == 1 ? 'checked' : '' }}></td>
                                                         <td><input type="checkbox" name="print[{{$row->module_id}}]" {{ $row->print == 1 ? 'checked' : '' }}></td>
 														<td><input type="checkbox" name="report[{{$row->module_id}}]" {{ $row->report == 1 ? 'checked' : '' }}></td>
                                                     </tr>

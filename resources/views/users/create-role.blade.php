@@ -44,7 +44,8 @@
 													<th>View</th>
 													<th>Update</th>
 													<th>Delete</th>
-													<th>Attachements</th>
+													<th>Att. Add</th>
+													<th>Att. Delete</th>
 													<th>Print</th>
 													<th>Report</th>
 												</tr>
@@ -57,7 +58,8 @@
                                                         <td><input type="checkbox" name="view[{{$row->id}}]"></td>
                                                         <td><input type="checkbox" name="update[{{$row->id}}]"></td>
                                                         <td><input type="checkbox" name="delete[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="att[{{$row->id}}]"></td>
+														<td><input type="checkbox" name="att_add[{{$row->id}}]"></td>
+														<td><input type="checkbox" name="att_delete[{{$row->id}}]"></td>
                                                         <td><input type="checkbox" name="print[{{$row->id}}]"></td>
 														<td><input type="checkbox" name="report[{{$row->id}}]"></td>
                                                     </tr>
