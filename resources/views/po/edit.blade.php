@@ -59,9 +59,13 @@
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_saler_address" value="{{$pur->cash_saler_address}}" class="form-control">
 											</div>
-											<div class="col-12 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea">{{$pur->pur_remarks}}</textarea>
+											</div>	
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">{{$pur->tc}}</textarea>
 											</div>	
 									  </div>
 									</div>

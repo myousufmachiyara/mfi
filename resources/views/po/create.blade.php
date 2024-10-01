@@ -58,9 +58,24 @@
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_saler_address" class="form-control">
 											</div>
-											<div class="col-12 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="pur_remarks" id="pur_remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
+											</div>	
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">
+* Prices are fixed unless otherwise agreed.
+* Payment is due within [mutually agreed upon] days from the invoice date. 
+* Delivery dates are estimates. Supplier must notify of delays.
+* Title and risk pass to the purchaser upon delivery.
+* Purchaser may inspect goods upon delivery and reject defective or non-conforming items.
+* Purchaser may cancel the PO in writing before shipment.
+* Returns are subject to supplier’s policy and require pre-approval
+* Supplier warrants goods/services to be defect-free 
+* Supplier is liable for direct damages from defective goods/services; no liability for indirect or consequential damages.
+* Both parties will keep proprietary information confidential.
+* These terms are governed by the laws of Islamic Republic of Pakistan</textarea>
 											</div>	
 									  </div>
 									</div>
@@ -140,11 +155,6 @@
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 													<input type="hidden" id="total_quantity_show" name="total_quantity" placeholder="Total Quantity" class="form-control">
 												</div>
-
-												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">GST</label>
-													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
-												</div> -->
 
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
