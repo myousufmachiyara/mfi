@@ -361,7 +361,7 @@
 					type: "GET",
 					url: "/tpo/getavailablestock/"+item_id,
 					success: function(result){
-						$('#stock'+row_no).val(result['opp_bal']);
+						$('#stock'+row_no).val(result[0]['opp_bal']);
 					},
 					error: function(){
 						alert("error");

@@ -95,8 +95,7 @@ class Sales2Controller extends Controller
             $pur2->Bill_discount=$request->Bill_discount;
         }
 
-        $pur2->created_by=1;
-
+        $pur2->created_by = session('user_id');
         $pur2->save();
 
         $pur_2_id = tsales::latest()->first();
@@ -237,10 +236,7 @@ class Sales2Controller extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount OR $request->Bill_discount==0) {
             $pur2->Bill_discount=$request->Bill_discount;
         }
-        $pur2->created_by=1;
 
-        
-        
         tsales::where('Sal_inv_no', $request->pur2_id)->update([
             'sa_date'=>$pur2->sa_date,
             'pur_ord_no'=>$pur2->pur_ord_no,
@@ -253,7 +249,7 @@ class Sales2Controller extends Controller
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
-            'created_by' => $pur2->created_by,
+            'updated_by' => session('user_id'),
         ]);
 
         tsales_2::where('sales_inv_cod', $request->pur2_id)->delete();
@@ -313,7 +309,10 @@ class Sales2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        tsales::where('Sal_inv_no', $request->delete_purc2)->update(['status' => '0']);
+        tsales::where('Sal_inv_no', $request->delete_purc2)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-sale2invoices');
     }
 

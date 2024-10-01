@@ -45,7 +45,10 @@ class TStockInController extends Controller
 
     public function destroy(Request $request)
     {
-        $tstock_in = tstock_in::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $tstock_in = tstock_in::where('Sal_inv_no', $request->invoice_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-tstock-in');
     }
 
@@ -59,11 +62,8 @@ class TStockInController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         $tstock_in = new tstock_in();
 
-
-        // $tstock_in->Sal_inv_no;
         if ($request->has('date') && $request->date) {
             $tstock_in->sa_date=$request->date;
         }
@@ -92,8 +92,7 @@ class TStockInController extends Controller
         if ($request->has('account_name') && $request->account_name) {
             $tstock_in->account_name=$request->account_name;
         }
-
-        $tstock_in->created_by=$userId;
+        $tstock_in->created_by = session('user_id');
         $tstock_in->status=1;
 
         $tstock_in->save();
@@ -214,7 +213,7 @@ class TStockInController extends Controller
             'transporter'=>$tstock_in->transporter,
             'account_name'=>$tstock_in->account_name,
             'item_type'=>$tstock_in->item_type,
-    
+            'updated_by' => session('user_id'),
         ]);
         
         tstock_in_2::where('sales_inv_cod', $request->invoice_no)->delete();

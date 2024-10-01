@@ -41,7 +41,10 @@ class StockInController extends Controller
 
     public function destroy(Request $request)
     {
-        $stock_in = stock_in::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $stock_in = stock_in::where('Sal_inv_no', $request->invoice_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-stock-in');
     }
 
@@ -55,9 +58,7 @@ class StockInController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         $stock_in = new stock_in();
-
 
         // $stock_in->Sal_inv_no;
         if ($request->has('date') && $request->date) {
@@ -78,7 +79,7 @@ class StockInController extends Controller
             $stock_in->account_name=$request->account_name;
         }
 
-        $stock_in->created_by=$userId;
+        $stock_in->created_by = session('user_id');
         $stock_in->status=1;
 
         $stock_in->save();
@@ -171,6 +172,7 @@ class StockInController extends Controller
             'cash_Pur_address'=>$stock_in->cash_Pur_address,
             'Cash_pur_name'=>$stock_in->Cash_pur_name,
             'account_name'=>$stock_in->account_name,
+            'updated_by' => session('user_id'),
         ]);
         
         stock_in_2::where('sales_inv_cod', $request->invoice_no)->delete();

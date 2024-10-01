@@ -58,6 +58,7 @@ class JV2Controller extends Controller
         }
 
         $lager0 = new lager0();
+        $lager0->created_by = session('user_id');
 
         if ($request->has('jv_date') && $request->jv_date) {
             $lager0->jv_date=$request->jv_date;
@@ -107,13 +108,13 @@ class JV2Controller extends Controller
                 if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
                 {
                     $sales_ageing = new sales_ageing();
-
+                    $sales_ageing->created_by = session('user_id');
                     $sales_ageing->jv2_id=$latest_jv2['jv_no'];
+                    $sales_ageing->created_by = session('user_id');
                     $sales_ageing->amount=$request->rec_amount[$j];
                     $sales_ageing->sales_id=$request->invoice_nos[$j];
                     $sales_ageing->sales_prefix=$request->prefix[$j];
                     $sales_ageing->acc_name=$request->customer_name;
-                    $sales_ageing->created_by=1;
                     $sales_ageing->save();
                 }
                 
@@ -127,13 +128,12 @@ class JV2Controller extends Controller
                 if($request->pur_rec_amount[$k]>0 && $request->pur_rec_amount[$k]!==null)
                 {
                     $pur_ageing = new purchase_ageing();
-
+                    $pur_ageing->created_by = session('user_id');
                     $pur_ageing->jv2_id=$latest_jv2['jv_no'];
                     $pur_ageing->amount=$request->pur_rec_amount[$k];
                     $pur_ageing->sales_id=$request->pur_invoice_nos[$k];
                     $pur_ageing->sales_prefix=$request->pur_prefix[$k];
                     $pur_ageing->acc_name=$request->customer_name;
-                    $pur_ageing->created_by=1;
                     $pur_ageing->save();
                 }
                 
@@ -186,6 +186,7 @@ class JV2Controller extends Controller
         lager0::where('jv_no', $request->jv_no)->update([
             'jv_date'=>$lager0->jv_date,
             'narration'=>$lager0->narration,
+            'updated_by' => session('user_id'),
         ]);
 
         $lager = lager::where('auto_lager', $request->jv_no)->delete();
@@ -237,7 +238,10 @@ class JV2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        $lager0 = lager0::where('jv_no', $request->delete_jv_no)->update(['status' => '0']);
+        $lager0 = lager0::where('jv_no', $request->delete_jv_no)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-jv2');
     }
 

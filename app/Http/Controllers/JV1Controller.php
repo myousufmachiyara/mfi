@@ -58,6 +58,7 @@ class JV1Controller extends Controller
         }
 
         $jv1 = new jvsingel();
+        $jv1->created_by = session('user_id');
 
         if ($request->has('ac_dr_sid') && $request->ac_dr_sid) {
             $jv1->ac_dr_sid=$request->ac_dr_sid;
@@ -127,6 +128,7 @@ class JV1Controller extends Controller
             'amount'=>$jv1->amount,
             'date'=>$jv1->date,
             'remarks'=>$jv1->remarks,
+            'updated_by' => session('user_id'),
         ]);
 
         if($request->hasFile('update_att')){
@@ -148,7 +150,10 @@ class JV1Controller extends Controller
 
     public function destroy(Request $request)
     {
-        $jv1 = jvsingel::where('auto_lager', $request->delete_auto_lager)->update(['status' => '0']);
+        $jv1 = jvsingel::where('auto_lager', $request->delete_auto_lager)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-jv1');
     }
 

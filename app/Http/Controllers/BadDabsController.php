@@ -47,7 +47,6 @@ class BadDabsController extends Controller
 
     public function store(Request $request)
     {
-        $userId = 1;
         $bad_dabs = new bad_dabs();
     
         if ($request->has('date') && $request->date) {
@@ -56,8 +55,7 @@ class BadDabsController extends Controller
         if ($request->has('reason') && $request->reason) {
             $bad_dabs->reason = $request->reason; 
         }
-    
-        $bad_dabs->created_by = $userId;
+        $bad_dabs->created_by = session('user_id');
         $bad_dabs->status = 1;
     
         $bad_dabs->save();
@@ -93,7 +91,10 @@ class BadDabsController extends Controller
 
     public function destroy(Request $request)
     {
-        $bad_dabs = bad_dabs::where('bad_dabs_id', $request->delete_bad_dabs_id)->update(['status' => '0']);
+        $bad_dabs = bad_dabs::where('bad_dabs_id', $request->delete_bad_dabs_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-bad-dabs');
     }
 
@@ -127,6 +128,7 @@ class BadDabsController extends Controller
         bad_dabs::where('bad_dabs_id', $request->bad_dabs_id)->update([
             'reason'=>$bad_dabs->reason,
             'date'=>$bad_dabs->date,
+            'updated_by' => session('user_id'),
         ]);
         
         bad_dabs_2::where('bad_dabs_cod', $request->bad_dabs_id)->delete();

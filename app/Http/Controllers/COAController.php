@@ -52,7 +52,6 @@ class COAController extends Controller
         $acc = new AC();
 
         $acc->created_by = session('user_id');
-        $acc->updated_by = 0;
 
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
@@ -96,6 +95,7 @@ class COAController extends Controller
             foreach ($files as $file)
             {
                 $acc_att = new ac_att();
+                $acc_att->created_by = session('user_id');                
                 $acc_att->ac_code = $latest_acc['ac_code'];
                 $extension = $file->getClientOriginalExtension();
                 $acc_att->att_path = $this->coaDoc($file,$extension);

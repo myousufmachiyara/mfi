@@ -225,14 +225,9 @@
 				</section>
 			</div>
 		</section>
-       
-		 
+    
 		<script>
-
-				
-
 			var index=2;
-			var itemCount = Number($('#itemCount').val());
 
 			$(document).ready(function() {
 				$(window).keydown(function(event){
@@ -241,12 +236,7 @@
 						return false;
 					}
 				});
-
-				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
-				toggleInputs();
 			});
-
-
 
 			function removeRow(button) {
 				console.log("before remove");
@@ -336,7 +326,7 @@
 						$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
 						$('#weight_per_piece'+row_no).val(result[0]['weight']);
 						$('#weight_per_piece'+row_no+'').trigger('change');
-						// getavailablestock(result[0]['it_cod'],row_no);
+						getavailablestock(result[0]['it_cod'],row_no);
 						addNewRow();
 					},
 					error: function(){
@@ -370,7 +360,7 @@
 					type: "GET",
 					url: "/tquotation/getavailablestock/"+item_id,
 					success: function(result){
-						$('#stock'+row_no).val(result['opp_bal']);
+						$('#stock'+row_no).val(result[0]['opp_bal']);
 					},
 					error: function(){
 						alert("error");

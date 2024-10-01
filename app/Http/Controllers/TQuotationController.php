@@ -93,6 +93,8 @@ class TquotationController extends Controller
             $quot2->Bill_discount=$request->Bill_discount;
         }
 
+        $quot2->created_by = session('user_id');
+
         $quot2->save();
 
         $pur_2_id = tquotation::latest()->first();
@@ -213,6 +215,7 @@ public function edit($id)
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
+            'updated_by' => session('user_id'),
         ]);
 
         tquotation_2::where('sales_inv_cod', $request->pur2_id)->delete();
@@ -275,7 +278,10 @@ public function edit($id)
 
     public function destroy(Request $request)
     {
-        tquotation::where('Sale_inv_no', $request->delete_quot2)->update(['status' => '0']);
+        tquotation::where('Sale_inv_no', $request->delete_quot2)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-tquotation');
     }
 
@@ -352,7 +358,7 @@ public function edit($id)
     }
     
     public function getavailablestock($id) {
-        $result = gd_pipe_item_stock9_much::where('it_cod', $id)->select('opp_bal')->first();
+        $result = gd_pipe_item_stock9_much::where('it_cod', $id)->select('opp_bal')->get();
         return $result;
     }
     

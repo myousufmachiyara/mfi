@@ -58,6 +58,7 @@ class Purchase2Controller extends Controller
     {
         
         $pur2 = new tpurchase();
+        $pur2->created_by = session('user_id');
 
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
@@ -261,6 +262,7 @@ class Purchase2Controller extends Controller
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
+            'updated_by' => session('user_id'),
         ]);
 
         tpurchase_2::where('sales_inv_cod', $request->pur2_id)->delete();
@@ -393,7 +395,10 @@ class Purchase2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        tpurchase::where('Sale_inv_no', $request->delete_purc2)->update(['status' => '0']);
+        tpurchase::where('Sale_inv_no', $request->delete_purc2)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-purchases2');
     }
 
