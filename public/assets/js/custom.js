@@ -1,10 +1,14 @@
 /* Add here all your JS customizations */
 
-document.getElementsByClassName('cust-textarea')[0].addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.stopPropagation(); // Prevents the Enter key from propagating to other elements
-    }
+
+document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
+    textarea.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.stopPropagation(); // Prevents the Enter key from propagating to other elements
+        }
+    });
 });
+
 
 
 function convertCurrencyToWords(number) {

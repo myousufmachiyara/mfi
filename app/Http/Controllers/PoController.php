@@ -26,13 +26,13 @@ class PoController extends Controller
         ->join('ac', 'ac.ac_code', '=', 'po.ac_cod')
         ->select(
             'po.pur_id','po.pur_date','po.cash_saler_name','po.pur_remarks','ac.ac_name',
-            'pur_bill_no', 'po.pur_convance_char', 'po.pur_labor_char','po.pur_discount','po.prefix',
+            'pur_bill_no', 'po.pur_convance_char', 'po.pur_labor_char','po.pur_discount','po.prefix','po.tc',
             'po.sale_against',
             \DB::raw('SUM(po_2.pur_qty) as weight_sum'),
             \DB::raw('SUM(po_2.pur_qty*po_2.pur_price) as total_bill'),
         )
         ->groupby('po.pur_id','po.pur_date','po.cash_saler_name','po.pur_remarks','ac.ac_name',
-        'pur_bill_no','po.pur_convance_char', 'po.sale_against', 'po.pur_labor_char','po.pur_discount','po.prefix')
+        'pur_bill_no','po.pur_convance_char', 'po.sale_against', 'po.pur_labor_char','po.pur_discount','po.prefix','po.tc')
         ->get();
         
         return view('po.index',compact('pur1'));
@@ -71,6 +71,9 @@ class PoController extends Controller
         }
         if ($request->has('pur_remarks') && $request->pur_remarks) {
             $pur1->pur_remarks=$request->pur_remarks;
+        }
+        if ($request->has('tc') && $request->tc) {
+            $pur1->tc=$request->tc;
         }
         if ($request->has('pur_convance_char') && $request->pur_convance_char) {
             $pur1->pur_convance_char=$request->pur_convance_char;
@@ -165,6 +168,9 @@ class PoController extends Controller
         if ($request->has('pur_remarks') && $request->pur_remarks OR empty($request->pur_remarks) ) {
             $pur1->pur_remarks=$request->pur_remarks;
         }
+        if ($request->has('tc') && $request->tc OR empty($request->tc) ) {
+            $pur1->tc=$request->tc;
+        }
         if ($request->has('pur_convance_char') && $request->pur_convance_char OR $request->pur_convance_char==0) {
             $pur1->pur_convance_char=$request->pur_convance_char;
         }
@@ -184,6 +190,7 @@ class PoController extends Controller
             'cash_saler_name'=>$pur1->cash_saler_name,
             'cash_saler_address'=>$pur1->cash_saler_address,
             'pur_remarks'=>$pur1->pur_remarks,
+            'tc'=>$pur1->tc,
             'pur_convance_char'=>$pur1->pur_convance_char,
             'pur_labor_char'=>$pur1->pur_labor_char,
             'pur_discount'=>$pur1->pur_discount,
