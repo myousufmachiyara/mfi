@@ -48,7 +48,7 @@
 												<input type="text" placeholder="Pur Inv. No." name="sal_inv_no" disabled class="form-control">
 											</div>
 
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-3 mb-2">
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_Pur_address" class="form-control">
 											
@@ -58,14 +58,25 @@
 												
 											</div>
 
-											<div class="col-12 col-md-8 mb-12">
+											<div class="col-6 col-md-4 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea">
-* All of these rates are at 20% tax as accommodated by laws of GOP.
-* This is not a sales tax invoice and no additional taxes should/will be adjusted in this amount.
-* All of these rates are tentative and subjected to change without any prior notice.
-* Customers aren’t allowed to deduct any additional with holding tax from this amount while paying for the order.</textarea>
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>
+											<div class="col-6 col-md-5 mb-12">
+												<label class="col-form-label">Terms And Conditions</label>
+											<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">
+* Prices are fixed unless otherwise agreed.
+* Payment is due within [mutually agreed upon] days from the invoice date. 
+* Delivery dates are estimates. Supplier must notify of delays.
+* Title and risk pass to the purchaser upon delivery.
+* Purchaser may inspect goods upon delivery and reject defective or non-conforming items.
+* Purchaser may cancel the PO in writing before shipment.
+* Returns are subject to supplier’s policy and require pre-approval
+* Supplier warrants goods/services to be defect-free 
+* Supplier is liable for direct damages from defective goods/services; no liability for indirect or consequential damages.
+* Both parties will keep proprietary information confidential.
+* These terms are governed by the laws of Islamic Republic of Pakistan</textarea>
+											</div>	
 									  </div>
 									</div>
 						

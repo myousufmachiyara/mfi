@@ -58,25 +58,32 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-2 mb-2">
 												<label class="col-form-label" >Name of Person</label>
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
 											</div>
 											
 
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-2 mb-2">
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_Pur_address" value="{{$pur2->cash_Pur_address}}" class="form-control">
 											</div>
 
-											<div class="col-8 mb-12">
-												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
-											</div>	
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
+
+											<div class="col-6 mb-12">
+												<label class="col-form-label">Remarks</label>
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
+											</div>	
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">{{$pur2->tc}}</textarea>
+											</div>  
+											
 									  </div>
 									</div>
 									

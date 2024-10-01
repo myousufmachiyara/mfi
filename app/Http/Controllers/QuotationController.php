@@ -30,12 +30,12 @@ class QuotationController extends Controller
         ->join('ac','quotation.account_name','=','ac.ac_code')
         ->select(
             'quotation.Sal_inv_no','quotation.sa_date','quotation.Cash_pur_name','quotation.Sales_remarks','ac.ac_name',
-            'quotation.pur_ord_no', 'quotation.ConvanceCharges', 'quotation.LaborCharges','quotation.Bill_discount', 'quotation.po', 'quotation.prefix',
+            'quotation.pur_ord_no', 'quotation.ConvanceCharges', 'quotation.LaborCharges','quotation.Bill_discount', 'quotation.po', 'quotation.prefix', 'quotation.tc',
             \DB::raw('SUM(quotation_2.Sales_qty) as weight_sum'),
             \DB::raw('SUM(quotation_2.Sales_qty*quotation_2.sales_price) as total_bill'),
         )
         ->groupby('quotation.Sal_inv_no','quotation.sa_date','quotation.Cash_pur_name','quotation.Sales_remarks','ac.ac_name',
-        'quotation.pur_ord_no', 'quotation.ConvanceCharges', 'quotation.LaborCharges','quotation.Bill_discount','quotation.po','quotation.prefix' )
+        'quotation.pur_ord_no', 'quotation.ConvanceCharges', 'quotation.LaborCharges','quotation.Bill_discount','quotation.po','quotation.prefix', 'quotation.tc' )
         ->get();
 
         return view('quotation.index',compact('sales'));
@@ -62,6 +62,9 @@ class QuotationController extends Controller
         }
         if ($request->has('remarks') && $request->remarks) {
             $sales->Sales_remarks=$request->remarks;
+        }
+        if ($request->has('tc') && $request->tc) {
+            $sales->tc=$request->tc;
         }
         if ($request->has('labour_charges') && $request->labour_charges) {
             $sales->LaborCharges=$request->labour_charges;
@@ -171,6 +174,9 @@ class QuotationController extends Controller
         if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $sale1->Sales_remarks=$request->remarks;
         }
+        if ($request->has('tc') && $request->tc OR empty($request->tc)) {
+            $sale1->tc=$request->tc;
+        }
         if ($request->has('labour_charges') && $request->labour_charges OR $request->labour_charges==0) {
             $sale1->LaborCharges=$request->labour_charges;
         }
@@ -209,6 +215,7 @@ class QuotationController extends Controller
             'ConvanceCharges'=>$sale1->ConvanceCharges,
             'LaborCharges'=>$sale1->LaborCharges,
             'Sales_remarks'=>$sale1->Sales_remarks,
+            'tc'=>$sale1->tc,
             'sa_date'=>$sale1->sa_date,
             'pur_ord_no'=>$sale1->pur_ord_no,
             'updated_by' => session('user_id'),

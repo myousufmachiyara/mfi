@@ -44,7 +44,7 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
                                                     <td>{{$row->Cash_pur_name}}</td>
-                                                    <td>{{$row->Sales_Remarks}}</td>
+                                                    <td class="limited-text">{{$row->Sales_Remarks}}</td>
                                                     <td>{{$row->sales_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>

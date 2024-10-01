@@ -45,7 +45,7 @@
                                                     <td>{{$row->po}}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->Cash_pur_name}}</td>
-                                                    <td>{{$row->Sales_remarks}}</td>
+                                                    <td class="limited-text">{{$row->Sales_remarks}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>

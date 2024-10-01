@@ -68,10 +68,24 @@
 												<input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Person Phone Number" class="form-control">
 											</div>
 
-											<div class="col-12 mb-3">
+											<div class="col-6 mb-3">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
 											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">
+* This Quotation is valid for 2 days from the date issued. After this period, a new quotation may be required.
+* The quotation includes only the services/products explicitly stated. Any additional services/products will be subject to further discussion and agreement.
+* Prices quoted are subject to change based on market shift, making this quotation void without any notice. All prices are exclusive of applicable taxes unless stated otherwise.(No additional taxes will be deducted from this amount)
+* Payment terms will be outlined in the final agreement. A deposit of mutually agreed percentage may be required upon acceptance of the quotation.
+* Delivery dates provided are estimates and may be subject to change based on circumstances beyond our control.
+* Cancellations must be made in writing. Fees may apply depending on the stage of the project and incurred costs.
+* We are not liable for any indirect, incidental, or consequential damages arising from the services/products provided.
+* Both parties agree to maintain confidentiality regarding any proprietary information exchanged during the quotation process.
+* These terms shall be governed by the laws of Islamic Republic of Pakistan.</textarea>
+											</div>	
 									  </div>
 									</div>
 							
