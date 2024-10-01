@@ -21,7 +21,14 @@ body {
 	margin: 0;
 	font-size: 13px;
 }
-
+.limited-text {
+	max-height: 4em; /* Adjust for number of lines */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3; /* Number of lines to show */
+  }
 a {
 	color: #CCC;
 	text-decoration: none;

@@ -48,7 +48,7 @@
                                                     <td>{{$row->pur_ord_no}}</td>
                                                     <td>{{$row->disp_to}}</td>
                                                     <td>{{$row->Cash_pur_name}}</td>
-                                                    <td class="two-line-ellipsis">{{$row->Sales_Remarks}}</td>
+                                                    <td class="limited-text">{{$row->Sales_Remarks}}</td>
                                                     <td>{{$row->sales_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
