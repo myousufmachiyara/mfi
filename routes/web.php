@@ -48,6 +48,41 @@
         Route::get('/tstock_out/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'show'])->name('show-tstock-out-invoice');
         Route::get('/bad_dabs/show/{id}', [App\Http\Controllers\BadDabsController::class, 'show'])->name('show-bad-dabs');
         Route::get('/stock_out/stock_out_invoice/view/{id}', [App\Http\Controllers\StockOutController::class, 'show'])->name('show-stock-out-invoice');
+        Route::get('/coa/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
+        Route::get('/coa/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
+        Route::get('/vouchers/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
+        Route::get('/vouchers/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
+        Route::post('/coa/downloadAll', [App\Http\Controllers\COAController::class, 'downloadAllAtt'])->name('coa-att-download-all');
+        Route::get('/vouchers2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
+        Route::get('/vouchers2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
+        Route::get('/purchase1/view/{id}', [App\Http\Controllers\PurchaseController::class, 'view'])->name('show-purchases1-att');
+        Route::get('/purchase1/download/{id}', [App\Http\Controllers\PurchaseController::class, 'downloadAtt'])->name('purc1-att-download');
+        Route::get('/purchase2/view/{id}', [App\Http\Controllers\Purchase2Controller::class, 'view'])->name('show-purchases2-att');
+        Route::get('/purchase2/download/{id}', [App\Http\Controllers\Purchase2Controller::class, 'downloadAtt'])->name('purc2-att-download');
+        Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'view'])->name('show-sales2-att');
+        Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sales2-att-download');
+        Route::get('/sales/download/{id}', [App\Http\Controllers\SalesController::class, 'downloadAtt'])->name('sale1-att-download');
+        Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
+        Route::get('/po/view/{id}', [App\Http\Controllers\PoController::class, 'view'])->name('show-po-att');
+        Route::get('/po/download/{id}', [App\Http\Controllers\PoController::class, 'downloadAtt'])->name('po-att-download');
+        Route::get('/tpo/view/{id}', [App\Http\Controllers\TpoController::class, 'view'])->name('show-tpo-att');
+        Route::get('/tpo/download/{id}', [App\Http\Controllers\TpoController::class, 'downloadAtt'])->name('tpo-att-download');
+        Route::get('/quotation/download/{id}', [App\Http\Controllers\QuotationController::class, 'downloadAtt'])->name('quotation-att-download');
+        Route::get('/quotation/view/{id}', [App\Http\Controllers\QuotationController::class, 'view'])->name('show-quotation-att');
+        Route::get('/tstock_in/download/{id}', [App\Http\Controllers\TStockInController::class, 'downloadAtt'])->name('tstock-in-att-download');
+        Route::get('/tstock_in/view/{id}', [App\Http\Controllers\TStockInController::class, 'view'])->name('show-tstock-in-att'); 
+        Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('tstock-out-att-download');
+        Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-tstock-out-att');
+        Route::get('/stock_in/download/{id}', [App\Http\Controllers\StockInController::class, 'downloadAtt'])->name('stock-in-att-download');
+        Route::get('/stock_in/viewAtt/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
+        Route::get('/stock_out/download/{id}', [App\Http\Controllers\StockOutController::class, 'downloadAtt'])->name('stock-out-att-download');
+        Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
+        Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
+        Route::get('/tquotation/download/{id}', [App\Http\Controllers\TQuotationController::class, 'downloadAtt'])->name('tquotation-att-download');
+        Route::post('/complains/downloadAll', [App\Http\Controllers\ComplainsController::class, 'downloadAllAtt'])->name('complains-att-download-all');
+        Route::get('/complains/download/{id}', [App\Http\Controllers\ComplainsController::class, 'downloadAtt'])->name('complains-att-download');
+        Route::get('/complains/view/{id}', [App\Http\Controllers\ComplainsController::class, 'view'])->name('complains-att-view');
+
     });
 
     Route::middleware(['checkPermission:add'])->group(function () {
@@ -148,6 +183,7 @@
         Route::post('/sales2/update', [App\Http\Controllers\Sales2Controller::class, 'update'])->name('update-sales2');
         Route::get('/tbad_dabs/edit/{id}', [App\Http\Controllers\TBadDabsController::class, 'edit'])->name('edit-tbad-dabs-entry');
         Route::get('/tstock_in/edit/{id}', [App\Http\Controllers\TStockInController::class, 'edit'])->name('edit-tstock-in-invoice');
+        Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-tstock-in-invoice');
     });
 
     Route::middleware(['checkPermission:delete'])->group(function () {
@@ -176,77 +212,27 @@
         Route::post('/tstock_out/delete', [App\Http\Controllers\TStockOutController::class, 'destroy'])->name('delete-tstock-out-invoice');
     });
 
-    Route::middleware(['checkPermission:att'])->group(function () {
+    Route::middleware(['checkPermission:att_add'])->group(function () {
+       
+    });
 
-        Route::get('/user/attachements', [App\Http\Controllers\UsersController::class, 'getAttachements'])->name('get-user-att');
-        Route::get('/coa/attachements', [App\Http\Controllers\COAController::class, 'getAttachements'])->name('get-acc-att');
-        Route::get('/coa/download/{id}', [App\Http\Controllers\COAController::class, 'downloadAtt'])->name('coa-att-download');
-        Route::get('/coa/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
+    Route::middleware(['checkPermission:att_delete'])->group(function () {
         Route::delete('/coa/deleteAtt/{id}', [App\Http\Controllers\COAController::class, 'deleteAtt'])->name('coa-att-delete');
-        Route::post('/coa/downloadAll', [App\Http\Controllers\COAController::class, 'downloadAllAtt'])->name('coa-att-download-all');
-        Route::get('/vouchers/attachements', [App\Http\Controllers\JV1Controller::class, 'getAttachements'])->name('get-jv1-att');
-        Route::get('/vouchers/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
-        Route::get('/vouchers/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
         Route::delete('/vouchers/deleteAttachment/{id}', [App\Http\Controllers\JV1Controller::class, 'deleteAtt'])->name('jv1-att-delete');
-        Route::get('/vouchers2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
-        Route::get('/vouchers2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
-        Route::get('/vouchers2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
-        Route::delete('/vouchers2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
-        Route::get('/purchase1/view/{id}', [App\Http\Controllers\PurchaseController::class, 'view'])->name('show-purchases1-att');
-        Route::get('/purchase1/attachements', [App\Http\Controllers\PurchaseController::class, 'getAttachements'])->name('get-purc1-att');
-        Route::get('/purchase1/download/{id}', [App\Http\Controllers\PurchaseController::class, 'downloadAtt'])->name('purc1-att-download');
         Route::delete('/purchase1/deleteAttachment/{id}', [App\Http\Controllers\PurchaseController::class, 'deleteAtt'])->name('purc1-att-delete');
-        Route::get('/purchase2/view/{id}', [App\Http\Controllers\Purchase2Controller::class, 'view'])->name('show-purchases2-att');
-        Route::get('/purchase2/attachements', [App\Http\Controllers\Purchase2Controller::class, 'getAttachements'])->name('get-purc2-att');
-        Route::get('/purchase2/download/{id}', [App\Http\Controllers\Purchase2Controller::class, 'downloadAtt'])->name('purc2-att-download');
-        Route::delete('/purchase2/deleteAttachment/{id}', [App\Http\Controllers\Purchase2Controller::class, 'deleteAtt'])->name('purc2-att-delete');
-        Route::get('/sales2/view/{id}', [App\Http\Controllers\Sales2Controller::class, 'view'])->name('show-sales2-att');
-        Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sales2-att');
-        Route::get('/sales2/download/{id}', [App\Http\Controllers\Sales2Controller::class, 'downloadAtt'])->name('sales2-att-download');
-        Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sales2-att-delete');
-        Route::get('/sales/attachements', [App\Http\Controllers\SalesController::class, 'getAttachements'])->name('get-sale1-att');
-        Route::get('/sales/download/{id}', [App\Http\Controllers\SalesController::class, 'downloadAtt'])->name('sale1-att-download');
-        Route::delete('/sales/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
-        Route::get('/sales/view/{id}', [App\Http\Controllers\SalesController::class, 'view'])->name('show-sale1-att');
-        Route::get('/po/view/{id}', [App\Http\Controllers\PoController::class, 'view'])->name('show-po-att');
-        Route::get('/po/attachements', [App\Http\Controllers\PoController::class, 'getAttachements'])->name('get-po-att');
-        Route::get('/po/download/{id}', [App\Http\Controllers\PoController::class, 'downloadAtt'])->name('po-att-download');
-        Route::delete('/po/deleteAttachment/{id}', [App\Http\Controllers\PoController::class, 'deleteAtt'])->name('po-att-delete');
-        Route::get('/tpo/view/{id}', [App\Http\Controllers\TpoController::class, 'view'])->name('show-tpo-att');
-        Route::get('/tpo/attachements', [App\Http\Controllers\TpoController::class, 'getAttachements'])->name('get-tpo-att');
-        Route::get('/tpo/download/{id}', [App\Http\Controllers\TpoController::class, 'downloadAtt'])->name('tpo-att-download');
-        Route::delete('/tpo/deleteAttachment/{id}', [App\Http\Controllers\TpoController::class, 'deleteAtt'])->name('tpo-att-delete');
-        Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
-        Route::get('/quotation/download/{id}', [App\Http\Controllers\QuotationController::class, 'downloadAtt'])->name('quotation-att-download');
-        Route::delete('/quotation/deleteAttachment/{id}', [App\Http\Controllers\QuotationController::class, 'deleteAtt'])->name('quotation-att-delete');
-        Route::get('/quotation/view/{id}', [App\Http\Controllers\QuotationController::class, 'view'])->name('show-quotation-att');
-        Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-tstock-in-invoice');
-        Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
-        Route::get('/tstock_in/download/{id}', [App\Http\Controllers\TStockInController::class, 'downloadAtt'])->name('tstock-in-att-download');
-        Route::delete('/tstock_in/deleteAttachment/{id}', [App\Http\Controllers\TStockInController::class, 'deleteAtt'])->name('sale1-tstock-in-delete');
-        Route::get('/tstock_in/view/{id}', [App\Http\Controllers\TStockInController::class, 'view'])->name('show-tstock-in-att'); 
-        Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-tstock-out-att');
-        Route::get('/tstock_out/download/{id}', [App\Http\Controllers\TStockOutController::class, 'downloadAtt'])->name('tstock-out-att-download');
-        Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
-        Route::get('/tstock_out/view/{id}', [App\Http\Controllers\TStockOutController::class, 'view'])->name('show-tstock-out-att');
-        Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
-        Route::get('/stock_in/download/{id}', [App\Http\Controllers\StockInController::class, 'downloadAtt'])->name('stock-in-att-download');
-        Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('stock-in-delete-att');
-        Route::get('/stock_in/viewAtt/{id}', [App\Http\Controllers\StockInController::class, 'view'])->name('show-stock-in-att'); 
-        Route::get('/stock_out/attachements', [App\Http\Controllers\StockOutController::class, 'getAttachements'])->name('get-stock-out-att');
-        Route::get('/stock_out/download/{id}', [App\Http\Controllers\StockOutController::class, 'downloadAtt'])->name('stock-out-att-download');
-        Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOutController::class, 'deleteAtt'])->name('stock-out-att-delete');
-        Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
-        Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
-        Route::get('/tquotation/attachements', [App\Http\Controllers\TQuotationController::class, 'getAttachements'])->name('get-tquotation-att');
-        Route::get('/tquotation/download/{id}', [App\Http\Controllers\TQuotationController::class, 'downloadAtt'])->name('tquotation-att-download');
-        Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TQuotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
-        Route::get('/complains/attachements', [App\Http\Controllers\ComplainsController::class, 'getAttachements'])->name('get-complains-att');
-        Route::post('/complains/downloadAll', [App\Http\Controllers\ComplainsController::class, 'downloadAllAtt'])->name('complains-att-download-all');
-        Route::get('/complains/download/{id}', [App\Http\Controllers\ComplainsController::class, 'downloadAtt'])->name('complains-att-download');
-        Route::get('/complains/view/{id}', [App\Http\Controllers\ComplainsController::class, 'view'])->name('complains-att-view');
         Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\ComplainsController::class, 'deleteAtt'])->name('complains-att-delete');
-      
+        Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TQuotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
+        Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOutController::class, 'deleteAtt'])->name('stock-out-att-delete');
+        Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('stock-in-delete-att');
+        Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
+        Route::delete('/tstock_in/deleteAttachment/{id}', [App\Http\Controllers\TStockInController::class, 'deleteAtt'])->name('sale1-tstock-in-delete');
+        Route::delete('/quotation/deleteAttachment/{id}', [App\Http\Controllers\QuotationController::class, 'deleteAtt'])->name('quotation-att-delete');
+        Route::delete('/tpo/deleteAttachment/{id}', [App\Http\Controllers\TpoController::class, 'deleteAtt'])->name('tpo-att-delete');
+        Route::delete('/po/deleteAttachment/{id}', [App\Http\Controllers\PoController::class, 'deleteAtt'])->name('po-att-delete');
+        Route::delete('/sales/deleteAttachment/{id}', [App\Http\Controllers\SalesController::class, 'deleteAtt'])->name('sale1-att-delete');
+        Route::delete('/sales2/deleteAttachment/{id}', [App\Http\Controllers\Sales2Controller::class, 'deleteAtt'])->name('sales2-att-delete');
+        Route::delete('/purchase2/deleteAttachment/{id}', [App\Http\Controllers\Purchase2Controller::class, 'deleteAtt'])->name('purc2-att-delete');
+        Route::delete('/vouchers2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
     });
 
     Route::middleware(['checkPermission:report'])->group(function () {
@@ -303,7 +289,24 @@
         Route::post('/items/new-item/validate', [App\Http\Controllers\ItemsController::class, 'validation'])->name('validate-item');
         Route::post('/item2/new-item/validate', [App\Http\Controllers\Item2Controller::class, 'validation'])->name('validate-item-2');
         Route::post('/coa/acc/validate', [App\Http\Controllers\COAController::class, 'validation'])->name('validate-acc');
- 
+        Route::get('/user/attachements', [App\Http\Controllers\UsersController::class, 'getAttachements'])->name('get-user-att');
+        Route::get('/coa/attachements', [App\Http\Controllers\COAController::class, 'getAttachements'])->name('get-acc-att');
+        Route::get('/vouchers/attachements', [App\Http\Controllers\JV1Controller::class, 'getAttachements'])->name('get-jv1-att');
+        Route::get('/complains/attachements', [App\Http\Controllers\ComplainsController::class, 'getAttachements'])->name('get-complains-att');
+        Route::get('/tquotation/attachements', [App\Http\Controllers\TQuotationController::class, 'getAttachements'])->name('get-tquotation-att');
+        Route::get('/stock_out/attachements', [App\Http\Controllers\StockOutController::class, 'getAttachements'])->name('get-stock-out-att');
+        Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
+        Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-tstock-out-att');
+        Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
+        Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
+        Route::get('/tpo/attachements', [App\Http\Controllers\TpoController::class, 'getAttachements'])->name('get-tpo-att');
+        Route::get('/po/attachements', [App\Http\Controllers\PoController::class, 'getAttachements'])->name('get-po-att');
+        Route::get('/sales/attachements', [App\Http\Controllers\SalesController::class, 'getAttachements'])->name('get-sale1-att');
+        Route::get('/sales2/attachements', [App\Http\Controllers\Sales2Controller::class, 'getAttachements'])->name('get-sales2-att');
+        Route::get('/purchase2/attachements', [App\Http\Controllers\Purchase2Controller::class, 'getAttachements'])->name('get-purc2-att');
+        Route::get('/vouchers2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
+        Route::get('/purchase1/attachements', [App\Http\Controllers\PurchaseController::class, 'getAttachements'])->name('get-purc1-att');
+
         Route::get('/unauthorized', function () {
             return view('unauthorized');
         })->name('unauthorized');
