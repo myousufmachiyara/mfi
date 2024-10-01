@@ -139,12 +139,8 @@
 													<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
 														Terms And Conditions:&nbsp
 													</span><br><br>
-													
-													<span style="font-weight:400;color:rgb(224, 8, 8)" class="value">{{$pur->tc}}</span>
+													<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
 												</h2>
-												
-
-
 											</div>
 										</div>
 									</div>

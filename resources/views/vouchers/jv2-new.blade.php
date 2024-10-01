@@ -314,12 +314,14 @@
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" ><i class="fas fa-times"></i></button>';
-			index++;
 
 			itemCount = Number($('#itemCount').val());
+			$('#account_cod'+index).select2();
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
-			$('#myTable select[data-plugin-selecttwo]').select2();
+			
+			index++;
+
 		}
 	}
 
