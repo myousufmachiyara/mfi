@@ -44,7 +44,10 @@ class TStockOutController extends Controller
 
     public function destroy(Request $request)
     {
-        $tstock_out = tstock_out::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $tstock_out = tstock_out::where('Sal_inv_no', $request->invoice_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-tstock-out');
     }
 
@@ -55,15 +58,10 @@ class TStockOutController extends Controller
         return view('tstock_out.create',compact('items','coa'));
     }
 
-
-
     public function store(Request $request)
     {
-        $userId=1;
         $tstock_out = new tstock_out();
 
-
-        // $tstock_out->Sal_inv_no;
         if ($request->has('date') && $request->date) {
             $tstock_out->sa_date=$request->date;
         }
@@ -93,7 +91,7 @@ class TStockOutController extends Controller
             $tstock_out->account_name=$request->account_name;
         }
 
-        $tstock_out->created_by=$userId;
+        $tstock_out->created_by = session('user_id');
         $tstock_out->status=1;
 
         $tstock_out->save();
@@ -135,15 +133,15 @@ class TStockOutController extends Controller
     }
 
     public function show(string $id)
-    
     {
         $tstock_out = tstock_out::where('Sal_inv_no',$id)
-                        ->join('ac','tstock_out.account_name','=','ac.ac_code')
-                        ->first();
+        ->join('ac','tstock_out.account_name','=','ac.ac_code')
+        ->first();
 
         $tstock_out_items = tstock_out_2::where('sales_inv_cod',$id)
-                        ->join('item_entry2','tstock_out_2.item_cod','=','item_entry2.it_cod')
-                        ->get();
+        ->join('item_entry2','tstock_out_2.item_cod','=','item_entry2.it_cod')
+        ->get();
+
         return view('tstock_out.view',compact('tstock_out','tstock_out_items'));
     }
 
@@ -199,7 +197,7 @@ class TStockOutController extends Controller
             'transporter'=>$tstock_out->transporter,
             'account_name'=>$tstock_out->account_name,
             'item_type'=>$tstock_out->item_type,
-    
+            'updated_by' => session('user_id'),
         ]);
         
         tstock_out_2::where('sales_inv_cod', $request->invoice_no)->delete();

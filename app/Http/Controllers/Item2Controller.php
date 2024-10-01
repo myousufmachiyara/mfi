@@ -52,7 +52,6 @@ class Item2Controller extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
 
         if($request->has('items'))
         {
@@ -75,7 +74,7 @@ class Item2Controller extends Controller
                     $Item_entry2->stock_level=$request->item_stock_level[$i];
                     $Item_entry2->labourprice=$request->item_l_price[$i];
                     $Item_entry2->status=1;
-                    $Item_entry2->created_by=$userId;
+                    $Item_entry2->created_by=session('user_id');
 
                     $Item_entry2->save();
                 }
@@ -146,6 +145,7 @@ class Item2Controller extends Controller
             'opp_date'=>$item->opp_date,
             'stock_level'=>$item->stock_level,
             'labourprice'=>$item->labourprice,
+            'updated_by' => session('user_id'),
         ]);
         
         return redirect()->route('all-items-2');

@@ -51,7 +51,6 @@ class QuotationController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         $sales = new quotation();
 
         // $sales->Sal_inv_no;
@@ -95,7 +94,7 @@ class QuotationController extends Controller
             $sales->sed_sal=$request->totalAmount;
         }
 
-        $sales->created_by=$userId;
+        $sales->created_by = session('user_id');
         $sales->status=1;
 
         $sales->save();
@@ -212,6 +211,7 @@ class QuotationController extends Controller
             'Sales_remarks'=>$sale1->Sales_remarks,
             'sa_date'=>$sale1->sa_date,
             'pur_ord_no'=>$sale1->pur_ord_no,
+            'updated_by' => session('user_id'),
         ]);
         
         quotation_2::where('sales_inv_cod', $request->invoice_no)->delete();
@@ -254,7 +254,10 @@ class QuotationController extends Controller
 
     public function destroy(Request $request)
     {
-        $sales = quotation::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $sales = quotation::where('Sal_inv_no', $request->invoice_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-quotation');
     }
 

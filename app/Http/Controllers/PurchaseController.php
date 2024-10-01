@@ -51,6 +51,7 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         $pur1 = new purchase();
+        $pur1->created_by = session('user_id');
 
         if ($request->has('pur_date') && $request->pur_date) {
             $pur1->pur_date=$request->pur_date;
@@ -176,8 +177,6 @@ class PurchaseController extends Controller
             $pur1->pur_discount=$request->bill_discount;
         }
 
-   
-
         purchase::where('pur_id', $request->pur_id)->update([
             'pur_date'=>$pur1->pur_date,
             'pur_bill_no'=>$pur1->pur_bill_no,
@@ -189,6 +188,7 @@ class PurchaseController extends Controller
             'pur_convance_char'=>$pur1->pur_convance_char,
             'pur_labor_char'=>$pur1->pur_labor_char,
             'pur_discount'=>$pur1->pur_discount,
+            'updated_by' => session('user_id'),
         ]);
 
         purchase_2::where('pur_cod', $request->pur_id)->delete();
@@ -238,7 +238,10 @@ class PurchaseController extends Controller
 
     public function destroy(Request $request)
     {
-        $purc1 = purchase::where('pur_id', $request->delete_purc1)->update(['status' => '0']);
+        $purc1 = purchase::where('pur_id', $request->delete_purc1)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-purchases1');
     }
 

@@ -82,7 +82,7 @@ class TpoController extends Controller
         if ($request->has('Bill_discount') && $request->Bill_discount) {
             $tpo2->Bill_discount=$request->Bill_discount;
         }
-
+        $tpo2->created_by = session('user_id');
         $tpo2->save();
 
         $pur_2_id = tpo::latest()->first();
@@ -198,6 +198,7 @@ public function edit($id)
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
+            'updated_by' => session('user_id'),
         ]);
 
         tpo_2::where('sales_inv_cod', $request->pur2_id)->delete();
@@ -265,7 +266,10 @@ public function edit($id)
 
     public function destroy(Request $request)
     {
-        tpo::where('Sale_inv_no', $request->delete_tpo2)->update(['status' => '0']);
+        tpo::where('Sale_inv_no', $request->delete_tpo2)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-tpo');
     }
 

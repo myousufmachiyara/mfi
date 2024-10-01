@@ -48,7 +48,6 @@ class TBadDabsController extends Controller
 
     public function store(Request $request)
     {
-        $userId = 1;
         $tbad_dabs = new TBadDabs();
     
         if ($request->has('date') && $request->date) {
@@ -62,7 +61,7 @@ class TBadDabsController extends Controller
             $tbad_dabs->item_type = $request->item_type; 
         }
     
-        $tbad_dabs->created_by = $userId;
+        $tbad_dabs->created_by = session('user_id');
         $tbad_dabs->status = 1;
     
         $tbad_dabs->save();
@@ -98,7 +97,11 @@ class TBadDabsController extends Controller
 
     public function destroy(Request $request)
     {
-        $tbad_dabs = TBadDabs::where('bad_dabs_id', $request->delete_tbad_dabs_id)->update(['status' => '0']);
+        $tbad_dabs = TBadDabs::where('bad_dabs_id', $request->delete_tbad_dabs_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
+
         return redirect()->route('all-tbad-dabs');
     }
 
@@ -136,6 +139,7 @@ class TBadDabsController extends Controller
             'reason'=>$tbad_dabs->reason,
             'date'=>$tbad_dabs->date,
             'item_type'=>$tbad_dabs->item_type,
+            'updated_by' => session('user_id'),
         ]);
         
         TBadDabs2::where('bad_dabs_cod', $request->bad_dabs_id)->delete();

@@ -42,7 +42,6 @@ class ItemsController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         if($request->has('items'))
         {
             for($i=0;$i<$request->items;$i++)
@@ -63,7 +62,7 @@ class ItemsController extends Controller
                     $item_entry->stock_level=$request->item_stock_level[$i];
                     $item_entry->labourprice=$request->item_l_price[$i];
                     $item_entry->status=1;
-                    $item_entry->created_by=$userId;
+                    $item_entry->created_by=session('user_id');
 
                     $item_entry->save();
                 }
@@ -75,7 +74,10 @@ class ItemsController extends Controller
 
     public function destroy(Request $request)
     {
-        $item_groups = Item_entry::where('it_cod', $request->item_id)->update(['status' => '0']);
+        $item_groups = Item_entry::where('it_cod', $request->item_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-items');
     }
 
@@ -131,6 +133,7 @@ class ItemsController extends Controller
             'opp_date'=>$item->opp_date,
             'stock_level'=>$item->stock_level,
             'labourprice'=>$item->labourprice,
+            'updated_by' => session('user_id'),
         ]);
         
         return redirect()->route('all-items');

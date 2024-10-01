@@ -92,6 +92,7 @@ class UsersController extends Controller
                 'picture' => $this->att_path,
                 'cnic_front' => $this->cnic_front_path,
                 'cnic_back' => $this->cnic_back_path,
+                'created_by' => session('user_id')
             ]);
 
             $user_id=users::latest()->select('id')->first()->id;
@@ -99,6 +100,7 @@ class UsersController extends Controller
             $user_role= user_roles::create([
                 'user_id' => $user_id,
                 'role_id' => $request->role_id,
+                'created_by ' => session('user_id'),
             ]);
 
             return redirect()->route('all-users')->with('success', 'User created successfully.');
@@ -181,10 +183,12 @@ class UsersController extends Controller
             'picture'=>$user->picture,
             'cnic_front'=>$user->cnic_front,
             'cnic_back'=>$user->cnic_back,
+            'updated_by' => session('user_id'),
         ]);
 
         user_roles::where('user_id', $request->update_user_id)->update([
             'role_id' => $request->update_role,
+            'updated_by' => session('user_id'),
         ]);
 
         return redirect()->route('all-users')->with('success', 'User updated successfully.');
@@ -264,13 +268,19 @@ class UsersController extends Controller
 
     public function deactivateUser(Request $request)
     {
-        users::where('id', $request->deactivate_user)->update(['status' => '0']);
+        users::where('id', $request->deactivate_user)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-users');
     }
 
     public function activateUser(Request $request)
     {
-        users::where('id', $request->activate_user)->update(['status' => '1']);
+        users::where('id', $request->activate_user)->update([
+            'status' => '1',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-users');
     }
 

@@ -49,6 +49,7 @@ class PoController extends Controller
     public function store(Request $request)
     {
         $pur1 = new po();
+        $pur1->created_by = session('user_id');
 
         if ($request->has('pur_date') && $request->pur_date) {
             $pur1->pur_date=$request->pur_date;
@@ -186,6 +187,7 @@ class PoController extends Controller
             'pur_convance_char'=>$pur1->pur_convance_char,
             'pur_labor_char'=>$pur1->pur_labor_char,
             'pur_discount'=>$pur1->pur_discount,
+            'updated_by' => session('user_id'),
         ]);
 
         po_2::where('pur_cod', $request->pur_id)->delete();
@@ -235,7 +237,10 @@ class PoController extends Controller
 
     public function destroy(Request $request)
     {
-        $purc1 = po::where('pur_id', $request->delete_purc1)->update(['status' => '0']);
+        $purc1 = po::where('pur_id', $request->delete_purc1)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-po');
     }
 

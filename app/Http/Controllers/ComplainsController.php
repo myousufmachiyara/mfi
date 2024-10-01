@@ -46,6 +46,7 @@ class ComplainsController extends Controller
     public function store(Request $request)
     {
         $complains = new complains();
+        $complains->created_by = session('user_id');
 
         if ($request->has('inv_dat') && $request->inv_date) {
             $complains->complains=$request->complains;
@@ -104,7 +105,10 @@ class ComplainsController extends Controller
 
     public function destroy(Request $request)
     {
-        $complains = complains::where('id', $request->complain_id)->update(['status' => '0']);
+        $complains = complains::where('id', $request->complain_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-complains');
     }
 
@@ -113,6 +117,7 @@ class ComplainsController extends Controller
         
         // Find the existing complain
         $complains = complains::where('id', $request->update_id)->get()->first();
+        $complains->updated_by  = session('user_id');
 
         // Update fields if present
         if ($request->has('update_inv_dat') OR empty($request->update_inv_dat)) {

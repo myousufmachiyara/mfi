@@ -42,7 +42,10 @@ class StockOutController extends Controller
 
     public function destroy(Request $request)
     {
-        $stock_out = stock_out::where('Sal_inv_no', $request->invoice_id)->update(['status' => '0']);
+        $stock_out = stock_out::where('Sal_inv_no', $request->invoice_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-stock-out');
     }
 
@@ -56,9 +59,7 @@ class StockOutController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         $stock_out = new stock_out();
-
 
         // $stock_out->Sal_inv_no;
         if ($request->has('date') && $request->date) {
@@ -79,7 +80,7 @@ class StockOutController extends Controller
             $stock_out->account_name=$request->account_name;
         }
 
-        $stock_out->created_by=$userId;
+        $stock_out->created_by = session('user_id');
         $stock_out->status=1;
 
         $stock_out->save();
@@ -174,6 +175,8 @@ class StockOutController extends Controller
             'cash_Pur_address'=>$stock_out->cash_Pur_address,
             'Cash_pur_name'=>$stock_out->Cash_pur_name,
             'account_name'=>$stock_out->account_name,
+            'updated_by' => session('user_id'),
+
         ]);
         
         stock_out_2::where('sales_inv_cod', $request->invoice_no)->delete();

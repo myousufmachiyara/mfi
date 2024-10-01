@@ -36,6 +36,7 @@ class UserRoleController extends Controller
         $roles = new roles();
         $roles->name = $request->role_name;
         $roles->shortcode = $request->shortcode ?? null; // Use null if shortcode is not present
+        $roles->created_by = session('user_id');
         $roles->save();
 
         // Retrieve the newly created role ID
@@ -44,6 +45,7 @@ class UserRoleController extends Controller
         // Loop through the modules and create role access
         for ($i = 1; $i <= $request->modules_count; $i++) {
             $role_access = new role_access();
+            $role_access->created_by = session('user_id');
             $role_access->module_id = $request->module[$i];
             $role_access->role_id = $role_id;
 
@@ -81,6 +83,7 @@ class UserRoleController extends Controller
         roles::where('id', $request->role_id)->update([
             'name'=> $request->role_name,
             'shortcode'=> $request->shortcode,
+            'updated_by' => session('user_id'),
         ]);
 
 
@@ -89,6 +92,7 @@ class UserRoleController extends Controller
         // Loop through the modules and create role access
         for ($i = 1; $i <= $request->modules_count; $i++) {
             $role_access = new role_access();
+            $role_access->created_by = session('user_id');
             $role_access->module_id = $request->module[$i];
             $role_access->role_id = $role_id;
 
