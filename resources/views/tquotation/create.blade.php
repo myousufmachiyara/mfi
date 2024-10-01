@@ -55,32 +55,37 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-2 mb-2">
 												<label class="col-form-label" >Name of Person</label>
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" class="form-control">
 											</div>
 
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-2 mb-2">
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_Pur_address" class="form-control">
 											</div>
-
-											<div class="col-12 col-md-8 mb-12">
-												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea">
-* All of these rates are at 20% tax as accommodated by laws of GOP.
-* This is not a sales tax invoice and no additional taxes should/will be adjusted in this amount.
-* All of these rates are tentative and subjected to change without any prior notice.
-* Customers aren’t allowed to deduct any additional with holding tax from this amount while paying for the order.</textarea>
-											</div>
-											
-
-
-											
-											
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+
+											<div class="col-12 col-md-6 mb-12">
+												<label class="col-form-label">Remarks</label>
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">
+* This Quotation is valid for 2 days from the date issued. After this period, a new quotation may be required.
+* The quotation includes only the services/products explicitly stated. Any additional services/products will be subject to further discussion and agreement.
+* Prices quoted are subject to change based on market shift, making this quotation void without any notice. All prices are exclusive of applicable taxes unless stated otherwise.(No additional taxes will be deducted from this amount)
+* Payment terms will be outlined in the final agreement. A deposit of mutually agreed percentage may be required upon acceptance of the quotation.
+* Delivery dates provided are estimates and may be subject to change based on circumstances beyond our control.
+* Cancellations must be made in writing. Fees may apply depending on the stage of the project and incurred costs.
+* We are not liable for any indirect, incidental, or consequential damages arising from the services/products provided.
+* Both parties agree to maintain confidentiality regarding any proprietary information exchanged during the quotation process.
+* These terms shall be governed by the laws of Islamic Republic of Pakistan.</textarea>
 											</div>
 									  </div>
 									</div>

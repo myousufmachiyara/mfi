@@ -73,9 +73,14 @@
 
 											</div>
 
-											<div class="col-12 mb-3">
+											<div class="col-6 mb-3">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$sales->Sales_remarks}}</textarea>
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">{{$sales->tc}}</textarea>
 											</div>
 									  </div>
 									</div>

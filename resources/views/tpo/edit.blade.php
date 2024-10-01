@@ -53,17 +53,21 @@
 											
 											
 
-											<div class="col-sm-3 col-md-4 mb-2">
+											<div class="col-sm-3 col-md-3 mb-2">
 												<label class="col-form-label" >Person Address</label>
 												<input type="text" placeholder="Person Address" name="cash_Pur_address" value="{{$pur2->cash_Pur_address}}" class="form-control">
 	
 													<label class="col-form-label">Attachements</label>
 													<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 												</div>
-											<div class="col-12 col-md-8 mb-12">
+											<div class="col-12 col-md-4 mb-12">
 												<label class="col-form-label">Remarks</label>
 												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>
+											<div class="col-12 col-md-5 mb-12">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">{{$pur2->tc}}</textarea>
+											</div>	
 									  </div>
 									</div>
 									
