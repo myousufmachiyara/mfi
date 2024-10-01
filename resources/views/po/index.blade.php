@@ -43,7 +43,7 @@
                                                     <td>{{ \Carbon\Carbon::parse($row->pur_date)->format('d-m-y') }}</td>
                                                     <td><strong>{{$row->ac_name}}</strong></td>
                                                     <td>{{$row->cash_saler_name}}</td>
-                                                    <td>{{$row->pur_remarks}}</td>
+                                                    <td class="limited-text">{{$row->pur_remarks}}</td>
                                                     <td>{{$row->sale_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
