@@ -136,10 +136,10 @@
 												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 												<br>
 												<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span class="mb-3" style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
-														Terms And Conditions:
-													</span>
-													<span style="font-weight:400;color:rgb(224, 8, 8)" class="value">{{ htmlspecialchars($pur->tc) }}</span>
+													<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+														Terms And Conditions:&nbsp
+													</span><br><br>
+													<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
 												</h2>
 											</div>
 										</div>
