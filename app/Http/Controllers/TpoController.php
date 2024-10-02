@@ -446,6 +446,7 @@ public function edit($id)
         $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Len</th>';
         $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">%</th>';
         $html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
+        $html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Ship To</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -476,6 +477,8 @@ public function edit($id)
             $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
             $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
             $total_amount += $amount;
+
+            $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $items['dispatch_to'] . '</td>';
 
             $html .= '</tr>';
             $count++;
