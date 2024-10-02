@@ -354,8 +354,8 @@ class COAController extends Controller
     {
         $coa_id=$request->att_id;
 
-        if($request->hasFile('att')){
-            $files = $request->file('att');
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
             foreach ($files as $file)
             {
                 $acc_att = new ac_att();
