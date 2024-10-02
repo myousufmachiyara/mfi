@@ -421,14 +421,14 @@
                             </div> 
                             <div class="col-lg-6 mb-2">
                                 <label>Mac Address</label>
-                                <input type="text" class="form-control" placeholder="password" name="user_device_password" required>
+                                <input type="text" class="form-control" placeholder="Mac Address" name="user_device_password" required>
                             </div>
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Change Details</button>
+                                <button type="submit" class="btn btn-primary">Add Device</button>
                                 <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
