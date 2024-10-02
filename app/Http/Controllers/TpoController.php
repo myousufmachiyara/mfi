@@ -414,15 +414,7 @@ public function edit($id)
         $html .= '</table>';
 
         // $pdf->writeHTML($html, true, false, true, false, '');
-// Group the items by dispatch_to
-$grouped_items = [];
-foreach ($purchase_items as $item) {
-    $dispatch_to = $item['dispatch_to'];
-    if (!isset($grouped_items[$dispatch_to])) {
-        $grouped_items[$dispatch_to] = [];
-    }
-    $grouped_items[$dispatch_to][] = $item;
-}
+
         $html .= '<table border="0.1px" style="border-collapse: collapse;">';
         $html .= '<tr>';
         $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Account Name </td>';
@@ -463,7 +455,15 @@ foreach ($purchase_items as $item) {
         $total_quantity = 0;
         $total_amount = 0;
         
-        
+        // Group the items by dispatch_to
+        $grouped_items = [];
+        foreach ($purchase_items as $item) {
+            $dispatch_to = $item['dispatch_to'];
+            if (!isset($grouped_items[$dispatch_to])) {
+                $grouped_items[$dispatch_to] = [];
+            }
+            $grouped_items[$dispatch_to][] = $item;
+        }
         
         foreach ($grouped_items as $dispatch_to => $items_group) {
             $html .= '<h4>Dispatch To: ' . $dispatch_to . '</h4>';
@@ -498,9 +498,9 @@ foreach ($purchase_items as $item) {
             
             // Display the totals for the group
             $html .= '<tr>';
-            $html .= '<td colspan="3" style="text-align:right;font-weight:bold">Total for ' . $dispatch_to . ':</td>';
+            $html .= '<td colspan="3" style="text-align:right;font-weight:bold">Sub Total===>>:</td>';
             $html .= '<td style="text-align:center">' . $group_total_quantity . '</td>';
-            $html .= '<td colspan="4" style="text-align:right;font-weight:bold">Total Amount: ' . $group_total_amount . '</td>';
+            $html .= '<td colspan="4" style="text-align:right;font-weight:bold">' . $group_total_amount . '</td>';
             $html .= '</tr>';
             
             // Add the group totals to the overall totals
