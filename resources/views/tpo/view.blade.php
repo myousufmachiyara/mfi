@@ -212,7 +212,7 @@
 								</div>
 
 								<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-po') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+								<a onclick="window.location='{{ route('all-tpo') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
 								</div>
 
