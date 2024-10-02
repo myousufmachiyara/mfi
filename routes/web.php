@@ -248,7 +248,7 @@
         Route::get('/vouchers/print/{id}', [App\Http\Controllers\JV1Controller::class, 'print'])->name('print-jv1');
         Route::get('/complains/print/{id}', [App\Http\Controllers\ComplainsController::class, 'print'])->name('print-complains');
         Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
-        Route::get('/tpo/generatePDF/{id}', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
+        Route::get('/tpo/generatePDF/', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
         Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
         Route::get('/quotation/downloadPDF/{id}', [App\Http\Controllers\QuotationController::class, 'downloadPDF'])->name('download-quotation-invoice');
         Route::get('/po/generatePDF/{id}', [App\Http\Controllers\PoController::class, 'generatePDF'])->name('print-po-invoice');
