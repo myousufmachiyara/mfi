@@ -222,7 +222,6 @@ class ComplainsController extends Controller
 
     public function generatePDF($id)
     {
-        die("hello");
         $complains = complains::where('complains.id', $id)
         ->leftjoin('ac as acc_name', 'acc_name.ac_code', '=', 'complains.company_name')
         ->join('ac as disp_to', 'disp_to.ac_code', '=', 'complains.party_name')
