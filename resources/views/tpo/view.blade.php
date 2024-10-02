@@ -220,7 +220,7 @@
 
 
 							<div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
-								<form method="get" action="{{ route('print-tpo-invoice') }}" enctype="multipart/form-data">
+								<form method="get" action="{{ route('print-sales2-invoice') }}" enctype="multipart/form-data">
 									@csrf
 									<section class="card">
 										<header class="card-header">
@@ -234,7 +234,7 @@
 													<option value="2" >Exclude Item Length</option>
 													<option value="3" >Only Quantity & Price</option>
 												</select>
-												<input type="hidden" name="print_tpo" id="printID" >
+												<input type="hidden" name="print_sale2" id="printID" >
 											</div>
 										</div>
 										<footer class="card-footer">
