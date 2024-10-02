@@ -102,7 +102,6 @@ class ComplainsController extends Controller
         return redirect()->route('all-complains');
     }
 
-
     public function destroy(Request $request)
     {
         $complains = complains::where('id', $request->complain_id)->update([
@@ -219,5 +218,9 @@ class ComplainsController extends Controller
         } 
     }
 
+    public function generatePDF($id)
+    {
+        
+    }
 
 }
