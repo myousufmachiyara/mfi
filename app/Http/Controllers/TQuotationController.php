@@ -28,14 +28,14 @@ class TquotationController extends Controller
             ->join('ac as disp_to', 'disp_to.ac_code', '=', 'tquotation.Cash_pur_name_ac')
             ->select(
                 'tquotation.Sale_inv_no', 'tquotation.sa_date', 'acc_name.ac_name as acc_name', 'tquotation.pur_ord_no',
-                'disp_to.ac_name as disp_to', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix',
+                'disp_to.ac_name as disp_to', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix', 'tquotation.tc',
                 'tquotation.ConvanceCharges', 'tquotation.LaborCharges', 'tquotation.Bill_discount',
                 \DB::raw('SUM(tquotation_2.weight_pc * tquotation_2.Sales_qty2) as weight_sum'),
                 \DB::raw('SUM(((tquotation_2.Sales_qty2 * tquotation_2.sales_price) + ((tquotation_2.Sales_qty2 * tquotation_2.sales_price) * (tquotation_2.discount / 100))) * tquotation_2.length) as total_bill')
             )
             ->groupby(
                 'tquotation.Sale_inv_no', 'tquotation.sa_date', 'acc_name.ac_name', 'tquotation.pur_ord_no',
-                'disp_to.ac_name', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix',
+                'disp_to.ac_name', 'tquotation.Cash_pur_name', 'tquotation.Sales_Remarks', 'tquotation.sales_against', 'tquotation.prefix', 'tquotation.tc',
                 'tquotation.ConvanceCharges', 'tquotation.LaborCharges', 'tquotation.Bill_discount'
             )
             ->get();
@@ -82,6 +82,9 @@ class TquotationController extends Controller
         }
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
             $quot2->Sales_Remarks=$request->Sales_Remarks;
+        }
+        if ($request->has('tc') && $request->tc) {
+            $quot2->tc=$request->tc;
         }
         if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
             $quot2->ConvanceCharges=$request->ConvanceCharges;
@@ -190,6 +193,9 @@ public function edit($id)
         if ($request->has('cash_Pur_address') && $request->cash_Pur_address OR empty($request->cash_Pur_address)) {
             $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
+        if ($request->has('tc') && $request->tc OR empty($request->tc)) {
+            $pur2->tc=$request->tc;
+        }
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
@@ -211,6 +217,7 @@ public function edit($id)
             'Cash_pur_name_ac'=>$pur2->Cash_pur_name_ac,
             'Cash_pur_name'=>$pur2->Cash_pur_name,
             'cash_Pur_address'=>$pur2->cash_Pur_address,
+            'tc'=>$pur2->tc,
             'Sales_Remarks'=>$pur2->Sales_Remarks,
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,

@@ -27,14 +27,14 @@ class TpoController extends Controller
             ->join('ac as acc_name', 'acc_name.ac_code', '=', 'tpo.account_name')
             ->select(
                 'tpo.Sale_inv_no', 'tpo.sa_date', 'acc_name.ac_name as acc_name',
-                 'tpo.Cash_pur_name', 'tpo.Sales_Remarks', 'tpo.sales_against', 'tpo.prefix',
+                 'tpo.Cash_pur_name', 'tpo.Sales_Remarks', 'tpo.sales_against', 'tpo.prefix','tpo.tc',
                 'tpo.ConvanceCharges', 'tpo.LaborCharges', 'tpo.Bill_discount',
                 \DB::raw('SUM(tpo_2.weight_pc * tpo_2.Sales_qty2) as weight_sum'),
                 \DB::raw('SUM(((tpo_2.Sales_qty2 * tpo_2.sales_price) + ((tpo_2.Sales_qty2 * tpo_2.sales_price) * (tpo_2.discount / 100))) * tpo_2.length) as total_bill')
             )
             ->groupby(
                 'tpo.Sale_inv_no', 'tpo.sa_date', 'acc_name.ac_name',
-                 'tpo.Cash_pur_name', 'tpo.Sales_Remarks', 'tpo.sales_against', 'tpo.prefix',
+                 'tpo.Cash_pur_name', 'tpo.Sales_Remarks', 'tpo.sales_against', 'tpo.prefix','tpo.tc',
                 'tpo.ConvanceCharges', 'tpo.LaborCharges', 'tpo.Bill_discount'
             )
             ->get();
@@ -72,6 +72,9 @@ class TpoController extends Controller
         }
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
             $tpo2->Sales_Remarks=$request->Sales_Remarks;
+        }
+        if ($request->has('tc') && $request->tc) {
+            $tpo2->tc=$request->tc;
         }
         if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
             $tpo2->ConvanceCharges=$request->ConvanceCharges;
@@ -178,6 +181,9 @@ public function edit($id)
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
         }
+        if ($request->has('tc') && $request->tc OR empty($request->tc)) {
+            $pur2->tc=$request->tc;
+        }
         if ($request->has('ConvanceCharges') && $request->ConvanceCharges OR $request->ConvanceCharges==0) {
             $pur2->ConvanceCharges=$request->ConvanceCharges;
         }
@@ -195,6 +201,7 @@ public function edit($id)
             'Cash_pur_name'=>$pur2->Cash_pur_name,
             'cash_Pur_address'=>$pur2->cash_Pur_address,
             'Sales_Remarks'=>$pur2->Sales_Remarks,
+            'tc'=>$pur2->tc,
             'ConvanceCharges'=>$pur2->ConvanceCharges,
             'LaborCharges'=>$pur2->LaborCharges,
             'Bill_discount'=>$pur2->Bill_discount,
