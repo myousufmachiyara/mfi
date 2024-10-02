@@ -498,9 +498,9 @@ public function edit($id)
             
             // Display the totals for the group
             $html .= '<tr>';
-            $html .= '<td colspan="3" style="text-align:right;font-weight:bold;color:#17365D">Sub Total===>></td>';
+            $html .= '<td colspan="5" style="text-align:right;font-weight:bold;color:#17365D">Sub Total===>></td>';
             $html .= '<td style="text-align:center;font-weight:bold;color:red">' . $group_total_quantity . '</td>';
-            $html .= '<td colspan="6" style="text-align:center;font-weight:bold;color:red">' . $group_total_amount . '</td>';
+            $html .= '<td colspan="5" style="text-align:center;font-weight:bold;color:red">' . $group_total_amount . '</td>';
             $html .= '</tr>';
             
             // Add the group totals to the overall totals
