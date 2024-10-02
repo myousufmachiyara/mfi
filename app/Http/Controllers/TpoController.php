@@ -378,9 +378,9 @@ public function edit($id)
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('TPO-'.$purchase['prefix'].$purchase['Sale_inv_no']);
-        $pdf->SetSubject('TPO-'.$purchase['prefix'].$purchase['Sale_inv_no']);
-        $pdf->SetKeywords('TPO, TCPDF, PDF');
+        $pdf->SetTitle('Purchase Order-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetSubject('Purchase Order-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetKeywords('Purchase Order, TCPDF, PDF');
                    
         // Add a page
         $pdf->AddPage();
@@ -573,7 +573,7 @@ public function edit($id)
  
         
         // Close and output PDF
-        $pdf->Output('TPO_'.$purchase['prefix'].$purchase['Sale_inv_no'].'.pdf', 'I');
+        $pdf->Output('Purchase Order_'.$purchase['prefix'].$purchase['Sale_inv_no'].'.pdf', 'I');
     }
     
 
