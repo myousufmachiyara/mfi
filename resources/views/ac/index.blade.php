@@ -156,7 +156,7 @@
         </div>
 
         <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-            <form method="post" action="" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            <form method="post" action="{{ route('coa-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                 @csrf  
                 <section class="card">
                     <header class="card-header">
