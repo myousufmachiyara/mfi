@@ -220,7 +220,7 @@ class ComplainsController extends Controller
 
     public function generatePDF($id)
     {
-        
+        die(print_r($id));
     }
 
 }
