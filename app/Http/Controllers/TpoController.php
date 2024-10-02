@@ -511,14 +511,7 @@ public function edit($id)
             $html .= '</table>';
         }
         
-        // Display overall totals
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td colspan="3" style="text-align:right;font-weight:bold">Grand Total:</td>';
-        $html .= '<td style="text-align:center">' . $total_quantity . '</td>';
-        $html .= '<td colspan="4" style="text-align:right;font-weight:bold">Total Amount: ' . $total_amount . '</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
+       
         
         $pdf->writeHTML($html, true, false, true, false, '');
         
