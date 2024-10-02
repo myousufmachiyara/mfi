@@ -51,7 +51,7 @@
 												<input type="text" placeholder="Pur Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
 
 												<!-- Hidden Input Field -->
-												<input type="hidden" placeholder="Pur Inv. No.." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
+												<input type="text" placeholder="Pur Inv. No.." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
 											</div>
 											
 
