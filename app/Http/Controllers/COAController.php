@@ -366,6 +366,8 @@ class COAController extends Controller
                 $acc_att->save();
             }
         }
+        return redirect()->route('all-acc');
+
     }
 
     public function view($id)
