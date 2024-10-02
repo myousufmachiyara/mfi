@@ -299,15 +299,12 @@ class QuotationController extends Controller
         } 
     }
 
-
     public function getAttachements(Request $request)
     {
         $sale1_att = sale1_att::where('sale1_id', $request->id)->get();
         
         return $sale1_att;
     }
-
-
 
     public function generatePDF($id)
     {
@@ -519,6 +516,4 @@ class QuotationController extends Controller
         // Close and output PDF
         $pdf->Output('Quotation_'.$sales['prefix'].$sales['Sal_inv_no'].'.pdf', 'I');
     }
-
-
 }
