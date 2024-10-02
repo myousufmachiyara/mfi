@@ -143,12 +143,7 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                                    @csrf   -->
-                                    <input type="hidden" id="download_id" name="download_id">                              
-                                    <!-- <button type="button" class="btn btn-danger">Delete All</button> -->
-                                    <button class="btn btn-default modal-dismiss">Cancel</button>
-                                <!-- </form> -->
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
                     </footer>
