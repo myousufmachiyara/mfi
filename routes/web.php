@@ -259,7 +259,7 @@
         Route::get('/tstock_out/tstock_out/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-tstock-out-invoice');
         Route::get('/bad_dabs/bad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\BadDabsController::class, 'generatePDF'])->name('print-bad-dabs-invoice');
         Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
-        Route::get('/complains/generatePDF/{id}', [App\Http\Controllers\ComplainsController::class, 'generatePDFNew'])->name('print-complain');
+        Route::get('/complains/generatePDF/{id}', [App\Http\Controllers\ComplainsController::class, 'generatePDF'])->name('print-complain');
         Route::get('/stock_out/stock_out_invoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-stock-out-invoice');
     });
 

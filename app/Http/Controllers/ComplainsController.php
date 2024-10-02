@@ -220,7 +220,7 @@ class ComplainsController extends Controller
         } 
     }
 
-    public function generatePDFNew($id)
+    public function generatePDF($id)
     {
         $complains = complains::where('complains.id', $id)
         ->leftjoin('ac as acc_name', 'acc_name.ac_code', '=', 'complains.company_name')
