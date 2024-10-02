@@ -326,7 +326,7 @@ Route::middleware(['checkPermission: add'])->group(function () {
     Route::get('/tpo/attachements', [App\Http\Controllers\TpoController::class, 'getAttachements'])->name('get-tpo-att');
     Route::get('/tpo/download/{id}', [App\Http\Controllers\TpoController::class, 'downloadAtt'])->name('tpo-att-download');
     Route::delete('/tpo/deleteAttachment/{id}', [App\Http\Controllers\TpoController::class, 'deleteAtt'])->name('tpo-att-delete');
-    Route::get('/tpo/generatePDF/{id}', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
+    Route::get('/tpo/generatePDF/', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
     Route::get('/tpo/getunclosed/', [App\Http\Controllers\TpoController::class, 'getunclosed'])->name('get-unclosed-tpo-invoice');
     Route::get('/tpo/getItems/{id}', [App\Http\Controllers\TpoController::class, 'getItems'])->name('get-tpo-items');
     Route::get('/tpo/getavailablestock/{id}', [App\Http\Controllers\TpoController::class, 'getavailablestock'])->name('tpo-item-stock-bal');
