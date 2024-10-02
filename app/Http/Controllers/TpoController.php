@@ -436,91 +436,30 @@ public function edit($id)
         
         $pdf->writeHTML($html, true, false, true, false, '');
     
-        $html = '<table border="0.3" style="text-align:center;margin-top:10px">';
-        $html .= '<tr>';
-        $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
-        $html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
-        $html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
-        $html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
-        $html .= '<th style="width:11%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price/Unit</th>';
-        $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Len</th>';
-        $html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">%</th>';
-        $html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
-        $html .= '</tr>';
-        $html .= '</table>';
-        
-        $pdf->setTableHtml($html);
-        
-        $total_weight = 0;
-        $total_quantity = 0;
-        $total_amount = 0;
-        
-        // Group the items by dispatch_to
-        $grouped_items = [];
-        foreach ($purchase_items as $item) {
-            $dispatch_to = $item['dispatch_to'];
-            if (!isset($grouped_items[$dispatch_to])) {
-                $grouped_items[$dispatch_to] = [];
-            }
-            $grouped_items[$dispatch_to][] = $item;
-        }
-        
-        foreach ($grouped_items as $dispatch_to => $items_group) {
-            $html .= '<h4>Dispatch To: ' . $dispatch_to . '</h4>';
-            $html .= '<table cellspacing="0" cellpadding="5">';
-            $count = 1;
-            $group_total_amount = 0;
-            $group_total_quantity = 0;
-            $group_total_weight = 0;
-            
-            foreach ($items_group as $item) {
-                // Determine background color based on odd/even rows
-                $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
-        
-                $html .= '<tr style="' . $bg_color . '">';
-                $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
-                $html .= '<td style="width:26%;border-right:1px dashed #000">' . $item['item_name'] . '</td>';
-                $html .= '<td style="width:20%;border-right:1px dashed #000">' . $item['remarks'] . '</td>';
-                $html .= '<td style="width:10%;border-right:1px dashed #000; text-align:center">' . $item['Sales_qty2'] . '</td>';
-                $group_total_quantity += $item['Sales_qty2'];
-                $html .= '<td style="width:11%;border-right:1px dashed #000; text-align:center">' . $item['sales_price'] . '</td>';
-                $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $item['length'] . '</td>';
-                $html .= '<td style="width:7%;border-right:1px dashed #000; text-align:center">' . $item['discount'] . '</td>';
-        
-                // Calculate the total weight and amount for the group
-                $group_total_weight += $item['Sales_qty2'] * $item['weight_pc'];
-                $amount = (($item['Sales_qty2'] * $item['sales_price']) + (($item['Sales_qty2'] * $item['sales_price']) * ($item['discount'] / 100))) * $item['length'];
-                $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
-                $group_total_amount += $amount;
-                $html .= '</tr>';
-                $count++;
-            }
-            
-            // Display the totals for the group
-            $html .= '<tr>';
-            $html .= '<td colspan="3" style="text-align:right;font-weight:bold">Total for ' . $dispatch_to . ':</td>';
-            $html .= '<td style="text-align:center">' . $group_total_quantity . '</td>';
-            $html .= '<td colspan="4" style="text-align:right;font-weight:bold">Total Amount: ' . $group_total_amount . '</td>';
-            $html .= '</tr>';
-            
-            // Add the group totals to the overall totals
-            $total_quantity += $group_total_quantity;
-            $total_amount += $group_total_amount;
-            $total_weight += $group_total_weight;
-        
-            $html .= '</table>';
-        }
-        
-        // Display overall totals
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td colspan="3" style="text-align:right;font-weight:bold">Grand Total:</td>';
-        $html .= '<td style="text-align:center">' . $total_quantity . '</td>';
-        $html .= '<td colspan="4" style="text-align:right;font-weight:bold">Total Amount: ' . $total_amount . '</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-        
-        $pdf->writeHTML($html, true, false, true, false, '');
+       // Group the items by dispatch_to
+$grouped_items = [];
+foreach ($purchase_items as $item) {
+    $dispatch_to = $item['dispatch_to'];
+    if (!isset($grouped_items[$dispatch_to])) {
+        $grouped_items[$dispatch_to] = [];
+    }
+    $grouped_items[$dispatch_to][] = $item;
+}
+
+// Initialize the table HTML after grouping the items
+$html = '<table border="0.3" style="text-align:center;margin-top:10px">';
+$html .= '<tr>';
+$html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
+$html .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+$html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
+$html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
+$html .= '<th style="width:11%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price/Unit</th>';
+$html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Len</th>';
+$html .= '<th style="width:7%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">%</th>';
+$html .= '<th style="width:13%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
+$html .= '</tr>';
+$html .= '</table>';
+
         
         $currentY = $pdf->GetY();
             
