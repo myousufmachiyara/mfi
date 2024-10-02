@@ -49,8 +49,12 @@
 												<label class="col-form-label">Pur Inv#</label>
 												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
 												<input type="text" placeholder="Pur Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
+
+												<!-- Hidden Input Field -->
+												<input type="hidden" placeholder="Pur Inv. No.." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
 											</div>
 											
+
 											
 
 											<div class="col-sm-3 col-md-3 mb-2">
