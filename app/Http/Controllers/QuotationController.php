@@ -512,6 +512,8 @@ class QuotationController extends Controller
         $pdf->SetFont('helvetica','B', 12);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
+
+        // terms and condition starts here
         $currentY = $pdf->GetY();
 
         $pdf->SetFont('helvetica','BIU', 14);
@@ -524,8 +526,9 @@ class QuotationController extends Controller
         $pdf->SetTextColor(255, 0, 0);
 
         $width = 185;
-
         $pdf->MultiCell($width, 10, $sales['tc'], 0, 'L', 0, 1, '', '', true);
+
+        // terms and condition ends here
 
         // Close and output PDF
         $pdf->Output('Quotation_'.$sales['prefix'].$sales['Sal_inv_no'].'.pdf', 'I');
