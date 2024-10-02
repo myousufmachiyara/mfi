@@ -171,9 +171,6 @@ public function edit($id)
             $pur2->sales_against=$request->hidden_sales_against;
         }
         
-        if ($request->has('hidden_sales_against') && $request->hidden_sales_against OR empty($request->hidden_sales_against)) {
-            $pur2->sales_against=$request->hidden_sales_against;
-        }
         if ($request->has('account_name') && $request->account_name) {
             $pur2->account_name=$request->account_name;
         }
