@@ -60,12 +60,16 @@
                                                     <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td><strong>{{$row->sub}}</strong></td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->ac_code}})" href="#attModal">View Att.</a></td>
+                                                    <td>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->ac_code}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->ac_code}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     @if($row->status==1)
                                                         <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                             <span class="separator"> | </span>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
                                                         </td>
                                                     @else
                                                         <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
@@ -139,16 +143,38 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                                    @csrf   -->
-                                    <input type="hidden" id="download_id" name="download_id">                              
-                                    <!-- <button type="button" class="btn btn-danger">Delete All</button> -->
-                                    <button class="btn btn-default modal-dismiss">Cancel</button>
-                                <!-- </form> -->
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
                     </footer>
                 </section>
+        </div>
+
+        <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('coa-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                @csrf  
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Upload Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="col-lg-12 mb-2">
+                                <input type="file" class="form-control" name="addAtt[]" multiple accept="application/pdf, image/png, image/jpeg">
+                                <input type="hidden" class="form-control" name="att_id" id="att_id">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="sumit" class="btn btn-danger">Upload</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
         </div>
 
         <div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
@@ -255,7 +281,7 @@
 
                             <div class="col-lg-12 mb-2">
                                 <label>Attachement</label>
-                                <input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att[]" multiple accept="application/pdf, image/png, image/jpeg">
                             </div>
   
                         </div>
@@ -346,7 +372,7 @@
 
                             <div class="col-lg-6 mb-2">
                                 <label>Attachements</label>
-                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                                <input type="file" class="form-control" name="att[]" id="update_att" multiple accept="application/pdf, image/png, image/jpeg">
                             </div>
                         </div>
                     </div>
@@ -395,6 +421,10 @@
 
     function setId(id){
         $('#deleteID').val(id);
+    }
+
+    function setAttId(id){
+        $('#att_id').val(id);
     }
 
     function getAccountDetails(id){
@@ -475,6 +505,8 @@
                 // Optionally, remove the element or reload the page
                 location.reload();
             } else {
+                alert("hello");
+                
                 return response.json().then(data => {
                     throw new Error(data.message || 'An error occurred.');
                 });

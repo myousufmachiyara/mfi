@@ -43,7 +43,6 @@ class TquotationController extends Controller
         return view('tquotation.index', compact('quot2'));
     }
     
-
     public function create(Request $request)
     {
         $items = Item_entry2::all();
@@ -155,7 +154,7 @@ class TquotationController extends Controller
         return redirect()->route('all-tquotation');
     }
 
-public function edit($id)
+    public function edit($id)
     {
         $items = Item_entry2::orderBy('item_name', 'asc')->get();
         $coa = AC::orderBy('ac_name', 'asc')->get();
@@ -165,7 +164,6 @@ public function edit($id)
 
         return view('tquotation.edit',compact('pur2','pur2_item','items','coa'));
     }
-
 
     public function update(Request $request)
     {
@@ -282,7 +280,6 @@ public function edit($id)
         return redirect()->route('all-tquotation');
     }
 
-
     public function destroy(Request $request)
     {
         tquotation::where('Sale_inv_no', $request->delete_quot2)->update([
@@ -315,8 +312,6 @@ public function edit($id)
         
         return $pur2_atts;
     }
-
-    
 
     public function getItems($id){
 

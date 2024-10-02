@@ -12,6 +12,8 @@ use App\Models\AC;
 use App\Models\complains;
 use App\Models\complains_att;
 use TCPDF;
+use App\Services\myPDF;
+
 
 class ComplainsController extends Controller
 {
@@ -101,7 +103,6 @@ class ComplainsController extends Controller
         }
         return redirect()->route('all-complains');
     }
-
 
     public function destroy(Request $request)
     {
@@ -219,5 +220,58 @@ class ComplainsController extends Controller
         } 
     }
 
+    public function generatePDF($id)
+    {
+        $complains = complains::where('complains.id', $id)
+        ->leftjoin('ac as acc_name', 'acc_name.ac_code', '=', 'complains.company_name')
+        ->join('ac as disp_to', 'disp_to.ac_code', '=', 'complains.party_name')
+        ->select(
+            'complains.id', 
+            'complains.inv_dat', 
+            'complains.mfi_pur_number', 
+            'complains.mill_pur_number', 
+            'complains.company_name',
+            'complains.party_name', 
+            'complains.complain_detail', 
+            'complains.resolve_date', 
+            'complains.resolve_remarks', 
+            'complains.clear',
+            'acc_name.ac_name as company_name_display', // example field from the first join
+            'disp_to.ac_name as party_name_display' // example field from the second join
+        )
+        ->get();
+
+        $pdf = new MyPDF();
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Complain-'.$complains['id']);
+        $pdf->SetSubject('Complain-'.$complains['id']);
+        $pdf->SetKeywords('Complain, TCPDF, PDF');
+                    
+        // Add a page
+        $pdf->AddPage(); 
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 4px;
+        }';
+
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Invoice</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+   
+        $pdf->Output('Complain'.$complains['id'].'.pdf', 'I');
+    }
 
 }

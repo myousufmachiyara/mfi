@@ -45,6 +45,7 @@
                                                         <td class="actions">
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fas fa-sheild-halved"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
@@ -404,6 +405,38 @@
             </section>
         </div>
 
+        <div id="addMacAdd" class="modal-block modal-block-primary mfp-hide">
+            <section class="card">
+                <form method="post" action="{{ route('change-user-credentials') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                    @csrf
+                    <header class="card-header">
+                        <h2 class="card-title">Add User Device</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">    
+                            <div class="col-lg-6 mb-2">
+                                <label>Device Name</label>
+                                <input type="text" class="form-control" placeholder="Device Name"  name="user_device_name" required>
+                                <input type="hidden" class="form-control" name="user_mac_id" id="user_mac_id">
+                            </div> 
+                            <div class="col-lg-6 mb-2">
+                                <label>Mac Address</label>
+                                <input type="text" class="form-control" placeholder="Mac Address" name="user_device_password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Add Device</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </form>
+            </section>
+        </div>
+
         @include('../layouts.footerlinks')
 	</body>
 </html>
@@ -448,8 +481,11 @@
         $('#user_cred_id').val(id);
         $('#update_user_username').val(username);
     }
-    
-    
+
+    function setMacAddID(id,username){
+        $('#user_mac_id').val(id);
+    }
+
     function setActivateID(id){
         $('#activate_user').val(id);
     } 

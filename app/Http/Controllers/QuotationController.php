@@ -299,15 +299,12 @@ class QuotationController extends Controller
         } 
     }
 
-
     public function getAttachements(Request $request)
     {
         $sale1_att = sale1_att::where('sale1_id', $request->id)->get();
         
         return $sale1_att;
     }
-
-
 
     public function generatePDF($id)
     {
@@ -471,6 +468,13 @@ class QuotationController extends Controller
         $roundedTotal= round($total_amount+$sales['LaborCharges']+$sales['ConvanceCharges']-$sales['Bill_discount']);
         $num_to_words=$pdf->convertCurrencyToWords($roundedTotal);
        
+        $pdf->SetFont('helvetica','BIU', 14);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY+20);
+        $width = 100;
+        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
+        $pdf->SetFont('helvetica','', 10);
 
         // Column 3
         $pdf->SetFont('helvetica','B', 10);
@@ -508,17 +512,25 @@ class QuotationController extends Controller
         $pdf->SetFont('helvetica','B', 12);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
+
+        // terms and condition starts here
+        $currentY = $pdf->GetY();
+
         $pdf->SetFont('helvetica','BIU', 14);
         $pdf->SetTextColor(23, 54, 93);
 
-        $pdf->SetXY(10, $currentY+20);
-        $width = 100;
-        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
-        $pdf->SetFont('helvetica','', 10);
-        
+        $pdf->SetXY(10, $currentY+10);
+        $pdf->Cell(35, 5,  'Terms & Conditions:' , 0, 'L');
+
+        $pdf->SetFont('helvetica','', 11);
+        $pdf->SetTextColor(255, 0, 0);
+
+        $width = 185;
+        $pdf->MultiCell($width, 10, $sales['tc'], 0, 'L', 0, 1, '', '', true);
+
+        // terms and condition ends here
+
         // Close and output PDF
         $pdf->Output('Quotation_'.$sales['prefix'].$sales['Sal_inv_no'].'.pdf', 'I');
     }
-
-
 }

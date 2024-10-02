@@ -52,7 +52,6 @@
         Route::get('/coa/view/{id}', [App\Http\Controllers\COAController::class, 'view'])->name('coa-att-view');
         Route::get('/vouchers/download/{id}', [App\Http\Controllers\JV1Controller::class, 'downloadAtt'])->name('jv1-att-download');
         Route::get('/vouchers/view/{id}', [App\Http\Controllers\JV1Controller::class, 'view'])->name('jv1-att-view');
-        Route::post('/coa/downloadAll', [App\Http\Controllers\COAController::class, 'downloadAllAtt'])->name('coa-att-download-all');
         Route::get('/vouchers2/download/{id}', [App\Http\Controllers\JV2Controller::class, 'downloadAtt'])->name('jv2-att-download');
         Route::get('/vouchers2/view/{id}', [App\Http\Controllers\JV2Controller::class, 'view'])->name('jv2-att-view');
         Route::get('/purchase1/view/{id}', [App\Http\Controllers\PurchaseController::class, 'view'])->name('show-purchases1-att');
@@ -88,6 +87,7 @@
     Route::middleware(['checkPermission:add'])->group(function () {
 
         Route::post('/user/create', [App\Http\Controllers\UsersController::class, 'createUser'])->name('new-user');
+        Route::post('/user/device/create', [App\Http\Controllers\UsersController::class, 'addDevice'])->name('new-user-device');
         Route::get('/user-role/new', [App\Http\Controllers\UserRoleController::class, 'create'])->name('new-role');
         Route::post('/user-role/create', [App\Http\Controllers\UserRoleController::class, 'store'])->name('create-role');
         Route::post('/item-groups/create', [App\Http\Controllers\ItemGroupsController::class, 'store'])->name('store-item-group');
@@ -213,7 +213,8 @@
     });
 
     Route::middleware(['checkPermission:att_add'])->group(function () {
-       
+        Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
+
     });
 
     Route::middleware(['checkPermission:att_delete'])->group(function () {
@@ -259,6 +260,7 @@
         Route::get('/tstock_out/tstock_out/generatePDF/{id}', [App\Http\Controllers\TStockOutController::class, 'generatePDF'])->name('print-tstock-out-invoice');
         Route::get('/bad_dabs/bad_dabs_invoice/generatePDF/{id}', [App\Http\Controllers\BadDabsController::class, 'generatePDF'])->name('print-bad-dabs-invoice');
         Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
+        Route::get('/complains/generatePDF/{id}', [App\Http\Controllers\ComplainsController::class, 'generatePDF'])->name('print-complain');
         Route::get('/stock_out/stock_out_invoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-stock-out-invoice');
     });
 

@@ -60,12 +60,20 @@
                                                     
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                       <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getComplainsDetails({{$row->id}})" href="#updateModal">
+                                                        <a class="text-danger" href="{{route('print-complain',$row->id)}}">
+                                                          <i class="fas fa-print"></i>
+                                                        </a>
+
+                                                        <span class="separator"> | </span>
+
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getComplainsDetails({{$row->id}})" href="#updateModal">
                                                           <i class="fas fa-pencil-alt"></i>
                                                         </a>
-                                                         <span class="separator"> | </span>
+
+                                                        <span class="separator"> | </span>
+
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->id}})" href="#deleteModal">
-                                                         <i class="far fa-trash-alt" style="color:red"></i>
+                                                            <i class="far fa-trash-alt" style="color:red"></i>
                                                         </a>
                                                     </td>
 

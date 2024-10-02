@@ -507,6 +507,24 @@ class PoController extends Controller
         $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
         $pdf->SetFont('helvetica','', 10);
         
+
+        // terms and condition starts here
+        $currentY = $pdf->GetY();
+
+        $pdf->SetFont('helvetica','BIU', 14);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY+10);
+        $pdf->Cell(35, 5,  'Terms & Conditions:' , 0, 'L');
+
+        $pdf->SetFont('helvetica','', 11);
+        $pdf->SetTextColor(255, 0, 0);
+
+        $width = 185;
+        $pdf->MultiCell($width, 10, $purchase['tc'], 0, 'L', 0, 1, '', '', true);
+
+        // terms and condition ends here
+
         // Close and output PDF
         $pdf->Output('Purchase Order_'.$purchase['prefix'].$purchase['pur_id'].'.pdf', 'I');
     }
