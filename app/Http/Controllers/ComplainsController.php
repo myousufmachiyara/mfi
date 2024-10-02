@@ -246,8 +246,8 @@ class ComplainsController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Complain-'.$complains['Sal_inv_no']);
-        $pdf->SetSubject('Complain-'.$complains['Sal_inv_no']);
+        $pdf->SetTitle('Complain-'.$complains['id']);
+        $pdf->SetSubject('Complain-'.$complains['id']);
         $pdf->SetKeywords('Complain, TCPDF, PDF');
                     
         // Add a page
@@ -272,6 +272,7 @@ class ComplainsController extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
    
+        $pdf->Output('Complain'.$complains['id'].'.pdf', 'I');
     }
 
 }
