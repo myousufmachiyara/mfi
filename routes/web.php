@@ -212,8 +212,7 @@
     });
 
     Route::middleware(['checkPermission:att_add'])->group(function () {
-        Route::delete('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
-
+        Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
     });
 
     Route::middleware(['checkPermission:att_delete'])->group(function () {
