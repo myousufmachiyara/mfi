@@ -241,7 +241,7 @@ class ComplainsController extends Controller
         )
         ->get();
 
-        die(print_r($complains))
+        die(print_r($complains));
         $pdf = new MyPDF();
 
         // Set document information
