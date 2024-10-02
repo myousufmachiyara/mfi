@@ -251,8 +251,7 @@ class ComplainsController extends Controller
         $pdf->SetKeywords('Complain, TCPDF, PDF');
                     
         // Add a page
-        $pdf->AddPage();
-            
+        $pdf->AddPage(); 
         $pdf->setCellPadding(1.2); // Set padding for all cells in the table
 
         // margin top
