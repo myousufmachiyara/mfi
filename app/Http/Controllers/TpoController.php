@@ -417,16 +417,12 @@ public function edit($id)
 
         $html .= '<table border="0.1px" style="border-collapse: collapse;">';
         $html .= '<tr>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Account Name </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_name'].'</td>';
-        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D"></td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['Cash_name'].'</td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Account Name </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_name'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td width="20%" width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D" >Address </td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_add'].'</td>';
-        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Company Name</td>';
-        $html .= '<td width="30%" style="font-size:10px;font-family:poppins;">'.$purchase['company_name'].'</td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Address </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_add'].'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
