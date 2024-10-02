@@ -350,16 +350,22 @@ class COAController extends Controller
         }
     }
 
-    public function downloadAllAtt(Request $request)
+    public function addAtt(Request $request)
     {
-        $doc=ac_att::where('ac_code', $request->download_id)->select('att_path')->get();
-        foreach($doc as $attachment){
-            $filePath = public_path($attachment['att_path']);
-            if (file_exists($filePath)) {
-                $allAtt[] = public_path($attachment['att_path']);
+        $coa_id=$request->att_id;
+
+        if($request->hasFile('att')){
+            $files = $request->file('att');
+            foreach ($files as $file)
+            {
+                $acc_att = new ac_att();
+                $acc_att->created_by = session('user_id');                
+                $acc_att->ac_code = $coa_id;
+                $extension = $file->getClientOriginalExtension();
+                $acc_att->att_path = $this->coaDoc($file,$extension);
+                $acc_att->save();
             }
         }
-        return Response::download($allAtt[0]);
     }
 
     public function view($id)
