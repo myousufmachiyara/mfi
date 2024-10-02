@@ -87,6 +87,7 @@
     Route::middleware(['checkPermission:add'])->group(function () {
 
         Route::post('/user/create', [App\Http\Controllers\UsersController::class, 'createUser'])->name('new-user');
+        Route::post('/user/device/create', [App\Http\Controllers\UsersController::class, 'addDevice'])->name('new-user-device');
         Route::get('/user-role/new', [App\Http\Controllers\UserRoleController::class, 'create'])->name('new-role');
         Route::post('/user-role/create', [App\Http\Controllers\UserRoleController::class, 'store'])->name('create-role');
         Route::post('/item-groups/create', [App\Http\Controllers\ItemGroupsController::class, 'store'])->name('store-item-group');

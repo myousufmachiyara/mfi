@@ -13,6 +13,7 @@ use App\Models\users;
 use App\Models\roles;
 use App\Models\user_roles;
 use App\Models\role_access;
+use App\Models\user_mac_address;
 use App\Traits\SaveImage;
 
 class UsersController extends Controller
@@ -237,6 +238,15 @@ class UsersController extends Controller
         ]);
 
 
+    }
+
+    public function addDevice(Request $request){
+        $user_mac_address = user_mac_address::create([
+            'user_id' => $request->user_mac_id,
+            'device_name' => $request->user_device_name,
+            'mac_address' => $request->user_device_password,
+            'created_by' => session('user_id'),
+        ]);
     }
 
     public function logout()
