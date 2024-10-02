@@ -241,15 +241,14 @@ class ComplainsController extends Controller
         )
         ->get();
 
-        die(print_r($complains));
         $pdf = new MyPDF();
 
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sale Invoice-'.$purchase['prefix'].$purchase['Sal_inv_no']);
-        $pdf->SetSubject('Sale Invoice-'.$purchase['prefix'].$purchase['Sal_inv_no']);
-        $pdf->SetKeywords('Sale Invoice, TCPDF, PDF');
+        $pdf->SetTitle('Complain-'.$complains['Sal_inv_no']);
+        $pdf->SetSubject('Complain-'.$complains['Sal_inv_no']);
+        $pdf->SetKeywords('Complain, TCPDF, PDF');
                     
         // Add a page
         $pdf->AddPage();
