@@ -475,7 +475,7 @@ class QuotationController extends Controller
         $width = 100;
         $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
         $pdf->SetFont('helvetica','', 10);
-        
+
         // Column 3
         $pdf->SetFont('helvetica','B', 10);
         $pdf->SetTextColor(23, 54, 93);
@@ -512,6 +512,15 @@ class QuotationController extends Controller
         $pdf->SetFont('helvetica','B', 12);
         $pdf->Cell(35, 5,  $net_amount, 1, 'R');
         
+        $currentY = $pdf->GetY();
+
+        $pdf->SetFont('helvetica','BIU', 14);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY+20);
+        $width = 100;
+        $pdf->MultiCell($width, 10, $num_to_words, 0, 'L', 0, 1, '', '', true);
+
         // Close and output PDF
         $pdf->Output('Quotation_'.$sales['prefix'].$sales['Sal_inv_no'].'.pdf', 'I');
     }
