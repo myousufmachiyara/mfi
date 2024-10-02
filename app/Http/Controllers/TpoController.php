@@ -360,16 +360,15 @@ public function edit($id)
     public function showAllPDF($id)
 
     {
-        $purchase = tsales::where('Sal_inv_no', $id)
-        ->leftJoin('ac as account', 'account.ac_code', '=', 'tsales.account_name')
-        ->leftJoin('ac as company', 'company.ac_code', '=', 'tsales.company_name')
-        ->select('tsales.*', 'account.ac_name as ac_name', 'account.address as ac_add' , 'account.phone_no as ac_phone_no' ,'company.ac_name as company_name')
+        $purchase = tpo::where('Sale_inv_no', $id)
+        ->leftJoin('ac as account', 'account.ac_code', '=', 'tpo.account_name')
+        ->select('tpo.*', 'account.ac_name as ac_name', 'account.address as ac_add' , 'account.phone_no as ac_phone_no')
         ->first();
 
 
-        $purchase_items = tsales_2::where('sales_inv_cod',$id)
-                ->join('item_entry2','tsales_2.item_cod','=','item_entry2.it_cod')
-                ->select('tsales_2.*','item_entry2.item_name')
+        $purchase_items = tpo_2::where('sales_inv_cod',$id)
+                ->join('item_entry2','tpo_2.item_cod','=','item_entry2.it_cod')
+                ->select('tpo_2.*','item_entry2.item_name')
                 ->get();
                 
         $pdf = new MyPDF();
@@ -377,9 +376,9 @@ public function edit($id)
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sale Invoice-'.$purchase['prefix'].$purchase['Sal_inv_no']);
-        $pdf->SetSubject('Sale Invoice-'.$purchase['prefix'].$purchase['Sal_inv_no']);
-        $pdf->SetKeywords('Sale Invoice, TCPDF, PDF');
+        $pdf->SetTitle('TPO-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetSubject('TPO-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetKeywords('TPO, TCPDF, PDF');
                    
         // Add a page
         $pdf->AddPage();
@@ -399,13 +398,13 @@ public function edit($id)
 
         // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Invoice</h1>';
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Order</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table style="margin-bottom:1rem">';
         $html .= '<tr>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;color:#000">'.$purchase['prefix'].$purchase['Sal_inv_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;color:#000">'.$purchase['prefix'].$purchase['Sale_inv_no'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Mill Inv No: <span style="text-decoration: underline;color:#000">'.$purchase['pur_ord_no'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;color:#000">Hamza</span></td>';
@@ -560,7 +559,7 @@ public function edit($id)
         $pdf->SetFont('helvetica','', 10);
         
         // Close and output PDF
-        $pdf->Output('Sale Invoice_'.$purchase['prefix'].$purchase['Sal_inv_no'].'.pdf', 'I');
+        $pdf->Output('TPO_'.$purchase['prefix'].$purchase['Sale_inv_no'].'.pdf', 'I');
     }
     
 
