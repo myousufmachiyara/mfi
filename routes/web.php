@@ -265,6 +265,7 @@
         Route::get('/stock_in/generatePDF/{id}', [App\Http\Controllers\StockInController::class, 'generatePDF'])->name('print-stock-in-invoice');
         Route::get('/complains/generatePDF/{id}', [App\Http\Controllers\ComplainsController::class, 'generatePDF'])->name('print-complain');
         Route::get('/stock_out/stock_out_invoice/generatePDF/{id}', [App\Http\Controllers\StockOutController::class, 'generatePDF'])->name('print-stock-out-invoice');
+        Route::get('/tquotation/generatePDF/', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tqout-invoice');
     });
 
     Route::middleware(['auth'])->group(function () {

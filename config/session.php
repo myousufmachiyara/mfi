@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'lifetime' => 1,
+    'lifetime' => 10,
 
     // 'lifetime' => env('SESSION_LIFETIME', 30),
 
