@@ -343,6 +343,9 @@
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);
+                $('#update_ac_cr_sid').select2();
+                $('#update_ac_dr_sid').select2();
+
             },
             error: function(){
                 alert("error");
