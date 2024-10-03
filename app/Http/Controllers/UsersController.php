@@ -37,7 +37,10 @@ class UsersController extends Controller
         if (Auth::check()) {
             return view('home'); // Show the home view if authenticated
         }
-        return view('/login');
+        $user_mac = getMacAddress();
+        return view('login')->with([
+            'mac_add' => $user_mac,
+        ]);
     }
 
     public function createUser(Request $request)
@@ -206,31 +209,45 @@ class UsersController extends Controller
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
-
-            
-            $request->session()->regenerate();
             $user = Auth::user();
+            $user_mac = getMacAddress();
 
-            $user_roles = user_roles::where('user_id',$user['id'])
-            ->join('roles','roles.id','=','user_roles.role_id')
-            ->select('user_roles.*','roles.name as role_name')
-            ->first();
+            $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');
 
-            $user_permission = role_access::where('role_id',$user_roles['role_id'])
-            ->select('module_id','view')
-            ->get();
-            
-            $user_access = $user_permission->toArray();
+            if ($allowed_macs->contains($user_mac)) {
+
+                $request->session()->regenerate();
     
-            session([
-                'user_id' => $user['id'],
-                'user_name' => $user['name'],
-                'role_name' => $user_roles['role_name'],
-                'user_role' => $user_roles['role_id'],
-                'user_access' => $user_access,
-            ]);
+                $user_roles = user_roles::where('user_id',$user['id'])
+                ->join('roles','roles.id','=','user_roles.role_id')
+                ->select('user_roles.*','roles.name as role_name')
+                ->first();
+    
+                $user_permission = role_access::where('role_id',$user_roles['role_id'])
+                ->select('module_id','view')
+                ->get();
+                
+                $user_access = $user_permission->toArray();
+        
+                session([
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name'],
+                    'role_name' => $user_roles['role_name'],
+                    'user_role' => $user_roles['role_id'],
+                    'user_access' => $user_access,
+                ]);
+    
+                return redirect()->intended('/home');
+            }
+            else{
+                Auth::logout();
+                return view('login')->with([
+                    'error' => 'Device Not registered',
+                    'mac_add' => $user_mac,
+                ]);
+            }
 
-            return redirect()->intended('/home');
+           
         }
 
         // Authentication failed
@@ -333,5 +350,26 @@ class UsersController extends Controller
         ]);
 
         return redirect()->route('all-users');
+    }
+
+    public function getMacAddress()
+    {
+        $macAddress = '';
+
+        // Use a shell command to get the MAC address
+        if (stripos(PHP_OS, 'WIN') === 0) {
+            // Windows
+            $output = shell_exec('getmac');
+            $macAddress = strtok($output, "\n"); // Get the first line
+        } else {
+            // Linux/Unix
+            $output = shell_exec('ip link show');
+            preg_match('/ether ([\da-f:]+)/', $output, $matches);
+            $macAddress = $matches[1] ?? ''; // Get the first MAC address found
+        }
+
+        return response()->json([
+            'mac_address' => $macAddress ?: 'Unable to retrieve MAC Address'
+        ]);
     }
 }
