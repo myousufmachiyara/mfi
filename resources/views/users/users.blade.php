@@ -215,6 +215,7 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
+                                <button class="btn btn-default modal-dismiss">Close</button>
                             </div>
                         </div>
                     </footer>
