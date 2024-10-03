@@ -43,7 +43,7 @@
                                                     <td>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->ac_code}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
                                                     </td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1" href="{{ route('show-jv1', $row->auto_lager) }}">
