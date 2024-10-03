@@ -239,7 +239,8 @@ class ComplainsController extends Controller
             'acc_name.ac_name as company_name_display', // example field from the first join
             'disp_to.ac_name as party_name_display' // example field from the second join
         )
-        ->get();
+        ->first();
+
 
         $pdf = new MyPDF();
 
@@ -258,19 +259,85 @@ class ComplainsController extends Controller
         $margin_top = '.margin-top {
             margin-top: 10px;
         }';
-        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
 
         // margin bottom
         $margin_bottom = '.margin-bottom {
-            margin-bottom: 4px;
+            margin-bottom: 10px;
         }';
 
-        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
-
-        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Invoice</h1>';
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">MFI Complain Status Report</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
    
+        $html = '<table style="margin-bottom:1rem">';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Complain No: &nbsp;<span style="text-decoration: underline;color:#000">'.$complains['id'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">Complain Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($complains['inv_dat'])->format('d-m-y').'</span></td>';
+        if($complains['clear']==0)
+            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="text-decoration: underline;color:#000">Open</span></td>';
+        else if($complains['clear']==1)
+            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="text-decoration: underline;color:#000">Clear</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $html = '<div style="border:1px solid #000;">';
+        $html .= '<table cellpadding="7" >';
+        $html .= '<tr>';
+        $html .= '<td style="color:red"><h2>Complain Details</h2></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="border-bottom: 3px solid #000;" cellpadding="7" >';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Company Name: &nbsp;<span style="color:#000">'.$complains['company_name_display'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">Company Inv # &nbsp; <span style="color:#000">Here</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="margin-top:10px" cellpadding="8" >';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Customer Name: &nbsp;<span style="color:#000">'.$complains['company_name_display'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">MFI Pur Inv # &nbsp; <span style="color:#000">Here</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="margin-bottom:5px">';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center"><h3>Complain Remarks</h3></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table cellpadding="8">';
+        $html .= '<tr>';
+        $html .= '<td style="color:red;"><p>Complain Remarks</p></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '</div>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        $html = '<div style="border:1px solid #000;">';
+        $html .= '<table cellpadding="7">';
+        $html .= '<tr>';
+        $html .= '<td style="color:red"><h2>Closing Details</h2></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table style="margin-bottom:5px">';
+        $html .= '<tr>';
+        $html .= '<td style="font-weight:bold;text-align:center;font-size:10px"><p>Closing Date:</p></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '</div>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
         $pdf->Output('Complain'.$complains['id'].'.pdf', 'I');
     }
 
