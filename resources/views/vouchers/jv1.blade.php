@@ -40,7 +40,7 @@
                                                 @else
                                                     <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
                                                 @endif
-                                                    <td>
+                                                    <td style="vertical-align: middle;">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                         <span class="separator"> | </span>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
@@ -50,7 +50,7 @@
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getJVSDetails({{$row->auto_lager}})" href="#updateModal">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getJVSDetails({{$row->auto_lager}})" href="#updateModal">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
@@ -71,7 +71,7 @@
 			</div>
 		</section>
 
-        <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
+        <div id="updateModal" class="modal-block modal-block-primary mfp-hide" style="z-index: 1050">
             <section class="card">
                 <form method="post" action="{{ route('update-jv1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
@@ -292,6 +292,7 @@
 	</body>
 </html>
 <script>
+
     function setId(id){
         $('#deleteID').val(id);
     }

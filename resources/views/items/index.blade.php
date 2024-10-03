@@ -60,7 +60,7 @@
                                                         <td>{{ intval($row->labourprice) }}</td>
                                                     @endif
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>

@@ -35,13 +35,15 @@
 <!-- Theme Custom -->
 <script src="/assets/js/custom.js"></script>
 
-<!-- Theme Initialization Files -->
-<script src="/assets/js/theme.init.js"></script>
-
 <!-- Examples -->
 <script src="/assets/js/examples/examples.header.menu.js"></script>
 <script src="/assets/js/examples/examples.dashboard.js"></script>
 <script src="/assets/js/examples/examples.datatables.default.js"></script>
 <script src="/assets/js/examples/examples.modals.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/assets/js/theme.init.js"></script>
+
+
 
 
