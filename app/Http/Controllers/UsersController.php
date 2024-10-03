@@ -207,6 +207,7 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
 
+            
             $request->session()->regenerate();
             $user = Auth::user();
 
