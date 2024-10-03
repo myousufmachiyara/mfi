@@ -287,7 +287,6 @@
                 </section>
             </form>
         </div>
-
         @include('../layouts.footerlinks')
 	</body>
 </html>
@@ -337,13 +336,11 @@
             success: function(result){
                 $('#update_id').val(result['auto_lager']);
                 $('#update_id_view').val(result['auto_lager']);
-                // $('#update_ac_cr_sid').val(result['ac_cr_sid']);
-                // $('#update_ac_dr_sid').val(result['ac_dr_sid']);
+                $('#update_ac_cr_sid').val(result['ac_cr_sid']);
+                $('#update_ac_dr_sid').val(result['ac_dr_sid']);
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);
-                $('#update_ac_cr_sid').select2();
-                $('#update_ac_dr_sid').select2();
             },
             error: function(){
                 alert("error");
