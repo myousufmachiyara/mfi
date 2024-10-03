@@ -24,11 +24,11 @@
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label">Role Name</label>
-												<input type="text" name="role_name" value={{$role->name}} required class="form-control">
+												<input type="text" name="role_name" value="{{$role->name}}" required class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-4 mb-2">
 												<label class="col-form-label" >Role Shortcode</label>
-												<input type="text" placeholder="Shortcode" name="shortcode" value={{$role->shortcode}} class="form-control">
+												<input type="text" placeholder="Shortcode" name="shortcode" value="{{$role->shortcode}}" class="form-control">
 											</div>
 									  </div>
 									</div>

@@ -37,7 +37,10 @@ class UsersController extends Controller
         if (Auth::check()) {
             return view('home'); // Show the home view if authenticated
         }
-        return view('/login');
+        // $user_mac = $this->getMacAddress();
+        return view('login')->with([
+            'mac_add' => '',
+        ]);
     }
 
     public function createUser(Request $request)
@@ -206,37 +209,51 @@ class UsersController extends Controller
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
-
-            $request->session()->regenerate();
             $user = Auth::user();
+            // $user_mac =  $this->getMacAddress();
 
-            $user_roles = user_roles::where('user_id',$user['id'])
-            ->join('roles','roles.id','=','user_roles.role_id')
-            ->select('user_roles.*','roles.name as role_name')
-            ->first();
+            // $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');
 
-            $user_permission = role_access::where('role_id',$user_roles['role_id'])
-            ->select('module_id','view')
-            ->get();
-            
-            $user_access = $user_permission->toArray();
+            // if ($allowed_macs->contains($user_mac)) {
+
+                $request->session()->regenerate();
     
-            session([
-                'user_id' => $user['id'],
-                'user_name' => $user['name'],
-                'role_name' => $user_roles['role_name'],
-                'user_role' => $user_roles['role_id'],
-                'user_access' => $user_access,
-            ]);
+                $user_roles = user_roles::where('user_id',$user['id'])
+                ->join('roles','roles.id','=','user_roles.role_id')
+                ->select('user_roles.*','roles.name as role_name')
+                ->first();
+    
+                $user_permission = role_access::where('role_id',$user_roles['role_id'])
+                ->select('module_id','view')
+                ->get();
+                
+                $user_access = $user_permission->toArray();
+        
+                session([
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name'],
+                    'role_name' => $user_roles['role_name'],
+                    'user_role' => $user_roles['role_id'],
+                    'user_access' => $user_access,
+                ]);
+    
+                return redirect()->intended('/home');
+            // }
+            // else{
+            //     Auth::logout();
+            //     return view('login')->with([
+            //         'error' => 'Device Not registered',
+            //         'mac_add' => $user_mac,
+            //     ]);
+            // }
 
-            return redirect()->intended('/home');
+           
         }
 
         // Authentication failed
         return back()->withErrors([
             'username' => 'Invalid Credentials.',
         ]);
-
 
     }
 
@@ -247,6 +264,17 @@ class UsersController extends Controller
             'mac_address' => $request->user_device_password,
             'created_by' => session('user_id'),
         ]);
+
+        return redirect()->route('all-users');
+
+    }
+
+    public function getMacAdd(Request $request){
+        $user_mac_address = user_mac_address::where('user_id', $request->id)
+        ->select('id', 'device_name', 'mac_address')
+        ->get();
+
+        return $user_mac_address;
     }
 
     public function logout()
@@ -322,5 +350,26 @@ class UsersController extends Controller
         ]);
 
         return redirect()->route('all-users');
+    }
+
+    public function getMacAddress()
+    {
+        $output = shell_exec('ifconfig'); // Or 'ip link show'
+        
+        if ($output === null) {
+            return 'Command execution failed.';
+        }
+    
+        // Log output to a file for debugging
+        file_put_contents('ifconfig_output.txt', $output);
+    
+        $lines = explode("\n", $output);
+        foreach ($lines as $line) {
+            if (preg_match('/ether ([\da-f:]+)/', $line, $matches)) {
+                return $matches[1]; // Return the first MAC address found
+            }
+        }
+    
+        return 'Unable to retrieve MAC Address';
     }
 }

@@ -138,6 +138,8 @@
 
         Route::get('/user/details', [App\Http\Controllers\UsersController::class, 'getUserDetails'])->name('user-details');
         Route::post('/user/change-credentials', [App\Http\Controllers\UsersController::class, 'changeCredentials'])->name('change-user-credentials');
+        Route::post('/user/add-device', [App\Http\Controllers\UsersController::class, 'addDevice'])->name('add-user-device');
+        Route::get('/user/mac_address', [App\Http\Controllers\UsersController::class, 'getMacAdd'])->name('user-mac-address');
         Route::post('/user/update', [App\Http\Controllers\UsersController::class, 'updateUser'])->name('update-user');
         Route::post('/user/deactivate', [App\Http\Controllers\UsersController::class, 'deactivateUser'])->name('deactivate-user');
         Route::post('/user/activate', [App\Http\Controllers\UsersController::class, 'activateUser'])->name('activate-user');
@@ -214,6 +216,7 @@
 
     Route::middleware(['checkPermission:att_add'])->group(function () {
         Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
+        Route::post('/vouchers/addAtt/', [App\Http\Controllers\JV1Controller::class, 'addAtt'])->name('jv1-att-add');
 
     });
 
@@ -248,7 +251,7 @@
         Route::get('/vouchers/print/{id}', [App\Http\Controllers\JV1Controller::class, 'print'])->name('print-jv1');
         Route::get('/complains/print/{id}', [App\Http\Controllers\ComplainsController::class, 'print'])->name('print-complains');
         Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
-        Route::get('/tpo/generatePDF/{id}', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
+        Route::get('/tpo/generatePDF/', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
         Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
         Route::get('/quotation/downloadPDF/{id}', [App\Http\Controllers\QuotationController::class, 'downloadPDF'])->name('download-quotation-invoice');
         Route::get('/po/generatePDF/{id}', [App\Http\Controllers\PoController::class, 'generatePDF'])->name('print-po-invoice');

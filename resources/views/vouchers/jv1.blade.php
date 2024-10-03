@@ -40,9 +40,11 @@
                                                 @else
                                                     <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
                                                 @endif
-                                                
-                                                
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal">View Att.</a></td>
+                                                    <td>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1" href="{{ route('show-jv1', $row->auto_lager) }}">
                                                             <i class="fas fa-eye"></i>
@@ -252,16 +254,38 @@
                 <footer class="card-footer">
                     <div class="row">
                         <div class="col-md-12 text-end">
-                            <!-- <form method="post" action="{{ route('coa-att-download-all') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                                @csrf   -->
-                                <input type="hidden" id="download_id" name="download_id">                              
-                                <!-- <button type="button" class="btn btn-danger">Download All</button> -->
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
-                            <!-- </form> -->
+                            <button class="btn btn-default modal-dismiss">Cancel</button>
                         </div>
                     </div>
                 </footer>
             </section>
+        </div>
+
+        <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('jv1-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                @csrf  
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Upload Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="col-lg-12 mb-2">
+                                <input type="file" class="form-control" name="addAtt[]" multiple accept="application/pdf, image/png, image/jpeg">
+                                <input type="hidden" class="form-control" name="att_id" id="att_id">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="sumit" class="btn btn-danger">Upload</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
         </div>
         @include('../layouts.footerlinks')
 	</body>
@@ -269,6 +293,10 @@
 <script>
     function setId(id){
         $('#deleteID').val(id);
+    }
+
+    function setAttId(id){
+        $('#att_id').val(id);
     }
 
     function getAttachements(id){
@@ -306,11 +334,10 @@
             url: "/vouchers/detail",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $('#update_id').val(result['auto_lager']);
                 $('#update_id_view').val(result['auto_lager']);
-                $('#update_ac_cr_sid').val(result['ac_cr_sid']).trigger('change');
-                $('#update_ac_dr_sid').val(result['ac_dr_sid']).trigger('change');
+                $('#update_ac_cr_sid').val(result['ac_cr_sid']);
+                $('#update_ac_dr_sid').val(result['ac_dr_sid']);
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);
