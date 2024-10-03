@@ -354,17 +354,22 @@ class UsersController extends Controller
 
     public function getMacAddress()
     {
-        // Use a different method to retrieve the MAC address
-        // This example assumes a Linux environment
-        $output = [];
-        exec('ifconfig', $output); // Or 'ip link show'
-        
-        foreach ($output as $line) {
-            if (preg_match('/ether ([\da-f:]+)/', $line, $matches)) {
-                return $matches[1]; // Return the first MAC address found
-            }
+        $macAddress = '';
+
+        // Use a shell command to get the MAC address
+        if (stripos(PHP_OS, 'WIN') === 0) {
+            // Windows
+            $output = shell_exec('getmac');
+            $macAddress = strtok($output, "\n"); // Get the first line
+        } else {
+            // Linux/Unix
+            $output = shell_exec('ip link show');
+            preg_match('/ether ([\da-f:]+)/', $output, $matches);
+            $macAddress = $matches[1] ?? ''; // Get the first MAC address found
         }
-    
-        return 'Unable to retrieve MAC Address';
+
+        return response()->json([
+            'mac_address' => $macAddress ?: 'Unable to retrieve MAC Address'
+        ]);
     }
 }
