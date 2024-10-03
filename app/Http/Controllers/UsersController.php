@@ -352,19 +352,17 @@ class UsersController extends Controller
         return redirect()->route('all-users');
     }
 
-    public function getMacAddress()
-    {
-        // Use a different method to retrieve the MAC address
-        // This example assumes a Linux environment
-        $output = [];
-        exec('ifconfig', $output); // Or 'ip link show'
-        
-        foreach ($output as $line) {
-            if (preg_match('/ether ([\da-f:]+)/', $line, $matches)) {
-                return $matches[1]; // Return the first MAC address found
-            }
+    public function getMacAddress() {
+        $mac = null;
+    
+        // Execute the command and capture the output
+        exec('getmac', $mac);
+    
+        // Check if we got a result
+        if (!empty($mac)) {
+            return trim($mac[0]);
         }
     
-        return 'Unable to retrieve MAC Address';
+        return null;
     }
 }
