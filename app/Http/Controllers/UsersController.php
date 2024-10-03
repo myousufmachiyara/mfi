@@ -37,9 +37,9 @@ class UsersController extends Controller
         if (Auth::check()) {
             return view('home'); // Show the home view if authenticated
         }
-        $user_mac = $this->getMacAddress();
+        // $user_mac = $this->getMacAddress();
         return view('login')->with([
-            'mac_add' => $user_mac,
+            'mac_add' => '',
         ]);
     }
 
@@ -210,11 +210,11 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
-            $user_mac =  $this->getMacAddress();
+            // $user_mac =  $this->getMacAddress();
 
-            $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');
+            // $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');
 
-            if ($allowed_macs->contains($user_mac)) {
+            // if ($allowed_macs->contains($user_mac)) {
 
                 $request->session()->regenerate();
     
@@ -238,14 +238,14 @@ class UsersController extends Controller
                 ]);
     
                 return redirect()->intended('/home');
-            }
-            else{
-                Auth::logout();
-                return view('login')->with([
-                    'error' => 'Device Not registered',
-                    'mac_add' => $user_mac,
-                ]);
-            }
+            // }
+            // else{
+            //     Auth::logout();
+            //     return view('login')->with([
+            //         'error' => 'Device Not registered',
+            //         'mac_add' => $user_mac,
+            //     ]);
+            // }
 
            
         }
@@ -352,12 +352,24 @@ class UsersController extends Controller
         return redirect()->route('all-users');
     }
 
-    function getMacAddress() {
-        $output = shell_exec('getmac');
-        if ($output) {
-            $lines = explode("\n", trim($output));
-            return trim($lines[0]);
+    public function getMacAddress()
+    {
+        $output = shell_exec('ifconfig'); // Or 'ip link show'
+        
+        if ($output === null) {
+            return 'Command execution failed.';
         }
-        return null;
+    
+        // Log output to a file for debugging
+        file_put_contents('ifconfig_output.txt', $output);
+    
+        $lines = explode("\n", $output);
+        foreach ($lines as $line) {
+            if (preg_match('/ether ([\da-f:]+)/', $line, $matches)) {
+                return $matches[1]; // Return the first MAC address found
+            }
+        }
+    
+        return 'Unable to retrieve MAC Address';
     }
 }
