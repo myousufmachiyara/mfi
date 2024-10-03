@@ -521,7 +521,7 @@ class Sales2Controller extends Controller
             // Calculate the total weight and amount
             $total_weight += $items['Sales_qty2'] * $items['weight_pc'];
             $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
-            $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
+            $html .= '<td style="width:13%;border-right:1px dashed #000; text-align:center">' . round($amount, 2) . '</td>';
             $total_amount += $amount;
 
             $html .= '</tr>';
@@ -727,7 +727,7 @@ class Sales2Controller extends Controller
             // Calculate the total weight and amount
             $total_weight += $items['Sales_qty2'] * $items['weight_pc'];
             $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
-            $html .= '<td style="width:15%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
+            $html .= '<td style="width:15%;border-right:1px dashed #000; text-align:center">' . round($amount, 2) . '</td>';
             $total_amount += $amount;
 
             $html .= '</tr>';
@@ -900,7 +900,7 @@ class Sales2Controller extends Controller
         $html .= '<th style="width:29%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
         $html .= '<th style="width:25%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
         $html .= '<th style="width:10%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
-        $html .= '<th style="width:14%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">List Rate</th>';
+        $html .= '<th style="width:14%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Price</th>';
         $html .= '<th style="width:16%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
@@ -930,7 +930,7 @@ class Sales2Controller extends Controller
             // Calculate the total weight and amount
             $total_weight += $items['Sales_qty2'] * $items['weight_pc'];
             $amount = (($items['Sales_qty2'] * $items['sales_price']) + (($items['Sales_qty2'] * $items['sales_price']) * ($items['discount'] / 100))) * $items['length'];
-            $html .= '<td style="width:16%;border-right:1px dashed #000; text-align:center">' . $amount . '</td>';
+            $html .= '<td style="width:16%;border-right:1px dashed #000; text-align:center">' . round($amount, 2) . '</td>';
             $total_amount += $amount;
 
             $html .= '</tr>';
