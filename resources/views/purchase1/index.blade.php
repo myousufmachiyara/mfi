@@ -37,7 +37,7 @@
                                     <div class="row" style="justify-content:end">
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="searchColId">
-                                                <option value="default">Search All</option>
+                                                <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
                                                 <option value="3">by Account</option>
@@ -207,34 +207,33 @@
         const table = document.getElementById('searchableTable');
         const rows = table.getElementsByTagName('tr');
         requestAnimationFrame(() => {
-            if(colId=="default"){
-                
-                // Loop through all rows
-                for (let i = 0; i < rows.length; i++) {
-                    const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
-                    let found = false;
+            // if(colId=="default"){
+            //     // Loop through all rows
+            //     for (let i = 0; i < rows.length; i++) {
+            //         const cells = rows[i].getElementsByTagName('td'); // Get all cells in the current row
+            //         let found = false;
                     
-                    // Loop through each cell in the row
-                    for (let j = 0; j < cells.length; j++) {
-                        const cellText = cells[j].textContent || cells[j].innerText;
+            //         // Loop through each cell in the row
+            //         for (let j = 0; j < cells.length; j++) {
+            //             const cellText = cells[j].textContent || cells[j].innerText;
                         
-                        // Check if the cell text matches the input value
-                        if (cellText.toUpperCase().indexOf(input) > -1) {
-                            found = true;
-                            break; // No need to check other cells in this row if a match is found
-                        }
-                    }
+            //             // Check if the cell text matches the input value
+            //             if (cellText.toUpperCase().indexOf(input) > -1) {
+            //                 found = true;
+            //                 break; // No need to check other cells in this row if a match is found
+            //             }
+            //         }
                     
-                    // Show or hide the row based on whether a match was found
-                    if (found) {
-                        rows[i].style.display = '';
-                    } else {
-                        rows[i].style.display = 'none';
-                    }
-                }
-            }   
+            //         // Show or hide the row based on whether a match was found
+            //         if (found) {
+            //             rows[i].style.display = '';
+            //         } else {
+            //             rows[i].style.display = 'none';
+            //         }
+            //     }
+            // }   
 
-            else {
+            // else {
                 for (let i = 1; i < rows.length; i++) {
                     const cells = rows[i].getElementsByTagName('td');
                     if (cells.length > 2) { // Ensure there are enough cells in the row
@@ -247,7 +246,7 @@
                         }
                     }
                 }
-            }
+            // }
             loader.style.display = 'none';
         });
     }
