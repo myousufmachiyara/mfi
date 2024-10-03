@@ -311,7 +311,7 @@ class ComplainsController extends Controller
 
         $html .= '<table cellpadding="8">';
         $html .= '<tr>';
-        $html .= '<td style="color:red;"><p>Complain Remarks</p></td>';
+        $html .= '<td style="color:red;"><p>'.$complains['complain_detail'].'</p></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
