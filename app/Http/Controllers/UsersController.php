@@ -352,17 +352,12 @@ class UsersController extends Controller
         return redirect()->route('all-users');
     }
 
-    public function getMacAddress() {
-        $mac = null;
-    
-        // Execute the command and capture the output
-        exec('getmac', $mac);
-    
-        // Check if we got a result
-        if (!empty($mac)) {
-            return trim($mac[0]);
+    function getMacAddress() {
+        $output = shell_exec('getmac');
+        if ($output) {
+            $lines = explode("\n", trim($output));
+            return trim($lines[0]);
         }
-    
         return null;
     }
 }
