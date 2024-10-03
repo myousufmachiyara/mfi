@@ -139,6 +139,7 @@
         Route::get('/user/details', [App\Http\Controllers\UsersController::class, 'getUserDetails'])->name('user-details');
         Route::post('/user/change-credentials', [App\Http\Controllers\UsersController::class, 'changeCredentials'])->name('change-user-credentials');
         Route::post('/user/add-device', [App\Http\Controllers\UsersController::class, 'addDevice'])->name('add-user-device');
+        Route::get('/user/mac_address', [App\Http\Controllers\UsersController::class, 'getMacAdd'])->name('user-mac-address');
         Route::post('/user/update', [App\Http\Controllers\UsersController::class, 'updateUser'])->name('update-user');
         Route::post('/user/deactivate', [App\Http\Controllers\UsersController::class, 'deactivateUser'])->name('deactivate-user');
         Route::post('/user/activate', [App\Http\Controllers\UsersController::class, 'activateUser'])->name('activate-user');

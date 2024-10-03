@@ -46,7 +46,8 @@
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-laptop"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#macAddModal" onclick="getMacAdd({{$row->id}})"><i class="fas fa-minus"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
                                                         <td class="actions">
@@ -175,6 +176,37 @@
                                     </tr>
                                 </thead>
                                 <tbody id="acc_attachements">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+        </div>
+
+        <div id="macAddModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">All Devices</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+
+                            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                <thead>
+                                    <tr>
+                                        <th>Device Name</th>
+                                        <th>Device Mac Address</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user_mac_list">
 
                                 </tbody>
                             </table>
@@ -589,6 +621,35 @@
             }
         });
 	}
+
+    function getMacAdd(id){
+
+        var table = document.getElementById('user_mac_list');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/user/mac_address",
+            data: {id:id},
+            success: function(result){
+                console.log(result);
+
+                $.each(result, function(k,v){                    
+                        var html="<tr>";
+                        html+= "<td>"+v['device_name']+"</td>"
+                        html+= "<td>"+v['mac_address']+"</td>"
+                        html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['id']+")'><i class='fas fa-times'></i></a></td>"
+                        html+="</tr>";
+                        $('#user_mac_list').append(html);
+                });
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+    }
 
     function printReport(){
         window.location.href = "{{ route('print-acc')}}";

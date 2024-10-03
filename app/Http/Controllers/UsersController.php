@@ -251,6 +251,14 @@ class UsersController extends Controller
 
     }
 
+    public function getMacAdd(Request $request){
+        $user_mac_address = user_mac_address::where('user_id', $request->id)
+        ->select('id', 'device_name', 'mac_address')
+        ->get();
+
+        return $user_mac_address;
+    }
+
     public function logout()
     {
         Auth::logout();
