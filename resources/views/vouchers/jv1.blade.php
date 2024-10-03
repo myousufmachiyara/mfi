@@ -184,7 +184,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
-                                <select class="form-control"  name="update_ac_dr_sid" required id="update_ac_dr_sid">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="update_ac_dr_sid" required id="update_ac_dr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -193,7 +193,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
-                                <select  class="form-control"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
                                     <option disabled selected>Select Account</option>
                                     @foreach($acc as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
@@ -341,8 +341,6 @@
                 $('#update_amount').val(result['amount']);
                 $('#update_date').val(result['date']);
                 $('#update_remarks').val(result['remarks']);
-                $('#update_ac_cr_sid').select2();
-                $('#update_ac_dr_sid').select2();
             },
             error: function(){
                 alert("error");
