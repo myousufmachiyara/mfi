@@ -46,7 +46,7 @@
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fas fa-sheild-halved"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-laptop"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
                                                         <td class="actions">
