@@ -17,7 +17,7 @@
 									<div class="row">
 										<div class="col-sm-6 mt-3">
 											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Quotation No:</h2>
-											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->prefix}}{{$pur->Sal_inv_no}}</h4>
+											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->prefix}}{{$pur->Sale_inv_no}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
 											<div class="ib">
@@ -184,7 +184,7 @@
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
 								<a onclick="window.location='{{ route('all-tquotation') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sal_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
+								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
 							</div>
 
 						</div>
