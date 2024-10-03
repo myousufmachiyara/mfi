@@ -292,7 +292,7 @@ class ComplainsController extends Controller
         $html .= '<table style="border-bottom: 3px solid #000;" cellpadding="7" >';
         $html .= '<tr>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Company Name: &nbsp;<span style="color:#000">'.$complains['company_name_display'].'</span></td>';
-        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">Company Inv # &nbsp; <span style="color:#000">Here</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">Company Inv # &nbsp; <span style="color:#000">'.$complains['mill_pur_number'].'</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
