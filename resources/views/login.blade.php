@@ -52,7 +52,7 @@
 						@if(isset($error))
 							<div style="color: red;">{{ $error }}</div>
 						@endif
-						<p class="text-dark mb-4">{{$mac_add}}</p>
+						{{-- <p class="text-dark mb-4">{{$mac_add}}</p> --}}
 						<div class="col-sm-8" style="padding: 40px 30px 40px !important;display:inline-block">
 							<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 								@csrf							
