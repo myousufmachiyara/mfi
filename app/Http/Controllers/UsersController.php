@@ -237,7 +237,6 @@ class UsersController extends Controller
             'username' => 'Invalid Credentials.',
         ]);
 
-
     }
 
     public function addDevice(Request $request){
@@ -247,6 +246,9 @@ class UsersController extends Controller
             'mac_address' => $request->user_device_password,
             'created_by' => session('user_id'),
         ]);
+
+        return redirect()->route('all-users');
+
     }
 
     public function logout()

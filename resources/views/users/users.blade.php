@@ -407,7 +407,7 @@
 
         <div id="addMacAdd" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post" action="{{ route('change-user-credentials') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                <form method="post" action="{{ route('add-user-device') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <header class="card-header">
                         <h2 class="card-title">Add User Device</h2>
