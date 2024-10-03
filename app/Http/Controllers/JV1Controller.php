@@ -148,6 +148,26 @@ class JV1Controller extends Controller
         return redirect()->route('all-jv1');
     }
 
+    public function addAtt(Request $request)
+    {
+        $coa_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $jv1_att = new jv1_att();
+                $jv1_att->created_by = session('user_id');                
+                $jv1_att->ac_code = $coa_id;
+                $extension = $file->getClientOriginalExtension();
+                $jv1_att->att_path = $this->jv1Doc($file,$extension);
+                $jv1_att->save();
+            }
+        }
+        return redirect()->route('all-jv1');
+
+    }
+
     public function destroy(Request $request)
     {
         $jv1 = jvsingel::where('auto_lager', $request->delete_auto_lager)->update([

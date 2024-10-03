@@ -214,6 +214,7 @@
 
     Route::middleware(['checkPermission:att_add'])->group(function () {
         Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
+        Route::post('/vouchers/addAtt/', [App\Http\Controllers\JV1Controller::class, 'addAtt'])->name('jv1-att-add');
 
     });
 
