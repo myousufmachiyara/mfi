@@ -71,6 +71,70 @@
 			</div>
 		</section>
 
+        <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
+            <section class="card">
+                <form method="post" action="{{ route('update-jv1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                    @csrf
+                    <header class="card-header">
+                        <h2 class="card-title">Update Journal Voucher</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>JV1 Code</label>
+                                <input type="number" class="form-control" placeholder="JV1 Code" id="update_id" required disabled>
+                                <input type="hidden" class="form-control" placeholder="JV1 Code" name="update_auto_lager" id="update_id_view" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Date</label>
+                                <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name="update_ac_dr_sid" required >
+                                    <option value="" disabled selected>Select Account</option>
+                                    @foreach($acc as $key => $row)	
+                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
+                                    <option disabled selected>Select Account</option>
+                                    @foreach($acc as $key => $row)	
+                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+                                    @endforeach
+                                </select>                            
+                            </div>
+                            <div class="col-lg-6 mb-2">
+                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
+                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step="any" name="update_amount" required>
+                            </div>
+
+                            <div class="col-lg-6 mb-2">
+                                <label>Attachments</label>
+                                <input type="file" class="form-control" name="update_att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+                            </div>  
+                            <div class="col-lg-12 mb-2">
+                                <label>Remarks</label>
+                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
+                            </div>
+                        </div>
+                    
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Update Journal Voucher</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                    </div>
+                </form>
+            </section>
+        </div>
+
         <div id="deleteModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
             <form method="post" action="{{ route('delete-jv1') }}" enctype="multipart/form-data">
                 @csrf
@@ -164,69 +228,6 @@
             </section>
         </div>
 
-        <div id="updateModal" class="modal-block modal-block-primary mfp-hide">
-            <section class="card">
-                <form method="post" action="{{ route('update-jv1') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                    @csrf
-                    <header class="card-header">
-                        <h2 class="card-title">Update Journal Voucher</h2>
-                    </header>
-                    <div class="card-body">
-                        <div class="row form-group">
-                            <div class="col-lg-6">
-                                <label>JV1 Code</label>
-                                <input type="number" class="form-control" placeholder="JV1 Code" id="update_id" required disabled>
-                                <input type="hidden" class="form-control" placeholder="JV1 Code" name="update_auto_lager" id="update_id_view" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Date</label>
-                                <input type="date" class="form-control" placeholder="Date" id="update_date" name="update_date" value="<?php echo date('Y-m-d'); ?>" required>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Debit<span style="color: red;"><strong>*</strong></span></label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name="update_ac_dr_sid" required id="update_ac_dr_sid">
-                                    <option disabled selected>Select Account</option>
-                                    @foreach($acc as $key => $row)	
-                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Account Credit<span style="color: red;"><strong>*</strong></span></label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name ="update_ac_cr_sid" required id="update_ac_cr_sid">
-                                    <option disabled selected>Select Account</option>
-                                    @foreach($acc as $key => $row)	
-                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-                                    @endforeach
-                                </select>                            
-                            </div>
-                            <div class="col-lg-6 mb-2">
-                                <label>Amount<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="number" class="form-control" placeholder="Amount" id="update_amount" value="0" step="any" name="update_amount" required>
-                            </div>
-
-                            <div class="col-lg-6 mb-2">
-                                <label>Attachments</label>
-                                <input type="file" class="form-control" name="update_att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-                            </div>  
-                            <div class="col-lg-12 mb-2">
-                                <label>Remarks</label>
-                                <textarea rows="4" cols="50" class="form-control cust-textarea" placeholder="Remarks" id="update_remarks" name="update_remarks"> </textarea>                            </div>
-                            </div>
-                        </div>
-                    
-                    <footer class="card-footer">
-                        <div class="row">
-                            <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Update Journal Voucher</button>
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
-                            </div>
-                        </div>
-                    </footer>
-                    </div>
-                </form>
-            </section>
-        </div>
 
         <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
             <section class="card">
