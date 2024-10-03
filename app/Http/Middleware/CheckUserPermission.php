@@ -23,7 +23,7 @@ class CheckUserPermission
             return redirect('/login'); // or wherever you want to redirect unauthenticated users
         }
 
-        if ($request->session()->token() !== $request->_token) {
+        if (!$request->session()->token()) {
             return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
         }
 
