@@ -334,7 +334,7 @@ class JV1Controller extends Controller
         $pdf->SetTextColor(23, 54, 93); // RGB values for #17365D
         // First Cell
         $pdf->SetXY(50, $currentY+50);
-        $pdf->Cell(50, 0, "Received By", $style, 1, 'C');
+        $pdf->Cell(50, 0, "Accountant's Signature", $style, 1, 'C');
 
         // Second Cell
         $pdf->SetXY(200, $currentY+50);

@@ -175,14 +175,14 @@
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
 								<a onclick="window.location='{{ route('all-sale2invoices') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<!-- <a href="{{ route('print-sales2-invoice', $pur->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2"> <i class="fas fa-print"></i> Print</a> -->
+							
 								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sal_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
 							</div>
 
 						</div>
 
 						<div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
-							<form method="get" action="{{ route('print-sales2-invoice') }}" enctype="multipart/form-data">
+							<form method="get" action="{{ route('print-sales2-invoice') }}" target="_blank" enctype="multipart/form-data">
 								@csrf
 								<section class="card">
 									<header class="card-header">
