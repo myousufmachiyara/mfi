@@ -58,7 +58,7 @@
                                     <div id="searchloader"></div>
 
                                     <div class="modal-wrapper" style="overflow-x: auto;">
-                                        <table class="table table-bordered table-striped mb-0" id="myTable">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
