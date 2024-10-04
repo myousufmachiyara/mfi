@@ -47,6 +47,9 @@
 												<label class="col-form-label">Sale Inv#</label>
 												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
 												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
+													<!-- Hidden Input Field -->
+													<input type="hidden" placeholder="Sale Inv. No." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
+										
 											</div>
 											
 											<div class="col-sm-12 col-md-4 mb-3">
@@ -479,6 +482,13 @@
             inputField.disabled = true;
             this.textContent = "Enable"; // Change the label back to "Edit" after saving
         }
+    });
+
+
+	// Update the hidden input field on change of the first input field
+	document.getElementById('sale-inv-no').addEventListener('input', function() {
+        var hiddenSaleInvInput = document.getElementById('hidden-sale-inv-no');
+        hiddenSaleInvInput.value = this.value;  // Update the hidden input with the new value
     });
 											
 
