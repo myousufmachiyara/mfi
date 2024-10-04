@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\modules;
 use App\Models\role_access;
+use Illuminate\Support\Facades\Session;
 
 class CheckUserPermission
 {
