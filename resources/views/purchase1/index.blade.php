@@ -253,6 +253,16 @@
 </script>
 
 <script>
+    $(document).ready(function() {
+        $('#searchableTable').DataTable({
+            paging: true,
+            searching: false,
+            ordering: true,
+            order: [[ 0, "desc" ]], // Order by the Age column (index 3)
+            pageLength: 50, // Show 5 records per page
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }
