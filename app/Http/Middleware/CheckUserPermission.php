@@ -22,9 +22,8 @@ class CheckUserPermission
         if (!Auth::check()) {
             return redirect('/login'); // or wherever you want to redirect unauthenticated users
         }
-
-        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
+        if (!Session::has('user_id')) {
+            return redirect()->route('login')->with('error', 'Session is invalid or has expired.');
         }
 
         // Get permissions from db
