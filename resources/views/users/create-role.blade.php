@@ -35,9 +35,9 @@
 							</div>
 							<div class="col-12 mb-3">
 								<section class="card">
-									<div class="card-body" style="overflow-x: auto;">
-										<table class="table table-bordered table-striped mb-0" id="myTable"  >
-											<thead>
+									<div class="card-body" style="height: 450px;overflow-y: auto;padding:0px !important">
+										<table class="table table-bordered table-striped mb-0" id="myTable">
+											<thead style="position: sticky;top: 0;background-color: white; ">
 												<tr>
 													<th>Module Name</th>
 													<th>Create</th>
