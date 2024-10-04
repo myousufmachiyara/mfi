@@ -36,7 +36,8 @@
                                 <div class="card-body">
                                     <div class="row" style="justify-content:end">
                                         <div class="col-md-5" style="display:flex;">
-                                            <select class="form-control" style="margin-right:10px" id="searchColId">
+                                             <!-- id="searchColId" -->
+                                            <select class="form-control" style="margin-right:10px" id="column-select" >
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
@@ -48,14 +49,16 @@
                                                 <option value="8">by Bill Amount</option>
                                                 <option value="12">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
+                                            <!-- <input class="form-control" placeholder="Search Here..." id="column-search" style="margin-right:10px"> -->
+
+                                            <!-- <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px"> -->
                                             <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
                                         </div>
                                     </div>
                                     <div id="searchloader"></div>
 
                                     <div class="modal-wrapper" style="overflow-x: auto;">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                        <table class="table table-bordered table-striped mb-0" id="myTable">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
@@ -194,7 +197,7 @@
 </html>
 
 
-<script>
+<!-- <script>
     function searchTable() {
         const loader = document.getElementById('searchloader');
         loader.style.display = 'block';
@@ -250,16 +253,21 @@
             loader.style.display = 'none';
         });
     }
-</script>
+</script> -->
 
 <script>
     $(document).ready(function() {
-        $('#searchableTable').DataTable({
-            paging: true,
-            searching: false,
-            ordering: true,
-            order: [[ 0, "desc" ]], // Order by the Age column (index 3)
-            pageLength: 50, // Show 5 records per page
+        var table = $('#myTable').DataTable();
+
+        $('#column-search').on('keyup change', function() {
+            var selectedColumn = $('#column-select').val();
+            table.column(selectedColumn).search(this.value).draw();
+        });
+
+        $('#column-select').on('change', function() {
+            // Clear the search input when column is changed
+            $('#column-search').val('');
+            table.column($(this).val()).search('').draw();
         });
     });
 
