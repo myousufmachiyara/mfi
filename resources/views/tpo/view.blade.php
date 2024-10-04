@@ -220,7 +220,7 @@
 
 
 							<div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
-								<form method="get" action="{{ route('print-tpo-invoice') }}" enctype="multipart/form-data">
+								<form method="get" action="{{ route('print-tpo-invoice') }}" target="_blank" enctype="multipart/form-data">
 									@csrf
 									<section class="card">
 										<header class="card-header">

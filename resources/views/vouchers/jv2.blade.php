@@ -44,7 +44,7 @@
                                                     @endif
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('print-jv2', $row->jv_no) }}">
+                                                        <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
                                                             <i class="fas fa-print"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
