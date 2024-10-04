@@ -121,8 +121,7 @@ class UsersController extends Controller
 
     public function updateUser(Request $request)
     {
-    
-        $user = users::where('id', $request->user_id)->first();
+        $user = users::where('id', $request->update_user_id)->first();
 
         if ($request->hasFile('update_att') && $request->file('update_att')) {
             $filePath = public_path($user->picture);
