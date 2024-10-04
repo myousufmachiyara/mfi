@@ -255,7 +255,13 @@
 </script> -->
 <script>
     $(document).ready(function() {
-        var table = $('#searchableTable').DataTable();
+        var table = $('#searchableTable').DataTable({
+            paging: true,
+            searching: false,
+            ordering: true,
+            order: [[ 0, "desc" ]], // Order by the Age column (index 3)
+            pageLength: 50, // Show 5 records per page
+        });
 
         $('#column-search').on('keyup change', function() {
             var selectedColumn = $('#searchColId').val();
