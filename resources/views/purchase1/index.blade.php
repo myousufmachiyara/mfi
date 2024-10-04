@@ -48,9 +48,7 @@
                                                 <option value="8">by Bill Amount</option>
                                                 <option value="12">by Net Amount</option>
                                             </select>
-                                            <input class="form-control" type="text" id="column-search" placeholder="Search..." />
-
-                                            <!-- <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px"> -->
+                                            <input class="form-control" placeholder="Search Here..." onkeyup="searchTable()" id="searchInput" style="margin-right:10px">
                                             <!-- <button class="btn btn-danger" style="width:12em"> <i class="fas fa-filter"> &nbsp;</i> Filter </button> -->
                                         </div>
                                     </div>
@@ -196,7 +194,7 @@
 </html>
 
 
-<!-- <script>
+<script>
     function searchTable() {
         const loader = document.getElementById('searchloader');
         loader.style.display = 'block';
@@ -252,29 +250,8 @@
             loader.style.display = 'none';
         });
     }
-</script> -->
-<script>
-    $(document).ready(function() {
-        var table = $('#searchableTable').DataTable({
-            paging: true,
-            searching: false,
-            ordering: true,
-            order: [[ 0, "desc" ]], // Order by the Age column (index 3)
-            pageLength: 50, // Show 5 records per page
-        });
-
-        $('#column-search').on('keyup change', function() {
-            var selectedColumn = $('#searchColId').val();
-            table.column(selectedColumn).search(this.value).draw();
-        });
-
-        $('#searchColId').on('change', function() {
-            // Clear the search input when column is changed
-            $('#column-search').val('');
-            table.column($(this).val()).search('').draw();
-        });
-    });
 </script>
+
 <script>
     function setId(id){
         $('#deleteID').val(id);
