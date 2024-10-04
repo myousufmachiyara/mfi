@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\modules;
 use App\Models\role_access;
-use Illuminate\Support\Facades\Session;
 
 class CheckUserPermission
 {
@@ -22,9 +21,6 @@ class CheckUserPermission
         // Check if user is authenticated
         if (!Auth::check()) {
             return redirect('/login'); // or wherever you want to redirect unauthenticated users
-        }
-        if (!Session::has('user_id')) {
-            return redirect()->route('login')->with('error', 'Session is invalid or has expired.');
         }
 
         // Get permissions from db
