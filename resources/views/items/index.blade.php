@@ -9,7 +9,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Items</h2>
                                     <form class="text-end" action="{{ route('create-item') }}" method="GET">
-                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
+                                        <button type="button" class="btn btn-primary mt-2 modal-with-zoom-anim ws-normal modal-with-form" href="#createModal"> <i class="fas fa-plus" ></i> New Item (Single) </button>
                                         <button type="submit" class="btn btn-danger mt-2"> <i class="fas fa-plus"></i>  New Item (Multiple) </button>
                                     </form>
                                 </header>
@@ -60,7 +60,7 @@
                                                         <td>{{ intval($row->labourprice) }}</td>
                                                     @endif
                                                     <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                         <span class="separator"> | </span>

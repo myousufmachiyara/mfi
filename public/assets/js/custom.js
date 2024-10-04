@@ -9,6 +9,18 @@ document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
     });
 });
 
+var table = $('#searchableTable').DataTable();
+
+$('#column-search').on('keyup change', function() {
+    var selectedColumn = $('#searchColId').val();
+    table.column(selectedColumn).search(this.value).draw();
+});
+
+$('#searchColId').on('change', function() {
+    // Clear the search input when column is changed
+    $('#column-search').val('');
+    table.column($(this).val()).search('').draw();
+});
 
 
 function convertCurrencyToWords(number) {

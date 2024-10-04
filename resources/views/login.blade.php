@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="fixed">
+<html>
 	<head>
-
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
@@ -40,63 +39,64 @@
 	</head>
 	<body style="background:#fff;">
 		<!-- start: page -->
-		<div style="display:flex">
-			<div class="col-12 col-md-6">
-				<section class="text-center">
-					<a href="/" class="logo">
-						<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
-					</a>					
-					<div style="padding-top:1.5rem;">
+			<div class="row">
+				<div class="col-12 col-md-6 text-center">
+					<div class="container" style="width:60%;position: relative;top: 20%;">
+						<a href="/" class="logo">
+							<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
+						</a>					
 						<h2 class="mb-0 text-primary">Welcome Back</h2>
-						<p class="text-dark mb-4">Please enter your username and password to continue</p>
+						<p class="text-dark mb-4">Please Login To Continue</p>
 						@if(isset($error))
 							<div style="color: red;">{{ $error }}</div>
 						@endif
-						{{-- <p class="text-dark mb-4">{{$mac_add}}</p> --}}
-						<div class="col-sm-8" style="padding: 40px 30px 40px !important;display:inline-block">
-							<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
-								@csrf							
-								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
-											<i class="bx bx-user text-4"></i>
-										</span>
-										<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-									</div>
+						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+							@csrf							
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
+										<i class="bx bx-user text-4"></i>
+									</span>
+									<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 								</div>
+							</div>
 
-								<div class="form-group mb-3">
-									<div class="clearfix">
-										<!-- <a href="pages-recover-password.html" class="float-end">Lost Password?</a> -->
-									</div>
-									<div class="input-group">
-										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
-											<i class="bx bx-lock text-4"></i>
-										</span>
-										<input name="password" class="form-control" type="password" id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-
-									</div>
-									<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
+							<div class="form-group mb-3">
+								<div>
+								</div>
+								<div class="input-group">
+									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
+										<i class="bx bx-lock text-4"></i>
+									</span>
+									<input name="password" class="form-control" type="password" id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 
 								</div>
+								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
 
-								<div class="row">
-									<div class="col-sm-12 text-center">
-										<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
-									</div>
-								</div>
-							</form>
-						</div>
+							</div>
+
+							<div class="col-sm-12">
+								<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
+							</div>
+						</form>
+						<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
 					</div>
-					<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
-				</section>
-			</div>
-			<div class="col-md-6 d-none d-lg-block ">
-				<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
-					<div class="item"><img src="/assets/img/sample-1.jpg" alt=""></div>
+				</div>
+				<div class="col-md-6 d-none d-lg-block">
+					<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
+						<div class="item"><img src="/assets/img/slide1.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide2.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide3.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide4.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide5.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide6.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide7.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide8.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+						<div class="item"><img src="/assets/img/slide9.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
+
+					</div>
 				</div>
 			</div>
-		</div>
 
 		<!-- end: page -->
 
