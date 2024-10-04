@@ -163,11 +163,11 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="complain_detail">Complain Details</label>
-                                <textarea id="complain_detail" rows="4" class="form-control" placeholder="Complain Details" name="complain_detail"></textarea>
+                                <textarea id="complain_detail" rows="4" class="form-control cust-textarea" placeholder="Complain Details" name="complain_detail"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="resolve_remarks">Resolve Remarks</label>
-                                <textarea id="resolve_remarks" rows="4" class="form-control" placeholder="Resolve Remarks" name="resolve_remarks" disabled></textarea>
+                                <textarea id="resolve_remarks" rows="4" class="form-control cust-textarea" placeholder="Resolve Remarks" name="resolve_remarks" disabled></textarea>
                             </div>
                             
                             <div class="col-lg-6 mb-2">
@@ -214,10 +214,12 @@
                                 <input type="number" class="form-control" placeholder="ID" id="update_complain_id" required disabled>
                                 <input type="hidden" class="form-control" placeholder="ID" name="update_id" id="update_id_view" required>
                             </div>
+
                             <div class="col-lg-6 mb-2">
                                 <label>Complain Date<span style="color: red;"><strong>*</strong></span></label>
-                                <input type="date" id="update_complain_date" class="form-control" placeholder="Date" name="update_inv_dat required">
+                                <input type="date" id="update_complain_date" class="form-control" placeholder="Date" name="update_inv_dat" required>
                             </div>
+                            
                             <div class="col-lg-6 mb-2">
                                 <label for="update_mfi_purchase_number">MFI Purchase Number</label>
                                 <input type="text" id="update_mfi_purchase_number" class="form-control" placeholder="MFI Purchase Number" name="update_mfi_pur_number">
@@ -246,11 +248,11 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="update_complain_detail">Complain Details</label>
-                                <textarea id="update_complain_detail" rows="4" class="form-control" placeholder="Complain Details" name="update_complain_detail"></textarea>
+                                <textarea id="update_complain_detail" rows="4" class="form-control cust-textarea" placeholder="Complain Details" name="update_complain_detail"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="update_resolve_remarks">Resolve Remarks</label>
-                                <textarea id="update_resolve_remarks" rows="4" class="form-control" placeholder="Resolve Remarks" name="update_resolve_remarks"></textarea>
+                                <textarea id="update_resolve_remarks" rows="4" class="form-control cust-textarea" placeholder="Resolve Remarks" name="update_resolve_remarks"></textarea>
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label for="update_resolve_date">Resolve Date</label>

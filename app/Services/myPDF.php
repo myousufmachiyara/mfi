@@ -126,6 +126,30 @@ class myPDF extends TCPDF
         if ($number == 1) {  // Special case for "One"
             return "One";
         }
+        if ($number == 2) {  // Special case for "One"
+            return "Two";
+        }
+        if ($number == 3) {  // Special case for "One"
+            return "Three";
+        }
+        if ($number == 4) {  // Special case for "One"
+            return "Four";
+        }
+        if ($number == 5) {  // Special case for "One"
+            return "Five";
+        }
+        if ($number == 6) {  // Special case for "One"
+            return "Six";
+        }
+        if ($number == 7) {  // Special case for "One"
+            return "Seven";
+        }
+        if ($number == 8) {  // Special case for "One"
+            return "Eight";
+        }
+        if ($number == 9) {  // Special case for "One"
+            return "Nine";
+        }
     
         if ($hundreds > 0) {
             $result .= $this->convertSingleDigit($hundreds) . " Hundred ";

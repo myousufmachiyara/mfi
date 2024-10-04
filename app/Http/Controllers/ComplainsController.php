@@ -50,9 +50,10 @@ class ComplainsController extends Controller
         $complains = new complains();
         $complains->created_by = session('user_id');
 
-        if ($request->has('inv_dat') && $request->inv_date) {
-            $complains->complains=$request->complains;
+        if ($request->has('inv_dat') && $request->inv_dat) {
+            $complains->inv_dat = $request->inv_dat;
         }
+        
         if ($request->has('mfi_pur_number') && $request->mfi_pur_number) {
             $complains->mfi_pur_number = $request->mfi_pur_number;
         }
@@ -121,10 +122,9 @@ class ComplainsController extends Controller
         $complains->updated_by  = session('user_id');
 
         // Update fields if present
-        if ($request->has('update_inv_dat') OR empty($request->update_inv_dat)) {
+        if ($request->has('update_inv_dat')) {
             $complains->inv_dat = $request->update_inv_dat;
         }
-
         if ($request->has('update_mfi_pur_number') OR empty($request->update_mfi_pur_number)) {
             $complains->mfi_pur_number = $request->update_mfi_pur_number;
         }
@@ -274,9 +274,9 @@ class ComplainsController extends Controller
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Complain No: &nbsp;<span style="text-decoration: underline;color:#000">'.$complains['id'].'</span></td>';
         $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:center">Complain Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($complains['inv_dat'])->format('d-m-y').'</span></td>';
         if($complains['clear']==0)
-            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="text-decoration: underline;color:#000">Open</span></td>';
+            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="font-size:15px;text-decoration: underline;color:red">Open</span></td>';
         else if($complains['clear']==1)
-            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="text-decoration: underline;color:#000">Clear</span></td>';
+            $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D;text-align:right">Status: &nbsp; <span style="font-size:15px;text-decoration: underline;color:red">Closed</span></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -311,7 +311,7 @@ class ComplainsController extends Controller
 
         $html .= '<table cellpadding="8">';
         $html .= '<tr>';
-        $html .= '<td style="color:red;"><p>'.$complains['complain_detail'].'</p></td>';
+        $html .= '<td style="color:red; word-wrap:break-word;"><p>' . nl2br(htmlspecialchars($complains['complain_detail'])) . '</p></td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -321,22 +321,28 @@ class ComplainsController extends Controller
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
 
-        $html = '<div style="border:1px solid #000;">';
-        $html .= '<table cellpadding="7">';
+
+        $html = '<div style="border:1px solid #000; padding: 10px;">'; // Container for the PDF
+        $html .= '<table cellpadding="7" style="width:100%;">'; // Table for the heading
         $html .= '<tr>';
-        $html .= '<td style="color:red"><h2>Closing Details</h2></td>';
+        $html .= '<td style="color:red; text-align:center;"><h2>Closing Details</h2></td>'; // Centered heading
         $html .= '</tr>';
         $html .= '</table>';
-
-        $html .= '<table style="margin-bottom:5px">';
+        
+        $html .= '<table style="margin-bottom:5px; width:100%;">'; // Table for closing details
         $html .= '<tr>';
-        $html .= '<td style="font-weight:bold;text-align:center;font-size:10px"><p>Closing Date:</p></td>';
+        $html .= '<td style="font-size:10px; font-weight:bold; font-family:poppins; color:#17365D; text-align:right;">Closing Date: &nbsp;<span style="color:#000;">' . \Carbon\Carbon::parse($complains['resolve_date'])->format('d-m-Y') . '</span></td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="color:red; word-wrap:break-word;"><p>' . nl2br(htmlspecialchars($complains['resolve_remarks'])) . '</p></td>';
         $html .= '</tr>';
         $html .= '</table>';
-
+        
         $html .= '</div>';
+        
+        $pdf->writeHTML($html, true, false, true, false, ''); // Write HTML to PDF
+        
 
-        $pdf->writeHTML($html, true, false, true, false, '');
 
         $pdf->Output('Complain'.$complains['id'].'.pdf', 'I');
     }
