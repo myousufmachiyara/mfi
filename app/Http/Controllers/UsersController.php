@@ -65,22 +65,22 @@ class UsersController extends Controller
             ], 422); // Unprocessable Entity status code
         }
 
-        if ($request->hasFile('att') && $request->file('att')) {
+        if ($request->hasFile('att') && $request->file('att') && !empty($request->file('att'))) {
             $file = $request->file('att');
             $extension = $file->getClientOriginalExtension();
-            $this->att_path = $this->UserProfile($file, $extension);
+            $att_path = $this->UserProfile($file, $extension);
         }
 
         if ($request->hasFile('cnic_front') && $request->file('cnic_front')) {
             $file = $request->file('cnic_front');
             $extension = $file->getClientOriginalExtension();
-            $this->cnic_front_path = $this->UserProfile($file, $extension);
+            $cnic_front_path = $this->UserProfile($file, $extension);
         }
 
         if ($request->hasFile('cnic_back') && $request->file('cnic_back')) {
             $file = $request->file('cnic_back');
             $extension = $file->getClientOriginalExtension();
-            $this->cnic_back_path = $this->UserProfile($file, $extension);
+            $cnic_back_path = $this->UserProfile($file, $extension);
         }
         
         try {
@@ -93,9 +93,9 @@ class UsersController extends Controller
                 'phone_no' => $request->phone_no,
                 'address' => $request->address, 
                 'date' => $request->date,      
-                'picture' => $this->att_path,
-                'cnic_front' => $this->cnic_front_path,
-                'cnic_back' => $this->cnic_back_path,
+                'picture' => $att_path,
+                'cnic_front' => $cnic_front_path,
+                'cnic_back' => $cnic_back_path,
                 'created_by' => session('user_id')
             ]);
 
@@ -121,8 +121,7 @@ class UsersController extends Controller
 
     public function updateUser(Request $request)
     {
-    
-        $user = users::where('id', $request->user_id)->first();
+        $user = users::where('id', $request->update_user_id)->first();
 
         if ($request->hasFile('update_att') && $request->file('update_att')) {
             $filePath = public_path($user->picture);
@@ -171,7 +170,7 @@ class UsersController extends Controller
             $user->email=$request->update_email_add;
         }
         if ($request->has('update_cnic_no') && $request->update_cnic_no ) {
-            $user->cnic_no=$request->update_date;
+            $user->cnic_no=$request->update_cnic_no;
         }
         if ($request->has('update_add') && $request->update_add) {
             $user->address=$request->update_add;
