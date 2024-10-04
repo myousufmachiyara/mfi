@@ -15,7 +15,7 @@
 
                     <li class="active">
                         <a class="nav-link" href="/">
-                            <i class="bx bx-home-alt" aria-hidden="true"></i>
+                            <i class="fa fa-home" aria-hidden="true"></i>
                             <span>Home</span>
                         </a>    
                     </li>
@@ -23,7 +23,7 @@
                     @if(((session('user_access')[0]['module_id'])==1 && (session('user_access')[0]['view'])==1) OR ((session('user_access')[1]['module_id'])==2 && (session('user_access')[1]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-user" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-users" aria-hidden="true"></i>
                             <span>Users</span>
                         </a>
                         <ul class="nav nav-children">
@@ -49,7 +49,7 @@
                     @if(((session('user_access')[2]['module_id'])==3 && (session('user_access')[2]['view'])==1) OR ((session('user_access')[3]['module_id'])==4 && (session('user_access')[3]['view'])==1) OR ((session('user_access')[4]['module_id'])==5 && (session('user_access')[4]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-cylinder" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-warehouse" aria-hidden="true"></i>
                             <span>Items</span>
                         </a>
                         <ul class="nav nav-children">
@@ -82,7 +82,7 @@
                     @if(((session('user_access')[5]['module_id'])==6 && (session('user_access')[5]['view'])==1) OR ((session('user_access')[6]['module_id'])==7 && (session('user_access')[6]['view'])==1) OR ((session('user_access')[7]['module_id'])==8 && (session('user_access')[7]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-edit-alt" aria-hidden="true"></i>
+                            <i style="font-size:16px"class="fa fa-money-bill" aria-hidden="true"></i>
                             <span>Accounts</span>                
                         </a>
                         <ul class="nav nav-children">
@@ -116,7 +116,7 @@
                     @if(((session('user_access')[8]['module_id'])==9 && (session('user_access')[8]['view'])==1) OR ((session('user_access')[9]['module_id'])==10 && (session('user_access')[9]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-copy-alt" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-file-invoice" aria-hidden="true"></i>
                             <span>Vouchers</span>     
                         </a>
                         <ul class="nav nav-children">
@@ -143,7 +143,7 @@
                     @if(((session('user_access')[10]['module_id'])==11 && (session('user_access')[10]['view'])==1) OR ((session('user_access')[11]['module_id'])==12 && (session('user_access')[11]['view'])==1) OR ((session('user_access')[12]['module_id'])==13 && (session('user_access')[12]['view'])==1) OR ((session('user_access')[13]['module_id'])==14 && (session('user_access')[13]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-purchase-tag" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-file-import" aria-hidden="true"></i>
                             <span>Purchase</span>     
                         </a>
                         <ul class="nav nav-children">
@@ -186,7 +186,7 @@
                     @if(((session('user_access')[14]['module_id'])==15 && (session('user_access')[14]['view'])==1) OR ((session('user_access')[15]['module_id'])==16 && (session('user_access')[15]['view'])==1) OR ((session('user_access')[16]['module_id'])==17 && (session('user_access')[16]['view'])==1) OR ((session('user_access')[17]['module_id'])==18 && (session('user_access')[17]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-basket" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-file-export" aria-hidden="true"></i>
                             <span>Sale</span>   
                         </a>
                         <ul class="nav nav-children">
@@ -231,7 +231,7 @@
                     @if(((session('user_access')[18]['module_id'])==19 && (session('user_access')[18]['view'])==1) OR ((session('user_access')[19]['module_id'])==20 && (session('user_access')[19]['view'])==1) OR ((session('user_access')[20]['module_id'])==21 && (session('user_access')[20]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link  " href="#">
-                            <i class="bx bx-bar-chart" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-cube" aria-hidden="true"></i>
                             <span>Stock Pipe</span>   
                         </a>
                         <ul class="nav nav-children">
@@ -266,7 +266,7 @@
                     @if(((session('user_access')[21]['module_id'])==22 && (session('user_access')[21]['view'])==1) OR ((session('user_access')[22]['module_id'])==23 && (session('user_access')[22]['view'])==1) OR ((session('user_access')[23]['module_id'])==24 && (session('user_access')[23]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-door-open" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-door-open" aria-hidden="true"></i>
                             <span>Stock Doors</span>   
                         </a>
                         <ul class="nav nav-children">
@@ -301,9 +301,8 @@
                     @if(((session('user_access')[24]['module_id'])==25 && (session('user_access')[24]['view'])==1) OR ((session('user_access')[25]['module_id'])==26 && (session('user_access')[25]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link  " href="#">
-                            <i class="bx bx-file" aria-hidden="true"></i>
-                            <span>Purchase Orders</span>  
-                    
+                        <i style="font-size:16px" class='fa fa-clipboard'></i>
+                        <span>Purchase Orders</span>  
                         </a>
                         <ul class="nav nav-children">
                             @if(((session('user_access')[24]['module_id'])==25 && (session('user_access')[24]['view'])==1))
@@ -330,7 +329,7 @@
                     @if(((session('user_access')[26]['module_id'])==27 && (session('user_access')[26]['view'])==1) OR ((session('user_access')[27]['module_id'])==28 && (session('user_access')[27]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-right-arrow" aria-hidden="true"></i>
+                            <i style="font-size:16px" class="fa fa-file" aria-hidden="true"></i>
                             <span>Quotations</span>  
                         </a>
                         <ul class="nav nav-children">
@@ -358,7 +357,7 @@
                     @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i class="bx bx-right-arrow" aria-hidden="true"></i>
+                            <i style="font-size:16px"class="fa fa-arrow-right"></i>
                             <span>Others</span>  
                         </a>
                         <ul class="nav nav-children">
