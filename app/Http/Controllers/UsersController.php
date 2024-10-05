@@ -32,6 +32,24 @@ class UsersController extends Controller
         return view('users.users',compact('roles','users'));
     }
 
+    public function createValidation(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'username' => 'required|string|max:255|unique:users',
+            'cnic_no' => 'required|string|max:255|unique:users',
+            'phone_no' => 'nullable|string|max:255|unique:users',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422); // Unprocessable Entity status code
+        }
+    }
+    
     public function loginScreen()
     {
         if (Auth::check()) {
@@ -48,22 +66,6 @@ class UsersController extends Controller
         $att_path = '';
         $cnic_front_path = '';
         $cnic_back_path = '';
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'username' => 'required|string|max:255|unique:users',
-            'cnic_no' => 'required|string|max:255|unique:users',
-            'phone_no' => 'nullable|string|max:255|unique:users',
-        ]);
-    
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422); // Unprocessable Entity status code
-        }
 
         if ($request->hasFile('att') && $request->file('att') && !empty($request->file('att'))) {
             $file = $request->file('att');
