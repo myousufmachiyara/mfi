@@ -120,8 +120,8 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 
-											<div class="col-6 mb-2">
-												<label class="col-form-label">Previous Invoices</label>
+											<div class="col-4 mb-2">
+												<label class="col-form-label">Account Name</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
@@ -133,9 +133,14 @@
 
 											</div>
 
-											<div class="col-6 mb-2">
+											<div class="col-4 mb-2">
 												<label class="col-form-label">Unadjusted Amount</label>
 												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+											</div>
+
+											<div class="col-4 mb-2">
+												<label class="col-form-label">Total Amount</label>
+												<input type="number" id="total_reci_amount" class="form-control" value="0" disabled step="any">
 											</div>
 
 											<div class="col-12 mb-2" >
@@ -247,14 +252,27 @@
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
-			if(total_debit==total_credit){
+			var isChecked = $('#SaletoggleSwitch').is(':checked');
+
+			if(isChecked){
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted")
+				}
+			}
+			else if(total_debit==total_credit){
 				var form = document.getElementById('addForm');
 				form.submit();
 			}
 			else{
 				alert("Total Debit & Credit Must be Equal")
 			}
-
 		});	
 		
 		document.getElementById('SaletoggleSwitch').addEventListener('change', SaletoggleInputs);
@@ -376,7 +394,7 @@
 							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 							html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='rec_amount[]' required></td>"
+							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='rec_amount[]' onchange='totalReci()' required></td>"
 							html+="</tr>";
 							$('#pendingInvoices').append(html);
 							counter++;
@@ -390,6 +408,23 @@
 		}
 	}
 
+
+	function totalReci() {
+		var totalRec = 0; // Initialize the total amount variable
+		var table = document.getElementById("pendingInvoices"); // Get the table element
+		var rowCount = table.rows.length; // Get the total number of rows
+
+		// Loop through each row in the table
+		for (var i = 0; i < rowCount; i++) {
+			var input = table.rows[i].cells[4].querySelector('input'); // Get the input field in the specified cell
+			if (input) { // Check if the input exists
+				var rec = Number(input.value); // Convert the input value to a number
+				totalRec += isNaN(rec) ? 0 : rec; // Add to totalRec, handle NaN cases
+			}
+		}
+		
+		$('#total_reci_amount').val(totalRec); // Set the total in the corresponding input field
+	}
 
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();

@@ -92,7 +92,7 @@
 								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">Commission Form</h2>
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" value="0" id="toggleSwitch">
+										<input class="form-check-input" type="checkbox" value="0" id="toggleSwitch" onchange="toggleInputs(this)">
 										<input type="hidden" class="form-control" name="isCommissionForm" value="0" id="isCommissionForm">
 									</div>
 								</header>								
@@ -302,9 +302,6 @@
 						return false;
 					}
 				});
-
-				// document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
-				toggleInputs();
 			});
 
 
@@ -504,6 +501,17 @@
 			}
 
 			function toggleInputs() {
+
+				if (checkbox.checked) {
+					// Checkbox is checked
+					console.log("Checkbox is checked!");
+					// You can add your logic here
+				} else {
+					// Checkbox is unchecked
+					console.log("Checkbox is unchecked!");
+					// You can add your logic here
+				}
+
 				const isChecked = document.getElementById('toggleSwitch').checked;
 				const inputGroups = document.querySelectorAll('.comm-form-field');
 				inputGroups.forEach(input => {
