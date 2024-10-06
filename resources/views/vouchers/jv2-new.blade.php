@@ -252,9 +252,13 @@
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
+
 			var isChecked = $('#SaletoggleSwitch').is(':checked');
 
 			if(isChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var total_reci_amount=$('#total_reci_amount').val();
+
 				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount){
 					var form = document.getElementById('addForm');
 					form.submit();
