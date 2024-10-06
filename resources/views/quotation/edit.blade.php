@@ -13,7 +13,7 @@
 										<h2 class="card-title">Edit Quotation</h2>
 
 										<div class="card-actions">
-											<button type="button" id="btn_add" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" id="btn_add" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
 
@@ -302,38 +302,25 @@
 			index++;
 
 			var itemCount = Number($('#itemCount').val());
-			itemCount = itemCount+1;
-			$('#itemCount').val(itemCount);
-			$('#myTable select[data-plugin-selecttwo]').select2();
+				itemCount = itemCount+1;
+				$('#itemCount').val(itemCount);
+				$('#myTable select[data-plugin-selecttwo]').select2();
 
-			 // Set focus on the new item_code input field
-			// document.getElementById('item_code' + (index - 1)).focus();
-
-			document.getElementById('btn_add').addEventListener('click', function() {
-    // Assuming 'index' is defined and incremented somewhere in your code
-    if (typeof index !== 'undefined') {
-        let itemCodeElement = document.getElementById('item_code' + (index - 1));
-        
-        // Check if the element with the calculated id exists
-        if (itemCodeElement) {
-            itemCodeElement.focus();
-        } else {
-            console.error('Element with id item_code' + (index - 1) + ' not found');
-        }
-    } else {
-        console.error('Index is not defined');
-    }
-});
-
-			 
-			
+	 
+			}
 		}
 		
+		function addNewRow_btn() {
 
-	}
+    		addNewRow(); // Call the same function
+			// Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
 
 
-	function getItemDetails(row_no,option){
+		}
+
+
+		function getItemDetails(row_no,option){
 		var itemId;
 		if(option==1){
 			itemId = document.getElementById("item_code"+row_no).value;

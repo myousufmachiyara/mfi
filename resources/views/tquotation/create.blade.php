@@ -12,7 +12,7 @@
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">New Quotation Pipes/Garders</h2>
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
 
@@ -178,10 +178,6 @@
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">GST</label>
-													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
-												</div> -->
 
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
@@ -304,10 +300,18 @@
 					$('#myTable select[data-plugin-selecttwo]').select2();
 
 
-					// Set focus on the new item_code input field
-					document.getElementById('item_code' + (index - 1)).focus();
+					
 
 				}
+			}
+
+			function addNewRow_btn() {
+
+			addNewRow(); // Call the same function
+			// Set focus on the new item_code input field
+			document.getElementById('item_cod' + (index - 1)).focus();
+
+
 			}
 
 			function getItemDetails(row_no,option){

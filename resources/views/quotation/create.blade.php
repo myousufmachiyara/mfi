@@ -12,7 +12,7 @@
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">New Quotation</h2>
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
 
@@ -303,12 +303,19 @@ var index=2;
 			$('#myTable select[data-plugin-selecttwo]').select2();
 			 
 			
+		}
+		}
+		
+		function addNewRow_btn() {
+
+    		addNewRow(); // Call the same function
 			// Set focus on the new item_code input field
 			document.getElementById('item_code' + (index - 1)).focus();
-		}
-	}
 
-	function getItemDetails(row_no,option){
+
+		}
+
+		function getItemDetails(row_no,option){
 		var itemId;
 		if(option==1){
 			itemId = document.getElementById("item_code"+row_no).value;

@@ -44,7 +44,7 @@
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit JV2 Details</h2>
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
@@ -217,7 +217,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow()" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow_btn()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
