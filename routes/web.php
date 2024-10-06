@@ -33,6 +33,7 @@
         Route::get('/tpo/all-tpo', [App\Http\Controllers\TpoController::class, 'index'])->name('all-tpo');
         Route::get('/quotation/all-quotation', [App\Http\Controllers\QuotationController::class, 'index'])->name('all-quotation');
         Route::get('/tquotation/all-tquotation', [App\Http\Controllers\TQuotationController::class, 'index'])->name('all-tquotation');
+        Route::get('/weight/all-weight', [App\Http\Controllers\WeightController::class, 'index'])->name('all-weight');
         Route::get('/po/show/{id}', [App\Http\Controllers\PoController::class, 'show'])->name('show-po');
         Route::get('/purchase2/show/{id}', [App\Http\Controllers\Purchase2Controller::class, 'show'])->name('show-purchases2');
         Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'showNew'])->name('show-sale-invoice');
@@ -41,6 +42,7 @@
         Route::get('/tpo/show/{id}', [App\Http\Controllers\TpoController::class, 'show'])->name('show-tpo');
         Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'show'])->name('show-stock-in-invoice');
         Route::get('/tquotation/show/{id}', [App\Http\Controllers\TQuotationController::class, 'show'])->name('show-tquotation');
+        Route::get('/weight/show/{id}', [App\Http\Controllers\WeightController::class, 'show'])->name('show-weight');
         Route::get('/purchase1/show/{id}', [App\Http\Controllers\PurchaseController::class, 'show'])->name('show-purchases1');
         Route::get('/vouchers/show/{id}', [App\Http\Controllers\JV1Controller::class, 'show'])->name('show-jv1');
         Route::get('/tbad_dabs/show/{id}', [App\Http\Controllers\TBadDabsController::class, 'show'])->name('show-tbad-dabs');
@@ -77,7 +79,9 @@
         Route::get('/stock_out/download/{id}', [App\Http\Controllers\StockOutController::class, 'downloadAtt'])->name('stock-out-att-download');
         Route::get('/stock_out/view/{id}', [App\Http\Controllers\StockOutController::class, 'view'])->name('show-stock-out-att');
         Route::get('/tquotation/view/{id}', [App\Http\Controllers\TQuotationController::class, 'view'])->name('show-tquotation-att');
+        Route::get('/weight/view/{id}', [App\Http\Controllers\WeightController::class, 'view'])->name('show-weight-att');
         Route::get('/tquotation/download/{id}', [App\Http\Controllers\TQuotationController::class, 'downloadAtt'])->name('tquotation-att-download');
+        Route::get('/weight/download/{id}', [App\Http\Controllers\WeightController::class, 'downloadAtt'])->name('weight-att-download');
         Route::post('/complains/downloadAll', [App\Http\Controllers\ComplainsController::class, 'downloadAllAtt'])->name('complains-att-download-all');
         Route::get('/complains/download/{id}', [App\Http\Controllers\ComplainsController::class, 'downloadAtt'])->name('complains-att-download');
         Route::get('/complains/view/{id}', [App\Http\Controllers\ComplainsController::class, 'view'])->name('complains-att-view');
@@ -121,6 +125,8 @@
         Route::post('/purchase1/create', [App\Http\Controllers\PurchaseController::class, 'store'])->name('store-purchases1');
         Route::get('/tquotation/new', [App\Http\Controllers\TQuotationController::class, 'create'])->name('new-tquotation');
         Route::post('/tquotation/create', [App\Http\Controllers\TQuotationController::class, 'store'])->name('store-tquotation');
+        Route::get('/weight/new', [App\Http\Controllers\WeightController::class, 'create'])->name('new-weight');
+        Route::post('/weight/create', [App\Http\Controllers\WeightController::class, 'store'])->name('store-weight');
         Route::post('/complains/create', [App\Http\Controllers\ComplainsController::class, 'store'])->name('store-complains');
         Route::post('/stock_in/create', [App\Http\Controllers\StockInController::class, 'store'])->name('store-stock-in-invoice');
         Route::get('/bad_dabs/new', [App\Http\Controllers\BadDabsController::class, 'create'])->name('create-bad-dabs'); 
@@ -154,6 +160,8 @@
         Route::post('/quotation/update', [App\Http\Controllers\QuotationController::class, 'update'])->name('update-quotation-invoice');
         Route::get('/tquotation/edit/{id}', [App\Http\Controllers\TQuotationController::class, 'edit'])->name('edit-tquotation');
         Route::post('/tquotation/update', [App\Http\Controllers\TQuotationController::class, 'update'])->name('update-tquotation');
+        Route::get('/weight/edit/{id}', [App\Http\Controllers\WeightController::class, 'edit'])->name('edit-weight');
+        Route::post('/weight/update', [App\Http\Controllers\WeightController::class, 'update'])->name('update-weight');
         Route::post('/complains/update', [App\Http\Controllers\ComplainsController::class, 'update'])->name('update-complains');
         Route::post('/stock_out/update', [App\Http\Controllers\StockOutController::class, 'update'])->name('update-stock-out-invoice');
         Route::get('/tstock_out/edit/{id}', [App\Http\Controllers\TStockOutController::class, 'edit'])->name('edit-tstock-out-invoice');
@@ -199,6 +207,7 @@
         Route::post('/tpo/delete', [App\Http\Controllers\TpoController::class, 'destroy'])->name('delete-tpo');
         Route::post('/quotation/delete', [App\Http\Controllers\QuotationController::class, 'destroy'])->name('delete-quotation-invoice');
         Route::post('/tquotation/delete', [App\Http\Controllers\TQuotationController::class, 'destroy'])->name('delete-tquotation');
+        Route::post('/weight/delete', [App\Http\Controllers\WeightController::class, 'destroy'])->name('delete-weight');
         Route::post('/purchase1/delete', [App\Http\Controllers\PurchaseController::class, 'destroy'])->name('delete-purchases1');
         Route::post('/coa/delete', [App\Http\Controllers\COAController::class, 'destroy'])->name('delete-acc');
         Route::post('/coa-sub-heads/delete', [App\Http\Controllers\COASubHeadsController::class, 'destroy'])->name('delete-acc-sub-heads-groups');
@@ -227,6 +236,7 @@
         Route::delete('/purchase1/deleteAttachment/{id}', [App\Http\Controllers\PurchaseController::class, 'deleteAtt'])->name('purc1-att-delete');
         Route::delete('/complains/deleteAttachment/{id}', [App\Http\Controllers\ComplainsController::class, 'deleteAtt'])->name('complains-att-delete');
         Route::delete('/tquotation/deleteAttachment/{id}', [App\Http\Controllers\TQuotationController::class, 'deleteAtt'])->name('tquotation-att-delete');
+        Route::delete('/weight/deleteAttachment/{id}', [App\Http\Controllers\WeightController::class, 'deleteAtt'])->name('weight-att-delete');
         Route::delete('/stock_out/deleteAttachment/{id}', [App\Http\Controllers\StockOutController::class, 'deleteAtt'])->name('stock-out-att-delete');
         Route::delete('/stock_in/deleteAttachment/{id}', [App\Http\Controllers\StockInController::class, 'deleteAtt'])->name('stock-in-delete-att');
         Route::delete('/tstock_out/deleteAttachment/{id}', [App\Http\Controllers\TStockOutController::class, 'deleteAtt'])->name('tstock-out-att-delete');
@@ -251,7 +261,7 @@
         Route::get('/vouchers2/print/{id}', [App\Http\Controllers\JV2Controller::class, 'print'])->name('print-jv2');
         Route::get('/vouchers/print/{id}', [App\Http\Controllers\JV1Controller::class, 'print'])->name('print-jv1');
         Route::get('/complains/print/{id}', [App\Http\Controllers\ComplainsController::class, 'print'])->name('print-complains');
-        Route::get('/tquotation/generatePDF/{id}', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tquotation-invoice');
+        Route::get('/weight/generatePDF/{id}', [App\Http\Controllers\WeightController::class, 'generatePDF'])->name('print-weight-invoice');
         Route::get('/tpo/generatePDF/', [App\Http\Controllers\TpoController::class, 'generatePDF'])->name('print-tpo-invoice');
         Route::get('/quotation/generatePDF/{id}', [App\Http\Controllers\QuotationController::class, 'generatePDF'])->name('print-quotation-invoice');
         Route::get('/quotation/downloadPDF/{id}', [App\Http\Controllers\QuotationController::class, 'downloadPDF'])->name('download-quotation-invoice');
@@ -291,6 +301,9 @@
         Route::get('/tquotation/getunclosed/', [App\Http\Controllers\TQuotationController::class, 'getunclosed'])->name('get-unclosed-tquotation-invoice');
         Route::get('/tquotation/getItems/{id}', [App\Http\Controllers\TQuotationController::class, 'getItems'])->name('get-quot2-items');
         Route::get('/tquotation/getavailablestock/{id}', [App\Http\Controllers\TQuotationController::class, 'getavailablestock'])->name('qout-item-stock-bal');
+        Route::get('/weight/getunclosed/', [App\Http\Controllers\WeightController::class, 'getunclosed'])->name('get-unclosed-weight-invoice');
+        Route::get('/weight/getItems/{id}', [App\Http\Controllers\WeightController::class, 'getItems'])->name('get-weight-items');
+        Route::get('/weight/getavailablestock/{id}', [App\Http\Controllers\WeightController::class, 'getavailablestock'])->name('weightt-item-stock-bal');
         Route::get('/complains/detail', [App\Http\Controllers\ComplainsController::class, 'getcomplainsDetails'])->name('get-complains-details');
         Route::get('/coa/detail', [App\Http\Controllers\COAController::class, 'getAccountDetails'])->name('get-acc-details');
         Route::post('/items/new-item/validate', [App\Http\Controllers\ItemsController::class, 'validation'])->name('validate-item');
@@ -301,6 +314,7 @@
         Route::get('/vouchers/attachements', [App\Http\Controllers\JV1Controller::class, 'getAttachements'])->name('get-jv1-att');
         Route::get('/complains/attachements', [App\Http\Controllers\ComplainsController::class, 'getAttachements'])->name('get-complains-att');
         Route::get('/tquotation/attachements', [App\Http\Controllers\TQuotationController::class, 'getAttachements'])->name('get-tquotation-att');
+        Route::get('/weight/attachements', [App\Http\Controllers\WeightController::class, 'getAttachements'])->name('get-weight-att');
         Route::get('/stock_out/attachements', [App\Http\Controllers\StockOutController::class, 'getAttachements'])->name('get-stock-out-att');
         Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
         Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-tstock-out-att');

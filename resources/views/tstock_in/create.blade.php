@@ -13,7 +13,7 @@
 										<h2 class="card-title">New Stock In Pipe/Garder</h2>
                                         <div class="card-actions">
 											<button type="button" class="btn btn-danger modal-with-zoom-anim ws-normal mb-2" onclick="getPurchase2()" href="#getPurchase2"> Get Unclosed Purchase2 </button>
-											<button type="button" class="btn btn-primary mb-2" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary mb-2" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
 
@@ -229,11 +229,19 @@
             $('#itemCount').val(Number($('#itemCount').val()) + 1);
             $('#myTable select[data-plugin-selecttwo]').select2();
 
-            // Set focus on the new item_code input field
-		    document.getElementById('item_code' + (index - 1)).focus();
 
         }
     }
+
+    function addNewRow_btn() {
+
+    addNewRow(); // Call the same function
+    // Set focus on the new item_code input field
+    document.getElementById('item_code' + (index - 1)).focus();
+
+
+    }
+
 
     function getItemDetails(row_no, option) {
         var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();

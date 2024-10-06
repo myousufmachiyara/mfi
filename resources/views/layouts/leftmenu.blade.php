@@ -364,7 +364,7 @@
 
                             @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
                             <li>
-                                <a class="nav-link"   href="#">
+                                <a class="nav-link"   href="{{ route('all-weight')}}">
                                     Weight
                                 </a>
                             </li>	

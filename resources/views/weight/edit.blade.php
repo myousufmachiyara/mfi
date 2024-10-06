@@ -344,13 +344,12 @@
 
 	function addNewRow_btn() {
 
-	addNewRow(); // Call the same function
-	// Set focus on the new item_code input field
-	document.getElementById('item_cod' + (index - 1)).focus();
+		addNewRow(); // Call the same function
+		// Set focus on the new item_code input field
+		document.getElementById('item_cod' + (index - 1)).focus();
 
 
-	}
-
+	}	
 
 	function getItemDetails(row_no,option){
 		var itemId;

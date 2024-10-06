@@ -1,161 +1,95 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.pageheader')
-			<div class="inner-wrapper">
+		@include('../layouts.pageheader')
+		<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					<form method="post" action="{{ route('store-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('store-tquotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-12 col-md-4 mb-3">								
-								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Purchase Details</h2>
-									</header>
-
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Invoice No.</label>
-												<input type="text" placeholder="(New Invoice)" class="form-control" disabled>
-												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-											</div>
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" autofocus value="<?php echo date('Y-m-d'); ?>" class="form-control">
-											</div>
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" class="form-control">
-											</div>
-											<div class="col-6 mb-3">
-												<label class="col-form-label">Attachements</label>
-												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-											</div>
-											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Company Name <span style="color: red;">*</span></label>
-												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
-													<option value="" disabled selected>Select Company Account</option>
-													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-													@endforeach
-												</select>
-											</div>
-											
-									  </div>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-12 col-md-4 mb-3">								
-								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Dispatch Details</h2>
-									</header>
-
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Customer Name<span style="color: red;"><strong>*</strong></span></label>
-												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
-													<option value="" disabled selected>Select Customer Account</option>
-													@foreach($coa as $key => $row)	
-														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-													@endforeach
-												</select>
-											</div>
-											<div class="col-sm-3 col-md-6 mb-2">
-												<label class="col-form-label" >Name of Person</label>
-												<input type="text" placeholder="Name of Person" name="Cash_pur_name" class="form-control">
-											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sal_inv_no" disabled class="form-control">
-											</div>
-
-											<div class="col-sm-3 col-md-6 mb-2">
-												<label class="col-form-label" >Person Address</label>
-												<input type="text" placeholder="Person Address" name="cash_Pur_address" class="form-control">
-											</div>
-
-											<div class="col-12 mb-12">
-												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
-											</div>	
-
-									  </div>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-12 col-md-4 mb-3">
-								<header class="card-header" style="display: flex;justify-content: space-between;">
-									<h2 class="card-title">Commission Form</h2>
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" value="0" id="toggleSwitch" onchange="toggleInputs(this)">
-										<input type="hidden" class="form-control" name="isCommissionForm" value="0" id="isCommissionForm">
-									</div>
-								</header>								
-								<section class="card">
-									<div class="card-body" style="background: #2023240f !important">
-										<div class="row form-group mb-2">
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field">
-											</div>
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field">
-											</div>
-
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Bill Amount After Discount</label>
-												<input type="number" value="0" id="BillAfterDisc" step="any" required disabled class="form-control comm-form-field">
-											</div>
-
-											<div class="col-6 mb-2">
-												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field">
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Item Group<span style="color: red;"><strong>*</strong></span></label>
-												<select data-plugin-selecttwo class="form-control comm-form-field select2-js"  name="tax_item_name" required>
-													<option value="" disabled selected>Select Account</option>
-													@foreach($item_group as $key => $row)	
-														<option value="{{$row->item_group_cod }}">{{$row->group_name}}</option>
-													@endforeach
-												</select>											
-											</div>
-
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"></textarea>
-											</div>
-									  </div>
-									</div>
-								</section>
-							</div>
-
-							<div class="col-12 mb-3">
+							<div class="col-12 mb-3">								
 								<section class="card">
 									<header class="card-header" style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">New Purchase Pipe</h2>
-
+										<h2 class="card-title">New Quotation Pipes/Garders</h2>
 										<div class="card-actions">
 											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 									</header>
+
+									<div class="card-body">
+										<div class="row form-group mb-2">
+											<div class="col-6 col-md-2 mb-2">
+												<label class="col-form-label" >Quotation No.</label>
+												<input type="text" placeholder="(New Quotation)" class="form-control" disabled>
+												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+											</div>
+											<div class="col-6 col-md-2 mb-2">
+												<label class="col-form-label" >Date</label>
+												<input type="date" name="sa_date" autofocus value="<?php echo date('Y-m-d'); ?>" class="form-control">
+											</div>
+											
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Custmer Name <span style="color: red;">*</span></label>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
+													<option value="" disabled selected>Select Custmer Name</option>
+													@foreach($coa as $key => $row)	
+														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="col-6 col-md-2 mb-2">
+												<label class="col-form-label" >PO#</label>
+												<input type="text" placeholder="PO#" name="pur_ord_no" class="form-control">
+											</div>
+											
+											<div class="col-6 col-md-2 mb-2">
+												<label class="col-form-label" >Sale Inv. No.</label>
+												<input type="text" placeholder="Sale Inv. No." name="sal_inv_no" disabled class="form-control">
+											</div>
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
+													<option value="" disabled selected>Select Dispatch From</option>
+													@foreach($coa as $key => $row)	
+														<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="col-sm-3 col-md-2 mb-2">
+												<label class="col-form-label" >Name of Person</label>
+												<input type="text" placeholder="Name of Person" name="Cash_pur_name" class="form-control">
+											</div>
+
+											<div class="col-sm-3 col-md-2 mb-2">
+												<label class="col-form-label" >Person Address</label>
+												<input type="text" placeholder="Person Address" name="cash_Pur_address" class="form-control">
+											</div>
+											<div class="col-sm-12 col-md-4 mb-3">
+												<label class="col-form-label">Attachements</label>
+												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
+											</div>
+
+											<div class="col-12 col-md-6 mb-12">
+												<label class="col-form-label">Remarks</label>
+												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label">Terms And Conditions</label>
+												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">
+* This Quotation is valid for 2 days from the date issued. After this period, a new quotation may be required.
+* The quotation includes only the services/products explicitly stated. Any additional services/products will be subject to further discussion and agreement.
+* Prices quoted are subject to change based on market shift, making this quotation void without any notice. All prices are exclusive of applicable taxes unless stated otherwise.(No additional taxes will be deducted from this amount)
+* Payment terms will be outlined in the final agreement. A deposit of mutually agreed percentage may be required upon acceptance of the quotation.
+* Delivery dates provided are estimates and may be subject to change based on circumstances beyond our control.
+* Cancellations must be made in writing. Fees may apply depending on the stage of the project and incurred costs.
+* We are not liable for any indirect, incidental, or consequential damages arising from the services/products provided.
+* Both parties agree to maintain confidentiality regarding any proprietary information exchanged during the quotation process.
+* These terms shall be governed by the laws of Islamic Republic of Pakistan.</textarea>
+											</div>
+									  </div>
+									</div>
+						
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
@@ -164,17 +98,18 @@
 													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
 													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
-													<th width="7,5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Len<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<!-- <th width="7%">Weight/Pc</th> -->
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Price Date</th>
+													<th width="7%">Stock</th>
 													<th width=""></th>
 												</tr>
 											</thead>
-											<tbody id="Purchase2Table">
+											<tbody id="Quotation2Table">
 												<tr>
 													<td>
 														<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod1" onchange="getItemDetails(1,1)" required>
@@ -214,7 +149,9 @@
 														<input type="date" class="form-control" disabled id="pur2_price_date1">
 														<input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show1">
 													</td>
-
+													<td>
+														<input type="number" class="form-control" id="stock1" name="stock[]" value="0" required step="any" disabled>
+													</td>	
 													<td style="vertical-align: middle;">
 														<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
 													</td>
@@ -240,6 +177,11 @@
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
+
+												<!-- <div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+													<label class="col-form-label">GST</label>
+													<input type="text" id="gst" name="gst_pur" onchange="netTotal()" placeholder="GST" class="form-control">
+												</div> -->
 
 												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
@@ -275,8 +217,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Invoice</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-tquotation') }}'"> <i class="fas fa-trash"></i> Discard Invoice</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Add Quotation</button>
 											</div>
 										</div>
 									</footer>
@@ -288,12 +230,9 @@
 				</section>
 			</div>
 		</section>
-       
-		 
+    
 		<script>
-
 			var index=2;
-			var itemCount = Number($('#itemCount').val());
 
 			$(document).ready(function() {
 				$(window).keydown(function(event){
@@ -304,11 +243,9 @@
 				});
 			});
 
-
-
 			function removeRow(button) {
 				console.log("before remove");
-				var tableRows = $("#Purchase2Table tr").length;
+				var tableRows = $("#Quotation2Table tr").length;
 				if(tableRows>1){
 					var row = button.parentNode.parentNode;
 					row.parentNode.removeChild(row);
@@ -338,10 +275,11 @@
 					var cell9 = newRow.insertCell(8);
 					var cell10 = newRow.insertCell(9);
 					var cell11 = newRow.insertCell(10);
+					var cell12 = newRow.insertCell(11);
 
 
 					cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
-					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+					cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 											'<option value="" disabled selected>Select Item</option>'+
 											'@foreach($items as $key => $row)'+	
 												'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -355,7 +293,8 @@
 					cell8.innerHTML  = '<input type="number" class="form-control" id="pur2_qty'+index+'" value="0" step="any" required disabled><input type="hidden" class="form-control" name="pur2_qty[]" id="pur2_qty_show1" value="0" step="any" required>';
 					cell9.innerHTML  = '<input type="number" id="amount'+index+'" class="form-control"  value="0" step="any" disabled>';
 					cell10.innerHTML = '<input type="date" disabled class="form-control" id="pur2_price_date'+index+'" required><input type="hidden" class="form-control" name="pur2_price_date[]" id="pur2_price_date_show'+index+'">';
-					cell11.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
+					cell11.innerHTML  = '<input type="number" class="form-control" id="stock'+index+'" name="stock[]" value="0" step="any" disabled>';
+					cell12.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
 					index++;
 
@@ -363,12 +302,10 @@
 					itemCount = itemCount+1;
 					$('#itemCount').val(itemCount);
 					$('#myTable select[data-plugin-selecttwo]').select2();
-					
-        
 
 				}
 			}
-		
+			
 			function addNewRow_btn() {
 
 				addNewRow(); // Call the same function
@@ -376,7 +313,7 @@
 				document.getElementById('item_cod' + (index - 1)).focus();
 
 
-			}
+			}	
 
 			function getItemDetails(row_no,option){
 				var itemId;
@@ -398,7 +335,8 @@
 						$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
 						$('#pur2_price_date_show'+row_no).val(result[0]['pur_rate_date']);
 						$('#weight_per_piece'+row_no).val(result[0]['weight']);
-						$('#weight_per_piece'+row_no+'').trigger('change')
+						$('#weight_per_piece'+row_no+'').trigger('change');
+						getavailablestock(result[0]['it_cod'],row_no);
 						addNewRow();
 					},
 					error: function(){
@@ -407,13 +345,7 @@
 				});
 			}
 
-			function CalBillAfterDisc(){
-				var basic_amount = parseFloat($('#basic_amount').val());
-				var basic_amount_disc = parseFloat($('#basic_amount_disc').val());
-
-				sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
-				$('#BillAfterDisc').val(sum);
-			}
+			
 
 			function getCOADetails(){
 				var coaId = document.getElementById("coa_name").value;
@@ -432,6 +364,23 @@
 					}
 				});
 			}
+
+			function getavailablestock(item_id,row_no){				
+				$.ajax({
+					type: "GET",
+					url: "/tquotation/getavailablestock/"+item_id,
+					success: function(result){
+						$('#stock'+row_no).val(result[0]['opp_bal']);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+
+
+
+
 
 			function rowTotal(index){
 
@@ -456,7 +405,7 @@
 				var totalAmount=0;
 				var totalWeight=0;
 				var totalQuantity=0;
-				var tableRows = $("#Purchase2Table tr").length;
+				var tableRows = $("#Quotation2Table tr").length;
 				var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
 
 				for (var i = 0; i < tableRows; i++) {
@@ -508,36 +457,7 @@
 				rowTotal(index);
 			}
 
-			function toggleInputs() {
-
-				if (checkbox.checked) {
-					// Checkbox is checked
-					console.log("Checkbox is checked!");
-					// You can add your logic here
-				} else {
-					// Checkbox is unchecked
-					console.log("Checkbox is unchecked!");
-					// You can add your logic here
-				}
-
-				const isChecked = document.getElementById('toggleSwitch').checked;
-				const inputGroups = document.querySelectorAll('.comm-form-field');
-				inputGroups.forEach(input => {
-					// Show or hide input groups based on the toggle switch state
-					if (input.id !== 'BillAfterDisc') {
-						input.disabled = !isChecked;
-					}
-				});
-				
-				var switchElement = document.getElementById('toggleSwitch');
-				if(switchElement.checked){
-					$('#isCommissionForm').val(1);
-				}
-				else{
-					$('#isCommissionForm').val(0);
-				}
-			}
-
+			
 		</script>
 	@include('../layouts.footerlinks')
 	</body>

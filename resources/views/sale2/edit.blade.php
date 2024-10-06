@@ -94,7 +94,7 @@
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 										<h2 class="card-title">Edit Sale 2 Invoice Details</h2>
 									</header>
@@ -345,11 +345,17 @@
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
-			// Set focus on the new item_code input field
-			document.getElementById('item_code' + (index - 1)).focus();
-        
-
+			
 		}
+	}
+
+	function addNewRow_btn() {
+
+	addNewRow(); // Call the same function
+	// Set focus on the new item_code input field
+	document.getElementById('item_cod' + (index - 1)).focus();
+
+
 	}
 
 	function getItemDetails(row_no,option){

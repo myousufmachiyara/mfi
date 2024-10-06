@@ -12,7 +12,7 @@
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">New Pipe Bad Debts</h2>
                                     <div class="card-actions">
-										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
                                 </header>
                                 <div class="card-body">
@@ -182,32 +182,39 @@ function addNewRow() {
         index++;
         $('#itemCount').val(Number($('#itemCount').val()) + 1);
         $('#myTable select[data-plugin-selecttwo]').select2();
-        
-        // Set focus on the new item_code input field
-		document.getElementById('item_code' + (index - 1)).focus();
+       
         
     }
 
 }
+		
+		function addNewRow_btn() {
 
-function getItemDetails(row_no, option) {
-    var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
-    $.ajax({
-        type: "GET",
-        url: "/items/detail",
-        data: {id: itemId},
-        success: function(result) {
-            if (result.length > 0) {
-                $('#item_code' + row_no).val(result[0]['it_cod']);
-                $('#item_name' + row_no).val(result[0]['it_cod']);
-                $('#remarks' + row_no).val(result[0]['item_remark']);
-                addNewRow();
-            }
-        },
-        error: function() {
-            alert("Error retrieving item details.");
-        }
-    });
+    		addNewRow(); // Call the same function
+			// Set focus on the new item_code input field
+			document.getElementById('item_code' + (index - 1)).focus();
+
+
+		}
+
+        function getItemDetails(row_no, option) {
+            var itemId = option === 1 ? $("#item_code" + row_no).val() : $("#item_name" + row_no).val();
+            $.ajax({
+                type: "GET",
+                url: "/items/detail",
+                data: {id: itemId},
+                success: function(result) {
+                    if (result.length > 0) {
+                        $('#item_code' + row_no).val(result[0]['it_cod']);
+                        $('#item_name' + row_no).val(result[0]['it_cod']);
+                        $('#remarks' + row_no).val(result[0]['item_remark']);
+                        addNewRow();
+                    }
+                },
+                error: function() {
+                    alert("Error retrieving item details.");
+                }
+         });
 }
 
 function tableTotal() {
