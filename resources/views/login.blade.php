@@ -57,7 +57,7 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 										<i class="bx bx-user text-4"></i>
 									</span>
-									<input class="form-control" name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 								</div>
 							</div>
 
@@ -68,7 +68,7 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
 										<i class="bx bx-lock text-4"></i>
 									</span>
-									<input name="password" class="form-control" type="password" id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									<input name="password" class="form-control" type="password" required id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 
 								</div>
 								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 d-none d-lg-block">
-					<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1 }'>
+					<div class="owl-carousel owl-theme mb-0" data-plugin-carousel data-plugin-options='{ "dots": false, "nav": true, "items": 1, "autoplay": true }'>
 						<div class="item"><img src="/assets/img/slide1.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
 						<div class="item"><img src="/assets/img/slide2.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
 						<div class="item"><img src="/assets/img/slide3.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
