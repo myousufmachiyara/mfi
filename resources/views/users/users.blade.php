@@ -307,7 +307,7 @@
                                 <select class="form-control" name="role_id" required>
                                     <option value="" selected disabled>Select User Role</option>
                                     @foreach ($roles as $key => $row)
-                                        <option value={{$row->id}}>{{$row->name}}</option>
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
                                    @endforeach
                                 </select>
                             </div>
@@ -320,6 +320,7 @@
                                 <input type="password" class="form-control" placeholder="password" name="password">
                             </div>
                         </div>
+                        <div id="validationError"></div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
@@ -478,27 +479,37 @@
     
     $(document).ready(function(){
     
-        // $('#addForm').on('submit', function(e){
-        //     e.preventDefault();
+        $('#addForm').on('submit', function(e){
+            e.preventDefault();
 
-        //     var formData = $(this).serialize();
+            var formData = $(this).serialize();
 
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/coa/acc/validate',
-        //         data: formData,
-        //         success: function(response){
-        //             var form = document.getElementById('addForm');
-        //             form.submit();
-        //         },
-        //         error: function(response){
-        //             var errors = response.responseJSON.errors;
-        //             var errorMessage = 'Account Already Exists';
-
-        //             alert(errorMessage);
-        //         }
-        //     });
-        // });
+            $.ajax({
+                type: 'POST',
+                url: '/user/create/validate',
+                data: formData,
+                success: function(response){
+                    var form = document.getElementById('addForm');
+                    form.submit();
+                },
+                error: function(response) {
+                    if (response.responseJSON.errors) {
+                        var errors = response.responseJSON.errors;
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                const messages = errors[key];
+                                messages.forEach(message => {
+                                    $('#validationError').append(`<span style="color:red">${message}</span><br>`);
+                                });
+                            }
+                        }
+                        
+                    } else {
+                        $('#validationError').html('An unexpected error occurred.');
+                    }
+                }
+            });
+        });
 
     });
 
@@ -554,7 +565,6 @@
             url: "/user/details",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $('#update_user_id').val(result['user']['id']);
                 $('#show_update_user_id').val(result['user']['id']);
                 $('#update_date').val(result['user']['date']);
