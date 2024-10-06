@@ -259,7 +259,7 @@
                             </div>
                             <div class="col-lg-6 mb-2">
                                 <label>Account Group </label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  name ="group_cod" required>
+                                <select data-plugin-selecttwo class="form-control select2-js"  name ="group_cod">
                                     <option value="">Select Group</option>
                                     @foreach($ac_group as $key => $row)	
                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -402,7 +402,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/coa/validate',
+                url: '/coa/acc/validate',
                 data: formData,
                 success: function(response){
                     var form = document.getElementById('addForm');
