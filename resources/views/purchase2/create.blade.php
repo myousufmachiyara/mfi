@@ -303,7 +303,7 @@
 					}
 				});
 
-				document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
+				// document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
 				toggleInputs();
 			});
 

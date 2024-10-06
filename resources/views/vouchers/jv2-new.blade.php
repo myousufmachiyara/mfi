@@ -122,12 +122,15 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label">Previous Invoices</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"  name="customer_name" onchange="getPendingInvoices()" required disabled>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
-												</select>																			
+												</select>	
+												
+												<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
+
 											</div>
 
 											<div class="col-6 mb-2">
@@ -435,6 +438,8 @@
 
 		$('#sales_unadjusted_amount').val(unadjusted_amount);
 		$('#customer_name').val(0).trigger('change');
+		$('#show_customer_name').val(0);
+
 		document.getElementById('sale_span').style.display = 'none';
 
 		var saleAgingtable = document.getElementById("pendingInvoices"); 
@@ -469,6 +474,7 @@
 
 			if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
 				$('#customer_name').val(credited_account).trigger('change');
+				$('#show_customer_name').val(credited_account);
 				$('#sales_unadjusted_amount').val(unadjusted_amount);
 			}
 		}

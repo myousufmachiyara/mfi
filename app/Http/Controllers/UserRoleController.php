@@ -72,6 +72,12 @@ class UserRoleController extends Controller
         ->join('modules', 'modules.id', '=', 'role_access.module_id')
         ->select('role_access.*', 'modules.name as module_name', 'modules.id as module_id')
         ->get();
+
+
+        // $role_access = role_access::where('role_access.role_id',$id)
+        // ->join('modules', 'modules.id', '=', 'role_access.module_id')
+        // ->select('role_access.*','modules.name as module_name', 'modules.id as module_id')
+        // ->get();
         $count = count($role_access);
 
         return view('users.edit-role',compact('role','role_access','count'));
