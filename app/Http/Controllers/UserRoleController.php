@@ -68,10 +68,16 @@ class UserRoleController extends Controller
 
         $role = roles::where('id',$id)->first();
         $role_access = role_access::where('role_access.role_id', $id)
-        ->orWhere('role_access.role_id',0)
+        ->orWhere('role_access.role_id', 0)
         ->join('modules', 'modules.id', '=', 'role_access.module_id')
-        ->select('role_access.*', 'modules.name as module_name', 'modules.id as module_id','role_access.module_id')
-        ->groupBy('role_access.module_id')
+        ->select(
+            'role_access.id', // Include ID to avoid the error
+            'role_access.module_id',
+            'modules.name as module_name',
+            'modules.id as module_id'
+        )
+        ->groupBy('role_access.id', 'role_access.module_id', 'modules.name', 'modules.id') // Include all selected columns
+        ->orderBy('modules.id')
         ->get();
 
 
