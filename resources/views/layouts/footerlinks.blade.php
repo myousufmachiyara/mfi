@@ -1,4 +1,30 @@
+
 <script>
+    // Function to enable/disable elements
+    function toggleElements(disable) {
+        const elements = document.querySelectorAll('button, a, input[type="submit"], form');
+        elements.forEach(element => {
+            if (element.tagName === 'A' || element.tagName === 'BUTTON') {
+                element.onclick = disable ? (e) => e.preventDefault() : null; // Prevent default action if disabled
+            }
+            element.disabled = disable; // Disable button or input
+        });
+    }
+
+    // Show loader on page unload and before content is loaded
+    window.addEventListener('beforeunload', function() {
+        document.querySelector('.loader').style.display = 'flex';
+        toggleElements(true); // Disable elements
+    });
+
+    // Hide loader when the page is fully loaded
+    window.addEventListener('load', function() {
+        document.querySelector('.loader').style.display = 'none';
+        toggleElements(false); // Enable elements
+    });
+</script>
+
+<!-- <script>
     // Show loader on page unload and before content is loaded
     window.addEventListener('beforeunload', function() {
         document.querySelector('.loader').style.display = 'flex';
@@ -8,7 +34,7 @@
     window.addEventListener('load', function() {
         document.querySelector('.loader').style.display = 'none';
     });
-</script>
+</script> -->
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
