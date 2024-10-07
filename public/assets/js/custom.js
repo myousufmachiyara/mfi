@@ -1,5 +1,11 @@
 /* Add here all your JS customizations */
 
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        // The page was loaded from the cache
+        window.location.reload();
+    }
+});
 
 document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
     textarea.addEventListener('keydown', function(e) {
