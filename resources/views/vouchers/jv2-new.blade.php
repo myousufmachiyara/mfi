@@ -181,7 +181,7 @@
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Account Name</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
-													<option value="" disabled selected>Select Account</option>
+													<option value="0" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
@@ -258,10 +258,32 @@
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
-
 			var isChecked = $('#SaletoggleSwitch').is(':checked');
+			var isPurChecked = $('#SaletoggleSwitch').is(':checked');
 
-			if(isChecked){
+			if(isChecked && isPurChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+
+				var total_reci_amount=$('#total_reci_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
+			else if(isChecked){
 				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
 				var total_reci_amount=$('#total_reci_amount').val();
 
@@ -273,13 +295,31 @@
 					alert("Total Debit & Credit Must be Equal")
 				}
 				else if(sales_unadjusted_amount!=total_reci_amount) {
-					alert("Unadjusted amount is not completely adjusted")
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
 				}
 			}
+
+			else if(isPurChecked){
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
 			else if(total_debit==total_credit){
 				var form = document.getElementById('addForm');
 				form.submit();
 			}
+
 			else{
 				alert("Total Debit & Credit Must be Equal")
 			}
