@@ -473,8 +473,8 @@
 	}
 
 	function totalPay() {
-		var totalRec = 0; // Initialize the total amount variable
-		var table = document.getElementById("pendingInvoices"); // Get the table element
+		var totalPay = 0; // Initialize the total amount variable
+		var table = document.getElementById("purpendingInvoices"); // Get the table element
 		var rowCount = table.rows.length; // Get the total number of rows
 
 		// Loop through each row in the table
@@ -482,11 +482,11 @@
 			var input = table.rows[i].cells[4].querySelector('input'); // Get the input field in the specified cell
 			if (input) { // Check if the input exists
 				var rec = Number(input.value); // Convert the input value to a number
-				totalRec += isNaN(rec) ? 0 : rec; // Add to totalRec, handle NaN cases
+				totalPay += isNaN(rec) ? 0 : rec; // Add to totalRec, handle NaN cases
 			}
 		}
 		
-		$('#total_reci_amount').val(totalRec); // Set the total in the corresponding input field
+		$('#total_pay_amount').val(totalPay); // Set the total in the corresponding input field
 	}
 
 	function getPurPendingInvoices(){
@@ -510,7 +510,7 @@
 						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='pur_balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='pur_bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control' value='0' step='any' name='pur_rec_amount[]' required></td>"
+						html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='pur_rec_amount[]' onchange='totalPay()' required></td>"
 						html+="</tr>";
 						$('#purpendingInvoices').append(html);
 						counter++;
@@ -528,8 +528,6 @@
 		var pur_unadjusted_amount=0;
 		var pur_debit_account=0;
 		var pur_no_of_dedits=0;
-
-		console.log("hello");
 
 		$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
 		$('#pur_customer_name').val(0).trigger('change');
