@@ -101,21 +101,21 @@
 										<div class="row form-group mb-2">
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field">
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field" disabled>
 											</div>
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field">
+												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field" disabled>
 											</div>
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field">
+												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field">
+												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
 											<div class="col-6 mb-2">
@@ -125,12 +125,12 @@
 
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field">
+												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Item Group<span style="color: red;"><strong>*</strong></span></label>
-												<select data-plugin-selecttwo class="form-control comm-form-field select2-js"  name="tax_item_name" required>
+												<select data-plugin-selecttwo class="form-control comm-form-field select2-js"  name="tax_item_name" required disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod }}">{{$row->group_name}}</option>
@@ -140,7 +140,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"></textarea>
+												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea" disabled></textarea>
 											</div>
 									  </div>
 									</div>
@@ -289,22 +289,22 @@
 			</div>
 		</section>
        
-		 
 		<script>
 
 			var index=2;
 			var itemCount = Number($('#itemCount').val());
 
 			$(document).ready(function() {
-				$(window).keydown(function(event){
-					if(event.keyCode == 13) {
+				// Prevent default action of Enter key
+				$(window).keydown(function(event) {
+					if (event.keyCode === 13) {
 						event.preventDefault();
 						return false;
 					}
 				});
+
+				
 			});
-
-
 
 			function removeRow(button) {
 				console.log("before remove");
@@ -508,34 +508,20 @@
 				rowTotal(index);
 			}
 
-			function toggleInputs() {
-
-				if (checkbox.checked) {
-					// Checkbox is checked
-					console.log("Checkbox is checked!");
-					// You can add your logic here
-				} else {
-					// Checkbox is unchecked
-					console.log("Checkbox is unchecked!");
-					// You can add your logic here
-				}
-
-				const isChecked = document.getElementById('toggleSwitch').checked;
+			function toggleInputs(checkbox) {
+				console.log(checkbox);
 				const inputGroups = document.querySelectorAll('.comm-form-field');
+				const isChecked = checkbox.checked;
+
 				inputGroups.forEach(input => {
 					// Show or hide input groups based on the toggle switch state
 					if (input.id !== 'BillAfterDisc') {
 						input.disabled = !isChecked;
 					}
 				});
-				
-				var switchElement = document.getElementById('toggleSwitch');
-				if(switchElement.checked){
-					$('#isCommissionForm').val(1);
-				}
-				else{
-					$('#isCommissionForm').val(0);
-				}
+
+				// Update hidden input field
+				$('#isCommissionForm').val(isChecked ? 1 : 0);
 			}
 
 		</script>
