@@ -72,7 +72,7 @@ class UserRoleController extends Controller
         ->join('modules', 'modules.id', '=', 'role_access.module_id')
         ->select('role_access.*', 'modules.name as module_name', 'modules.id as module_id','role_access.module_id')
         ->groupBy('role_access.module_id','modules.name', 'modules.id')
-        ->orderBy('modules.id')
+        ->orderBy('modules.id','asc')
         ->get();
 
 
