@@ -53,7 +53,7 @@
                                                     <td><strong>Garder / TR</strong></td>
                                                 @endif
 
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
+                                                    <td><button class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</button></td>
                                                     <td class="actions">
                                                         <a href="{{ route('show-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
