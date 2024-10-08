@@ -151,6 +151,8 @@
     }
 
     function getAttachements(id){
+        console.log("function");
+
         var table = document.getElementById('tstockIn_attachements');
         while (table.rows.length > 0) {
             table.deleteRow(0);
