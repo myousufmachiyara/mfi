@@ -36,17 +36,18 @@
     });
 </script> -->
 <!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/jquery.nanoscroller.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-placeholder/2.3.1/jquery.placeholder.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+<script src="/assets/vendor/jquery/jquery.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/assets/vendor/nanoscroller/nanoscroller.js"></script>
+<script src="/assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+<script src="/assets/vendor/jquery-ui/jquery-ui.js"></script>
+<script src="/assets/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
+<script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/assets/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
 
