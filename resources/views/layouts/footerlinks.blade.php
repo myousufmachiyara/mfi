@@ -1,16 +1,9 @@
 
-<script>
-// Show loader on page unload and before content is loaded
-window.addEventListener('beforeunload', function() {
-    document.querySelector('.loader').style.display = 'flex';
-});
 
-// Hide loader when the page is fully loaded
-window.addEventListener('load', function() {
-    document.querySelector('.loader').style.display = 'none';
-});
-
-</script>
+<!-- <script>
+   
+</script> -->
+<!-- jQuery -->
 
 <script src="/assets/vendor/jquery/jquery.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -45,7 +38,6 @@ window.addEventListener('load', function() {
 
 <!-- Theme Initialization Files -->
 <script src="/assets/js/theme.init.js"></script>
-
 
 
 
