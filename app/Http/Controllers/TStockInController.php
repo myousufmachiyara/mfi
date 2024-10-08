@@ -254,6 +254,7 @@ class TStockInController extends Controller
 
     public function getAttachements(Request $request)
     {
+        return $request->id;
         $tstock_in_att = tstock_in_att::where('tstock_in_id', $request->id)->get();
         return $tstock_in_att;
     }
