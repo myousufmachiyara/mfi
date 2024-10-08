@@ -67,17 +67,11 @@ class UserRoleController extends Controller
     public function edit($id){
 
         $role = roles::where('id',$id)->first();
-        $role_access = role_access::where('role_access.role_id', 5)
-        ->orWhere('role_access.role_id', 0)
-        ->join('modules', 'modules.id', '=', 'role_access.module_id')
-        ->select(
-            'role_access.*', // Select all columns from role_access
-            'modules.name as module_name',
-            'modules.id as module_id'
-        )
-        ->groupBy('role_access.module_id', 'modules.name', 'modules.id') // Group by required columns
-        ->get();
-        
+
+        // $role_access = role_access::where('role_access.role_id',$id)
+        // ->join('modules', 'modules.id', '=', 'role_access.module_id')
+        // ->select('role_access.*','modules.name as module_name', 'modules.id as module_id')
+        // ->get();
         $count = count($role_access);
 
         return view('users.edit-role',compact('role','role_access','count'));
