@@ -253,7 +253,7 @@ class UsersController extends Controller
 
         // Authentication failed
         return back()->withErrors([
-            'username' => 'Invalid Credentials.',
+            'error' => 'Invalid Username or Password.',
         ]);
 
     }
