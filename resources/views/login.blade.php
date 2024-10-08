@@ -47,9 +47,12 @@
 						</a>					
 						<h2 class="mb-0 text-primary">Welcome Back</h2>
 						<p class="text-dark mb-4">Please Login To Continue</p>
-						@if(isset($error))
-							<div style="color: red;">{{ $error }}</div>
+						@if ($errors->has('error'))
+							<div style="color: red;">
+								{{ $errors->first('error') }}
+							</div>
 						@endif
+					
 						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 							@csrf							
 							<div class="form-group">

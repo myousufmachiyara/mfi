@@ -133,7 +133,7 @@ class JV2Controller extends Controller
                     $pur_ageing->amount=$request->pur_rec_amount[$k];
                     $pur_ageing->sales_id=$request->pur_invoice_nos[$k];
                     $pur_ageing->sales_prefix=$request->pur_prefix[$k];
-                    $pur_ageing->acc_name=$request->customer_name;
+                    $pur_ageing->acc_name=$request->pur_customer_name;
                     $pur_ageing->save();
                 }
                 

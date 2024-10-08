@@ -427,6 +427,10 @@
         $('#att_id').val(id);
     }
 
+    function test(){
+        alert("hello");
+    }
+
     function getAccountDetails(id){
         $.ajax({
             type: "GET",

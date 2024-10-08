@@ -259,7 +259,7 @@
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
 			var isChecked = $('#SaletoggleSwitch').is(':checked');
-			var isPurChecked = $('#SaletoggleSwitch').is(':checked');
+			var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
 			if(isChecked && isPurChecked){
 				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();

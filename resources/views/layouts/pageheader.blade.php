@@ -1,6 +1,6 @@
-<div class="loader">
+<!-- <div class="loader">
 	<div></div>
-</div>
+</div> -->
 <header class="header header-nav-menu header-nav-top-line ">
 	
 	<div class="logo-container">
