@@ -73,7 +73,7 @@ class UserRoleController extends Controller
         ->select(
             'role_access.module_id', // Include module_id for grouping
             'modules.name as module_name',
-            DB::raw('COUNT(role_access.module_id) as count') // Count the occurrences of module_id
+            \DB::raw('COUNT(role_access.module_id) as count') // Count the occurrences of module_id
         )
         ->groupBy('role_access.module_id', 'modules.name') // Group by module_id and module_name
         ->get();
