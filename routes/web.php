@@ -318,7 +318,7 @@
         Route::get('/stock_out/attachements', [App\Http\Controllers\StockOutController::class, 'getAttachements'])->name('get-stock-out-att');
         Route::get('/stock_in/attachements', [App\Http\Controllers\StockInController::class, 'getAttachements'])->name('get-stock-in-att');
         Route::get('/tstock_out/attachements', [App\Http\Controllers\TStockOutController::class, 'getAttachements'])->name('get-tstock-out-att');
-        Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
+        // Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
         Route::get('/quotation/attachements', [App\Http\Controllers\QuotationController::class, 'getAttachements'])->name('get-quotation-att');
         Route::get('/tpo/attachements', [App\Http\Controllers\TpoController::class, 'getAttachements'])->name('get-tpo-att');
         Route::get('/po/attachements', [App\Http\Controllers\PoController::class, 'getAttachements'])->name('get-po-att');
@@ -332,3 +332,5 @@
             return view('unauthorized');
         })->name('unauthorized');
     });
+
+    Route::get('/tstock_in/attachements', [App\Http\Controllers\TStockInController::class, 'getAttachements'])->name('get-tstock-in-att');
