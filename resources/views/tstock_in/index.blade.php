@@ -150,7 +150,7 @@
         $('#deleteID').val(id);
     }
 
-    function getAttachements(id){
+    public function getAttachements(id){
         alert("hello");
         var table = document.getElementById('tstockIn_attachements');
         while (table.rows.length > 0) {
