@@ -78,8 +78,8 @@ class UserRoleController extends Controller
         ->orWhere('role_access.role_id', 0)
         ->join('modules', 'modules.id', '=', 'role_access.module_id')
         ->select(
-            'role_access.module_id', // Include module_id for grouping
             'role_access.*',
+            'role_access.module_id', // Include module_id for grouping
             'modules.name as module_name',
             \DB::raw('COUNT(role_access.module_id) as count') // Count the occurrences of module_id
         )
