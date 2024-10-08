@@ -63,7 +63,6 @@
                                                     <td>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->ac_code}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                         <span class="separator"> | </span>
-                                                        <button type="button" onclick="test()">test</button>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->ac_code}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
                                                     </td>
                                                     @if($row->status==1)
