@@ -7,6 +7,16 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
+// Show loader on page unload and before content is loaded
+window.addEventListener('beforeunload', function() {
+    document.querySelector('.loader').style.display = 'flex';
+});
+
+// Hide loader when the page is fully loaded
+window.addEventListener('load', function() {
+    document.querySelector('.loader').style.display = 'none';
+});
+
 document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
     textarea.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
