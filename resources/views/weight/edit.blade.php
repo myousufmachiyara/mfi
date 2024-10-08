@@ -162,12 +162,7 @@
 
 												
 
-												<div class="col-12 pb-sm-3 pb-md-0 text-end">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
-													<span>
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
-													</span>
-												</div>
+												
 											</div>
 										</div>
 									</footer>
@@ -233,13 +228,7 @@
 		$('#total_weight').val(FormattedTotalWeight);
 		$('#totalAmount').val(FormattedTotalAmount);
 
-		var convance_charges = Number($('#convance_charges').val());
-		var labour_charges = Number($('#labour_charges').val());
-		var bill_discount = Number($('#bill_discount').val());
-
-		netAmount = totalAmount + convance_charges +  labour_charges - bill_discount;
-		FormattednetTotal = formatNumberWithCommas(netAmount);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
+		
 
 		document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
 		toggleInputs();
@@ -405,28 +394,10 @@
 		$('#total_quantity').val(totalQuantity);
 		$('#total_quantity_show').val(totalQuantity);
 		
-		netTotal();
+	
 	}
 
-	function netTotal(){
-		var netTotal = 0;
-		var total = Number($('#totalAmount').val());
-		var convance_charges = Number($('#convance_charges').val());
-		var labour_charges = Number($('#labour_charges').val());
-		var bill_discount = Number($('#bill_discount').val());
-
-		netTotal = total + convance_charges + labour_charges - bill_discount;
-		netTotal = netTotal.toFixed(0);
-		FormattednetTotal = formatNumberWithCommas(netTotal);
-		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
-		$('#net_amount').val(netTotal);
-
-		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		console.log(bill_perc);
-		
-		$('#bill_perc').val(bill_perc);
-	}
- 
+	
 	function formatNumberWithCommas(number) {
     	// Convert number to string and add commas
     	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
