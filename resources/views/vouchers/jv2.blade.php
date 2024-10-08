@@ -17,11 +17,12 @@
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
                                         <thead>
                                             <tr>
-                                                <th width="5%">Voch#</th>
-                                                <th width="8%">Date</th>
-                                                <th width="40%">Narration</th>
-                                                <th>Total Debit</th>
-                                                <th>Total Credit</th>
+                                                <th>Voch#</th>
+                                                <th>Date</th>
+                                                <th>Narration</th>
+                                                <th>Debit / Credit</th>
+                                                <th>Sales Invoices</th>
+                                                <th>Purchase Invoices</th>
                                                 <th>Att.</th>
                                                 <th>Action</th>
                                             </tr>
@@ -32,16 +33,9 @@
                                                     <td>{{$row->jv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->narration}}</td>
-                                                    @if(substr(strval($row->total_debit), strpos(strval($row->total_debit), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->total_debit, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->total_debit))}}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->total_credit), strpos(strval($row->total_credit), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->total_credit, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->total_credit))}}</td>
-                                                    @endif
+                                                    <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
+                                                    <td>{{$row->jv_no}}</td>
+                                                    <td>{{$row->jv_no}}</td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
