@@ -53,7 +53,7 @@
                                                     <td><strong>Garder / TR</strong></td>
                                                 @endif
 
-                                                    <td><button class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</button></td>
+                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="test({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
                                                     <td class="actions">
                                                         <a href="{{ route('show-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
@@ -150,35 +150,35 @@
         $('#deleteID').val(id);
     }
 
-    function getAttachements(id){
-        console.log("function");
-
-        var table = document.getElementById('tstockIn_attachements');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
-
-        $.ajax({
-            type: "GET",
-            url: "/tstock_in/attachements",
-            data: {id:id},
-            success: function(result){
-                console.log("hello");
-                $.each(result, function(k,v){
-                    var html="<tr>";
-                    html+= "<td>"+v['att_path']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tstock_in/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tstock_in/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
-                    html+="</tr>";
-                    $('#tstockIn_attachements').append(html);
-                });
-            },
-            error: function(){
-                alert("error");
-            }
-        });
+    function test(id){
+        alert("hello")
     }
+    // function getAttachements(id){
+    //     var table = document.getElementById('tstockIn_attachements');
+    //     while (table.rows.length > 0) {
+    //         table.deleteRow(0);
+    //     }
+
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/tstock_in/attachements",
+    //         data: {id:id},
+    //         success: function(result){
+    //             $.each(result, function(k,v){
+    //                 var html="<tr>";
+    //                 html+= "<td>"+v['att_path']+"</td>"
+    //                 html+= "<td class='text-center'><a class='mb-1 mt-1 mr-2 me-1 text-danger' href='/tstock_in/download/"+v['att_id']+"'><i class='fas fa-download'></i></a></td>"
+    //                 html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='/tstock_in/view/"+v['att_id']+"' target='_blank'><i class='fas fa-eye'></i></a></td>"
+    //                 html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+v['att_id']+")'><i class='fas fa-trash'></i></a></td>"
+    //                 html+="</tr>";
+    //                 $('#tstockIn_attachements').append(html);
+    //             });
+    //         },
+    //         error: function(){
+    //             alert("error");
+    //         }
+    //     });
+    // }
 
     function deleteFile(fileId) {
         if (!confirm('Are you sure you want to delete this file?')) {
