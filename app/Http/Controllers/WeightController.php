@@ -29,13 +29,13 @@ class WeightController extends Controller
             ->join('ac as disp_to', 'disp_to.ac_code', '=', 'weight.Cash_pur_name_ac')
             ->select(
                 'weight.Sale_inv_no', 'weight.sa_date', 'acc_name.ac_name as acc_name', 'weight.pur_ord_no',
-                'disp_to.ac_name as disp_to', 'weight.Cash_pur_name', 'weight.Sales_Remarks', 'weight.sales_against', 'weight.prefix', 'weight.tc',
+                'disp_to.ac_name as disp_to', 'weight.Cash_pur_name', 'weight.Sales_Remarks', 'weight.sales_against', 'weight.prefix',
                 \DB::raw('SUM(weight_2.weight_pc * weight_2.Sales_qty2) as weight_sum'),
                 
             )
             ->groupby(
                 'weight.Sale_inv_no', 'weight.sa_date', 'acc_name.ac_name', 'weight.pur_ord_no',
-                'disp_to.ac_name', 'weight.Cash_pur_name', 'weight.Sales_Remarks', 'weight.sales_against', 'weight.prefix', 'weight.tc'
+                'disp_to.ac_name', 'weight.Cash_pur_name', 'weight.Sales_Remarks', 'weight.sales_against', 'weight.prefix'
             )
             ->get();
     
@@ -57,15 +57,6 @@ class WeightController extends Controller
         if ($request->has('sa_date') && $request->sa_date) {
             $quot2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
-            $quot2->pur_ord_no=$request->pur_ord_no;
-        }
-        if ($request->has('isInduced') && $request->isInduced==1) {
-            $quot2->sale_against=$request->sale_against;
-        }
-        if ($request->has('sales_against') && $request->sales_against) {
-            $quot2->sales_against=$request->sales_against;
-        }
         if ($request->has('account_name') && $request->account_name) {
             $quot2->account_name=$request->account_name;
         }
@@ -80,18 +71,6 @@ class WeightController extends Controller
         }
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks) {
             $quot2->Sales_Remarks=$request->Sales_Remarks;
-        }
-        if ($request->has('tc') && $request->tc) {
-            $quot2->tc=$request->tc;
-        }
-        if ($request->has('ConvanceCharges') && $request->ConvanceCharges) {
-            $quot2->ConvanceCharges=$request->ConvanceCharges;
-        }
-        if ($request->has('LaborCharges') && $request->LaborCharges) {
-            $quot2->LaborCharges=$request->LaborCharges;
-        }
-        if ($request->has('Bill_discount') && $request->Bill_discount) {
-            $quot2->Bill_discount=$request->Bill_discount;
         }
 
         $quot2->created_by = session('user_id');
@@ -172,12 +151,6 @@ class WeightController extends Controller
         if ($request->has('sa_date') && $request->sa_date) {
             $pur2->sa_date=$request->sa_date;
         }
-        if ($request->has('pur_ord_no') && $request->pur_ord_no OR empty($request->pur_ord_no)) {
-            $pur2->pur_ord_no=$request->pur_ord_no;
-        }
-        if ($request->has('hidden_sales_against') && $request->hidden_sales_against OR empty($request->hidden_sales_against)) {
-            $pur2->sales_against=$request->hidden_sales_against;
-        }
         if ($request->has('account_name') && $request->account_name) {
             $pur2->account_name=$request->account_name;
         }
@@ -190,35 +163,17 @@ class WeightController extends Controller
         if ($request->has('cash_Pur_address') && $request->cash_Pur_address OR empty($request->cash_Pur_address)) {
             $pur2->cash_Pur_address=$request->cash_Pur_address;
         }
-        if ($request->has('tc') && $request->tc OR empty($request->tc)) {
-            $pur2->tc=$request->tc;
-        }
         if ($request->has('Sales_Remarks') && $request->Sales_Remarks OR empty($request->Sales_Remarks)) {
             $pur2->Sales_Remarks=$request->Sales_Remarks;
-        }
-        if ($request->has('ConvanceCharges') && $request->ConvanceCharges OR $request->ConvanceCharges==0) {
-            $pur2->ConvanceCharges=$request->ConvanceCharges;
-        }
-        if ($request->has('LaborCharges') && $request->LaborCharges OR $request->LaborCharges==0) {
-            $pur2->LaborCharges=$request->LaborCharges;
-        }
-        if ($request->has('Bill_discount') && $request->Bill_discount OR $request->Bill_discount==0) {
-            $pur2->Bill_discount=$request->Bill_discount;
         }
 
         weight::where('Sale_inv_no', $request->pur2_id)->update([
             'sa_date'=>$pur2->sa_date,
-            'pur_ord_no'=>$pur2->pur_ord_no,
-            'sales_against'=>$pur2->sales_against,
             'account_name'=>$pur2->account_name,
             'Cash_pur_name_ac'=>$pur2->Cash_pur_name_ac,
             'Cash_pur_name'=>$pur2->Cash_pur_name,
             'cash_Pur_address'=>$pur2->cash_Pur_address,
-            'tc'=>$pur2->tc,
             'Sales_Remarks'=>$pur2->Sales_Remarks,
-            'ConvanceCharges'=>$pur2->ConvanceCharges,
-            'LaborCharges'=>$pur2->LaborCharges,
-            'Bill_discount'=>$pur2->Bill_discount,
             'updated_by' => session('user_id'),
         ]);
 

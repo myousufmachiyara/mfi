@@ -1125,6 +1125,213 @@ $html .= '</tr>';
         // Close and output PDF
         $pdf->Output('Purchase Order_'.$purchase['prefix'].$purchase['Sale_inv_no'].'.pdf', 'I');
     }
+
+
+    public function weightCalculationPDF($id)
+    {
+
+        $purchase = tpo::where('Sale_inv_no', $id)
+        ->leftJoin('ac as account', 'account.ac_code', '=', 'tpo.account_name')
+        ->select('tpo.*', 'account.ac_name as ac_name', 'account.address as ac_add' , 'account.phone_no as ac_phone_no')
+        ->first();
+
+
+        $purchase_items = tpo_2::where('sales_inv_cod',$id)
+                 ->join('item_entry2','tpo_2.item_cod','=','item_entry2.it_cod')
+                ->select('tpo_2.*','item_entry2.item_name')
+                ->get();
+
+                
+        $pdf = new MyPDF();
+
+        // Set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Purchase Order-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetSubject('Purchase Order-'.$purchase['prefix'].$purchase['Sale_inv_no']);
+        $pdf->SetKeywords('Purchase Order, TCPDF, PDF');
+                   
+        // Add a page
+        $pdf->AddPage();
+           
+        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
+
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 4px;
+        }';
+
+        // $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $heading='<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Order</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
+
+        $html = '<table style="margin-bottom:1rem">';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Invoice No: &nbsp;<span style="text-decoration: underline;color:#000">'.$purchase['prefix'].$purchase['Sale_inv_no'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Date: &nbsp;<span style="color:#000">'.\Carbon\Carbon::parse($purchase['sa_date'])->format('d-m-y').'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Pur Inv No: <span style="text-decoration: underline;color:#000">'.$purchase['sales_against'].'</span></td>';
+        $html .= '<td style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Login: &nbsp; <span style="text-decoration: underline;color:#000">Hamza</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+       
+
+        $html .= '<table border="0.1px" style="border-collapse: collapse;">';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Account Name </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_name'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Address </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_add'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Phone </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['ac_phone_no'].'</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td width="20%" style="font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Remarks </td>';
+        $html .= '<td width="80%" style="font-size:10px;font-family:poppins;">'.$purchase['Sales_Remarks'].'</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        $total_weight = 0;
+        $total_quantity = 0;
+        $total_amount = 0;
+        
+        // Group the items by dispatch_to
+        $grouped_items = [];
+        foreach ($purchase_items as $item) {
+            $dispatch_to = $item['dispatch_to'];
+            if (!isset($grouped_items[$dispatch_to])) {
+                $grouped_items[$dispatch_to] = [];
+            }
+            $grouped_items[$dispatch_to][] = $item;
+        }
+        
+        foreach ($grouped_items as $dispatch_to => $items_group) {
+                    
+                    // Display 'Dispatch To' before the table and page header content
+                      $html = '<h4 style="text-align:left;font-size:14px;margin-top:20px">
+                     <span style="color:#17365D;">Dispatch To:</span> 
+                     <span style="color:red;">' . $dispatch_to . '</span>
+                         </h4>';
+
+        
+            // Page header and table structure
+            $html .= '<table border="0.3" style="text-align:center;margin-top:10px">';
+            $html .= '<tr>';
+            $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
+            $html .= '<th style="width:34%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+            $html .= '<th style="width:28%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Description</th>';
+            $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
+            $html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Weight</th>';
+            $html .= '</tr>';
+            $html .= '</table>';
+        
+            $count = 1;
+            $group_total_amount = 0;
+            $group_total_quantity = 0;
+            $group_total_weight = 0;
+        
+            $html .= '<table cellspacing="0" cellpadding="5">'; // Starting the detailed rows
+        
+            foreach ($items_group as $item) {
+                // Determine background color based on odd/even rows
+                $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
+        
+                $html .= '<tr style="' . $bg_color . '">';
+                $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
+                $html .= '<td style="width:34%;border-right:1px dashed #000">' . $item['item_name'] . '</td>';
+                $html .= '<td style="width:28%;border-right:1px dashed #000">' . $item['remarks'] . '</td>';
+                $html .= '<td style="width:12%;border-right:1px dashed #000; text-align:center">' . $item['Sales_qty2'] . '</td>';
+                $group_total_quantity += $item['Sales_qty2'];
+                // Calculate the total weight and amount for the group
+                $weight = $item['Sales_qty2'] * $item['weight_pc'];
+                $group_total_weight += $weight;
+                $html .= '<td style="width:20%;border-right:1px dashed #000; text-align:center">' . round($weight, 2) . '</td>';
+                $html .= '</tr>';
+                $count++;
+             }
+        
+             $html .= '<tr>';
+             $html .= '<td colspan="2" style="width:70%;text-align:right;padding:5px 0;font-weight:bold;color:#17365D;border-top:1px solid #000;">Sub Total ===>></td>';
+             $html .= '<td style="width:10%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . $group_total_quantity . '</td>';
+             $html .= '<td style="width:20%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . round($group_total_weight, 2) . ' Kgs</td>';
+             $html .= '</tr>';
+             
+             
+
+        
+            // Add the group totals to the overall totals
+            $total_quantity += $group_total_quantity;
+            $total_amount += $group_total_amount;
+            $total_weight += $group_total_weight;
+        
+            $html .= '</table>';
+        
+            // Write HTML content for each group to PDF
+            $pdf->writeHTML($html, true, false, true, false, '');
+        }
+        
+        
+        $currentY = $pdf->GetY();
+            
+        if(($pdf->getPageHeight()-$pdf->GetY())<57){
+            $pdf->AddPage();
+            $currentY = $pdf->GetY()+15;
+        }
+
+        $pdf->SetFont('helvetica','B', 10);
+        $pdf->SetTextColor(23, 54, 93);
+
+        $pdf->SetXY(10, $currentY);
+        $pdf->Cell(40, 5, 'Total Weight(kg)', 1,1);
+        $pdf->Cell(40, 5, 'Total Quantity', 1,1);
+
+        // // Column 2
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetXY(50, $currentY);
+        $pdf->Cell(42, 5,  $total_weight, 1, 'R');
+        $pdf->SetXY(50, $currentY+6.8);
+        $pdf->SetFont('helvetica','', 10);
+
+        $pdf->Cell(42, 5, $total_quantity, 1,'R');
+
+      
+
+         // terms and condition starts here
+         $currentY = $pdf->GetY();
+
+         $pdf->SetFont('helvetica','BIU', 14);
+         $pdf->SetTextColor(23, 54, 93);
+ 
+         $pdf->SetXY(10, $currentY+10);
+         $pdf->Cell(35, 5,  'Terms & Conditions:' , 0, 'L');
+ 
+         $pdf->SetFont('helvetica','', 11);
+         $pdf->SetTextColor(255, 0, 0);
+ 
+         $width = 185;
+         $pdf->MultiCell($width, 10, $purchase['tc'], 0, 'L', 0, 1, '', '', true);
+ 
+         // terms and condition ends here
+ 
+        
+        // Close and output PDF
+        $pdf->Output('Purchase Order_'.$purchase['prefix'].$purchase['Sale_inv_no'].'.pdf', 'I');
+    }
+    
     
     public function generatePDF(Request $request)
     {
@@ -1136,6 +1343,9 @@ $html .= '</tr>';
         }
         elseif($request->print_type==3){
             $this->onlyPriceQtyPDF($request->print_sale2);
+        }
+        elseif($request->print_type==4){
+            $this->weightCalculationPDF($request->print_sale2);
         }
     }
 

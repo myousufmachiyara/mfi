@@ -4,7 +4,7 @@
 		@include('../layouts.pageheader')
 		<div class="inner-wrapper">
 				<section role="main" class="content-body">
-					<form method="post" action="{{ route('update-tquotation') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+					<form method="post" action="{{ route('update-weight') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
 							<div class="col-12 mb-3">								
@@ -20,7 +20,7 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-6 col-md-2 mb-2">
-												<label class="col-form-label" >Quotation No.</label>
+												<label class="col-form-label" >Weight No.</label>
 												<input type="text" placeholder="(Edit Quotation)" class="form-control" value="{{$pur2->prefix}}{{$pur2->Sale_inv_no}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sale_inv_no}}" name="pur2_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
@@ -30,7 +30,7 @@
 												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" autofocus class="form-control">
 											</div>
 											
-											<div class="col-sm-12 col-md-4 mb-3">
+											<div class="col-sm-12 col-md-3 mb-3">
 												<label class="col-form-label">Customer Name<span style="color: red;"><strong>*</strong></span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
 													<option value="" disabled selected>Select Customer Name</option>
@@ -39,20 +39,8 @@
 													@endforeach
 												</select>
 											</div>
-											<div class="col-6 col-md-2 mb-2">
-												<label class="col-form-label" >PO#</label>
-												<input type="text" placeholder="PO#" name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
-											</div>
-											<div class="col-6 col-md-2 mb-2">
-												<label class="col-form-label">Sale Inv#</label>
-												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
-													<!-- Hidden Input Field -->
-													<input type="hidden" placeholder="Sale Inv. No." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
-										
-											</div>
 											
-											<div class="col-sm-12 col-md-4 mb-3">
+											<div class="col-sm-12 col-md-3 mb-3">
 												<label class="col-form-label">Dispatch From<span style="color: red;">*</span></label>
 												<select data-plugin-selecttwo class="form-control select2-js"  name="disp_account_name" required>
 													<option value="" disabled selected>Select Dispatch From</option>
@@ -79,13 +67,9 @@
 
 											<div class="col-6 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
+												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
 
-											<div class="col-6 mb-2">
-												<label class="col-form-label">Terms And Conditions</label>
-												<textarea rows="4" cols="50" name="tc" id="tc" placeholder="Terms And Conditions" class="form-control cust-textarea">{{$pur2->tc}}</textarea>
-											</div>  
 											
 									  </div>
 									</div>
@@ -176,27 +160,7 @@
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
-												</div>
-
-												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
-												</div>
-
-												<div class="col-12 col-md-2 pb-sm-3 pb-md-0">
-													<label class="col-form-label">Bill Discount </label>
-													<div class="row">
-														<div class="col-8">
-															<input type="number" id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
-														</div>
-														<div class="col-4">
-															<input type="text" id="bill_perc" class="form-control" placeholder="0%" disabled>
-														</div>
-													</div>
-												</div>
+												
 
 												<div class="col-12 pb-sm-3 pb-md-0 text-end">
 													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
@@ -210,8 +174,8 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-tquotation') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Quotation</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-weight') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update</button>
 											</div>
 										</div>
 									</footer>
@@ -479,24 +443,7 @@
 
 
 
-	document.getElementById('edit-sale-inv').addEventListener('click', function () {
-        var inputField = document.getElementById('sale-inv-no');
-        if (inputField.disabled) {
-            inputField.disabled = false;
-            inputField.focus(); // Focus on the input when enabled
-            this.textContent = "Disable"; // Change the label to "Save" when editing
-        } else {
-            inputField.disabled = true;
-            this.textContent = "Enable"; // Change the label back to "Edit" after saving
-        }
-    });
 
-
-	// Update the hidden input field on change of the first input field
-	document.getElementById('sale-inv-no').addEventListener('input', function() {
-        var hiddenSaleInvInput = document.getElementById('hidden-sale-inv-no');
-        hiddenSaleInvInput.value = this.value;  // Update the hidden input with the new value
-    });
 											
 
 </script>
