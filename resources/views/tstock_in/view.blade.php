@@ -136,9 +136,8 @@
 							</div>
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a type="button" class="btn btn-danger mt-2" href="{{ route('all-tstock-in') }}"> <i class="fas fa-arrow-left"></i> Back</a>
+								<a class="btn btn-danger mb-2 mt-2" href="{{ route('all-tstock-in') }}"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a href="{{ route('print-tstock-in-invoice', $tstock_in->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
-							
 							</div>
 
 						</div>
