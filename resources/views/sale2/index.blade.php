@@ -176,7 +176,6 @@
             url: "/sales2/attachements",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
