@@ -16,7 +16,7 @@
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
-											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Quotation No:</h2>
+											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Weight No:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->prefix}}{{$pur->Sale_inv_no}}</h4>
 										</div>
 										<div class="col-sm-6 text-end mt-3 mb-3">
@@ -49,10 +49,6 @@
 													<span style="color:#17365D">Phone No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->phone_no}}</span>
 												</h4>
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span style="color:#17365D">PO NO: &nbsp </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_ord_no}}</span>
-												</h4>
 											</div>
 										</div>
 										<div class="col-md-5">
@@ -72,10 +68,6 @@
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span style="color:#17365D">Sale Inv No: &nbsp </span>
-													<span style="font-weight:400;color:black" class="value"> {{$pur->sales_against}}</span>
-												</h4>
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Remarks: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Sales_Remarks}}</span>
 												</h4>
@@ -94,6 +86,7 @@
 											<th class="text-center font-weight-semibold" style="color:#17365D">Price/Unit</th>
 											<th class="text-center font-weight-semibold" style="color:#17365D">Length</th>
 											<th class="text-center font-weight-semibold" style="color:#17365D">%</th>
+											<th class="text-center font-weight-semibold" style="color:#17365D">Weight</th>
 											<th class="text-center font-weight-semibold" style="color:#17365D">Amount</th>
 										</tr>
 									</thead>
@@ -110,6 +103,7 @@
 											<td class="text-center">{{$pur2_item->sales_price}}</td>
 											<td class="text-center">{{$pur2_item->length}}</td>
 											<td class="text-center">{{$pur2_item->discount}}</td>
+											<td class="text-center">{{($pur2_item->Sales_qty2 * $pur2_item->weight_pc)}}</td>
 											<td class="text-center">{{(($pur2_item->Sales_qty2 * $pur2_item->sales_price)+( ($pur2_item->Sales_qty2 * $pur2_item->sales_price) * ($pur2_item->discount/100))) * $pur2_item->length}}</td>
 										</tr>
 										<?php $subtotal=$subtotal+((($pur2_item->Sales_qty2 * $pur2_item->sales_price)+( ($pur2_item->Sales_qty2 * $pur2_item->sales_price) * ($pur2_item->discount/100))) * $pur2_item->length) ?>
@@ -137,18 +131,11 @@
 			
 													</tbody>
 												</table>
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+												
 
 											</div>
 											
-											<div>
-												<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
-													Terms And Conditions:&nbsp
-												</span><br><br>
-												<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
-												</h2>
-											</div>
+											
 										</div>
 									</div>
 									<div class="col-4 invoice-summary">
@@ -156,24 +143,10 @@
 											<table class="table h6 text-dark">
 												<tbody>
 													<tr class="b-top-0">
-														<td colspan="2" style="color:#17365D">Subtotal</td>
+														<td colspan="2" style="color:#17365D">Amount</td>
 														<td class="text-left">{{$subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2" style="color:#17365D">Labour Charges</td>
-														<td class="text-left" style="color:#17365D">{{$pur->LaborCharges}} PKR</td>
-													</tr>
-														<td colspan="2" style="color:#17365D">Convance Charges</td>
-														<td class="text-left">{{$pur->ConvanceCharges}} PKR</td>
-													</tr>
-													</tr>
-														<td colspan="2" style="color:#17365D">Discount</td>
-														<td class="text-left">{{$pur->Bill_discount}} PKR</td>
-													</tr>
-													<?php $netamount=round($subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
-													<tr class="h5">
-														<td colspan="2" style="color:#17365D">Net Amount</td>
-														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
+													
+													
 													</tr>
 												</tbody>
 											</table>
@@ -183,40 +156,15 @@
 							</div>
 
 							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-tquotation') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
+								<a onclick="window.location='{{ route('all-weight') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+								<a href="{{ route('print-weight-invoice', $pur->Sale_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
+							
 							</div>
 
 						</div>
 
-						<div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" style="max-width: 350px;">
-							<form method="get" action="{{ route('print-tqout-invoice') }}" target="_blank" enctype="multipart/form-data">
-								@csrf
-								<section class="card">
-									<header class="card-header">
-										<h2 class="card-title">Select Print Format</h2>
-									</header>
-									<div class="card-body">
-										<div class="modal-wrapper">
-											<select data-plugin-selecttwo class="form-control select2-js" autofocus name="print_type" required>
-												<option value="" disabled selected>Select Print Format</option>
-												<option value="1" >Show All</option>
-												<option value="2" >Exclude Item Length</option>
-												<option value="3" >Only Quantity & Price</option>
-											</select>
-											<input type="hidden" name="print_sale2" id="printID" >
-										</div>
-									</div>
-									<footer class="card-footer">
-										<div class="row">
-											<div class="col-md-12 text-end">
-												<button type="submit" class="btn btn-danger">Print</button>
-												<button class="btn btn-default modal-dismiss">Cancel</button>
-											</div>
-										</div>
-									</footer>
-								</section>
-							</form>
+						
+								
 						</div>
 					</section>
 				</section>
@@ -227,14 +175,7 @@
 	</body>
 
 	<script>
-		var netAmount = <?php echo json_encode($netamount); ?>;
-		var words = convertCurrencyToWords(netAmount);
-		document.getElementById('numberInWords').innerHTML = words;
 
-
-		function setPrintId(id){
-			$('#printID').val(id);
-		}
 	</script>
 	
 </html>
