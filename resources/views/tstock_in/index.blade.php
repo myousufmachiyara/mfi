@@ -161,7 +161,7 @@
             url: "/tstock_in/attachements",
             data: {id:id},
             success: function(result){
-                console.log(result);
+                console.log("hello");
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
