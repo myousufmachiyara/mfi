@@ -168,7 +168,7 @@ class JV2Controller extends Controller
         // })
         // ->get();
 
-        $sales_ageing = vw_union_sale_1_2_opbal::leftjoin('sales_ageing', function ($param) {
+        $sales_ageing = vw_union_sale_1_2_opbal::rightjoin('sales_ageing', function ($param) {
             $param->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
                   ->on('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id')
                   ->on('vw_union_sale_1_2_opbal.account_name', '=', 'sales_ageing.acc_name');
