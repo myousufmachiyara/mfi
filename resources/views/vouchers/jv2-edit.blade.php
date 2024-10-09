@@ -130,7 +130,7 @@
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}" {{ $sales_ageing->acc_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
+														<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->acc_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 													@endforeach
 												</select>	
 												
