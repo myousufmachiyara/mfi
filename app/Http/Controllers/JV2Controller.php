@@ -432,28 +432,19 @@ class JV2Controller extends Controller
         }	
     }
 
-    // public function pendingInvoice($id){
-
-    //     $results = Sales::where('sales.account_name', $id)
-    //         ->leftJoin('rec1_able_sal', 'sales.Sal_inv_no', '=', 'rec1_able_sal.Sal_inv_no')
-    //         ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
-    //         ->select(
-    //             'sales.Sal_inv_no','sales.account_name',
-    //             DB::raw('rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) as b_amt'),
-    //             DB::raw('SUM(rec1_able_rec_voch_s.rec_amt as r_amt)'),
-    //             DB::raw('((rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) - (rec1_able_rec_voch_s.rec_amt)) as bill_balance'),
-    //         )
-    //         ->get();
-
-    //     return $results;
-    // }
-
     public function pendingInvoice($id){
         // Query to get the results from the view
+        // $results = vw_union_sale_1_2_opbal::where('account_name', $id)
+        //     ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
+        //     ->orderby ('sa_date', 'asc')
+        //     ->get();
+
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
-            ->orderby ('sa_date', 'asc')
-            ->get();
+        ->selectRaw('Sal_inv_no, prefix, sa_date, SUM(rec_amt) AS total_rec_amt, SUM(b_amt) AS total_b_amt, SUM(balance) AS total_balance')
+        ->groupBy('Sal_inv_no', 'prefix', 'sa_date')  // Grouping by Sal_inv_no, prefix, and sa_date
+        ->orderBy('sa_date', 'asc')
+        ->get();
+
     
         return $results;
     }
