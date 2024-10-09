@@ -178,7 +178,7 @@
         Route::post('/vouchers2/update', [App\Http\Controllers\JV2Controller::class, 'update'])->name('update-jv2');
         Route::get('/purchase1/edit/{id}', [App\Http\Controllers\PurchaseController::class, 'edit'])->name('edit-purchases1');
         Route::post('/purchase1/update', [App\Http\Controllers\PurchaseController::class, 'update'])->name('update-purchases1');
-        Route::get('/purchase2/edit/{id}/{cred_acc}', [App\Http\Controllers\Purchase2Controller::class, 'edit'])->name('edit-purchases2');
+        Route::get('/purchase2/edit/{id}', [App\Http\Controllers\Purchase2Controller::class, 'edit'])->name('edit-purchases2');
         Route::post('/purchase2/update', [App\Http\Controllers\Purchase2Controller::class, 'update'])->name('update-purchases2');
         Route::post('/stock_in/update', [App\Http\Controllers\StockInController::class, 'update'])->name('update-stock-in-invoice');
         Route::post('/bad_dabs/update', [App\Http\Controllers\BadDabsController::class, 'update'])->name('update-bad-dabs');

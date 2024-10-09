@@ -14,7 +14,6 @@ use App\Models\sales_ageing;
 use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
-use App\Models\vw_union_sale_1_2_opbal_for_edit;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -27,26 +26,16 @@ class JV2Controller extends Controller
 
     public function index()
     {
-        $jv2 = Lager0::where('lager0.status', 1)
-    ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
-    ->select(
-        'lager0.jv_no',
-        'lager0.jv_date',
-        'lager0.narration',
+        $jv2= Lager0::where('lager0.status', 1)
+        ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+        ->select(
+        'lager0.jv_no','lager0.jv_date','lager0.narration',
         \DB::raw('SUM(lager.debit) as total_debit'),
-        \DB::raw('SUM(lager.credit) as total_credit'),
-        \DB::raw('CASE 
-            WHEN SUM(lager.debit) > 0 THEN "debit_account" 
-            WHEN SUM(lager.credit) > 0 THEN "credit_account" 
-            ELSE NULL 
-        END as account_cod')
-    )
-    ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
-    ->get();
+        \DB::raw('SUM(lager.credit) as total_credit')
+        )
+        ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
+        ->get();
 
-
-    die(print_r( $jv2 ));
-    
         return view('vouchers.jv2',compact('jv2'));
     }
 
@@ -165,31 +154,19 @@ class JV2Controller extends Controller
         return redirect()->route('all-jv2');
     }
 
-    public function edit($id,$cred_acc)
+    public function edit($id)
     {
-        echo($cred_acc);
-
         $jv2 = lager0::where('lager0.jv_no',$id)->first();
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
 
-        // $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
-        // ->join('vw_union_sale_1_2_opbal', function ($param) {
-        //     $param->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
-        //          ->on('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id')
-        //          ->on('vw_union_sale_1_2_opbal.account_name', '=', 'sales_ageing.acc_name');
-        // })
-        // ->get();
-
-        
         $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
-        ->join('vw_union_sale_1_2_opbal_for_edit','','','')
+        ->join('vw_union_sale_1_2_opbal', function ($param) {
+            $param->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
+                 ->on('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id')
+                 ->on('vw_union_sale_1_2_opbal.account_name', '=', 'sales_ageing.acc_name');
+        })
         ->get();
-        
-        $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name', $id)
-        ->join('vw_union_sale_1_2_opbal_for_edit','','','')
-        ->get();
-
 
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
