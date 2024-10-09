@@ -26,6 +26,7 @@ class JV2Controller extends Controller
 
     public function index()
     {
+        die("hello");
         $jv2= Lager0::where('lager0.status', 1)
         ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
         ->select(
@@ -35,7 +36,7 @@ class JV2Controller extends Controller
         )
         ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
         ->get();
-        
+
 
         return view('vouchers.jv2',compact('jv2'));
     }
