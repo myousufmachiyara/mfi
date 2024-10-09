@@ -120,7 +120,7 @@
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
-										@if(!empty($sales_ageing))
+										@if($sales_ageing->count() > 0)
 											<div class="form-check form-switch">
 												<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
 											</div>
