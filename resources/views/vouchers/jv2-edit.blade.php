@@ -129,7 +129,6 @@
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Account Name</label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
@@ -165,9 +164,15 @@
 														</tr>
 													</thead>
 													<tbody id="pendingInvoices">
+													@foreach ($sales_ageing as $key => $row)
 														<tr>
-
+															<td><input type='text' class='form-control' value="{{$row->prefix}}.{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+															<td><input type='hidden' class='form-control'  value="{{$row->sa_date}}"></td>
+															<td><input type='number' class='form-control' value="round({{$row->b_amt}}" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="round({{$row->b_amt}}"></td>
+															<td><input type='number' class='form-control text-danger' value="round({{$row->balance}}" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="round({{$row->balance}}"></td>
+															<td><input type='number' class='form-control' value='0' max="round({{$row->balance}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
 														</tr>
+													@endforeach
 													</tbody>
 												</table>										
 											</div>
@@ -223,9 +228,11 @@
 														</tr>
 													</thead>
 													<tbody id="purpendingInvoices">
+														@foreach ($purchase_ageing as $key => $row)
 														<tr>
 
 														</tr>
+														@endforeach
 													</tbody>
 												</table>										
 											</div>
