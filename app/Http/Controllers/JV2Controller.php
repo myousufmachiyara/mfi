@@ -27,20 +27,23 @@ class JV2Controller extends Controller
 
     public function index()
     {
-        $jv2= Lager0::where('lager0.status', 1)
-        ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
-        ->select(
-        'lager0.jv_no','lager0.jv_date','lager0.narration',
+        $jv2 = Lager0::where('lager0.status', 1)
+    ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+    ->select(
+        'lager0.jv_no',
+        'lager0.jv_date',
+        'lager0.narration',
         \DB::raw('SUM(lager.debit) as total_debit'),
         \DB::raw('SUM(lager.credit) as total_credit'),
         \DB::raw('CASE 
-            WHEN lager.debit > 0 THEN "debit_account" 
-            WHEN lager.credit > 0 THEN "credit_account" 
+            WHEN SUM(lager.debit) > 0 THEN "debit_account" 
+            WHEN SUM(lager.credit) > 0 THEN "credit_account" 
             ELSE NULL 
         END as account_cod')
-        )
-        ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
-        ->get();
+    )
+    ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
+    ->get();
+
 
         return view('vouchers.jv2',compact('jv2'));
     }
