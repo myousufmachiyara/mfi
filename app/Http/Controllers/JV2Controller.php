@@ -440,9 +440,8 @@ class JV2Controller extends Controller
         //     ->get();
 
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-        ->selectRaw('Sal_inv_no, prefix, sa_date, SUM(rec_amt) AS total_rec_amt, SUM(b_amt) AS total_b_amt, SUM(balance) AS total_balance')
-        ->groupBy('Sal_inv_no', 'prefix', 'sa_date')  // Grouping by Sal_inv_no, prefix, and sa_date
-        ->orderBy('sa_date', 'asc')
+        ->selectRaw('Sal_inv_no, prefix, sa_date, SUM(rec_amt) AS total_rec_amt, b_amt , balance')
+        ->orderby ('sa_date', 'asc')
         ->get();
 
     
