@@ -434,16 +434,10 @@ class JV2Controller extends Controller
 
     public function pendingInvoice($id){
         // Query to get the results from the view
-        // $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-        //     ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
-        //     ->orderby ('sa_date', 'asc')
-        //     ->get();
-
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-        ->selectRaw('Sal_inv_no, prefix, sa_date, SUM(rec_amt) AS total_rec_amt, b_amt , balance')
+        ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
         ->orderby ('sa_date', 'asc')
         ->get();
-
     
         return $results;
     }
