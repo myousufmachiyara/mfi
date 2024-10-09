@@ -165,14 +165,16 @@ class JV2Controller extends Controller
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
 
-        $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
-        ->rightjoin('vw_union_sale_1_2_opbal_for_edit', function ($param) {
-            $param->on('vw_union_sale_1_2_opbal_for_edit.prefix', '=', 'sales_ageing.sales_prefix')
-                 ->on('vw_union_sale_1_2_opbal_for_edit.Sal_inv_no', '=', 'sales_ageing.sales_id')
-                 ->on('vw_union_sale_1_2_opbal_for_edit.account_name', '=', 'sales_ageing.acc_name');
-        })
-        ->get();
+        // $sales_ageing = sales_ageing::where('sales_ageing.acc_name', 353)
+        // ->rightjoin('vw_union_sale_1_2_opbal_for_edit', function ($param) {
+        //     $param->on('vw_union_sale_1_2_opbal_for_edit.prefix', '=', 'sales_ageing.sales_prefix')
+        //          ->on('vw_union_sale_1_2_opbal_for_edit.Sal_inv_no', '=', 'sales_ageing.sales_id')
+        //          ->on('vw_union_sale_1_2_opbal_for_edit.account_name', '=', 'sales_ageing.acc_name');
+        // })
+        // ->get();
       
+        $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name',353)->get();
+
 
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
