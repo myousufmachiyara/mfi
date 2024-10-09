@@ -178,7 +178,7 @@ class JV2Controller extends Controller
         $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
         ->join('vw_union_sale_1_2_opbal_for_edit','','','')
         ->get();
-        c
+        
         $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name', $id)
         ->join('vw_union_sale_1_2_opbal_for_edit','','','')
         ->get();
