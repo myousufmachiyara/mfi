@@ -163,8 +163,10 @@ class JV2Controller extends Controller
         return redirect()->route('all-jv2');
     }
 
-    public function edit($id,$sal_age_acc)
+    public function edit($id,$cred_acc)
     {
+        echo($cred_acc);
+
         $jv2 = lager0::where('lager0.jv_no',$id)->first();
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
