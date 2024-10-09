@@ -156,9 +156,6 @@ class JV2Controller extends Controller
 
     public function edit($id)
     {
-        $sales_ageing=null;
-        $purchase_ageing=null;
-
         $jv2 = lager0::where('lager0.jv_no',$id)->first();
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
