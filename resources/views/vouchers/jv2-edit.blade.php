@@ -166,7 +166,7 @@
 													<tbody id="pendingInvoices">
 													@foreach ($sales_ageing as $key => $row)
 														<tr>
-															<td><input type='text' class='form-control' value="{{$row->prefix . $row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+															<td><input type='text' class='form-control' value="{{$row->sales_prefix}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
 															<td><input type='date' class='form-control'  value="{{$row->sa_date}}"></td>
 															<td><input type='number' class='form-control' value="round({{$row->b_amt}}"  name='balance_amount[]'></td>
 															<td><input type='number' class='form-control text-danger' value="round({{$row->balance}}" name='bill_amount[]'></td>
