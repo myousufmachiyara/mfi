@@ -130,7 +130,7 @@
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->acc_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
+														<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 													@endforeach
 												</select>	
 												
@@ -162,11 +162,11 @@
 													<tbody id="pendingInvoices">
 													@foreach ($sales_ageing as $key => $row)
 														<tr>
-															<td><input type='text' class='form-control' value="{{$row->sales_prefix}}{{$row->sales_id}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+															<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
 															<td><input type='date' class='form-control' value="{{$row->sa_date}}"></td>
 															<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' ></td>
 															<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' ></td>
-															<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
+															<td><input type='number' class='form-control' value="{{$row->rec_amt}}" max="{{$row->rec_amt}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
 														</tr>
 													@endforeach
 													</tbody>
