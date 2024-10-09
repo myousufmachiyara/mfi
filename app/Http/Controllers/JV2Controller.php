@@ -162,12 +162,6 @@ class JV2Controller extends Controller
         $sales_ageing = sales_ageing::where('sales_ageing.jv2_id',$id)->get();
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
-        echo(print_r($sales_ageing));
-        echo("\n");
-        echo(print_r($purchase_ageing));
-
-        die();
-
         return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
     }
 
