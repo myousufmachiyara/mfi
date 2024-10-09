@@ -14,6 +14,7 @@ use App\Models\sales_ageing;
 use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
+use App\Models\vw_union_sale_1_2_opbal_for_edit;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -164,13 +165,14 @@ class JV2Controller extends Controller
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
 
-        $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
-        ->join('vw_union_sale_1_2_opbal', function ($param) {
-            $param->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
-                 ->on('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id')
-                 ->on('vw_union_sale_1_2_opbal.account_name', '=', 'sales_ageing.acc_name');
+        $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.jv2_id', $id) // Update to correct model name
+        ->join('vw_union_sale_1_2_opbal', function ($join) {
+            $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'vw_union_sale_1_2_opbal_for_edit.sales_prefix') // Update to correct model name
+                 ->on('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'vw_union_sale_1_2_opbal_for_edit.sales_id')
+                 ->on('vw_union_sale_1_2_opbal.account_name', '=', 'vw_union_sale_1_2_opbal_for_edit.acc_name');
         })
         ->get();
+    
 
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
