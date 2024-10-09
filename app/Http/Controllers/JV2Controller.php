@@ -26,15 +26,8 @@ class JV2Controller extends Controller
 
     public function index()
     {
-        Cache::flush(); 
+        
 
-        ob_start(); // Start output buffering
-
-    // Your code to generate output
-    echo "This is buffered output.";
-
-    $content = ob_get_clean(); // Get buffered content and clear the buffer
-    
 
         $jv2= Lager0::where('lager0.status', 1)
         ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
