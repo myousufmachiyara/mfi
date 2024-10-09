@@ -11,11 +11,15 @@
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Edit Journal Voucher 2</h2>
+										
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-6 col-md-2 mb-2">
+											<div class="col-6 col-md-1 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
 												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
@@ -26,28 +30,20 @@
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="{{$jv2->jv_date}}" class="form-control">
 											</div>
+											
+											<div class="col-sm-12 col-md-5 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
+											</div>
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
-											<div class="col-sm-12 col-md-4 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
-											</div>
 
 									  </div>
-									</div>
-								</section>
-							</div>
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header" style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Edit JV2 Details</h2>
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-									</header>
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+									
+								
+									<div class="card-body" style="overflow-x:auto;min-height:auto;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -100,7 +96,7 @@
 											</tbody>
 										</table>
 									</div>
-
+									</div>
 									<footer class="card-footer" >
 										<div class="row mb-3"  style="float:right">
 											<div class="col-6 col-md-6 pb-sm-3 pb-md-0">
