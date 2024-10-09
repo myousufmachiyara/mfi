@@ -45,6 +45,8 @@ class JV2Controller extends Controller
     ->get();
 
 
+    die(print_r( $jv2 ));
+    
         return view('vouchers.jv2',compact('jv2'));
     }
 
