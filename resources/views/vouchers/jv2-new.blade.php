@@ -343,15 +343,6 @@
 		totalCredit();
     }
 
-    // document.getElementById('removeRowBtn').addEventListener('click', function() {
-    //     var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
-    //     if (table.rows.length > 0) {
-    //         table.deleteRow(table.rows.length - 1);
-    //     } else {
-    //         alert("No rows to delete!");
-    //     }
-    // });
-
 	function addNewRow(){
 		var lastRow =  $('#myTable tr:last');
 		latestValue=lastRow[0].cells[0].querySelector('select').value;
