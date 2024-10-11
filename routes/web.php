@@ -327,7 +327,10 @@
         Route::get('/purchase2/attachements', [App\Http\Controllers\Purchase2Controller::class, 'getAttachements'])->name('get-purc2-att');
         Route::get('/vouchers2/attachements', [App\Http\Controllers\JV2Controller::class, 'getAttachements'])->name('get-jv2-att');
         Route::get('/purchase1/attachements', [App\Http\Controllers\PurchaseController::class, 'getAttachements'])->name('get-purc1-att');
-
+        Route::get('/modules/all-modules', [App\Http\Controllers\ModulesController::class, 'index'])->name('all-modules');
+        Route::post('/modules/add', [App\Http\Controllers\ModulesController::class, 'store'])->name('add-module');
+        Route::post('/modules/update', [App\Http\Controllers\ModulesController::class, 'update'])->name('update-module');
+        Route::get('/modules/details', [App\Http\Controllers\ModulesController::class, 'getModuleDetails'])->name('get-module-details');
         Route::get('/unauthorized', function () {
             return view('unauthorized');
         })->name('unauthorized');
