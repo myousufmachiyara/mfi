@@ -9,7 +9,7 @@
 						<div class="col-12 mb-3">								
 							<section class="card">
 								<header class="card-header" style="display: flex;justify-content: space-between;">
-									<h2 class="card-title">Add JV 2</h2>
+									<h2 class="card-title">New Journal Voucher 2</h2>
 									<div class="card-actions">
 										<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>

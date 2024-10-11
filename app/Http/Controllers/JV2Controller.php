@@ -14,6 +14,7 @@ use App\Models\sales_ageing;
 use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
+use App\Models\vw_union_sale_1_2_opbal_for_edit;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -26,6 +27,9 @@ class JV2Controller extends Controller
 
     public function index()
     {
+        
+
+
         $jv2= Lager0::where('lager0.status', 1)
         ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
         ->select(
@@ -35,6 +39,7 @@ class JV2Controller extends Controller
         )
         ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
         ->get();
+
 
         return view('vouchers.jv2',compact('jv2'));
     }
@@ -159,7 +164,18 @@ class JV2Controller extends Controller
         $jv2 = lager0::where('lager0.jv_no',$id)->first();
         $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
-        $sales_ageing = sales_ageing::where('sales_ageing.jv2_id',$id)->get();
+
+        // $sales_ageing = sales_ageing::where('sales_ageing.acc_name', 353)
+        // ->rightjoin('vw_union_sale_1_2_opbal_for_edit', function ($param) {
+        //     $param->on('vw_union_sale_1_2_opbal_for_edit.prefix', '=', 'sales_ageing.sales_prefix')
+        //          ->on('vw_union_sale_1_2_opbal_for_edit.Sal_inv_no', '=', 'sales_ageing.sales_id')
+        //          ->on('vw_union_sale_1_2_opbal_for_edit.account_name', '=', 'sales_ageing.acc_name');
+        // })
+        // ->get();
+      
+        $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name',353)->get();
+
+
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
         return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
@@ -246,7 +262,6 @@ class JV2Controller extends Controller
         ]);
         return redirect()->route('all-jv2');
     }
-
 
     public function print($id)
     {
@@ -432,28 +447,12 @@ class JV2Controller extends Controller
         }	
     }
 
-    // public function pendingInvoice($id){
-
-    //     $results = Sales::where('sales.account_name', $id)
-    //         ->leftJoin('rec1_able_sal', 'sales.Sal_inv_no', '=', 'rec1_able_sal.Sal_inv_no')
-    //         ->leftJoin('rec1_able_rec_voch_s', 'sales.Sal_inv_no', '=', 'rec1_able_rec_voch_s.sales_id')
-    //         ->select(
-    //             'sales.Sal_inv_no','sales.account_name',
-    //             DB::raw('rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) as b_amt'),
-    //             DB::raw('SUM(rec1_able_rec_voch_s.rec_amt as r_amt)'),
-    //             DB::raw('((rec1_able_sal.Bill_amount + sales.ConvanceCharges + sales.LaborCharges) - (rec1_able_rec_voch_s.rec_amt)) as bill_balance'),
-    //         )
-    //         ->get();
-
-    //     return $results;
-    // }
-
     public function pendingInvoice($id){
         // Query to get the results from the view
         $results = vw_union_sale_1_2_opbal::where('account_name', $id)
-            ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
-            ->orderby ('sa_date', 'asc')
-            ->get();
+        ->select('Sal_inv_no', 'b_amt', 'rec_amt', 'account_name','balance','prefix','sa_date')
+        ->orderby ('sa_date', 'asc')
+        ->get();
     
         return $results;
     }

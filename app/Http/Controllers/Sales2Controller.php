@@ -174,7 +174,10 @@ class Sales2Controller extends Controller
             ]);
         }
 
-        return redirect()->route('all-sale2invoices');
+        // return redirect()->route('all-sale2invoices');
+
+        return redirect()->route('show-sales2', $pur_2_id['Sal_inv_no']);
+
     }
 
     public function edit($id)
@@ -304,7 +307,9 @@ class Sales2Controller extends Controller
             }
         }
 
-        return redirect()->route('all-sale2invoices');
+        // return redirect()->route('all-sale2invoices');
+
+        return redirect()->route('show-sales2',$request->pur2_id);
     }
 
     public function destroy(Request $request)

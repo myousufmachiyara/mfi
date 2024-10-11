@@ -11,11 +11,15 @@
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Edit Journal Voucher 2</h2>
+										
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-6 col-md-2 mb-2">
+											<div class="col-6 col-md-1 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
 												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
@@ -26,28 +30,20 @@
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="jv_date" value="{{$jv2->jv_date}}" class="form-control">
 											</div>
+											
+											<div class="col-sm-12 col-md-5 mb-2">
+												<label class="col-form-label">Narration</label>
+												<textarea rows="1" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
+											</div>
 											<div class="col-sm-12 col-md-4 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
-											<div class="col-sm-12 col-md-4 mb-2">
-												<label class="col-form-label">Narration</label>
-												<textarea rows="4" cols="50" name="narration" id="narration" required placeholder="Narration" class="form-control cust-textarea">{{$jv2->narration}}</textarea>
-											</div>
 
 									  </div>
-									</div>
-								</section>
-							</div>
-							<div class="col-12 mb-3">
-								<section class="card">
-									<header class="card-header" style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Edit JV2 Details</h2>
-										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
-										</div>
-									</header>
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+									
+								
+									<div class="card-body" style="overflow-x:auto;min-height:auto;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
@@ -100,7 +96,7 @@
 											</tbody>
 										</table>
 									</div>
-
+									</div>
 									<footer class="card-footer" >
 										<div class="row mb-3"  style="float:right">
 											<div class="col-6 col-md-6 pb-sm-3 pb-md-0">
@@ -134,7 +130,7 @@
 												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+														<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 													@endforeach
 												</select>	
 												
@@ -166,11 +162,11 @@
 													<tbody id="pendingInvoices">
 													@foreach ($sales_ageing as $key => $row)
 														<tr>
-															<td><input type='text' class='form-control' value="{{$row->sales_prefix}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
-															<td><input type='date' class='form-control'  value="{{$row->sa_date}}"></td>
-															<td><input type='number' class='form-control' value="round({{$row->b_amt}}"  name='balance_amount[]'></td>
-															<td><input type='number' class='form-control text-danger' value="round({{$row->balance}}" name='bill_amount[]'></td>
-															<td><input type='number' class='form-control' value='0' value="round({{$row->amount}}"  max="round({{$row->balance}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
+															<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+															<td><input type='date' class='form-control' value="{{$row->sa_date}}"></td>
+															<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' ></td>
+															<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' ></td>
+															<td><input type='number' class='form-control' value="{{$row->rec_amt}}" max="{{$row->rec_amt}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
 														</tr>
 													@endforeach
 													</tbody>
