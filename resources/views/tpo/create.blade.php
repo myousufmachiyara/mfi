@@ -87,10 +87,10 @@
 													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Quantity<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Length<span style="color: red;"><strong>*</strong></span></th>
-													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Percentage<span style="color: red;"><strong>*</strong></span></th>
 													<!-- <th width="7%">Weight/Pc</th> -->
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
