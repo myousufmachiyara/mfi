@@ -90,7 +90,7 @@
 													<th width="7%">Quantity<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Length<span style="color: red;"><strong>*</strong></span></th>
-													<th width="7%">Percentage<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Percent<span style="color: red;"><strong>*</strong></span></th>
 													<!-- <th width="7%">Weight/Pc</th> -->
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
