@@ -171,6 +171,8 @@ class JV2Controller extends Controller
         })
         ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
         ->get();
+
+        die($print_r($sales_ageing));
         
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
