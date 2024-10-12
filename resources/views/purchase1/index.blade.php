@@ -176,11 +176,9 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#searchableTable').DataTable(
-        {
-            "order": [[ 0, "desc" ]] // Sort by the second column (Age) in descending order
-        }
-    );
+    var table = $('#searchableTable').DataTable({
+            "order": [[0, "desc"]],
+        });
 
     $('#columnSearch').on('keyup change', function() {
         var columnIndex = $('#columnSelect').val();
