@@ -174,7 +174,10 @@ class JV2Controller extends Controller
       
         // $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name',353)->get();
 
-        $sales_ageing = sales_ageing::where('sales_ageing.jv2_id',$id)->get();
+        $sales_ageing = sales_ageing::where('sales_ageing.jv2_id',$id)
+        ->join('vw_union_sale_1_2_opbal.account_name', '=', 'sales_ageing.acc_name')
+        ->get();
+        
         $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
 
         return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
