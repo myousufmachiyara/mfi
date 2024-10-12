@@ -170,25 +170,27 @@ class JV2Controller extends Controller
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
         
         // Join sales_ageing with vw_union_sale_1_2_opbal.
-        $sales_ageing = sales_ageing::join('vw_union_sale_1_2_opbal', function($join) {
-            $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
-                ->where('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id');
-        })
-        ->where('sales_ageing.jv2_id', $id)
-        ->selectRaw('sales_ageing.*, vw_union_sale_1_2_opbal.*, 
-            (COALESCE(sales_ageing.amount, 0) + COALESCE(vw_union_sale_1_2_opbal.balance, 0)) AS P_rem_bal')
-        ->get();
-
+        $sales_ageing = sales_ageing::where('jv2_id', $id)
+            ->join('vw_union_sale_1_2_opbal', function ($join) {
+                $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
+                     ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
+            })
+            ->select('sales_ageing.', 'vw_union_sale_1_2_opbal.')
+            ->get();
+    
         // Set $sales_ageing to null if the collection is empty.
         $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
-
+    
+        
+    
         // Fetch the related purchase ageing records.
         $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
-
+    
         // Return the view with the fetched data.
         return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
     }
-
+    
+    
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
