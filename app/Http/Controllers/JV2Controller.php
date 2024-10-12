@@ -200,7 +200,7 @@ class JV2Controller extends Controller
         ->get();
 
     // Optional: Use dd() for debugging in Laravel.
-    dd($sales_ageing);
+    dd($sales_agein['items']);
     
     // Fetch the related purchase ageing records.
     $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
