@@ -179,6 +179,7 @@
 									@else{
 										
 									}
+									@endif
 								</section>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
