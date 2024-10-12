@@ -106,7 +106,7 @@ class JV2Controller extends Controller
             }
         }
 
-        if($request->has('prevInvoices') && $request->prevInvoices==1)
+        if($request->has('prevInvoices') && $request->prevInvoices!=0)
         {
             for($j=0;$j<$request->totalInvoices;$j++)
             {

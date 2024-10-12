@@ -570,9 +570,11 @@
         if ($('#SaletoggleSwitch').is(':checked')) {
             customer_name.prop('disabled', false);
             sales_unadjusted_amount.prop('disabled', false);
+			$('#prevInvoices').val(1);
         } else {
             customer_name.prop('disabled', true);
             sales_unadjusted_amount.prop('disabled', true);
+			$('#prevInvoices').val(0);
         }
     }
 	// function SaletoggleInputs() {
