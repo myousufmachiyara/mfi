@@ -34,7 +34,7 @@ return [
 
     // 'lifetime' => 1,
 
-    'lifetime' => 3, // For example, 3 minutes
+    'lifetime' => 20, // For example, 20 minutes
     'expire_on_close' => true,
 
     /*
