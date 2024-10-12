@@ -14,7 +14,6 @@ use App\Models\sales_ageing;
 use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
-use App\Models\vw_union_sale_1_2_opbal_for_edit;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -106,7 +105,7 @@ class JV2Controller extends Controller
             }
         }
 
-        if($request->has('prevInvoices') && $request->prevInvoices==1)
+        if($request->has('prevInvoices') && $request->prevInvoices!=0)
         {
             for($j=0;$j<$request->totalInvoices;$j++)
             {
@@ -161,26 +160,37 @@ class JV2Controller extends Controller
 
     public function edit($id)
     {
-        $jv2 = lager0::where('lager0.jv_no',$id)->first();
-        $jv2_items = lager::where('lager.auto_lager',$id)->get();
+        // Retrieve the main JV2 record.
+        $jv2 = lager0::where('jv_no', $id)->firstOrFail();
+        
+        // Get the related JV2 items.
+        $jv2_items = lager::where('auto_lager', $id)->get();
+        
+        // Fetch active accounts ordered by name.
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
-
-        // $sales_ageing = sales_ageing::where('sales_ageing.acc_name', 353)
-        // ->rightjoin('vw_union_sale_1_2_opbal_for_edit', function ($param) {
-        //     $param->on('vw_union_sale_1_2_opbal_for_edit.prefix', '=', 'sales_ageing.sales_prefix')
-        //          ->on('vw_union_sale_1_2_opbal_for_edit.Sal_inv_no', '=', 'sales_ageing.sales_id')
-        //          ->on('vw_union_sale_1_2_opbal_for_edit.account_name', '=', 'sales_ageing.acc_name');
-        // })
-        // ->get();
-      
-        $sales_ageing = vw_union_sale_1_2_opbal_for_edit::where('vw_union_sale_1_2_opbal_for_edit.account_name',353)->get();
-
-
-        $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
-
-        return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
+        
+        // Join sales_ageing with vw_union_sale_1_2_opbal.
+        $sales_ageing = sales_ageing::where('jv2_id', $id)
+            ->join('vw_union_sale_1_2_opbal', function ($join) {
+                $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
+                     ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
+            })
+            ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
+            ->get();
+    
+        // Set $sales_ageing to null if the collection is empty.
+        $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
+    
+        
+    
+        // Fetch the related purchase ageing records.
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
+    
+        // Return the view with the fetched data.
+        return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
     }
-
+    
+    
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [

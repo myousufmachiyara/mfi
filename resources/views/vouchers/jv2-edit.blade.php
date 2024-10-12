@@ -115,65 +115,114 @@
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
-										@if(empty($sales_ageing))
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
-											</div>
-										@endif
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
+										</div>
 									</header>
+									
+									@if(!empty($sales_ageing))
+										<div class="card-body">
+											<div class="row form-group mb-2">
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name</label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
+														<option value="0" selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
+														@endforeach
+													</select>	
+													
+													<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
 
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
-													<option value="0" selected>Select Account</option>
-													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
-													@endforeach
-												</select>	
-												
-												<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
+												</div>
 
-											</div>
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+												</div>
 
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Unadjusted Amount</label>
-												<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
-											</div>
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_reci_amount" class="form-control" value="0" disabled step="any">
+												</div>
 
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Total Amount</label>
-												<input type="number" id="total_reci_amount" class="form-control" value="0" disabled step="any">
-											</div>
-
-											<div class="col-12 mb-2" >
-												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
-													<thead>
-														<tr>
-															<th width="15%">Inv #</th>
-															<th width="15%">Date</th>
-															<th width="20%">Bill Amount</th>
-															<th width="20%">Remaining</th>
-															<th width="20%">Amount</th>
-														</tr>
-													</thead>
-													<tbody id="pendingInvoices">
-													@foreach ($sales_ageing as $key => $row)
-														<tr>
-															<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
-															<td><input type='date' class='form-control' value="{{$row->sa_date}}"></td>
-															<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' ></td>
-															<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' ></td>
-															<td><input type='number' class='form-control' value="{{$row->rec_amt}}" max="{{$row->rec_amt}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
-														</tr>
-													@endforeach
-													</tbody>
-												</table>										
+												<div class="col-12 mb-2" >
+													<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="15%">Inv #</th>
+																<th width="15%">Date</th>
+																<th width="20%">Bill Amount</th>
+																<th width="20%">Remaining</th>
+																<th width="20%">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="pendingInvoices">
+														@foreach ($sales_ageing as $key => $row)
+															<tr>
+																<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+																<td><input type='date' class='form-control' value="{{$row->sa_date}}" disabled></td>
+																<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' disabled></td>
+																<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' disabled></td>
+																<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalReci()' required disabled></td>
+															</tr>
+														@endforeach
+														</tbody>
+													</table>										
+												</div>
 											</div>
 										</div>
-									</div>
+									
+									@else
+										<div class="card-body">
+											<div class="row form-group mb-2">
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name</label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"    onchange="getPendingInvoices()" required disabled>
+														<option value="0" selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+														@endforeach
+													</select>	
+													
+													<!-- <input type="hidden" id="show_customer_name" name="customer_name" class="form-control"> -->
+
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_reci_amount" class="form-control" value="0" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2" >
+													<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="15%">Inv #</th>
+																<th width="15%">Date</th>
+																<th width="20%">Bill Amount</th>
+																<th width="20%">Remaining</th>
+																<th width="20%">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="pendingInvoices">
+															<tr>
+
+															</tr>
+														</tbody>
+													</table>										
+												</div>
+											</div>
+										</div>
+									
+									@endif
 								</section>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
@@ -301,6 +350,8 @@
 		$('#total_credit').val(totalCredit);
 		$('#total_debit').val(totalDebit);
 
+		document.getElementById('SaletoggleSwitch').addEventListener('change', SaletoggleInputs);
+		document.getElementById('PurtoggleSwitch').addEventListener('change', PurtoggleInputs);
 	});
 
     function removeRow(button) {
@@ -446,7 +497,7 @@
 							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
 							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-							html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control text-danger' value="+Math.round(v['balance'])+" value='0' disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
 							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='rec_amount[]' onchange='totalReci()' required></td>"
 							html+="</tr>";
 							$('#pendingInvoices').append(html);
@@ -578,53 +629,74 @@
 		}
 	}
 
-	function SaletoggleInputs() {
+	// function SaletoggleInputs() {
 		
-		var unadjusted_amount=0;
-		var credited_account=0;
-		var no_of_credits=0;
+	// 	var unadjusted_amount=0;
+	// 	var credited_account=0;
+	// 	var no_of_credits=0;
 
-		$('#sales_unadjusted_amount').val(unadjusted_amount);
-		$('#customer_name').val(0).trigger('change');
-		$('#show_customer_name').val(0);
+	// 	$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 	$('#customer_name').val(0).trigger('change');
+	// 	$('#show_customer_name').val(0);
 
-		document.getElementById('sale_span').style.display = 'none';
+	// 	document.getElementById('sale_span').style.display = 'none';
+	// 	document.getElementById('sales_warning').style.display = 'none';
 
-		var saleAgingtable = document.getElementById("pendingInvoices"); 
-		while (saleAgingtable.rows.length > 0) {
-			saleAgingtable.deleteRow(0);
-		}
+		
+	// 	var saleAgingtable = document.getElementById("pendingInvoices"); 
+	// 	while (saleAgingtable.rows.length > 0) {
+	// 		saleAgingtable.deleteRow(0);
+	// 	}
 
-		if ($('#SaletoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
+	// 	if ($('#SaletoggleSwitch').is(':checked')) {
+	// 		document.getElementById('sales_warning').style.display = 'block';
 
-			for (var i=0;i<rowCount; i++){	
-				selected_account = $('#account_cod'+(i+1)).val();
+	// 		var table = document.getElementById("JV2Table"); 
+	// 		var rowCount = table.rows.length;
 
-				if (selected_account) {
+	// 		for (var i=0;i<rowCount; i++){	
+	// 			selected_account = $('#account_cod'+(i+1)).val();
 
-					credit = table.rows[i].cells[6].querySelector('input').value;
+	// 			if (selected_account) {
 
-					if(credit>=1 && no_of_credits<1){
-						credited_account = selected_account;
-						unadjusted_amount = credit;
-						no_of_credits = no_of_credits + 1;
-					}
-					else if(credit>=1 && no_of_credits>=1){
-						credited_account = 0;
-						unadjusted_amount = 0;
-						document.getElementById('sale_span').style.display = 'block';
-						break;
-					}
-				} 
-			}
+	// 				credit = table.rows[i].cells[6].querySelector('input').value;
 
-			if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
-				$('#customer_name').val(credited_account).trigger('change');
-				$('#show_customer_name').val(credited_account);
-				$('#sales_unadjusted_amount').val(unadjusted_amount);
-			}
-		}
-	}
+	// 				if(credit>=1 && no_of_credits<1){
+	// 					credited_account = selected_account;
+	// 					unadjusted_amount = credit;
+	// 					no_of_credits = no_of_credits + 1;
+	// 				}
+	// 				else if(credit>=1 && no_of_credits>=1){
+	// 					credited_account = 0;
+	// 					unadjusted_amount = 0;
+	// 					document.getElementById('sale_span').style.display = 'block';
+	// 					break;
+	// 				}
+	// 			} 
+	// 		}
+
+	// 		if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
+	// 			$('#customer_name').val(credited_account).trigger('change');
+	// 			$('#show_customer_name').val(credited_account);
+	// 			$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 		}
+	// 	}
+	// }
+
+	function SaletoggleInputs() {
+        const customer_name = $('#customer_name');
+        const sales_unadjusted_amount = $('#sales_unadjusted_amount');
+
+        if ($('#SaletoggleSwitch').is(':checked')) {
+			document.getElementById('sales_warning').style.display = 'block';
+            customer_name.prop('disabled', false);
+            sales_unadjusted_amount.prop('disabled', false);
+			$('#prevInvoices').val(1);
+        } else{
+			document.getElementById('sales_warning').style.display = 'none';
+            customer_name.prop('disabled', true);
+            sales_unadjusted_amount.prop('disabled', true);
+			$('#prevInvoices').val(0);
+        }
+    }
 </script>
