@@ -115,7 +115,7 @@
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span></h2>
+										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
 										@if(empty($sales_ageing))
 											<div class="form-check form-switch">
 												<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
@@ -629,53 +629,74 @@
 		}
 	}
 
-	function SaletoggleInputs() {
+	// function SaletoggleInputs() {
 		
-		var unadjusted_amount=0;
-		var credited_account=0;
-		var no_of_credits=0;
+	// 	var unadjusted_amount=0;
+	// 	var credited_account=0;
+	// 	var no_of_credits=0;
 
-		$('#sales_unadjusted_amount').val(unadjusted_amount);
-		$('#customer_name').val(0).trigger('change');
-		$('#show_customer_name').val(0);
+	// 	$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 	$('#customer_name').val(0).trigger('change');
+	// 	$('#show_customer_name').val(0);
 
-		document.getElementById('sale_span').style.display = 'none';
+	// 	document.getElementById('sale_span').style.display = 'none';
+	// 	document.getElementById('sales_warning').style.display = 'none';
 
-		var saleAgingtable = document.getElementById("pendingInvoices"); 
-		while (saleAgingtable.rows.length > 0) {
-			saleAgingtable.deleteRow(0);
-		}
+		
+	// 	var saleAgingtable = document.getElementById("pendingInvoices"); 
+	// 	while (saleAgingtable.rows.length > 0) {
+	// 		saleAgingtable.deleteRow(0);
+	// 	}
 
-		if ($('#SaletoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
+	// 	if ($('#SaletoggleSwitch').is(':checked')) {
+	// 		document.getElementById('sales_warning').style.display = 'block';
 
-			for (var i=0;i<rowCount; i++){	
-				selected_account = $('#account_cod'+(i+1)).val();
+	// 		var table = document.getElementById("JV2Table"); 
+	// 		var rowCount = table.rows.length;
 
-				if (selected_account) {
+	// 		for (var i=0;i<rowCount; i++){	
+	// 			selected_account = $('#account_cod'+(i+1)).val();
 
-					credit = table.rows[i].cells[6].querySelector('input').value;
+	// 			if (selected_account) {
 
-					if(credit>=1 && no_of_credits<1){
-						credited_account = selected_account;
-						unadjusted_amount = credit;
-						no_of_credits = no_of_credits + 1;
-					}
-					else if(credit>=1 && no_of_credits>=1){
-						credited_account = 0;
-						unadjusted_amount = 0;
-						document.getElementById('sale_span').style.display = 'block';
-						break;
-					}
-				} 
-			}
+	// 				credit = table.rows[i].cells[6].querySelector('input').value;
 
-			if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
-				$('#customer_name').val(credited_account).trigger('change');
-				$('#show_customer_name').val(credited_account);
-				$('#sales_unadjusted_amount').val(unadjusted_amount);
-			}
-		}
-	}
+	// 				if(credit>=1 && no_of_credits<1){
+	// 					credited_account = selected_account;
+	// 					unadjusted_amount = credit;
+	// 					no_of_credits = no_of_credits + 1;
+	// 				}
+	// 				else if(credit>=1 && no_of_credits>=1){
+	// 					credited_account = 0;
+	// 					unadjusted_amount = 0;
+	// 					document.getElementById('sale_span').style.display = 'block';
+	// 					break;
+	// 				}
+	// 			} 
+	// 		}
+
+	// 		if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
+	// 			$('#customer_name').val(credited_account).trigger('change');
+	// 			$('#show_customer_name').val(credited_account);
+	// 			$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 		}
+	// 	}
+	// }
+
+	function SaletoggleInputs() {
+        const customer_name = $('#customer_name');
+        const sales_unadjusted_amount = $('#sales_unadjusted_amount');
+
+        if ($('#SaletoggleSwitch').is(':checked')) {
+			document.getElementById('sales_warning').style.display = 'block';
+            customer_name.prop('disabled', false);
+            sales_unadjusted_amount.prop('disabled', false);
+			$('#prevInvoices').val(1);
+        } else{
+			document.getElementById('sales_warning').style.display = 'none';
+            customer_name.prop('disabled', true);
+            sales_unadjusted_amount.prop('disabled', true);
+			$('#prevInvoices').val(0);
+        }
+    }
 </script>
