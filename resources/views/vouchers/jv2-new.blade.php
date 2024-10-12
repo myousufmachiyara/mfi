@@ -122,14 +122,14 @@
 
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
+												<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"    onchange="getPendingInvoices()" required disabled>
 													<option value="0" selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
 												</select>	
 												
-												<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
+												<!-- <input type="hidden" id="show_customer_name" name="customer_name" class="form-control"> -->
 
 											</div>
 
@@ -564,53 +564,65 @@
 	}
 
 	function SaletoggleInputs() {
+        const customer_name = $('#customer_name');
+        const sales_unadjusted_amount = $('#sales_unadjusted_amount');
+
+        if ($('#SaletoggleSwitch').is(':checked')) {
+            customer_name.prop('disabled', false);
+            sales_unadjusted_amount.prop('disabled', false);
+        } else {
+            customer_name.prop('disabled', true);
+            sales_unadjusted_amount.prop('disabled', true);
+        }
+    }
+	// function SaletoggleInputs() {
 		
-		var unadjusted_amount=0;
-		var credited_account=0;
-		var no_of_credits=0;
+	// 	var unadjusted_amount=0;
+	// 	var credited_account=0;
+	// 	var no_of_credits=0;
 
-		$('#sales_unadjusted_amount').val(unadjusted_amount);
-		$('#customer_name').val(0).trigger('change');
-		$('#show_customer_name').val(0);
+	// 	$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 	$('#customer_name').val(0).trigger('change');
+	// 	$('#show_customer_name').val(0);
 
-		document.getElementById('sale_span').style.display = 'none';
+	// 	document.getElementById('sale_span').style.display = 'none';
 
-		var saleAgingtable = document.getElementById("pendingInvoices"); 
-		while (saleAgingtable.rows.length > 0) {
-			saleAgingtable.deleteRow(0);
-		}
+	// 	var saleAgingtable = document.getElementById("pendingInvoices"); 
+	// 	while (saleAgingtable.rows.length > 0) {
+	// 		saleAgingtable.deleteRow(0);
+	// 	}
 
-		if ($('#SaletoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
+	// 	if ($('#SaletoggleSwitch').is(':checked')) {
+	// 		var table = document.getElementById("JV2Table"); 
+	// 		var rowCount = table.rows.length;
 
-			for (var i=0;i<rowCount; i++){	
-				selected_account = $('#account_cod'+(i+1)).val();
+	// 		for (var i=0;i<rowCount; i++){	
+	// 			selected_account = $('#account_cod'+(i+1)).val();
 
-				if (selected_account) {
+	// 			if (selected_account) {
 
-					credit = table.rows[i].cells[6].querySelector('input').value;
+	// 				credit = table.rows[i].cells[6].querySelector('input').value;
 
-					if(credit>=1 && no_of_credits<1){
-						credited_account = selected_account;
-						unadjusted_amount = credit;
-						no_of_credits = no_of_credits + 1;
-					}
-					else if(credit>=1 && no_of_credits>=1){
-						credited_account = 0;
-						unadjusted_amount = 0;
-						document.getElementById('sale_span').style.display = 'block';
-						break;
-					}
-				} 
-			}
+	// 				if(credit>=1 && no_of_credits<1){
+	// 					credited_account = selected_account;
+	// 					unadjusted_amount = credit;
+	// 					no_of_credits = no_of_credits + 1;
+	// 				}
+	// 				else if(credit>=1 && no_of_credits>=1){
+	// 					credited_account = 0;
+	// 					unadjusted_amount = 0;
+	// 					document.getElementById('sale_span').style.display = 'block';
+	// 					break;
+	// 				}
+	// 			} 
+	// 		}
 
-			if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
-				$('#customer_name').val(credited_account).trigger('change');
-				$('#show_customer_name').val(credited_account);
-				$('#sales_unadjusted_amount').val(unadjusted_amount);
-			}
-		}
-	}
+	// 		if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
+	// 			$('#customer_name').val(credited_account).trigger('change');
+	// 			$('#show_customer_name').val(credited_account);
+	// 			$('#sales_unadjusted_amount').val(unadjusted_amount);
+	// 		}
+	// 	}
+	// }
 
 </script>
