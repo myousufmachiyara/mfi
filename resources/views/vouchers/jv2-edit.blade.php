@@ -123,8 +123,9 @@
 										@endif
 									</header>
 									
-									@if(!empty($sales_ageing))
-									<div class="card-body">
+									@if(empty($sales_ageing))
+									<p>empty</p>
+									<!-- <div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Account Name</label>
@@ -174,10 +175,11 @@
 												</table>										
 											</div>
 										</div>
-									</div>
+									</div> -->
 
 									@else{
-										
+										<p>not empty</p>
+
 									}
 									@endif
 								</section>
