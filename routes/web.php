@@ -334,4 +334,9 @@
         Route::get('/unauthorized', function () {
             return view('unauthorized');
         })->name('unauthorized');
+
+        Route::post('/keep-alive', function () {
+            session(['lastActivity' => time()]); // Update last activity time
+            return response()->json(['status' => 'success']);
+        });
     });

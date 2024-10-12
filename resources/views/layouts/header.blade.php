@@ -55,4 +55,11 @@
             display: none;
         }
     </style>
-
+	<div id="timeoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+		<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 5px; text-align: center;">
+			<h4>Do you want to continue your session?</h4>
+			<!-- <button class="btn btn-danger modal-dismiss">OK</button> -->
+			<button class="btn btn-primary modal-dismiss" id="continueSession">Yes, continue</button>
+			<button class="btn btn-danger" id="logoutSession">No, logout</button>
+		</div>
+	</div>
