@@ -123,7 +123,7 @@
 										@endif
 									</header>
 									
-									@if(!empty($sales_ageing)){
+									@if(!empty($sales_ageing))
 										<div class="card-body">
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
@@ -175,12 +175,55 @@
 												</div>
 											</div>
 										</div>
-									}
-										
-									@else{
-										<p>empty</p>
-									}
-					
+									
+									@else
+										<div class="card-body">
+											<div class="row form-group mb-2">
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name</label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"    onchange="getPendingInvoices()" required disabled>
+														<option value="0" selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+														@endforeach
+													</select>	
+													
+													<!-- <input type="hidden" id="show_customer_name" name="customer_name" class="form-control"> -->
+
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_reci_amount" class="form-control" value="0" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2" >
+													<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="15%">Inv #</th>
+																<th width="15%">Date</th>
+																<th width="20%">Bill Amount</th>
+																<th width="20%">Remaining</th>
+																<th width="20%">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="pendingInvoices">
+															<tr>
+
+															</tr>
+														</tbody>
+													</table>										
+												</div>
+											</div>
+										</div>
+									
 									@endif
 								</section>
 							</div>
