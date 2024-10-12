@@ -353,8 +353,6 @@
                     </li>
                     @endif
 
-
-                    @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i style="font-size:16px"class="fa fa-arrow-right"></i>
@@ -386,8 +384,6 @@
                             @endif
                         </ul>
                     </li>
-                    @endif
-
                 </ul>	
             </nav>
 		</div>
