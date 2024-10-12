@@ -3891,7 +3891,7 @@ html.dark .inner-menu .inner-menu-toggle-inside:after {
 .header {
 	background: #FFF;
 	border-bottom: 1px solid #E9E9E6;
-	border-top: 3px solid #EDEDED;
+	border-top: 0px solid #EDEDED;
 	z-index: 1000;
 }
 

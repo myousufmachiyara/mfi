@@ -7,15 +7,11 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
-//  // Show loader on page unload and before content is loaded
-//  window.addEventListener('beforeunload', function() {
-//     document.querySelector('.loader').style.display = 'flex';
-// });
+$(window).on('load', function() {
+    // Hide the loader once the page is fully loaded
+    $('#loader').addClass('hidden');
+});
 
-// // Hide loader when the page is fully loaded
-// window.addEventListener('load', function() {
-//     document.querySelector('.loader').style.display = 'none';
-// });
 
 document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
     textarea.addEventListener('keydown', function(e) {
@@ -23,19 +19,6 @@ document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
             e.stopPropagation(); // Prevents the Enter key from propagating to other elements
         }
     });
-});
-
-var table = $('#searchableTable').DataTable();
-
-$('#column-search').on('keyup change', function() {
-    var selectedColumn = $('#searchColId').val();
-    table.column(selectedColumn).search(this.value).draw();
-});
-
-$('#searchColId').on('change', function() {
-    // Clear the search input when column is changed
-    $('#column-search').val('');
-    table.column($(this).val()).search('').draw();
 });
 
 
@@ -179,3 +162,36 @@ function convertTens(number) {
 
     return tens[number] || "";
 }
+
+// session maintain
+
+    let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
+    let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
+    let warningTimeout;
+    let warningShown = false;
+
+    function resetTimer() {
+        clearTimeout(warningTimeout);
+        warningShown = false;
+        warningTimeout = setTimeout(showModal, timeoutWarning);
+    }
+
+    function showModal() {
+        warningShown = true;
+        $('#timeoutModal').show(); // Show the modal
+    }
+
+    // Continue session event
+    $('#continueSession').on('click', function() {
+        $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
+        $('#timeoutModal').hide(); // Hide the modal
+        resetTimer(); // Reset the timer
+    });
+
+    // Logout event
+    $('#logoutSession').on('click', function() {
+        window.location.href = '/logout'; // Redirect to logout or any desired action
+    });
+
+    $(document).on('mousemove keypress click scroll', resetTimer);
+    resetTimer();

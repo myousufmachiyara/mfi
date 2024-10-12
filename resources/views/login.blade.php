@@ -35,13 +35,23 @@
 
 		<!-- Head Libs -->
 		<script src="/assets/vendor/modernizr/modernizr.js"></script>
+		<style>
+			.resp-cont {
+				width:60%;
+			}
 
+			@media (max-width: 768px) {
+				.resp-cont {
+					width:80%
+				}
+			}
+		</style>
 	</head>
 	<body style="background:#fff;">
 		<!-- start: page -->
 			<div class="row">
 				<div class="col-12 col-md-6 text-center">
-					<div class="container" style="width:60%;position: relative;top: 20%;">
+					<div class="container resp-cont" style="position: relative;top: 20%;">
 						<a href="/" class="logo">
 							<img src="/assets/img/logo.png" height="60" alt="MFI Logo" />
 						</a>					

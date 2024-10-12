@@ -353,8 +353,6 @@
                     </li>
                     @endif
 
-
-                    @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
                             <i style="font-size:16px"class="fa fa-arrow-right"></i>
@@ -370,15 +368,24 @@
                             </li>	
                             @endif
 
+                            @if(((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
                             <li>
                                 <a class="nav-link"   href="{{ route('all-complains')}}">
                                     Complains
                                 </a>
                             </li>	
+                            @endif
+
+                            <!-- set admin Role ID here -->
+                            @if(session('user_role')==1)
+                            <li>
+                                <a class="nav-link"   href="{{ route('all-modules')}}">
+                                    Modules
+                                </a>
+                            </li>	
+                            @endif
                         </ul>
                     </li>
-                    @endif
-
                 </ul>	
             </nav>
 		</div>

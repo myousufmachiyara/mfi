@@ -38,31 +38,28 @@
 		<link rel="stylesheet" href="/assets/css/custom.css">
 	</head>
 	<style>
-        /* Loader styles */
-        .loader {
+		/* Loader styles */
+		#loader {
             position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
-            /* background: rgba(255, 255, 255, 0.9);  */
-			background-color: transparent;
+            z-index: 9999;
         }
-        .loader div {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-			/* background-color: transparent; */
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        #loader.hidden {
+            display: none;
         }
     </style>
-
+	<div id="timeoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+		<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 5px; text-align: center;">
+			<h4>Do you want to continue your session?</h4>
+			<!-- <button class="btn btn-danger modal-dismiss">OK</button> -->
+			<button class="btn btn-primary modal-dismiss" id="continueSession">Yes, continue</button>
+			<button class="btn btn-danger" id="logoutSession">No, logout</button>
+		</div>
+	</div>

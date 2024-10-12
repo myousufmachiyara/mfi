@@ -5954,8 +5954,8 @@ textarea.form-control-lg {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  border: 0.25em solid currentColor;
-  border-right-color: transparent;
+  border: 0.25em solid #ffff;
+  border-right-color: #0088CC;
   border-radius: 50%;
   -webkit-animation: 0.75s linear infinite spinner-border;
   animation: 0.75s linear infinite spinner-border;
