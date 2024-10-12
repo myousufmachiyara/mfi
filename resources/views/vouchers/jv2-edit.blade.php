@@ -350,6 +350,8 @@
 		$('#total_credit').val(totalCredit);
 		$('#total_debit').val(totalDebit);
 
+		document.getElementById('SaletoggleSwitch').addEventListener('change', SaletoggleInputs);
+		document.getElementById('PurtoggleSwitch').addEventListener('change', PurtoggleInputs);
 	});
 
     function removeRow(button) {
