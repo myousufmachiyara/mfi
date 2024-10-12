@@ -179,7 +179,38 @@ class JV2Controller extends Controller
     //     return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
     // }
 
-    public function edit($id)
+//     public function edit($id)
+// {
+//     // Retrieve the main JV2 record.
+//     $jv2 = lager0::where('jv_no', $id)->firstOrFail();
+    
+//     // Get the related JV2 items.
+//     $jv2_items = lager::where('auto_lager', $id)->get();
+    
+//     // Fetch active accounts ordered by name.
+//     $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
+    
+//     // Join sales_ageing with vw_union_sale_1_2_opbal.
+//     $sales_ageing = sales_ageing::where('jv2_id', $id)
+//         ->join('vw_union_sale_1_2_opbal', function ($join) {
+//             $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
+//                  ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
+//         })
+//         ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
+//         ->get();
+
+//     // Optional: Use dd() for debugging in Laravel.
+
+//     die(print_r($sales_ageing));
+    
+//     // Fetch the related purchase ageing records.
+//     $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
+
+//     // Return the view with the fetched data.
+//     return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
+// }
+
+public function edit($id)
 {
     // Retrieve the main JV2 record.
     $jv2 = lager0::where('jv_no', $id)->firstOrFail();
@@ -199,9 +230,11 @@ class JV2Controller extends Controller
         ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
         ->get();
 
-    // Optional: Use dd() for debugging in Laravel.
-    die(print_r($sales_ageing));
+    // Set $sales_ageing to null if the collection is empty.
+    $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
+
     
+
     // Fetch the related purchase ageing records.
     $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
 
