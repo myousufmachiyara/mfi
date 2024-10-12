@@ -175,7 +175,7 @@ class JV2Controller extends Controller
                 $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
                      ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
             })
-            ->select('sales_ageing.', 'vw_union_sale_1_2_opbal.')
+            ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
             ->get();
     
         // Set $sales_ageing to null if the collection is empty.
