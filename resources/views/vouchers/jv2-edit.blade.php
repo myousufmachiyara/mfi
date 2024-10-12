@@ -116,11 +116,11 @@
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
-										@if(empty($sales_ageing))
+										<!-- @if(empty($sales_ageing)) -->
 											<div class="form-check form-switch">
 												<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
 											</div>
-										@endif
+										<!-- @endif -->
 									</header>
 									
 									@if(!empty($sales_ageing))
