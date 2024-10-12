@@ -122,7 +122,8 @@
 											</div>
 										@endif
 									</header>
-
+									
+									@if(!empty($sales_ageing))
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-4 mb-2">
@@ -174,6 +175,10 @@
 											</div>
 										</div>
 									</div>
+
+									@else{
+										
+									}
 								</section>
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
