@@ -159,45 +159,24 @@ class JV2Controller extends Controller
     }
 
     public function edit($id)
-    // {
-    //     $jv2 = lager0::where('lager0.jv_no',$id)->first();
-    //     $jv2_items = lager::where('lager.auto_lager',$id)->get();
-    //     $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
-
-    //     $sales_ageing = sales_ageing::where('sales_ageing.jv2_id', $id)
-    //     ->join('vw_union_sale_1_2_opbal', function($join) {
-    //         $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
-    //              ->where('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id');
-    //     })
-    //     ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
-    //     ->get();
-        
-    //     die(print_r($sales_ageing));
-    //     $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
-
-    //     return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
-    // }
-    
- {
-        $jv2 = lager0::where('jv_no', $id)->first();
-        $jv2_items = lager::where('auto_lager', $id)->get();
+    {
+        $jv2 = lager0::where('lager0.jv_no',$id)->first();
+        $jv2_items = lager::where('lager.auto_lager',$id)->get();
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
-    
+
         $sales_ageing = sales_ageing::where('jv2_id', $id)
-            ->join('vw_union_sale_1_2_opbal', function($join) {
-                $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
-                     ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
-            })
-            ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
-            ->get();
-    
-        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
-    
-        // Remove debugging in production
-     dd($sales_ageing);
-    
-        return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
+        ->join('vw_union_sale_1_2_opbal', function($join) {
+            $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
+                ->whereColumn('vw_union_sale_1_2_opbal.Sal_inv_no', 'sales_ageing.sales_id');
+        })
+        ->select('sales_ageing.*', 'vw_union_sale_1_2_opbal.*')
+        ->get();
+        
+        $purchase_ageing = purchase_ageing::where('purchase_ageing.jv2_id',$id)->get();
+
+        return view('vouchers.jv2-edit',compact('acc','jv2','jv2_items','sales_ageing','purchase_ageing'));
     }
+    
     
     public function update(Request $request)
     {
