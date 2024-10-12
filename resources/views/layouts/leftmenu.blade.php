@@ -368,11 +368,13 @@
                             </li>	
                             @endif
 
+                            @if(((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
                             <li>
                                 <a class="nav-link"   href="{{ route('all-complains')}}">
                                     Complains
                                 </a>
                             </li>	
+                            @endif
 
                             <!-- set admin Role ID here -->
                             @if(session('user_role')==1)
