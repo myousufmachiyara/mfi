@@ -14,7 +14,6 @@ use App\Models\sales_ageing;
 use App\Models\purchase_ageing;
 use App\Models\vw_union_sale_1_2_opbal;
 use App\Models\vw_union_pur_1_2_opbal;
-use App\Models\vw_union_sale_1_2_opbal_for_edit;
 use App\Traits\SaveImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
