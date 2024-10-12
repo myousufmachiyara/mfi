@@ -166,7 +166,7 @@
 															<td><input type='date' class='form-control' value="{{$row->sa_date}}"></td>
 															<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' ></td>
 															<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' ></td>
-															<td><input type='number' class='form-control' value="{{$row->rec_amt}}" max="{{$row->rec_amt}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
+															<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalReci()' required></td>
 														</tr>
 													@endforeach
 													</tbody>
