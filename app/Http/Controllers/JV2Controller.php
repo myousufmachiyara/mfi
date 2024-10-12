@@ -170,7 +170,7 @@ class JV2Controller extends Controller
         $acc = AC::where('status', 1)->orderBy('ac_name', 'asc')->get();
         
         // Join sales_ageing with vw_union_sale_1_2_opbal.
-        $sales_ageing = SalesAgeing::join('vw_union_sale_1_2_opbal', function($join) {
+        $sales_ageing = sales_ageing::join('vw_union_sale_1_2_opbal', function($join) {
             $join->on('vw_union_sale_1_2_opbal.prefix', '=', 'sales_ageing.sales_prefix')
                 ->where('vw_union_sale_1_2_opbal.Sal_inv_no', '=', 'sales_ageing.sales_id');
         })
