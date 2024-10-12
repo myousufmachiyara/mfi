@@ -7,15 +7,11 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
-//  // Show loader on page unload and before content is loaded
-//  window.addEventListener('beforeunload', function() {
-//     document.querySelector('.loader').style.display = 'flex';
-// });
+$(window).on('load', function() {
+    // Hide the loader once the page is fully loaded
+    $('#loader').addClass('hidden');
+});
 
-// // Hide loader when the page is fully loaded
-// window.addEventListener('load', function() {
-//     document.querySelector('.loader').style.display = 'none';
-// });
 
 document.querySelectorAll('.cust-textarea').forEach(function(textarea) {
     textarea.addEventListener('keydown', function(e) {

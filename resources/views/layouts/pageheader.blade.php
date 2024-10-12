@@ -1,6 +1,8 @@
-<!-- <div class="loader">
-	<div></div>
-</div> -->
+<div id="loader">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <header class="header header-nav-menu header-nav-top-line ">
 	
 	<div class="logo-container">
