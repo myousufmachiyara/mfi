@@ -128,14 +128,14 @@
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 														@endforeach
 													</select>	
 													
-													<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
+													<!-- <input type="hidden" id="show_customer_name"  class="form-control"> -->
 
 												</div>
 
