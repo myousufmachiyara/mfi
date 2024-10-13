@@ -24,6 +24,8 @@
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
 												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" id="jv_no" class="form-control">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+												<input type="hidden" id="pur_prevInvoices" name="pur_prevInvoices" value="0" class="form-control">
+												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 											</div>
 
 											<div class="col-6 col-md-2 mb-2">
