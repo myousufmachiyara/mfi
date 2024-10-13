@@ -687,6 +687,7 @@
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
 		const jv_no= $('#jv_no').val();
+		console.log(jv_no);
 	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
