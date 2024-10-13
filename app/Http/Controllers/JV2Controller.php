@@ -189,76 +189,76 @@ class JV2Controller extends Controller
     
     public function update(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'debit' => 'required',
-        //     'credit' => 'required',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'debit' => 'required',
+            'credit' => 'required',
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json(['errors' => $validator->errors()], 422);
-        // }
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
-        // $lager0 = lager0::where('jv_no', $request->jv_no)->get()->first();
+        $lager0 = lager0::where('jv_no', $request->jv_no)->get()->first();
 
-        // if ($request->has('jv_date') && $request->jv_date) {
-        //     $lager0->jv_date=$request->jv_date;
-        // }
-        // if ($request->has('narration') && $request->narration OR empty($request->narration)) {
-        //     $lager0->narration=$request->narration;
-        // }
+        if ($request->has('jv_date') && $request->jv_date) {
+            $lager0->jv_date=$request->jv_date;
+        }
+        if ($request->has('narration') && $request->narration OR empty($request->narration)) {
+            $lager0->narration=$request->narration;
+        }
 
-        // lager0::where('jv_no', $request->jv_no)->update([
-        //     'jv_date'=>$lager0->jv_date,
-        //     'narration'=>$lager0->narration,
-        //     'updated_by' => session('user_id'),
-        // ]);
+        lager0::where('jv_no', $request->jv_no)->update([
+            'jv_date'=>$lager0->jv_date,
+            'narration'=>$lager0->narration,
+            'updated_by' => session('user_id'),
+        ]);
 
-        // $lager = lager::where('auto_lager', $request->jv_no)->delete();
+        $lager = lager::where('auto_lager', $request->jv_no)->delete();
 
-        // if($request->has('items'))
-        // {
-        //     for($i=0;$i<$request->items;$i++)
-        //     {
+        if($request->has('items'))
+        {
+            for($i=0;$i<$request->items;$i++)
+            {
 
-        //         if(filled($request->account_cod[$i]))
-        //         {
-        //             $lager = new lager();
+                if(filled($request->account_cod[$i]))
+                {
+                    $lager = new lager();
 
-        //             $lager->auto_lager=$request->jv_no;
-        //             $lager->account_cod=$request->account_cod[$i];
-        //             if ($request->remarks[$i] OR empty($request->remarks[$i])) {
-        //                 $lager->remarks=$request->remarks[$i];
-        //             }
-        //             if ($request->bank_name[$i] OR empty($request->bank_name[$i])) {
-        //                 $lager->bankname=$request->bank_name[$i];
-        //             }
-        //             if ($request->instrumentnumber[$i] OR empty($request->instrumentnumber[$i])) {
-        //                 $lager->instrumentnumber=$request->instrumentnumber[$i];
-        //             }
-        //             if ($request->chq_date[$i] OR empty($request->chq_date[$i])) {
-        //                 $lager->chqdate=$request->chq_date[$i];
-        //             }
-        //             $lager->debit=$request->debit[$i];
-        //             $lager->credit=$request->credit[$i];
-        //             $lager->save();
-        //         }
-        //     }
-        // }
+                    $lager->auto_lager=$request->jv_no;
+                    $lager->account_cod=$request->account_cod[$i];
+                    if ($request->remarks[$i] OR empty($request->remarks[$i])) {
+                        $lager->remarks=$request->remarks[$i];
+                    }
+                    if ($request->bank_name[$i] OR empty($request->bank_name[$i])) {
+                        $lager->bankname=$request->bank_name[$i];
+                    }
+                    if ($request->instrumentnumber[$i] OR empty($request->instrumentnumber[$i])) {
+                        $lager->instrumentnumber=$request->instrumentnumber[$i];
+                    }
+                    if ($request->chq_date[$i] OR empty($request->chq_date[$i])) {
+                        $lager->chqdate=$request->chq_date[$i];
+                    }
+                    $lager->debit=$request->debit[$i];
+                    $lager->credit=$request->credit[$i];
+                    $lager->save();
+                }
+            }
+        }
 
-        // if($request->hasFile('att')){
-        //     $files = $request->file('att');
+        if($request->hasFile('att')){
+            $files = $request->file('att');
             
-        //     foreach ($files as $file)
-        //     {
-        //         $jv2_att = new jv2_att();
-        //         $jv2_att->jv2_id = $request->jv_no;
-        //         $extension = $file->getClientOriginalExtension();
-        //         $jv2_att->att_path = $this->jv2Doc($file,$extension);
-        //         $jv2_att->save();
-        //     }
-        // }
+            foreach ($files as $file)
+            {
+                $jv2_att = new jv2_att();
+                $jv2_att->jv2_id = $request->jv_no;
+                $extension = $file->getClientOriginalExtension();
+                $jv2_att->att_path = $this->jv2Doc($file,$extension);
+                $jv2_att->save();
+            }
+        }
 
-        die(print_r($request->all()));
+        // die(print_r($request->all()));
         if($request->has('prevInvoices') && $request->prevInvoices!=0)
         {
             $sales_ageing = sales_ageing::where('jv2_id', $request->jv_no)->delete();
