@@ -125,7 +125,7 @@
 										<div class="card-body">
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
-													<label class="col-form-label">Account Name</label>
+													<label class="col-form-label">Account Name <a><i class="fa fa-refresh"></i></a></label>
 													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
@@ -707,7 +707,6 @@
             customer_name.prop('disabled', false);
             sales_unadjusted_amount.prop('disabled', false);
 			$('#prevInvoices').val(1);
-			$('#customer_name').select2();
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
 			var table = document.getElementById('pendingInvoices');
