@@ -3,7 +3,7 @@
 		<section class="body">
 			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('store-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
@@ -177,7 +177,7 @@
 											<tbody id="Purchase2Table">
 												<tr>
 													<td>
-														<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod1" onchange="getItemDetails(1,1)" required>
+														<input type="text" class="form-control" name="item_cod[]"  autofocus id="item_cod1" onchange="getItemDetails(1,1)" required>
 													</td>
 													<td>
 														<select data-plugin-selecttwo class="form-control select2-js"  id="item_name1" name="item_name[]" onchange="getItemDetails(1,2)" required>
@@ -393,7 +393,7 @@
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']).trigger('change');
+				$('#item_name' + row_no).val(result[0]['it_cod']).select2();
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 				$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);

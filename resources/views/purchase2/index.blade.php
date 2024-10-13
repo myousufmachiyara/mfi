@@ -1,8 +1,10 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-            @include('../layouts.pageheader')
+            @include('../layouts.homepageheader')
             <div class="inner-wrapper">
+                @include('layouts.leftmenu')
+
 				<section role="main" class="content-body">
                     <div class="row">
                         <div class="col">
