@@ -3,7 +3,7 @@
 		<section class="body">
         @include('../layouts.pageheader')
             <div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('create-role') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">

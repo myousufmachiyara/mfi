@@ -3,7 +3,7 @@
 		<section class="body">
 		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 
                     <section class="card">
 

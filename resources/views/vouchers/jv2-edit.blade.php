@@ -3,7 +3,7 @@
 		<section class="body">
 		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
@@ -419,7 +419,6 @@
 
 		}
 	}
-
 
 	function validateItemName(inputElement)
 	{

@@ -6,8 +6,9 @@
     </style>	
     <body>
 		<section class="body">
-            @include('../layouts.pageheader')
-            <div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper" style="padding-top: 50px;">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
                     <div class="row">
                         <div class="col">

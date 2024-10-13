@@ -3,7 +3,7 @@
 		<section class="body">
             @include('../layouts.pageheader')
             <div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" id="myForm" action="{{ route('update-tstock-in-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
@@ -269,7 +269,7 @@
             success: function(result) {
                 if (result.length > 0) {
                     $('#item_code'+row_no).val(result[0]['it_cod']);
-                    $('#item_name'+row_no).val(result[0]['it_cod']);
+                    $('#item_name'+row_no).val(result[0]['it_cod']).select2();
                     $('#remarks'+row_no).val(result[0]['item_remark']);
                     $('#weight'+row_no).val(result[0]['weight']);
                     $('#weight'+row_no).trigger('change');
