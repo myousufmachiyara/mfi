@@ -707,7 +707,7 @@
             customer_name.prop('disabled', false);
             sales_unadjusted_amount.prop('disabled', false);
 			$('#prevInvoices').val(1);
-			$('#customer_name').trigger('change');
+			$('#customer_name').select2();
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
 			var table = document.getElementById('pendingInvoices');
