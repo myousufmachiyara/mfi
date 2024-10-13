@@ -22,7 +22,7 @@
 											<div class="col-6 col-md-1 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
-												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
+												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" id="jv_no" class="form-control">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
 
@@ -686,14 +686,41 @@
 	function SaletoggleInputs() {
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
-
+		const jv_no= $('#jv_no').val();
+	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/deactive_sales_ageing/"+jv_no,
+					success: function(result){
+						console.log("success here");
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
             customer_name.prop('disabled', false);
             sales_unadjusted_amount.prop('disabled', false);
 			$('#prevInvoices').val(1);
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/active_sales_ageing/"+jv_no,
+					success: function(result){
+						console.log("success here");
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
             customer_name.prop('disabled', true);
             sales_unadjusted_amount.prop('disabled', true);
 			$('#prevInvoices').val(0);

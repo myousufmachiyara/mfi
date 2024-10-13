@@ -176,6 +176,8 @@
         Route::post('/vouchers/update', [App\Http\Controllers\JV1Controller::class, 'update'])->name('update-jv1');
         Route::get('/vouchers2/edit/{id}', [App\Http\Controllers\JV2Controller::class, 'edit'])->name('edit-jv2');
         Route::post('/vouchers2/update', [App\Http\Controllers\JV2Controller::class, 'update'])->name('update-jv2');
+        Route::get('/vouchers2/active_sales_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'activeSalesAgeing'])->name('active-sales-ageing');
+        Route::get('/vouchers2/deactive_sales_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'deactiveSalesAgeing'])->name('deactive-sales-ageing');
         Route::get('/purchase1/edit/{id}', [App\Http\Controllers\PurchaseController::class, 'edit'])->name('edit-purchases1');
         Route::post('/purchase1/update', [App\Http\Controllers\PurchaseController::class, 'update'])->name('update-purchases1');
         Route::get('/purchase2/edit/{id}', [App\Http\Controllers\Purchase2Controller::class, 'edit'])->name('edit-purchases2');
