@@ -165,33 +165,42 @@ function convertTens(number) {
 
 // session maintain
 
-    let timeoutWarning = 15 * 60 * 1000; // 1 minute in milliseconds
-    let timeoutRedirect = 20 * 60 * 1000; // 2 minutes in milliseconds
-    let warningTimeout;
-    let warningShown = false;
+let timeoutWarning = 15 * 60 * 1000; // 1 minute in milliseconds
+let timeoutRedirect = 20 * 60 * 1000; // 2 minutes in milliseconds
+let warningTimeout;
+let warningShown = false;
 
-    function resetTimer() {
-        clearTimeout(warningTimeout);
-        warningShown = false;
-        warningTimeout = setTimeout(showModal, timeoutWarning);
-    }
+function resetTimer() {
+    clearTimeout(warningTimeout);
+    warningShown = false;
+    warningTimeout = setTimeout(showModal, timeoutWarning);
+}
 
-    function showModal() {
-        warningShown = true;
-        $('#timeoutModal').show(); // Show the modal
-    }
+function showModal() {
+    warningShown = true;
+    $('#timeoutModal').show(); // Show the modal
+}
 
-    // Continue session event
-    $('#continueSession').on('click', function() {
-        $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
-        $('#timeoutModal').hide(); // Hide the modal
-        resetTimer(); // Reset the timer
-    });
+// Continue session event
+$('#continueSession').on('click', function() {
+    $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
+    $('#timeoutModal').hide(); // Hide the modal
+    resetTimer(); // Reset the timer
+});
 
-    // Logout event
-    $('#logoutSession').on('click', function() {
-        window.location.href = '/logout'; // Redirect to logout or any desired action
-    });
+// Logout event
+$('#logoutSession').on('click', function() {
+    window.location.href = '/logout'; // Redirect to logout or any desired action
+});
 
-    $(document).on('mousemove keypress click scroll', resetTimer);
-    resetTimer();
+$(document).on('mousemove keypress click scroll', resetTimer);
+resetTimer();
+
+var table = $('#searchableTable').DataTable({
+    "order": [[0, "desc"]],
+});
+
+$('#columnSearch').on('keyup change', function() {
+    var columnIndex = $('#columnSelect').val();
+    table.column(columnIndex).search(this.value).draw();
+});

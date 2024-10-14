@@ -177,14 +177,7 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#searchableTable').DataTable({
-            "order": [[0, "desc"]],
-        });
 
-    $('#columnSearch').on('keyup change', function() {
-        var columnIndex = $('#columnSelect').val();
-        table.column(columnIndex).search(this.value).draw();
-    });
 });
 </script>
 
