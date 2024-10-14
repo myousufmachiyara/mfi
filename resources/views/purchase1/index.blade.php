@@ -1,8 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-            @include('layouts.pageheader')
-			<div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper" style="padding-top: 50px;">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">                    
                     <div class="row">
                         <div class="col">
@@ -176,14 +177,7 @@
 
 <script>
 $(document).ready(function() {
-    var table = $('#searchableTable').DataTable({
-            "order": [[0, "desc"]],
-        });
 
-    $('#columnSearch').on('keyup change', function() {
-        var columnIndex = $('#columnSelect').val();
-        table.column(columnIndex).search(this.value).draw();
-    });
 });
 </script>
 

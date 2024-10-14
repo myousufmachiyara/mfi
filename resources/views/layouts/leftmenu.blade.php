@@ -40,7 +40,16 @@
                                     User Accounts
                                 </a>
                             </li>
-                            @endif			
+                            @endif	
+                            
+                             <!-- set admin Role ID here -->
+                             @if(session('user_role')==1)
+                            <li>
+                                <a class="nav-link"   href="{{ route('all-modules')}}">
+                                    Modules
+                                </a>
+                            </li>	
+                            @endif
                         </ul>
                     </li>
                     @endif
@@ -376,14 +385,7 @@
                             </li>	
                             @endif
 
-                            <!-- set admin Role ID here -->
-                            @if(session('user_role')==1)
-                            <li>
-                                <a class="nav-link"   href="{{ route('all-modules')}}">
-                                    Modules
-                                </a>
-                            </li>	
-                            @endif
+                           
                         </ul>
                     </li>
                 </ul>	

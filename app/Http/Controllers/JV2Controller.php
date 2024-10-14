@@ -26,9 +26,7 @@ class JV2Controller extends Controller
 
     public function index()
     {
-        
-
-
+    
         $jv2= Lager0::where('lager0.status', 1)
         ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
         ->select(
@@ -181,8 +179,6 @@ class JV2Controller extends Controller
         // Set $sales_ageing to null if the collection is empty.
         $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
     
-        
-    
         // Fetch the related purchase ageing records.
         $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
     
@@ -261,6 +257,29 @@ class JV2Controller extends Controller
                 $jv2_att->save();
             }
         }
+
+        // die(print_r($request->all()));
+        if($request->has('prevInvoices') && $request->prevInvoices!=0)
+        {
+            $sales_ageing = sales_ageing::where('jv2_id', $request->jv_no)->delete();
+
+            for($j=0;$j<$request->totalInvoices;$j++)
+            {
+                if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
+                {
+                    $sales_ageing = new sales_ageing();
+                    $sales_ageing->updated_by = session('user_id');
+                    $sales_ageing->jv2_id=$request->jv_no;
+                    $sales_ageing->amount=$request->rec_amount[$j];
+                    $sales_ageing->sales_id=$request->invoice_nos[$j];
+                    $sales_ageing->sales_prefix=$request->prefix[$j];
+                    $sales_ageing->acc_name=$request->customer_name;
+                    $sales_ageing->save();
+                }
+                
+            }
+        }
+
         return redirect()->route('all-jv2');
     }
 
@@ -271,6 +290,22 @@ class JV2Controller extends Controller
             'updated_by' => session('user_id'),
         ]);
         return redirect()->route('all-jv2');
+    }
+
+    public function activeSalesAgeing($id){
+        $sales_ageing = sales_ageing::where('jv2_id', $id)->update([
+            'status' => '1',
+            'updated_by' => session('user_id'),
+        ]);
+        return $sales_ageing;
+    }
+
+    public function deactiveSalesAgeing($id){
+        $sales_ageing = sales_ageing::where('jv2_id', $id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
+        return $sales_ageing;
     }
 
     public function print($id)

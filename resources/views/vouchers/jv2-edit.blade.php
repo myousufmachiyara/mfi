@@ -3,7 +3,7 @@
 		<section class="body">
 		@include('../layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
 						<div class="row">
@@ -22,8 +22,10 @@
 											<div class="col-6 col-md-1 mb-2">
 												<label class="col-form-label" >RC. #</label>
 												<input type="text" placeholder="Invoice No." value="{{$jv2->jv_no}}" class="form-control" disabled>
-												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" class="form-control">
+												<input type="hidden" name="jv_no" value="{{$jv2->jv_no}}" id="jv_no" class="form-control">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
+												<input type="hidden" id="pur_prevInvoices" name="pur_prevInvoices" value="0" class="form-control">
+												<input type="hidden" id="prevInvoices" name="prevInvoices" value="0" class="form-control">
 											</div>
 
 											<div class="col-6 col-md-2 mb-2">
@@ -126,14 +128,14 @@
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name"   onchange="getPendingInvoices()" required disabled>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}" {{ $sales_ageing[0]->account_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 														@endforeach
 													</select>	
 													
-													<input type="hidden" id="show_customer_name" name="customer_name" class="form-control">
+													<!-- <input type="hidden" id="show_customer_name"  class="form-control"> -->
 
 												</div>
 
@@ -180,7 +182,7 @@
 
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"    onchange="getPendingInvoices()" required disabled>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"  onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -417,7 +419,6 @@
 
 		}
 	}
-
 
 	function validateItemName(inputElement)
 	{
@@ -686,14 +687,42 @@
 	function SaletoggleInputs() {
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
-
+		const jv_no= $('#jv_no').val();
+		console.log(jv_no);
+	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/deactive_sales_ageing/"+jv_no,
+					success: function(result){
+						console.log("success here");
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
             customer_name.prop('disabled', false);
             sales_unadjusted_amount.prop('disabled', false);
 			$('#prevInvoices').val(1);
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/active_sales_ageing/"+jv_no,
+					success: function(result){
+						console.log("success here");
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
             customer_name.prop('disabled', true);
             sales_unadjusted_amount.prop('disabled', true);
 			$('#prevInvoices').val(0);

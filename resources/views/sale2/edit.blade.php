@@ -3,7 +3,7 @@
 		<section class="body">
 			@include('../layouts.pageheader')
 			<div class="inner-wrapper">
-				<section role="main" class="content-body">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-sales2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
@@ -372,7 +372,7 @@
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
+				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['sales_price']);
 				$('#pur2_price_date'+row_no).val(result[0]['sale_rate_date']);
