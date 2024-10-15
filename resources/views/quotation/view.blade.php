@@ -3,7 +3,7 @@
 		<section class="body">
 				<div class="inner-wrapper" style="padding-top: 50px;">
 					@include('layouts.leftmenu')
-				<section role="main" class="content-body" >
+					<section role="main" class="content-body" >
 					@include('../layouts.pageheader')
 
                     <section class="card">

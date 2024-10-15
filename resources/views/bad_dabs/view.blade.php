@@ -1,9 +1,10 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			<div class="inner-wrapper">
-				<section role="main" class="content-body" style="margin:0px">
-					@include('../layouts.pageheader')
+			<div class="inner-wrapper" style="padding-top: 50px;">
+				@include('layouts.leftmenu')
+				<section role="main" class="content-body" >
+				@include('../layouts.pageheader')
 
                     <section class="card">
 
@@ -99,16 +100,16 @@
 									</div>
 								</div>
 
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-bad-dabs') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-bad-dabs-invoice', $bad_dabs->bad_dabs_id) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
+								<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+									<a onclick="window.location='{{ route('all-bad-dabs') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+									<a href="{{ route('print-bad-dabs-invoice', $bad_dabs->bad_dabs_id) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
+								</div>
+
 							</div>
 
-						</div>
-
+						</section>
 					</section>
-				</section>
-			</div>
+				</div>
 			</div>
 		</section>
         @include('../layouts.footerlinks')
