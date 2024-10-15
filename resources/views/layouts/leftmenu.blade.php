@@ -362,35 +362,40 @@
                     </li>
                     @endif
 
-                    <li class="nav-parent">
-                        <a class="nav-link" href="#">
-                            <i style="font-size:16px"class="fa fa-arrow-right"></i>
-                            <span>Others</span>  
-                        </a>
-                        <ul class="nav nav-children">
 
-                            @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
-                            <li>
-                                <a class="nav-link"   href="{{ route('all-weight')}}">
-                                    Weight
-                                </a>
-                            </li>	
-                            @endif
+                        @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1) OR ((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
+                        <li class="nav-parent">
+                            <a class="nav-link" href="#">
+                                <i style="font-size:16px"class="fa fa-arrow-right"></i>
+                                <span>Others</span>  
+                            </a>
+                            <ul class="nav nav-children">
 
-                            @if(((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
-                            <li>
-                                <a class="nav-link"   href="{{ route('all-complains')}}">
-                                    Complains
-                                </a>
-                            </li>	
-                            @endif
+                                @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1))
+                                <li>
+                                    
+                                    <a class="nav-link"   href="{{ route('all-complains')}}">
+                                        Complains
+                                    </a>
+                                </li>	
+                                @endif
 
-                           
-                        </ul>
-                    </li>
+                                @if(((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
+                                <li>
+                                    <a class="nav-link"   href="{{ route('all-weight')}}">
+                                        Weight
+                                    </a>
+                                </li>	
+                                @endif
+
+                            
+                            </ul>
+                         </li>
+                         @endif
+                   
                 </ul>	
-            </nav>
-		</div>
+                 </nav>
+		        </div>
 
         <script>
             // Maintain Scroll Position
