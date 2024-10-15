@@ -1,9 +1,10 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-		@include('../layouts.pageheader')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body" style="margin:0px">
+			<div class="inner-wrapper" style="padding-top: 50px;">
+				@include('layouts.leftmenu')
+				<section role="main" class="content-body" >
+				@include('../layouts.pageheader')
 
                     <section class="card">
 
