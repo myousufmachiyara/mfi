@@ -16,72 +16,93 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>Account Name</th>
-                                                <th>Receivable</th>
-                                                <th>Payable</th>
-                                                <th>Date</th>
-                                                <th>Remarks</th>
-                                                <th>Address</th>
-                                                <th>Credit Limit</th>
-                                                <th>Days Limit</th>
-                                                <th>Group</th>
-                                                <th>Account Type</th>
-                                                <th>Att.</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($acc as $key => $row)
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="1">by Account</option>
+                                                <option value="2">by Receivable</option>
+                                                <option value="3">by Payable</option>
+                                                <option value="4">by Date</option>
+                                                <option value="5">by Remarks</option>
+                                                <option value="6">by Address</option>
+                                                <option value="7">by Credit Limit</option>
+                                                <option value="8">by Days Limit</option>
+                                                <option value="9">by Group</option>
+                                                <option value="10">by Account Type</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper" style="overflow-x:auto">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$row->ac_code}}</td>
-                                                    <td><strong>{{$row->ac_name}}</strong></td>
-                                                    @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->rec_able))}}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
-                                                        <td>{{ rtrim(rtrim(number_format($row->pay_able, 10, '.', ','), '0'), '.') }}</td>
-                                                    @else
-                                                        <td>{{ number_format(intval($row->pay_able))}}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->remarks}}</td>
-                                                    <td>{{$row->address}}   {{$row->phone_no}}</td>
-                                                    @if(substr(strval($row->credit_limit), strpos(strval($row->credit_limit), '.') + 1) > 0)
-                                                        <td style="color: rgb(156, 32, 32);"><strong>{{ rtrim(rtrim(number_format($row->credit_limit, 10, '.', ','), '0'), '.') }}</strong></td>
-                                                    @else
-                                                         <td style="color: rgb(156, 32, 32);"><strong>{{ number_format(intval($row->credit_limit))}}</strong></td>
-                                                    @endif
-
-                                                    <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
-                                                    <td>{{$row->group_name}}</td>
-                                                    <td><strong>{{$row->sub}}</strong></td>
-                                                    <td>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->ac_code}})" href="#attModal"><i class="fa fa-eye"> </i></a>
-                                                        <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->ac_code}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
-                                                    </td>
-                                                    @if($row->status==1)
-                                                        <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            @if(session('user_role')==1)
-                                                            <span class="separator"> | </span>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
-                                                            @endif
-                                                        </td>
-                                                    @else
-                                                        <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
-                                                    @endif
-                                                
+                                                    <th>Code</th>
+                                                    <th>Account Name</th>
+                                                    <th>Receivable</th>
+                                                    <th>Payable</th>
+                                                    <th>Date</th>
+                                                    <th>Remarks</th>
+                                                    <th>Address</th>
+                                                    <th>Credit Limit</th>
+                                                    <th>Days Limit</th>
+                                                    <th>Group</th>
+                                                    <th>Account Type</th>
+                                                    <th>Att.</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-									</table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($acc as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->ac_code}}</td>
+                                                        <td><strong>{{$row->ac_name}}</strong></td>
+                                                        @if(substr(strval($row->rec_able), strpos(strval($row->rec_able), '.') + 1) >0)
+                                                            <td>{{ rtrim(rtrim(number_format($row->rec_able, 10, '.', ','), '0'), '.') }}</td>
+                                                        @else
+                                                            <td>{{ number_format(intval($row->rec_able))}}</td>
+                                                        @endif
+                                                        @if(substr(strval($row->pay_able), strpos(strval($row->pay_able), '.') + 1)>0)
+                                                            <td>{{ rtrim(rtrim(number_format($row->pay_able, 10, '.', ','), '0'), '.') }}</td>
+                                                        @else
+                                                            <td>{{ number_format(intval($row->pay_able))}}</td>
+                                                        @endif
+                                                        <td>{{ \Carbon\Carbon::parse($row->opp_date)->format('d-m-y') }}</td>
+                                                        <td>{{$row->remarks}}</td>
+                                                        <td>{{$row->address}}   {{$row->phone_no}}</td>
+                                                        @if(substr(strval($row->credit_limit), strpos(strval($row->credit_limit), '.') + 1) > 0)
+                                                            <td style="color: rgb(156, 32, 32);"><strong>{{ rtrim(rtrim(number_format($row->credit_limit, 10, '.', ','), '0'), '.') }}</strong></td>
+                                                        @else
+                                                            <td style="color: rgb(156, 32, 32);"><strong>{{ number_format(intval($row->credit_limit))}}</strong></td>
+                                                        @endif
+
+                                                        <td style="color: rgb(156, 32, 32);"><strong>{{$row->days_limit}}-Days</strong></td>
+                                                        <td>{{$row->group_name}}</td>
+                                                        <td><strong>{{$row->sub}}</strong></td>
+                                                        <td>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->ac_code}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->ac_code}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                        </td>
+                                                        @if($row->status==1)
+                                                            <td class="actions">
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAccountDetails({{$row->ac_code}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                                @if(session('user_role')==1)
+                                                                <span class="separator"> | </span>
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId({{$row->ac_code}})" href="#deleteModal"><i class="fa fa-times" style="color:red"></i></a>
+                                                                @endif
+                                                            </td>
+                                                        @else
+                                                            <td><a href="{{ route('activate-acc',$row->ac_code)}}"><i style="color:green" class="fas fa-check"></i></a></td>
+                                                        @endif
+                                                    
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
