@@ -2,9 +2,8 @@
 	<body>
 		<section class="body">
             @include('../layouts.homepageheader')
-            <div class="inner-wrapper">
+            <div class="inner-wrapper cust-pad">
                 @include('layouts.leftmenu')
-
 				<section role="main" class="content-body">
                     <div class="row">
                         <div class="col">
@@ -40,8 +39,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper" >
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                    <div class="modal-wrapper">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable" >
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>

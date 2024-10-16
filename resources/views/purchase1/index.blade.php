@@ -15,7 +15,7 @@
                                     </form>
                                 </header>
                                
-                                <div class="card-body">
+                                <div class="card-body" style="overflow-x: auto;">
                                     <div>
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal-wrapper" style="overflow-x: auto;">
+                                    <div class="modal-wrapper">
                                         <table class="table table-bordered table-striped mb-0" id="searchableTable">
                                             <thead>
                                                 <tr>

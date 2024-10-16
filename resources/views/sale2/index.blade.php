@@ -1,13 +1,8 @@
-@include('../layouts.header')
-    <style>
-        .select2-container{
-            width: 100% !important;
-        }
-    </style>	
+@include('../layouts.header')	
     <body>
 		<section class="body">
             @include('layouts.homepageheader')
-			<div class="inner-wrapper" style="padding-top: 50px;">
+			<div class="inner-wrapper cust-pad">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
                     <div class="row">
