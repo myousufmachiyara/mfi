@@ -519,7 +519,7 @@
         const pur_customer_name = $('#pur_customer_name');
         const pur_unadjusted_amount = $('#pur_unadjusted_amount');
 
-        if ($('#SaletoggleSwitch').is(':checked')) {
+        if ($('#PurtoggleSwitch').is(':checked')) {
             pur_customer_name.prop('disabled', false);
             pur_unadjusted_amount.prop('disabled', false);
 			$('#pur_prevInvoices').val(1);
