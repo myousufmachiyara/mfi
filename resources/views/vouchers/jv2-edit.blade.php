@@ -315,7 +315,7 @@
 		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
 		if (isChecked || isPurChecked) {
-			event.preventDefault();
+			console.log("hello");
 		}
 	});
 	
