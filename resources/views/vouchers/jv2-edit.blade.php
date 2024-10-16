@@ -316,12 +316,10 @@
 
 		if (isChecked || isPurChecked) {
 			const confirmationMessage = 'You have unsaved changes. Are you sure you want to leave?';
-			event.returnValue = confirmationMessage; 
-			return confirmationMessage; // Show confirmation dialog
-		} 
-		// Else case: Allow the page to refresh naturally
+			alert(confirmationMessage);
+		}
 	});
-
+	
 	var itemCount;
 
 	$(document).ready(function() {
