@@ -123,7 +123,7 @@ class JV2Controller extends Controller
             }
         }
 
-        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices==1)
+        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices!=0)
         {
             for($k=0;$k<$request->pur_totalInvoices;$k++)
             {
@@ -180,8 +180,17 @@ class JV2Controller extends Controller
         $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
     
         // Fetch the related purchase ageing records.
-        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
     
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)
+        ->join('vw_union_pur_1_2_opbal', function ($join) {
+            $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
+                 ->whereColumn('vw_union_pur_1_2_opbal.Sal_inv_no', 'purchase_ageing.sales_id');
+        })
+        ->select('purchase_ageing.*', 'vw_union_pur_1_2_opbal.*')
+        ->get();
+
+        $purchase_ageing = $purchase_ageing->isEmpty() ? null : $purchase_ageing;
+
         // Return the view with the fetched data.
         return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
     }
@@ -258,7 +267,6 @@ class JV2Controller extends Controller
             }
         }
 
-        // die(print_r($request->all()));
         if($request->has('prevInvoices') && $request->prevInvoices!=0)
         {
             $sales_ageing = sales_ageing::where('jv2_id', $request->jv_no)->delete();
@@ -280,6 +288,26 @@ class JV2Controller extends Controller
             }
         }
 
+        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices!=0)
+        {
+            $purchase_ageing = purchase_ageing::where('jv2_id', $request->jv_no)->delete();
+
+            for($k=0;$k<$request->pur_totalInvoices;$k++)
+            {
+                if($request->pur_rec_amount[$k]>0 && $request->pur_rec_amount[$k]!==null)
+                {
+                    $pur_ageing = new purchase_ageing();
+                    $pur_ageing->created_by = session('user_id');
+                    $pur_ageing->jv2_id=$request->jv_no;
+                    $pur_ageing->amount=$request->pur_rec_amount[$k];
+                    $pur_ageing->sales_id=$request->pur_invoice_nos[$k];
+                    $pur_ageing->sales_prefix=$request->pur_prefix[$k];
+                    $pur_ageing->acc_name=$request->pur_customer_name;
+                    $pur_ageing->save();
+                }
+                
+            }
+        }
         return redirect()->route('all-jv2');
     }
 
@@ -307,6 +335,23 @@ class JV2Controller extends Controller
         ]);
         return $sales_ageing;
     }
+
+    public function activePurAgeing($id){
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->update([
+            'status' => '1',
+            'updated_by' => session('user_id'),
+        ]);
+        return $purchase_ageing;
+    }
+
+    public function deactivePurAgeing($id){
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
+        return $purchase_ageing;
+    }
+
 
     public function print($id)
     {

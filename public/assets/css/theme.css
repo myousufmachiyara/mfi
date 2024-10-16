@@ -235,7 +235,7 @@ a:active {
 
 	/* Layout Fixed - Content Body */
 	html.fixed .content-body {
-		margin-left: 270px;
+		margin-left: 255px;
 		margin-right: 0px;
 
 	}
@@ -466,7 +466,7 @@ a:active {
 	}
 
 	.content-body {
-		padding: 80px 10px;
+		padding: 50px 10px;
 	}
 	.card-header {
 		padding: 12px 17px 3px 17px !important;

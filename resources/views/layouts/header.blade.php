@@ -54,6 +54,14 @@
         #loader.hidden {
             display: none;
         }
+		.cust-pad {
+			padding-top: 0; /* or any other default padding */
+		}
+		@media (min-width: 768px) {
+			.cust-pad {
+				padding-top: 50px;
+			}	
+		}
     </style>
 	<div id="timeoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
 		<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 5px; text-align: center;">

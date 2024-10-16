@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal-wrapper" style="overflow-x: auto;">
+                                    <div class="modal-wrapper" style="overflow-x:auto">
                                         <table class="table table-bordered table-striped mb-0" id="searchableTable">
                                             <thead>
                                                 <tr>

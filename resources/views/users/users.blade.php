@@ -2,7 +2,7 @@
 	<body>
 		<section class="body">
         @include('layouts.homepageheader')
-			<div class="inner-wrapper" style="padding-top: 50px;">
+			<div class="inner-wrapper cust-pad">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
                     <div class="row">
@@ -15,51 +15,69 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Employee Name</th>
-                                                <th>Username</th>
-                                                <th>Role</th>
-                                                <th>CNIC</th>
-                                                <th>Address</th>
-                                                <th>Phone No.</th>
-                                                <th>Email</th>
-                                                <th>Doc.</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                @foreach($users as $key => $row)
-                                                    <tr>
-                                                        <td>{{$row->id}}</td>
-                                                        <td>{{$row->name}}</td>
-                                                        <td>{{$row->username}}</td>
-                                                        <td>{{$row->role_name}}</td>
-                                                        <td>{{$row->cnic_no}}</td>
-                                                        <td>{{$row->address}}</td>
-                                                        <td>{{$row->phone_no}}</td>
-                                                        <td>{{$row->email}}</td>
-                                                        <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View</a></td>
-                                                        @if($row->status==1)
-                                                        <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#macAddModal" onclick="getMacAdd({{$row->id}})"><i class="fas fa-minus"></i></a>
-                                                        </td>
-                                                        @elseif($row->status==0)
-                                                        <td class="actions">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" href="#activateUser" onclick="setActivateID({{$row->id}})"><i class="fa fa-user-check"></i></a>
-                                                            <!-- <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a> -->
-                                                        </td>
-                                                        @endif
-                                                    </tr>
-                                                @endforeach
-                                        </tbody>
-									</table>
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by ID</option>
+                                                <option value="1">by Employee Name</option>
+                                                <option value="2">by Username</option>
+                                                <option value="3">by Role</option>
+                                                <option value="4">by CNIC</option>
+                                                <option value="5">by Address</option>
+                                                <option value="6">by Phone No.</option>
+                                                <option value="7">by Email</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper" style="overflow-x:auto">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Employee Name</th>
+                                                    <th>Username</th>
+                                                    <th>Role</th>
+                                                    <th>CNIC</th>
+                                                    <th>Address</th>
+                                                    <th>Phone No.</th>
+                                                    <th>Email</th>
+                                                    <th>Doc.</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    @foreach($users as $key => $row)
+                                                        <tr>
+                                                            <td>{{$row->id}}</td>
+                                                            <td>{{$row->name}}</td>
+                                                            <td>{{$row->username}}</td>
+                                                            <td>{{$row->role_name}}</td>
+                                                            <td>{{$row->cnic_no}}</td>
+                                                            <td>{{$row->address}}</td>
+                                                            <td>{{$row->phone_no}}</td>
+                                                            <td>{{$row->email}}</td>
+                                                            <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View</a></td>
+                                                            @if($row->status==1)
+                                                            <td class="actions">
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#macAddModal" onclick="getMacAdd({{$row->id}})"><i class="fas fa-minus"></i></a>
+                                                            </td>
+                                                            @elseif($row->status==0)
+                                                            <td class="actions">
+                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" href="#activateUser" onclick="setActivateID({{$row->id}})"><i class="fa fa-user-check"></i></a>
+                                                                <!-- <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a> -->
+                                                            </td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>

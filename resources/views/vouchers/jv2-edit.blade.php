@@ -116,7 +116,7 @@
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
-									<header class="card-header"  style="display: flex;justify-content: space-between;">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
 										<div class="form-check form-switch">
 											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
@@ -127,7 +127,7 @@
 										<div class="card-body">
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
-													<label class="col-form-label">Account Name</label>
+													<label class="col-form-label">Account Name <span><a onclick="refreshSalesAgeing()" id="refreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span></label>
 													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
@@ -135,8 +135,6 @@
 														@endforeach
 													</select>	
 													
-													<!-- <input type="hidden" id="show_customer_name"  class="form-control"> -->
-
 												</div>
 
 												<div class="col-4 mb-2">
@@ -182,20 +180,18 @@
 
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"  onchange="getPendingInvoices()" required disabled>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"  onchange="getPendingInvoices()" required>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 														@endforeach
 													</select>	
 													
-													<!-- <input type="hidden" id="show_customer_name" name="customer_name" class="form-control"> -->
-
 												</div>
 
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Unadjusted Amount</label>
-													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" step="any">
 												</div>
 
 												<div class="col-4 mb-2">
@@ -230,61 +226,105 @@
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span></h2>
-										
-										@if(empty($purchase_ageing))
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
-											</div>
-										@endif
+										<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span><span id="pur_warning" style="color:red;font-size: 16px;display:none">All Previous Purchase Ageing Record Against this JV2 will be replace by lastest</span></h2>
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+										</div>
 									</header>
-
-									<div class="card-body">
-										<div class="row form-group mb-2">
-										
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
-													<option value="0" disabled selected>Select Account</option>
-													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
-													@endforeach
-												</select>
-												<input type="hidden" id="show_pur_customer_name" name="pur_customer_name" class="form-control" step="any">																			
-											</div>
-
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Unadjusted Amount</label>
-												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
-											</div>
-
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Total Amount</label>
-												<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
-											</div>
-
-											<div class="col-12 mb-2">
-												<table class="table table-bordered table-striped mb-0 mt-2">
-													<thead>
-														<tr>
-															<th width="">Inv #</th>
-															<th width="">Date</th>
-															<th width="">Bill Amount</th>
-															<th width="">Remaining Amount</th>
-															<th width="">Amount</th>
-														</tr>
-													</thead>
-													<tbody id="purpendingInvoices">
-														@foreach ($purchase_ageing as $key => $row)
-														<tr>
-
-														</tr>
+									@if(!empty($purchase_ageing))
+										<div class="card-body">
+											<div class="row form-group mb-2">
+											
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" name="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
+														<option value="0" disabled selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)
+															<option value="{{$row1->ac_code}}" {{ $purchase_ageing[0]->acc_name == $row1->ac_code ? 'selected' : '' }}>{{$row1->ac_name}}</option>
 														@endforeach
-													</tbody>
-												</table>										
+													</select>
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2">
+													<table class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="">Inv #</th>
+																<th width="">Date</th>
+																<th width="">Bill Amount</th>
+																<th width="">Remaining Amount</th>
+																<th width="">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="purpendingInvoices">
+															@foreach ($purchase_ageing as $key => $row)
+																<tr>
+																	<td><input type='text' class='form-control' value="{{$row->sales_prefix}}{{$row->sales_id}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='pur_totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='sales_prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+																	<td><input type='date' class='form-control' value="{{$row->sa_date}}" disabled></td>
+																	<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' disabled></td>
+																	<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' disabled></td>
+																	<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalPay()' required disabled></td>
+																</tr>
+															@endforeach
+														</tbody>
+													</table>										
+												</div>
 											</div>
 										</div>
-									</div>
+									@else
+										<div class="card-body">
+											<div class="row form-group mb-2">
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" name="pur_customer_name" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required>
+														<option value="0" disabled selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+														@endforeach
+													</select>
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2">
+													<table class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="">Inv #</th>
+																<th width="">Date</th>
+																<th width="">Bill Amount</th>
+																<th width="">Remaining Amount</th>
+																<th width="">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="purpendingInvoices">
+																<tr>
+																	
+																</tr>
+														</tbody>
+													</table>										
+												</div>
+											</div>
+										</div>
+									@endif
 								</section>
 							</div>
 							<div class="col-12 mb-3">
@@ -310,6 +350,16 @@
  
 <script>
 
+	window.addEventListener('beforeunload', function(event) {
+		var isChecked = $('#SaletoggleSwitch').is(':checked');
+		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
+
+		if (isChecked || isPurChecked) {
+			event.preventDefault();
+			event.returnValue = ''; // Show the default confirmation dialog
+		}
+  	});
+	
 	var itemCount;
 
 	$(document).ready(function() {
@@ -324,10 +374,68 @@
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
-			if(total_debit==total_credit){
+			var isChecked = $('#SaletoggleSwitch').is(':checked');
+			var isPurChecked = $('#PurtoggleSwitch').is(':checked');
+
+			if(isChecked && isPurChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+
+				var total_reci_amount=$('#total_reci_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('updateForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
+			else if(isChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var total_reci_amount=$('#total_reci_amount').val();
+
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount){
+					var form = document.getElementById('updateForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
+				}
+			}
+
+			else if(isPurChecked){
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('updateForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
+			else if(total_debit==total_credit){
 				var form = document.getElementById('updateForm');
 				form.submit();
 			}
+
 			else{
 				alert("Total Debit & Credit Must be Equal")
 			}
@@ -477,7 +585,6 @@
 		window.history.back();
 	}
 
-
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
 		var table = document.getElementById('pendingInvoices');
@@ -530,7 +637,7 @@
 		$('#total_reci_amount').val(totalRec); // Set the total in the corresponding input field
 	}
 
-	function totalPay() {
+	function totalPay(){
 		var totalPay = 0; // Initialize the total amount variable
 		var table = document.getElementById("purpendingInvoices"); // Get the table element
 		var rowCount = table.rows.length; // Get the total number of rows
@@ -549,156 +656,103 @@
 
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
-		var counter=1;
-		$('#pur_prevInvoices').val(1)
-		
 		var table = document.getElementById('purpendingInvoices');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
+		$('#purpendingInvoices').html('');
+		$('#purpendingInvoices').find('tr').remove();
 
-		$.ajax({
-			type: "GET",
-			url: "/vouchers2/purpendingInvoice/"+cust_id,
-			success: function(result){
-				$.each(result, function(k,v){
-					if(Math.round(v['balance'])>0){
-						var html="<tr>";
-						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='pur_invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='pur_prefix[]' class='form-control' value="+v['prefix']+"></td>"
-						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
-						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='pur_balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='pur_bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='pur_rec_amount[]' onchange='totalPay()' required></td>"
-						html+="</tr>";
-						$('#purpendingInvoices').append(html);
-						counter++;
-					}
-				});
-			},
-			error: function(){
-				alert("error");
-			}
-		});
+		if(cust_id!=0){
+			var counter=1;
+			$('#pur_prevInvoices').val(1)
+			
+			$.ajax({
+				type: "GET",
+				url: "/vouchers2/purpendingInvoice/"+cust_id,
+				success: function(result){
+					$.each(result, function(k,v){
+						if(Math.round(v['balance'])>0){
+							var html="<tr>";
+							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='pur_invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='pur_prefix[]' class='form-control' value="+v['prefix']+"></td>"
+							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control text-danger' value="+Math.round(v['balance'])+" value='0' disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='pur_rec_amount[]' onchange='totalPay()' required></td>"
+							html+="</tr>";
+							$('#purpendingInvoices').append(html);
+							counter++;
+						}
+					});
+				},
+				error: function(){
+					alert("error");
+				}
+			});
+		}
 	}
 
 	function PurtoggleInputs() {
-		
-		var pur_unadjusted_amount=0;
-		var pur_debit_account=0;
-		var pur_no_of_dedits=0;
+        const pur_customer_name = $('#pur_customer_name');
+        const pur_unadjusted_amount = $('#pur_unadjusted_amount');
+		const jv_no= $('#jv_no').val();
+	
+        if ($('#PurtoggleSwitch').is(':checked')) {
+			document.getElementById('pur_warning').style.display = 'block';
+			document.getElementById('PurrefreshBtn').style.display = 'inline';
+			var table = document.getElementById('purpendingInvoices');
+        	if (table.rows.length > 0) {
+				
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/deactive_pur_ageing/"+jv_no,
+					success: function(result){
 
-		$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-		$('#pur_customer_name').val(0).trigger('change');
-		$('#show_pur_customer_name').val(0);
-
-		document.getElementById('pur_span').style.display = 'none';
-
-		var PurAgingtable = document.getElementById("purpendingInvoices"); 
-		while (PurAgingtable.rows.length > 0) {
-			PurAgingtable.deleteRow(0);
-		}
-
-		if ($('#PurtoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
-
-			for (var i=0;i<rowCount; i++){	
-				pur_selected_account = $('#account_cod'+(i+1)).val();
-
-				if (pur_selected_account) {
-					dedit = table.rows[i].cells[5].querySelector('input').value;
-
-					if(dedit>=1 && pur_no_of_dedits<1){
-						pur_debit_account = pur_selected_account;
-						pur_unadjusted_amount = dedit;
-						pur_no_of_dedits = pur_no_of_dedits + 1;
+					},
+					error: function(){
+						alert("error");
 					}
-					else if(dedit>=1 && pur_no_of_dedits>=1){
-						pur_debit_account = 0;
-						pur_unadjusted_amount = 0;
-						document.getElementById('pur_span').style.display = 'block';
-						break;
+				});
+			}
+            pur_customer_name.prop('disabled', false);
+            pur_unadjusted_amount.prop('disabled', false);
+			$('#pur_prevInvoices').val(1);
+        } else{
+			document.getElementById('pur_warning').style.display = 'none';
+			document.getElementById('PurrefreshBtn').style.display = 'none';
+
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/active_pur_ageing/"+jv_no,
+					success: function(result){
+					},
+					error: function(){
+						alert("error");
 					}
-				} 
+				});
 			}
+            pur_customer_name.prop('disabled', true);
+            pur_unadjusted_amount.prop('disabled', true);
+			$('#pur_prevInvoices').val(0);
+        }
+    }
 
-			if(pur_debit_account>0 && pur_unadjusted_amount>0 && pur_no_of_dedits==1 ){
-				$('#pur_customer_name').val(pur_debit_account).trigger('change');
-				$('#show_pur_customer_name').val(pur_debit_account);
-				$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-			}
-		}
-	}
-
-	// function SaletoggleInputs() {
-		
-	// 	var unadjusted_amount=0;
-	// 	var credited_account=0;
-	// 	var no_of_credits=0;
-
-	// 	$('#sales_unadjusted_amount').val(unadjusted_amount);
-	// 	$('#customer_name').val(0).trigger('change');
-	// 	$('#show_customer_name').val(0);
-
-	// 	document.getElementById('sale_span').style.display = 'none';
-	// 	document.getElementById('sales_warning').style.display = 'none';
-
-		
-	// 	var saleAgingtable = document.getElementById("pendingInvoices"); 
-	// 	while (saleAgingtable.rows.length > 0) {
-	// 		saleAgingtable.deleteRow(0);
-	// 	}
-
-	// 	if ($('#SaletoggleSwitch').is(':checked')) {
-	// 		document.getElementById('sales_warning').style.display = 'block';
-
-	// 		var table = document.getElementById("JV2Table"); 
-	// 		var rowCount = table.rows.length;
-
-	// 		for (var i=0;i<rowCount; i++){	
-	// 			selected_account = $('#account_cod'+(i+1)).val();
-
-	// 			if (selected_account) {
-
-	// 				credit = table.rows[i].cells[6].querySelector('input').value;
-
-	// 				if(credit>=1 && no_of_credits<1){
-	// 					credited_account = selected_account;
-	// 					unadjusted_amount = credit;
-	// 					no_of_credits = no_of_credits + 1;
-	// 				}
-	// 				else if(credit>=1 && no_of_credits>=1){
-	// 					credited_account = 0;
-	// 					unadjusted_amount = 0;
-	// 					document.getElementById('sale_span').style.display = 'block';
-	// 					break;
-	// 				}
-	// 			} 
-	// 		}
-
-	// 		if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
-	// 			$('#customer_name').val(credited_account).trigger('change');
-	// 			$('#show_customer_name').val(credited_account);
-	// 			$('#sales_unadjusted_amount').val(unadjusted_amount);
-	// 		}
-	// 	}
-	// }
 
 	function SaletoggleInputs() {
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
 		const jv_no= $('#jv_no').val();
-		console.log(jv_no);
 	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
+			document.getElementById('refreshBtn').style.display = 'inline';
 			var table = document.getElementById('pendingInvoices');
         	if (table.rows.length > 0) {
+				
 				$.ajax({
 					type: "GET",
 					url: "/vouchers2/deactive_sales_ageing/"+jv_no,
 					success: function(result){
-						console.log("success here");
+
 					},
 					error: function(){
 						alert("error");
@@ -710,13 +764,14 @@
 			$('#prevInvoices').val(1);
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
+			document.getElementById('refreshBtn').style.display = 'none';
+
 			var table = document.getElementById('pendingInvoices');
         	if (table.rows.length > 0) {
 				$.ajax({
 					type: "GET",
 					url: "/vouchers2/active_sales_ageing/"+jv_no,
 					success: function(result){
-						console.log("success here");
 					},
 					error: function(){
 						alert("error");
@@ -728,4 +783,13 @@
 			$('#prevInvoices').val(0);
         }
     }
+
+	function refreshSalesAgeing(){
+		$('#customer_name').trigger('change');
+	}
+
+	function refreshPurAgeing(){
+		$('#pur_customer_name').trigger('change');
+	}
+
 </script>

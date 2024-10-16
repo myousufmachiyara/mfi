@@ -2,9 +2,8 @@
 	<body>
 		<section class="body">
             @include('../layouts.homepageheader')
-            <div class="inner-wrapper">
+            <div class="inner-wrapper cust-pad">
                 @include('layouts.leftmenu')
-
 				<section role="main" class="content-body">
                     <div class="row">
                         <div class="col">
@@ -15,7 +14,7 @@
                                         <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice</button>
                                     </form>
                                 </header>
-                                <div class="card-body" >
+                                <div class="card-body"  >
                                     <div>
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
@@ -40,12 +39,12 @@
 
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper" >
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                    <div class="modal-wrapper" style="overflow-x:auto">
+                                        <table class="table table-bordered table-striped mb-0" id="searchableTable" >
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
-                                                    <th>Code</th>
+                                                    <th style="border-left:1px solid #dee2e6 ">Code</th>
                                                     <th>Date</th>
                                                     <th>Company Name</th>
                                                     <th>Mill Inv #</th>
@@ -69,7 +68,7 @@
                                                 @foreach ($pur2 as $key => $row)
                                                 <tr>
                                                     <td style="display:none">{{$row->Sale_inv_no}}</td>
-                                                    <td>{{$row->prefix}}{{$row->Sale_inv_no}}</td>
+                                                    <td style="border-left:1px solid #dee2e6 ">{{$row->prefix}}{{$row->Sale_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
                                                     <td>{{$row->acc_name}}</td>
                                                     <td>{{$row->pur_ord_no}}</td>
