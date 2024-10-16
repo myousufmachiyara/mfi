@@ -283,7 +283,16 @@
         Route::get('/tquotation/generatePDF/', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tqout-invoice');
     });
 
+    // Route::middleware(['checkPermission:report'])->group(function (){
+
+    // });
+
     Route::middleware(['auth'])->group(function () {
+
+        Route::get('/rep-acc-name', function () {
+            return view('reports.acc_name');
+        });
+
 
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
@@ -344,3 +353,5 @@
             return response()->json(['status' => 'success']);
         });
     });
+
+
