@@ -514,54 +514,69 @@
 		});
 	}
 
-	function PurtoggleInputs() {
+	// function PurtoggleInputs() {
 		
-		var pur_unadjusted_amount=0;
-		var pur_debit_account=0;
-		var pur_no_of_dedits=0;
+	// 	var pur_unadjusted_amount=0;
+	// 	var pur_debit_account=0;
+	// 	var pur_no_of_dedits=0;
 
-		$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-		$('#pur_customer_name').val(0).trigger('change');
-		$('#show_pur_customer_name').val(0);
+	// 	$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
+	// 	$('#pur_customer_name').val(0).trigger('change');
+	// 	$('#show_pur_customer_name').val(0);
 
-		document.getElementById('pur_span').style.display = 'none';
+	// 	document.getElementById('pur_span').style.display = 'none';
 
-		var PurAgingtable = document.getElementById("purpendingInvoices"); 
-		while (PurAgingtable.rows.length > 0) {
-			PurAgingtable.deleteRow(0);
-		}
+	// 	var PurAgingtable = document.getElementById("purpendingInvoices"); 
+	// 	while (PurAgingtable.rows.length > 0) {
+	// 		PurAgingtable.deleteRow(0);
+	// 	}
 
-		if ($('#PurtoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
+	// 	if ($('#PurtoggleSwitch').is(':checked')) {
+	// 		var table = document.getElementById("JV2Table"); 
+	// 		var rowCount = table.rows.length;
 
-			for (var i=0;i<rowCount; i++){	
-				pur_selected_account = $('#account_cod'+(i+1)).val();
+	// 		for (var i=0;i<rowCount; i++){	
+	// 			pur_selected_account = $('#account_cod'+(i+1)).val();
 
-				if (pur_selected_account) {
-					dedit = table.rows[i].cells[5].querySelector('input').value;
+	// 			if (pur_selected_account) {
+	// 				dedit = table.rows[i].cells[5].querySelector('input').value;
 
-					if(dedit>=1 && pur_no_of_dedits<1){
-						pur_debit_account = pur_selected_account;
-						pur_unadjusted_amount = dedit;
-						pur_no_of_dedits = pur_no_of_dedits + 1;
-					}
-					else if(dedit>=1 && pur_no_of_dedits>=1){
-						pur_debit_account = 0;
-						pur_unadjusted_amount = 0;
-						document.getElementById('pur_span').style.display = 'block';
-						break;
-					}
-				} 
-			}
+	// 				if(dedit>=1 && pur_no_of_dedits<1){
+	// 					pur_debit_account = pur_selected_account;
+	// 					pur_unadjusted_amount = dedit;
+	// 					pur_no_of_dedits = pur_no_of_dedits + 1;
+	// 				}
+	// 				else if(dedit>=1 && pur_no_of_dedits>=1){
+	// 					pur_debit_account = 0;
+	// 					pur_unadjusted_amount = 0;
+	// 					document.getElementById('pur_span').style.display = 'block';
+	// 					break;
+	// 				}
+	// 			} 
+	// 		}
 
-			if(pur_debit_account>0 && pur_unadjusted_amount>0 && pur_no_of_dedits==1 ){
-				$('#pur_customer_name').val(pur_debit_account).trigger('change');
-				$('#show_pur_customer_name').val(pur_debit_account);
-				$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-			}
-		}
-	}
+	// 		if(pur_debit_account>0 && pur_unadjusted_amount>0 && pur_no_of_dedits==1 ){
+	// 			$('#pur_customer_name').val(pur_debit_account).trigger('change');
+	// 			$('#show_pur_customer_name').val(pur_debit_account);
+	// 			$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
+	// 		}
+	// 	}
+	// }
+
+	function PurtoggleInputs() {
+        const pur_customer_name = $('#pur_customer_name');
+        const pur_unadjusted_amount = $('#pur_unadjusted_amount');
+
+        if ($('#SaletoggleSwitch').is(':checked')) {
+            pur_customer_name.prop('disabled', false);
+            pur_unadjusted_amount.prop('disabled', false);
+			$('#pur_prevInvoices').val(1);
+        } else {
+            pur_customer_name.prop('disabled', true);
+            pur_unadjusted_amount.prop('disabled', true);
+			$('#pur_prevInvoices').val(0);
+        }
+    }
 
 	function SaletoggleInputs() {
         const customer_name = $('#customer_name');
@@ -577,54 +592,6 @@
 			$('#prevInvoices').val(0);
         }
     }
-	// function SaletoggleInputs() {
-		
-	// 	var unadjusted_amount=0;
-	// 	var credited_account=0;
-	// 	var no_of_credits=0;
 
-	// 	$('#sales_unadjusted_amount').val(unadjusted_amount);
-	// 	$('#customer_name').val(0).trigger('change');
-	// 	$('#show_customer_name').val(0);
-
-	// 	document.getElementById('sale_span').style.display = 'none';
-
-	// 	var saleAgingtable = document.getElementById("pendingInvoices"); 
-	// 	while (saleAgingtable.rows.length > 0) {
-	// 		saleAgingtable.deleteRow(0);
-	// 	}
-
-	// 	if ($('#SaletoggleSwitch').is(':checked')) {
-	// 		var table = document.getElementById("JV2Table"); 
-	// 		var rowCount = table.rows.length;
-
-	// 		for (var i=0;i<rowCount; i++){	
-	// 			selected_account = $('#account_cod'+(i+1)).val();
-
-	// 			if (selected_account) {
-
-	// 				credit = table.rows[i].cells[6].querySelector('input').value;
-
-	// 				if(credit>=1 && no_of_credits<1){
-	// 					credited_account = selected_account;
-	// 					unadjusted_amount = credit;
-	// 					no_of_credits = no_of_credits + 1;
-	// 				}
-	// 				else if(credit>=1 && no_of_credits>=1){
-	// 					credited_account = 0;
-	// 					unadjusted_amount = 0;
-	// 					document.getElementById('sale_span').style.display = 'block';
-	// 					break;
-	// 				}
-	// 			} 
-	// 		}
-
-	// 		if(credited_account>0 && unadjusted_amount>0 && no_of_credits==1 ){
-	// 			$('#customer_name').val(credited_account).trigger('change');
-	// 			$('#show_customer_name').val(credited_account);
-	// 			$('#sales_unadjusted_amount').val(unadjusted_amount);
-	// 		}
-	// 	}
-	// }
 
 </script>
