@@ -28,7 +28,7 @@
                                                 <option value="6">by Sale Inv #</option>
                                                 <option value="7">by Weight</option>
                                                 <option value="8">by Bill Amount</option>
-                                                <option value="12">by Net Amount</option>
+                                                <option value="10">by Net Amount</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
 
@@ -48,9 +48,7 @@
                                                     <th>SaleInv #</th>
                                                     <th>Weight (kg)</th>
                                                     <th>Bill Amount</th>
-                                                    <th>Convance Charges</th>
-                                                    <th>Labour Charges</th>
-                                                    <th>Discount</th>
+                                                    <th>Convance & Labour Charges/Discount</th>
                                                     <th>Net Amount</th>
                                                     <th>Att.</th> 
                                                     <th>Action</th>
@@ -68,9 +66,9 @@
                                                     <td>{{$row->sale_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
-                                                    <td>{{$row->pur_convance_char}}</td>
-                                                    <td>{{$row->pur_labor_char}}</td>
-                                                    <td>{{$row->pur_discount}}</td>
+                                                    <td>{{$row->pur_convance_char}}/{{$row->pur_labor_char}}/{{$row->pur_discount}}</td>
+                                                    {{-- <td>{{$row->pur_labor_char}}</td>
+                                                    <td>{{$row->pur_discount}}</td> --}}
                                                     @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
