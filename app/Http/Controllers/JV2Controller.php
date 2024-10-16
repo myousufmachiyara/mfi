@@ -180,8 +180,17 @@ class JV2Controller extends Controller
         $sales_ageing = $sales_ageing->isEmpty() ? null : $sales_ageing;
     
         // Fetch the related purchase ageing records.
-        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->get();
     
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)
+        ->join('vw_union_pur_1_2_opbal', function ($join) {
+            $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
+                 ->whereColumn('vw_union_pur_1_2_opbal.Sal_inv_no', 'purchase_ageing.sales_id');
+        })
+        ->select('purchase_ageing.*', 'vw_union_pur_1_2_opbal.*')
+        ->get();
+
+        $purchase_ageing = $purchase_ageing->isEmpty() ? null : $purchase_ageing;
+
         // Return the view with the fetched data.
         return view('vouchers.jv2-edit', compact('acc', 'jv2', 'jv2_items', 'sales_ageing', 'purchase_ageing'));
     }
