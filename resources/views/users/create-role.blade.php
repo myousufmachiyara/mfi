@@ -40,28 +40,28 @@
 											<thead style="position: sticky;top: 0;background-color: white; ">
 												<tr>
 													<th>Module Name</th>
-													<th>Create</th>
-													<th>View</th>
-													<th>Update</th>
-													<th>Delete</th>
-													<th>Att. Add</th>
-													<th>Att. Delete</th>
-													<th>Print</th>
-													<th>Report</th>
+													<th>Create (<label for="checkAllcreate0"><input type="checkbox" onclick="checkAll(0, 'create')" id="checkAllcreate0"> All</label>)</th>
+													<th>View (<label for="checkAllview0"><input type="checkbox" onclick="checkAll(0, 'view')" id="checkAllview0"> All</label>)</th>
+													<th>Update (<label for="checkAllupdate0"><input type="checkbox" onclick="checkAll(0, 'update')" id="checkAllupdate0"> All</label>)</th>
+													<th>Delete (<label for="checkAlldelete0"><input type="checkbox" onclick="checkAll(0, 'delete')" id="checkAlldelete0"> All</label>)</th>
+													<th>Att. Add (<label for="checkAllattadd0"><input type="checkbox" onclick="checkAll(0, 'attadd')" id="checkAllattadd0"> All</label>)</th>
+													<th>Att. Delete (<label for="checkAllattdelete0"><input type="checkbox" onclick="checkAll(0, 'attdelete')" id="checkAllattdelete0"> All</label>)</th>
+													<th>Print (<label for="checkAllprint0"><input type="checkbox" onclick="checkAll(0, 'print')" id="checkAllprint0"> All</label>)</th></th>
+													<th>Report (<label for="checkAllreport0"><input type="checkbox" onclick="checkAll(0, 'report')" id="checkAllreport0"> All</label>)</th></th>
 												</tr>
 											</thead>
 											<tbody id="UserRoleTable" >
                                                 @foreach ($modules as $key => $row)
                                                     <tr>
                                                         <td><input type="hidden" value="{{$row->id}}" name="module[{{$row->id}}]">{{$row->name}}</td>	
-                                                        <td><input type="checkbox" name="create[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="view[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="update[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="delete[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="att_add[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="att_delete[{{$row->id}}]"></td>
-                                                        <td><input type="checkbox" name="print[{{$row->id}}]"></td>
-														<td><input type="checkbox" name="report[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" class="create-checkbox-0" name="create[{{$row->id}}]"></td>
+														<td><input type="checkbox" class="view-checkbox-0" name="view[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" class="update-checkbox-0" name="update[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" class="delete-checkbox-0" name="delete[{{$row->id}}]"></td>
+														<td><input type="checkbox" class="attadd-checkbox-0" name="att_add[{{$row->id}}]"></td>
+														<td><input type="checkbox" class="attdelete-checkbox-0" name="att_delete[{{$row->id}}]"></td>
+                                                        <td><input type="checkbox" class="print-checkbox-0" name="print[{{$row->id}}]"></td>
+														<td><input type="checkbox" class="report-checkbox-0" name="report[{{$row->id}}]"></td>
                                                     </tr>
                                                 @endforeach
 											</tbody>
@@ -98,5 +98,17 @@
 			}
 		});
 	});
+
+
+
+	function checkAll(index, type) {
+        const selectAllCheckbox = document.getElementById(`checkAll${type}${index}`);
+        const checkboxes = document.querySelectorAll(`.${type}-checkbox-${index}`);
+
+        // Check or uncheck all checkboxes based on the "Select All" checkbox
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    }
 
 </script>
