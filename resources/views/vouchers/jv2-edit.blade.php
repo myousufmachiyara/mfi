@@ -337,14 +337,6 @@
 			var isChecked = $('#SaletoggleSwitch').is(':checked');
 			var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
-			// if(total_debit==total_credit){
-			// 	var form = document.getElementById('updateForm');
-			// 	form.submit();
-			// }
-			// else{
-			// 	alert("Total Debit & Credit Must be Equal")
-			// }
-
 			if(isChecked && isPurChecked){
 				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
 				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
@@ -552,7 +544,6 @@
 	function goBack() {
 		window.history.back();
 	}
-
 
 	function getPendingInvoices(){
 		var cust_id=$('#customer_name').val();
