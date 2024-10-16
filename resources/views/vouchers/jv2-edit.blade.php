@@ -316,6 +316,8 @@
 
 		if (isChecked || isPurChecked) {
 			alert("You have unsaved changes. Please save your changes before leaving.");
+			event.preventDefault();
+        	event.returnValue = '';
 		}
 	});
 	
@@ -810,4 +812,4 @@
 	function refreshSalesAgeing(){
 		$('#customer_name').trigger('change');
 	}
-</script>
+</script>>
