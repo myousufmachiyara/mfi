@@ -127,7 +127,7 @@
 										<div class="card-body">
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
-													<label class="col-form-label">Account Name <a onclick="refreshSalesAgeing()"><i class="bx bx-refresh" style="font-size: 17px;color: red;"> </i></a></label>
+													<label class="col-form-label">Account Name <a onclick="refreshSalesAgeing()" id="refreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 17px;color: red;"> </i></a></label>
 													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
@@ -688,10 +688,10 @@
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
 		const jv_no= $('#jv_no').val();
-		console.log(jv_no);
 	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
+			document.getElementById('refreshBtn').style.display = 'block';
 			var table = document.getElementById('pendingInvoices');
         	if (table.rows.length > 0) {
 				$.ajax({
@@ -710,6 +710,8 @@
 			$('#prevInvoices').val(1);
         } else{
 			document.getElementById('sales_warning').style.display = 'none';
+			document.getElementById('refreshBtn').style.display = 'none';
+
 			var table = document.getElementById('pendingInvoices');
         	if (table.rows.length > 0) {
 				$.ajax({
