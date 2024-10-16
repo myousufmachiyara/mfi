@@ -279,6 +279,26 @@ class JV2Controller extends Controller
             }
         }
 
+        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices!=0)
+        {
+            $purchase_ageing = purchase_ageing::where('jv2_id', $request->jv_no)->delete();
+
+            for($k=0;$k<$request->pur_totalInvoices;$k++)
+            {
+                if($request->pur_rec_amount[$k]>0 && $request->pur_rec_amount[$k]!==null)
+                {
+                    $pur_ageing = new purchase_ageing();
+                    $pur_ageing->created_by = session('user_id');
+                    $pur_ageing->jv2_id=$request->jv_no;
+                    $pur_ageing->amount=$request->pur_rec_amount[$k];
+                    $pur_ageing->sales_id=$request->pur_invoice_nos[$k];
+                    $pur_ageing->sales_prefix=$request->pur_prefix[$k];
+                    $pur_ageing->acc_name=$request->pur_customer_name;
+                    $pur_ageing->save();
+                }
+                
+            }
+        }
         return redirect()->route('all-jv2');
     }
 

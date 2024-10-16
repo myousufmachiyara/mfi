@@ -135,8 +135,6 @@
 														@endforeach
 													</select>	
 													
-													<!-- <input type="hidden" id="show_customer_name"  class="form-control"> -->
-
 												</div>
 
 												<div class="col-4 mb-2">
@@ -189,8 +187,6 @@
 														@endforeach
 													</select>	
 													
-													<!-- <input type="hidden" id="show_customer_name" name="customer_name" class="form-control"> -->
-
 												</div>
 
 												<div class="col-4 mb-2">
@@ -238,53 +234,100 @@
 											</div>
 										@endif
 									</header>
-
-									<div class="card-body">
-										<div class="row form-group mb-2">
-										
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
-													<option value="0" disabled selected>Select Account</option>
-													@foreach($acc as $key1 => $row1)	
-														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
-													@endforeach
-												</select>
-												<input type="hidden" id="show_pur_customer_name" name="pur_customer_name" class="form-control" step="any">																			
-											</div>
-
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Unadjusted Amount</label>
-												<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
-											</div>
-
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Total Amount</label>
-												<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
-											</div>
-
-											<div class="col-12 mb-2">
-												<table class="table table-bordered table-striped mb-0 mt-2">
-													<thead>
-														<tr>
-															<th width="">Inv #</th>
-															<th width="">Date</th>
-															<th width="">Bill Amount</th>
-															<th width="">Remaining Amount</th>
-															<th width="">Amount</th>
-														</tr>
-													</thead>
-													<tbody id="purpendingInvoices">
-														@foreach ($purchase_ageing as $key => $row)
-														<tr>
-
-														</tr>
+									@if(!empty($purchase_ageing))
+										<div class="card-body">
+											<div class="row form-group mb-2">
+											
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" name="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
+														<option value="0" disabled selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 														@endforeach
-													</tbody>
-												</table>										
+													</select>
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2">
+													<table class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="">Inv #</th>
+																<th width="">Date</th>
+																<th width="">Bill Amount</th>
+																<th width="">Remaining Amount</th>
+																<th width="">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="purpendingInvoices">
+															@foreach ($purchase_ageing as $key => $row)
+																<tr>
+																	<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+																	<td><input type='date' class='form-control' value="{{$row->sa_date}}" disabled></td>
+																	<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' disabled></td>
+																	<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' disabled></td>
+																	<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalReci()' required disabled></td>
+																</tr>
+															@endforeach
+														</tbody>
+													</table>										
+												</div>
 											</div>
 										</div>
-									</div>
+									@else
+										<div class="card-body">
+											<div class="row form-group mb-2">
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" name="pur_customer_name" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
+													<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required>
+														<option value="0" disabled selected>Select Account</option>
+														@foreach($acc as $key1 => $row1)	
+															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
+														@endforeach
+													</select>
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Unadjusted Amount</label>
+													<input type="number" id="pur_unadjusted_amount" name="pur_unadjusted_amount" value="0" class="form-control" step="any">
+												</div>
+
+												<div class="col-4 mb-2">
+													<label class="col-form-label">Total Amount</label>
+													<input type="number" id="total_pay_amount" value="0" class="form-control" disabled step="any">
+												</div>
+
+												<div class="col-12 mb-2">
+													<table class="table table-bordered table-striped mb-0 mt-2">
+														<thead>
+															<tr>
+																<th width="">Inv #</th>
+																<th width="">Date</th>
+																<th width="">Bill Amount</th>
+																<th width="">Remaining Amount</th>
+																<th width="">Amount</th>
+															</tr>
+														</thead>
+														<tbody id="purpendingInvoices">
+																<tr>
+																	
+																</tr>
+														</tbody>
+													</table>										
+												</div>
+											</div>
+										</div>
+									@endif
 								</section>
 							</div>
 							<div class="col-12 mb-3">
@@ -631,7 +674,7 @@
 					$.each(result, function(k,v){
 						if(Math.round(v['balance'])>0){
 							var html="<tr>";
-							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
 							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
 							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
 							html+= "<td width='20%'><input type='number' class='form-control text-danger' value="+Math.round(v['balance'])+" value='0' disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
