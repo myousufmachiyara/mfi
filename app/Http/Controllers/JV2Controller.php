@@ -19,27 +19,47 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\DB;
 
 class JV2Controller extends Controller
 {
     use SaveImage;
 
     public function index()
-    {
+    // {
     
-        $jv2= Lager0::where('lager0.status', 1)
-        ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+    //     $jv2= Lager0::where('lager0.status', 1)
+    //     ->leftjoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+    //     ->select(
+    //     'lager0.jv_no','lager0.jv_date','lager0.narration',
+    //     \DB::raw('SUM(lager.debit) as total_debit'),
+    //     \DB::raw('SUM(lager.credit) as total_credit')
+    //     )
+    //     ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
+    //     ->get();
+
+
+    //     return view('vouchers.jv2',compact('jv2'));
+    // }
+    
+{
+    $jv2 = Lager0::where('lager0.status', 1)
+        ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+        ->leftJoin('sales_ageing', 'lager0.jv_no', '=', 'sales_ageing.jv2_id')
         ->select(
-        'lager0.jv_no','lager0.jv_date','lager0.narration',
-        \DB::raw('SUM(lager.debit) as total_debit'),
-        \DB::raw('SUM(lager.credit) as total_credit')
+            'lager0.jv_no',
+            'lager0.jv_date',
+            'lager0.narration',
+            DB::raw('SUM(lager.debit) as total_debit'),
+            DB::raw('SUM(lager.credit) as total_credit'),
+            DB::raw("CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) AS merged_sales_id")
         )
-        ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
+        ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration', 'merged_sales_id')
         ->get();
 
+    return view('vouchers.jv2', compact('jv2'));
+}
 
-        return view('vouchers.jv2',compact('jv2'));
-    }
 
     public function create(Request $request)
     {

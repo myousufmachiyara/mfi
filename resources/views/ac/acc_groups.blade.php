@@ -1,8 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-            @include('layouts.pageheader')
-            <div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper" style="padding-top: 50px;">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
                     <div class="row">
                         <div class="col">
@@ -29,8 +30,10 @@
                                                     <td>{{$row->group_name}}</td>
                                                     <td class="actions text-end">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getDetails({{$row->group_cod}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                        @if(session('user_role')==1)
                                                         <span class="separator"> | </span>
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->group_cod}})" href="#deleteModal"><i class="far fa-trash-alt" style="color:red"></i></a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
