@@ -182,7 +182,7 @@
 
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name</label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"  onchange="getPendingInvoices()" required disabled>
+													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"  onchange="getPendingInvoices()" required>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
@@ -195,7 +195,7 @@
 
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Unadjusted Amount</label>
-													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" disabled step="any">
+													<input type="number" id="sales_unadjusted_amount" name="sales_unadjusted_amount" value="0" class="form-control" step="any">
 												</div>
 
 												<div class="col-4 mb-2">
