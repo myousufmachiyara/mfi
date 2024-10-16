@@ -315,9 +315,10 @@
 		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
 		if (isChecked || isPurChecked) {
-			console.log("hello");
+		event.preventDefault();
+		event.returnValue = ''; // Show the default confirmation dialog
 		}
-	});
+  	});
 	
 	var itemCount;
 
@@ -774,7 +775,7 @@
 					type: "GET",
 					url: "/vouchers2/deactive_sales_ageing/"+jv_no,
 					success: function(result){
-						console.log("success here");
+
 					},
 					error: function(){
 						alert("error");
@@ -794,7 +795,6 @@
 					type: "GET",
 					url: "/vouchers2/active_sales_ageing/"+jv_no,
 					success: function(result){
-						console.log("success here");
 					},
 					error: function(){
 						alert("error");
