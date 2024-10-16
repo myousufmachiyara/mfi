@@ -226,7 +226,7 @@
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
-										<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span></h2>
+										<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span><span id="pur_warning" style="color:red;font-size: 16px;display:none">All Previous Purchase Ageing Record Against this JV2 will be replace by lastest</span></h2>
 										<div class="form-check form-switch">
 											<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
 										</div>
@@ -695,7 +695,7 @@
 		const jv_no= $('#jv_no').val();
 	
         if ($('#PurtoggleSwitch').is(':checked')) {
-			document.getElementById('pur_span').style.display = 'block';
+			document.getElementById('pur_warning').style.display = 'block';
 			document.getElementById('PurrefreshBtn').style.display = 'inline';
 			var table = document.getElementById('purpendingInvoices');
         	if (table.rows.length > 0) {
@@ -715,7 +715,7 @@
             pur_unadjusted_amount.prop('disabled', false);
 			$('#pur_prevInvoices').val(1);
         } else{
-			document.getElementById('pur_span').style.display = 'none';
+			document.getElementById('pur_warning').style.display = 'none';
 			document.getElementById('PurrefreshBtn').style.display = 'none';
 
 			var table = document.getElementById('pendingInvoices');
