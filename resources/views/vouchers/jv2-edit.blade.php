@@ -315,7 +315,7 @@
 		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
 		if (isChecked || isPurChecked) {
-			showNotification("You have unsaved changes.");
+			event.preventDefault();
 		}
 	});
 	
