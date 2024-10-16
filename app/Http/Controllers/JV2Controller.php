@@ -123,7 +123,7 @@ class JV2Controller extends Controller
             }
         }
 
-        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices==1)
+        if($request->has('pur_prevInvoices') && $request->pur_prevInvoices!=0)
         {
             for($k=0;$k<$request->pur_totalInvoices;$k++)
             {
