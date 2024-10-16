@@ -343,7 +343,7 @@
 				var total_pay_amount=$('#total_pay_amount').val();
 
 				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount && pur_unadjusted_amount==total_pay_amount){
-					var form = document.getElementById('addForm');
+					var form = document.getElementById('updateForm');
 					form.submit();
 				}
 				else if(total_debit!=total_credit) {
@@ -362,7 +362,7 @@
 				var total_reci_amount=$('#total_reci_amount').val();
 
 				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount){
-					var form = document.getElementById('addForm');
+					var form = document.getElementById('updateForm');
 					form.submit();
 				}
 				else if(total_debit!=total_credit) {
@@ -378,7 +378,7 @@
 				var total_pay_amount=$('#total_pay_amount').val();
 
 				if(total_debit==total_credit && pur_unadjusted_amount==total_pay_amount){
-					var form = document.getElementById('addForm');
+					var form = document.getElementById('updateForm');
 					form.submit();
 				}
 				else if(total_debit!=total_credit) {
@@ -390,7 +390,7 @@
 			}
 
 			else if(total_debit==total_credit){
-				var form = document.getElementById('addForm');
+				var form = document.getElementById('updateForm');
 				form.submit();
 			}
 
