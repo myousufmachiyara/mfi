@@ -316,7 +316,7 @@
 
 		if (isChecked || isPurChecked) {
 			event.preventDefault();
-			event.returnValue = ''; // Show the default confirmation dialog
+			event.returnValue = 'hello'; // Show the default confirmation dialog
 		}
   	});
 	
