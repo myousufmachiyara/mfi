@@ -180,13 +180,12 @@
 										
 											<div class="col-4 mb-2">
 												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
+												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" name="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
 													<option value="0" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
 														<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>
 													@endforeach
 												</select>
-												<input type="hidden" id="show_pur_customer_name" name="pur_customer_name" class="form-control" step="any">																			
 											</div>
 
 											<div class="col-4 mb-2">
