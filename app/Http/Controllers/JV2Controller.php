@@ -41,36 +41,25 @@ class JV2Controller extends Controller
 
     //     return view('vouchers.jv2',compact('jv2'));
     // }
-    {
-        // Fetch JV2 data with total debit and credit.
-        $jv2 = Lager0::where('lager0.status', 1)
-            ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
-            ->select(
-                'lager0.jv_no',
-                'lager0.jv_date',
-                'lager0.narration',
-                DB::raw('SUM(lager.debit) as total_debit'),
-                DB::raw('SUM(lager.credit) as total_credit')
-            )
-            ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
-            ->get();
+    
+{
+    $jv2 = Lager0::where('lager0.status', 1)
+        ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
+        ->leftJoin('sales_ageing', 'lager0.jv_no', '=', 'sales_ageing.jv2_id')
+        ->select(
+            'lager0.jv_no',
+            'lager0.jv_date',
+            'lager0.narration',
+            DB::raw('SUM(lager.debit) as total_debit'),
+            DB::raw('SUM(lager.credit) as total_credit'),
+            DB::raw("CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) AS merged_sales_id")
+        )
+        ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration', 'merged_sales_id')
+        ->get();
 
-        // Fetch merged sales data.
-        $result = DB::table('lager0')
-            ->select(
-                'lager0.jv_no',
-                DB::raw("CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) AS merged_sales_id"),
-                'sales_ageing.acc_name'
-            )
-            ->leftJoin('lager', 'lager0.jv_no', '=', 'lager.auto_lager')
-            ->leftJoin('sales_ageing', 'lager0.jv_no', '=', 'sales_ageing.jv2_id')
-            ->where('lager0.status', 1)
-            ->groupBy('lager0.jv_no', 'merged_sales_id', 'sales_ageing.acc_name')
-            ->get();
+    return view('vouchers.jv2', compact('jv2'));
+}
 
-        // Pass both datasets to the view.
-        return view('vouchers.jv2', compact('jv2', 'result'));
-    }
 
     public function create(Request $request)
     {
