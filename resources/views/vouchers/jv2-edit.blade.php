@@ -310,6 +310,18 @@
  
 <script>
 
+	window.addEventListener('beforeunload', function(event) {
+		var isChecked = $('#SaletoggleSwitch').is(':checked');
+		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
+
+		if (isChecked || isPurChecked) {
+			const confirmationMessage = 'You have unsaved changes. Are you sure you want to leave?';
+			event.returnValue = confirmationMessage; 
+			return confirmationMessage; // Show confirmation dialog
+		} 
+		// Else case: Allow the page to refresh naturally
+	});
+
 	var itemCount;
 
 	$(document).ready(function() {
