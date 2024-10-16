@@ -127,7 +127,7 @@
 										<div class="card-body">
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
-													<label class="col-form-label">Account Name</label>
+													<label class="col-form-label">Account Name <i class="bx bx-refresh"> </i></label>
 													<select data-plugin-selecttwo class="form-control select2-js" id="customer_name" name="customer_name"   onchange="getPendingInvoices()" required disabled>
 														<option value="0" selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
