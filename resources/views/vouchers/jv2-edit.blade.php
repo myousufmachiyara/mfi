@@ -324,10 +324,76 @@
             e.preventDefault();
 			var total_credit=$('#total_credit').val();
 			var total_debit=$('#total_debit').val();
-			if(total_debit==total_credit){
-				var form = document.getElementById('updateForm');
+			var isChecked = $('#SaletoggleSwitch').is(':checked');
+			var isPurChecked = $('#PurtoggleSwitch').is(':checked');
+
+			// if(total_debit==total_credit){
+			// 	var form = document.getElementById('updateForm');
+			// 	form.submit();
+			// }
+			// else{
+			// 	alert("Total Debit & Credit Must be Equal")
+			// }
+
+			if(isChecked && isPurChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+
+				var total_reci_amount=$('#total_reci_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
+			else if(isChecked){
+				var sales_unadjusted_amount=$('#sales_unadjusted_amount').val();
+				var total_reci_amount=$('#total_reci_amount').val();
+
+				if(total_debit==total_credit && sales_unadjusted_amount==total_reci_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(sales_unadjusted_amount!=total_reci_amount) {
+					alert("Unadjusted amount is not completely adjusted In Sales Ageing")
+				}
+			}
+
+			else if(isPurChecked){
+				var pur_unadjusted_amount=$('#pur_unadjusted_amount').val();
+				var total_pay_amount=$('#total_pay_amount').val();
+
+				if(total_debit==total_credit && pur_unadjusted_amount==total_pay_amount){
+					var form = document.getElementById('addForm');
+					form.submit();
+				}
+				else if(total_debit!=total_credit) {
+					alert("Total Debit & Credit Must be Equal")
+				}
+				else if(pur_unadjusted_amount!=total_pay_amount) {
+					alert("Unadjusted amount is not completely adjusted In Purchase Ageing")
+				}
+			}
+
+			else if(total_debit==total_credit){
+				var form = document.getElementById('addForm');
 				form.submit();
 			}
+
 			else{
 				alert("Total Debit & Credit Must be Equal")
 			}

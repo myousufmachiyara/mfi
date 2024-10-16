@@ -258,7 +258,6 @@ class JV2Controller extends Controller
             }
         }
 
-        // die(print_r($request->all()));
         if($request->has('prevInvoices') && $request->prevInvoices!=0)
         {
             $sales_ageing = sales_ageing::where('jv2_id', $request->jv_no)->delete();
