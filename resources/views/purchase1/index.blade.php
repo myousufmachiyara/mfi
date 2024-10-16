@@ -66,7 +66,7 @@
                                                     <td>{{$row->sale_against}}</td>
                                                     <td>{{$row->weight_sum}}</td>
                                                     <td>{{$row->total_bill}}</td>
-                                                    <td>{{$row->pur_convance_char}},{{$row->pur_labor_char}},{{$row->pur_discount}}</td>
+                                                    <td>{{$row->pur_convance_char}}/{{$row->pur_labor_char}}/{{$row->pur_discount}}</td>
                                                     {{-- <td>{{$row->pur_labor_char}}</td>
                                                     <td>{{$row->pur_discount}}</td> --}}
                                                     @php ($net_amount=$row->total_bill+$row->pur_convance_char+$row->pur_labor_char-$row->pur_discount)
