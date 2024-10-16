@@ -315,8 +315,8 @@
 		var isPurChecked = $('#PurtoggleSwitch').is(':checked');
 
 		if (isChecked || isPurChecked) {
-		event.preventDefault();
-		event.returnValue = ''; // Show the default confirmation dialog
+			event.preventDefault();
+			event.returnValue = ''; // Show the default confirmation dialog
 		}
   	});
 	
