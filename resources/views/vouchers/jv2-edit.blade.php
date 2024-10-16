@@ -272,11 +272,11 @@
 														<tbody id="purpendingInvoices">
 															@foreach ($purchase_ageing as $key => $row)
 																<tr>
-																	<td><input type='text' class='form-control' value="{{$row->prefix}}{{$row->Sal_inv_no}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->Sal_inv_no}}"><input type='hidden' name='totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='prefix[]' class='form-control' value="{{$row->prefix}}"></td>
+																	<td><input type='text' class='form-control' value="{{$row->sales_prefix}}{{$row->sales_id}}" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="{{$row->sales_id}}"><input type='hidden' name='pur_totalInvoices' class='form-control' value="{{$key}}"><input type='hidden' name='sales_prefix[]' class='form-control' value="{{$row->prefix}}"></td>
 																	<td><input type='date' class='form-control' value="{{$row->sa_date}}" disabled></td>
 																	<td><input type='number' class='form-control' value="{{$row->b_amt}}" name='bill_amount[]' disabled></td>
 																	<td><input type='number' class='form-control text-danger' value="{{$row->balance}}" name='balance_amount[]' disabled></td>
-																	<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalReci()' required disabled></td>
+																	<td><input type='number' class='form-control' value="{{$row->amount}}" max="{{$row->amount}}" step='any' name='rec_amount[]' onchange='totalPay()' required disabled></td>
 																</tr>
 															@endforeach
 														</tbody>
