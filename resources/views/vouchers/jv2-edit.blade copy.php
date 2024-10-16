@@ -114,7 +114,7 @@
 									
 								</section>
 							</div>
-							{{-- <div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
+							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
@@ -222,118 +222,7 @@
 									
 									@endif
 								</section>
-							</div> --}}
-
-
-							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
-								<section class="card">
-									<header class="card-header" style="display: flex; justify-content: space-between;">
-										<h2 class="card-title">
-											Sales Ageing 
-											<span id="sale_span" style="color:red; font-size: 16px; display:none">
-												More than 1 credit not allowed
-											</span>
-											<span id="sales_warning" style="color:red; font-size: 16px; display:none">
-												All Previous Sales Ageing Record Against this JV2 will be replaced by the latest
-											</span>
-										</h2>
-										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch" disabled>
-										</div>
-									</header>
-							
-									<div class="card-body">
-										<div class="row form-group mb-2">
-											<div class="col-4 mb-2">
-												<label class="col-form-label">
-													Account Name 
-													<span>
-														<a onclick="refreshSalesAgeing()" id="refreshBtn" style="display:none">
-															<i class="bx bx-refresh" style="font-size: 20px; color: red;"> </i>
-														</a>
-													</span>
-												</label>
-												<select data-plugin-selecttwo class="form-control select2-js" 
-														id="customer_name" name="customer_name" 
-														onchange="getPendingInvoices()" required 
-														{{ empty($sales_ageing) ? '' : 'disabled' }}>
-													<option value="0" selected>Select Account</option>
-													@foreach($acc as $key1 => $row1)    
-														<option value="{{ $row1->ac_code }}" 
-															{{ (!empty($sales_ageing) && $sales_ageing[0]->account_name == $row1->ac_code) ? 'selected' : '' }}>
-															{{ $row1->ac_name }}
-														</option>
-													@endforeach
-												</select>    
-											</div>
-							
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Unadjusted Amount</label>
-												<input type="number" id="sales_unadjusted_amount" 
-													   name="sales_unadjusted_amount" value="0" 
-													   class="form-control" step="any" 
-													   {{ empty($sales_ageing) ? '' : 'disabled' }}>
-											</div>
-							
-											<div class="col-4 mb-2">
-												<label class="col-form-label">Total Amount</label>
-												<input type="number" id="total_reci_amount" 
-													   class="form-control" value="0" disabled step="any">
-											</div>
-							
-											<div class="col-12 mb-2">
-												<table id="sales_ageing" class="table table-bordered table-striped mb-0 mt-2">
-													<thead>
-														<tr>
-															<th width="15%">Inv #</th>
-															<th width="15%">Date</th>
-															<th width="20%">Bill Amount</th>
-															<th width="20%">Remaining</th>
-															<th width="20%">Amount</th>
-														</tr>
-													</thead>
-													<tbody id="pendingInvoices">
-														@if (!empty($sales_ageing))
-															@foreach ($sales_ageing as $key => $row)
-																<tr>
-																	<td>
-																		<input type='text' class='form-control' 
-																			   value="{{ $row->prefix }}{{ $row->Sal_inv_no }}" disabled>
-																		<input type='hidden' name='invoice_nos[]' value="{{ $row->Sal_inv_no }}">
-																		<input type='hidden' name='totalInvoices' value="{{ $key }}">
-																		<input type='hidden' name='prefix[]' value="{{ $row->prefix }}">
-																	</td>
-																	<td>
-																		<input type='date' class='form-control' 
-																			   value="{{ $row->sa_date }}" disabled>
-																	</td>
-																	<td>
-																		<input type='number' class='form-control' 
-																			   value="{{ $row->b_amt }}" name='bill_amount[]' disabled>
-																	</td>
-																	<td>
-																		<input type='number' class='form-control text-danger' 
-																			   value="{{ $row->balance }}" name='balance_amount[]' disabled>
-																	</td>
-																	<td>
-																		<input type='number' class='form-control' 
-																			   value="{{ $row->amount }}" max="{{ $row->amount }}" 
-																			   step='any' name='rec_amount[]' 
-																			   onchange='totalReci()' required disabled>
-																	</td>
-																</tr>
-															@endforeach
-														@else
-															<tr><td colspan="5" class="text-center">No data available</td></tr>
-														@endif
-													</tbody>
-												</table>                                        
-											</div>
-										</div>
-									</div>
-								</section>
 							</div>
-							
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
