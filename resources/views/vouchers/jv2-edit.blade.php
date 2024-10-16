@@ -116,7 +116,7 @@
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-6 mb-3">								
 								<section class="card">
-									<header class="card-header"  style="display: flex;justify-content: space-between;">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Sales Ageing <span id="sale_span" style="color:red;font-size: 16px;display:none">More than 1 credit not allowed</span><span id="sales_warning" style="color:red;font-size: 16px;display:none">All Previous Sales Ageing Record Against this JV2 will be replace by lastest</span></h2>
 										<div class="form-check form-switch">
 											<input class="form-check-input" type="checkbox" id="SaletoggleSwitch">
@@ -227,12 +227,9 @@
 								<section class="card">
 									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span></h2>
-										
-										@if(empty($purchase_ageing))
-											<div class="form-check form-switch">
-												<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
-											</div>
-										@endif
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+										</div>
 									</header>
 									@if(!empty($purchase_ageing))
 										<div class="card-body">
