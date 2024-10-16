@@ -243,7 +243,7 @@
 										<div class="row form-group mb-2">
 										
 											<div class="col-4 mb-2">
-												<label class="col-form-label">Account Name</label>
+												<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
 												<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required disabled>
 													<option value="0" disabled selected>Select Account</option>
 													@foreach($acc as $key1 => $row1)	
@@ -623,88 +623,123 @@
 		$('#total_pay_amount').val(totalPay); // Set the total in the corresponding input field
 	}
 
+	// function getPurPendingInvoices(){
+	// 	var cust_id=$('#pur_customer_name').val();
+	// 	var counter=1;
+	// 	$('#pur_prevInvoices').val(1)
+		
+	// 	var table = document.getElementById('purpendingInvoices');
+    //     while (table.rows.length > 0) {
+    //         table.deleteRow(0);
+    //     }
+
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: "/vouchers2/purpendingInvoice/"+cust_id,
+	// 		success: function(result){
+	// 			$.each(result, function(k,v){
+	// 				if(Math.round(v['balance'])>0){
+	// 					var html="<tr>";
+	// 					html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='pur_invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='pur_prefix[]' class='form-control' value="+v['prefix']+"></td>"
+	// 					html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+	// 					html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='pur_balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+	// 					html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='pur_bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+	// 					html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='pur_rec_amount[]' onchange='totalPay()' required></td>"
+	// 					html+="</tr>";
+	// 					$('#purpendingInvoices').append(html);
+	// 					counter++;
+	// 				}
+	// 			});
+	// 		},
+	// 		error: function(){
+	// 			alert("error");
+	// 		}
+	// 	});
+	// }
+
 	function getPurPendingInvoices(){
 		var cust_id=$('#pur_customer_name').val();
-		var counter=1;
-		$('#pur_prevInvoices').val(1)
-		
 		var table = document.getElementById('purpendingInvoices');
-        while (table.rows.length > 0) {
-            table.deleteRow(0);
-        }
+		$('#purpendingInvoices').html('');
+		$('#purpendingInvoices').find('tr').remove();
 
-		$.ajax({
-			type: "GET",
-			url: "/vouchers2/purpendingInvoice/"+cust_id,
-			success: function(result){
-				$.each(result, function(k,v){
-					if(Math.round(v['balance'])>0){
-						var html="<tr>";
-						html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='pur_invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='pur_totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='pur_prefix[]' class='form-control' value="+v['prefix']+"></td>"
-						html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
-						html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='pur_balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control text-danger'  value="+Math.round(v['balance'])+" disabled><input type='hidden' name='pur_bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
-						html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='pur_rec_amount[]' onchange='totalPay()' required></td>"
-						html+="</tr>";
-						$('#purpendingInvoices').append(html);
-						counter++;
-					}
-				});
-			},
-			error: function(){
-				alert("error");
-			}
-		});
+		if(cust_id!=0){
+			var counter=1;
+			$('#pur_prevInvoices').val(1)
+			
+			$.ajax({
+				type: "GET",
+				url: "/vouchers2/purpendingInvoice/"+cust_id,
+				success: function(result){
+					$.each(result, function(k,v){
+						if(Math.round(v['balance'])>0){
+							var html="<tr>";
+							html+= "<td width='18%'><input type='text' class='form-control' value="+v['prefix']+""+v['Sal_inv_no']+" disabled><input type='hidden' name='invoice_nos[]' class='form-control' value="+v['Sal_inv_no']+"><input type='hidden' name='totalInvoices' class='form-control' value="+counter+"><input type='hidden' name='prefix[]' class='form-control' value="+v['prefix']+"></td>"
+							html+= "<td width='15%'>"+v['sa_date']+"<input type='hidden' class='form-control' value="+v['sa_date']+"></td>"					
+							html+= "<td width='20%'><input type='number' class='form-control' value="+Math.round(v['b_amt'])+" disabled><input type='hidden' name='balance_amount[]' class='form-control' value="+Math.round(v['b_amt'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control text-danger' value="+Math.round(v['balance'])+" value='0' disabled><input type='hidden' name='bill_amount[]' class='form-control' value="+Math.round(v['bill_balance'])+"></td>"
+							html+= "<td width='20%'><input type='number' class='form-control' value='0' max="+Math.round(v['balance'])+" step='any' name='rec_amount[]' onchange='totalReci()' required></td>"
+							html+="</tr>";
+							$('#purpendingInvoices').append(html);
+							counter++;
+						}
+					});
+				},
+				error: function(){
+					alert("error");
+				}
+			});
+		}
 	}
 
-	function PurtoggleInputs() {
+	// function PurtoggleInputs() {
 		
-		var pur_unadjusted_amount=0;
-		var pur_debit_account=0;
-		var pur_no_of_dedits=0;
+	// 	var pur_unadjusted_amount=0;
+	// 	var pur_debit_account=0;
+	// 	var pur_no_of_dedits=0;
 
-		$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-		$('#pur_customer_name').val(0).trigger('change');
-		$('#show_pur_customer_name').val(0);
+	// 	$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
+	// 	$('#pur_customer_name').val(0).trigger('change');
+	// 	$('#show_pur_customer_name').val(0);
 
-		document.getElementById('pur_span').style.display = 'none';
+	// 	document.getElementById('pur_span').style.display = 'none';
 
-		var PurAgingtable = document.getElementById("purpendingInvoices"); 
-		while (PurAgingtable.rows.length > 0) {
-			PurAgingtable.deleteRow(0);
-		}
+	// 	var PurAgingtable = document.getElementById("purpendingInvoices"); 
+	// 	while (PurAgingtable.rows.length > 0) {
+	// 		PurAgingtable.deleteRow(0);
+	// 	}
 
-		if ($('#PurtoggleSwitch').is(':checked')) {
-			var table = document.getElementById("JV2Table"); 
-			var rowCount = table.rows.length;
+	// 	if ($('#PurtoggleSwitch').is(':checked')) {
+	// 		var table = document.getElementById("JV2Table"); 
+	// 		var rowCount = table.rows.length;
 
-			for (var i=0;i<rowCount; i++){	
-				pur_selected_account = $('#account_cod'+(i+1)).val();
+	// 		for (var i=0;i<rowCount; i++){	
+	// 			pur_selected_account = $('#account_cod'+(i+1)).val();
 
-				if (pur_selected_account) {
-					dedit = table.rows[i].cells[5].querySelector('input').value;
+	// 			if (pur_selected_account) {
+	// 				dedit = table.rows[i].cells[5].querySelector('input').value;
 
-					if(dedit>=1 && pur_no_of_dedits<1){
-						pur_debit_account = pur_selected_account;
-						pur_unadjusted_amount = dedit;
-						pur_no_of_dedits = pur_no_of_dedits + 1;
-					}
-					else if(dedit>=1 && pur_no_of_dedits>=1){
-						pur_debit_account = 0;
-						pur_unadjusted_amount = 0;
-						document.getElementById('pur_span').style.display = 'block';
-						break;
-					}
-				} 
-			}
+	// 				if(dedit>=1 && pur_no_of_dedits<1){
+	// 					pur_debit_account = pur_selected_account;
+	// 					pur_unadjusted_amount = dedit;
+	// 					pur_no_of_dedits = pur_no_of_dedits + 1;
+	// 				}
+	// 				else if(dedit>=1 && pur_no_of_dedits>=1){
+	// 					pur_debit_account = 0;
+	// 					pur_unadjusted_amount = 0;
+	// 					document.getElementById('pur_span').style.display = 'block';
+	// 					break;
+	// 				}
+	// 			} 
+	// 		}
 
-			if(pur_debit_account>0 && pur_unadjusted_amount>0 && pur_no_of_dedits==1 ){
-				$('#pur_customer_name').val(pur_debit_account).trigger('change');
-				$('#show_pur_customer_name').val(pur_debit_account);
-				$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
-			}
-		}
-	}
+	// 		if(pur_debit_account>0 && pur_unadjusted_amount>0 && pur_no_of_dedits==1 ){
+	// 			$('#pur_customer_name').val(pur_debit_account).trigger('change');
+	// 			$('#show_pur_customer_name').val(pur_debit_account);
+	// 			$('#pur_unadjusted_amount').val(pur_unadjusted_amount);
+	// 		}
+	// 	}
+	// }
 
 	// function SaletoggleInputs() {
 		
@@ -760,6 +795,54 @@
 	// 	}
 	// }
 
+	function PurtoggleInputs() {
+        const pur_customer_name = $('#pur_customer_name');
+        const pur_unadjusted_amount = $('#pur_unadjusted_amount');
+		const jv_no= $('#jv_no').val();
+	
+        if ($('#PurtoggleSwitch').is(':checked')) {
+			document.getElementById('pur_span').style.display = 'block';
+			document.getElementById('PurrefreshBtn').style.display = 'inline';
+			var table = document.getElementById('purpendingInvoices');
+        	if (table.rows.length > 0) {
+				
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/deactive_pur_ageing/"+jv_no,
+					success: function(result){
+
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+            pur_customer_name.prop('disabled', false);
+            pur_unadjusted_amount.prop('disabled', false);
+			$('#pur_prevInvoices').val(1);
+        } else{
+			document.getElementById('pur_span').style.display = 'none';
+			document.getElementById('PurrefreshBtn').style.display = 'none';
+
+			var table = document.getElementById('pendingInvoices');
+        	if (table.rows.length > 0) {
+				$.ajax({
+					type: "GET",
+					url: "/vouchers2/active_pur_ageing/"+jv_no,
+					success: function(result){
+					},
+					error: function(){
+						alert("error");
+					}
+				});
+			}
+            pur_customer_name.prop('disabled', true);
+            pur_unadjusted_amount.prop('disabled', true);
+			$('#pur_prevInvoices').val(0);
+        }
+    }
+
+
 	function SaletoggleInputs() {
         const customer_name = $('#customer_name');
         const sales_unadjusted_amount = $('#sales_unadjusted_amount');
@@ -810,4 +893,9 @@
 	function refreshSalesAgeing(){
 		$('#customer_name').trigger('change');
 	}
+
+	function refreshPurAgeing(){
+		$('#pur_customer_name').trigger('change');
+	}
+
 </script>

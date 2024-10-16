@@ -7,7 +7,7 @@
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
 
     Route::middleware(['checkPermission:view'])->group(function () {
-        
+
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
         Route::get('/user-role/all-roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('all-roles');
         Route::get('/item-groups/all-groups', [App\Http\Controllers\ItemGroupsController::class, 'index'])->name('all-item-groups');
@@ -178,6 +178,8 @@
         Route::post('/vouchers2/update', [App\Http\Controllers\JV2Controller::class, 'update'])->name('update-jv2');
         Route::get('/vouchers2/active_sales_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'activeSalesAgeing'])->name('active-sales-ageing');
         Route::get('/vouchers2/deactive_sales_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'deactiveSalesAgeing'])->name('deactive-sales-ageing');
+        Route::get('/vouchers2/active_pur_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'activePurAgeing'])->name('active-pur-ageing');
+        Route::get('/vouchers2/deactive_pur_ageing/{id}', [App\Http\Controllers\JV2Controller::class, 'deactivePurAgeing'])->name('deactive-pur-ageing');
         Route::get('/purchase1/edit/{id}', [App\Http\Controllers\PurchaseController::class, 'edit'])->name('edit-purchases1');
         Route::post('/purchase1/update', [App\Http\Controllers\PurchaseController::class, 'update'])->name('update-purchases1');
         Route::get('/purchase2/edit/{id}', [App\Http\Controllers\Purchase2Controller::class, 'edit'])->name('edit-purchases2');

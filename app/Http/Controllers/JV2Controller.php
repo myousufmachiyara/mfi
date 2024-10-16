@@ -307,6 +307,23 @@ class JV2Controller extends Controller
         return $sales_ageing;
     }
 
+    public function activePurAgeing($id){
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->update([
+            'status' => '1',
+            'updated_by' => session('user_id'),
+        ]);
+        return $purchase_ageing;
+    }
+
+    public function deactivePurAgeing($id){
+        $purchase_ageing = purchase_ageing::where('jv2_id', $id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
+        return $purchase_ageing;
+    }
+
+
     public function print($id)
     {
 
