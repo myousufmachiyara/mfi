@@ -691,9 +691,10 @@
 	
         if ($('#SaletoggleSwitch').is(':checked')) {
 			document.getElementById('sales_warning').style.display = 'block';
-			document.getElementById('refreshBtn').style.display = 'block';
+			document.getElementById('refreshBtn').style.display = 'inline';
 			var table = document.getElementById('pendingInvoices');
         	if (table.rows.length > 0) {
+				
 				$.ajax({
 					type: "GET",
 					url: "/vouchers2/deactive_sales_ageing/"+jv_no,
