@@ -36,7 +36,7 @@
                                                     <td>{{$row->narration}}</td>
                                                     <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
                                                     <td>{{$row->merged_sales_ids}}</td>
-                                                    <td>{{$row->jv_no}}</td>
+                                                    <td>{{$row->merged_purchase_ids}}</td>
                                                     <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
                                                     <td class="actions">
                                                         <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
