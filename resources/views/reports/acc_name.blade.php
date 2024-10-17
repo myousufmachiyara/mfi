@@ -10,13 +10,13 @@
                             <div class="form-group">
                                 <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
                                 <label class="col-form-label">From</label>
-                                <input type="date" class="form-control" value="<?php echo $previousDate; ?>">
+                                <input type="date" class="form-control" id="fromDate" value="<?php echo $previousDate; ?>">
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label" >To</label>
-                                <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -164,9 +164,18 @@
 	</body>
     <script>
         function getReport(){
+
+            fromDate=$('#fromDate');
+            toDate=$('#toDate');
+
             $.ajax({
                 type: "GET",
                 url: "/rep-by-acc-name/pur1",
+                data:{
+                    fromDate: fromDate,
+                    toDate: toDate,
+                }, 
+
                 success: function(result){
                     console.log(result);
                 },
