@@ -11,25 +11,25 @@
                                	<div class="tabs">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item active">
-                                            <a class="nav-link" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">GL</a>
+                                            <a class="nav-link" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">General Ledger</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">GL_R</a>
+                                            <a class="nav-link" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">General Ledger R</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Pur Report</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-target="#age" href="#age" data-bs-toggle="tab">Age</a>
+                                            <a class="nav-link" data-bs-target="#age" href="#age" data-bs-toggle="tab">Ageing</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-bs-target="#ann_sal" href="#ann_sal" data-bs-toggle="tab">Annual Sale</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-target="#GL1" href="#GL1" data-bs-toggle="tab">GL</a>
+                                            <a class="nav-link" data-bs-target="#GL1" href="#GL1" data-bs-toggle="tab">General Ledger 1</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-bs-target="#GL_R1" href="#GL_R1" data-bs-toggle="tab">GL_R</a>
+                                            <a class="nav-link" data-bs-target="#GL_R1" href="#GL_R1" data-bs-toggle="tab">General Ledger R 1</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-bs-target="#sal_rep" href="#sal_rep" data-bs-toggle="tab">Sale Report</a>
@@ -43,8 +43,53 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div id="GL" class="tab-pane active">
-                                            <p>GL</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                            <div class="row form-group pb-3">
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label">From</label>
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" >To</label>
+                                                        <input type="date" class="form-control" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label">Account Name</label>
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <label style="display:block" class="col-form-label">Action</label>
+                                                        <a class="mb-1 mt-1 me-1 btn btn-danger"><i class="fa fa-filter"></i> Filter</a>
+                                                        <!-- <a class="btn btn-primary"><i class="bx bx-refresh"></i></a> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mt-4">
+                                                    <table class="table table-bordered table-striped mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Rendering engine</th>
+                                                                <th>Browser</th>
+                                                                <th>Platform(s)</th>
+                                                                <th>Browser</th>
+                                                                <th>Platform(s)</th>
+                                                                <th>Browser</th>
+                                                                <th>Platform(s)</th>
+                                                                <th>Engine version</th>
+                                                                <th>CSS grade</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+       
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div id="GL_R" class="tab-pane">
                                             <p>GL_R</p>
