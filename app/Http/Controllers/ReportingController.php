@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AC;
+use App\Models\pur_by_account;
 
 class ReportingController extends Controller
 {
@@ -12,5 +13,10 @@ class ReportingController extends Controller
     {
         $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('reports.acc_name',compact('coa'));
+    }
+
+    public function purchase1(Request $request){
+        $pur_by_account = pur_by_account::get();
+        return $pur_by_account;
     }
 }

@@ -352,7 +352,8 @@
     // reporting
 
     Route::middleware(['auth'])->group(function () {
-        
+
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('rep-by-acc-name');
 
     });

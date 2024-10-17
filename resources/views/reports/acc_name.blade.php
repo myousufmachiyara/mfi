@@ -9,7 +9,6 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
-
                                 <label class="col-form-label">From</label>
                                 <input type="date" class="form-control" value="<?php echo $previousDate; ?>">
                             </div>
@@ -31,6 +30,9 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-4">
+                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="getReport()"><i class="fa fa-filter"></i></a>
+                        </div>
                     </div>   
                     <div class="tabs">
                         <ul class="nav nav-tabs">
@@ -41,37 +43,37 @@
                                 <a class="nav-link" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">General Ledger R</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#age" href="#age" data-bs-toggle="tab">Sales Ageing</a>
+                                <a class="nav-link" data-bs-target="#sale_age" href="#sale_age" data-bs-toggle="tab">Sales Ageing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#age" href="#age" data-bs-toggle="tab">Purchase Ageing</a>
+                                <a class="nav-link" data-bs-target="#pur_age" href="#pur_age" data-bs-toggle="tab">Purchase Ageing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Sale 1</a>
+                                <a class="nav-link" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Sale 2</a>
+                                <a class="nav-link" data-bs-target="#sale_2" href="#sale_2" data-bs-toggle="tab">Sale 2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Combine Sale</a>
+                                <a class="nav-link" data-bs-target="#comb_sale" href="#comb_sale" data-bs-toggle="tab">Combine Sale</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Purchase 1</a>
+                                <a class="nav-link" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Purchase 2</a>
+                                <a class="nav-link" data-bs-target="#purchase_2" href="#purchase_2" data-bs-toggle="tab">Purchase 2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_rep" href="#pur_rep" data-bs-toggle="tab">Combine Purchase</a>
+                                <a class="nav-link" data-bs-target="#comb_purchase" href="#comb_purchase" data-bs-toggle="tab">Combine Purchase</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#JV" href="#JV" data-bs-toggle="tab">Vouchers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#ann_sal" href="#ann_sal" data-bs-toggle="tab">Sale Return</a>
+                                <a class="nav-link" data-bs-target="#sal_ret" href="#sal_ret" data-bs-toggle="tab">Sale Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#ann_rep" href="#ann_rep" data-bs-toggle="tab">Purchase Return</a>
+                                <a class="nav-link" data-bs-target="#pur_ret" href="#pur_ret" data-bs-toggle="tab">Purchase Return</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -137,6 +139,22 @@
                                 <p>JV</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
+                            <div id="JV" class="tab-pane">
+                                <p>JV</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            </div>
+                            <div id="JV" class="tab-pane">
+                                <p>JV</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            </div>
+                            <div id="JV" class="tab-pane">
+                                <p>JV</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            </div>
+                            <div id="JV" class="tab-pane">
+                                <p>JV</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            </div>
                         </div>
                     </div>
                 </section>		
@@ -144,4 +162,18 @@
 		</section>
         @include('../layouts.footerlinks')
 	</body>
+    <script>
+        function getReport(){
+            $.ajax({
+                type: "GET",
+                url: "/rep-by-acc-name/pur1",
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(){
+                    alert("error");
+                }
+            });
+        }
+    </script>
 </html>
