@@ -52,7 +52,7 @@ class JV2Controller extends Controller
         'lager0.narration',
         DB::raw('SUM(lager.debit) as total_debit'),
         DB::raw('SUM(lager.credit) as total_credit'),
-        DB::raw("GROUP_CONCAT(CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) SEPARATOR ' / ') AS merged_sales_ids")
+        DB::raw("GROUP_CONCAT(CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) SEPARATOR ';') AS merged_sales_ids")
     )
     ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
     ->get();
