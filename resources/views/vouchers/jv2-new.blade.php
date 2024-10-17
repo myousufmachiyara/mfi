@@ -368,7 +368,7 @@
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
-			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
+			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" ><i class="fas fa-times"></i></button>';
