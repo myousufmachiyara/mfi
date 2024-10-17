@@ -139,8 +139,6 @@
                 </section>		
 			</div>
 		</section>
-
-
         @include('../layouts.footerlinks')
 	</body>
 </html>
