@@ -150,6 +150,7 @@ class Sales2Controller extends Controller
             }
         }
 
+        // is induced 1 for From Stock Out
         if($request->has('isInduced') && $request->isInduced == 1){
             $tstock_out = new tstock_out();
 
@@ -162,6 +163,7 @@ class Sales2Controller extends Controller
             ]);
         }   
 
+        // is induced 2 for From Stock Out
         elseif($request->has('isInduced') && $request->isInduced == 2){
             $tpurchase = new tpurchase();
 
@@ -169,7 +171,7 @@ class Sales2Controller extends Controller
             $prefix=$pur_2_id['prefix'];
             $sales_against = $prefix.''.$SalinducedID;
             $tpurchase->sales_against = $sales_against;
-            tpurchase::where('Sal_inv_no', $request->inducedID)->update([
+            tpurchase::where('Sale_inv_no', $request->inducedID)->update([
                 'sales_against'=>$tpurchase->sales_against,
             ]);
         }

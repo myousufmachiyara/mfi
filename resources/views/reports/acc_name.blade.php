@@ -21,11 +21,13 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label">Account Name</label>
-                                <input type="text" class="form-control">
+                                <select data-plugin-selecttwo class="form-control select2-js"  id="company_name" required disabled>
+                                    <option value="" disabled selected>Select Account</option>
+                                    <!-- @foreach($coa as $key => $row)	
+                                        <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+                                    @endforeach -->
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <a class="btn btn-primary" style="margin-top: 2rem;padding: 0.6rem 2.5rem;"><i class="fa fa-filter"></i> Filter</a>
                         </div>
                     </div>   
                     <div class="tabs">
@@ -63,7 +65,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#JV" href="#JV" data-bs-toggle="tab">Vouchers</a>
                             </li>
-                            
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#ann_sal" href="#ann_sal" data-bs-toggle="tab">Sale Return</a>
                             </li>
