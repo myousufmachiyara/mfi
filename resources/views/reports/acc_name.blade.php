@@ -108,31 +108,35 @@
                                 <p>GL_R</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="pur_rep" class="tab-pane">
+                            <div id="sale_age" class="tab-pane">
                                 <p>Purchase Report</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="age" class="tab-pane">
+                            <div id="agpur_agee" class="tab-pane">
                                 <p>Ageing</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="ann_sal" class="tab-pane">
+                            <div id="sale_1" class="tab-pane">
                                 <p>Anuual Sale</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="GL1" class="tab-pane">
+                            <div id="sale_2" class="tab-pane">
                                 <p>GL1</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="GL_R1" class="tab-pane">
+                            <div id="comb_sale" class="tab-pane">
                                 <p>GL_R1</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="sal_rep" class="tab-pane">
+                            <div id="purchase_1" class="tab-pane">
                                 <p>Sale Report</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="JV" class="tab-pane">
+                            <div id="purchase_2" class="tab-pane">
+                                <p>JV</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            </div>
+                            <div id="comb_purchase" class="tab-pane">
                                 <p>JV</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
@@ -140,15 +144,11 @@
                                 <p>JV</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="JV" class="tab-pane">
+                            <div id="#sal_ret" class="tab-pane">
                                 <p>JV</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="JV" class="tab-pane">
-                                <p>JV</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                            </div>
-                            <div id="JV" class="tab-pane">
+                            <div id="#pur_ret" class="tab-pane">
                                 <p>JV</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
