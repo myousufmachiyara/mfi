@@ -581,7 +581,6 @@
 					type: "GET",
 					url: "/purchase2/getunclosed/",
 					success: function(result){
-						console.log(result);
 						$.each(result, function(k,v){
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sale_inv_no']+"</td>"
@@ -614,6 +613,7 @@
 					type: "GET",
 					url: "/purchase2/getItems/"+id,
 					success: function(result){
+						console.log(result);
 						$('#stck_in_date').val(result['pur1']['sa_date']);
 						$('#account_name').val(result['pur1']['Cash_pur_name_ac']).trigger('change');
 						$('#company_name').val(result['pur1']['account_name']).trigger('change');
