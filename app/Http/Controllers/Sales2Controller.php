@@ -309,8 +309,6 @@ class Sales2Controller extends Controller
             }
         }
 
-        // return redirect()->route('all-sale2invoices');
-
         return redirect()->route('show-sales2',$request->pur2_id);
     }
 

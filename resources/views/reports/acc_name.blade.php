@@ -8,24 +8,26 @@
                     <div class="row mb-4">
                         <div class="col-lg-2">
                             <div class="form-group">
+                                <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
+
                                 <label class="col-form-label">From</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" value="<?php echo $previousDate; ?>">
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label" >To</label>
-                                <input type="date" class="form-control" >
+                                <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="col-form-label">Account Name</label>
-                                <select data-plugin-selecttwo class="form-control select2-js"  id="company_name" required disabled>
+                                <select data-plugin-selecttwo class="form-control select2-js"  id="company_name" required>
                                     <option value="" disabled selected>Select Account</option>
-                                    <!-- @foreach($coa as $key => $row)	
+                                    @foreach($coa as $key => $row)	
                                         <option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-                                    @endforeach -->
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

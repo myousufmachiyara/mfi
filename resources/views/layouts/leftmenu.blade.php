@@ -394,7 +394,7 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a class="nav-link" href="/rep-acc-name">
+                                <a class="nav-link" href="/rep-by-acc-name">
                                     Account Name
                                 </a>
                             </li>

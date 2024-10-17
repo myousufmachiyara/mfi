@@ -289,11 +289,6 @@
 
     Route::middleware(['auth'])->group(function () {
 
-        Route::get('/rep-acc-name', function () {
-            return view('reports.acc_name');
-        });
-
-
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/item-groups/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
@@ -354,4 +349,10 @@
         });
     });
 
+    // reporting
 
+    Route::middleware(['auth'])->group(function () {
+        
+        Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
+
+    });
