@@ -581,6 +581,7 @@
 					type: "GET",
 					url: "/purchase2/getunclosed/",
 					success: function(result){
+						console.log(result);
 						$.each(result, function(k,v){
 							var html="<tr>";
 							html+= "<td>"+v['prefix']+""+v['Sale_inv_no']+"</td>"
