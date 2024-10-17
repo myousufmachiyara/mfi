@@ -165,8 +165,8 @@
     <script>
         function getReport(){
 
-            fromDate=$('#fromDate');
-            toDate=$('#toDate');
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
 
             $.ajax({
                 type: "GET",
