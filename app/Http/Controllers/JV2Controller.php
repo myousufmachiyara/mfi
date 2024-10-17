@@ -129,7 +129,7 @@ class JV2Controller extends Controller
         {
             for($j=0;$j<$request->totalInvoices;$j++)
             {
-                if($request->rec_amount[$j]>0 && $request->rec_amount[$j]!==null)
+                if($request->rec_amount[$j]<0 && $request->rec_amount[$j]!==null)
                 {
                     $sales_ageing = new sales_ageing();
                     $sales_ageing->created_by = session('user_id');
