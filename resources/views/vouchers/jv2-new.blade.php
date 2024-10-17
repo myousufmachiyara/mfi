@@ -73,7 +73,7 @@
 															<input type="text" class="form-control" name="instrumentnumber[]">
 														</td>
 														<td>
-															<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+															<input type="date" class="form-control" name="chq_date[]" size=5 " >
 														</td>
 														<td>
 															<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
