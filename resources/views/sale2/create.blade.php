@@ -620,6 +620,7 @@
 						$('#disp_account_name').val(result['pur1']['account_name']);
 						$('#Cash_pur_name').val(result['pur1']['Cash_pur_name']);
 						$('#sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sale_inv_no']);
+						$('#show_sal_inv_no').val(result['pur1']['prefix']+""+result['pur1']['Sale_inv_no']);
 						$('#inducedID').val(result['pur1']['Sale_inv_no']);
 						$('#inducedPrefix').val(result['pur1']['prefix']);
 						$('#cash_pur_address').val(result['pur1']['cash_Pur_address']);
