@@ -63,7 +63,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <a style="margin-top: 2.5rem;" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</a>
+                                                    <a class="btn btn-primary" style="margin-top: 2rem;padding: 0.6rem 2.5rem;"><i class="fa fa-filter"></i> Filter</a>
                                                 </div>
                                                 <div class="col-lg-12 text-end">
                                                     <a class="mb-1 mt-1 me-1 btn btn-warning"><i class="fa fa-download"></i> Download</a>
