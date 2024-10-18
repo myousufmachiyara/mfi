@@ -62,8 +62,9 @@ class JV2Controller extends Controller
             ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
             ->get();
         
-        return view('vouchers.jv2', compact('jv2'));
-            }        
+            return view('vouchers.jv2', compact('jv2'));
+            
+        }        
 
 
     public function create(Request $request)
