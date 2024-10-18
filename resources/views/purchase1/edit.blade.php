@@ -383,7 +383,7 @@
 
 		netTotal = total + convance_charges + labour_charges - bill_discount;
 		netTotal = netTotal.toFixed(0);
-		FormattednetTotal = formatNumberWithCommas(netTotal).toFixed(0);
+		FormattednetTotal = formatNumberWithCommas(netTotal);
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 	}
  
