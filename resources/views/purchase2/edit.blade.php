@@ -353,7 +353,7 @@
 		var bill_discount = Number($('#bill_discount').val());
 
 		netAmount = totalAmount + convance_charges +  labour_charges - bill_discount;
-		FormattednetTotal = formatNumberWithCommas(netAmount);
+		FormattednetTotal = formatNumberWithCommas(netAmount.toFixed(0));
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 
 		document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
