@@ -208,7 +208,6 @@ $('#columnSearch').on('keyup change', function() {
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();
     var currentPassword=$('#current_passowrd').val();
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
