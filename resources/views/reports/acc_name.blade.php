@@ -265,7 +265,7 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html+= "<td>"+v['pur_id']+"</td>"
-                            html+= "<td>"+v['pur_date']+"</td>"
+                            html+= "<td>"+v['date']+"</td>"
                             html+= "<td>"+v['item_cod']+"</td>"
                             html+= "<td>"+v['remarks']+"</td>"
                             html+= "<td>"+v['pur_qty']+"</td>"
