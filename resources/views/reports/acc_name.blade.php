@@ -175,6 +175,21 @@
             acc_id=$('#acc_id').val();
 
             if(tabId=="#GL"){
+
+            }
+            else if(tabId=="#GL_R"){
+            }
+            else if(tabId=="#sale_age"){
+            }
+            else if(tabId=="#pur_age"){
+            }
+            else if(tabId=="#sale_1"){
+            }
+            else if(tabId=="#sale_2"){
+            }
+            else if(tabId=="#comb_sale"){
+            }
+            else if(tabId=="#purchase_1"){
                 var table = document.getElementById('glTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -209,20 +224,6 @@
                         alert("error");
                     }
                 });
-            }
-            else if(tabId=="#GL_R"){
-            }
-            else if(tabId=="#sale_age"){
-            }
-            else if(tabId=="#pur_age"){
-            }
-            else if(tabId=="#sale_1"){
-            }
-            else if(tabId=="#sale_2"){
-            }
-            else if(tabId=="#comb_sale"){
-            }
-            else if(tabId=="#purchase_1"){
             }
             else if(tabId=="#purchase_2"){
             }
