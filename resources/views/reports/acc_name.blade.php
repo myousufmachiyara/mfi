@@ -78,31 +78,7 @@
                         </ul>
                         <div class="tab-content">
                             <div id="GL" class="tab-pane">
-                                <div class="row form-group pb-3">
-                                    <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success"><i class="fa fa-file-excel"></i> Excel</a>   
-                                    </div>
-                                    <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Date</th>
-                                                    <th>Item Name</th>
-                                                    <th>Remarks</th>
-                                                    <th>Weight</th>
-                                                    <th>Price</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="glTbleBody">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div id="GL_R" class="tab-pane">
                                 <p>GL_R</p>
@@ -129,8 +105,31 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
                             <div id="purchase_1" class="tab-pane">
-                                <p>Sale Report</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            <div class="row form-group pb-3">
+                                <div class="col-lg-12 text-end">
+                                    <a class="mb-1 mt-1 me-1 btn btn-warning"><i class="fa fa-download"></i> Download</a>
+                                    <a class="mb-1 mt-1 me-1 btn btn-danger"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                    <a class="mb-1 mt-1 me-1 btn btn-success"><i class="fa fa-file-excel"></i> Excel</a>   
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <table class="table table-bordered table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Item Name</th>
+                                                <th>Remarks</th>
+                                                <th>Weight</th>
+                                                <th>Price</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="P1TbleBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             </div>
                             <div id="purchase_2" class="tab-pane">
                                 <p>JV</p>
@@ -195,7 +194,7 @@
                     table.deleteRow(0);
                 }
                 url="/rep-by-acc-name/pur1";
-                tableID="#glTbleBody";
+                tableID="#P1TbleBody";
 
                 $.ajax({
                     type: "GET",
