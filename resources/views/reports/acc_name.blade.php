@@ -230,15 +230,15 @@
                     success: function(result){
                         $.each(result, function(k,v){
                             var html="<tr>";
-                            html+= "<td>"+(k+1)+"</td>"
-                            html+= "<td>"+v['DATE']+"</td>"
-                            html+= "<td>"+v['NO']+"</td>"
-                            html+= "<td>"+v['pur_bill_no']+"</td>"
-                            html+= "<td>"+v['ac2']+"</td>"
-                            html+= "<td>"+v['sal_inv']+"</td>"
-                            html+= "<td>"+v['remarks']+"</td>"
-                            html+= "<td>"+v['cr_amt']+"</td>"
-                            html+="</tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['DATE'] ? v['DATE'] : "") + "</td>";
+                            html += "<td>" + (v['NO'] ? v['NO'] : "") + "</td>";
+                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
+                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html +="</tr>";
                             $(tableID).append(html);
                         });
                     },
@@ -266,15 +266,15 @@
                     success: function(result){
                         $.each(result, function(k,v){
                             var html="<tr>";
-                            html+= "<td>"+(k+1)+"</td>"
-                            html+= "<td>"+v['date']+"</td>"
-                            html+= "<td>"+v['no']+"</td>"
-                            html+= "<td>"+v['pur_ord_no']+"</td>"
-                            html+= "<td>"+v['ac2']+"</td>"
-                            html+= "<td>"+v['sal_inv']+"</td>"
-                            html+= "<td>"+v['remarks']+"</td>"
-                            html+= "<td>"+v['cr_amt']+"</td>"
-                            html+="</tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['date'] ? v['date'] : "") + "</td>";
+                            html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
+                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html +="</tr>";
                             $(tableID).append(html);
                         });
                     },
