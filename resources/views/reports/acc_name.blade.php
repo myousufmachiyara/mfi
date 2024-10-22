@@ -172,7 +172,7 @@
         });
 
         function tabChanged(tabId) {
-            if()
+          
             // var table = document.getElementById('glTbleBody');
             // while (table.rows.length > 0) {
             //     table.deleteRow(0);
