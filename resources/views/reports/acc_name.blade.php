@@ -36,7 +36,7 @@
                     </div>   
                     <div class="tabs">
                         <ul class="nav nav-tabs">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">General Ledger</a>
                             </li>
                             <li class="nav-item">
@@ -207,7 +207,7 @@
         });
 
         function tabChanged(tabId) {
-            console.log('Tab changed to:', tabId);
+            alert('Tab changed to:', tabId);
             // Add your logic here
         }
     </script>
