@@ -265,7 +265,7 @@
                     success: function(result){
                         $.each(result, function(k,v){
                             var html="<tr>";
-                            html+= "<td>"+k+"</td>"
+                            html+= "<td>"+(k+1)+"</td>"
                             html+= "<td>"+v['date']+"</td>"
                             html+= "<td>"+v['no']+"</td>"
                             html+= "<td>"+v['pur_ord_no']+"</td>"
