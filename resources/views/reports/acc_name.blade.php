@@ -169,6 +169,7 @@
         });
 
         function tabChanged(tabId) {
+            alert("function call");
             fromDate=$('#fromDate').val();
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
