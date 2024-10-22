@@ -168,13 +168,12 @@
         });
 
         function tabChanged(tabId) {
-            alert("function call");
+            console.log(tabId);
             fromDate=$('#fromDate').val();
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
             if(tabId=="#GL"){
-
             }
             else if(tabId=="#GL_R"){
             }
@@ -189,7 +188,7 @@
             else if(tabId=="#comb_sale"){
             }
             else if(tabId=="#purchase_1"){
-                var table = document.getElementById('glTbleBody');
+                var table = document.getElementById('P1TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
@@ -204,7 +203,6 @@
                         toDate: toDate,
                         acc_id:acc_id,
                     }, 
-
                     success: function(result){
                         $.each(result, function(k,v){
                             var html="<tr>";
