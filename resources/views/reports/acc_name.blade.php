@@ -77,7 +77,7 @@
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="GL" class="tab-pane active">
+                            <div id="GL" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-12 text-end">
                                         <a class="mb-1 mt-1 me-1 btn btn-warning"><i class="fa fa-download"></i> Download</a>
@@ -161,52 +161,54 @@
 	</body>
     <script>
         function getReport(){
-            var table = document.getElementById('glTbleBody');
-            while (table.rows.length > 0) {
-                table.deleteRow(0);
-            }
-
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
-
-            $.ajax({
-                type: "GET",
-                url: "/rep-by-acc-name/pur1",
-                data:{
-                    fromDate: fromDate,
-                    toDate: toDate,
-                    acc_id:acc_id,
-                }, 
-
-                success: function(result){
-                    $.each(result, function(k,v){
-                        var html="<tr>";
-                        html+= "<td>"+v['pur_id']+"</td>"
-                        html+= "<td>"+v['pur_date']+"</td>"
-                        html+= "<td>"+v['item_cod']+"</td>"
-                        html+= "<td>"+v['remarks']+"</td>"
-                        html+= "<td>"+v['pur_qty']+"</td>"
-                        html+= "<td>"+v['pur_price']+"</td>"
-                        html+= "<td>"+v['pur_price']+"</td>"
-                        html+="</tr>";
-                        $('#glTbleBody').append(html);
-                    });
-                },
-                error: function(){
-                    alert("error");
-                }
-            });
+            
         }
 
         document.querySelectorAll('.nav-link').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
-                const tabId = this.getAttribute('data-bs-target');
+                var tabId = this.getAttribute('data-bs-target');
                 tabChanged(tabId);
             });
         });
 
         function tabChanged(tabId) {
+            if()
+            // var table = document.getElementById('glTbleBody');
+            // while (table.rows.length > 0) {
+            //     table.deleteRow(0);
+            // }
+
+            // fromDate=$('#fromDate').val();
+            // toDate=$('#toDate').val();
+            // acc_id=$('#acc_id').val();
+
+            // $.ajax({
+            //     type: "GET",
+            //     url: "/rep-by-acc-name/pur1",
+            //     data:{
+            //         fromDate: fromDate,
+            //         toDate: toDate,
+            //         acc_id:acc_id,
+            //     }, 
+
+            //     success: function(result){
+            //         $.each(result, function(k,v){
+            //             var html="<tr>";
+            //             html+= "<td>"+v['pur_id']+"</td>"
+            //             html+= "<td>"+v['pur_date']+"</td>"
+            //             html+= "<td>"+v['item_cod']+"</td>"
+            //             html+= "<td>"+v['remarks']+"</td>"
+            //             html+= "<td>"+v['pur_qty']+"</td>"
+            //             html+= "<td>"+v['pur_price']+"</td>"
+            //             html+= "<td>"+v['pur_price']+"</td>"
+            //             html+="</tr>";
+            //             $('#glTbleBody').append(html);
+            //         });
+            //     },
+            //     error: function(){
+            //         alert("error");
+            //     }
+            // });
             alert('Tab changed to:', tabId);
             // Add your logic here
         }
