@@ -291,5 +291,11 @@
             else if(tabId=="#pur_ret"){
             }
         }
+        function getReport() {
+            const activeTabLink = document.querySelector('.nav-link.active');
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
     </script>
 </html>
