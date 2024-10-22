@@ -288,7 +288,6 @@
     // });
 
     Route::middleware(['auth'])->group(function () {
-
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::post('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
@@ -352,9 +351,7 @@
     });
 
     // reporting
-
     Route::middleware(['auth'])->group(function () {
-
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name');
     });
