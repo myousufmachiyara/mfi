@@ -17,7 +17,7 @@ class ReportingController extends Controller
     }
 
     public function purchase1(Request $request){
-        $pur_by_account = pur_by_account::where('ac_cod',$request->acc_id)
+        $pur_by_account = pur_by_account::where('ac1',$request->acc_id)
         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->get();
 

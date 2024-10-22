@@ -115,12 +115,13 @@
                                         <table class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Date</th>
-                                                    <th>Item Name</th>
+                                                    <th>S/No</th>
+                                                    <th>Sales Date</th>
+                                                    <th>Inv No.</th>
+                                                    <th>Mill No.</th>
+                                                    <th>Dispatch To Party</th>
+                                                    <th>Sale Inv</th>
                                                     <th>Remarks</th>
-                                                    <th>Weight</th>
-                                                    <th>Price</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
@@ -229,13 +230,14 @@
                     success: function(result){
                         $.each(result, function(k,v){
                             var html="<tr>";
-                            html+= "<td>"+v['pur_id']+"</td>"
-                            html+= "<td>"+v['pur_date']+"</td>"
-                            html+= "<td>"+v['item_cod']+"</td>"
+                            html+= "<td>"+(k+1)+"</td>"
+                            html+= "<td>"+v['DATE']+"</td>"
+                            html+= "<td>"+v['NO']+"</td>"
+                            html+= "<td>"+v['pur_bill_no']+"</td>"
+                            html+= "<td>"+v['ac2']+"</td>"
+                            html+= "<td>"+v['sal_inv']+"</td>"
                             html+= "<td>"+v['remarks']+"</td>"
-                            html+= "<td>"+v['pur_qty']+"</td>"
-                            html+= "<td>"+v['pur_price']+"</td>"
-                            html+= "<td>"+v['pur_price']+"</td>"
+                            html+= "<td>"+v['cr_amt']+"</td>"
                             html+="</tr>";
                             $(tableID).append(html);
                         });
