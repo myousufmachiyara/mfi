@@ -291,6 +291,8 @@
 
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::post('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
+        Route::post('/change-user-password', [App\Http\Controllers\UsersController::class, 'updateUserPassowrd'])->name('change-user-password');
         Route::get('/item-groups/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
         Route::get('/items/detail', [App\Http\Controllers\ItemsController::class, 'getItemDetails'])->name('get-item-details');
         Route::get('/item2/detail', [App\Http\Controllers\Item2Controller::class, 'getItemDetails'])->name('get-item-details-2');

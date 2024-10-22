@@ -112,7 +112,7 @@
                                 <p>Purchase Report</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
-                            <div id="agpur_agee" class="tab-pane">
+                            <div id="pur_age" class="tab-pane">
                                 <p>Ageing</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
@@ -161,7 +161,6 @@
 	</body>
     <script>
         function getReport(){
-
             var table = document.getElementById('glTbleBody');
             while (table.rows.length > 0) {
                 table.deleteRow(0);
@@ -198,6 +197,18 @@
                     alert("error");
                 }
             });
+        }
+
+        document.querySelectorAll('.nav-link').forEach(tabLink => {
+            tabLink.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-bs-target');
+                tabChanged(tabId);
+            });
+        });
+
+        function tabChanged(tabId) {
+            console.log('Tab changed to:', tabId);
+            // Add your logic here
         }
     </script>
 </html>

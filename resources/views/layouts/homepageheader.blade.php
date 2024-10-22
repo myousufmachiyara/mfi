@@ -28,12 +28,11 @@
 			<div class="dropdown-menu">
 				<ul class="list-unstyled">
 					<li class="divider"></li>
-
+					<!-- <li>
+						<a role="menuitem" tabindex="-1" href="#changeUserDetails" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-user"></i> Profile</a>
+					</li> -->
 					<li>
-						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
-					</li>
-					<li>
-						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
+						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
 					</li>
 					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
@@ -42,4 +41,43 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+			@csrf
+			<header class="card-header">
+				<h2 class="card-title">Change Password</h2>
+			</header>
+			<div class="card-body">
+				<div class="row form-group">    
+					<div class="col-lg-6 mb-2">
+						<label>Current Password</label>
+						<input type="password" class="form-control" placeholder="Current Password" id="current_passowrd" name="current_passowrd" required>
+					</div> 
+					<div class="col-lg-6 mb-2">
+						<label>New Password</label>
+						<input type="password" class="form-control" placeholder="New Password" name="new_password" required>
+					</div>
+				</div>
+			</div>
+			<footer class="card-footer">
+				<div class="row">
+					<div class="col-md-12 text-end">
+						<button type="submit" class="btn btn-primary">Change Password</button>
+						<button class="btn btn-default modal-dismiss">Cancel</button>
+					</div>
+				</div>
+			</footer>
+		</form>
+	</div>
 </header>
+<script>
+	$(document).ready(function() {
+		$(window).keydown(function(event){
+			if(event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+</script>

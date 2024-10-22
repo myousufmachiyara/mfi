@@ -373,4 +373,27 @@ class UsersController extends Controller
     
         return 'Unable to retrieve MAC Address';
     }
+
+    public function getUserPassword(Request $request){
+        $user_password = users::where('id', session('user_id'))->value('password');
+        if (Hash::check($request->password, $user_password)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public function updateUserPassowrd(Request $request){
+        $user = users::where('id', session('user_id'))
+        ->select('password')
+        ->first();
+
+        if ($request->has('new_password') && $request->new_password) {
+            $user->password=Hash::make($request->new_password);
+        }
+
+        users::where('id', session('user_id'))->update([
+            'password' => $user->password,
+        ]);
+        return redirect('/home');
+    }
 }
