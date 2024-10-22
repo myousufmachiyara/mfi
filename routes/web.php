@@ -288,14 +288,10 @@
     // });
 
     Route::middleware(['auth'])->group(function () {
-
-        Route::get('/rep-acc-name', function () {
-            return view('reports.acc_name');
-        });
-
-
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::get('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
+        Route::post('/change-user-password', [App\Http\Controllers\UsersController::class, 'updateUserPassowrd'])->name('change-user-password');
         Route::get('/item-groups/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
         Route::get('/items/detail', [App\Http\Controllers\ItemsController::class, 'getItemDetails'])->name('get-item-details');
         Route::get('/item2/detail', [App\Http\Controllers\Item2Controller::class, 'getItemDetails'])->name('get-item-details-2');
@@ -354,4 +350,9 @@
         });
     });
 
-
+    // reporting
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\ReportingController::class, 'purchase2'])->name('pur2-rep-by-acc-name');
+    });

@@ -503,7 +503,7 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow_btn()" name ="account_cod[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow()" name ="account_cod[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									@foreach($acc as $key => $row)	
                                         '<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>'+
@@ -512,7 +512,7 @@
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
-			cell5.innerHTML  = '<input type="date" class="form-control" size="5" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
+			cell5.innerHTML  = '<input type="date" class="form-control" size="5" name="chq_date[]"  >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step=".00001">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step=".00001">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';

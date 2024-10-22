@@ -11,7 +11,7 @@
 								<header class="card-header" style="display: flex;justify-content: space-between;">
 									<h2 class="card-title">New Journal Voucher 2</h2>
 									<div class="card-actions">
-										<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
+										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
 									</div>
 								</header>
 
@@ -73,7 +73,7 @@
 															<input type="text" class="form-control" name="instrumentnumber[]">
 														</td>
 														<td>
-															<input type="date" class="form-control" name="chq_date[]" size=5 value="<?php echo date('Y-m-d'); ?>" >
+															<input type="date" class="form-control" name="chq_date[]" size=5 " >
 														</td>
 														<td>
 															<input type="number" class="form-control" name="debit[]" onchange="totalDebit()" required value="0" step="any">
@@ -368,7 +368,7 @@
 			cell2.innerHTML  = '<input type="text" class="form-control" name="remarks[]" >';
 			cell3.innerHTML  = '<input type="text" class="form-control" name="bank_name[]" >';
 			cell4.innerHTML  = '<input type="text" class="form-control" name="instrumentnumber[]">';
-			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  value="<?php echo date('Y-m-d'); ?>" >';
+			cell5.innerHTML  = '<input type="date" class="form-control" name="chq_date[]"  >';
 			cell6.innerHTML  = '<input type="number" class="form-control" name="debit[]"  required value="0" onchange="totalDebit()" step="any">';
 			cell7.innerHTML  = '<input type="number" class="form-control" name="credit[]"  required value="0" onchange="totalCredit()" step="any">';
 			cell8.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" ><i class="fas fa-times"></i></button>';

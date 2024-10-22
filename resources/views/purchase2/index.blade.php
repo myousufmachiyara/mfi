@@ -78,16 +78,17 @@
                                                     <td>{{$row->sales_against}}</td>
                                                     <td>{{$row->group_name}}</td>
                                                     <td>{{$row->weight_sum}}</td>
-                                                    <td>{{$row->total_bill}}</td>
+                                                    <td>{{number_format(round($row->total_bill), 0)}}</td>
                                                     <td>{{$row->ConvanceCharges}}</td>
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
                                                     @php ($net_amount=$row->total_bill+$row->ConvanceCharges+$row->LaborCharges-$row->Bill_discount)
-                                                    @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
+                                                    {{-- @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
                                                         <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
-                                                    @endif
+                                                    @endif --}}
+                                                    <td><strong style="font-size:15px">{{ number_format(round($net_amount), 0) }}</strong></td>
                                                     @if($row->sales_against!=null) 
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                     @else

@@ -204,3 +204,34 @@ $('#columnSearch').on('keyup change', function() {
     var columnIndex = $('#columnSelect').val();
     table.column(columnIndex).search(this.value).draw();
 });
+
+$('#changePasswordForm').on('submit', function(e){
+    e.preventDefault();
+    var currentPassword=$('#current_passowrd').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/validate-user-password/',
+        data: {
+            'password':currentPassword,
+        },
+        success: function(response){
+            console.log(response);
+            if(response==1){
+                var form = document.getElementById('changePasswordForm');
+                form.submit();
+            }
+            else{
+                alert("Current Password is not Correct")
+            }
+        },
+        error: function(){
+            alert("error");
+        }
+    });
+});	
