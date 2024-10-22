@@ -202,7 +202,7 @@
                             html+= "<td>"+v['pur_price']+"</td>"
                             html+= "<td>"+v['pur_price']+"</td>"
                             html+="</tr>";
-                            $('tableID').append(html);
+                            $(tableID).append(html);
                         });
                     },
                     error: function(){
