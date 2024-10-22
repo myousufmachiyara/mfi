@@ -223,6 +223,39 @@
                 });
             }
             else if(tabId=="#purchase_2"){
+                var table = document.getElementById('P2TbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/pur2";
+                tableID="#P2TbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    success: function(result){
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html+= "<td>"+v['pur_id']+"</td>"
+                            html+= "<td>"+v['pur_date']+"</td>"
+                            html+= "<td>"+v['item_cod']+"</td>"
+                            html+= "<td>"+v['remarks']+"</td>"
+                            html+= "<td>"+v['pur_qty']+"</td>"
+                            html+= "<td>"+v['pur_price']+"</td>"
+                            html+= "<td>"+v['pur_price']+"</td>"
+                            html+="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
             }
             else if(tabId=="#comb_purchase"){
             }
