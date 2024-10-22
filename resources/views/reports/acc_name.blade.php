@@ -160,57 +160,79 @@
         @include('../layouts.footerlinks')
 	</body>
     <script>
-        function getReport(){
-            
-        }
 
         document.querySelectorAll('.nav-link').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
-                var tabId = this.getAttribute('data-bs-target');
+                tabId = this.getAttribute('data-bs-target');
                 tabChanged(tabId);
             });
         });
 
         function tabChanged(tabId) {
-          
-            // var table = document.getElementById('glTbleBody');
-            // while (table.rows.length > 0) {
-            //     table.deleteRow(0);
-            // }
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
 
-            // fromDate=$('#fromDate').val();
-            // toDate=$('#toDate').val();
-            // acc_id=$('#acc_id').val();
+            if(tabId=="#GL"){
+                var table = document.getElementById('glTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/pur1";
+                tableID="#glTbleBody";
 
-            // $.ajax({
-            //     type: "GET",
-            //     url: "/rep-by-acc-name/pur1",
-            //     data:{
-            //         fromDate: fromDate,
-            //         toDate: toDate,
-            //         acc_id:acc_id,
-            //     }, 
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
 
-            //     success: function(result){
-            //         $.each(result, function(k,v){
-            //             var html="<tr>";
-            //             html+= "<td>"+v['pur_id']+"</td>"
-            //             html+= "<td>"+v['pur_date']+"</td>"
-            //             html+= "<td>"+v['item_cod']+"</td>"
-            //             html+= "<td>"+v['remarks']+"</td>"
-            //             html+= "<td>"+v['pur_qty']+"</td>"
-            //             html+= "<td>"+v['pur_price']+"</td>"
-            //             html+= "<td>"+v['pur_price']+"</td>"
-            //             html+="</tr>";
-            //             $('#glTbleBody').append(html);
-            //         });
-            //     },
-            //     error: function(){
-            //         alert("error");
-            //     }
-            // });
-            alert('Tab changed to:', tabId);
-            // Add your logic here
+                    success: function(result){
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html+= "<td>"+v['pur_id']+"</td>"
+                            html+= "<td>"+v['pur_date']+"</td>"
+                            html+= "<td>"+v['item_cod']+"</td>"
+                            html+= "<td>"+v['remarks']+"</td>"
+                            html+= "<td>"+v['pur_qty']+"</td>"
+                            html+= "<td>"+v['pur_price']+"</td>"
+                            html+= "<td>"+v['pur_price']+"</td>"
+                            html+="</tr>";
+                            $('tableID').append(html);
+                        });
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
+            }
+            else if(tabId=="#GL_R"){
+            }
+            else if(tabId=="#sale_age"){
+            }
+            else if(tabId=="#pur_age"){
+            }
+            else if(tabId=="#sale_1"){
+            }
+            else if(tabId=="#sale_2"){
+            }
+            else if(tabId=="#comb_sale"){
+            }
+            else if(tabId=="#purchase_1"){
+            }
+            else if(tabId=="#purchase_2"){
+            }
+            else if(tabId=="#comb_purchase"){
+            }
+            else if(tabId=="#JV"){
+            }
+            else if(tabId=="#sal_ret"){
+            }
+            else if(tabId=="#pur_ret"){
+            }
         }
     </script>
 </html>
