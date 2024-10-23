@@ -215,7 +215,7 @@ $('#changePasswordForm').on('submit', function(e){
     });
 
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: '/validate-user-password/',
         data: {
             'password':currentPassword,
