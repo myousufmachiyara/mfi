@@ -418,6 +418,48 @@
                                     Daily Register
                                 </a>
                             </li>	
+
+                            <li>
+                                <a class="nav-link" href="#">
+                                    Commisions
+                                </a>
+                            </li>
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i style="font-size:16px"></i>
+                                    <span>GoDown</span>  
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Group
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-parent">
+                                <a class="nav-link" href="#">
+                                    <i style="font-size:16px"></i>
+                                    <span>Factory</span>  
+                                </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Group
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>	
