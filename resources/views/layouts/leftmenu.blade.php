@@ -389,8 +389,8 @@
 
                     <li class="nav-parent">
                         <a class="nav-link" href="#">
-                            <i style="font-size:16px"class="fa fa-file-pdf"></i>
-                            <span>Reports</span>  
+                            <i class="fa fa-file-pdf" style="font-size:16px;"></i>
+                            <span>Reports</span>
                         </a>
                         <ul class="nav nav-children">
                             <li>
@@ -417,17 +417,17 @@
                                 <a class="nav-link" href="#">
                                     Daily Register
                                 </a>
-                            </li>	
-
+                            </li>
                             <li>
                                 <a class="nav-link" href="#">
-                                    Commisions
+                                    Commissions
                                 </a>
                             </li>
+                    
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    <i style="font-size:16px"></i>
-                                    <span>GoDown</span>  
+                                    <i class="fa fa-warehouse" style="font-size:16px;"></i>
+                                    <span>GoDown</span>
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
@@ -442,10 +442,11 @@
                                     </li>
                                 </ul>
                             </li>
+                    
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    <i style="font-size:16px"></i>
-                                    <span>Factory</span>  
+                                    <i class="fa fa-industry" style="font-size:16px;"></i>
+                                    <span>Factory</span>
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
@@ -462,6 +463,7 @@
                             </li>
                         </ul>
                     </li>
+                    
                 </ul>	
             </nav>
 		</div>
