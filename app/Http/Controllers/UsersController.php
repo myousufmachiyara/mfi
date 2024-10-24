@@ -375,6 +375,7 @@ class UsersController extends Controller
     }
 
     public function getUserPassword(Request $request){
+        return ('Hello');
         $user_password = users::where('id', session('user_id'))->value('password');
         if (Hash::check($request->password, $user_password)) {
             return 1;
