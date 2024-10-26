@@ -110,9 +110,9 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">From: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_from"></span>
                                                 <span style="color:#17365D">To: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_to"></span>
                                             </h4>
                                             
                                             <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
@@ -122,7 +122,7 @@
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -250,6 +250,11 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
+                        $('#pur1_from').text(fromDate);
+                        $('#pur1_to').text(toDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#pur1_acc').text(selectedAcc);
+
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
