@@ -336,7 +336,7 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
-                       
+                        console.log(result);
                     },
                     error: function(){
                         alert("error");
