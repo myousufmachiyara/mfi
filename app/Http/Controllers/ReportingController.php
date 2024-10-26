@@ -32,7 +32,15 @@ class ReportingController extends Controller
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
 
-        return Excel::download(new Purchase1Export($pur_by_account), 'custom_data.xlsx');
+        $accId = $request->acc_id;
+        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+        
+        // Construct the filename
+        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+
+        // Return the download response with the dynamic filename
+        return Excel::download(new Purchase1Export($pur_by_account), $filename);
     }
 
     public function purchase2(Request $request){

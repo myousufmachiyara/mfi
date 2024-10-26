@@ -23,13 +23,15 @@ class Purchase1Export implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Sales Date',
-            'Inv No.',
-            'Mill No.',
-            'Dispatch To Party',
-            'Sale Inv',
-            'Remarks',
-            'Amount',
+            'Ac1',
+            'Ac2',
+            'Date',
+            'NO',
+            'remarks',
+            'cr amount',
+            'saler address',
+            'pur_bill_no',
+            'sal_inv',
         ];
     }
 }
