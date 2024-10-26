@@ -348,5 +348,16 @@
             }
 
         }
+
+        function downloadPDF(tabName){
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
+
+            if (tabName === "purchase1") {
+                window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+        }
     </script>
 </html>
