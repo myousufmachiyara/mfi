@@ -46,6 +46,7 @@ class ReportingController extends Controller
 
     public function purchase1PDF(Request $request)
     {
+        die("hello");
         $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
@@ -150,7 +151,6 @@ class ReportingController extends Controller
         }
 
         $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
-
     }
 
     public function purchase2(Request $request){
