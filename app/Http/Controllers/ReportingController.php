@@ -55,8 +55,8 @@ class ReportingController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('JV2 # '.$pur_by_account['']);
-        $pdf->SetSubject('JV2 # '.$pur_by_account['']);
+        // $pdf->SetTitle('JV2 # '.$pur_by_account['']);
+        // $pdf->SetSubject('JV2 # '.$pur_by_account['']);
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
 
