@@ -90,6 +90,7 @@ class ReportingController extends Controller
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;"></span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> To Date: <span style="color:black;font-weight:normal;"></span></td>';
         $html .= '</tr>';
         $html .= '</table>';
