@@ -25,7 +25,12 @@ class Purchase1Export implements FromCollection, WithHeadings
         return [
             'Column 1',
             'Column 2',
-            // Add your actual column names here
+            'Column 3',
+            'Column 4',
+            'Column 5',
+            'Column 6',
+            'Column 7',
+            'Column 8',
         ];
     }
 }
