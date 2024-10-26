@@ -357,8 +357,8 @@
         // Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name');
         Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\ReportingController::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
-        Route::get('/rep-by-acc-name/pur1/PDF', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name-PDF');
-        Route::get('/rep-by-acc-name/pur1/download', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name-download');
+        Route::get('/rep-by-acc-name/pur1/PDF', [App\Http\Controllers\ReportingController::class, 'purchase1PDF'])->name('pur1-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/pur1/download', [App\Http\Controllers\ReportingController::class, 'purchase1Download'])->name('pur1-rep-by-acc-name-download');
 
         // Purchase 2
         Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\ReportingController::class, 'purchase2'])->name('pur2-rep-by-acc-name');
