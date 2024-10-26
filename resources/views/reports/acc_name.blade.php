@@ -218,6 +218,8 @@
             fromDate=$('#fromDate').val();
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
+            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
+            const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#GL"){
             }
@@ -250,8 +252,8 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
-                        $('#pur1_from').text(fromDate);
-                        $('#pur1_to').text(toDate);
+                        $('#pur1_from').text(formattedfromDate);
+                        $('#pur1_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#pur1_acc').text(selectedAcc);
 
