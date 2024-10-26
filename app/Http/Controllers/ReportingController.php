@@ -55,8 +55,8 @@ class ReportingController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('JV2 # '.$jv2['jv_no']);
-        $pdf->SetSubject('JV2 # '.$jv2['jv_no']);
+        $pdf->SetTitle('JV2 # '.$pur_by_account['jv_no']);
+        $pdf->SetSubject('JV2 # '.$pur_by_account['jv_no']);
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
 
@@ -82,12 +82,12 @@ class ReportingController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Voucher No: <span style="text-decoration: underline;color:black;">'.$jv2['jv_no'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($jv2['jv_date'])->format('d-m-y') . '</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Voucher No: <span style="text-decoration: underline;color:black;">'.$pur_by_account['jv_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($pur_by_account['jv_date'])->format('d-m-y') . '</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="10%" style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Remarks:</td>';
-        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$jv2['narration'].'</td>';
+        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$pur_by_account['narration'].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -111,7 +111,7 @@ class ReportingController extends Controller
         $total_debit=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($jv2_items as $items) {
+        foreach ($pur_by_account as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
@@ -149,7 +149,7 @@ class ReportingController extends Controller
             $currentY = $pdf->GetY();
         }
 
-        $pdf->Output('jv2_'.$jv2['jv_no'].'.pdf', 'I');
+        $pdf->Output('jv2_'.$pur_by_account['jv_no'].'.pdf', 'I');
     }
 
     public function purchase2(Request $request){
