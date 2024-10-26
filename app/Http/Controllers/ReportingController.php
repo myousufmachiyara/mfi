@@ -55,8 +55,8 @@ class ReportingController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account'.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account'.$request->acc_id);
+        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
         $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
