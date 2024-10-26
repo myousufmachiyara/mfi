@@ -104,9 +104,9 @@ class ReportingController extends Controller
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
         $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Dispatch To Party</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Sale Inv</th>';
-        $html .= '<th style="width:18%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Sale Inv</th>';
+        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
