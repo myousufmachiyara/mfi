@@ -115,10 +115,10 @@
                                                 <span style="font-weight:400; color:black;" class="value"></span>
                                             </h4>
                                             
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                            <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">To: &nbsp;</span>
                                                 <span style="font-weight:400; color:black;" class="value"></span>
-                                            </h4>
+                                            </h4> -->
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
