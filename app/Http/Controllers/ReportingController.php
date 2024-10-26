@@ -121,34 +121,35 @@ class ReportingController extends Controller
         $pdf->setTableHtml($html);
 
         $count=1;
-        $total_credit=0;
-        $total_debit=0;
+        $totalAmount=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
         foreach ($pur_by_account as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:20%;">'.$items[''].'</td>';
-                $html .= '<td style="width:20%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $total_debit=$total_debit+$items[''];
-                $total_credit=$total_credit+$items[''];
+                $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
             else{
                 $html .= '<tr>';
-                $html .= '<td style="width:20%;">'.$items[''].'</td>';
-                $html .= '<td style="width:20%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $html .= '<td style="width:15%;">'.$items[''].'</td>';
-                $total_debit=$total_debit+$items[''];
-                $total_credit=$total_credit+$items[''];
+                $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
             $count++;
