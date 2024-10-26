@@ -99,7 +99,7 @@ class ReportingController extends Controller
 
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
-        $html .= '<th style="width:3%;color:#17365D;font-weight:bold;">S/No</th>';
+        $html .= '<th style="width:5%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Sales Date</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
