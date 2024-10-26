@@ -58,7 +58,7 @@ class ReportingController extends Controller
         // $pdf->SetTitle('JV2 # '.$pur_by_account['']);
         // $pdf->SetSubject('JV2 # '.$pur_by_account['']);
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
-        $pdf->setPageOrientation('L');
+        $pdf->setPageOrientation('P');
 
         // Add a page
         $pdf->AddPage();
