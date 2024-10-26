@@ -9,6 +9,7 @@ use App\Models\pipe_pur_by_account;
 use App\Exports\Purchase1Export;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
+use Carbon\Carbon;
 
 class ReportingController extends Controller
 {
@@ -50,6 +51,11 @@ class ReportingController extends Controller
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
 
+        $currentDate = Carbon::now();
+
+        // Format the date if needed
+        $formattedDate = $currentDate->format('d-m-y');
+        
         $pdf = new MyPDF();
 
         // Set document information
@@ -83,7 +89,7 @@ class ReportingController extends Controller
         $html = '<table>';
         $html .= '<tr>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="text-decoration: underline;color:black;"></span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;"></span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;"> '.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="text-decoration: underline;color:black;"></span></td>';
