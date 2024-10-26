@@ -32,7 +32,6 @@ class ReportingController extends Controller
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
 
-        return $pur_by_account;
         return Excel::download(new Purchase1Export($pur_by_account), 'custom_data.xlsx');
     }
 
