@@ -326,22 +326,8 @@
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
-            if(tabName=="purchase1"){
-                $.ajax({
-                    type: "GET",
-                    url: '/rep-by-acc-name/pur1/excel',
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
-                    success: function(result){
-                        console.log(result);
-                    },
-                    error: function(){
-                        alert("error");
-                    }
-                });
+            if (tabName === "purchase1") {
+                window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
     </script>
