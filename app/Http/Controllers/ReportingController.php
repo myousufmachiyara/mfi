@@ -46,7 +46,6 @@ class ReportingController extends Controller
 
     public function purchase1PDF(Request $request)
     {
-        die("hello");
         $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
