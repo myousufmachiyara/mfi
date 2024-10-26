@@ -106,7 +106,6 @@
                             </div>
                             <div id="purchase_1" class="tab-pane">
                                 <div class="row form-group pb-3">
-
                                     <div class="col-lg-12 ">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
@@ -116,10 +115,10 @@
                                                 <span style="font-weight:400; color:black;" class="value"></span>
                                             </h4>
                                             
-                                            {{-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">To: &nbsp;</span>
                                                 <span style="font-weight:400; color:black;" class="value"></span>
-                                            </h4> --}}
+                                            </h4>
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
@@ -131,7 +130,7 @@
                                     <div class="col-lg-12 text-end">
                                         <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download"><i class="fa fa-download"></i> Download</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -319,6 +318,30 @@
             const activeTabLink = document.querySelector('.nav-link.active');
             if (activeTabLink) {
                 activeTabLink.click();
+            }
+        }
+
+        function downloadExcel(tabName){
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
+
+            if(tabName=="purchase1"){
+                $.ajax({
+                    type: "GET",
+                    url: '/rep-by-acc-name/pur1/excel',
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    success: function(result){
+                       
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
             }
         }
     </script>
