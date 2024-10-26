@@ -157,13 +157,6 @@ class ReportingController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $currentY = $pdf->GetY();
-
-        if(($pdf->getPageHeight()-$pdf->GetY())<50){
-            $pdf->AddPage();
-            $currentY = $pdf->GetY();
-        }
-
         $pdf->Output('jv2.pdf', 'I');
     }
 
@@ -278,13 +271,6 @@ class ReportingController extends Controller
         }
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-
-        $currentY = $pdf->GetY();
-
-        if(($pdf->getPageHeight()-$pdf->GetY())<50){
-            $pdf->AddPage();
-            $currentY = $pdf->GetY();
-        }
 
         $pdf->Output('jv2.pdf', 'D');
     }
