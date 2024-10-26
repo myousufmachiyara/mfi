@@ -55,8 +55,8 @@ class ReportingController extends Controller
 
         // Format the date if needed
         $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = $request->fromDate->format('d-m-y');
-        $formattedToDate = $request->toDate->format('d-m-y');
+        $formattedFromDate = $request->fromDate;
+        $formattedToDate = $request->toDate;
 
         $pdf = new MyPDF();
 
