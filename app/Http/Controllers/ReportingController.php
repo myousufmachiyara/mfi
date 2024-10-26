@@ -55,8 +55,8 @@ class ReportingController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('JV2 # '.$pur_by_account['jv_no']);
-        $pdf->SetSubject('JV2 # '.$pur_by_account['jv_no']);
+        $pdf->SetTitle('JV2 # '.$pur_by_account['']);
+        $pdf->SetSubject('JV2 # '.$pur_by_account['']);
         $pdf->SetKeywords('Journal Voucher, TCPDF, PDF');
         $pdf->setPageOrientation('L');
 
@@ -82,12 +82,12 @@ class ReportingController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Voucher No: <span style="text-decoration: underline;color:black;">'.$pur_by_account['jv_no'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($pur_by_account['jv_date'])->format('d-m-y') . '</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Voucher No: <span style="text-decoration: underline;color:black;">'.$pur_by_account[''].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Date: <span style="color:black;font-weight:normal;">' . \Carbon\Carbon::parse($pur_by_account[''])->format('d-m-y') . '</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td width="10%" style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Remarks:</td>';
-        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$pur_by_account['narration'].'</td>';
+        $html .= '<td width="78%" style="color:black;font-weight:normal;">'.$pur_by_account[''].'</td>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -115,26 +115,26 @@ class ReportingController extends Controller
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
-                $html .= '<td style="width:20%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['bankname'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['instrumentnumber'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['debit'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['credit'].'</td>';
-                $total_debit=$total_debit+$items['debit'];
-                $total_credit=$total_credit+$items['credit'];
+                $html .= '<td style="width:20%;">'.$items[''].'</td>';
+                $html .= '<td style="width:20%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $total_debit=$total_debit+$items[''];
+                $total_credit=$total_credit+$items[''];
                 $html .= '</tr>';
             }
             else{
                 $html .= '<tr>';
-                $html .= '<td style="width:20%;">'.$items['acc_name'].'</td>';
-                $html .= '<td style="width:20%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['bankname'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['instrumentnumber'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['debit'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['credit'].'</td>';
-                $total_debit=$total_debit+$items['debit'];
-                $total_credit=$total_credit+$items['credit'];
+                $html .= '<td style="width:20%;">'.$items[''].'</td>';
+                $html .= '<td style="width:20%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $html .= '<td style="width:15%;">'.$items[''].'</td>';
+                $total_debit=$total_debit+$items[''];
+                $total_credit=$total_credit+$items[''];
                 $html .= '</tr>';
             }
             $count++;
@@ -149,7 +149,7 @@ class ReportingController extends Controller
             $currentY = $pdf->GetY();
         }
 
-        $pdf->Output('jv2_'.$pur_by_account['jv_no'].'.pdf', 'I');
+        $pdf->Output('jv2_'.$pur_by_account[''].'.pdf', 'I');
     }
 
     public function purchase2(Request $request){
