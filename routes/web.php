@@ -366,6 +366,6 @@
 
 
         // Rpt Godwon By Item Name Stock In
-        Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'si'])->name('si-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
 
     });
