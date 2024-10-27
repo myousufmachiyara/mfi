@@ -163,7 +163,7 @@ class ReportingController extends Controller
         $pdf->SetFont('helvetica', 'B', 12);
 
         // Column 3
-        $pdf->SetXY(150, $currentY+5);
+        $pdf->SetXY(155, $currentY+5);
         $pdf->MultiCell(28, 5, 'Total', 1, 'C');
 
         $pdf->SetXY(175, $currentY+5);
