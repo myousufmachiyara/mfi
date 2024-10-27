@@ -111,18 +111,18 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="si_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="si_to"></span>
                                             </h4>
                                             
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Item Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="si_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                                     <th>Total Weight</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="P1TbleBody">
+                                            <tbody id="SITbleBody">
 
                                             </tbody>
                                         </table>
@@ -231,12 +231,12 @@
             }
             
             else if(tabId=="#SI"){
-                var table = document.getElementById('P1TbleBody');
+                var table = document.getElementById('SITbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
                 url="/rep-godown-by-item-name/si";
-                tableID="#P1TbleBody";
+                tableID="#SITbleBody";
 
                 $.ajax({
                     type: "GET",
@@ -247,10 +247,10 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
-                        $('#pur1_from').text(formattedfromDate);
-                        $('#pur1_to').text(formattedtoDate);
+                        $('#si_from').text(formattedfromDate);
+                        $('#si_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#pur1_acc').text(selectedAcc);
+                        $('#si_acc').text(selectedAcc);
 
                         $.each(result, function(k,v){
                             var html="<tr>";
