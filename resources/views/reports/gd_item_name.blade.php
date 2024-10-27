@@ -277,50 +277,106 @@
                 });
             }
             
-            else if(tabId=="#SO"){
-                var table = document.getElementById('SOTbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
-                url="/rep-godown-by-item-name/so";
-                tableID="#SOTbleBody";
+            // else if(tabId=="#SO"){
+            //     var table = document.getElementById('SOTbleBody');
+            //     while (table.rows.length > 0) {
+            //         table.deleteRow(0);
+            //     }
+            //     url="/rep-godown-by-item-name/so";
+            //     tableID="#SOTbleBody";
 
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
+            //     $.ajax({
+            //         type: "GET",
+            //         url: url,
+            //         data:{
+            //             fromDate: fromDate,
+            //             toDate: toDate,
+            //             acc_id:acc_id,
+            //         }, 
                     
-                    success: function(result){
-                        $('#so_from').text(formattedfromDate);
-                        $('#so_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#so_acc').text(selectedAcc);
+            //         success: function(result){
+            //             $('#so_from').text(formattedfromDate);
+            //             $('#so_to').text(formattedtoDate);
+            //             var selectedAcc = $('#acc_id').find("option:selected").text();
+            //             $('#so_acc').text(selectedAcc);
 
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['pur_inv'] ? v['pur_inv'] : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['mill_gate'] ? v['mill_gate'] : "") + "</td>";
-                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['sales_qty'] ? v['sales_qty'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        alert("error");
-                    }
-                });
-            }
+            //             $.each(result, function(k,v){
+            //                 var html="<tr>";
+            //                 html += "<td>"+(k+1)+"</td>"
+            //                 html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
+            //                 html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+            //                 html += "<td>" + (v['pur_inv'] ? v['pur_inv'] : "") + "</td>";
+            //                 html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+            //                 html += "<td>" + (v['mill_gate'] ? v['mill_gate'] : "") + "</td>";
+            //                 html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+            //                 html += "<td>" + (v['sales_qty'] ? v['sales_qty'] : "") + "</td>";
+            //                 html +="</tr>";
+            //                 $(tableID).append(html);
+            //             });
+            //         },
+            //         error: function(){
+            //             alert("error");
+            //         }
+            //     });
+            // }
+            else if (tabId === "#SO") {
+    let table = document.getElementById('SOTbleBody');
+    
+    // Clear the table
+    while (table.rows.length > 0) {
+        table.deleteRow(0);
+    }
+
+    const url = "/rep-godown-by-item-name/so";
+    const tableID = "#SOTbleBody";
+
+    // Helper function to safely access data
+    const safeVal = (val) => val ? val : "";
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {
+            fromDate: fromDate,
+            toDate: toDate,
+            acc_id: acc_id,
+        },
+        beforeSend: function() {
+            $(tableID).html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+        },
+        success: function (result) {
+            $('#so_from').text(formattedfromDate);
+            $('#so_to').text(formattedtoDate);
+
+            const selectedAcc = $('#acc_id').find("option:selected").text();
+            $('#so_acc').text(selectedAcc);
+
+            $(tableID).empty(); // Clear the loading message
+
+            // Populate the table with new data
+            $.each(result, function (k, v) {
+                let html = `<tr>
+                    <td>${k + 1}</td>
+                    <td>${safeVal(v['prefix'])}${safeVal(v['Sal_inv_no'])}</td>
+                    <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
+                    <td>${safeVal(v['pur_inv'])}</td>
+                    <td>${safeVal(v['ac_name'])}</td>
+                    <td>${safeVal(v['mill_gate'])}</td>
+                    <td>${safeVal(v['remarks'])}</td>
+                    <td>${safeVal(v['sales_qty'])}</td>
+                </tr>`;
+                $(tableID).append(html);
+            });
+        },
+        error: function () {
+            $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+        }
+    });
+}
+
             else if(tabId=="#stock_balance"){
             }
+
             
         }
         function getReport() {
