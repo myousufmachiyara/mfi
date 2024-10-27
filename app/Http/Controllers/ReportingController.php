@@ -158,9 +158,18 @@ class ReportingController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
+        $currentY = $pdf->GetY();
+
+        $pdf->SetFont('helvetica', 'B', 12);
+
+        // Column 3
+        $pdf->SetXY(175, $currentY+5);
+        $pdf->MultiCell(28, 5, 'Total', 1, 'C');
+
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+
 
         $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
