@@ -283,7 +283,7 @@
                     table.deleteRow(0);
                 }
                 url="/rep-godown-by-item-name/so";
-                tableID="#SITbleBody";
+                tableID="#SOTbleBody";
 
                 $.ajax({
                     type: "GET",
