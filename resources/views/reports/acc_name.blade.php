@@ -108,12 +108,16 @@
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-12 ">
                                         <div class="bill-to">
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">From: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_from"></span>
-                                                <span style="color:#17365D">To: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_to"></span>
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From:&nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To:&nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
                                             </h4>
+                                            
                                             
                                             <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">To: &nbsp;</span>
