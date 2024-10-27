@@ -20,4 +20,12 @@ class RptGoDownItemNameController extends Controller
         return view('reports.gd_item_name',compact('items'));
         
     }
+
+    public function tstockin(Request $request){
+        $pur_by_account = gd_pipe_pur_by_item_name::where('ac1',$request->acc_id)
+        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        ->get();
+
+        return $pur_by_account;
+    }
 }

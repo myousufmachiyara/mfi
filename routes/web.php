@@ -363,4 +363,13 @@
 
         // Purchase 2
         Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\ReportingController::class, 'purchase2'])->name('pur2-rep-by-acc-name');
+
+
+         // Rpt Godwon By Item Name Stock In
+         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGodownItemNameController::class, 'si'])->name('si-rep-godown-by-item-name');
+         Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\ReportingController::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
+         Route::get('/rep-by-acc-name/pur1/PDF', [App\Http\Controllers\ReportingController::class, 'purchase1PDF'])->name('pur1-rep-by-acc-name-PDF');
+         Route::get('/rep-by-acc-name/pur1/download', [App\Http\Controllers\ReportingController::class, 'purchase1Download'])->name('pur1-rep-by-acc-name-download');
+
+
     });
