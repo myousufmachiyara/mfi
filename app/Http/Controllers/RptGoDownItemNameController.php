@@ -21,10 +21,13 @@ class RptGoDownItemNameController extends Controller
 
     public function tstockin(Request $request){
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
-        >join('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
+        ->join('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->get();
 
         return $gd_pipe_pur_by_item_name;
+
+      
+        
     }
 }
