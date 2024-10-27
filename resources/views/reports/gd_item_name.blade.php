@@ -46,7 +46,7 @@
                                 <a class="nav-link" data-bs-target="#SO" href="#SO" data-bs-toggle="tab">Stock Out</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#stock_balance" href="#stock_balance" data-bs-toggle="tab">Stock Balance</a>
+                                <a class="nav-link" data-bs-target="#bal" href="#bal" data-bs-toggle="tab">Stock Balance</a>
                             </li>
                            
                         </ul>
@@ -203,9 +203,53 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="stock_balance" class="tab-pane">
-                                <p>Ageing</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            <div id="bal" class="tab-pane">
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6 ">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="bal_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="bal_to"></span>
+                                            </h4>
+                                            
+                                    
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D">Item Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="bal_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-6 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                    </div>
+                                    
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>ID</th>
+                                                    <th>Date</th>
+                                                    <th>Reason</th>
+                                                    <th>Remarks</th>
+                                                    <th>Qty Add</th>
+                                                    <th>Qty Less</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="balTbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             
                         </div>
@@ -320,61 +364,112 @@
             //     });
             // }
             else if (tabId === "#SO") {
-    let table = document.getElementById('SOTbleBody');
-    
-    // Clear the table
-    while (table.rows.length > 0) {
-        table.deleteRow(0);
-    }
+                let table = document.getElementById('SOTbleBody');
+                
+                // Clear the table
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
 
-    const url = "/rep-godown-by-item-name/so";
-    const tableID = "#SOTbleBody";
+                const url = "/rep-godown-by-item-name/so";
+                const tableID = "#SOTbleBody";
 
-    // Helper function to safely access data
-    const safeVal = (val) => val ? val : "";
+                // Helper function to safely access data
+                const safeVal = (val) => val ? val : "";
 
-    $.ajax({
-        type: "GET",
-        url: url,
-        data: {
-            fromDate: fromDate,
-            toDate: toDate,
-            acc_id: acc_id,
-        },
-        beforeSend: function() {
-            $(tableID).html('<tr><td colspan="8" class="text-center fa-plus">Loading...</td></tr>');
-        },
-        success: function (result) {
-            $('#so_from').text(formattedfromDate);
-            $('#so_to').text(formattedtoDate);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id: acc_id,
+                    },
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function (result) {
+                        $('#so_from').text(formattedfromDate);
+                        $('#so_to').text(formattedtoDate);
 
-            const selectedAcc = $('#acc_id').find("option:selected").text();
-            $('#so_acc').text(selectedAcc);
+                        const selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#so_acc').text(selectedAcc);
 
-            $(tableID).empty(); // Clear the loading message
+                        $(tableID).empty(); // Clear the loading message
 
-            // Populate the table with new data
-            $.each(result, function (k, v) {
-                let html = `<tr>
-                    <td>${k + 1}</td>
-                    <td>${safeVal(v['prefix'])}${safeVal(v['Sal_inv_no'])}</td>
-                    <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
-                    <td>${safeVal(v['pur_inv'])}</td>
-                    <td>${safeVal(v['ac_name'])}</td>
-                    <td>${safeVal(v['mill_gate'])}</td>
-                    <td>${safeVal(v['remarks'])}</td>
-                    <td>${safeVal(v['sales_qty'])}</td>
-                </tr>`;
-                $(tableID).append(html);
-            });
-        },
-        error: function () {
-            $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
-        }
-    });
-}
+                        // Populate the table with new data
+                        $.each(result, function (k, v) {
+                            let html = `<tr>
+                                <td>${k + 1}</td>
+                                <td>${safeVal(v['prefix'])}${safeVal(v['Sal_inv_no'])}</td>
+                                <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
+                                <td>${safeVal(v['pur_inv'])}</td>
+                                <td>${safeVal(v['ac_name'])}</td>
+                                <td>${safeVal(v['mill_gate'])}</td>
+                                <td>${safeVal(v['remarks'])}</td>
+                                <td>${safeVal(v['sales_qty'])}</td>
+                            </tr>`;
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function () {
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
+            }
 
-            else if(tabId=="#stock_balance"){
+            else if(tabId=="#bal"){
+                let table = document.getElementById('balTbleBody');
+                
+                // Clear the table
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+
+                const url = "/rep-godown-by-item-name/bal";
+                const tableID = "#balTbleBody";
+
+                // Helper function to safely access data
+                const safeVal = (val) => val ? val : "";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id: acc_id,
+                    },
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function (result) {
+                        $('#bal_from').text(formattedfromDate);
+                        $('#bal_to').text(formattedtoDate);
+
+                        const selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#bal_acc').text(selectedAcc);
+
+                        $(tableID).empty(); // Clear the loading message
+
+                        // Populate the table with new data
+                        $.each(result, function (k, v) {
+                            let html = `<tr>
+                                <td>${k + 1}</td>
+                                <td>${safeVal(v['Sal_inv_no'])}</td>
+                                <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
+                                <td>${safeVal(v['reason'])}</td>
+                                <td>${safeVal(v['remarks'])}</td>
+                                <td>${safeVal(v['pc_add'])}</td>
+                                <td>${safeVal(v['pc_less'])}</td>
+                            </tr>`;
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function () {
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
             }
 
             
