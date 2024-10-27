@@ -158,7 +158,13 @@ class ReportingController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->Output('jv2.pdf', 'I');
+        $accId = $request->acc_id;
+        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+
+        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+
+        $pdf->Output($filename, 'I');
     }
 
     public function purchase1Download(Request $request)
@@ -274,7 +280,13 @@ class ReportingController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        $pdf->Output('jv2.pdf', 'D');
+        $accId = $request->acc_id;
+        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+
+        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+
+        $pdf->Output($filename, 'D');
     }
 
     public function purchase2(Request $request){
