@@ -293,11 +293,17 @@
                         toDate: toDate,
                         acc_id:acc_id,
                     }, 
+
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+
                     success: function(result){
                         $('#so_from').text(formattedfromDate);
                         $('#so_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#so_acc').text(selectedAcc);
+                        
+                        $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
                             var html="<tr>";
