@@ -56,9 +56,8 @@ class ReportingController extends Controller
 
         // Format the date if needed
         $formattedDate = $currentDate->format('d-m-y');
-
-        $formattedFromDate = Carbon::createFromFormat('Y-m-d', $request->fromDate)->format('d/m/Y');
-        $formattedToDate = Carbon::createFromFormat('Y-m-d', $request->toDate)->format('d/m/Y');
+        $formattedFromDate = Carbon::createFromFormat('Y-m-d', $request->fromDate)->format('d-m-y');
+        $formattedToDate = Carbon::createFromFormat('Y-m-d', $request->toDate)->format('d-m-y');
 
         $pdf = new MyPDF();
 
@@ -92,7 +91,7 @@ class ReportingController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="text-decoration: underline;color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
