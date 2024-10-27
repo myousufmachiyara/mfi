@@ -188,46 +188,7 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#IL"){
-                var table = document.getElementById('P1TbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
-                url="/rep-by-acc-name/pur1";
-                tableID="#P1TbleBody";
-
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
-                    success: function(result){
-                        $('#pur1_from').text(formattedfromDate);
-                        $('#pur1_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#pur1_acc').text(selectedAcc);
-
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") + "</td>";
-                            html += "<td>" + (v['DATE'] ? moment(v['DATE']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac_cod'] ? v['ac_cod'] : "") + "</td>";
-                            html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
-                            html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + "</td>";
-                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        alert("error");
-                    }
-                });
+                
             }
             
             else if(tabId=="#SI"){
