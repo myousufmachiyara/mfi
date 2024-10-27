@@ -353,6 +353,7 @@
     // reporting
     Route::middleware(['auth'])->group(function () {
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
+        Route::get('/rep-godown-by-item-name', [App\Http\Controllers\RptGodownItemNameController::class, 'byGodownItemName'])->name('rep-godown-by-item-name');
 
         // Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name');
