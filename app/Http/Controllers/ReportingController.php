@@ -163,8 +163,11 @@ class ReportingController extends Controller
         $pdf->SetFont('helvetica', 'B', 12);
 
         // Column 3
-        $pdf->SetXY(175, $currentY+5);
+        $pdf->SetXY(150, $currentY+5);
         $pdf->MultiCell(28, 5, 'Total', 1, 'C');
+
+        $pdf->SetXY(175, $currentY+5);
+        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
