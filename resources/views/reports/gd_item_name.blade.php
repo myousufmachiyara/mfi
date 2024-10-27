@@ -342,7 +342,8 @@
             acc_id: acc_id,
         },
         beforeSend: function() {
-            $(tableID).html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+            $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Loading...</td></tr>');
+
         },
         success: function (result) {
             $('#so_from').text(formattedfromDate);
