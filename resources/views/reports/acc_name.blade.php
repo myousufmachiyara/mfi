@@ -106,32 +106,31 @@
                             </div>
                             <div id="purchase_1" class="tab-pane">
                                 <div class="row form-group pb-3">
-
                                     <div class="col-lg-12 ">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">From: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_from"></span>
                                                 <span style="color:#17365D">To: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_to"></span>
                                             </h4>
                                             
-                                            {{-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                            <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">To: &nbsp;</span>
                                                 <span style="font-weight:400; color:black;" class="value"></span>
-                                            </h4> --}}
+                                            </h4> -->
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
+                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -219,6 +218,8 @@
             fromDate=$('#fromDate').val();
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
+            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
+            const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#GL"){
             }
@@ -251,10 +252,15 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
+                        $('#pur1_from').text(formattedfromDate);
+                        $('#pur1_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#pur1_acc').text(selectedAcc);
+
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['DATE'] ? v['DATE'] : "") + "</td>";
+                            html += "<td>" + (v['DATE'] ? moment(v['DATE']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['NO'] ? v['NO'] : "") + "</td>";
                             html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
@@ -290,7 +296,7 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['date'] ? v['date'] : "") + "</td>";
+                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
@@ -320,6 +326,38 @@
             if (activeTabLink) {
                 activeTabLink.click();
             }
+        }
+
+        function downloadExcel(tabName){
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
+
+            if (tabName === "purchase1") {
+                window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+        }
+
+        function printPDF(tabName){
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
+
+            if (tabName === "purchase1") {
+                window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+        }
+
+        function downloadPDF(tabName){
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
+
+            if (tabName === "purchase1") {
+                window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
         }
     </script>
 </html>
