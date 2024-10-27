@@ -216,7 +216,7 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") + "</td>";
+                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") + (v['prefix'] ? v['prefix'] : "") +"</td>";
                             html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
                             html += "<td>" + (v['ac_cod'] ? v['ac_cod'] : "") + "</td>";
