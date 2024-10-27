@@ -164,7 +164,7 @@ class ReportingController extends Controller
 
         // Column 3
         $pdf->SetXY(155, $currentY+5);
-        $pdf->MultiCell(28, 5, 'Total', 1, 'C');
+        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
 
         $pdf->SetXY(175, $currentY+5);
         $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
