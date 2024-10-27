@@ -165,14 +165,15 @@ class ReportingController extends Controller
     {
         $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
 
         // Format the date if needed
         $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = $request->fromDate;
-        $formattedToDate = $request->toDate;
+        $formattedFromDate = Carbon::createFromFormat('Y-m-d', $request->fromDate)->format('d-m-y');
+        $formattedToDate = Carbon::createFromFormat('Y-m-d', $request->toDate)->format('d-m-y');
 
         $pdf = new MyPDF();
 
@@ -206,11 +207,11 @@ class ReportingController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="text-decoration: underline;color:black;"></span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="text-decoration: underline;color:black;"></span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$pur_by_account[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -245,7 +246,7 @@ class ReportingController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -258,7 +259,7 @@ class ReportingController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
