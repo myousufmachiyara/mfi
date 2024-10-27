@@ -345,6 +345,7 @@
 
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(url, '_blank'); 
             }
 
         }
