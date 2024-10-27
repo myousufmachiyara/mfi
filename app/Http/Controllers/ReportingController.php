@@ -55,8 +55,9 @@ class ReportingController extends Controller
 
         // Format the date if needed
         $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = $request->fromDate;
-        $formattedToDate = $request->toDate;
+
+        $formattedFromDate = Carbon::createFromFormat('Y-m-d', $fromDate)->format('d/m/Y');
+        $formattedToDate = Carbon::createFromFormat('Y-m-d', $toDate)->format('d/m/Y');
 
         $pdf = new MyPDF();
 
