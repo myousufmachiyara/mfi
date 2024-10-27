@@ -129,7 +129,7 @@
                                     
                                     <div class="col-lg-12 text-end">
                                         <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1', event)"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
@@ -345,7 +345,6 @@
 
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-                window.open(url, '_blank'); 
             }
 
         }
