@@ -155,8 +155,53 @@
                                 </div>
                             </div>
                             <div id="SO" class="tab-pane">
-                                <p>Purchase Report</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6 ">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="so_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="so_to"></span>
+                                            </h4>
+                                            
+                                    
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D">Item Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="so_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-6 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                    </div>
+                                    
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>SI No.</th>
+                                                    <th>Date</th>
+                                                    <th>Sale Inv#</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Gate Pass#</th>
+                                                    <th>Remarks</th>
+                                                    <th>Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="SOTbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="stock_balance" class="tab-pane">
                                 <p>Ageing</p>
@@ -233,6 +278,45 @@
             }
             
             else if(tabId=="#SO"){
+                var table = document.getElementById('SOTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-godown-by-item-name/so";
+                tableID="#SITbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    success: function(result){
+                        $('#so_from').text(formattedfromDate);
+                        $('#so_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#so_acc').text(selectedAcc);
+
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['pur_inv'] ? v['pur_inv'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['mill_gate'] ? v['mill_gate'] : "") + "</td>";
+                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+                            html += "<td>" + (v['sales_qty'] ? v['sales_qty'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
             }
             else if(tabId=="#stock_balance"){
             }
