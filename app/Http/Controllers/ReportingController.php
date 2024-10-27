@@ -49,6 +49,7 @@ class ReportingController extends Controller
     {
         $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
@@ -91,7 +92,7 @@ class ReportingController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="text-decoration: underline;color:black;"></span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="text-decoration: underline;color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
