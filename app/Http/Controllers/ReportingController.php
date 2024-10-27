@@ -130,7 +130,7 @@ class ReportingController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -143,7 +143,7 @@ class ReportingController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.$items['DATE'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
