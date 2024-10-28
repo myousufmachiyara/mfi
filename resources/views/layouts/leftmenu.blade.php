@@ -403,10 +403,23 @@
                                     Account Group
                                 </a>
                             </li>
-                            <li>
+                            <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    Item Name
+                                    <i class="fa fa-pallet" style="font-size:16px;"></i>
+                                    <span>Item Name</span>
                                 </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name 2
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a class="nav-link" href="#">
@@ -436,7 +449,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="/rep-godown-by-group-name">
                                             By Item Group
                                         </a>
                                     </li>
