@@ -56,9 +56,9 @@ class RptAccNamePur2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Pipe Purchase Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Pipe Purchase Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Pipe Purchase Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -77,7 +77,7 @@ class RptAccNamePur2Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Pipe Purchase Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
@@ -191,9 +191,9 @@ class RptAccNamePur2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Pipe Purchase Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Pipe Purchase Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Pipe Purchase Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -212,7 +212,7 @@ class RptAccNamePur2Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Pipe Purchase Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
