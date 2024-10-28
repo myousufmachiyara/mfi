@@ -23,7 +23,7 @@ class RptAccNamePur2Controller extends Controller
     public function purchase2Excel(Request $request)
     {
         $pipe_pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->get();
 
         $accId = $request->acc_id;
@@ -40,7 +40,7 @@ class RptAccNamePur2Controller extends Controller
     public function purchase2PDF(Request $request)
     {
         $pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->leftjoin('ac','ac.ac_code','=','pipe_pur_by_account.ac1')
             ->get();
 
@@ -123,7 +123,7 @@ class RptAccNamePur2Controller extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -136,7 +136,7 @@ class RptAccNamePur2Controller extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -175,7 +175,7 @@ class RptAccNamePur2Controller extends Controller
     public function purchase2Download(Request $request)
     {
         $pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->leftjoin('ac','ac.ac_code','=','pipe_pur_by_account.ac1')
             ->get();
 
@@ -257,7 +257,7 @@ class RptAccNamePur2Controller extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -270,7 +270,7 @@ class RptAccNamePur2Controller extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
