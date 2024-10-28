@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AC;
+use App\Models\Item_entry2;
 use App\Models\pur_by_account;
 use App\Models\pipe_pur_by_account;
 use App\Exports\Purchase1Export;
