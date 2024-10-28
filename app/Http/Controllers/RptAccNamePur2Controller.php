@@ -31,7 +31,7 @@ class RptAccNamePur2Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "purchase2_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
         return Excel::download(new Purchase2Export($pur_by_account), $filename);
@@ -167,7 +167,7 @@ class RptAccNamePur2Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "purchase2_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'I');
     }
@@ -300,7 +300,7 @@ class RptAccNamePur2Controller extends Controller
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "purchase2_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'D');
     }
