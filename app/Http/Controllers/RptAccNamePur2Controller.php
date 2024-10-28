@@ -22,7 +22,7 @@ class RptAccNamePur2Controller extends Controller
 
     public function purchase2Excel(Request $request)
     {
-        $pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
+        $pipe_pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
             ->get();
 
@@ -34,14 +34,14 @@ class RptAccNamePur2Controller extends Controller
         $filename = "purchase2_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Purchase2Export($pur_by_account), $filename);
+        return Excel::download(new Purchase2Export($pipe_pur_by_account), $filename);
     }
 
     public function purchase2PDF(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
+        $pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','pipe_pur_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
@@ -176,7 +176,7 @@ class RptAccNamePur2Controller extends Controller
     {
         $pur_by_account = pipe_pur_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','pipe_pur_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
