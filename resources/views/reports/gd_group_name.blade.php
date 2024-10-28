@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="col-form-label"><strong>Item Name</strong></label>
+                                <label class="col-form-label"><strong>Group Name</strong></label>
                                 <select data-plugin-selecttwo class="form-control select2-js"  id="acc_id">
-                                    <option value="" disabled selected>Item Name</option>
+                                    <option value="" disabled selected>Group Name</option>
                                     @foreach($items as $key => $row)	
-                                        <option value="{{$row->it_cod}}">{{$row->item_name}}</option>
+                                        <option value="{{$row->it_cod}}">{{$row->group_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -37,21 +37,21 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#IL" href="#IL" data-bs-toggle="tab">Item Ledger</a>
+                                <a class="nav-link" data-bs-target="#stock_rpt" href="#stock_rpt" data-bs-toggle="tab">Stock Report</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SI" href="#SI" data-bs-toggle="tab">Stock IN</a>
+                                <a class="nav-link" data-bs-target="#sale_rpt" href="#sale_rpt" data-bs-toggle="tab">Stock In Report</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SO" href="#SO" data-bs-toggle="tab">Stock Out</a>
+                                <a class="nav-link" data-bs-target="#pur_rpt" href="#SO" data-bs-toggle="tab">Stock Out Report</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#bal" href="#bal" data-bs-toggle="tab">Stock Balance</a>
+                                <a class="nav-link" data-bs-target="#pur_rpt" href="#SO" data-bs-toggle="tab">Balance Stock Report</a>
                             </li>
                            
                         </ul>
                         <div class="tab-content">
-                            <div id="IL" class="tab-pane">
+                            <div id="stock_rpt" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6 ">
                                         <div class="bill-to">
@@ -66,10 +66,7 @@
                                             </h4>
                                             
                                             
-                                            <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">To: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
-                                            </h4> -->
+                                          
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
@@ -275,7 +272,7 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#IL"){
+            if(tabId=="#stock_rpt"){
                 
             }
             
@@ -321,7 +318,48 @@
                 });
             }
             
-            
+            // else if(tabId=="#SO"){
+            //     var table = document.getElementById('SOTbleBody');
+            //     while (table.rows.length > 0) {
+            //         table.deleteRow(0);
+            //     }
+            //     url="/rep-godown-by-item-name/so";
+            //     tableID="#SOTbleBody";
+
+            //     $.ajax({
+            //         type: "GET",
+            //         url: url,
+            //         data:{
+            //             fromDate: fromDate,
+            //             toDate: toDate,
+            //             acc_id:acc_id,
+            //         }, 
+                    
+            //         success: function(result){
+            //             $('#so_from').text(formattedfromDate);
+            //             $('#so_to').text(formattedtoDate);
+            //             var selectedAcc = $('#acc_id').find("option:selected").text();
+            //             $('#so_acc').text(selectedAcc);
+
+            //             $.each(result, function(k,v){
+            //                 var html="<tr>";
+            //                 html += "<td>"+(k+1)+"</td>"
+            //                 html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
+            //                 html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+            //                 html += "<td>" + (v['pur_inv'] ? v['pur_inv'] : "") + "</td>";
+            //                 html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+            //                 html += "<td>" + (v['mill_gate'] ? v['mill_gate'] : "") + "</td>";
+            //                 html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+            //                 html += "<td>" + (v['sales_qty'] ? v['sales_qty'] : "") + "</td>";
+            //                 html +="</tr>";
+            //                 $(tableID).append(html);
+            //             });
+            //         },
+            //         error: function(){
+            //             alert("error");
+            //         }
+            //     });
+            // }
             else if (tabId === "#SO") {
                 let table = document.getElementById('SOTbleBody');
                 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AC;
 use App\Models\Item_entry2;
+use App\Models\Item_Groups;
 use App\Models\pur_by_account;
 use App\Models\pipe_pur_by_account;
 use App\Exports\Purchase1Export;
@@ -27,4 +28,11 @@ class ReportingController extends Controller
         $items = Item_entry2::orderBy('item_name', 'asc')->get();
         return view('reports.gd_item_name',compact('items'));
     }
+
+     // By Godown Group Name
+     public function byGodownGroupName()
+     {
+         $items = Item_Groups::orderBy('group_name', 'asc')->get();
+         return view('reports.gd_group_name',compact('items'));
+     }
 }
