@@ -106,7 +106,7 @@
                             </div>
                             <div id="purchase_1" class="tab-pane">
                                 <div class="row form-group pb-3">
-                                    <div class="col-lg-6 ">
+                                    <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
@@ -118,12 +118,6 @@
                                                 <span style="font-weight: 400; color: black;" id="pur1_to"></span>
                                             </h4>
                                             
-                                            
-                                            <!-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">To: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" class="value"></span>
-                                            </h4> -->
-                                    
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
                                                 <span style="font-weight:400; color:black;" id="pur1_acc"></span>
@@ -160,10 +154,30 @@
                             </div>
                             <div id="purchase_2" class="tab-pane">
                                 <div class="row form-group pb-3">
+
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur2_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur2_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="pur2_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase2')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase2')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -297,6 +311,11 @@
                         acc_id:acc_id,
                     }, 
                     success: function(result){
+                        $('#pur2_from').text(formattedfromDate);
+                        $('#pur2_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#pur2_acc').text(selectedAcc);
+
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
@@ -318,7 +337,6 @@
             }
             else if(tabId=="#comb_purchase"){
 
-                both_pur_rpt_by_account
             }
             else if(tabId=="#JV"){
             }
@@ -327,6 +345,7 @@
             else if(tabId=="#pur_ret"){
             }
         }
+
         function getReport() {
             const activeTabLink = document.querySelector('.nav-link.active');
             if (activeTabLink) {
@@ -342,6 +361,10 @@
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "purchase2") {
+                window.location.href = `/rep-by-acc-name/pur2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName){
@@ -353,6 +376,10 @@
                 window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
+            else if (tabName === "purchase2") {
+                window.location.href = `/rep-by-acc-name/pur2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
         }
 
         function downloadPDF(tabName){
@@ -362,6 +389,10 @@
 
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "purchase2") {
+                window.location.href = `/rep-by-acc-name/pur2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
         }

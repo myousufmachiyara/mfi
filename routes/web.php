@@ -365,6 +365,9 @@
 
         // Purchase 2
         Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\RptAccNamePur2Controller::class, 'purchase2'])->name('pur2-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur2/excel', [App\Http\Controllers\RptAccNamePur2Controller::class, 'purchase2Excel'])->name('pur2-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/pur2/PDF', [App\Http\Controllers\RptAccNamePur2Controller::class, 'purchase2PDF'])->name('pur2-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/pur2/download', [App\Http\Controllers\RptAccNamePur2Controller::class, 'purchase2Download'])->name('pur2-rep-by-acc-name-download');
 
         // Combine Purchases
         Route::get('/rep-by-acc-name/comb-pur', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchase'])->name('comb-pur-rep-by-acc-name');
@@ -376,5 +379,4 @@
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
-
     });
