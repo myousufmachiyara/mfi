@@ -34,7 +34,7 @@ class RptAccNamePur2Controller extends Controller
         $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Purchase1Export($pur_by_account), $filename);
+        return Excel::download(new Purchase2Export($pur_by_account), $filename);
     }
 
     public function purchase2PDF(Request $request)
