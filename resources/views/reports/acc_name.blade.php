@@ -269,12 +269,15 @@
                         toDate: toDate,
                         acc_id:acc_id,
                     }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
                     success: function(result){
                         $('#pur1_from').text(formattedfromDate);
                         $('#pur1_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#pur1_acc').text(selectedAcc);
-
+                        $(tableID).empty(); // Clear the loading message
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
@@ -290,7 +293,7 @@
                         });
                     },
                     error: function(){
-                        alert("error");
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
@@ -310,11 +313,15 @@
                         toDate: toDate,
                         acc_id:acc_id,
                     }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
                     success: function(result){
                         $('#pur2_from').text(formattedfromDate);
                         $('#pur2_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#pur2_acc').text(selectedAcc);
+                        $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
                             var html="<tr>";
@@ -331,7 +338,7 @@
                         });
                     },
                     error: function(){
-                        alert("error");
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
