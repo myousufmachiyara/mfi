@@ -276,7 +276,6 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#IL"){
-                
             }
             
             else if(tabId=="#SI"){
@@ -320,7 +319,6 @@
                     }
                 });
             }
-            
             
             else if (tabId === "#SO") {
                 let table = document.getElementById('SOTbleBody');

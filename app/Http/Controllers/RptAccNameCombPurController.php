@@ -12,36 +12,37 @@ use Carbon\Carbon;
 
 class RptAccNameCombPurController extends Controller
 {
+
     public function combinePurchase(Request $request){
-        $pur_by_account = pur_by_account::where('ac1',$request->acc_id)
-        ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+        $both_pur_rpt_by_account = both_pur_rpt_by_account::where('ac1',$request->acc_id)
+        ->whereBetween('date', [$request->fromDate, $request->toDate])
         ->get();
 
-        return $pur_by_account;
+        return $both_pur_rpt_by_account;
     }
 
     public function combinePurchaseExcel(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->get();
+        $both_pur_rpt_by_account = both_pur_rpt_by_account::where('ac1',$request->acc_id)
+        ->whereBetween('date', [$request->fromDate, $request->toDate])
+        ->get();
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "purchase_comb_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Purchase1Export($pur_by_account), $filename);
+        return Excel::download(new PurchaseCombExport($both_pur_rpt_by_account), $filename);
     }
 
     public function combinePurchasePDF(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
+        $pur_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','both_pur_rpt_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
@@ -167,7 +168,7 @@ class RptAccNameCombPurController extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "purchase_comb_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'I');
     }
@@ -300,8 +301,9 @@ class RptAccNameCombPurController extends Controller
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "purchase_comb_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'D');
     }
+
 }
