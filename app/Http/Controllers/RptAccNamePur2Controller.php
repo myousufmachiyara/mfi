@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AC;
+use App\Models\pipe_pur_by_account;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Services\myPDF;
+use Carbon\Carbon;
 
 class RptAccNamePur2Controller extends Controller
 {
