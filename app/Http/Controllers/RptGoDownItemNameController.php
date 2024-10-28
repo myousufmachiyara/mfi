@@ -14,12 +14,6 @@ use Carbon\Carbon;
 
 class RptGoDownItemNameController extends Controller
 {
-    //
-    public function byGodownItemName()
-    {
-        $items = Item_entry2::orderBy('item_name', 'asc')->get();
-        return view('reports.gd_item_name',compact('items'));
-    }
 
     public function tstockin(Request $request){
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
@@ -28,7 +22,6 @@ class RptGoDownItemNameController extends Controller
         ->get();
 
         return $gd_pipe_pur_by_item_name;
-        
     }
 
     public function tstockout(Request $request){

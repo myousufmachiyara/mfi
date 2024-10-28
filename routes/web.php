@@ -352,18 +352,25 @@
 
     // reporting
     Route::middleware(['auth'])->group(function () {
+
+        // Main Routes
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
-        Route::get('/rep-godown-by-item-name', [App\Http\Controllers\RptGoDownItemNameController::class, 'byGodownItemName'])->name('rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name', [App\Http\Controllers\ReportingController::class, 'byGodownItemName'])->name('rep-by-godown-item-name');
 
         // Purchase 1
-        Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\ReportingController::class, 'purchase1'])->name('pur1-rep-by-acc-name');
-        Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\ReportingController::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
-        Route::get('/rep-by-acc-name/pur1/PDF', [App\Http\Controllers\ReportingController::class, 'purchase1PDF'])->name('pur1-rep-by-acc-name-PDF');
-        Route::get('/rep-by-acc-name/pur1/download', [App\Http\Controllers\ReportingController::class, 'purchase1Download'])->name('pur1-rep-by-acc-name-download');
+        Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/pur1/PDF', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1PDF'])->name('pur1-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/pur1/download', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1Download'])->name('pur1-rep-by-acc-name-download');
 
         // Purchase 2
-        Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\ReportingController::class, 'purchase2'])->name('pur2-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur2', [App\Http\Controllers\RptAccNamePur2Controller::class, 'purchase2'])->name('pur2-rep-by-acc-name');
 
+        // Combine Purchases
+        Route::get('/rep-by-acc-name/comb-pur', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchase'])->name('comb-pur-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/comb-pur/excel', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchaseExcel'])->name('comb-pur-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/comb-pur/PDF', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasesPDF'])->name('comb-pur-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/comb-pur/download', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasesDownload'])->name('comb-pur-rep-by-acc-name-download');
 
         // Rpt Godwon By Item Name
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');

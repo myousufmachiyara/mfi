@@ -317,6 +317,8 @@
                 });
             }
             else if(tabId=="#comb_purchase"){
+
+                both_pur_rpt_by_account
             }
             else if(tabId=="#JV"){
             }
