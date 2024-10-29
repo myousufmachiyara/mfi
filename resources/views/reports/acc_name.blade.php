@@ -232,10 +232,9 @@
                                                     <th>S/No</th>
                                                     <th>Sales Date</th>
                                                     <th>Inv No.</th>
-                                                    <th>Mill No.</th>
-                                                    <th>Dispatch To Party</th>
-                                                    <th>Sale Inv</th>
-                                                    <th>Remarks</th>
+                                                    <th>Bill</th>
+                                                    <th>Detail To Party</th>
+                                                    <th>Entry Of</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
@@ -416,10 +415,9 @@
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
-                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td> </td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                             html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
                             html +="</tr>";
 
