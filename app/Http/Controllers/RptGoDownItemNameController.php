@@ -44,14 +44,12 @@ class RptGoDownItemNameController extends Controller
 
     public function tstockinPDF(Request $request)
     {
-        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::query()
-        ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
+        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
+        ->join('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
         ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
         ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name')
-        ->where('gd_pipe_pur_by_item_name.item_cod', $request->acc_id)
         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->get();
-
     
 
         $currentDate = Carbon::now();
