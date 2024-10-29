@@ -41,142 +41,121 @@ class RptGoDownItemNameController extends Controller
         // Return the download response with the dynamic filename
         return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
     }
-
     public function tstockinPDF(Request $request)
     {
-        // $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
-        // ->join('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
-        // ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        // ->get();
-
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
-        ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
-        ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
-        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name')
-        ->get();
-
-
+            ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
+            ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
+            ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name')
+            ->get();
+    
         $currentDate = Carbon::now();
-
-        // Format the date if needed
         $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = Carbon::createFromFormat('Y-m-d', $request->fromDate)->format('d-m-y');
-        $formattedToDate = Carbon::createFromFormat('Y-m-d', $request->toDate)->format('d-m-y');
-
+        $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
+        $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
+    
         $pdf = new MyPDF();
-
-        // Set document information
+    
+        // Set document metadata
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock In Report Of Item '.$request->acc_id);
-        $pdf->SetSubject('Stock In Report Of Item '.$request->acc_id);
-        $pdf->SetKeywords('Stock In Report Of Item, TCPDF, PDF');
+        $pdf->SetTitle('Stock In Report Of Item ' . $request->acc_id);
+        $pdf->SetSubject('Stock In Report');
+        $pdf->SetKeywords('Stock In Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-
-        // Add a page
+    
+        // Add a page and set padding
         $pdf->AddPage();
-        
-        $pdf->setCellPadding(1.2); // Set padding for all cells in the table
-
-        // margin top
-        $margin_top = '.margin-top {
-            margin-top: 10px;
-        }';
-        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
-
-        // margin bottom
-        $margin_bottom = '.margin-bottom {
-            margin-bottom: 5px;
-        }';
-
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Stock In Report Of Item</h1>';
+        $pdf->setCellPadding(1.2);
+    
+        // Report heading
+        $heading = '<h1 style="font-size:20px;text-align:center;
+                    font-style:italic;text-decoration:underline;color:#17365D">
+                    Stock In Report Of Item
+                    </h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-        $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
-
-        $html = '<table>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Item Name: <span style="color:black;">'.$gd_pipe_pur_by_item_name[0]['acc_id'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$gd_pipe_pur_by_item_name[0]['phone_no'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> To Date: <span style="color:black;font-weight:normal;">'.$formattedToDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-
+    
+        // Header details
+        $html = '
+            <table>
+                <tr>
+                    <td style="font-size:12px;font-weight:bold;color:#17365D;">Item Name: 
+                        <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
+                    </td>
+                    <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right;">
+                        Print Date: <span style="color:black;">' . $formattedDate . '</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right;">
+                        From Date: <span style="color:black;">' . $formattedFromDate . '</span>
+                    </td>
+                    <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right;">
+                        To Date: <span style="color:black;">' . $formattedToDate . '</span>
+                    </td>
+                </tr>
+            </table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-
-        $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
-        $html .= '<tr>';
-        $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">SI Date</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">SI ID.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Pur Inv</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Gate Pass</th>';
-        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Qty In</th>';
-        $html .= '</tr>';
-        $html .= '</table>';
-
-        $pdf->setTableHtml($html);
-
-        $count=1;
-        $totalAmount=0;
-
-        $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($gd_pipe_pur_by_item_name as $items) {
-            // Alternating background color using ternary operator
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; 
+    
+        // Table header for data
+        $html = '
+            <table border="1" style="border-collapse: collapse; text-align: center;">
+                <tr>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">SI Date</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">SI ID</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Pur Inv</th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>
+                    <th style="width:11%;color:#17365D;font-weight:bold;">Gate Pass</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Qty In</th>
+                </tr>';
+        
+        // Iterate through items and add rows
+        $count = 1;
+        $totalAmount = 0;
+    
+        foreach ($gd_pipe_pur_by_item_name as $item) {
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+    
+            $html .= '
+                <tr style="background-color:' . $backgroundColor . ';">
+                    <td style="width:7%;">' . $count . '</td>
+                    <td style="width:14%;">' . Carbon::parse($item['pur_date'])->format('d-m-y') . '</td>
+                    <td style="width:10%;">' . $item['prefix'] . $item['pur_id'] . '</td>
+                    <td style="width:10%;">' . $item['pur_bill_no'] . '</td>
+                    <td style="width:22%;">' . $item['ac_name'] . '</td>
+                    <td style="width:11%;">' . $item['mill_gate_no'] . '</td>
+                    <td style="width:15%;">' . $item['Pur_remarks'] . '</td>
+                    <td style="width:12%;">' . $item['pur_qty'] . '</td>
+                </tr>';
             
-            $html .= '<tr style="background-color:' . $backgroundColor . '">';
-            $html .= '<td style="width:7%;">' . $count . '</td>';
-            $html .= '<td style="width:14%;">' . 
-                      Carbon::createFromFormat('Y-m-d', $items['pur_date'])->format('d-m-y') . 
-                      '</td>';
-            $html .= '<td style="width:10%;">' . $items['prefix'] . $items['pur_id'] . '</td>';
-            $html .= '<td style="width:10%;">' . $items['pur_bill_no'] . '</td>';
-            $html .= '<td style="width:22%;">' . $items['ac_name'] . '</td>';
-            $html .= '<td style="width:11%;">' . $items['mill_gate_no'] . '</td>';
-            $html .= '<td style="width:15%;">' . $items['Pur_remarks'] . '</td>';
-            $html .= '<td style="width:12%;">' . $items['pur_qty'] . '</td>';
-            
-            // Accumulating total quantity
-            $totalAmount += $items['pur_qty'];
-            
-            $html .= '</tr>';
+            $totalAmount += $item['pur_qty']; // Accumulate total quantity
             $count++;
         }
+    
         $html .= '</table>';
-         $pdf->writeHTML($html, true, false, true, false, '');
-
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        // Display total amount at the bottom
         $currentY = $pdf->GetY();
-
         $pdf->SetFont('helvetica', 'B', 12);
-
-        // Column 3
-        $pdf->SetXY(155, $currentY+5);
+        $pdf->SetXY(155, $currentY + 5);
         $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-
-        $pdf->SetXY(175, $currentY+5);
+        $pdf->SetXY(175, $currentY + 5);
         $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
-
+    
+        // Prepare filename for the PDF
         $accId = $request->acc_id;
-        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
-        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
-
-
+        $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
-
+    
+        // Output the PDF
         $pdf->Output($filename, 'I');
     }
-
+    
 
     public function tstockout(Request $request){
         $gd_pipe_sale_by_item_name = gd_pipe_sale_by_item_name::where('item_cod',$request->acc_id)
