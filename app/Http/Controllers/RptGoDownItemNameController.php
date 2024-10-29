@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item_entry2;
+use App\Models\Item_Groups;
 use App\Models\AC;
 use App\Models\gd_pipe_pur_by_item_name;
 use App\Models\gd_pipe_sale_by_item_name;
@@ -157,7 +158,7 @@ class RptGoDownItemNameController extends Controller
         $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
     
         // Output the PDF
-        $pdf->Output($filename, 'I');
+        $pdf->Output($filename, 'D');
     }
     
 
