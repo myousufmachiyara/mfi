@@ -130,7 +130,7 @@
                                     <div class="col-lg-6 text-end">
                                         <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -443,8 +443,8 @@
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
-            if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "SI") {
+                window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
