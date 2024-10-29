@@ -454,7 +454,8 @@
             acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
-                window.location.href = `/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+
             }
 
         }
