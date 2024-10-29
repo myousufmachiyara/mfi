@@ -725,6 +725,10 @@
             else if (tabName === "sale_2") {
                 window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName){
@@ -751,6 +755,10 @@
             else if (tabName === "sale_2") {
                 window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function downloadPDF(tabName){
@@ -772,6 +780,10 @@
             
             else if (tabName === "sale_1") {
                 window.location.href = `/rep-by-acc-name/sale1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
             else if (tabName === "sale_2") {
