@@ -454,7 +454,8 @@
             acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
-                window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+                // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+                window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
 
             }
 
@@ -466,7 +467,7 @@
             acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
-                window.location.href = `/rep-godown-by-item-name/si/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
         }
