@@ -373,7 +373,7 @@
         // Combine Purchases
         Route::get('/rep-by-acc-name/comb-pur', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchase'])->name('comb-pur-rep-by-acc-name');
         Route::get('/rep-by-acc-name/comb-pur/excel', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchaseExcel'])->name('comb-pur-rep-by-acc-name-excel');
-        Route::get('/rep-by-acc-name/comb-pur/PDF', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasesPDF'])->name('comb-pur-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/comb-pur/PDF', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasePDF'])->name('comb-pur-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/comb-pur/download', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchaseDownload'])->name('comb-pur-rep-by-acc-name-download');
 
         // Godown By Item Name
