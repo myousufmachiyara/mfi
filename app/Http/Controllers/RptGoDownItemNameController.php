@@ -285,13 +285,6 @@ class RptGoDownItemNameController extends Controller
     public function tstockinReport(Request $request)
     {
 
-        // Validate the request if needed
-        $request->validate([
-            // 'fromDate' => 'required|date',
-            // 'toDate' => 'required|date',
-            // 'acc_id' => 'required',
-            'outputType' => 'required|in:download,view', // Ensure outputType is either 'download' or 'view'
-        ]);
 
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
             ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
