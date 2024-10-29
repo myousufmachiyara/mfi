@@ -41,7 +41,7 @@ class RptAccNameCombPurController extends Controller
     public function combinePurchasePDF(Request $request)
     {
         $pur_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->leftjoin('ac','ac.ac_code','=','both_pur_rpt_by_account.ac1')
             ->get();
 
@@ -124,7 +124,7 @@ class RptAccNameCombPurController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -137,7 +137,7 @@ class RptAccNameCombPurController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -176,7 +176,7 @@ class RptAccNameCombPurController extends Controller
     public function combinePurchaseDownload(Request $request)
     {
         $pur_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+            ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->leftjoin('ac','ac.ac_code','=','both_pur_rpt_by_account.ac1')
             ->get();
 
@@ -258,7 +258,7 @@ class RptAccNameCombPurController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
@@ -271,7 +271,7 @@ class RptAccNameCombPurController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
