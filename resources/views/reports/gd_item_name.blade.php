@@ -465,8 +465,8 @@
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
-            if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "si") {
+                window.location.href = `/rep-godown-by-item-name/si?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
         }
