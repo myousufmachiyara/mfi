@@ -388,6 +388,12 @@
         Route::get('/rep-by-acc-name/sale2/PDF', [App\Http\Controllers\RptAccNameSale2Controller::class, 'sale2PDF'])->name('sale2-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/sale2/download', [App\Http\Controllers\RptAccNameSale2Controller::class, 'sale2Download'])->name('sale2-rep-by-acc-name-download');
 
+        // Combine Sales
+        Route::get('/rep-by-acc-name/comb-sale', [App\Http\Controllers\RptAccNameCombSaleController::class, 'combineSale'])->name('comb-sale-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/comb-sale/excel', [App\Http\Controllers\RptAccNameCombSaleController::class, 'combineSaleExcel'])->name('comb-sale-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/comb-sale/PDF', [App\Http\Controllers\RptAccNameCombSaleController::class, 'combineSalePDF'])->name('comb-pur-sale-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/comb-sale/download', [App\Http\Controllers\RptAccNameCombSaleController::class, 'combineSaleDownload'])->name('comb-sale-rep-by-acc-name-download');
+
         // Godown By Item Name
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');

@@ -2,11 +2,11 @@
 
 namespace App\Exports;
 
-use App\Models\pipe_sale_by_account;
+use App\Models\both_sale_rpt_by_account;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class Sale2Export implements FromCollection, WithHeadings
+class SaleCombExport implements FromCollection, WithHeadings
 {
     protected $data;
 
@@ -23,13 +23,14 @@ class Sale2Export implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Entry Of',
             'Ac1',
             'Ac2',
             'Date',
-            'Sale Inv',
+            'No',
             'Remarks',
-            'cr amount',
-            'Cash Pur address',
+            'Dr Amount',
+            'Cr Amount',
         ];
     }
 }
