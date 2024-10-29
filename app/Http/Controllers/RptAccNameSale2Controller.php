@@ -4,26 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AC;
-use App\Models\sale_by_account;
-use App\Exports\Sale1Export;
+use App\Models\pipe_pipe_sale_by_account;
+use App\Exports\Sale2Export;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
 
-class RptAccNameSale1Controller extends Controller
+class RptAccNameSale2Controller extends Controller
 {
-    
-    public function sale1(Request $request){
-        $sale_by_account = sale_by_account::where('ac1',$request->acc_id)
+    public function sale2(Request $request){
+        $pipe_sale_by_account = pipe_sale_by_account::where('ac1',$request->acc_id)
         ->whereBetween('date', [$request->fromDate, $request->toDate])
         ->get();
 
-        return $sale_by_account;
+        return $pipe_sale_by_account;
     }
 
-    public function sale1Excel(Request $request)
+    public function sale2Excel(Request $request)
     {
-        $sale_by_account = sale_by_account::where('ac1', $request->acc_id)
+        $pipe_sale_by_account = pipe_sale_by_account::where('ac1', $request->acc_id)
             ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->get();
 
@@ -32,17 +31,17 @@ class RptAccNameSale1Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "sale2_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Sale1Export($sale_by_account), $filename);
+        return Excel::download(new Sale1Export($pipe_sale_by_account), $filename);
     }
 
-    public function sale1PDF(Request $request)
+    public function sale2PDF(Request $request)
     {
-        $sale_by_account = sale_by_account::where('ac1', $request->acc_id)
+        $pipe_sale_by_account = pipe_sale_by_account::where('ac1', $request->acc_id)
             ->whereBetween('date', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','sale_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','pipe_sale_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
@@ -57,9 +56,9 @@ class RptAccNameSale1Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sale Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Sale Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Sale Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Sale Pipe Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Sale Pipe Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Sale Pipe Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -78,18 +77,18 @@ class RptAccNameSale1Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Pipe Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$sale_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pipe_sale_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$sale_by_account[0]['phone_no'].'</span></td>';
+        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$pipe_sale_by_account[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -119,7 +118,7 @@ class RptAccNameSale1Controller extends Controller
         $totalAmount=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($sale_by_account as $items) {
+        foreach ($pipe_sale_by_account as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
@@ -168,16 +167,16 @@ class RptAccNameSale1Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
 
-        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "sale2_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'I');
     }
 
-    public function sale1Download(Request $request)
+    public function sale2Download(Request $request)
     {
-        $sale_by_account = sale_by_account::where('ac1', $request->acc_id)
+        $pipe_sale_by_account = pipe_sale_by_account::where('ac1', $request->acc_id)
             ->whereBetween('date', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','sale_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','pipe_sale_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
@@ -192,9 +191,9 @@ class RptAccNameSale1Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sale Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Sale Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Sale Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Sale Pipe Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Sale Pipe Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Sale Pipe Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -213,17 +212,17 @@ class RptAccNameSale1Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Pipe Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$sale_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pipe_sale_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$sale_by_account[0]['phone_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$pipe_sale_by_account[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -253,7 +252,7 @@ class RptAccNameSale1Controller extends Controller
         $totalAmount=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($sale_by_account as $items) {
+        foreach ($pipe_sale_by_account as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
@@ -301,7 +300,7 @@ class RptAccNameSale1Controller extends Controller
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "sale2_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'D');
     }

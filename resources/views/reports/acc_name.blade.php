@@ -93,54 +93,96 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
                             </div>
                             <div id="sale_1" class="tab-pane">
-                            <div class="row form-group pb-3">
-                                <div class="col-lg-6">
-                                    <div class="bill-to">
-                                        <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
-                                            <span style="color: #17365D;">From: &nbsp;</span>
-                                            <span style="font-weight: 400; color: black;" id="sale_1_from"></span>
-                                        
-                                            <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
-                                        
-                                            <span style="color: #17365D;">To: &nbsp;</span>
-                                            <span style="font-weight: 400; color: black;" id="sale_1_to"></span>
-                                        </h4>
-                                        
-                                        <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                            <span style="color:#17365D">Account Name: &nbsp;</span>
-                                            <span style="font-weight:400; color:black;" id="sale_1_acc"></span>
-                                        </h4>
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="sale_1_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="sale_1_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="sale_1_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_1')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_1')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>Sales Date</th>
+                                                    <th>Inv No.</th>
+                                                    <th>Bill</th>
+                                                    <th>Company Name</th>
+                                                    <th>Pur Inv</th>
+                                                    <th>Remarks</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Sale1TbleBody">
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 text-end">
-                                    <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_1')"><i class="fa fa-download"></i> Download</a>
-                                    <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                    <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_1')"><i class="fa fa-file-excel"></i> Excel</a>      
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <table class="table table-bordered table-striped mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>S/No</th>
-                                                <th>Sales Date</th>
-                                                <th>Inv No.</th>
-                                                <th>Bill</th>
-                                                <th>Company Name</th>
-                                                <th>Pur Inv</th>
-                                                <th>Remarks</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="Sale1TbleBody">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                             </div>
                             <div id="sale_2" class="tab-pane">
-                                <p>GL1</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="sale_2_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="sale_2_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="sale_2_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_2')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_2')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>Sales Date</th>
+                                                    <th>Inv No.</th>
+                                                    <th>Bill</th>
+                                                    <th>Company Name</th>
+                                                    <th>Pur Inv</th>
+                                                    <th>Remarks</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="Sale2TbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="comb_sale" class="tab-pane">
                                 <p>GL_R1</p>
@@ -377,6 +419,50 @@
                 });
             }
             else if(tabId=="#sale_2"){
+                var table = document.getElementById('Sale2TbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/sale2";
+                tableID="#Sale2TbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+                        $('#sale_2_from').text(formattedfromDate);
+                        $('#sale_2_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        
+                        $('#sale_2_acc').text(selectedAcc);
+                        $(tableID).empty(); // Clear the loading message
+
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
             }
             else if(tabId=="#comb_sale"){
             }
@@ -550,6 +636,10 @@
             else if (tabName === "sale_1") {
                 window.location.href = `/rep-by-acc-name/sale1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName){
@@ -572,6 +662,10 @@
             else if (tabName === "sale_1") {
                 window.location.href = `/rep-by-acc-name/sale1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function downloadPDF(tabName){
@@ -593,6 +687,10 @@
             
             else if (tabName === "sale_1") {
                 window.location.href = `/rep-by-acc-name/sale1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "sale_2") {
+                window.location.href = `/rep-by-acc-name/sale2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
     </script>
