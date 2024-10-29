@@ -31,7 +31,7 @@ class RptAccNameSale1Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
         return Excel::download(new Purchase1Export($sale_by_account), $filename);
@@ -167,12 +167,12 @@ class RptAccNameSale1Controller extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'I');
     }
 
-    public function purchase1Download(Request $request)
+    public function sale1Download(Request $request)
     {
         $sale_by_account = sale_by_account::where('ac1', $request->acc_id)
             ->whereBetween('date', [$request->fromDate, $request->toDate])
@@ -300,7 +300,7 @@ class RptAccNameSale1Controller extends Controller
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "sale1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'D');
     }
