@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AC;
-use App\Models\pipe_pipe_sale_by_account;
+use App\Models\pipe_sale_by_account;
 use App\Exports\Sale2Export;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
