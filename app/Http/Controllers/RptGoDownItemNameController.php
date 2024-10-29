@@ -284,30 +284,39 @@ class RptGoDownItemNameController extends Controller
 
     public function tstockinReport(Request $request)
     {
-
-        // Validate the request if needed
+        // Validate the request
         $request->validate([
             'fromDate' => 'required|date',
             'toDate' => 'required|date',
             'acc_id' => 'required',
-            'outputType' => 'required|in:download,view', // Ensure outputType is either 'download' or 'view'
+            'outputType' => 'required|in:download,view',
         ]);
-
+    
+        // Retrieve data from the database
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
             ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
             ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name','ac.ac_name')
+            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name')
             ->get();
     
+        // Check if data exists
+        if ($gd_pipe_pur_by_item_name->isEmpty()) {
+            return response()->json(['message' => 'No records found for the selected date range.'], 404);
+        }
+    
+        // Generate the PDF
+        return $this->generatePDF($gd_pipe_pur_by_item_name, $request);
+    }
+    
+    private function generatePDF($gd_pipe_pur_by_item_name, Request $request)
+    {
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
     
         $pdf = new MyPDF();
-    
-        // Set document metadata
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
         $pdf->SetTitle('Stock In Report Of Item ' . $request->acc_id);
@@ -320,10 +329,7 @@ class RptGoDownItemNameController extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center;
-                    font-style:italic;text-decoration:underline;color:#17365D">
-                    Stock In Report Of Item
-                    </h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock In Report Of Item</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
@@ -365,7 +371,7 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Qty In</th>
                 </tr>';
-        
+    
         // Iterate through items and add rows
         $count = 1;
         $totalAmount = 0;
@@ -412,10 +418,8 @@ class RptGoDownItemNameController extends Controller
         } else {
             $pdf->Output($filename, 'I'); // For inline view
         }
-
-     
     }
-
+    
     public function tstockout(Request $request){
         $gd_pipe_sale_by_item_name = gd_pipe_sale_by_item_name::where('item_cod',$request->acc_id)
         ->join('ac','gd_pipe_sale_by_item_name.account_name','=','ac.ac_code')
