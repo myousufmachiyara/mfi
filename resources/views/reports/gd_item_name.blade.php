@@ -128,9 +128,13 @@
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('si')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('si')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('si')">
+                                            <i class="fa fa-download"></i> Download
+                                        </a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('si')">
+                                            <i class="fa fa-file-pdf"></i> Print PDF
+                                        </a>
+                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -448,28 +452,51 @@
             }
         }
 
-        function printPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+        // function printPDF(tabName){
+        //     fromDate=$('#fromDate').val();
+        //     toDate=$('#toDate').val();
+        //     acc_id=$('#acc_id').val();
+
+        //     if (tabName === "si") {
+        //         // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+        //         window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+
+        //     }
+
+        // }
+
+        // function downloadPDF(tabName){
+        //     fromDate=$('#fromDate').val();
+        //     toDate=$('#toDate').val();
+        //     acc_id=$('#acc_id').val();
+
+        //     if (tabName === "si") {
+        //         window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+        //     }
+
+        // }
+
+        function printPDF(tabName) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            const acc_id = $('#acc_id').val();
 
             if (tabName === "si") {
-                // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+                // Redirect to download the PDF (you might want to change this based on your server logic)
                 window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-
             }
-
         }
 
-        function downloadPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+        function downloadPDF(tabName) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            const acc_id = $('#acc_id').val();
 
             if (tabName === "si") {
+                // Redirect to view the report (not for downloading)
                 window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
-
         }
+
     </script>
 </html>
