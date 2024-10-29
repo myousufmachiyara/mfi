@@ -34,7 +34,7 @@ class RptAccNameSale2Controller extends Controller
         $filename = "sale2_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Sale1Export($pipe_sale_by_account), $filename);
+        return Excel::download(new Sale2Export($pipe_sale_by_account), $filename);
     }
 
     public function sale2PDF(Request $request)
