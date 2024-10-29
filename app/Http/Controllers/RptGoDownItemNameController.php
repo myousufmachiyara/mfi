@@ -287,9 +287,9 @@ class RptGoDownItemNameController extends Controller
 
         // Validate the request if needed
         $request->validate([
-            'fromDate' => 'required|date',
-            'toDate' => 'required|date',
-            'acc_id' => 'required',
+            // 'fromDate' => 'required|date',
+            // 'toDate' => 'required|date',
+            // 'acc_id' => 'required',
             'outputType' => 'required|in:download,view', // Ensure outputType is either 'download' or 'view'
         ]);
 
@@ -406,8 +406,12 @@ class RptGoDownItemNameController extends Controller
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
     
-        // Output the PDF
-        $pdf->Output($filename, 'D');
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
     }
 
     public function tstockout(Request $request){
