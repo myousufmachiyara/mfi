@@ -221,9 +221,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase2')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase2')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('comb_purchase')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('comb_purchase')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('comb_purchase')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -458,6 +458,10 @@
             else if (tabName === "purchase2") {
                 window.location.href = `/rep-by-acc-name/pur2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "comb_purchase") {
+                window.location.href = `/rep-by-acc-name/comb-pur/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName){
@@ -473,6 +477,9 @@
                 window.location.href = `/rep-by-acc-name/pur2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
+            else if (tabName === "comb_purchase") {
+                window.location.href = `/rep-by-acc-name/comb-pur/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function downloadPDF(tabName){
@@ -488,6 +495,9 @@
                 window.location.href = `/rep-by-acc-name/pur2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
+            else if (tabName === "comb_purchase") {
+                window.location.href = `/rep-by-acc-name/comb-pur/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
     </script>
 </html>

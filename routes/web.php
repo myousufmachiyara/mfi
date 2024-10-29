@@ -357,7 +357,6 @@
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
         Route::get('/rep-godown-by-item-name', [App\Http\Controllers\ReportingController::class, 'byGodownItemName'])->name('rep-by-godown-item-name');
         Route::get('/rep-godown-by-group-name', [App\Http\Controllers\ReportingController::class, 'byGodownGroupName'])->name('rep-by-godown-group-name');
-        
 
         // Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
@@ -377,7 +376,7 @@
         Route::get('/rep-by-acc-name/comb-pur/PDF', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasesPDF'])->name('comb-pur-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/comb-pur/download', [App\Http\Controllers\RptAccNameCombPurController::class, 'combinePurchasesDownload'])->name('comb-pur-rep-by-acc-name-download');
 
-        // Rpt Godwon By Item Name
+        // Godown By Item Name
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
