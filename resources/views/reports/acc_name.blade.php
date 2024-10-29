@@ -726,8 +726,8 @@
                 window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            else if (tabName === "comb_sale") {
+                window.location.href = `/rep-by-acc-name/comb-sale/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
@@ -756,8 +756,8 @@
                 window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            else if (tabName === "comb_sale") {
+                window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
@@ -786,8 +786,8 @@
                 window.location.href = `/rep-by-acc-name/sale2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            else if (tabName === "comb_sale") {
+                window.location.href = `/rep-by-acc-name/comb-sale/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
     </script>
