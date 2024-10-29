@@ -350,11 +350,11 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
-                        $('#sale1_from').text(formattedfromDate);
-                        $('#sale1_to').text(formattedtoDate);
+                        $('#sale_1_from').text(formattedfromDate);
+                        $('#sale_1_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         
-                        $('#sale1_acc').text(selectedAcc);
+                        $('#sale_1_acc').text(selectedAcc);
                         $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
