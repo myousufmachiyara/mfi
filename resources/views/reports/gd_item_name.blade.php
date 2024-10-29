@@ -128,13 +128,13 @@
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('si')">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('SI')">
                                             <i class="fa fa-download"></i> Download
                                         </a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('si')">
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('SI')">
                                             <i class="fa fa-file-pdf"></i> Print PDF
                                         </a>
-                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')">
+                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('SI')">
                                             <i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
@@ -458,10 +458,10 @@
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
-            if (tabName === "si") {
-                 window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            if (tabName === "SI") {
+                // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
                 
-                // window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                 window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
 
             }
 
@@ -472,8 +472,8 @@
             toDate=$('#toDate').val();
             acc_id=$('#acc_id').val();
 
-            if (tabName === "si") {
-                window.location.href = `/rep-godown-by-item-name/si/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "SI") {
+                window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
         }

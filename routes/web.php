@@ -397,9 +397,9 @@
         //RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');
-         Route::get('/rep-godown-by-item-name/si/PDF', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinPDF'])->name('si-rep-godown-by-item-name-PDF');
-         Route::get('/rep-godown-by-item-name/si/download', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinDownload'])->name('si-rep-by-acc-name-download');
-        //Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinReport'])->name('si-rep-godown-by-item-name');
+         //Route::get('/rep-godown-by-item-name/si/PDF', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinPDF'])->name('si-rep-godown-by-item-name-PDF');
+        // Route::get('/rep-godown-by-item-name/si/download', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinDownload'])->name('si-rep-by-acc-name-download');
+        Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinReport'])->name('si-rep-godown-by-item-name');
 
 
 
