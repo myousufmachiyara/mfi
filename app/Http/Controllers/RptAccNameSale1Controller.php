@@ -56,9 +56,9 @@ class RptAccNameSale1Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Sale Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Sale Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Sale Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -77,7 +77,7 @@ class RptAccNameSale1Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
@@ -104,9 +104,9 @@ class RptAccNameSale1Controller extends Controller
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Dispatch To Party</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Sale Inv</th>';
+        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>';
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
         $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
@@ -191,9 +191,9 @@ class RptAccNameSale1Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Sale Report Of Account '.$request->acc_id);
+        $pdf->SetSubject('Sale Report Of Account '.$request->acc_id);
+        $pdf->SetKeywords('Sale Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -212,7 +212,7 @@ class RptAccNameSale1Controller extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
@@ -238,9 +238,9 @@ class RptAccNameSale1Controller extends Controller
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Dispatch To Party</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Sale Inv</th>';
+        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>';
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
         $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
