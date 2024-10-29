@@ -175,9 +175,9 @@ class RptAccNameCombPurController extends Controller
 
     public function combinePurchaseDownload(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
+        $pur_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
             ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+            ->leftjoin('ac','ac.ac_code','=','both_pur_rpt_by_account.ac1')
             ->get();
 
         $currentDate = Carbon::now();
