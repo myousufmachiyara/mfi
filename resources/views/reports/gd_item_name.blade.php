@@ -454,9 +454,9 @@
         }
 
         function printPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            const acc_id = $('#acc_id').val();
 
             if (tabName === "SI") {
                 // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
@@ -468,9 +468,9 @@
         }
 
         function downloadPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            const acc_id = $('#acc_id').val();
 
             if (tabName === "SI") {
                 window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
