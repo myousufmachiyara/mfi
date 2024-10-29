@@ -129,7 +129,7 @@ class RptGoDownItemNameController extends Controller
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['pur_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_id'].'</td>';
+                $html .= '<td style="width:10%;">'.$items['prefix'].$items['pur_id'].'</td>';
                 $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac_name'].'</td>';
                 $html .= '<td style="width:11%;">'.$items['mill_gate_no'].'</td>';
