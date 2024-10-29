@@ -34,7 +34,7 @@ class RptAccNameCombSaleController extends Controller
         $filename = "purchase_comb_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new PurchaseCombExport($both_sale_rpt_by_account), $filename);
+        return Excel::download(new SaleCombExport($both_sale_rpt_by_account), $filename);
     }
 
     public function combineSalePDF(Request $request)
