@@ -88,7 +88,7 @@ class RptGoDownItemNameController extends Controller
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Item Name: <span style="color:black;">'.$gd_pipe_pur_by_item_name[0]['item_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Item Name: <span style="color:black;">'.$gd_pipe_pur_by_item_name[0]['acc_id'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
