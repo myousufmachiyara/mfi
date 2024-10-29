@@ -39,7 +39,7 @@ class RptGoDownItemNameController extends Controller
         $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new tstockinExport($gd_pipe_pur_by_item_name), $filename);
+        return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
     }
 
     public function tstockinPDF(Request $request)
