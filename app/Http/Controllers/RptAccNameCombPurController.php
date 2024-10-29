@@ -105,7 +105,7 @@ class RptAccNameCombPurController extends Controller
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:20%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:25%;color:#17365D;font-weight:bold;">Bill</th>';
         $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Details</th>';
         $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Entry of</th>';
         $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
@@ -236,7 +236,7 @@ class RptAccNameCombPurController extends Controller
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
         $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:20%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:25%;color:#17365D;font-weight:bold;">Bill</th>';
         $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Details</th>';
         $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Entry of</th>';
         $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
