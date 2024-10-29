@@ -47,7 +47,7 @@ class RptGoDownItemNameController extends Controller
             ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
             ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name')
+            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name','ac.ac_name')
             ->get();
     
         $currentDate = Carbon::now();
@@ -94,6 +94,7 @@ class RptGoDownItemNameController extends Controller
                     </td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right;">
                         To Date: <span style="color:black;">' . $formattedToDate . '</span>
                     </td>
