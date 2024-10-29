@@ -466,7 +466,7 @@
             acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
-                window.location.href = `/rep-godown-by-item-name/si?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-godown-by-item-name/si/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
         }
