@@ -477,28 +477,6 @@
 
         }
 
-        // function printPDF(tabName) {
-        //     fromDate=$('#fromDate').val();
-        //     toDate=$('#toDate').val();
-        //     acc_id=$('#acc_id').val();
-
-        //     if (tabName === "si") {
-        //         // Redirect to download the PDF (you might want to change this based on your server logic)
-        //         window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-        //     }
-        // }
-
-        // function downloadPDF(tabName) {
-            
-        //     fromDate=$('#fromDate').val();
-        //     toDate=$('#toDate').val();
-        //     acc_id=$('#acc_id').val();
-
-        //     if (tabName === "si") {
-        //         // Redirect to view the report (not for downloading)
-        //         window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-        //     }
-        // }
 
     </script>
 </html>
