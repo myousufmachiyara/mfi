@@ -127,6 +127,7 @@
                                                 <th>Bill</th>
                                                 <th>Company Name</th>
                                                 <th>Pur Inv</th>
+                                                <th>Remarks</th>
                                                 <th>Amount</th>
                                             </tr>
                                         </thead>
