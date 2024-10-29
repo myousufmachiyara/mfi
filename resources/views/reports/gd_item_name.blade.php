@@ -134,7 +134,8 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('si')">
                                             <i class="fa fa-file-pdf"></i> Print PDF
                                         </a>
-                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('si')">
+                                            <i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -477,9 +478,12 @@
         // }
 
         function printPDF(tabName) {
-            const fromDate = $('#fromDate').val();
-            const toDate = $('#toDate').val();
-            const acc_id = $('#acc_id').val();
+            // const fromDate = $('#fromDate').val();
+            // const toDate = $('#toDate').val();
+            // const acc_id = $('#acc_id').val();
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
                 // Redirect to download the PDF (you might want to change this based on your server logic)
@@ -488,9 +492,13 @@
         }
 
         function downloadPDF(tabName) {
-            const fromDate = $('#fromDate').val();
-            const toDate = $('#toDate').val();
-            const acc_id = $('#acc_id').val();
+            // const fromDate = $('#fromDate').val();
+            // const toDate = $('#toDate').val();
+            // const acc_id = $('#acc_id').val();
+
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
 
             if (tabName === "si") {
                 // Redirect to view the report (not for downloading)
