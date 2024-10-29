@@ -135,7 +135,6 @@ class RptAccNameCombPurController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:10%;">'.$items['no'].'</td>';
                 $html .= '<td style="width:20%;">'.$items['ac2'].'</td>';
