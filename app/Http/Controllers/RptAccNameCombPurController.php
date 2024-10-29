@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AC;
 use App\Models\both_pur_rpt_by_account;
-use App\Exports\Purchase1Export;
+use App\Exports\PurchaseCombExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
