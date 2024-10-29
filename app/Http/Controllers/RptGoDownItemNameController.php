@@ -124,37 +124,29 @@ class RptGoDownItemNameController extends Controller
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
         foreach ($gd_pipe_pur_by_item_name as $items) {
-            if($count%2==0)
-            {
-                $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['pur_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['prefix'].$items['pur_id'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac_name'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['mill_gate_no'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['Pur_remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['pur_qty'].'</td>';
-                $totalAmount=$totalAmount+$items['pur_qty'];
-                $html .= '</tr>';
-            }
-            else{
-                $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['pur_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['prefix'].$items['pur_id'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac_name'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['mill_gate_no'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['Pur_remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['pur_qty'].'</td>';
-                $totalAmount=$totalAmount+$items['pur_qty'];
-                $html .= '</tr>';
-            }
+            // Alternating background color using ternary operator
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; 
+            
+            $html .= '<tr style="background-color:' . $backgroundColor . '">';
+            $html .= '<td style="width:7%;">' . $count . '</td>';
+            $html .= '<td style="width:14%;">' . 
+                      Carbon::createFromFormat('Y-m-d', $items['pur_date'])->format('d-m-y') . 
+                      '</td>';
+            $html .= '<td style="width:10%;">' . $items['prefix'] . $items['pur_id'] . '</td>';
+            $html .= '<td style="width:10%;">' . $items['pur_bill_no'] . '</td>';
+            $html .= '<td style="width:22%;">' . $items['ac_name'] . '</td>';
+            $html .= '<td style="width:11%;">' . $items['mill_gate_no'] . '</td>';
+            $html .= '<td style="width:15%;">' . $items['Pur_remarks'] . '</td>';
+            $html .= '<td style="width:12%;">' . $items['pur_qty'] . '</td>';
+            
+            // Accumulating total quantity
+            $totalAmount += $items['pur_qty'];
+            
+            $html .= '</tr>';
             $count++;
         }
         $html .= '</table>';
-        $pdf->writeHTML($html, true, false, true, false, '');
+         $pdf->writeHTML($html, true, false, true, false, '');
 
         $currentY = $pdf->GetY();
 
