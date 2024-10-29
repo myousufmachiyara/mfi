@@ -45,7 +45,7 @@ class RptGoDownItemNameController extends Controller
     public function tstockinPDF(Request $request)
     {
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
-        ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.item_code')
+        ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
         ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name')
         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->get();
