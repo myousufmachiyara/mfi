@@ -311,8 +311,7 @@ class RptGoDownItemNameController extends Controller
 
     public function tstockinReport(Request $request)
     {
-        // Log request data for debugging
-        \Log::info($request->all());
+    
 
         $request->validate([
             'fromDate' => 'required|date',
