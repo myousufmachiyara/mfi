@@ -118,7 +118,7 @@ class RptGoDownItemNameController extends Controller
             </tr>
             <tr>
                 <td></td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right;">
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
                     To Date: <span style="color:black;">' . $formattedToDate . '</span>
                 </td>
             </tr>
