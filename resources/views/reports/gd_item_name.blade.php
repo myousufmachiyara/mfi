@@ -320,7 +320,7 @@
                         });
                     },
                     error: function(){
-                        alert("error");
+                        alert("errytytor");
                     }
                 });
             }
