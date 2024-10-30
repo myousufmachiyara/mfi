@@ -236,9 +236,9 @@
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('bal')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('bal')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('bal')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -487,6 +487,10 @@
                 window.open(`/rep-godown-by-item-name/so/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
+            else if (tabName === "bal") {
+                window.open(`/rep-godown-by-item-name/bal/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+
+            }
         }
 
         function downloadPDF(tabName) {
@@ -502,6 +506,9 @@
             }
             else if (tabName === "SO") {
                 window.location.href = `/rep-godown-by-item-name/so/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+            else if (tabName === "bal") {
+                window.location.href = `/rep-godown-by-item-name/bal/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
     </script>
