@@ -382,8 +382,13 @@ class RptGoDownItemNameController extends Controller
     {
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
-        $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
+    
+        try {
+            $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
+            $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
+        } catch (\Exception $e) {
+            return back()->withError('Invalid date provided');
+        }
     
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
@@ -392,14 +397,19 @@ class RptGoDownItemNameController extends Controller
         $pdf->SetSubject('Stock Bal Report');
         $pdf->SetKeywords('Stock Bal Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-    
-        // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock Balance Report Of Item</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">
+                        Stock Balance Report Of Item
+                    </h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
+    
+        if (empty($gd_pipe_addless_by_item_name)) {
+            $pdf->writeHTML('<p>No records found.</p>', true, false, true, false, '');
+            return $pdf->Output('no_records.pdf', 'I');
+        }
     
         // Header details
         $html = '
@@ -427,9 +437,7 @@ class RptGoDownItemNameController extends Controller
                 </td>
             </tr>
         </table>';
-
         $pdf->writeHTML($html, true, false, true, false, '');
-
     
         // Table header for data
         $html = '
@@ -444,14 +452,12 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:15%;color:#17365D;font-weight:bold;">Qty Less</th>
                 </tr>';
     
-        // Iterate through items and add rows
         $count = 1;
         $totalAdd = 0;
         $totalLess = 0;
     
         foreach ($gd_pipe_addless_by_item_name as $item) {
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
-    
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
@@ -462,41 +468,30 @@ class RptGoDownItemNameController extends Controller
                     <td style="width:15%;">' . $item['pc_add'] . '</td>
                     <td style="width:15%;">' . $item['pc_less'] . '</td>
                 </tr>';
-            
             $totalAdd += $item['pc_add'];
-            $totalLess += $item['pc_less']; // Accumulate total quantity
+            $totalLess += $item['pc_less'];
             $count++;
         }
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
     
-        // Display total amount at the bottom
+        // Render totals at the bottom
         $cellWidth = 25;
         $currentY = $pdf->GetY();
-
-        // Render $totalLess
+    
         $pdf->SetXY(148, $currentY + 2);
         $pdf->MultiCell($cellWidth, 5, $totalAdd, 1, 'C');
-
-        // Render $totalAdd adjacent to $totalLess
+    
         $pdf->SetXY(148 + $cellWidth, $currentY + 2);
         $pdf->MultiCell($cellWidth, 5, $totalLess, 1, 'C');
-
     
-        // Prepare filename for the PDF
-        $accId = $request->acc_id;
-        $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
-        $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
-        $filename = "tstockbal_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        // Prepare filename
+        $filename = "tstockbal_report_{$request->acc_id}_from_{$fromDate}_to_{$toDate}.pdf";
     
-        // Determine output type
-        if ($request->outputType === 'download') {
-            $pdf->Output($filename, 'D'); // For download
-        } else {
-            $pdf->Output($filename, 'I'); // For inline view
-        }
+        $pdf->Output($filename, $request->outputType === 'download' ? 'D' : 'I');
     }
+    
 
 
 }
