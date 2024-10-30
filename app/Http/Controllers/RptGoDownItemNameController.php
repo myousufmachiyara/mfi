@@ -99,36 +99,29 @@ class RptGoDownItemNameController extends Controller
     
         // Header details
         $html = '
-
-        <div style="border: 2px solid #17365D; padding: 10px; border-radius: 5px; width: 100%; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);">
-            <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D;">
-                        Item Name: 
-                        <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
-                    </td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right;">
-                        Print Date: 
-                        <span style="color:black;">' . $formattedDate . '</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right;">
-                        From Date: 
-                        <span style="color:black;">' . $formattedFromDate . '</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right;">
-                        To Date: 
-                        <span style="color:black;">' . $formattedToDate . '</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
+        <table style="border:1px solid #000; width:100%; padding:10px;">
+            <tr>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000;">
+                    Item Name: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;">
+                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid #000;"></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;">
+                    From Date: <span style="color:black;">' . $formattedFromDate . '</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right;">
+                    To Date: <span style="color:black;">' . $formattedToDate . '</span>
+                </td>
+            </tr>
+        </table>';
+        
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Table header for data
