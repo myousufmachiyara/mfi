@@ -472,15 +472,15 @@ class RptGoDownItemNameController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Display total amount at the bottom
-        $cellWidth = 20;
+        $cellWidth = 22;
         $currentY = $pdf->GetY();
 
         // Render $totalLess
-        $pdf->SetXY(155, $currentY + 5);
+        $pdf->SetXY(150, $currentY + 5);
         $pdf->MultiCell($cellWidth, 5, $totalAdd, 1, 'C');
 
         // Render $totalAdd adjacent to $totalLess
-        $pdf->SetXY(155 + $cellWidth, $currentY + 5);
+        $pdf->SetXY(150 + $cellWidth, $currentY + 5);
         $pdf->MultiCell($cellWidth, 5, $totalLess, 1, 'C');
 
     
