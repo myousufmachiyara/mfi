@@ -405,6 +405,6 @@
         
         //RPT Godown By Item Name bal 
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
-        Route::get('/rep-godown-by-item-name/bal/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstocktbalReport'])->name('bal-rep-godown-by-item-name-report');
+        Route::get('/rep-godown-by-item-name/bal/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalReport'])->name('bal-rep-godown-by-item-name-report');
         
     });
