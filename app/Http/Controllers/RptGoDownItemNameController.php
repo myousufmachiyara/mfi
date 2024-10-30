@@ -282,32 +282,59 @@ class RptGoDownItemNameController extends Controller
     // }
 
 
+    // public function tstockinReport(Request $request)
+    // {
+    //     // Validate the request
+    //     $request->validate([
+    //         'fromDate' => 'required|date',
+    //         'toDate' => 'required|date',
+    //         'acc_id' => 'required',
+    //         'outputType' => 'required|in:download,view',
+    //     ]);
+    
+    //     // Retrieve data from the database
+    //     $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
+    //         ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
+    //         ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
+    //         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+    //         ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name')
+    //         ->get();
+    
+    //     // Check if data exists
+    //     if ($gd_pipe_pur_by_item_name->isEmpty()) {
+    //         return response()->json(['message' => 'No records found for the selected date range.'], 404);
+    //     }
+    
+    //     // Generate the PDF
+    //     return $this->generatePDF($gd_pipe_pur_by_item_name, $request);
+    // }
+
     public function tstockinReport(Request $request)
     {
-        // Validate the request
+        // Log request data for debugging
+        \Log::info($request->all());
+
         $request->validate([
             'fromDate' => 'required|date',
             'toDate' => 'required|date',
             'acc_id' => 'required',
-            'outputType' => 'required|in:download,view',
         ]);
-    
-        // Retrieve data from the database
+
+        // Fetch records
         $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
             ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
             ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
             ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name')
             ->get();
-    
-        // Check if data exists
+
         if ($gd_pipe_pur_by_item_name->isEmpty()) {
             return response()->json(['message' => 'No records found for the selected date range.'], 404);
         }
-    
-        // Generate the PDF
-        return $this->generatePDF($gd_pipe_pur_by_item_name, $request);
+
+        return response()->json($gd_pipe_pur_by_item_name);
     }
+
     
     private function generatePDF($gd_pipe_pur_by_item_name, Request $request)
     {
