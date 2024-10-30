@@ -62,7 +62,7 @@ class RptGoDownItemNameController extends Controller
             ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
             ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name')
+            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name', 'item_entry2.item_remark')
             ->get();
     
         // Check if data exists
@@ -99,7 +99,7 @@ class RptGoDownItemNameController extends Controller
     
         // Header details
         $html = '
-        <table style="border:1px solid #000; width:100%; padding:8px;">
+        <table style="border:1px solid #000; width:100%; padding:7px;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000;">
                     Item Name: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
@@ -109,7 +109,9 @@ class RptGoDownItemNameController extends Controller
                 </td>
             </tr>
             <tr>
-                <td style="border-bottom:1px solid #000;"></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000;">
+                    Item Name: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_remark'] . '</span>
+                </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;">
                     From Date: <span style="color:black;">' . $formattedFromDate . '</span>
                 </td>
