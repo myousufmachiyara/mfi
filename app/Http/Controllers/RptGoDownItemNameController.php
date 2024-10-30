@@ -12,6 +12,7 @@ use App\Models\gd_pipe_addless_by_item_name;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
+use Illuminate\Validation\Validator;
 
 class RptGoDownItemNameController extends Controller
 {

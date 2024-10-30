@@ -436,12 +436,13 @@
 
             
         }
-        // function getReport() {
-        //     const activeTabLink = document.querySelector('.nav-link.active');
-        //     if (activeTabLink) {
-        //         activeTabLink.click();
-        //     }
-        // }
+
+        function getReport() {
+            const activeTabLink = document.querySelector('.nav-link.active');
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
 
         // function downloadExcel(tabName){
         //     fromDate=$('#fromDate').val();
@@ -479,60 +480,50 @@
         // }
 
         function getInputValues() {
-    return {
-        fromDate: $('#fromDate').val(),
-        toDate: $('#toDate').val(),
-        acc_id: $('#acc_id').val()
-    };
-}
+            return {
+                fromDate: $('#fromDate').val(),
+                toDate: $('#toDate').val(),
+                acc_id: $('#acc_id').val()
+            };
+        }
 
-function getReport() {
-    const activeTabLink = document.querySelector('.nav-link.active');
-    if (activeTabLink) {
-        activeTabLink.click();
-    }
-}
+        function downloadExcel(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
 
-function downloadExcel(tabName) {
-    const { fromDate, toDate, acc_id } = getInputValues();
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
-    if (!fromDate || !toDate || !acc_id) {
-        alert('Please fill in all required fields.');
-        return;
-    }
+            if (tabName === "SI") {
+                window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+        }
 
-    if (tabName === "SI") {
-        window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-    }
-}
+        function printPDF(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
 
-function printPDF(tabName) {
-    const { fromDate, toDate, acc_id } = getInputValues();
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
-    if (!fromDate || !toDate || !acc_id) {
-        alert('Please fill in all required fields.');
-        return;
-    }
+            if (tabName === "SI") {
+                window.location.href = `/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+        }
 
-    if (tabName === "SI") {
-        window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-    }
-}
+        function downloadPDF(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
 
-function downloadPDF(tabName) {
-    const { fromDate, toDate, acc_id } = getInputValues();
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
-    if (!fromDate || !toDate || !acc_id) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-
-    if (tabName === "SI") {
-        window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-    }
-}
-
-
-
+            if (tabName === "SI") {
+                window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+        }
     </script>
 </html>
