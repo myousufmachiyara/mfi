@@ -401,8 +401,6 @@
         // Route::get('/rep-godown-by-item-name/si/download', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinDownload'])->name('si-rep-by-acc-name-download');
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinReport'])->name('si-rep-godown-by-item-name');
 
-
-
         //RPT Godown By Item Name so
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
         

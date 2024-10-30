@@ -309,9 +309,6 @@ class RptGoDownItemNameController extends Controller
         return $this->generatePDF($gd_pipe_pur_by_item_name, $request);
     }
 
-    
-
-    
     private function generatePDF($gd_pipe_pur_by_item_name, Request $request)
     {
         $currentDate = Carbon::now();
@@ -441,6 +438,5 @@ class RptGoDownItemNameController extends Controller
         return $gd_pipe_addless_by_item_name;
         
     }
-
 
 }
