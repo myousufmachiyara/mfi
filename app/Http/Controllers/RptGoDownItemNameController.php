@@ -297,7 +297,7 @@ class RptGoDownItemNameController extends Controller
         $count = 1;
         $totalAmount = 0;
     
-        foreach ($gd_pipe_pur_by_item_name as $item) {
+        foreach ($gd_pipe_sale_by_item_name as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
             $html .= '
