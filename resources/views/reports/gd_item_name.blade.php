@@ -444,40 +444,6 @@
             }
         }
 
-        // function downloadExcel(tabName){
-        //     fromDate=$('#fromDate').val();
-        //     toDate=$('#toDate').val();
-        //     acc_id=$('#acc_id').val();
-
-        //     if (tabName === "SI") {
-        //         window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-        //     }
-        // }
-
-        // function printPDF(tabName){
-        //     const fromDate = $('#fromDate').val();
-        //     const toDate = $('#toDate').val();
-        //     const acc_id = $('#acc_id').val();
-
-        //     if (tabName === "SI") {
-        //         // window.open(`/rep-godown-by-item-name/si/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
-                
-        //          window.location.href = `/rep-godown-by-item-name/si?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-
-        //     }
-
-        // }
-
-        // function downloadPDF(tabName){
-        //     const fromDate = $('#fromDate').val();
-        //     const toDate = $('#toDate').val();
-        //     const acc_id = $('#acc_id').val();
-
-        //     if (tabName === "SI") {
-        //         window.location.href = `/rep-godown-by-item-name/si?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-        //     }
-
-        // }
 
         function getInputValues() {
             return {
@@ -509,7 +475,8 @@
             }
 
             if (tabName === "SI") {
-                window.location.href = `/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+
             }
         }
 
