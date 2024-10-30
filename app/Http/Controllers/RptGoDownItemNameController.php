@@ -365,7 +365,7 @@ class RptGoDownItemNameController extends Controller
         // Retrieve data from the database
         $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod', $request->acc_id)
         ->join('item_entry2', 'gd_pipe_addless_by_item_name.item_cod', '=', 'item_entry2.it_cod')
-        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->select('gd_pipe_addless_by_item_name.*', 'item_entry2.item_name', 'item_entry2.item_remark')
         ->get();
     
