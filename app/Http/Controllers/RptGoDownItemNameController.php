@@ -447,6 +447,7 @@ class RptGoDownItemNameController extends Controller
         // Iterate through items and add rows
         $count = 1;
         $totalAdd = 0;
+        $totalLess = 0;
     
         foreach ($gd_pipe_addless_by_item_name as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
@@ -462,7 +463,8 @@ class RptGoDownItemNameController extends Controller
                     <td style="width:15%;">' . $item['pc_less'] . '</td>
                 </tr>';
             
-            $totalAdd += $item['pc_add']; // Accumulate total quantity
+            $totalAdd += $item['pc_add'];
+            $totalLess += $item['pc_less']; // Accumulate total quantity
             $count++;
         }
     
@@ -473,7 +475,7 @@ class RptGoDownItemNameController extends Controller
         $currentY = $pdf->GetY();
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        $pdf->MultiCell(28, 5, $totalLess, 1, 'C');
         $pdf->SetXY(175, $currentY + 5);
         $pdf->MultiCell(28, 5, $totalAdd, 1, 'C');
     
