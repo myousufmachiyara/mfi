@@ -311,7 +311,8 @@ class RptGoDownItemNameController extends Controller
 
     public function tstockinReport(Request $request)
     {
-    
+        // Log request data for debugging
+      //  \Log::info($request->all());
 
         $request->validate([
             'fromDate' => 'required|date',
@@ -331,9 +332,9 @@ class RptGoDownItemNameController extends Controller
             return response()->json(['message' => 'No records found for the selected date range.'], 404);
         }
 
-        return response()->json($gd_pipe_pur_by_item_name);
+        // Generate the PDF
+       return $this->generatePDF($gd_pipe_pur_by_item_name, $request);
     }
-
     
     private function generatePDF($gd_pipe_pur_by_item_name, Request $request)
     {
