@@ -101,7 +101,7 @@ class RptGoDownItemNameController extends Controller
         $html = '
         <table style="border:1px solid #000; width:100%; padding:7px; border-collapse:collapse;">
             <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000; width:70%;">
+                <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000; width:80%;">
                     Item Name: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;border-left:1px solid #000; width:20%;">
