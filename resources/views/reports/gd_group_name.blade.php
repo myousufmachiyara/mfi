@@ -37,7 +37,7 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#stock_rpt" href="#stock_rpt" data-bs-toggle="tab">Stock Report</a>
+                                <a class="nav-link" data-bs-target="#STOCKALL" href="#STOCKALL" data-bs-toggle="tab">Stock Report</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#sale_rpt" href="#sale_rpt" data-bs-toggle="tab">Stock In Report</a>
@@ -51,34 +51,34 @@
                            
                         </ul>
                         <div class="tab-content">
-                            <div id="stock_rpt" class="tab-pane">
+                            <div id="STOCKALL" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6 ">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="all_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="all_to"></span>
                                             </h4>
                                             
                                             
                                           
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="color:#17365D">Group Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:black;" id="all_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('STOCKALL')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('STOCKALL')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('STOCKALL')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -86,16 +86,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
-                                                    <th>Inv No.</th>
-                                                    <th>Mill No.</th>
-                                                    <th>Dispatch To Party</th>
-                                                    <th>Sale Inv</th>
+                                                    <th>It Code</th>
+                                                    <th>Item Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Qty In Hand</th>
+                                                    <th>Weight In Hand</th>
+                                                    
                                                 </tr>
                                             </thead>
-                                            <tbody id="P1TbleBody">
+                                            <tbody id="STOCKALLTbleBody">
 
                                             </tbody>
                                         </table>
@@ -272,10 +271,58 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#stock_rpt"){
+            if(tabId=="#STOCKALL"){
+                let table = document.getElementById('STOCKALLTbleBody');
                 
-            }
-            
+                // Clear the table
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+
+                const url = "/rep-godown-by-item-group/all";
+                const tableID = "#STOCKALLTbleBody";
+
+                // Helper function to safely access data
+                const safeVal = (val) => val ? val : "";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id: acc_id,
+                    },
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function (result) {
+                        $('#all_from').text(formattedfromDate);
+                        $('#all_to').text(formattedtoDate);
+
+                        const selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#all_acc').text(selectedAcc);
+
+                        $(tableID).empty(); // Clear the loading message
+
+                        // Populate the table with new data
+                        $.each(result, function (k, v) {
+                            let html = `<tr>
+                                <td>${k + 1}</td>
+                                <td>${safeVal(v['it_cod'])}</td>
+                                <td>${safeVal(v['item_name'])}</td>
+                                <td>${safeVal(v['item_remark'])}</td>
+                                <td>${safeVal(v['opp_bal'])}</td>
+                                <td>${safeVal(v['wt'])}</td>
+                            </tr>`;
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function () {
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
+            }            
             else if(tabId=="#SI"){
                 var table = document.getElementById('SITbleBody');
                 while (table.rows.length > 0) {
@@ -318,48 +365,7 @@
                 });
             }
             
-            // else if(tabId=="#SO"){
-            //     var table = document.getElementById('SOTbleBody');
-            //     while (table.rows.length > 0) {
-            //         table.deleteRow(0);
-            //     }
-            //     url="/rep-godown-by-item-name/so";
-            //     tableID="#SOTbleBody";
-
-            //     $.ajax({
-            //         type: "GET",
-            //         url: url,
-            //         data:{
-            //             fromDate: fromDate,
-            //             toDate: toDate,
-            //             acc_id:acc_id,
-            //         }, 
-                    
-            //         success: function(result){
-            //             $('#so_from').text(formattedfromDate);
-            //             $('#so_to').text(formattedtoDate);
-            //             var selectedAcc = $('#acc_id').find("option:selected").text();
-            //             $('#so_acc').text(selectedAcc);
-
-            //             $.each(result, function(k,v){
-            //                 var html="<tr>";
-            //                 html += "<td>"+(k+1)+"</td>"
-            //                 html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
-            //                 html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-            //                 html += "<td>" + (v['pur_inv'] ? v['pur_inv'] : "") + "</td>";
-            //                 html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-            //                 html += "<td>" + (v['mill_gate'] ? v['mill_gate'] : "") + "</td>";
-            //                 html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-            //                 html += "<td>" + (v['sales_qty'] ? v['sales_qty'] : "") + "</td>";
-            //                 html +="</tr>";
-            //                 $(tableID).append(html);
-            //             });
-            //         },
-            //         error: function(){
-            //             alert("error");
-            //         }
-            //     });
-            // }
+            
             else if (tabId === "#SO") {
                 let table = document.getElementById('SOTbleBody');
                 
