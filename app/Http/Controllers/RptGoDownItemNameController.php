@@ -104,7 +104,7 @@ class RptGoDownItemNameController extends Controller
                 <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000; width:70%;">
                     Item Name: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_name'] . '</span>
                 </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Print Date: <span style="color:black;">' . $formattedDate . '</span>
                 </td>
             </tr>
@@ -112,7 +112,7 @@ class RptGoDownItemNameController extends Controller
                 <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000;width:70%;">
                     Item Remarks: <span style="color:black;">' . $gd_pipe_pur_by_item_name[0]['item_remark'] . '</span>
                 </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     From Date: <span style="color:black;">' . $formattedFromDate . '</span>
                 </td>
             </tr>
