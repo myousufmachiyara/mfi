@@ -403,7 +403,7 @@
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/so/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutReport'])->name('so-rep-godown-by-item-name-report');
         
-        //RPT Godown By Item Name bal
+        //RPT Godown By Item Name bal 
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/bal/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstocktbalReport'])->name('bal-rep-godown-by-item-name-report');
         
