@@ -13,6 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
 use Illuminate\Validation\Validator;
+use App\Exports\TStockInExport;
 
 class RptGoDownItemNameController extends Controller
 {
