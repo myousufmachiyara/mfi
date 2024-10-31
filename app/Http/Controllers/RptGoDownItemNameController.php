@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Validation\Validator;
 use App\Exports\TStockInExport;
 use App\Exports\TStockOutExport;
+use App\Exports\TStockBalExport;
 
 class RptGoDownItemNameController extends Controller
 {
@@ -69,10 +70,10 @@ class RptGoDownItemNameController extends Controller
     
     public function tstockbalExcel(Request $request)
     {
-        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
-        ->leftjoin('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
+        $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod',$request->acc_id)
+        ->leftjoin('ac','gd_pipe_addless_by_item_name.ac_cod','=','ac.ac_code')
         ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        ->select('gd_pipe_pur_by_item_name.*','ac.ac_name')
+        ->select('gd_pipe_addless_by_item_name.*','ac.ac_name')
         ->get();
         
         $accId = $request->acc_id;
@@ -80,10 +81,10 @@ class RptGoDownItemNameController extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "tstockbal_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
+        return Excel::download(new TStockBalExport($gd_pipe_addless_by_item_name), $filename);
     }
 
     public function tstockinReport(Request $request)
