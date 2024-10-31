@@ -32,6 +32,7 @@ class TStockInExport implements FromCollection, WithHeadings
             'Item Code',
             'Purchase Quantity',
             'Weight Piece',
+            'Company Name',
         ];
     }
 }
