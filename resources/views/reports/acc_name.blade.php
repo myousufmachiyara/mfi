@@ -850,7 +850,7 @@
             }
 
             else if (tabName === "jv") {
-                window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-by-acc-name/jv/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
