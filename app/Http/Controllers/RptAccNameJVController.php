@@ -106,8 +106,8 @@ class RptAccNameJVController extends Controller
         $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Date</th>';
         $html .= '<th style="width:23%;color:#17365D;font-weight:bold;">Account Name</th>';
         $html .= '<th style="width:27%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>';
+        $html .= '<th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>';
+        $html .= '<th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -127,8 +127,8 @@ class RptAccNameJVController extends Controller
                 $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
                 $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
                 $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
@@ -140,8 +140,8 @@ class RptAccNameJVController extends Controller
                 $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
                 $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
                 $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
