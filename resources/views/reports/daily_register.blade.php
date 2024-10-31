@@ -697,113 +697,52 @@
             }
         }
 
-        function getReport() {
-            const activeTabLink = document.querySelector('.nav-link.active');
-            if (activeTabLink) {
-                activeTabLink.click();
+        function getInputValues() {
+            return {
+                fromDate: $('#fromDate').val(),
+                toDate: $('#toDate').val(),
+                acc_id: $('#acc_id').val()
+            };
+        }
+
+        function downloadExcel(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
+
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (tabName === "sale_1") {
+                window.location.href = `/rep-by-daily-reg/sale1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
-        function downloadExcel(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+        function printPDF(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
 
-            if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
             }
 
-            else if (tabName === "purchase2") {
-                window.location.href = `/rep-by-acc-name/pur2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_purchase") {
-                window.location.href = `/rep-by-acc-name/comb-pur/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "sale_1") {
-                window.location.href = `/rep-by-acc-name/sale1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_sale") {
-                window.location.href = `/rep-by-acc-name/comb-sale/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "jv") {
-                window.location.href = `/rep-by-acc-name/jv/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "sale_1") {
+                window.location.href = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
-        function printPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+        function downloadPDF(tabName) {
+            const { fromDate, toDate, acc_id } = getInputValues();
 
-            if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
             }
 
-            else if (tabName === "purchase2") {
-                window.location.href = `/rep-by-acc-name/pur2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_purchase") {
-                window.location.href = `/rep-by-acc-name/comb-pur/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "sale_1") {
-                window.location.href = `/rep-by-acc-name/sale1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_sale") {
-                window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "jv") {
-                window.location.href = `/rep-by-acc-name/jv/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "sale_1") {
+                window.location.href = `/rep-by-daily-reg/sale1/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
-
-        function downloadPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
-
-            if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "purchase2") {
-                window.location.href = `/rep-by-acc-name/pur2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_purchase") {
-                window.location.href = `/rep-by-acc-name/comb-pur/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-            
-            else if (tabName === "sale_1") {
-                window.location.href = `/rep-by-acc-name/sale1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-
-            else if (tabName === "comb_sale") {
-                window.location.href = `/rep-by-acc-name/comb-sale/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-            
-            else if (tabName === "jv") {
-                window.location.href = `/rep-by-acc-name/jv/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
-            }
-        }
+        
     </script>
 </html>

@@ -438,8 +438,6 @@
                     }
                 });
             }
-
-            
         }
 
         function getReport() {
@@ -448,7 +446,6 @@
                 activeTabLink.click();
             }
         }
-
 
         function getInputValues() {
             return {

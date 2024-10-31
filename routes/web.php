@@ -404,8 +404,7 @@
         // RPT by Daily Register Sale 1
         Route::get('/rep-by-daily-reg/sale1', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1'])->name('sale1-rep-by-daily-reg');
         Route::get('/rep-by-daily-reg/sale1/excel', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Excel'])->name('sale1-rep-by-daily-reg-excel');
-        Route::get('/rep-by-daily-reg/sale1/PDF', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1PDF'])->name('sale1-rep-by-daily-reg-PDF');
-        Route::get('/rep-by-daily-reg/sale1/download', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Download'])->name('sale1-rep-by-daily-reg-download');
+        Route::get('/rep-by-daily-reg/sale1/report', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Report'])->name('sale1-rep-by-daily-reg-report');
 
         // RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
