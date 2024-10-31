@@ -37,61 +37,34 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">General Ledger</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">General Ledger R</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_age" href="#sale_age" data-bs-toggle="tab">Sales Ageing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_age" href="#pur_age" data-bs-toggle="tab">Purchase Ageing</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_2" href="#sale_2" data-bs-toggle="tab">Sale 2</a>
+                                <a class="nav-link" data-bs-target="#sale_pipe" href="#sale_pipe" data-bs-toggle="tab">Sale Pipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#comb_sale" href="#comb_sale" data-bs-toggle="tab">Combine Sale</a>
+                                <a class="nav-link" data-bs-target="#sale_godown" href="#sale_godown" data-bs-toggle="tab">Sale Godown</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_2" href="#purchase_2" data-bs-toggle="tab">Purchase 2</a>
+                                <a class="nav-link" data-bs-target="#purchase_pipe" href="#purchase_pipe" data-bs-toggle="tab">Purchase Pipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#comb_purchase" href="#comb_purchase" data-bs-toggle="tab">Combine Purchase</a>
+                                <a class="nav-link" data-bs-target="#JV1" href="#JV1" data-bs-toggle="tab">JV1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#JV" href="#JV" data-bs-toggle="tab">Vouchers</a>
+                                <a class="nav-link" data-bs-target="#JV2" href="#JV2" data-bs-toggle="tab">JV2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sal_ret" href="#sal_ret" data-bs-toggle="tab">Sale Return</a>
+                                <a class="nav-link" data-bs-target="#receipt" href="#receipt" data-bs-toggle="tab">Receipt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_ret" href="#pur_ret" data-bs-toggle="tab">Purchase Return</a>
+                                <a class="nav-link" data-bs-target="#daily_reg" href="#daily_reg" data-bs-toggle="tab">Daily Register</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="GL" class="tab-pane">
-                               
-                            </div>
-                            <div id="GL_R" class="tab-pane">
-                                <p>GL_R</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                            </div>
-                            <div id="sale_age" class="tab-pane">
-                                <p>Purchase Report</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                            </div>
-                            <div id="pur_age" class="tab-pane">
-                                <p>Ageing</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
-                            </div>
                             <div id="sale_1" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6">
@@ -138,30 +111,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="sale_2" class="tab-pane">
+                            <div id="sale_pipe" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_2_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_pipe_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_2_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_pipe_to"></span>
                                             </h4>
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_2_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="sale_pipe_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_2')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_2')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_pipe')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_pipe')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_pipe')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -177,37 +150,37 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="Sale2TbleBody">
+                                            <tbody id="SalePipeTbleBody">
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div id="comb_sale" class="tab-pane">
+                            <div id="sale_godown" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_comb_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_godown_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_comb_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_godown_to"></span>
                                             </h4>
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_comb_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="sale_godown_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('comb_sale')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('comb_sale')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('comb_sale')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_godown')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_godown')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_godown')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -222,7 +195,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="ComSaleTbleBody">
+                                            <tbody id="SaleGodownTbleBody">
 
                                             </tbody>
                                         </table>
@@ -277,32 +250,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="purchase_2" class="tab-pane">
+                            <div id="purchase_pipe" class="tab-pane">
                                 <div class="row form-group pb-3">
 
                                     <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur2_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="pp_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur2_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="pp_to"></span>
                                             </h4>
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur2_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="pp_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase2')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase2')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('pp')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pp')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('pp')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -318,82 +291,37 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="P2TbleBody">
+                                            <tbody id="PPTbleBody">
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div id="comb_purchase" class="tab-pane">
+                            <div id="JV1" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur_comb_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="jv1_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur_comb_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="jv1_to"></span>
                                             </h4>
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur_comb_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="jv1_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('comb_purchase')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('comb_purchase')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('comb_purchase')"><i class="fa fa-file-excel"></i> Excel</a>      
-                                    </div>
-                                    <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/No</th>
-                                                    <th>Sales Date</th>
-                                                    <th>Inv No.</th>
-                                                    <th>Bill</th>
-                                                    <th>Detail To Party</th>
-                                                    <th>Entry Of</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="ComPurTbleBody">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="JV" class="tab-pane">
-                                <div class="row form-group pb-3">
-                                    <div class="col-lg-6">
-                                        <div class="bill-to">
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
-                                                <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="jv_from"></span>
-                                            
-                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
-                                            
-                                                <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="jv_to"></span>
-                                            </h4>
-                                            
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="jv_acc"></span>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('jv')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('jv')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('jv')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('jv1')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('jv1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('jv1')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -408,20 +336,18 @@
                                                     <th>Credit</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="JVTbleBody">
+                                            <tbody id="JV1TbleBody">
 
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div id="#sal_ret" class="tab-pane">
-                                <p>Sale Return</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            <div id="JV2" class="tab-pane">
                             </div>
-                            <div id="#pur_ret" class="tab-pane">
-                                <p>Purchase Return</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                            <div id="receipt" class="tab-pane">
+                            </div>
+                            <div id="daily_reg" class="tab-pane">
                             </div>
                         </div>
                     </div>
@@ -446,15 +372,7 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#GL"){
-            }
-            else if(tabId=="#GL_R"){
-            }
-            else if(tabId=="#sale_age"){
-            }
-            else if(tabId=="#pur_age"){
-            }
-            else if(tabId=="#sale_1"){
+            if(tabId=="#sale_1"){
                 var table = document.getElementById('Sale1TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -500,7 +418,7 @@
                     }
                 });
             }
-            else if(tabId=="#sale_2"){
+            else if(tabId=="#sale_pipe"){
                 var table = document.getElementById('Sale2TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -546,7 +464,7 @@
                     }
                 });
             }
-            else if(tabId=="#comb_sale"){
+            else if(tabId=="#sale_godown"){
                 var table = document.getElementById('ComSaleTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -636,7 +554,7 @@
                     }
                 });
             }
-            else if(tabId=="#purchase_2"){
+            else if(tabId=="#purchase_pipe"){
                 var table = document.getElementById('P2TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -681,53 +599,7 @@
                     }
                 });
             }
-            else if(tabId=="#comb_purchase"){
-                var table = document.getElementById('ComPurTbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
-                url="/rep-by-acc-name/comb-pur";
-                tableID="#ComPurTbleBody";
-
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
-                    beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
-                    },
-                    success: function(result){
-                        $('#pur_comb_from').text(formattedfromDate);
-                        $('#pur_comb_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#pur_comb_acc').text(selectedAcc);
-
-                        $(tableID).empty(); // Clear the loading message
-
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
-                            html +="</tr>";
-
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
-                    }
-                });
-            }
-            else if(tabId=="#JV"){
+            else if(tabId=="#JV1"){
                 var table = document.getElementById('JVTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
@@ -773,9 +645,55 @@
                     }
                 });
             }
-            else if(tabId=="#sal_ret"){
+            else if(tabId=="#JV2"){
+                var table = document.getElementById('JVTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/jv";
+                tableID="#JVTbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+                        $('#jv_from').text(formattedfromDate);
+                        $('#jv_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#jv_acc').text(selectedAcc);
+
+                        $(tableID).empty(); // Clear the loading message
+
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html +="</tr>";
+
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
             }
-            else if(tabId=="#pur_ret"){
+            else if(tabId=="#receipt"){
+            }
+            else if(tabId=="#daily_reg"){
             }
         }
 
