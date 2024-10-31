@@ -237,12 +237,12 @@ class RptAccNameJVController extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html .= '<th style="width:8%;color:#17365D;font-weight:bold;">Voucher</th>';
-        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Date</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>';
-        $html .= '<th style="width:25%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>';
+        $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">Vouc</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Date</th>';
+        $html .= '<th style="width:23%;color:#17365D;font-weight:bold;">Account Name</th>';
+        $html .= '<th style="width:27%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html .= '<th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>';
+        $html .= '<th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -258,12 +258,12 @@ class RptAccNameJVController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $html .= '<td style="width:7%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
                 $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
@@ -271,12 +271,12 @@ class RptAccNameJVController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $html .= '<td style="width:7%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:13%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
                 $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
@@ -290,12 +290,14 @@ class RptAccNameJVController extends Controller
 
         $pdf->SetFont('helvetica', 'B', 12);
 
-        // Column 3
-        $pdf->SetXY(155, $currentY+5);
-        $pdf->MultiCell(20, 5, $totalDebit, 1, 'C');
+        $pdf->SetXY(125, $currentY+5);
+        $pdf->MultiCell(27, 5, 'Total', 1, 'C');
 
-        $pdf->SetXY(175, $currentY+5);
-        $pdf->MultiCell(28, 5, $totalCredit, 1, 'C');
+        $pdf->SetXY(152, $currentY+5);
+        $pdf->MultiCell(25, 5, $totalDebit, 1, 'C');
+
+        $pdf->SetXY(177, $currentY+5);
+        $pdf->MultiCell(25, 5, $totalCredit, 1, 'C');
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
