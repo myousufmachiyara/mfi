@@ -14,6 +14,7 @@ use App\Services\myPDF;
 use Carbon\Carbon;
 use Illuminate\Validation\Validator;
 use App\Exports\TStockInExport;
+use App\Exports\TStockOutExport;
 
 class RptGoDownItemNameController extends Controller
 {
