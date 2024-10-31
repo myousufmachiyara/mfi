@@ -468,11 +468,11 @@
             }
 
             else if (tabName === "SO") {
-                window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-godown-by-item-name/so/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
             else if (tabName === "bal") {
-                window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-godown-by-item-name/bal/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
 
