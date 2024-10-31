@@ -188,7 +188,7 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('SO')">
                                             <i class="fa fa-file-pdf"></i> Print PDF
                                         </a>
-                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('SO ')">
+                                           <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('SO')">
                                             <i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
