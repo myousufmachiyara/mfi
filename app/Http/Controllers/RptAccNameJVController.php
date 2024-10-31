@@ -157,10 +157,10 @@ class RptAccNameJVController extends Controller
 
         // Column 3
         $pdf->SetXY(155, $currentY+5);
-        $pdf->MultiCell(28, 5, $totalDebit, 1, 'C');
+        $pdf->MultiCell(25, 5, $totalDebit, 1, 'C');
 
-        $pdf->SetXY(185, $currentY+5);
-        $pdf->MultiCell(28, 5, $totalCredit, 1, 'C');
+        $pdf->SetXY(180, $currentY+5);
+        $pdf->MultiCell(25, 5, $totalCredit, 1, 'C');
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
