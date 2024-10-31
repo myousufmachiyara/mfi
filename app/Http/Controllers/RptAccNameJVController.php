@@ -161,7 +161,7 @@ class RptAccNameJVController extends Controller
         $pdf->SetXY(145, $currentY+5);
         $pdf->MultiCell(25, 5, $totalDebit, 1, 'C');
 
-        $pdf->SetXY(175, $currentY+5);
+        $pdf->SetXY(177, $currentY+5);
         $pdf->MultiCell(25, 5, $totalCredit, 1, 'C');
 
         $accId = $request->acc_id;
