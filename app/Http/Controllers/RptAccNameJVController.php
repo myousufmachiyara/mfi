@@ -122,11 +122,11 @@ class RptAccNameJVController extends Controller
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:6%;">'.$count.'</td>';
+                $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
                 $html .= '<td style="width:10%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
@@ -135,11 +135,11 @@ class RptAccNameJVController extends Controller
             }
             else{
                 $html .= '<tr>';
-                $html .= '<td style="width:6%;">'.$count.'</td>';
+                $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
                 $html .= '<td style="width:10%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
                 $totalDebit=$totalDebit+$items['Debit'];
