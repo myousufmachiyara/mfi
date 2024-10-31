@@ -71,11 +71,9 @@ class RptGoDownItemNameController extends Controller
     public function tstockbalExcel(Request $request)
     {
         $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod',$request->acc_id)
-        ->leftjoin('ac','gd_pipe_addless_by_item_name.ac_cod','=','ac.ac_code')
-        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        ->select('gd_pipe_addless_by_item_name.*','ac.ac_name')
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->get();
-        
+                
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
