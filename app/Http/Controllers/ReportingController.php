@@ -29,10 +29,17 @@ class ReportingController extends Controller
         return view('reports.gd_item_name',compact('items'));
     }
 
-     // By Godown Group Name
-     public function byGodownGroupName()
-     {
-         $items = Item_Groups::orderBy('group_name', 'asc')->get();
-         return view('reports.gd_group_name',compact('items'));
-     }
+    // By Godown Group Name
+    public function byGodownGroupName()
+    {
+        $items = Item_Groups::orderBy('group_name', 'asc')->get();
+        return view('reports.gd_group_name',compact('items'));
+    }
+
+    // Daily Register
+    public function dailyRegister()
+    {
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+        return view('reports.daily_register',compact('coa'));
+    }
 }

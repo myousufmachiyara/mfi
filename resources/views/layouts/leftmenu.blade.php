@@ -297,7 +297,7 @@
 
                             @if(((session('user_access')[23]['module_id'])==24 && (session('user_access')[23]['view'])==1))
                             <li>
-                                <a class="nav-link"   href="{{ route('all-bad-dabs')}}">
+                                <a class="nav-link" href="{{ route('all-bad-dabs')}}">
                                     Stock Balance
                                 </a>
                             </li>
@@ -427,7 +427,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('rep-daily-register')}}">
                                     Daily Register
                                 </a>
                             </li>
