@@ -23,9 +23,9 @@ class RptAccNameJVController extends Controller
 
     public function jvExcel(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->get();
+        $all_payments_by_party = all_payments_by_party::where('account_cod',$request->acc_id)
+        ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+        ->get();
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
@@ -35,14 +35,14 @@ class RptAccNameJVController extends Controller
         $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Purchase1Export($pur_by_account), $filename);
+        return Excel::download(new Purchase1Export($all_payments_by_party), $filename);
     }
 
     public function jvPDF(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+        $all_payments_by_party = all_payments_by_party::where('account_cod', $request->acc_id)
+            ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+            ->leftjoin('ac','ac.ac_code','=','all_payments_by_party.account_cod')
             ->get();
 
         $currentDate = Carbon::now();
@@ -57,9 +57,9 @@ class RptAccNameJVController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Journal Voucher Payments '.$request->acc_id);
+        $pdf->SetSubject('Journal Voucher Payments '.$request->acc_id);
+        $pdf->SetKeywords('Journal Voucher Payments, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -78,18 +78,18 @@ class RptAccNameJVController extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Journal Voucher Payments</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$all_payments_by_party[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$pur_by_account[0]['phone_no'].'</span></td>';
+        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$all_payments_by_party[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -119,7 +119,7 @@ class RptAccNameJVController extends Controller
         $totalAmount=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($pur_by_account as $items) {
+        foreach ($all_payments_by_party as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
@@ -175,9 +175,9 @@ class RptAccNameJVController extends Controller
 
     public function jvDownload(Request $request)
     {
-        $pur_by_account = pur_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('DATE', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pur_by_account.ac1')
+        $all_payments_by_party = all_payments_by_party::where('account_cod', $request->acc_id)
+            ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+            ->leftjoin('ac','ac.ac_code','=','all_payments_by_party.account_cod')
             ->get();
 
         $currentDate = Carbon::now();
@@ -192,9 +192,9 @@ class RptAccNameJVController extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Purchase Report Of Account '.$request->acc_id);
-        $pdf->SetKeywords('Purchase Report Of Account, TCPDF, PDF');
+        $pdf->SetTitle('Journal Voucher Payments '.$request->acc_id);
+        $pdf->SetSubject('Journal Voucher Payments '.$request->acc_id);
+        $pdf->SetKeywords('Journal Voucher Payments, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
         // Add a page
@@ -213,17 +213,17 @@ class RptAccNameJVController extends Controller
             margin-bottom: 5px;
         }';
 
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Journal Voucher Payments</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
         $html = '<table>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$pur_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$all_payments_by_party[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$pur_by_account[0]['phone_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$all_payments_by_party[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -237,48 +237,48 @@ class RptAccNameJVController extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Dispatch To Party</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Sale Inv</th>';
-        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:8%;color:#17365D;font-weight:bold;">Voucher</th>';
+        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Date</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>';
+        $html .= '<th style="width:25%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
         $pdf->setTableHtml($html);
 
         $count=1;
-        $totalAmount=0;
+        $totalDebit=0;
+        $totalCredit=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-        foreach ($pur_by_account as $items) {
+        foreach ($all_payments_by_party as $items) {
             if($count%2==0)
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $totalDebit=$totalDebit+$items['Debit'];
+                $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
             }
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['DATE'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $totalDebit=$totalDebit+$items['Debit'];
+                $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
             }
             $count++;
@@ -292,16 +292,16 @@ class RptAccNameJVController extends Controller
 
         // Column 3
         $pdf->SetXY(155, $currentY+5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        $pdf->MultiCell(20, 5, $totalDebit, 1, 'C');
 
         $pdf->SetXY(175, $currentY+5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        $pdf->MultiCell(28, 5, $totalCredit, 1, 'C');
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "jv_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'D');
     }

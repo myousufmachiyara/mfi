@@ -814,6 +814,10 @@
             else if (tabName === "comb_sale") {
                 window.location.href = `/rep-by-acc-name/comb-sale/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "jv") {
+                window.location.href = `/rep-by-acc-name/jv/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName){
@@ -842,6 +846,10 @@
             }
 
             else if (tabName === "comb_sale") {
+                window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "jv") {
                 window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
@@ -873,6 +881,10 @@
 
             else if (tabName === "comb_sale") {
                 window.location.href = `/rep-by-acc-name/comb-sale/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+            
+            else if (tabName === "jv") {
+                window.location.href = `/rep-by-acc-name/jv/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
     </script>
