@@ -32,10 +32,10 @@ class RptAccNameJVController extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "jv_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new Purchase1Export($all_payments_by_party), $filename);
+        return Excel::download(new VouchersExport($all_payments_by_party), $filename);
     }
 
     public function jvPDF(Request $request)
