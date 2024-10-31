@@ -88,8 +88,7 @@ class RptAccNameJVController extends Controller
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        // $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$all_payments_by_party[0]['phone_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$all_payments_by_party[0]['phone_no'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
         $html .= '</tr>';
         $html .= '<tr>';
@@ -103,20 +102,20 @@ class RptAccNameJVController extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Mill No.</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Dispatch To Party</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Sale Inv</th>';
-        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:8%;color:#17365D;font-weight:bold;">Voucher</th>';
+        $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Date</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>';
+        $html .= '<th style="width:25%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
         $pdf->setTableHtml($html);
 
         $count=1;
-        $totalAmount=0;
+        $totalDebit=0;
+        $totalCredit=0;
 
         $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
         foreach ($all_payments_by_party as $items) {
@@ -124,27 +123,27 @@ class RptAccNameJVController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $totalDebit=$totalDebit+$items['Debit'];
+                $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
             }
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '<td style="width:25%;">'.$items['Narration'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
+                $html .= '<td style="width:12%;">'.$items['Credit'].'</td>';
+                $totalDebit=$totalDebit+$items['Debit'];
+                $totalCredit=$totalCredit+$items['Credit'];
                 $html .= '</tr>';
             }
             $count++;
@@ -158,17 +157,16 @@ class RptAccNameJVController extends Controller
 
         // Column 3
         $pdf->SetXY(155, $currentY+5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        $pdf->MultiCell(20, 5, $totalDebit, 1, 'C');
 
         $pdf->SetXY(175, $currentY+5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        $pdf->MultiCell(28, 5, $totalCredit, 1, 'C');
 
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
 
-
-        $filename = "purchase1_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "jv_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
 
         $pdf->Output($filename, 'I');
     }
