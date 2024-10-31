@@ -155,8 +155,10 @@ class RptAccNameJVController extends Controller
 
         $pdf->SetFont('helvetica', 'B', 12);
 
-        // Column 3
-        $pdf->SetXY(155, $currentY+5);
+        $pdf->SetXY(135, $currentY+5);
+        $pdf->MultiCell(25, 5, 'Total', 1, 'C');
+
+        $pdf->SetXY(145, $currentY+5);
         $pdf->MultiCell(25, 5, $totalDebit, 1, 'C');
 
         $pdf->SetXY(180, $currentY+5);
