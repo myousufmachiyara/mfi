@@ -158,7 +158,7 @@ class RptAccNameJVController extends Controller
         $pdf->SetXY(125, $currentY+5);
         $pdf->MultiCell(20, 5, 'Total', 1, 'C');
 
-        $pdf->SetXY(145, $currentY+5);
+        $pdf->SetXY(152, $currentY+5);
         $pdf->MultiCell(25, 5, $totalDebit, 1, 'C');
 
         $pdf->SetXY(177, $currentY+5);
