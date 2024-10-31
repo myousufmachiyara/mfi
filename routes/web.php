@@ -413,10 +413,12 @@
 
         // RPT Godown By Item Name so
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/so/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutExcel'])->name('so-rep-godown-by-item-name-excel');;
         Route::get('/rep-godown-by-item-name/so/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutReport'])->name('so-rep-godown-by-item-name-report');
         
         // RPT Godown By Item Name bal 
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/bal/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalExcel'])->name('bal-rep-godown-by-item-name-excel');;
         Route::get('/rep-godown-by-item-name/bal/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalReport'])->name('bal-rep-godown-by-item-name-report');
         
       

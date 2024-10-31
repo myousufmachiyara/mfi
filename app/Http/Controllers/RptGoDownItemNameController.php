@@ -45,9 +45,45 @@ class RptGoDownItemNameController extends Controller
         // Return the download response with the dynamic filename
         return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
     }
-    
-   
 
+    public function tstockoutExcel(Request $request)
+    {
+
+        $gd_pipe_sale_by_item_name = gd_pipe_sale_by_item_name::where('item_cod',$request->acc_id)
+        ->join('ac','gd_pipe_sale_by_item_name.account_name','=','ac.ac_code')
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('gd_pipe_sale_by_item_name.*','ac.ac_name')
+        ->get();
+        
+        $accId = $request->acc_id;
+        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+        
+        // Construct the filename
+        $filename = "tstockout_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+
+        // Return the download response with the dynamic filename
+        return Excel::download(new TStockOutExport($gd_pipe_sale_by_item_name), $filename);
+    }
+    
+    public function tstockbalExcel(Request $request)
+    {
+        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
+        ->leftjoin('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
+        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        ->select('gd_pipe_pur_by_item_name.*','ac.ac_name')
+        ->get();
+        
+        $accId = $request->acc_id;
+        $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
+        $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
+        
+        // Construct the filename
+        $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+
+        // Return the download response with the dynamic filename
+        return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
+    }
 
     public function tstockinReport(Request $request)
     {
@@ -343,7 +379,6 @@ class RptGoDownItemNameController extends Controller
         }
     }
     
-
     public function tstockbal(Request $request){
         $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod',$request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
@@ -352,7 +387,6 @@ class RptGoDownItemNameController extends Controller
         return $gd_pipe_addless_by_item_name;
         
     }
-
 
     public function tstockbalReport(Request $request)
     {
