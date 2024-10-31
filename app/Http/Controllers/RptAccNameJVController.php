@@ -102,8 +102,8 @@ class RptAccNameJVController extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html .= '<th style="width:8%;color:#17365D;font-weight:bold;">Vouc</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Date</th>';
+        $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">Vouc</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Date</th>';
         $html .= '<th style="width:23%;color:#17365D;font-weight:bold;">Account Name</th>';
         $html .= '<th style="width:27%;color:#17365D;font-weight:bold;">Remarks</th>';
         $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>';
@@ -123,8 +123,8 @@ class RptAccNameJVController extends Controller
             {
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
-                $html .= '<td style="width:10%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:7%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
                 $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
@@ -136,8 +136,8 @@ class RptAccNameJVController extends Controller
             else{
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:8%;">'.$items['entry_of'].'</td>';
-                $html .= '<td style="width:10%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:7%;">'.$items['entry_of'].'</td>';
+                $html .= '<td style="width:11%;">'.Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y').'</td>';
                 $html .= '<td style="width:23%;">'.$items['ac2'].'</td>';
                 $html .= '<td style="width:27%;">'.$items['Narration'].'</td>';
                 $html .= '<td style="width:12%;">'.$items['Debit'].'</td>';
