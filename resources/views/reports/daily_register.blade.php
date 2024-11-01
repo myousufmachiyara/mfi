@@ -501,7 +501,7 @@
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['Cash_pur_name'] ? v['Cash_pur_name'] : "") + "</td>";
@@ -544,7 +544,7 @@
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
