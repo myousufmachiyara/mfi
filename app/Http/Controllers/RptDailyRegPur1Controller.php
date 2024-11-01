@@ -68,9 +68,9 @@ class RptDailyRegPur1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Daily Register Sale 1 ' . $request->acc_id);
-        $pdf->SetSubject('Daily Register Sale 1');
-        $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
+        $pdf->SetTitle('Daily Register Purchase 1 ' . $request->acc_id);
+        $pdf->SetSubject('Daily Register Purchase 1');
+        $pdf->SetKeywords('Daily Register Purchase 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -78,7 +78,7 @@ class RptDailyRegPur1Controller extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Purchase 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
@@ -110,12 +110,12 @@ class RptDailyRegPur1Controller extends Controller
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Ord No.</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">R/No.</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Bill No.</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Customer Name</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Name</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
                 </tr>';
     
         // Iterate through items and add rows
@@ -129,11 +129,11 @@ class RptDailyRegPur1Controller extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:10%;">' . Carbon::parse($item['pur_date'])->format('d-m-y') . '</td>
-                    <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
-                    <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
-                    <td style="width:22%;">' . $item['acc_name'] . '</td>
-                    <td style="width:15%;">' . $item['Cash_pur_name'] . '</td>
-                    <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:10%;">' . $item['pur_id']. '</td>
+                    <td style="width:10%;">' . $item['pur_bill_no'] . '</td>
+                    <td style="width:22%;">' . $item['ac_name'] . '</td>
+                    <td style="width:15%;">' . $item['cash_saler_name'] . '</td>
+                    <td style="width:15%;">' . $item['Pur_Remarks'] . '</td>
                     <td style="width:12%;">' . $item['bill_amt'] . '</td>
                 </tr>';
             
