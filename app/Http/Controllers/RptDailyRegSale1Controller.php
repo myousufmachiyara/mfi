@@ -72,9 +72,9 @@ class RptDailyRegSale1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Daily Register 1 ' . $request->acc_id);
-        $pdf->SetSubject('Daily Register 1');
-        $pdf->SetKeywords('Daily Register 1, TCPDF, PDF');
+        $pdf->SetTitle('Daily Register Sale 1 ' . $request->acc_id);
+        $pdf->SetSubject('Daily Register Sale 1');
+        $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -99,7 +99,6 @@ class RptDailyRegSale1Controller extends Controller
                 </td>
             </tr>
             <tr>
-                <td></td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
                     To Date: <span style="color:black;">' . $formattedToDate . '</span>
                 </td>
