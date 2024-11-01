@@ -13,8 +13,8 @@ use Carbon\Carbon;
 class RptDailyRegPur1Controller extends Controller
 {
     public function pur1(Request $request){
-        $activite7_pur = activite7_pur::whereBetween('sa_date', [$request->fromDate, $request->toDate])
-        ->join('ac','ac.ac_code','=','activite7_pur.account_name')
+        $activite7_pur = activite7_pur::whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        ->join('ac','ac.ac_code','=','activite7_pur.ac_cod')
         ->select('activite7_pur.*','ac.ac_name as ac_name') 
         ->get();
 
@@ -23,7 +23,7 @@ class RptDailyRegPur1Controller extends Controller
 
     public function pur1Excel(Request $request)
     {
-        $activite7_pur = activite7_pur::whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        $activite7_pur = activite7_pur::whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite7_pur.account_name')
         ->select('activite7_pur.*','ac.ac_name') 
         ->get();
@@ -48,7 +48,7 @@ class RptDailyRegPur1Controller extends Controller
         ]);
     
         // Retrieve data from the database
-        $activite7_pur = activite7_pur::whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        $activite7_pur = activite7_pur::whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite7_pur.account_name')
         ->select('activite7_pur.*','ac.ac_name as acc_name') 
         ->get();
@@ -132,7 +132,7 @@ class RptDailyRegPur1Controller extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+                    <td style="width:10%;">' . Carbon::parse($item['pur_date'])->format('d-m-y') . '</td>
                     <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
                     <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
                     <td style="width:22%;">' . $item['acc_name'] . '</td>
