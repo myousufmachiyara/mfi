@@ -80,7 +80,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Ord No.</th>
                                                     <th>Account Name</th>
@@ -496,7 +496,7 @@
                             html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
-                            html += "<td>" + (v['comp_name'] ? v['comp_name'] : "") + "</td>";
+                            html += "<td>" + (v['cust_name'] ? v['cust_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
                             html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
