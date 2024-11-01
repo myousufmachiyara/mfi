@@ -594,8 +594,8 @@
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
+                            html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
+                            html += "<td>" + (v['cash_saler_name'] ? v['cash_saler_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
                             html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
