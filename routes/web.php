@@ -406,6 +406,21 @@
         Route::get('/rep-by-daily-reg/sale1/excel', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Excel'])->name('sale1-rep-by-daily-reg-excel');
         Route::get('/rep-by-daily-reg/sale1/report', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Report'])->name('sale1-rep-by-daily-reg-report');
 
+        // RPT by Daily Register Sale 2
+        Route::get('/rep-by-daily-reg/sale2', [App\Http\Controllers\RptDailyRegSale2Controller::class, 'sale2'])->name('sale2-rep-by-daily-reg');
+        Route::get('/rep-by-daily-reg/sale2/excel', [App\Http\Controllers\RptDailyRegSale2Controller::class, 'sale2Excel'])->name('sale2-rep-by-daily-reg-excel');
+        Route::get('/rep-by-daily-reg/sale2/report', [App\Http\Controllers\RptDailyRegSale2Controller::class, 'sale2Report'])->name('sale2-rep-by-daily-reg-report');
+
+        // RPT by Daily Register Purchase 1
+        Route::get('/rep-by-daily-reg/pur1', [App\Http\Controllers\RptDailyRegPur1Controller::class, 'pur1'])->name('pur1-rep-by-daily-reg');
+        Route::get('/rep-by-daily-reg/pur1/excel', [App\Http\Controllers\RptDailyRegPur1Controller::class, 'pur1Excel'])->name('pur1-rep-by-daily-reg-excel');
+        Route::get('/rep-by-daily-reg/pur1/report', [App\Http\Controllers\RptDailyRegPur1Controller::class, 'pur1Report'])->name('pur1-rep-by-daily-reg-report');
+
+        // RPT by Daily Register Purchase 2
+        Route::get('/rep-by-daily-reg/pur2', [App\Http\Controllers\RptDailyRegPur2Controller::class, 'pur2'])->name('pur2-rep-by-daily-reg');
+        Route::get('/rep-by-daily-reg/pur2/excel', [App\Http\Controllers\RptDailyRegPur2Controller::class, 'pur2Excel'])->name('pur2-rep-by-daily-reg-excel');
+        Route::get('/rep-by-daily-reg/pur2/report', [App\Http\Controllers\RptDailyRegPur2Controller::class, 'pur2Report'])->name('pur2-rep-by-daily-reg-report');
+
         // RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');;
