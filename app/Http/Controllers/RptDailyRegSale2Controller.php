@@ -72,9 +72,9 @@ class RptDailyRegSale2Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Daily Register Sale 1 ' . $request->acc_id);
-        $pdf->SetSubject('Daily Register Sale 1');
-        $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
+        $pdf->SetTitle('Daily Register Sale 2 ' . $request->acc_id);
+        $pdf->SetSubject('Daily Register Sale 2');
+        $pdf->SetKeywords('Daily Register Sale 2, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -82,7 +82,7 @@ class RptDailyRegSale2Controller extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 2</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
