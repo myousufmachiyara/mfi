@@ -124,6 +124,7 @@
                                                     <th>S/No</th>
                                                     <th>Date</th>
                                                     <th>Inv No.</th>
+                                                    <th>Ord No.</th>
                                                     <th>Account Name</th>
                                                     <th>Customer Name</th>
                                                     <th>Remarks</th>
@@ -509,12 +510,12 @@
                 });
             }
             else if(tabId=="#sale_pipe"){
-                var table = document.getElementById('Sale2TbleBody');
+                var table = document.getElementById('SalePipeTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-by-acc-name/sale2";
-                tableID="#Sale2TbleBody";
+                url="/rep-by-daily-reg/sale2";
+                tableID="#SalePipeTbleBody";
 
                 $.ajax({
                     type: "GET",
@@ -535,13 +536,13 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
+                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
+                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
