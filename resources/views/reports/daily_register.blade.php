@@ -82,9 +82,9 @@
                                                     <th>S/No</th>
                                                     <th>Date</th>
                                                     <th>Inv No.</th>
-                                                    <th>Ord No.</th>
+                                                    <th>Bill No.</th>
                                                     <th>Account Name</th>
-                                                    <th>Customer Name</th>
+                                                    <th>Name Of Person</th>
                                                     <th>Remarks</th>
                                                     <th>Bill Amount</th>
                                                 </tr>
