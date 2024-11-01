@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class activite13_pur_pipe extends Model
 {
     use HasFactory;
+    protected $table = "activite13_pur_pipe";
+    protected $fillable = [
+
+    ];
 }
