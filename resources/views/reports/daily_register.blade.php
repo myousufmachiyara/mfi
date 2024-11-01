@@ -80,8 +80,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Date</th>
+                                                    <th>Sales Date</th>
                                                     <th>Inv No.</th>
+                                                    <th>Ord No.</th>
                                                     <th>Account Name</th>
                                                     <th>Customer Name</th>
                                                     <th>Remarks</th>
@@ -302,11 +303,11 @@
                                                     <th>S/No</th>
                                                     <th>Sales Date</th>
                                                     <th>Inv No.</th>
-                                                    <th>Bill</th>
-                                                    <th>Company Name</th>
-                                                    <th>Pur Inv</th>
+                                                    <th>Ord No.</th>
+                                                    <th>Account Name</th>
+                                                    <th>Customer Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Bill Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="Sale1TbleBody">
