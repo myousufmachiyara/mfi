@@ -26,7 +26,8 @@ class RptDailyRegSale2Controller extends Controller
     {
         $activite11_sales_pipe = activite11_sales_pipe::whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite11_sales_pipe.account_name')
-        ->select('activite11_sales_pipe.*','ac.ac_name') 
+        ->join('ac as comp_acc','comp_acc.ac_code','=','activite11_sales_pipe.company_name')
+        ->select('activite11_sales_pipe.*','ac.ac_name','comp_acc.ac_name as comp_name') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
@@ -51,7 +52,8 @@ class RptDailyRegSale2Controller extends Controller
         // Retrieve data from the database
         $activite11_sales_pipe = activite11_sales_pipe::whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite11_sales_pipe.account_name')
-        ->select('activite11_sales_pipe.*','ac.ac_name as acc_name') 
+        ->join('ac as comp_acc','comp_acc.ac_code','=','activite11_sales_pipe.company_name')
+        ->select('activite11_sales_pipe.*','ac.ac_name','comp_acc.ac_name as comp_name') 
         ->get();
     
         // Check if data exists
@@ -137,7 +139,7 @@ class RptDailyRegSale2Controller extends Controller
                     <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
                     <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
                     <td style="width:22%;">' . $item['acc_name'] . '</td>
-                    <td style="width:15%;">' . $item['Cash_pur_name'] . '</td>
+                    <td style="width:15%;">' . $item['comp_name'] . '</td>
                     <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
                     <td style="width:12%;">' . $item['bill_amt'] . '</td>
                 </tr>';

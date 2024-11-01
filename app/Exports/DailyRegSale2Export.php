@@ -35,6 +35,7 @@ class DailyRegSale2Export implements FromCollection, WithHeadings
             'Convance Charges',
             'Labour Charges',
             'Account Name',
+            'Company Name',
         ];
     }
 }
