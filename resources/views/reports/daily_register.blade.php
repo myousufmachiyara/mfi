@@ -44,7 +44,16 @@
                                 <a class="nav-link" data-bs-target="#JV2" href="#JV2" data-bs-toggle="tab">JV2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#receipt" href="#receipt" data-bs-toggle="tab">Receipt</a>
+                                <a class="nav-link" data-bs-target="#sale_1_return" href="#sale_1_return" data-bs-toggle="tab">JV2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-target="#sale_pipe_return" href="#sale_pipe_return" data-bs-toggle="tab">JV2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-target="#purchase_1_return" href="#purchase_1_return" data-bs-toggle="tab">JV2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-target="#purchase_pipe_return" href="#purchase_pipe_return" data-bs-toggle="tab">JV2</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#daily_reg" href="#daily_reg" data-bs-toggle="tab">Daily Register</a>
@@ -544,7 +553,7 @@
                             html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
+                            html += "<td>" + (v['comp_name'] ? v['comp_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
                             html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
@@ -583,13 +592,13 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['DATE'] ? moment(v['DATE']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['NO'] ? v['NO'] : "") + "</td>";
-                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
+                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
