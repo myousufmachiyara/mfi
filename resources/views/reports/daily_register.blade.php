@@ -460,6 +460,13 @@
             });
         });
 
+        function getReport() {
+            const activeTabLink = document.querySelector('.nav-link.active');
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
+        
         function tabChanged(tabId) {
             fromDate=$('#fromDate').val();
             toDate=$('#toDate').val();
