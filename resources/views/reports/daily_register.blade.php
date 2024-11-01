@@ -570,7 +570,7 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-by-acc-name/pur1";
+                url="/rep-by-daily-reg/pur1";
                 tableID="#P1TbleBody";
 
                 $.ajax({
