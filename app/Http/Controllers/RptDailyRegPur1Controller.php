@@ -25,14 +25,14 @@ class RptDailyRegPur1Controller extends Controller
     {
         $activite7_pur = activite7_pur::whereBetween('pur_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite7_pur.account_name')
-        ->select('activite7_pur.*','ac.ac_name') 
+        ->select('activite7_pur.*','ac.ac_name as acc_name') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "daily_reg_pur1_report_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
         return Excel::download(new DailyRegPur1Export($activite7_pur), $filename);
@@ -160,7 +160,7 @@ class RptDailyRegPur1Controller extends Controller
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "daily_reg_pur1_report_from_{$fromDate}_to_{$toDate}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
