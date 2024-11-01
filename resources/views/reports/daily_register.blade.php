@@ -596,7 +596,7 @@
                             html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
                             html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
                             html += "<td>" + (v['cash_saler_name'] ? v['cash_saler_name'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
+                            html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
                             html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
 
