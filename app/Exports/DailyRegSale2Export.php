@@ -31,7 +31,7 @@ class DailyRegSale2Export implements FromCollection, WithHeadings
             'Bill Discount',
             'Sales Remarks',
             'Pur Ord No.',
-            'Company Name',
+            'Company ID',
             'Cash Name',
             'Convance Charges',
             'Labour Charges',
