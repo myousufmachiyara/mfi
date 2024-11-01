@@ -44,16 +44,16 @@
                                 <a class="nav-link" data-bs-target="#JV2" href="#JV2" data-bs-toggle="tab">JV2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_1_return" href="#sale_1_return" data-bs-toggle="tab">JV2</a>
+                                <a class="nav-link" data-bs-target="#sale_1_return" href="#sale_1_return" data-bs-toggle="tab">Sale 1 Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_pipe_return" href="#sale_pipe_return" data-bs-toggle="tab">JV2</a>
+                                <a class="nav-link" data-bs-target="#sale_pipe_return" href="#sale_pipe_return" data-bs-toggle="tab">Sale Pipe Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_1_return" href="#purchase_1_return" data-bs-toggle="tab">JV2</a>
+                                <a class="nav-link" data-bs-target="#purchase_1_return" href="#purchase_1_return" data-bs-toggle="tab">Purchase 1 Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_pipe_return" href="#purchase_pipe_return" data-bs-toggle="tab">JV2</a>
+                                <a class="nav-link" data-bs-target="#purchase_pipe_return" href="#purchase_pipe_return" data-bs-toggle="tab">Purchase Pipe Return</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#daily_reg" href="#daily_reg" data-bs-toggle="tab">Daily Register</a>
