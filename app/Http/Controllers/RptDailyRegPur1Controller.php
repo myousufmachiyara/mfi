@@ -24,8 +24,6 @@ class RptDailyRegPur1Controller extends Controller
     public function pur1Excel(Request $request)
     {
         $activite7_pur = activite7_pur::whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        ->join('ac','ac.ac_code','=','activite7_pur.ac_cod')
-        ->select('activite7_pur.*','ac.ac_name as acc_name') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
