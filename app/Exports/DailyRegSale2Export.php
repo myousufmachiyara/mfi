@@ -25,6 +25,7 @@ class DailyRegSale2Export implements FromCollection, WithHeadings
         return [
             'Date',
             'Sal Inv No',
+            'Prefix',
             'Account ID',
             'Bill Amt',
             'Bill Discount',
