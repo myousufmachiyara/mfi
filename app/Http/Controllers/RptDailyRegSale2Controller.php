@@ -27,7 +27,7 @@ class RptDailyRegSale2Controller extends Controller
         $activite11_sales_pipe = activite11_sales_pipe::whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite11_sales_pipe.account_name')
         ->join('ac as comp_acc','comp_acc.ac_code','=','activite11_sales_pipe.company_name')
-        ->select('activite11_sales_pipe.*','ac.ac_name','comp_acc.ac_name as comp_name') 
+        ->select('activite11_sales_pipe.*','ac.ac_name as acc_name','comp_acc.ac_name as comp_name') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
@@ -53,7 +53,7 @@ class RptDailyRegSale2Controller extends Controller
         $activite11_sales_pipe = activite11_sales_pipe::whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->join('ac','ac.ac_code','=','activite11_sales_pipe.account_name')
         ->join('ac as comp_acc','comp_acc.ac_code','=','activite11_sales_pipe.company_name')
-        ->select('activite11_sales_pipe.*','ac.ac_name','comp_acc.ac_name as comp_name') 
+        ->select('activite11_sales_pipe.*','ac.ac_name as acc_name','comp_acc.ac_name as comp_name') 
         ->get();
     
         // Check if data exists
