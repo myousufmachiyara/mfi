@@ -944,8 +944,6 @@
             else if (tabName === "sale_pipe") {
                 window.location.href = `/rep-by-daily-reg/sale2/excel?fromDate=${fromDate}&toDate=${toDate}`;
             }
-
-            
         }
 
         function printPDF(tabName) {
@@ -959,6 +957,10 @@
             if (tabName === "sale_1") {
                 window.location.href = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
+
+            else if (tabName === "sale_pipe") {
+                window.location.href = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+            }
         }
 
         function downloadPDF(tabName) {
@@ -971,6 +973,10 @@
 
             if (tabName === "sale_1") {
                 window.location.href = `/rep-by-daily-reg/sale1/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "sale_pipe") {
+                window.location.href = `/rep-by-daily-reg/sale2/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
             }
         }
         
