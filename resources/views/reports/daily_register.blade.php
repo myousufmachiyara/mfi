@@ -951,7 +951,7 @@
                 window.location.href = `/rep-by-daily-reg/sale2/excel?fromDate=${fromDate}&toDate=${toDate}`;
             }
 
-            else if (tabName === "purchase_2") {
+            else if (tabName === "purchase1") {
                 window.location.href = `/rep-by-daily-reg/pur1/excel?fromDate=${fromDate}&toDate=${toDate}`;
             }
 
