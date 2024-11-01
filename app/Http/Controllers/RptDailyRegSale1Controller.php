@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AC;
 use App\Models\activite5_sales;
-use App\Exports\DailyRegSale2Export;
+use App\Exports\DailyRegSale1Export;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
@@ -31,7 +31,7 @@ class RptDailyRegSale1Controller extends Controller
         $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new DailyRegSale2Export($activite5_sales), $filename);
+        return Excel::download(new DailyRegSale1Export($activite5_sales), $filename);
     }
 
     public function sale1Report(Request $request)
