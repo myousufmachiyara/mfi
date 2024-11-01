@@ -944,6 +944,14 @@
             else if (tabName === "sale_pipe") {
                 window.location.href = `/rep-by-daily-reg/sale2/excel?fromDate=${fromDate}&toDate=${toDate}`;
             }
+
+            else if (tabName === "purchase_2") {
+                window.location.href = `/rep-by-daily-reg/pur1/excel?fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "pp") {
+                window.location.href = `/rep-by-daily-reg/pur2/excel?fromDate=${fromDate}&toDate=${toDate}`;
+            }
         }
 
         function printPDF(tabName) {
@@ -961,6 +969,15 @@
             else if (tabName === "sale_pipe") {
                 window.location.href = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
+
+            else if (tabName === "purchase1") {
+                window.location.href = `/rep-by-daily-reg/pur1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "pp") {
+                window.location.href = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
         }
 
         function downloadPDF(tabName) {
@@ -977,6 +994,14 @@
 
             else if (tabName === "sale_pipe") {
                 window.location.href = `/rep-by-daily-reg/sale2/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "purchase1") {
+                window.location.href = `/rep-by-daily-reg/pur1/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "pp") {
+                window.location.href = `/rep-by-daily-reg/pur2/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
             }
         }
         
