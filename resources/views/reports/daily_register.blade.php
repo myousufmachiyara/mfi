@@ -126,7 +126,7 @@
                                                     <th>Inv No.</th>
                                                     <th>Bill No.</th>
                                                     <th>Account Name</th>
-                                                    <th>Company Name</th>
+                                                    <th>Dispatch From</th>
                                                     <th>Remarks</th>
                                                     <th>Bill Amount</th>
                                                 </tr>

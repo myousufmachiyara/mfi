@@ -14,9 +14,11 @@ class RptDailyRegSale2Controller extends Controller
 {
     public function sale2(Request $request){
         $activite11_sales_pipe = activite11_sales_pipe::whereBetween('sa_date', [$request->fromDate, $request->toDate])
-        ->join('ac','ac.ac_code','=','activite11_sales_pipe.account_name')
-        ->select('activite11_sales_pipe.*','ac.ac_name as ac_name') 
+        ->join('ac as account_ac', 'account_ac.ac_code', '=', 'activite11_sales_pipe.account_name')
+        ->join('ac as company_ac', 'company_ac.ac_code', '=', 'activite11_sales_pipe.company_name')
+        ->select('activite11_sales_pipe.*', 'account_ac.ac_name as account_name', 'company_ac.ac_name as company_name')
         ->get();
+    
 
         return $activite11_sales_pipe;
     }
