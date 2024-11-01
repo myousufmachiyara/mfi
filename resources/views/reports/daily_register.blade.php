@@ -277,24 +277,20 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_1_return_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_1_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_1_return_to"></span>
                                             </h4>
                                             
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_1_acc"></span>
-                                            </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_1')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_1_return')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_1_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_1_return')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -310,7 +306,7 @@
                                                     <th>Bill Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="Sale1TbleBody">
+                                            <tbody id="Sale1RetTbleBody">
 
                                             </tbody>
                                         </table>
@@ -331,16 +327,12 @@
                                                 <span style="font-weight: 400; color: black;" id="sale_pipe_to"></span>
                                             </h4>
                                             
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_pipe_acc"></span>
-                                            </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_pipe')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_pipe')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_pipe')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sale_pipe_return')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sale_pipe_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sale_pipe_return')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -356,7 +348,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="SalePipeTbleBody">
+                                            <tbody id="SalePipeRetTbleBody">
 
                                             </tbody>
                                         </table>
@@ -369,25 +361,20 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="pur1_return_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
-                                            </h4>
-                                            
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="font-weight: 400; color: black;" id="pur1_return_to"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1_return')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1_return')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -404,7 +391,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="P1TbleBody">
+                                            <tbody id="P1RetTbleBody">
 
                                             </tbody>
                                         </table>
@@ -425,18 +412,13 @@
                                                 <span style="color: #17365D;">To: &nbsp;</span>
                                                 <span style="font-weight: 400; color: black;" id="pp_to"></span>
                                             </h4>
-                                            
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pp_acc"></span>
-                                            </h4>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('pp')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pp')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('pp')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('pp_return')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pp_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('pp_return')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
@@ -452,7 +434,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="PPTbleBody">
+                                            <tbody id="PPRetTbleBody">
 
                                             </tbody>
                                         </table>
