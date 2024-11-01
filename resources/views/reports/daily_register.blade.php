@@ -32,9 +32,6 @@
                                 <a class="nav-link" data-bs-target="#sale_pipe" href="#sale_pipe" data-bs-toggle="tab">Sale Pipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_godown" href="#sale_godown" data-bs-toggle="tab">Sale Godown</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
                             </li>
                             <li class="nav-item">
