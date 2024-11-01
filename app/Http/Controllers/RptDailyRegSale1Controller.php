@@ -24,6 +24,8 @@ class RptDailyRegSale1Controller extends Controller
     public function sale1Excel(Request $request)
     {
         $activite5_sales = activite5_sales::whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->leftjoin('ac','ac.ac_code','=','activite5_sales.account_name')
+        ->select('activite5_sales.*','ac.ac_name as ac_name') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
