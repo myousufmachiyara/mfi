@@ -114,38 +114,28 @@ class RptAccNameSale1Controller extends Controller
 
         $pdf->setTableHtml($html);
 
-        $count=1;
-        $totalAmount=0;
+        $count = 1;
+        $totalAmount = 0;
 
-        $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
+        $html = '<table cellspacing="0" cellpadding="5" style="text-align:center">';
+
         foreach ($sale_by_account as $items) {
-            if($count%2==0)
-            {
-                $html .= '<tr style="background-color:#f1f1f1">';
-                $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
-                $html .= '</tr>';
-            }
-            else{
-                $html .= '<tr>';
-                $html .= '<td style="width:7%;">'.$count.'</td>';
-                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
-                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
-                $totalAmount=$totalAmount+$items['cr_amt'];
-                $html .= '</tr>';
-            }
+            // Apply alternate row color
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+            $html .= '<tr style="background-color:' . $backgroundColor . '">';
+            $html .= '<td style="width:7%;">' . $count . '</td>';
+            $html .= '<td style="width:14%;">' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>';
+            $html .= '<td style="width:16%;">' . $items['NO'] . '</td>';
+            $html .= '<td style="width:11%;">' . $items['bill'] . '</td>';
+            $html .= '<td style="width:22%;">' . $items['ac2'] . '</td>';
+            $html .= '<td style="width:15%;">' . $items['remarks'] . '</td>';
+            $html .= '<td style="width:15%;">' . $items['cr_amt'] . '</td>';
+            $html .= '</tr>';
+
+            $totalAmount += $items['cr_amt'];
             $count++;
         }
+
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
