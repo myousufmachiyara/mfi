@@ -129,10 +129,10 @@ class RptDailyRegJV2Controller extends Controller
                     <td style="width:8%;">' . $item['jv_no']. '</td>
                     <td style="width:11%;">' . Carbon::parse($item['jv_date'])->format('d-m-y') . '</td>
                     <td style="width:18%;">' . $item['ac_name'] . '</td>
-                    <td style="width:15%;">' . $item['debit'] . '</td>
-                    <td style="width:15%;">' . $item['credit'] . '</td>
+                    <td style="width:12%;">' . $item['debit'] . '</td>
+                    <td style="width:12%;">' . $item['credit'] . '</td>
                     <td style="width:15%;">' . $item['Remark'] . '</td>
-                    <td style="width:12%;">' . $item['Narration'] . '</td>
+                    <td style="width:18%;">' . $item['Narration'] . '</td>
                 </tr>';
             
             $totalAmount += $item['Amount']; // Accumulate total quantity
