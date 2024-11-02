@@ -314,6 +314,7 @@
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#IL_acc').text(selectedAcc);
                         var opening_qty;
+                        console.log (result);
 
                         $.each(result, function(k,v){
                             opening_qty=opening_qty+v['add_total'];
