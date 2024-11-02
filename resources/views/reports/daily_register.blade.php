@@ -224,7 +224,7 @@
                                                     <th>Bill Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="PPTbleBody">
+                                            <tbody id="P2TbleBody">
 
                                             </tbody>
                                         </table>
@@ -649,7 +649,7 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-by-acc-name/pur2";
+                url="/rep-by-daily-reg/pur2";
                 tableID="#P2TbleBody";
 
                 $.ajax({
@@ -671,13 +671,13 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
+                            html += "<td>" + (v['cust_name'] ? v['cust_name'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
+                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
@@ -912,12 +912,12 @@
                 });
             }
             else if(tabId=="#purchase_pipe_return"){
-                var table = document.getElementById('P2TbleBody');
+                var table = document.getElementById('');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
                 url="/rep-by-acc-name/pur2";
-                tableID="#P2TbleBody";
+                tableID="";
 
                 $.ajax({
                     type: "GET",
