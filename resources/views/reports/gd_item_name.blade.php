@@ -81,11 +81,7 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('IL')"><i class="fa fa-file-pdf"></i> Print PDF</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('IL')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
-                                    <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0" id="ILOpenings">
-                                        
-                                        </table>
-                                    </div>
+
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
                                             <thead>
@@ -293,10 +289,6 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                var table = document.getElementById('ILOpenings');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
 
                 url="/rep-godown-by-item-name/IL";
                 tableID="#ILTbleBody";
@@ -323,14 +315,13 @@
                             opening_qty += v['add_total'] || 0;
                         });
 
-                        var html="<thead>";
-                        html +="<tr>";
+                        
+                        var html ="<tr>";
                         html += "<th> Opening Quantity:</th>";
                         html += "<th>" + opening_qty + "</th>";
                         html +="</tr>";
-                        html +="</thead>";
+                        $(tableID).append(html);
                         
-                        $('#ILOpenings').append(html);
                         var balance=opening_qty;
 
                         $.each(result['ledger'], function(k,v){
