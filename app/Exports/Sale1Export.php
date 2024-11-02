@@ -23,13 +23,13 @@ class Sale1Export implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Ac1',
-            'Ac2',
+            'Account Code',
+            'Name/Address',
             'Date',
+            'Bill',
             'Sale Inv',
             'Remarks',
-            'cr amount',
-            'Cash Pur address',
+            'Net Bill Amount',
         ];
     }
 }
