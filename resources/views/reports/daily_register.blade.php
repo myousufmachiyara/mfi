@@ -108,12 +108,12 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_pipe_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_2_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="sale_pipe_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="sale_2_to"></span>
                                             </h4>
                                             
                                         </div>
@@ -194,12 +194,12 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pp_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="pur2_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pp_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="pur2_to"></span>
                                             </h4>
                                             
                                         </div>
