@@ -204,27 +204,12 @@ class RptAccNameSale1Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $html = '<table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$sale_by_account[0]['ac_name'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$sale_by_account[0]['phone_no'].'</span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
-        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> To Date: <span style="color:black;font-weight:normal;">'.$formattedToDate.'</span></td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-
          // Header details
          $html = '
          <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
              <tr>
                  <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000; width:70%;">
-                     Item Name: <span style="color:black;">' . $gd_pipe_sale_by_item_name[0]['item_name'] . '</span>
+                     Item Name: <span style="color:black;">' .$sale_by_account[0]['ac_name']. '</span>
                  </td>
                  <td style="font-size:12px; font-weight:bold;color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                      Print Date: <span style="color:black;">' . $formattedDate . '</span>
@@ -232,7 +217,7 @@ class RptAccNameSale1Controller extends Controller
              </tr>
              <tr>
                  <td style="font-size:12px; color:#17365D; border-bottom:1px solid #000;width:70%;">
-                     Item Remarks: <span style="color:black;">' . $gd_pipe_sale_by_item_name[0]['item_remark'] . '</span>
+                     Item Remarks: <span style="color:black;">' .$sale_by_account[0]['phone_no']. '</span>
                  </td>
                  <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                      From Date: <span style="color:black;">' . $formattedFromDate . '</span>
