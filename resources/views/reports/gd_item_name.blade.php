@@ -313,11 +313,11 @@
                         $('#IL_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#IL_acc').text(selectedAcc);
-                        var opening_qty;
+                        var opening_qty = 0;                        
                         console.log (result);
 
                         $.each(result, function(k,v){
-                            opening_qty=opening_qty+v['add_total'];
+                            opening_qty += v['add_total'] || 0;
                         });
                         var html="<tr>";
                             html += "<td> Opening Quantity: " + opening_qty +"</td>";
