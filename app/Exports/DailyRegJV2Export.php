@@ -4,14 +4,32 @@ namespace App\Exports;
 
 use App\Models\activites9_gen_acas;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class DailyRegJV2Export implements FromCollection
+class DailyRegJV2Export implements FromCollection, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
     public function collection()
     {
-        return activites9_gen_acas::all();
+        return $this->data;
+    }
+
+    public function headings(): array
+    {
+        return [
+            'JV No.',
+            'Date',
+            'Account Name',
+            'Debit Amount',
+            'Credit Amount',
+            'Remarks Debit Name',
+            'Narration',        
+        ];
     }
 }
