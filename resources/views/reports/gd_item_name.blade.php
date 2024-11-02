@@ -292,6 +292,11 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
+                var table = document.getElementById('ILOpenings');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+
                 url="/rep-godown-by-item-name/IL";
                 tableID="#ILTbleBody";
 
@@ -316,7 +321,7 @@
                         var html="<tr>";
                             html += "<td> Opening Quantity: " + opening_qty +"</td>";
                             html +="</tr>";
-                            
+
                         $('#ILOpenings').append(html);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
