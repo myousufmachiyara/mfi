@@ -110,9 +110,9 @@ class RptDailyRegJV2Controller extends Controller
                     <th style="width:8%;color:#17365D;font-weight:bold;">JV No</th>
                     <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:27%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Narration</th>
                 </tr>';
     
@@ -129,9 +129,9 @@ class RptDailyRegJV2Controller extends Controller
                     <td style="width:8%;">' . $item['jv_no']. '</td>
                     <td style="width:11%;">' . Carbon::parse($item['jv_date'])->format('d-m-y') . '</td>
                     <td style="width:18%;">' . $item['ac_name'] . '</td>
-                    <td style="width:18%;">' . $item['debit'] . '</td>
-                    <td style="width:18%;">' . $item['credit'] . '</td>
-                    <td style="width:27%;">' . $item['Remark'] . '</td>
+                    <td style="width:15%;">' . $item['debit'] . '</td>
+                    <td style="width:15%;">' . $item['credit'] . '</td>
+                    <td style="width:15%;">' . $item['Remark'] . '</td>
                     <td style="width:12%;">' . $item['Narration'] . '</td>
                 </tr>';
             
