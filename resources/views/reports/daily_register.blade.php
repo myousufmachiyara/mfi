@@ -692,7 +692,7 @@
                     table.deleteRow(0);
                 }
                 url="/rep-by-daily-reg/jv1";
-                tableID="#JVTbleBody";
+                tableID="#JV1TbleBody";
 
                 $.ajax({
                     type: "GET",
