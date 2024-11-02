@@ -220,19 +220,19 @@ class RptAccNameSale1Controller extends Controller
         $html .= '</table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
-
+        
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>';
+        $html .= '<th style="width:16%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Name/Address</th>';
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
+        
 
         $pdf->setTableHtml($html);
 
