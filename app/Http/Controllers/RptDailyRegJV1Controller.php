@@ -116,11 +116,11 @@ class RptDailyRegJV1Controller extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">R/No.</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">R/No.</th>
+                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
                 </tr>';
     
