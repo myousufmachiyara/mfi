@@ -331,6 +331,7 @@
                         html +="</thead>";
                         
                         $('#ILOpenings').append(html);
+                        var balance=opening_qty;
 
                         $.each(result['ledger'], function(k,v){
                             var html="<tr>";
@@ -342,10 +343,16 @@
                             html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
                             html += "<td>" + (v['add_qty'] ? v['add_qty'] : "0") + "</td>";
                             html += "<td>" + (v['less'] ? v['less'] : "0") + "</td>";
-                            if(!empty(v['add_qty'])){
-
+                            if (v['add_qty'] !== undefined && v['add_qty'] !== null) {
+                                balance += v['add_qty']; // Add to balance
                             }
-                            html += "<td>" + (v['less'] ? v['less'] : "") + "</td>";
+
+                            // Check if less exists and is not empty
+                            if (v['less'] !== undefined && v['less'] !== null) {
+                                balance -= v['less']; // Subtract from balance
+                            }
+
+                            html += "<td>" + balance + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
