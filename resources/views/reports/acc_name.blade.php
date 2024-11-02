@@ -125,10 +125,9 @@
                                                     <th>Sales Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Bill</th>
-                                                    <th>Company Name</th>
-                                                    <th>Pur Inv</th>
+                                                    <th>Name/Address</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Net Bill Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="Sale1TbleBody">
@@ -532,9 +531,8 @@
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
+                            html += "<td>" + (v['bill'] ? v['bill'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
                             html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
                             html +="</tr>";
