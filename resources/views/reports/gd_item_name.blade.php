@@ -305,6 +305,7 @@
                         $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     }, 
                     success: function(result){
+                        $(tableID).empty();
                         $('#IL_from').text(formattedfromDate);
                         $('#IL_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
@@ -315,7 +316,6 @@
                             opening_qty += v['add_total'] || 0;
                         });
 
-                        
                         var html ="<tr>";
                         html += "<th> Opening Quantity:</th>";
                         html += "<th>" + opening_qty + "</th>";
