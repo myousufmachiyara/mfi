@@ -550,6 +550,9 @@ class RptGoDownItemNameController extends Controller
             'ledger5_opp' => $gd_pipe_item_ledger5_opp,
             'ledger' => $gd_pipe_item_ledger,
         ];
+
+        return response()->json($response);
+
     }
 
     public function ILExcel(Request $request)
