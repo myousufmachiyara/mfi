@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class RptDailyRegJV1Controller extends Controller
 {
     public function jv1(Request $request){
-        $activites10_gen_ac = activites10_gen_ac::whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        $activites10_gen_ac = activites10_gen_ac::whereBetween('Date', [$request->fromDate, $request->toDate])
         ->join('ac as dr_acc','dr_acc.ac_code','=','activites10_gen_ac.ac_dr_sid')
         ->join('ac as cr_acc','cr_acc.ac_code','=','activites10_gen_ac.ac_cr_sid')
         ->select('activites10_gen_ac.*','dr_acc.ac_name as Debit_Acc','cr_acc.ac_name as Credit_Acc') 
