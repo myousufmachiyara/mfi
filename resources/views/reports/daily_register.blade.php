@@ -714,11 +714,11 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['auto_ledger'] ? v['auto_ledger'] : "") + "</td>";
+                            html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
                             html += "<td>" + (v['Date'] ? moment(v['Date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Debit_Acc'] ? v['Debit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['Credit_Acc'] ? v['Credit_Acc'] : "") + "</td>";
-                            html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
+                            html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
                             html += "<td>" + (v['Amount'] ? v['Amount'] : "") + "</td>";
                             html +="</tr>";
 
