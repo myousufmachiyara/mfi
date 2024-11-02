@@ -824,31 +824,32 @@
             acc_id=$('#acc_id').val();
 
             if (tabName === "purchase1") {
-                window.location.href = `/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+
             }
 
             else if (tabName === "purchase2") {
-                window.location.href = `/rep-by-acc-name/pur2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/pur2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "comb_purchase") {
-                window.location.href = `/rep-by-acc-name/comb-pur/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/comb-pur/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "sale_1") {
-                window.location.href = `/rep-by-acc-name/sale1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+               window.open(`/rep-by-acc-name/sale1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "sale_2") {
-                window.location.href = `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open( `/rep-by-acc-name/sale2/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "comb_sale") {
-                window.location.href = `/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/comb-sale/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "jv") {
-                window.location.href = `/rep-by-acc-name/jv/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open( `/rep-by-acc-name/jv/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
         }
 
