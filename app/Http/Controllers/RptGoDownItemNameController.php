@@ -549,7 +549,7 @@ class RptGoDownItemNameController extends Controller
         ->where('date', '<', $request->fromDate)
         ->get();
         
-        return $totalQtyResult;
+        return $gd_pipe_item_ledger5_opp;
     }
 
     public function ILExcel(Request $request)
