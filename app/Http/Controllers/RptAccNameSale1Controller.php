@@ -204,7 +204,7 @@ class RptAccNameSale1Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-        $html = '<table>';
+        $html = '<table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">';
         $html .= '<tr>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$sale_by_account[0]['ac_name'].'</span></td>';
         $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
