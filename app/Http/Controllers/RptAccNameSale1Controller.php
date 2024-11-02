@@ -67,20 +67,30 @@ class RptAccNameSale1Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Account Info Table
-        $html = '<table>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px;border-bottom:1px solid #000; width:70%;">Account Name: <span style="color:black;">' . $sale_by_account[0]['ac_name'] . '</span></td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;border-bottom:1px solid #000; width:30%;"> Print Date: <span style="color:black;">' . $currentDate . '</span></td>
-            </tr>
-            <tr>
-                <td style="padding:5px 10px;"></td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;border-bottom:1px solid #000; width:30%;"> From Date: <span style="color:black;">' . $formattedFromDate . '</span></td>
-            </tr>
-            <tr>
-                <td style="padding:5px 10px;"></td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;border-bottom:1px solid #000; width:30%;"> To Date: <span style="color:black;">' . $formattedToDate . '</span></td>
-            </tr>
-        </table>';
+        $html = '
+            <table>
+                <tr>
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
+                        Account Name: <span style="color:black;">' . htmlspecialchars($sale_by_account[0]['ac_name']) . '</span>
+                    </td>
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; width:30%;">
+                        Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 10px;"></td>
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; width:30%;">
+                        From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 10px;"></td>
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; width:30%;">
+                        To Date: <span style="color:black;">' . htmlspecialchars($formattedToDate) . '</span>
+                    </td>
+                </tr>
+            </table>';
+
         $pdf->writeHTML($html, true, false, true, false, '');
 
 
