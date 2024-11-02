@@ -302,7 +302,7 @@
                         acc_id:acc_id,
                     },
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     }, 
                     success: function(result){
                         $('#IL_from').text(formattedfromDate);
@@ -321,7 +321,7 @@
                         html += "<th>" + opening_qty + "</th>";
                         html +="</tr>";
                         $(tableID).append(html);
-                        
+
                         var balance=opening_qty;
 
                         $.each(result['ledger'], function(k,v){
