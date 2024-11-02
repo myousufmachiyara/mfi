@@ -86,16 +86,18 @@
                                     
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
+                                            <thead id="ILOpenings">
+                                            </thead>
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <!-- <th>Voucher No.</th>
+                                                    <th>Voucher No.</th>
                                                     <th>Date</th>
                                                     <th>Entry Of</th>
-                                                    <th>Account Name</th> -->
+                                                    <th>Account Name</th>
                                                     <th>Remarks</th>
                                                     <th>Add</th>
-                                                    <!-- <th>Less</th> -->
+                                                    <th>Less</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="ILTbleBody">
@@ -306,21 +308,16 @@
                         $('#IL_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#IL_acc').text(selectedAcc);
+                        var opening_qty;
 
-                        console.log(result)
                         $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            // html += "<td>" + (v['no'] ? v['no'] : "") +"</td>";
-                            // html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
-                            // html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            // html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
-                            html += "<td>" + (v['total_qty'] ? v['total_qty'] : "") + "</td>";
-                            // html += "<td>" + (v['less_total'] ? v['less_total'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
+                            opening_qty=opening_qty+v['add_total'];
                         });
+                        var html="<tr>";
+                            html += "<td> Opening Quantity: " + opening_qty +"</td>";
+                            html +="</tr>";
+                            
+                        $('#ILOpenings').append(html);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown); // Log error details to console
