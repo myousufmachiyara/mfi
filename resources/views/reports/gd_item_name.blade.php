@@ -320,7 +320,7 @@
                             opening_qty += v['add_total'] || 0;
                         });
                         var html="<tr>";
-                            html += "<td> Opening Quantity: " + opening_qty +"</td>";
+                            html += "<th> Opening Quantity: " + opening_qty +"</th>";
                             html +="</tr>";
 
                         $('#ILOpenings').append(html);
