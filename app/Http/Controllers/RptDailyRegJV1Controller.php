@@ -50,7 +50,10 @@ class RptDailyRegJV1Controller extends Controller
         ]);
     
         // Retrieve data from the database
-        $activites10_gen_ac = activites10_gen_ac::whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        $activites10_gen_ac = activites10_gen_ac::whereBetween('Date', [$request->fromDate, $request->toDate])
+        ->join('ac as dr_acc','dr_acc.ac_code','=','activites10_gen_ac.ac_dr_sid')
+        ->join('ac as cr_acc','cr_acc.ac_code','=','activites10_gen_ac.ac_cr_sid')
+        ->select('activites10_gen_ac.*','dr_acc.ac_name as Debit_Acc','cr_acc.ac_name as Credit_Acc') 
         ->get();
     
         // Check if data exists
@@ -72,9 +75,9 @@ class RptDailyRegJV1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Daily Register Purchase 1 ' . $request->acc_id);
-        $pdf->SetSubject('Daily Register Purchase 1');
-        $pdf->SetKeywords('Daily Register Purchase 1, TCPDF, PDF');
+        $pdf->SetTitle('Daily Register JV 1 ' . $request->acc_id);
+        $pdf->SetSubject('Daily Register JV 1');
+        $pdf->SetKeywords('Daily Register JV 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -82,7 +85,7 @@ class RptDailyRegJV1Controller extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Purchase 1</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register JV 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
@@ -113,11 +116,10 @@ class RptDailyRegJV1Controller extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">R/No.</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Bill No.</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Name</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Credit</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
                 </tr>';
@@ -132,16 +134,15 @@ class RptDailyRegJV1Controller extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['pur_date'])->format('d-m-y') . '</td>
-                    <td style="width:10%;">' . $item['pur_id']. '</td>
-                    <td style="width:10%;">' . $item['pur_bill_no'] . '</td>
-                    <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:15%;">' . $item['cash_saler_name'] . '</td>
-                    <td style="width:15%;">' . $item['Pur_Remarks'] . '</td>
-                    <td style="width:12%;">' . $item['bill_amt'] . '</td>
+                    <td style="width:10%;">' . $item['auto_lager']. '</td>
+                    <td style="width:10%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
+                    <td style="width:10%;">' . $item['Debit_Acc'] . '</td>
+                    <td style="width:22%;">' . $item['Credit_Acc'] . '</td>
+                    <td style="width:15%;">' . $item['remarks'] . '</td>
+                    <td style="width:12%;">' . $item['Amount'] . '</td>
                 </tr>';
             
-            $totalAmount += $item['bill_amt']; // Accumulate total quantity
+            $totalAmount += $item['Amount']; // Accumulate total quantity
             $count++;
         }
     
