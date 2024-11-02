@@ -990,6 +990,14 @@
             else if (tabName === "pp") {
                 window.location.href = `/rep-by-daily-reg/pur2/excel?fromDate=${fromDate}&toDate=${toDate}`;
             }
+
+            else if (tabName === "jv1") {
+                window.location.href = `/rep-by-daily-reg/jv1/excel?fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "jv2") {
+                window.location.href = `/rep-by-daily-reg/jv2/excel?fromDate=${fromDate}&toDate=${toDate}`;
+            }
         }
 
         function printPDF(tabName) {
