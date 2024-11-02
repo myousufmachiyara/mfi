@@ -30,10 +30,11 @@ class DailyRegPur2Export implements FromCollection, WithHeadings
             'Bill Discount',
             'Sales Remarks',
             'Pur Ord No.',
-            'Cash Pur Acc Name',
+            'Cash Pur Acc',
             'Convance Charges',
             'Labour Charges',
             'Account Name',
+            'Customer Name',
         ];
     }
 }
