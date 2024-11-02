@@ -543,6 +543,7 @@ class RptGoDownItemNameController extends Controller
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->orderBy('sa_date','asc')
         ->get();
 
     
