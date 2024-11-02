@@ -28,7 +28,7 @@ class DailyRegJV2Export implements FromCollection, WithHeadings
             'Account Name',
             'Debit Amount',
             'Credit Amount',
-            'Remarks Debit Name',
+            'Remarks',
             'Narration',        
         ];
     }
