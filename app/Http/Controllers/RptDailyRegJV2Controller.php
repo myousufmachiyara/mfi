@@ -112,7 +112,7 @@ class RptDailyRegJV2Controller extends Controller
                     <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:16%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Narration</th>
                 </tr>';
     
@@ -131,7 +131,7 @@ class RptDailyRegJV2Controller extends Controller
                     <td style="width:18%;">' . $item['ac_name'] . '</td>
                     <td style="width:12%;">' . $item['debit'] . '</td>
                     <td style="width:12%;">' . $item['credit'] . '</td>
-                    <td style="width:15%;">' . $item['Remark'] . '</td>
+                    <td style="width:16%;">' . $item['Remark'] . '</td>
                     <td style="width:18%;">' . $item['Narration'] . '</td>
                 </tr>';
             
