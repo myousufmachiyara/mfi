@@ -311,13 +311,13 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td></td>";
-                            html += "<td></td>";
-                            html += "<td></td>";
-                            html += "<td></td>";
+                            html += "<td>" + (v['no'] ? v['no'] : "") +"</td>";
+                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
                             html += "<td>" + (v['total_add_total'] ? v['total_add_total'] : "") + "</td>";
-                            html += "<td></td>";
+                            html += "<td>" + (v['less_total'] ? v['less_total'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });

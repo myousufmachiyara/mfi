@@ -536,15 +536,15 @@ class RptGoDownItemNameController extends Controller
     }
 
     public function IL(Request $request){
-        // $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
-        // ->where('date', '<', $request->fromDate)
-        // ->get();
-        
         $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         ->where('date', '<', $request->fromDate)
-        ->selectRaw('it_cod, SUM(add_total) as total_add_total','Remarks')
-        ->groupBy('it_cod')
         ->get();
+        
+        // $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
+        // ->where('date', '<', $request->fromDate)
+        // ->selectRaw('it_cod, SUM(add_total) as total_add_total','Remarks')
+        // ->groupBy('it_cod')
+        // ->get();
 
         return $gd_pipe_item_ledger5_opp;
     }
