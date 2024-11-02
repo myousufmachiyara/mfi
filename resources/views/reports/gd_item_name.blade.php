@@ -89,13 +89,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
-                                                    <th>Inv No.</th>
-                                                    <th>Mill No.</th>
-                                                    <th>Dispatch To Party</th>
-                                                    <th>Sale Inv</th>
+                                                    <th>Voucher No.</th>
+                                                    <th>Date</th>
+                                                    <th>Entry Of</th>
+                                                    <th>Account Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Add</th>
+                                                    <th>Less</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="ILTbleBody">
@@ -308,19 +308,19 @@
                         $('#IL_acc').text(selectedAcc);
 
                         console.log(result)
-                        // $.each(result, function(k,v){
-                        //     var html="<tr>";
-                        //     html += "<td>"+(k+1)+"</td>"
-                        //     html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
-                        //     html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
-                        //     html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
-                        //     html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                        //     html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
-                        //     html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
-                        //     html += "<td>" + (v['pur_qty'] ? v['pur_qty'] : "") + "</td>";
-                        //     html +="</tr>";
-                        //     $(tableID).append(html);
-                        // });
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['no'] ? v['no'] : "") +"</td>";
+                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
+                            html += "<td>" + (v['add_total'] ? v['add_total'] : "") + "</td>";
+                            html += "<td>" + (v['less_total'] ? v['less_total'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
                     },
                     error: function(){
                         alert("error");
