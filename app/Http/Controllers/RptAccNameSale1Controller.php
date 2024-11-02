@@ -204,74 +204,74 @@ class RptAccNameSale1Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
         $pdf->writeHTML('<style>' . $margin_bottom . '</style>', true, false, true, false, '');
 
-         // Header details
-         $html = '
-         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
-             <tr>
-                 <td style="font-size:12px; font-weight:bold; color:#17365D; border-bottom:1px solid #000; width:70%;">
-                     Item Name: <span style="color:black;">' .$sale_by_account[0]['ac_name']. '</span>
-                 </td>
-                 <td style="font-size:12px; font-weight:bold;color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                     Print Date: <span style="color:black;">' . $formattedDate . '</span>
-                 </td>
-             </tr>
-             <tr>
-                 <td style="font-size:12px; color:#17365D; border-bottom:1px solid #000;width:70%;">
-                     Item Remarks: <span style="color:black;">' .$sale_by_account[0]['phone_no']. '</span>
-                 </td>
-                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                     From Date: <span style="color:black;">' . $formattedFromDate . '</span>
-                 </td>
-             </tr>
-             <tr>
-                 <td></td>
-                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
-                     To Date: <span style="color:black;">' . $formattedToDate . '</span>
-                 </td>
-             </tr>
-         </table>';
+        $html = '<table>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Account Name: <span style="color:black;">'.$sale_by_account[0]['ac_name'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> Print Date: <span style="color:black;font-weight:normal;">'.$formattedDate.'</span></td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins">Phone No: <span style="color:black;">'.$sale_by_account[0]['phone_no'].'</span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> From Date: <span style="color:black;font-weight:normal;">'.$formattedFromDate.'</span></td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"><span style="color:black;font-weight:normal;"></span></td>';
+        $html .= '<td style="font-size:12px;font-weight:bold;color:#17365D;font-family:poppins;text-align:right"> To Date: <span style="color:black;font-weight:normal;">'.$formattedToDate.'</span></td>';
+        $html .= '</tr>';
+        $html .= '</table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
-        
+
         $html = '<table border="1" style="border-collapse: collapse;text-align:center" >';
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
-        $html .= '<th style="width:16%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Bill</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Name/Address</th>';
+        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>';
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
-        
 
         $pdf->setTableHtml($html);
 
-        $count = 1;
-        $totalAmount = 0;
+        $count=1;
+        $totalAmount=0;
 
-        $html = '<table cellspacing="0" cellpadding="5" style="text-align:center">';
-
+        $html .= '<table cellspacing="0" cellpadding="5" style="text-align:center">';
         foreach ($sale_by_account as $items) {
-            // Apply alternate row color
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-            $html .= '<tr style="background-color:' . $backgroundColor . '">';
-            $html .= '<td style="width:7%;">' . $count . '</td>';
-            $html .= '<td style="width:14%;">' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>';
-            $html .= '<td style="width:16%;">' . $items['NO'] . '</td>';
-            $html .= '<td style="width:11%;">' . $items['bill'] . '</td>';
-            $html .= '<td style="width:22%;">' . $items['ac2'] . '</td>';
-            $html .= '<td style="width:15%;">' . $items['remarks'] . '</td>';
-            $html .= '<td style="width:15%;">' . $items['cr_amt'] . '</td>';
-            $html .= '</tr>';
-
-            $totalAmount += $items['cr_amt'];
+            if($count%2==0)
+            {
+                $html .= '<tr style="background-color:#f1f1f1">';
+                $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
+                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
+                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '</tr>';
+            }
+            else{
+                $html .= '<tr>';
+                $html .= '<td style="width:7%;">'.$count.'</td>';
+                $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
+                $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
+                $totalAmount=$totalAmount+$items['cr_amt'];
+                $html .= '</tr>';
+            }
             $count++;
         }
-
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
+        $currentY = $pdf->GetY();
 
         $pdf->SetFont('helvetica', 'B', 12);
 
