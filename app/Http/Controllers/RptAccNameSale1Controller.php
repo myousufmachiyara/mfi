@@ -79,7 +79,7 @@ class RptAccNameSale1Controller extends Controller
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
                     Remarks: <span style="color:black;">' . htmlspecialchars($sale_by_account[0]['remarks']) . '</span>
                     </td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
