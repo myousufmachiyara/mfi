@@ -1024,6 +1024,14 @@
                 window.location.href = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
+            else if (tabName === "jv1") {
+                window.location.href = `/rep-by-daily-reg/jv1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "jv2") {
+                window.location.href = `/rep-by-daily-reg/jv2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
         }
 
         function downloadPDF(tabName) {
@@ -1048,6 +1056,14 @@
 
             else if (tabName === "pp") {
                 window.location.href = `/rep-by-daily-reg/pur2/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "jv1") {
+                window.location.href = `/rep-by-daily-reg/jv1/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
+            }
+
+            else if (tabName === "jv2") {
+                window.location.href = `/rep-by-daily-reg/jv2/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}`;
             }
         }
         
