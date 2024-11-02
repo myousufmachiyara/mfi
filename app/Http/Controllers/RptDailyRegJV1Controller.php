@@ -134,11 +134,11 @@ class RptDailyRegJV1Controller extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . $item['auto_lager']. '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
-                    <td style="width:10%;">' . $item['Debit_Acc'] . '</td>
-                    <td style="width:22%;">' . $item['Credit_Acc'] . '</td>
-                    <td style="width:15%;">' . $item['remarks'] . '</td>
+                    <td style="width:8%;">' . $item['auto_lager']. '</td>
+                    <td style="width:11%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
+                    <td style="width:15%;">' . $item['Debit_Acc'] . '</td>
+                    <td style="width:15%;">' . $item['Credit_Acc'] . '</td>
+                    <td style="width:20%;">' . $item['remarks'] . '</td>
                     <td style="width:12%;">' . $item['Amount'] . '</td>
                 </tr>';
             
