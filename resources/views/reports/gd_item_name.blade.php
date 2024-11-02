@@ -57,12 +57,12 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="IL_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="IL_to"></span>
                                             </h4>
                                             
                                             
@@ -73,15 +73,15 @@
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="IL_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('IL')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('IL')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('IL')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -98,7 +98,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="P1TbleBody">
+                                            <tbody id="ILTbleBody">
 
                                             </tbody>
                                         </table>
@@ -286,6 +286,46 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#IL"){
+                var table = document.getElementById('ILTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-godown-by-item-name/IL";
+                tableID="#ILTbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    success: function(result){
+                        $('#IL_from').text(formattedfromDate);
+                        $('#IL_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#IL_acc').text(selectedAcc);
+
+                        console.log(result)
+                        // $.each(result, function(k,v){
+                        //     var html="<tr>";
+                        //     html += "<td>"+(k+1)+"</td>"
+                        //     html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                        //     html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
+                        //     html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
+                        //     html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                        //     html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
+                        //     html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
+                        //     html += "<td>" + (v['pur_qty'] ? v['pur_qty'] : "") + "</td>";
+                        //     html +="</tr>";
+                        //     $(tableID).append(html);
+                        // });
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
             }
             
             else if(tabId=="#SI"){
@@ -463,7 +503,11 @@
                 return;
             }
 
-            if (tabName === "SI") {
+            if(tabName === "IL"){
+                window.location.href = `/rep-godown-by-item-name/IL/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "SI") {
                 window.location.href = `/rep-godown-by-item-name/si/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
@@ -484,7 +528,11 @@
                 return;
             }
 
-            if (tabName === "SI") {
+            if(tabName === "IL"){
+                window.open(`/rep-godown-by-item-name/IL/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            }
+
+            else if (tabName === "SI") {
                 window.open(`/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
@@ -505,8 +553,12 @@
                 alert('Please fill in all required fields.');
                 return;
             }
+            
+            if(tabName === "IL"){
+                window.location.href = `/rep-godown-by-item-name/IL/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
 
-            if (tabName === "SI") {
+            else if (tabName === "SI") {
                 window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
             else if (tabName === "SO") {

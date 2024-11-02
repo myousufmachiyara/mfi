@@ -431,6 +431,11 @@
         Route::get('/rep-by-daily-reg/jv2/excel', [App\Http\Controllers\RptDailyRegJV2Controller::class, 'jv2Excel'])->name('jv2-rep-by-daily-reg-excel');
         Route::get('/rep-by-daily-reg/jv2/report', [App\Http\Controllers\RptDailyRegJV2Controller::class, 'jv2Report'])->name('jv2-rep-by-daily-reg-report');
 
+        // RPT Godown By Item Name IL
+        Route::get('/rep-godown-by-item-name/IL', [App\Http\Controllers\RptGoDownItemNameController::class, 'IL'])->name('IL-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/IL/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILExcel'])->name('IL-rep-godown-by-item-name-excel');;
+        Route::get('/rep-godown-by-item-name/IL/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILReport'])->name('IL-rep-godown-by-item-name-report');
+
         // RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
         Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');;
