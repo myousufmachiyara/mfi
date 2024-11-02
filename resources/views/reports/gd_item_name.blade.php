@@ -322,8 +322,9 @@
                             $(tableID).append(html);
                         });
                     },
-                    error: function(){
-                        alert("error");
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX error:", textStatus, errorThrown); // Log error details to console
+                        alert("Error: " + textStatus + "\n" + errorThrown); // Display error message to the user
                     }
                 });
             }
