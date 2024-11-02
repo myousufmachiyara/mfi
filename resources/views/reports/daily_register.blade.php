@@ -687,7 +687,7 @@
                 });
             }
             else if(tabId=="#JV1"){
-                var table = document.getElementById('JVTbleBody');
+                var table = document.getElementById('JV1TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
