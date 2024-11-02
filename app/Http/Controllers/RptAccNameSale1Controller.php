@@ -69,7 +69,7 @@ class RptAccNameSale1Controller extends Controller
         // Account Info Table
         $html = '<table>
             <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px;">Account Name: <span style="color:black;">' . $sale_by_account[0]['ac_name'] . '</span></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px;">Account Name: <span style="color:black;border-bottom:1px solid #000; width:70%;">' . $sale_by_account[0]['ac_name'] . '</span></td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;"> Print Date: <span style="color:black;">' . $currentDate . '</span></td>
             </tr>
             <tr>
