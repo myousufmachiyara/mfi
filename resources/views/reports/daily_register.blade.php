@@ -245,10 +245,6 @@
                                                 <span style="font-weight: 400; color: black;" id="jv1_to"></span>
                                             </h4>
                                             
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="jv1_acc"></span>
-                                            </h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
@@ -261,12 +257,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Voucher</th>
+                                                    <th>R/No</th>
                                                     <th>Date</th>
-                                                    <th>Account Name</th>
-                                                    <th>Remarks</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
+                                                    <th>Remarks</th>
+                                                    <th>Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="JV1TbleBody">
@@ -277,6 +273,45 @@
                                 </div>
                             </div>
                             <div id="JV2" class="tab-pane">
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="jv2_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="jv2_to"></span>
+                                            </h4>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('jv2')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('jv2')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('jv2')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>R/No</th>
+                                                    <th>Date</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                    <th>Remarks</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="JV2TbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="sale_1_return" class="tab-pane">
                                 <div class="row form-group pb-3">
@@ -656,7 +691,7 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-by-acc-name/jv";
+                url="/rep-by-daily-reg/jv1";
                 tableID="#JVTbleBody";
 
                 $.ajax({
@@ -665,28 +700,26 @@
                     data:{
                         fromDate: fromDate,
                         toDate: toDate,
-                        acc_id:acc_id,
                     }, 
                     beforeSend: function() {
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
-                        $('#jv_from').text(formattedfromDate);
-                        $('#jv_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#jv_acc').text(selectedAcc);
+                        $('#jv1_from').text(formattedfromDate);
+                        $('#jv1_to').text(formattedtoDate);
+
 
                         $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html += "<td>" + (v['auto_ledger'] ? v['auto_ledger'] : "") + "</td>";
+                            html += "<td>" + (v['Date'] ? moment(v['Date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['Debit_Acc'] ? v['Debit_Acc'] : "") + "</td>";
+                            html += "<td>" + (v['Credit_Acc'] ? v['Credit_Acc'] : "") + "</td>";
+                            html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
+                            html += "<td>" + (v['Amount'] ? v['Amount'] : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
