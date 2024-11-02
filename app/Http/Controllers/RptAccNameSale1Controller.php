@@ -104,12 +104,11 @@ class RptAccNameSale1Controller extends Controller
         $html .= '<tr>';
         $html .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
         $html .= '<th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html .= '<th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>';
-        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>';
-        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>';
+        $html .= '<th style="width:16%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        $html .= '<th style="width:11%;color:#17365D;font-weight:bold;">Bill</th>';
+        $html .= '<th style="width:22%;color:#17365D;font-weight:bold;">Name/Address</th>';
         $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html .= '<th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>';
+        $html .= '<th style="width:15%;color:#17365D;font-weight:bold;">Amount</th>';
         $html .= '</tr>';
         $html .= '</table>';
 
@@ -125,12 +124,11 @@ class RptAccNameSale1Controller extends Controller
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
                 $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
                 $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
@@ -138,12 +136,11 @@ class RptAccNameSale1Controller extends Controller
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
                 $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
                 $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
@@ -259,12 +256,11 @@ class RptAccNameSale1Controller extends Controller
                 $html .= '<tr style="background-color:#f1f1f1">';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
                 $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
                 $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
@@ -272,12 +268,11 @@ class RptAccNameSale1Controller extends Controller
                 $html .= '<tr>';
                 $html .= '<td style="width:7%;">'.$count.'</td>';
                 $html .= '<td style="width:14%;">'.Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y').'</td>';
-                $html .= '<td style="width:10%;">'.$items['NO'].'</td>';
-                $html .= '<td style="width:10%;">'.$items['pur_bill_no'].'</td>';
+                $html .= '<td style="width:16%;">'.$items['NO'].'</td>';
+                $html .= '<td style="width:11%;">'.$items['bill'].'</td>';
                 $html .= '<td style="width:22%;">'.$items['ac2'].'</td>';
-                $html .= '<td style="width:11%;">'.$items['sal_inv'].'</td>';
                 $html .= '<td style="width:15%;">'.$items['remarks'].'</td>';
-                $html .= '<td style="width:12%;">'.$items['cr_amt'].'</td>';
+                $html .= '<td style="width:15%;">'.$items['cr_amt'].'</td>';
                 $totalAmount=$totalAmount+$items['cr_amt'];
                 $html .= '</tr>';
             }
