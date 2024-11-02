@@ -24,14 +24,17 @@ class RptDailyRegJV1Controller extends Controller
 
     public function jv1Excel(Request $request)
     {
-        $activites10_gen_ac = activites10_gen_ac::whereBetween('pur_date', [$request->fromDate, $request->toDate])
+        $activites10_gen_ac = activites10_gen_ac::whereBetween('Date', [$request->fromDate, $request->toDate])
+        ->join('ac as dr_acc','dr_acc.ac_code','=','activites10_gen_ac.ac_dr_sid')
+        ->join('ac as cr_acc','cr_acc.ac_code','=','activites10_gen_ac.ac_cr_sid')
+        ->select('activites10_gen_ac.*','dr_acc.ac_name as Debit_Acc','cr_acc.ac_name as Credit_Acc') 
         ->get();
 
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "daily_reg_pur1_report_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "daily_reg_jv1_report_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
         return Excel::download(new DailyRegJV1Export($activites10_gen_ac), $filename);
@@ -56,7 +59,7 @@ class RptDailyRegJV1Controller extends Controller
         }
     
         // Generate the PDF
-        return $this->pur1generatePDF($activites10_gen_ac, $request);
+        return $this->jv1generatePDF($activites10_gen_ac, $request);
     }
 
     private function jv1generatePDF($activites10_gen_ac, Request $request)
@@ -157,7 +160,7 @@ class RptDailyRegJV1Controller extends Controller
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
 
-        $filename = "daily_reg_pur1_report_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "daily_reg_jv1_report_from_{$fromDate}_to_{$toDate}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
