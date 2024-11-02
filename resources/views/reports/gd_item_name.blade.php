@@ -98,6 +98,7 @@
                                                     <th>Remarks</th>
                                                     <th>Add</th>
                                                     <th>Less</th>
+                                                    <th>Balance</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="ILTbleBody">
@@ -316,14 +317,30 @@
                         var opening_qty = 0;                        
                         console.log (result);
 
-                        $.each(result, function(k,v){
+                        $.each(result['ledger5_opp'], function(k,v){
                             opening_qty += v['add_total'] || 0;
                         });
+
                         var html="<tr>";
                         html += "<th> Opening Quantity: " + opening_qty +"</th>";
                         html +="</tr>";
 
                         $('#ILOpenings').append(html);
+
+                        $.each(result['ledger'], function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
+                            html += "<td>" + (v['add_qty'] ? v['add_qty'] : "") + "</td>";
+                            html += "<td>" + (v['less'] ? v['less'] : "") + "</td>";
+                            html += "<td>" + (v['less'] ? v['less'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown); // Log error details to console

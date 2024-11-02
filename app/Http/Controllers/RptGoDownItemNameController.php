@@ -10,15 +10,7 @@ use App\Models\gd_pipe_pur_by_item_name;
 use App\Models\gd_pipe_addless_by_item_name;
 use App\Models\gd_pipe_sale_by_item_name;
 use App\Models\gd_pipe_item_ledger5_opp;
-
-use App\Models\GdPipeItemLedger1Opp;
-use App\Models\GdPipeItemLedger2Pur;
-use App\Models\GdPipeItemLedger3Sal;
-use App\Models\GdPipeItemLedger4GeneralAdd;
-use App\Models\GdPipeItemLedger4GeneralLes;
-use Illuminate\Support\Facades\DB;
-
-
+use App\Models\gd_pipe_item_ledger;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
@@ -548,8 +540,16 @@ class RptGoDownItemNameController extends Controller
         $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         ->where('date', '<', $request->fromDate)
         ->get();
-        
-        return $gd_pipe_item_ledger5_opp;
+
+        $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->get();
+
+    
+        $response = [
+            'ledger5_opp' => $gd_pipe_item_ledger5_opp,
+            'ledger' => $gd_pipe_item_ledger,
+        ];
     }
 
     public function ILExcel(Request $request)
