@@ -316,7 +316,7 @@
                             html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['Remarks'] ? v['Remarks'] : "") + "</td>";
-                            html += "<td>" + (v['add_total'] ? v['add_total'] : "") + "</td>";
+                            html += "<td>" + (v['total_add_total'] ? v['total_add_total'] : "") + "</td>";
                             html += "<td>" + (v['less_total'] ? v['less_total'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
