@@ -298,12 +298,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>R/No</th>
+                                                    <th>JV No.</th>
                                                     <th>Date</th>
+                                                    <th>Account Name</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Narration</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="JV2TbleBody">
@@ -731,12 +732,12 @@
                 });
             }
             else if(tabId=="#JV2"){
-                var table = document.getElementById('JVTbleBody');
+                var table = document.getElementById('JV2TbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-by-acc-name/jv";
-                tableID="#JVTbleBody";
+                url="/rep-by-daily-reg/jv2";
+                tableID="#JV2TbleBody";
 
                 $.ajax({
                     type: "GET",
@@ -744,28 +745,26 @@
                     data:{
                         fromDate: fromDate,
                         toDate: toDate,
-                        acc_id:acc_id,
                     }, 
                     beforeSend: function() {
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
-                        $('#jv_from').text(formattedfromDate);
-                        $('#jv_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#jv_acc').text(selectedAcc);
+                        $('#jv2_from').text(formattedfromDate);
+                        $('#jv2_to').text(formattedtoDate);
 
                         $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                            html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
                             html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
+                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
+                            html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
                             html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
