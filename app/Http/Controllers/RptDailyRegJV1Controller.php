@@ -120,7 +120,7 @@ class RptDailyRegJV1Controller extends Controller
                     <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:25%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:27%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
                 </tr>';
     
@@ -138,7 +138,7 @@ class RptDailyRegJV1Controller extends Controller
                     <td style="width:11%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
                     <td style="width:18%;">' . $item['Debit_Acc'] . '</td>
                     <td style="width:18%;">' . $item['Credit_Acc'] . '</td>
-                    <td style="width:25%;">' . $item['remarks'] . '</td>
+                    <td style="width:27%;">' . $item['remarks'] . '</td>
                     <td style="width:12%;">' . $item['Amount'] . '</td>
                 </tr>';
             
