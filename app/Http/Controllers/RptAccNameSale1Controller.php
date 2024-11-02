@@ -68,20 +68,21 @@ class RptAccNameSale1Controller extends Controller
 
         // Account Info Table
         $html = '<table>
-                    <tr>
-                        <td style="font-size:12px;font-weight:bold;color:#17365D;">Account Name: <span style="color:black;">' . $sale_by_account[0]['ac_name'] . '</span></td>
-                        <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right"> Print Date: <span style="color:black;">' . $currentDate . '</span></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right"> From Date: <span style="color:black;">' . $formattedFromDate . '</span></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="font-size:12px;font-weight:bold;color:#17365D;text-align:right"> To Date: <span style="color:black;">' . $formattedToDate . '</span></td>
-                    </tr>
-                </table>';
+            <tr>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px;">Account Name: <span style="color:black;">' . $sale_by_account[0]['ac_name'] . '</span></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;"> Print Date: <span style="color:black;">' . $currentDate . '</span></td>
+            </tr>
+            <tr>
+                <td style="padding:5px 10px;"></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;"> From Date: <span style="color:black;">' . $formattedFromDate . '</span></td>
+            </tr>
+            <tr>
+                <td style="padding:5px 10px;"></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px;"> To Date: <span style="color:black;">' . $formattedToDate . '</span></td>
+            </tr>
+        </table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
 
         // Table Headers
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">
