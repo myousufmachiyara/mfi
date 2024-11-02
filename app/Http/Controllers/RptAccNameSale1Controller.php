@@ -78,13 +78,13 @@ class RptAccNameSale1Controller extends Controller
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding:5px 10px;"></td>
+                    <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;"></td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; width:30%;">
                         From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding:5px 10px;"></td>
+                    <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;"></td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; width:30%;">
                         To Date: <span style="color:black;">' . htmlspecialchars($formattedToDate) . '</span>
                     </td>
