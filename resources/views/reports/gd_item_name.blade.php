@@ -317,8 +317,8 @@
                         });
 
                         var html ="<tr>";
-                        html += "<th colspan=5> Opening Quantity:</th>";
-                        html += "<th colspan=4>" + opening_qty + "</th>";
+                        html += "<th colspan=8 style='text-align:right'> Opening Quantity:</th>";
+                        html += "<th colspan=1>" + opening_qty + "</th>";
                         html +="</tr>";
                         $(tableID).append(html);
 
