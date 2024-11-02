@@ -44,6 +44,7 @@ class RptAccNameSale1Controller extends Controller
         $sale_by_account = sale_by_account::where('ac1', $request->acc_id)
             ->whereBetween('date', [$request->fromDate, $request->toDate])
             ->leftjoin('ac', 'ac.ac_code', '=', 'sale_by_account.ac1')
+            ->select('sale_by_account.*', 'ac.ac_name',  'ac.remarks')
             ->get();
 
         // Get and format current and report dates
@@ -78,7 +79,9 @@ class RptAccNameSale1Controller extends Controller
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;"></td>
+                    <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;">
+                    Remarks: <span style="color:black;">' . htmlspecialchars($sale_by_account[0]['remarks']) . '</span>
+                    </td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                         From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
                     </td>
