@@ -10,6 +10,14 @@ use App\Models\gd_pipe_pur_by_item_name;
 use App\Models\gd_pipe_addless_by_item_name;
 use App\Models\gd_pipe_sale_by_item_name;
 use App\Models\gd_pipe_item_ledger5_opp;
+
+use App\Models\GdPipeItemLedger1Opp;
+use App\Models\GdPipeItemLedger2Pur;
+use App\Models\GdPipeItemLedger3Sal;
+use App\Models\GdPipeItemLedger4GeneralAdd;
+use App\Models\GdPipeItemLedger4GeneralLes;
+
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
@@ -536,9 +544,9 @@ class RptGoDownItemNameController extends Controller
     }
 
     public function IL(Request $request){
-        $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
-        ->where('date', '<', $request->fromDate)
-        ->get();
+        // $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
+        // ->where('date', '<', $request->fromDate)
+        // ->get();
         
         // $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         // ->where('date', '<', $request->fromDate)
@@ -546,7 +554,32 @@ class RptGoDownItemNameController extends Controller
         // ->groupBy('it_cod')
         // ->get();
 
-        return $gd_pipe_item_ledger5_opp;
+        $totalQty = GdPipeItemLedger1Opp::selectRaw('SUM(qty) AS total_qty, "Opening Stock" AS Remarks')
+        ->where('it_cod',  $request->acc_id)
+        ->where('date', '<', $request->fromDate)
+        ->unionAll(
+            GdPipeItemLedger2Pur::selectRaw('SUM(qty) AS total_qty, "Opening Stock" AS Remarks')
+                ->where('item_cod',  $request->acc_id)
+                ->where('date', '<', $request->fromDate)
+        )
+        ->unionAll(
+            GdPipeItemLedger3Sal::selectRaw('SUM(qty) AS total_qty, "Opening Stock" AS Remarks')
+                ->where('item_cod',  $request->acc_id)
+                ->where('date', '<', $request->fromDate)
+        )
+        ->unionAll(
+            GdPipeItemLedger4GeneralAdd::selectRaw('SUM(qty) AS total_qty, "Opening Stock" AS Remarks')
+                ->where('item_cod',  $request->acc_id)
+                ->where('date', '<', $request->fromDate)
+        )
+        ->unionAll(
+            GdPipeItemLedger4GeneralLes::selectRaw('SUM(qty) AS total_qty, "Opening Stock" AS Remarks')
+                ->where('item_cod',  $request->acc_id)
+                ->where('date', '<', $request->fromDate)
+        )
+        ->get();
+
+        return $totalQty;
     }
 
     public function ILExcel(Request $request)
