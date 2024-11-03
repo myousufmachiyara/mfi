@@ -572,7 +572,6 @@ class RptGoDownItemNameController extends Controller
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         $opening_qty = collect($gd_pipe_item_ledger5_opp)->sum('add_total');
-        die(print_r($opening_qty));
 
         // Construct the filename
         $filename = "IL_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
