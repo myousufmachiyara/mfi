@@ -605,12 +605,13 @@ class RptGoDownItemNameController extends Controller
         return $this->ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, $request);
     }
 
+
     private function ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, Request $request)
     {
         $currentDate = Carbon::now();
-        $formattedDate = $currentDate->format('d-m-y');
-        $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
-        $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
+        $formattedDate = $currentDate->format('d-m-Y');
+        $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-Y');
+        $formattedToDate = Carbon::parse($request->toDate)->format('d-m-Y');
         $opening_qty = $gd_pipe_item_ledger5_opp->sum('add_total');
         $balance = $opening_qty;
 
@@ -621,15 +622,15 @@ class RptGoDownItemNameController extends Controller
         $pdf->SetSubject('Item Ledger Report');
         $pdf->SetKeywords('Item Ledger Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-    
+
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-    
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Item Ledger Report</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-    
+
         // Header details
         $html = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
@@ -659,7 +660,6 @@ class RptGoDownItemNameController extends Controller
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-    
         // Table header for data
         $html = '
             <table border="1" style="border-collapse: collapse; text-align: center;">
@@ -676,45 +676,41 @@ class RptGoDownItemNameController extends Controller
                 </tr>
                 <tr>
                     <th colspan=8 style="text-align:right"> Opening Quantity:</th>
-                    <th colspan=1>'. $opening_qty .'</th>
+                    <th colspan=1>' . $opening_qty . '</th>
                 </tr>';
 
         // Iterate through items and add rows
         $count = 1;
-        $totalAmount = 0;
-    
         foreach ($gd_pipe_item_ledger as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
-    
+
+            // Update balance safely
+            if (!empty($item['add_qty'])) {
+                $balance += $item['add_qty'];
+            }
+            if (!empty($item['less'])) {
+                $balance -= $item['less'];
+            }
+
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:14%;">' . $item['Sal_inv_no'] . '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+                    <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-Y') . '</td>
                     <td style="width:10%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
                     <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
-                    <td style="width:12%;">' . $item['add_qty'] . '</td>
-                    <td style="width:12%;">' . $item['less'] . '</td>';
-
-                    if (!empty($item['add_qty'])) {
-                        $balance += $item['add_qty'];
-                    }
-                
-                    if (!empty($item['less'])) {
-                        $balance -= $item['less'];
-                    }
-
-                    '<td style="width:12%;">' . $balance . '</td>
+                    <td style="width:12%;">' . ($item['add_qty'] ?? '0') . '</td>
+                    <td style="width:12%;">' . ($item['less'] ?? '0') . '</td>
+                    <td style="width:12%;">' . $balance . '</td>
                 </tr>';
-            
-            // $totalAmount += $item['pur_qty']; // Accumulate total quantity
+
             $count++;
         }
-    
+
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-    
+
         // Display total amount at the bottom
         // $currentY = $pdf->GetY();
         // $pdf->SetFont('helvetica', 'B', 12);
@@ -722,13 +718,13 @@ class RptGoDownItemNameController extends Controller
         // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
         // $pdf->SetXY(175, $currentY + 5);
         // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
-    
+        
         // Prepare filename for the PDF
         $accId = $request->acc_id;
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "IL_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
-    
+
         // Determine output type
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
