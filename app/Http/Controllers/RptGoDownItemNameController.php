@@ -618,7 +618,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Item Ledger Report ' . $request->acc_id);
+        $pdf->SetTitle('Item Ledger Report' . $request->acc_id);
         $pdf->SetSubject('Item Ledger Report');
         $pdf->SetKeywords('Item Ledger Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
