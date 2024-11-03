@@ -696,7 +696,7 @@ class RptGoDownItemNameController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
-                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-Y') . '</td>
+                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
                     <td style="width:9%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
                     <td style="width:18%;">' . $item['Sales_Remarks'] . '</td>
