@@ -33,7 +33,7 @@ class GoDownByItemNameILExport implements FromCollection, WithHeadings
             'Remarks',
             'Add',
             'Less',
-            'Balance (Opening Bal:'.$this->$op_qty.')',
+            'Balance (Opening Bal:'.$this->op_qty.')',
         ];
     }
 }
