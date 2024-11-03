@@ -666,13 +666,13 @@ class RptGoDownItemNameController extends Controller
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">Vouc #</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Entry Of</th>
+                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:9%;color:#17365D;font-weight:bold;">Entry</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Add</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Less</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Balance</th>
+                    <th style="width:18%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Add</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Less</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
                 </tr>
                 <tr>
                     <th colspan="8" style="text-align:right"> Opening Quantity:</th>
@@ -696,15 +696,14 @@ class RptGoDownItemNameController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-Y') . '</td>
-                    <td style="width:10%;">' . $item['entry_of'] . '</td>
+                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-Y') . '</td>
+                    <td style="width:9%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
-                    <td style="width:8%;">' . ($item['add_qty'] ?? '0') . '</td>
-                    <td style="width:8%;">' . ($item['less'] ?? '0') . '</td>
-                    <td style="width:8%;">' . $balance . '</td>
+                    <td style="width:18%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
+                    <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
+                    <td style="width:7%;">' . $balance . '</td>
                 </tr>';
-
             $count++;
         }
 
