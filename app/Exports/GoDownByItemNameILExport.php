@@ -15,7 +15,7 @@ class GoDownByItemNameILExport implements FromCollection, WithHeadings
     public function __construct($data, $op_qty)
     {
         $this->data = $data;
-        $this->$op_qty = $op_qty;
+        $this->op_qty = $op_qty;
     }
 
     public function collection()
