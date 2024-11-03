@@ -669,7 +669,7 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:9%;color:#17365D;font-weight:bold;">Entry</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:19%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Add</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Less</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
@@ -699,7 +699,7 @@ class RptGoDownItemNameController extends Controller
                     <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
                     <td style="width:9%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:18%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:19%;">' . $item['Sales_Remarks'] . '</td>
                     <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
                     <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
                     <td style="width:7%;">' . $balance . '</td>
