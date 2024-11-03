@@ -675,8 +675,8 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
                 </tr>
                 <tr>
-                    <th colspan="8" style="text-align:right"> Opening Quantity:</th>
-                    <th colspan="1" >' . $opening_qty . '</th>
+                    <th colspan="8" style="text-align:right; font-weight:bold"> Opening Quantity:</th>
+                    <th colspan="1" style="font-weight:bold">' . $opening_qty . '</th>
                 </tr>';
 
         // Iterate through items and add rows
