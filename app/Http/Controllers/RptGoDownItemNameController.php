@@ -568,6 +568,8 @@ class RptGoDownItemNameController extends Controller
         ->orderBy('sa_date','asc')
         ->get();
         
+        die($gd_pipe_item_ledger5_opp);
+        
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
