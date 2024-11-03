@@ -20,7 +20,28 @@ class GoDownByItemNameILExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return $this->data;
+        $balance = $this->op_qty; // Start with the opening quantity
+
+        foreach ($this->data as $item) {
+            // Calculate the current balance
+            $add = !empty($item['add_qty']) ? $item['add_qty'] : 0;
+            $less = !empty($item['less']) ? $item['less'] : 0;
+            $balance += $add - $less; // Update balance
+
+            // Prepare the row with the calculated balance
+            $result[] = [
+                'Voucher No.' => $item['Sal_inv_no'],
+                'Date' => \Carbon\Carbon::parse($item['sa_date'])->format('d-m-Y'),
+                'Entry Of' => $item['entry_of'],
+                'Account Name' => $item['ac_name'],
+                'Remarks' => $item['Sales_Remarks'],
+                'Add' => $add,
+                'Less' => $less,
+                'Balance' => $balance, // Add calculated balance
+            ];
+        }
+
+        return collect($result); // Return as a collection
     }
 
     public function headings(): array
