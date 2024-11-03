@@ -18,6 +18,7 @@ use Illuminate\Validation\Validator;
 use App\Exports\TStockInExport;
 use App\Exports\TStockOutExport;
 use App\Exports\TStockBalExport;
+use App\Exports\GoDownByItemNameILExport;
 
 class RptGoDownItemNameController extends Controller
 {
@@ -558,22 +559,26 @@ class RptGoDownItemNameController extends Controller
 
     public function ILExcel(Request $request)
     {
-        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
-        ->leftjoin('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
-        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-        ->select('gd_pipe_pur_by_item_name.*','ac.ac_name')
+        $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
+        ->where('date', '<', $request->fromDate)
+        ->get();
+
+        $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->orderBy('sa_date','asc')
         ->get();
         
         $accId = $request->acc_id;
         $fromDate = \Carbon\Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
-        
+        $opening_qty = $gd_pipe_item_ledger5_opp->sum('add_total');
+
         // Construct the filename
         $filename = "IL_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
 
-        return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
+        return Excel::download(new GoDownByItemNameILExport($gd_pipe_item_ledger, $opening_qty), $filename);
     }
 
     public function ILReport(Request $request)
@@ -604,7 +609,6 @@ class RptGoDownItemNameController extends Controller
         // Generate the PDF
         return $this->ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, $request);
     }
-
 
     private function ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, Request $request)
     {
