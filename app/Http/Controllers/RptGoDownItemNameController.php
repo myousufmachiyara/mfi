@@ -670,9 +670,9 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:10%;color:#17365D;font-weight:bold;">Entry Of</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Add</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Less</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Balance</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Add</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Less</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Balance</th>
                 </tr>
                 <tr>
                     <th colspan="8" style="text-align:right"> Opening Quantity:</th>
@@ -700,9 +700,9 @@ class RptGoDownItemNameController extends Controller
                     <td style="width:10%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
                     <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
-                    <td style="width:12%;">' . ($item['add_qty'] ?? '0') . '</td>
-                    <td style="width:12%;">' . ($item['less'] ?? '0') . '</td>
-                    <td style="width:12%;">' . $balance . '</td>
+                    <td style="width:8%;">' . ($item['add_qty'] ?? '0') . '</td>
+                    <td style="width:8%;">' . ($item['less'] ?? '0') . '</td>
+                    <td style="width:8%;">' . $balance . '</td>
                 </tr>';
 
             $count++;
