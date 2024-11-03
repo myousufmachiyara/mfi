@@ -569,9 +569,10 @@ class RptGoDownItemNameController extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "IL_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
+
         return Excel::download(new TStockInExport($gd_pipe_pur_by_item_name), $filename);
     }
 
@@ -584,37 +585,41 @@ class RptGoDownItemNameController extends Controller
             'acc_id' => 'required',
             'outputType' => 'required|in:download,view',
         ]);
+
+        $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
+        ->where('date', '<', $request->fromDate)
+        ->get();
+
+        $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->orderBy('sa_date','asc')
+        ->get();
     
-        // Retrieve data from the database
-        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod', $request->acc_id)
-            ->join('ac', 'gd_pipe_pur_by_item_name.ac_cod', '=', 'ac.ac_code')
-            ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
-            ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
-            ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name', 'item_entry2.item_remark')
-            ->get();
     
         // Check if data exists
-        if ($gd_pipe_pur_by_item_name->isEmpty()) {
+        if ($gd_pipe_item_ledger->isEmpty()) {
             return response()->json(['message' => 'No records found for the selected date range.'], 404);
         }
     
         // Generate the PDF
-        return $this->ILgeneratePDF($gd_pipe_pur_by_item_name, $request);
+        return $this->ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, $request);
     }
 
-    private function ILgeneratePDF($gd_pipe_pur_by_item_name, Request $request)
+    private function ILgeneratePDF($gd_pipe_item_ledger5_opp, $gd_pipe_item_ledger, Request $request)
     {
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
-    
+        $opening_qty = $gd_pipe_item_ledger5_opp->sum('add_total');
+        $balance = $opening_qty;
+
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock In Report Of Item ' . $request->acc_id);
-        $pdf->SetSubject('Stock In Report');
-        $pdf->SetKeywords('Stock In Report, TCPDF, PDF');
+        $pdf->SetTitle('Item Ledger Report ' . $request->acc_id);
+        $pdf->SetSubject('Item Ledger Report');
+        $pdf->SetKeywords('Item Ledger Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -622,7 +627,7 @@ class RptGoDownItemNameController extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock In Report Of Item</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Item Ledger Report</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
@@ -660,15 +665,20 @@ class RptGoDownItemNameController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:14%;color:#17365D;font-weight:bold;">SI Date</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">SI ID</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Pur Inv</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>
-                    <th style="width:11%;color:#17365D;font-weight:bold;">Gate Pass</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Voucher No.</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Entry Of</th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Qty In</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Add</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Less</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Balance</th>
+                </tr>
+                <tr>
+                    <th colspan=8 style="text-align:right"> Opening Quantity:</th>
+                    <th colspan=1>'. $opening_qty .'</th>
                 </tr>';
-    
+
         // Iterate through items and add rows
         $count = 1;
         $totalAmount = 0;
@@ -679,16 +689,26 @@ class RptGoDownItemNameController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:14%;">' . Carbon::parse($item['pur_date'])->format('d-m-y') . '</td>
-                    <td style="width:10%;">' . $item['prefix'] . $item['pur_id'] . '</td>
-                    <td style="width:10%;">' . $item['pur_bill_no'] . '</td>
+                    <td style="width:14%;">' . $item['Sal_inv_no'] . '</td>
+                    <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+                    <td style="width:10%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:11%;">' . $item['mill_gate_no'] . '</td>
-                    <td style="width:15%;">' . $item['Pur_remarks'] . '</td>
-                    <td style="width:12%;">' . $item['pur_qty'] . '</td>
+                    <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:12%;">' . $item['add_qty'] . '</td>
+                    <td style="width:12%;">' . $item['less'] . '</td>';
+
+                    if (!empty($item['add_qty'])) {
+                        $balance += $item['add_qty'];
+                    }
+                
+                    if (!empty($item['less'])) {
+                        $balance -= $item['less'];
+                    }
+
+                    '<td style="width:12%;">' . $balance . '</td>
                 </tr>';
             
-            $totalAmount += $item['pur_qty']; // Accumulate total quantity
+            // $totalAmount += $item['pur_qty']; // Accumulate total quantity
             $count++;
         }
     
@@ -696,18 +716,18 @@ class RptGoDownItemNameController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        // $currentY = $pdf->GetY();
+        // $pdf->SetFont('helvetica', 'B', 12);
+        // $pdf->SetXY(155, $currentY + 5);
+        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        // $pdf->SetXY(175, $currentY + 5);
+        // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
     
         // Prepare filename for the PDF
         $accId = $request->acc_id;
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
-        $filename = "tstockin_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "IL_report_{$accId}_from_{$fromDate}_to_{$toDate}.pdf";
     
         // Determine output type
         if ($request->outputType === 'download') {
