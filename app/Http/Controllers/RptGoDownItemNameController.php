@@ -692,8 +692,8 @@ class RptGoDownItemNameController extends Controller
                 </tr>';
 
                 // Iterate through items and add rows
-            $count = 1;
-            foreach ($gd_pipe_item_ledger as $item) {
+                $count = 1;
+                foreach ($gd_pipe_item_ledger as $item) {
                 $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
                 // Update balance safely
