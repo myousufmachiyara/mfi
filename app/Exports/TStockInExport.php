@@ -25,13 +25,11 @@ class TStockInExport implements FromCollection, WithHeadings
             'Prefix',
             'Group Name',
             'Purchase Date',
-            'Account Code',
             'Purchase Remarks',
             'Purchase Bill No.',
             'Mill Gate No.',
             'Item Code',
             'Purchase Quantity',
-            'Weight Piece',
             'Company Name',
         ];
     }
