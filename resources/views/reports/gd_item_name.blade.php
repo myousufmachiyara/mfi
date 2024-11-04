@@ -323,13 +323,15 @@
                             html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th></th>";
-                            html += "<th style='text-align:right' colspan='2' style='text-align: center'><-----Opening Quantity----->:</th>"; // Merged across two columns
+                            html += "<th colspan='2' style='text-align: center'><-----Opening Quantity-----></th>"; // Merged and centered across two columns
                             html += "<th></th>"; 
                             html += "<th></th>";
-                            html += "<th>" + opening_qty + "</th>"; // Display opening quantity in the last column
+                            html += "<th style='text-align: right'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
                             html += "</tr>";
                             $(tableID).append(html);
-                        var balance=opening_qty;
+
+                        var balance = opening_qty;
+
 
                         $.each(result['ledger'], function(k,v){
                             var html="<tr>";
