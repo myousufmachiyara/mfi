@@ -133,13 +133,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>SI No.</th>
-                                                    <th>Date</th>
-                                                    <th>Pur Inv#</th>
-                                                    <th>Company Name</th>
                                                     <th>Gate Pass#</th>
-                                                    <th>Remarks</th>
+                                                    <th>Item Name</th>
+                                                    <th>Party Name</th>
                                                     <th>Quantity</th>
+                                                    <th>Weight</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SITbleBody">
@@ -187,13 +185,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>SO No.</th>
-                                                    <th>Date</th>
-                                                    <th>Sale Inv#</th>
-                                                    <th>Customer Name</th>
                                                     <th>Gate Pass#</th>
-                                                    <th>Remarks</th>
+                                                    <th>Item Name</th>
+                                                    <th>Party Name</th>
                                                     <th>Quantity</th>
+                                                    <th>Weight</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SOTbleBody">

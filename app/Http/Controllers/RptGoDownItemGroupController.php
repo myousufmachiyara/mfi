@@ -189,13 +189,15 @@ class RptGoDownItemGroupController extends Controller
         }
     }
 
-    public function tstockin(Request $request){
-        $gd_pipe_pur_by_item_name = gd_pipe_pur_by_item_name::where('item_cod',$request->acc_id)
-        ->join('ac','gd_pipe_pur_by_item_name.ac_cod','=','ac.ac_code')
-        ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
+    public function stockin(Request $request){
+        $pipe_pur_by_item_group = pipe_pur_by_item_group::where('item_cod',$request->acc_id)
+        ->join('ac','pipe_pur_by_item_group.account_name','=','ac.ac_code')
+        ->join('item_entry2','item_entry2.it_cod','=','pipe_pur_by_item_group.item_cod')
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('pipe_pur_by_item_group.*','ac.ac_name','item_entry2.item_name')
         ->get();
 
-        return $gd_pipe_pur_by_item_name;
+        return $pipe_pur_by_item_group;
     }
 
     public function tstockinExcel(Request $request)
@@ -360,13 +362,14 @@ class RptGoDownItemGroupController extends Controller
     }
 
     public function tstockout(Request $request){
-        $gd_pipe_sale_by_item_name = gd_pipe_sale_by_item_name::where('item_cod',$request->acc_id)
-        ->join('ac','gd_pipe_sale_by_item_name.account_name','=','ac.ac_code')
+        $pipe_sales_by_item_group = pipe_sales_by_item_group::where('item_cod',$request->acc_id)
+        ->join('ac','pipe_sales_by_item_group.account_name','=','ac.ac_code')
+        ->join('item_entry2','item_entry2.it_cod','=','pipe_sales_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('pipe_sales_by_item_group.*','ac.ac_name','item_entry2.item_name')
         ->get();
 
-        return $gd_pipe_sale_by_item_name;
-        
+        return $pipe_sales_by_item_group;
     }
 
     public function tstockoutExcel(Request $request)
