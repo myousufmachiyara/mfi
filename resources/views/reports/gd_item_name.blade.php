@@ -328,7 +328,6 @@
                             html += "<th></th>"; 
                             html += "<th></th>";
                             html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
-                            html += "<th></th>";
                             html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th>" + opening_qty + "</th>"; // Display opening quantity across the last two columns
