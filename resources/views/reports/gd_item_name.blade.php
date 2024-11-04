@@ -87,14 +87,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Voucher No.</th>
-                                                    <th>Date</th>
                                                     <th>Entry Of</th>
+                                                    <th>ID</th>
+                                                    <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Remarks</th>
                                                     <th>Add</th>
                                                     <th>Less</th>
-                                                    <th>Balance</th>
+                                                    <th>Stock</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="ILTbleBody">
@@ -316,20 +316,29 @@
                             opening_qty += v['add_total'] || 0;
                         });
 
-                        var html ="<tr>";
-                        html += "<th colspan=8 style='text-align:right'> Opening Quantity:</th>";
-                        html += "<th colspan=1>" + opening_qty + "</th>";
-                        html +="</tr>";
-                        $(tableID).append(html);
+                        
 
-                        var balance=opening_qty;
+                        var html = "<tr>";
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>";
+                            html += "<th colspan='2' style='text-align: center'><-----Opening Quantity-----></th>"; // Merged and centered across two columns
+                            html += "<th></th>"; 
+                            html += "<th></th>";
+                            html += "<th style='text-align: left'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
+                            html += "</tr>";
+                            $(tableID).append(html);
+
+                        var balance = opening_qty;
+
 
                         $.each(result['ledger'], function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                             html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
                             html += "<td>" + (v['add_qty'] ? v['add_qty'] : "0") + "</td>";

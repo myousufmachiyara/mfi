@@ -125,7 +125,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock In Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock In Report Of Item - ' . $gd_pipe_pur_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock In Report');
         $pdf->SetKeywords('Stock In Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -277,7 +277,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock Out Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock Bal Report Of Item - ' . $gd_pipe_sale_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock Out Report');
         $pdf->SetKeywords('Stock Out Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -427,7 +427,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock Bal Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock Bal Report Of Item  - ' . $gd_pipe_addless_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock Bal Report');
         $pdf->SetKeywords('Stock Bal Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -596,7 +596,9 @@ class RptGoDownItemNameController extends Controller
         ->get();
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
+        ->join('item_entry2', 'gd_pipe_item_ledger.item_cod', '=', 'item_entry2.it_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('gd_pipe_item_ledger.*', 'item_entry2.item_name', 'item_entry2.item_remark')
         ->orderBy('sa_date','asc')
         ->get();
     
@@ -622,7 +624,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Item Ledger Report' . $request->acc_id);
+        $pdf->SetTitle('Item Ledger Report - ' . $gd_pipe_item_ledger[0]['item_name']);
         $pdf->SetSubject('Item Ledger Report');
         $pdf->SetKeywords('Item Ledger Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -669,9 +671,9 @@ class RptGoDownItemNameController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Vouc #</th>
-                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:9%;color:#17365D;font-weight:bold;">Entry</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">ID</th>
+                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Add</th>
@@ -679,39 +681,45 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
                 </tr>
                 <tr>
-                    <th colspan="8" style="text-align:right; font-weight:bold"> Opening Quantity:</th>
-                    <th colspan="1" style="font-weight:bold">' . $opening_qty . '</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th colspan="2" style="text-align:center; font-weight:bold"> +-----Opening Quantity-----+ </th>
+                    <th></th>
+                    <th></th>
+                    <th style="font-weight:bold">' . $opening_qty . '</th>
                 </tr>';
 
-        // Iterate through items and add rows
-        $count = 1;
-        foreach ($gd_pipe_item_ledger as $item) {
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+                // Iterate through items and add rows
+                $count = 1;
+                foreach ($gd_pipe_item_ledger as $item) {
+                $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
-            // Update balance safely
-            if (!empty($item['add_qty'])) {
-                $balance += $item['add_qty'];
+                // Update balance safely
+                if (!empty($item['add_qty'])) {
+                    $balance += $item['add_qty'];
+                }
+                if (!empty($item['less'])) {
+                    $balance -= $item['less'];
+                }
+
+                $html .= '
+                    <tr style="background-color:' . $backgroundColor . ';">
+                        <td style="width:7%;">' . $count . '</td>
+                        <td style="width:9%;">' . $item['entry_of'] . '</td>
+                        <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
+                        <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+                        <td style="width:22%;">' . $item['ac_name'] . '</td>
+                        <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
+                        <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
+                        <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
+                        <td style="width:7%;">' . $balance . '</td>
+                    </tr>';
+                $count++;
             }
-            if (!empty($item['less'])) {
-                $balance -= $item['less'];
-            }
 
-            $html .= '
-                <tr style="background-color:' . $backgroundColor . ';">
-                    <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
-                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
-                    <td style="width:9%;">' . $item['entry_of'] . '</td>
-                    <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
-                    <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
-                    <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
-                    <td style="width:7%;">' . $balance . '</td>
-                </tr>';
-            $count++;
-        }
-
-        $html .= '</table>';
+         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
         // Display total amount at the bottom
