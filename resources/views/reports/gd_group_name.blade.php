@@ -48,7 +48,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#SAT" href="#SAT" data-bs-toggle="tab">Stock All Tabuller</a>
                             </li>
-                           
                         </ul>
                         <div class="tab-content">
                             <div id="SA" class="tab-pane">
@@ -284,7 +283,7 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#IL"){
+            if(tabId=="#SA"){
             }
             
             else if(tabId=="#SI"){
@@ -384,8 +383,8 @@
                 });
             }
 
-            else if(tabId=="#bal"){
-                let table = document.getElementById('balTbleBody');
+            else if(tabId=="#SAT"){
+                let table = document.getElementById('SATTbleBody');
                 
                 // Clear the table
                 while (table.rows.length > 0) {
@@ -393,7 +392,7 @@
                 }
 
                 const url = "/rep-godown-by-item-name/bal";
-                const tableID = "#balTbleBody";
+                const tableID = "#SATTbleBody";
 
                 // Helper function to safely access data
                 const safeVal = (val) => val ? val : "";

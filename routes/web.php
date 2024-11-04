@@ -433,23 +433,37 @@
 
         // RPT Godown By Item Name IL
         Route::get('/rep-godown-by-item-name/IL', [App\Http\Controllers\RptGoDownItemNameController::class, 'IL'])->name('IL-rep-godown-by-item-name');
-        Route::get('/rep-godown-by-item-name/IL/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILExcel'])->name('IL-rep-godown-by-item-name-excel');;
+        Route::get('/rep-godown-by-item-name/IL/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILExcel'])->name('IL-rep-godown-by-item-name-excel');
         Route::get('/rep-godown-by-item-name/IL/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILReport'])->name('IL-rep-godown-by-item-name-report');
 
         // RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
-        Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');;
+        Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');
         Route::get('/rep-godown-by-item-name/si/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinReport'])->name('si-rep-godown-by-item-name-report');
 
         // RPT Godown By Item Name so
         Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
-        Route::get('/rep-godown-by-item-name/so/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutExcel'])->name('so-rep-godown-by-item-name-excel');;
+        Route::get('/rep-godown-by-item-name/so/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutExcel'])->name('so-rep-godown-by-item-name-excel');
         Route::get('/rep-godown-by-item-name/so/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutReport'])->name('so-rep-godown-by-item-name-report');
         
         // RPT Godown By Item Name bal 
         Route::get('/rep-godown-by-item-name/bal', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbal'])->name('bal-rep-godown-by-item-name');
-        Route::get('/rep-godown-by-item-name/bal/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalExcel'])->name('bal-rep-godown-by-item-name-excel');;
+        Route::get('/rep-godown-by-item-name/bal/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalExcel'])->name('bal-rep-godown-by-item-name-excel');
         Route::get('/rep-godown-by-item-name/bal/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockbalReport'])->name('bal-rep-godown-by-item-name-report');
         
+        // RPT Godown By Item Name IL
+        Route::get('/rep-godown-by-item-name/IL', [App\Http\Controllers\RptGoDownItemNameController::class, 'IL'])->name('IL-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/IL/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILExcel'])->name('IL-rep-godown-by-item-name-excel');
+        Route::get('/rep-godown-by-item-name/IL/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'ILReport'])->name('IL-rep-godown-by-item-name-report');
+
+        // RPT Godown By Item Name si
+        Route::get('/rep-godown-by-item-name/si', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockin'])->name('si-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/si/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinExcel'])->name('si-rep-godown-by-item-name-excel');
+        Route::get('/rep-godown-by-item-name/si/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockinReport'])->name('si-rep-godown-by-item-name-report');
+
+        // RPT Godown By Item Name so
+        Route::get('/rep-godown-by-item-name/so', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockout'])->name('so-rep-godown-by-item-name');
+        Route::get('/rep-godown-by-item-name/so/excel', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutExcel'])->name('so-rep-godown-by-item-name-excel');
+        Route::get('/rep-godown-by-item-name/so/report', [App\Http\Controllers\RptGoDownItemNameController::class, 'tstockoutReport'])->name('so-rep-godown-by-item-name-report');
       
     });
