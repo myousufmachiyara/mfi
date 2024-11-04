@@ -37,32 +37,32 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#IL" href="#IL" data-bs-toggle="tab">Item Ledger</a>
+                                <a class="nav-link" data-bs-target="#SA" href="#SA" data-bs-toggle="tab">Stock All</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SI" href="#SI" data-bs-toggle="tab">Stock IN</a>
+                                <a class="nav-link" data-bs-target="#SI" href="#SI" data-bs-toggle="tab">Stock In</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-target="#SO" href="#SO" data-bs-toggle="tab">Stock Out</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#bal" href="#bal" data-bs-toggle="tab">Stock Balance</a>
+                                <a class="nav-link" data-bs-target="#SAT" href="#SAT" data-bs-toggle="tab">Stock All Tabuller</a>
                             </li>
                            
                         </ul>
                         <div class="tab-content">
-                            <div id="IL" class="tab-pane">
+                            <div id="SA" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6 ">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="sa_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="pur1_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="sa_to"></span>
                                             </h4>
                                             
                                             
@@ -73,15 +73,15 @@
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="sa_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('purchase1')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('purchase1')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purchase1')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('sa')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('sa')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('sa')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -98,7 +98,7 @@
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="P1TbleBody">
+                                            <tbody id="SATbleBody">
 
                                             </tbody>
                                         </table>
@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="bal" class="tab-pane">
+                            <div id="SAT" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-6 ">
                                         <div class="bill-to">
@@ -261,7 +261,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </section>		
