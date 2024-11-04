@@ -323,14 +323,15 @@
                         // $(tableID).append(html);
 
                         var html = "<tr>";
-                            html += "<th></th>"; // Empty cell after "Remarks"
-                            html += "<th></th>"; // Empty cell after "Remarks"
-                            html += "<th></th>"; // Empty cell after "Remarks"
-                            html += "<th></th>"; // Empty cell after "Remarks"
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>";
                             html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
-                            html += "<th></th>"; // Empty cell after "Remarks"
-                            html += "<th></th>"; // Empty cell after "Remarks"
-                            html += "<th colspan=2>" + opening_qty + "</th>"; // Display opening quantity across the last two columns
+                            html += "<th></th>";
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th>" + opening_qty + "</th>"; // Display opening quantity across the last two columns
                             html += "</tr>";
                             $(tableID).append(html);
 
