@@ -316,11 +316,19 @@
                             opening_qty += v['add_total'] || 0;
                         });
 
-                        var html ="<tr>";
-                        html += "<th colspan=8 style='text-align:right'> Opening Quantity:</th>";
-                        html += "<th colspan=1>" + opening_qty + "</th>";
-                        html +="</tr>";
+                        // var html ="<tr>";
+                        // html += "<th colspan=8 style='text-align:right'> Opening Quantity:</th>";
+                        // html += "<th colspan=1>" + opening_qty + "</th>";
+                        // html +="</tr>";
+                        // $(tableID).append(html);
+
+                        var html = "<tr>";
+                        html += "<th colspan=6></th>"; // Leave columns up to "Remarks" empty
+                        html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
+                        html += "<th colspan=2>" + opening_qty + "</th>"; // Display opening quantity across the remaining columns
+                        html += "</tr>";
                         $(tableID).append(html);
+
 
                         var balance=opening_qty;
 
