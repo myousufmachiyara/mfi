@@ -88,7 +88,7 @@
                                                 <tr>
                                                     <th>S/No</th>
                                                     <th>Entry Of</th>
-                                                    <th>Voucher No.</th>
+                                                    <th>ID</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Remarks</th>

@@ -30,7 +30,7 @@ class GoDownByItemNameILExport implements FromCollection, WithHeadings
 
             // Prepare the row with the calculated balance
             $result[] = [
-                'Voucher No.' => $item['Sal_inv_no'],
+                'ID' => $item['Sal_inv_no'],
                 'Date' => \Carbon\Carbon::parse($item['sa_date'])->format('d-m-Y'),
                 'Entry Of' => $item['entry_of'],
                 'Account Name' => $item['ac_name'],
@@ -47,7 +47,7 @@ class GoDownByItemNameILExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Voucher No.',
+            'ID',
             'Date',
             'Entry Of',
             'Account Name',
