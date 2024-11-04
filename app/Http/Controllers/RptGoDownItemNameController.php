@@ -671,9 +671,9 @@ class RptGoDownItemNameController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Vouc #</th>
+                    <th style="width:9%;color:#17365D;font-weight:bold;">Entry Of</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">ID</th>
                     <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:9%;color:#17365D;font-weight:bold;">Entry</th>
                     <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Add</th>
@@ -681,8 +681,15 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
                 </tr>
                 <tr>
-                    <th colspan="8" style="text-align:right; font-weight:bold"> Opening Quantity:</th>
-                    <th colspan="1" style="font-weight:bold">' . $opening_qty . '</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th  style="text-align:right; font-weight:bold"> Opening Quantity:</th>
+                    <th></th>
+                    <th></th>
+                    <th  style="font-weight:bold">' . $opening_qty . '</th>
                 </tr>';
 
         // Iterate through items and add rows
@@ -701,9 +708,9 @@ class RptGoDownItemNameController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
+                    <td style="width:9%;">' . $item['entry_of'] . '</td>
                     <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
                     <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
-                    <td style="width:9%;">' . $item['entry_of'] . '</td>
                     <td style="width:22%;">' . $item['ac_name'] . '</td>
                     <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
                     <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
