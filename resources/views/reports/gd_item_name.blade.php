@@ -335,13 +335,26 @@
                         //     html += "</tr>";
                         //     $(tableID).append(html);
 
-                        var html = "<tr>";
-                            html += "<th colspan='4'></th>"; // Leave the first four columns empty
-                            html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
-                            html += "<th colspan='3'></th>"; // Leave three more columns empty
-                            html += "<th>" + opening_qty + "</th>"; // Display opening quantity in the last column
-                            html += "</tr>";
-                            $(tableID).append(html);
+
+                            var html = "<tr>";
+                                html += "<th></th>"; 
+                                html += "<th></th>"; 
+                                html += "<th></th>"; 
+                                html += "<th></th>";
+                                html += "<th style='text-align:right' colspan='2'>Opening Quantity:</th>"; // Merged across two columns
+                                html += "<th></th>"; 
+                                html += "<th>" + opening_qty + "</th>"; // Display opening quantity in the last column
+                                html += "</tr>";
+                                $(tableID).append(html);
+
+
+                        // var html = "<tr>";
+                        //     html += "<th colspan='4'></th>"; // Leave the first four columns empty
+                        //     html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
+                        //     html += "<th colspan='3'></th>"; // Leave three more columns empty
+                        //     html += "<th>" + opening_qty + "</th>"; // Display opening quantity in the last column
+                        //     html += "</tr>";
+                        //     $(tableID).append(html);
 
                         var balance=opening_qty;
 
