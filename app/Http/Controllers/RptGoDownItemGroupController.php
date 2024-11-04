@@ -19,7 +19,7 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockAll(Request $request){
         $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_cod',$request->acc_id)
-        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->where('date', '<', $request->toDate)
         ->get();
 
         return $pipe_stock_all_by_item_group;
