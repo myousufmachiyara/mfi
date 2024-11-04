@@ -25,7 +25,7 @@
                                 <select data-plugin-selecttwo class="form-control select2-js"  id="acc_id">
                                     <option value="" disabled selected>Item Name</option>
                                     @foreach($items as $key => $row)	
-                                        <option value="{{$row->it_cod}}">{{$row->item_name}}</option>
+                                        <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

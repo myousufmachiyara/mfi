@@ -453,8 +453,8 @@
         
         // RPT Godown By Item Group Stock All
         Route::get('/rep-godown-by-item-grp/sa', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAll'])->name('sa-rep-godown-by-item-grp');
-        Route::get('/rep-godown-by-item-grp/sa/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAll'])->name('sa-rep-godown-by-item-grp-excel');
-        Route::get('/rep-godown-by-item-grp/sa/report', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAll'])->name('sa-rep-godown-by-item-grp-report');
+        Route::get('/rep-godown-by-item-grp/sa/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAllExcel'])->name('sa-rep-godown-by-item-grp-excel');
+        Route::get('/rep-godown-by-item-grp/sa/report', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAllReport'])->name('sa-rep-godown-by-item-grp-report');
 
         // RPT Godown By Item Name si
         Route::get('/rep-godown-by-item-grp/si', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockin'])->name('si-rep-godown-by-item-grp');
