@@ -596,7 +596,9 @@ class RptGoDownItemNameController extends Controller
         ->get();
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
+        ->join('item_entry2', 'gd_pipe_item_ledger.item_cod', '=', 'item_entry2.it_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('gd_pipe_item_ledgere.*', 'item_entry2.item_name', 'ac.ac_name', 'item_entry2.item_remark')
         ->orderBy('sa_date','asc')
         ->get();
     
