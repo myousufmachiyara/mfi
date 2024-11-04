@@ -270,6 +270,13 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
+            const { fromDate, toDate, acc_id } = getInputValues();
+
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
             if(tabId=="#SA"){
                 var table = document.getElementById('SATbleBody');
                 while (table.rows.length > 0) {
@@ -324,6 +331,9 @@
                         fromDate: fromDate,
                         toDate: toDate,
                         acc_id:acc_id,
+                    }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     }, 
                     success: function(result){
                         $('#si_from').text(formattedfromDate);
