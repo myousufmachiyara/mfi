@@ -343,6 +343,7 @@
                                 html += "<th></th>";
                                 html += "<th style='text-align:right' colspan='2'>Opening Quantity:</th>"; // Merged across two columns
                                 html += "<th></th>"; 
+                                html += "<th></th>";
                                 html += "<th>" + opening_qty + "</th>"; // Display opening quantity in the last column
                                 html += "</tr>";
                                 $(tableID).append(html);
