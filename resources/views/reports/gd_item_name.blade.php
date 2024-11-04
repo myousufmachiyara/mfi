@@ -323,7 +323,7 @@
                         // $(tableID).append(html);
 
                         var html = "<tr>";
-                        html += "<th colspan=5></th>"; // Leave columns up to "Remarks" empty
+                        html += "<th colspan=4></th>"; // Leave columns up to "Remarks" empty
                         html += "<th style='text-align:right'>Opening Quantity:</th>"; // Place label in "Remarks" column
                         html += "<th colspan=2></th>"; // Leave columns up to "Remarks" empty
                         html += "<th colspan=3>" + opening_qty + "</th>"; // Display opening quantity across the remaining columns
