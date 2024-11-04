@@ -688,7 +688,6 @@ class RptGoDownItemNameController extends Controller
                     <th></th>
                     <th colspan="2" style="text-align:right; font-weight:bold">Opening Quantity:</th>
                     <th></th>
-                    <th style="font-weight:bold"><?php echo $opening_qty; ?></th>
                     <th style="font-weight:bold">' . $opening_qty . '</th>
                 </tr>';
 
