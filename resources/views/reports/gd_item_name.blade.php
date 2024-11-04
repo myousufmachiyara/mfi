@@ -86,15 +86,15 @@
                                         <table class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>S/No</th>
-                                                    <th>Voucher No.</th>
-                                                    <th>Date</th>
-                                                    <th>Entry Of</th>
-                                                    <th>Account Name</th>
-                                                    <th>Remarks</th>
-                                                    <th>Add</th>
-                                                    <th>Less</th>
-                                                    <th>Balance</th>
+                                                    <th style="text-align: center;">S/No</th>
+                                                    <th style="text-align: center;">Entry Of</th>
+                                                    <th style="text-align: center;">ID</th>
+                                                    <th style="text-align: center;">Date</th>
+                                                    <th style="text-align: center;">Account Name</th>
+                                                    <th style="text-align: center;">Remarks</th>
+                                                    <th style="text-align: center;">Add</th>
+                                                    <th style="text-align: center;">Less</th>
+                                                    <th style="text-align: center;">Stock</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="ILTbleBody">
@@ -326,7 +326,7 @@
                             html += "<th colspan='2' style='text-align: center'><-----Opening Quantity-----></th>"; // Merged and centered across two columns
                             html += "<th></th>"; 
                             html += "<th></th>";
-                            html += "<th style='text-align: right'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
+                            html += "<th style='text-align: left'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
                             html += "</tr>";
                             $(tableID).append(html);
 
@@ -334,26 +334,29 @@
 
 
                         $.each(result['ledger'], function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
-                            html += "<td>" + (v['add_qty'] ? v['add_qty'] : "0") + "</td>";
-                            html += "<td>" + (v['less'] ? v['less'] : "0") + "</td>";
-                            if (v['add_qty'] !== undefined && v['add_qty'] !== null) {
-                                balance += v['add_qty']; // Add to balance
-                            }
+                            var html = "<tr>";
+                                html += "<td style='text-align: center;'>" + (k + 1) + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['add_qty'] ? v['add_qty'] : "0") + "</td>";
+                                html += "<td style='text-align: center;'>" + (v['less'] ? v['less'] : "0") + "</td>";
 
-                            // Check if less exists and is not empty
-                            if (v['less'] !== undefined && v['less'] !== null) {
-                                balance -= v['less']; // Subtract from balance
-                            }
+                                if (v['add_qty'] !== undefined && v['add_qty'] !== null) {
+                                    balance += v['add_qty']; // Add to balance
+                                }
 
-                            html += "<td>" + balance + "</td>";
-                            html +="</tr>";
+                                // Check if less exists and is not empty
+                                if (v['less'] !== undefined && v['less'] !== null) {
+                                    balance -= v['less']; // Subtract from balance
+                                }
+
+                                html += "<td style='text-align: center;'>" + balance + "</td>";
+                                html += "</tr>";
+
                             $(tableID).append(html);
                         });
                     },
