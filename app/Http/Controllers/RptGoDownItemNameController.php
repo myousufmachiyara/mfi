@@ -680,17 +680,19 @@ class RptGoDownItemNameController extends Controller
                     <th style="width:7%;color:#17365D;font-weight:bold;">Less</th>
                     <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
                 </tr>
-               <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th colspan="2" style="text-align:right; font-weight:bold">Opening Quantity:</th>
-                    <th></th>
-                    <th style="font-weight:bold"><?php echo $opening_qty; ?></th>
-                </tr>
+                <tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th colspan="2" style="text-align:right; font-weight:bold">Opening Quantity:</th>
+                        <th></th>
+                        <th style="font-weight:bold"><?php echo $opening_qty; ?></th>
+                    </tr>
 
+                </tr>';
 
         // Iterate through items and add rows
         $count = 1;
