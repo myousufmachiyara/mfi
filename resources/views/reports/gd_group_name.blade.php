@@ -88,17 +88,14 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
-                                                    <th>Inv No.</th>
-                                                    <th>Mill No.</th>
-                                                    <th>Dispatch To Party</th>
-                                                    <th>Sale Inv</th>
+                                                    <th>Item Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Amount</th>
+                                                    <th>Qty. in Hand</th>
+                                                    <th>Wg. in Hand</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SATbleBody">
-
+                                                    
                                             </tbody>
                                         </table>
                                     </div>
@@ -284,6 +281,42 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#SA"){
+                var table = document.getElementById('SATbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-godown-by-item-grp/sa";
+                tableID="#SATbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    success: function(result){
+                        $('#sa_from').text(formattedfromDate);
+                        $('#sa_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#sa_acc').text(selectedAcc);
+
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        alert("error");
+                    }
+                });
             }
             
             else if(tabId=="#SI"){
@@ -291,7 +324,7 @@
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-godown-by-item-name/si";
+                url="/rep-godown-by-item-grp/si";
                 tableID="#SITbleBody";
 
                 $.ajax({
@@ -336,7 +369,7 @@
                     table.deleteRow(0);
                 }
 
-                const url = "/rep-godown-by-item-name/so";
+                const url = "/rep-godown-by-item-grp/so";
                 const tableID = "#SOTbleBody";
 
                 // Helper function to safely access data
