@@ -125,7 +125,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock In Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock In Report Of Item - ' . $gd_pipe_pur_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock In Report');
         $pdf->SetKeywords('Stock In Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -277,7 +277,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock Out Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock Bal Report Of Item - ' . $gd_pipe_sale_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock Out Report');
         $pdf->SetKeywords('Stock Out Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -427,7 +427,7 @@ class RptGoDownItemNameController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock Bal Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Stock Bal Report Of Item  - ' . $gd_pipe_addless_by_item_name[0]['item_name']);
         $pdf->SetSubject('Stock Bal Report');
         $pdf->SetKeywords('Stock Bal Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
