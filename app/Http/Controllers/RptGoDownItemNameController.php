@@ -511,8 +511,8 @@ class RptGoDownItemNameController extends Controller
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
             <td colspan="5" style="text-align:right;">Total:</td>
-            <td style="width:7%;">' . $totalAdd . '</td>
-            <td style="width:7%;">' . $totalLess . '</td>
+            <td style="width:15%;">' . $totalAdd . '</td>
+            <td style="width:15%;">' . $totalLess . '</td>
         </tr>';
     
         $html .= '</table>';
@@ -522,13 +522,7 @@ class RptGoDownItemNameController extends Controller
         $cellWidth = 25;
         $currentY = $pdf->GetY();
 
-        // Render $totalLess
-        $pdf->SetXY(148, $currentY + 2);
-        $pdf->MultiCell($cellWidth, 5, $totalAdd, 1, 'C');
-
-        // Render $totalAdd adjacent to $totalLess
-        $pdf->SetXY(148 + $cellWidth, $currentY + 2);
-        $pdf->MultiCell($cellWidth, 5, $totalLess, 1, 'C');
+       
 
     
         // Prepare filename for the PDF
