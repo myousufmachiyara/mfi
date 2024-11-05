@@ -13,17 +13,16 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
 use Carbon\Carbon;
 use Illuminate\Validation\Validator;
+use App\Exports\GoDownByItemGrpSIExport;
 
 class RptGoDownItemGroupController extends Controller
 {
 
     public function stockAll(Request $request){
-        $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_cod',$request->acc_id)
-        ->where('date', '<', $request->toDate)
+        $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
         ->get();
 
         return $pipe_stock_all_by_item_group;
-        
     }
         
     public function stockAllExcel(Request $request)
@@ -373,13 +372,13 @@ class RptGoDownItemGroupController extends Controller
         return $gd_pipe_sales_by_item_group;
     }
 
-    public function tstockoutExcel(Request $request)
+    public function stockoutExcel(Request $request)
     {
-
-        $gd_pipe_sale_by_item_name = gd_pipe_sale_by_item_name::where('item_cod',$request->acc_id)
-        ->join('ac','gd_pipe_sale_by_item_name.account_name','=','ac.ac_code')
+        $gd_pipe_sales_by_item_group = gd_pipe_sales_by_item_group::where('item_group_cod', $request->acc_id)
+        ->join('ac', 'ac.ac_code', '=', 'gd_pipe_sales_by_item_group.account_name')
+        ->join('item_entry2', 'item_entry2.it_cod', '=', 'gd_pipe_sales_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
-        ->select('gd_pipe_sale_by_item_name.*','ac.ac_name')
+        ->select('gd_pipe_sales_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
         ->get();
         
         $accId = $request->acc_id;
@@ -387,10 +386,10 @@ class RptGoDownItemGroupController extends Controller
         $toDate = \Carbon\Carbon::parse($request->toDate)->format('Y-m-d');
         
         // Construct the filename
-        $filename = "tstockout_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
+        $filename = "stockout_report_{$accId}_from_{$fromDate}_to_{$toDate}.xlsx";
 
         // Return the download response with the dynamic filename
-        return Excel::download(new TStockOutExport($gd_pipe_sale_by_item_name), $filename);
+        return Excel::download(new TStockOutExport($gd_pipe_sales_by_item_group), $filename);
     }
 
     public function tstockoutReport(Request $request)

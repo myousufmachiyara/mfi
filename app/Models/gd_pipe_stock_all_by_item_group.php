@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pipe_pur_by_item_group extends Model
+class gd_pipe_stock_all_by_item_group extends Model
 {
     use HasFactory;
-    protected $table = "pipe_pur_by_item_group";
+    protected $table = "gd_pipe_stock_all_by_item_group";
     protected $fillable = [
+
     ];
-    
 }
