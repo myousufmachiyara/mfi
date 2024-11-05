@@ -117,13 +117,13 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#SA"){
-                var table = document.getElementById('SATbleBody');
+            if(tabId=="#Comm"){
+                var table = document.getElementById('CommTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-godown-by-item-grp/sa";
-                tableID="#SATbleBody";
+                url="/rep-comm/comm";
+                tableID="#CommTbleBody";
 
                 $.ajax({
                     type: "GET",
@@ -134,23 +134,25 @@
                         acc_id: acc_id,
                     }, 
                     success: function(result){
-                        $('#sa_from').text(formattedfromDate);
-                        $('#sa_to').text(formattedtoDate);
+                        $('#comm_from').text(formattedfromDate);
+                        $('#comm_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#sa_acc').text(selectedAcc);
+                        $('#comm_acc').text(selectedAcc);
 
                         $(tableID).empty(); // Clear the loading message
 
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
-                            html += "<td>" + (v['item_remarks'] ? v['item_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['opp_bal'] ? v['opp_bal'] : "") + "</td>";
-                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
+                        console.log(result);
+                        
+                        // $.each(result, function(k,v){
+                        //     var html="<tr>";
+                        //     html += "<td>"+(k+1)+"</td>"
+                        //     html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
+                        //     html += "<td>" + (v['item_remarks'] ? v['item_remarks'] : "") + "</td>";
+                        //     html += "<td>" + (v['opp_bal'] ? v['opp_bal'] : "") + "</td>";
+                        //     html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
+                        //     html +="</tr>";
+                        //     $(tableID).append(html);
+                        // });
                     },
                     error: function(){
                         alert("error");

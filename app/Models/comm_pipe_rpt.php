@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class comm_pipe_rpt extends Model
 {
     use HasFactory;
+    protected $table = "comm_pipe_rpt";
+    protected $fillable = [
+
+    ];
 }
