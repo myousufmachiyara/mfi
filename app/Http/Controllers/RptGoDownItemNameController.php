@@ -506,6 +506,14 @@ class RptGoDownItemNameController extends Controller
             $totalLess += $item['pc_less']; // Accumulate total quantity
             $count++;
         }
+
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="6" style="text-align:right;">Total:</td>
+            <td style="width:7%;">' . $totalAdd . '</td>
+            <td style="width:7%;">' . $totalLess . '</td>
+        </tr>';
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -724,7 +732,7 @@ class RptGoDownItemNameController extends Controller
             }
 
 
-                    // Add totals row
+                // Add totals row
                 $html .= '
                 <tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
@@ -734,16 +742,10 @@ class RptGoDownItemNameController extends Controller
                 </tr>';
 
 
-         $html .= '</table>';
+            $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Display total amount at the bottom
-        // $currentY = $pdf->GetY();
-        // $pdf->SetFont('helvetica', 'B', 12);
-        // $pdf->SetXY(155, $currentY + 5);
-        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        // $pdf->SetXY(175, $currentY + 5);
-        // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+   
 
         // Prepare filename for the PDF
         $accId = $request->acc_id;
