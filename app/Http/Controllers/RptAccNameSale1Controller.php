@@ -56,7 +56,7 @@ class RptAccNameSale1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("Sale Report Of Account {$request->acc_id}");
+        $pdf->SetTitle("Sale Report Of Account ' . $sale_by_account[0]['ac_name']");
         $pdf->SetSubject("Sale Report Of Account {$request->acc_id}");
         $pdf->SetKeywords('Sale Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
