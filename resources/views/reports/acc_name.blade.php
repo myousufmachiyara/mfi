@@ -439,9 +439,13 @@
         });
 
         function tabChanged(tabId) {
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+
+            const { fromDate, toDate, acc_id } = getInputValues();
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
@@ -784,10 +788,21 @@
             }
         }
 
+        function getInputValues() {
+            return {
+                fromDate: $('#fromDate').val(),
+                toDate: $('#toDate').val(),
+                acc_id: $('#acc_id').val()
+            };
+        }
+
         function downloadExcel(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+            const { fromDate, toDate, acc_id } = getInputValues();
+
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/excel?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
@@ -819,9 +834,12 @@
         }
 
         function printPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+            const { fromDate, toDate, acc_id } = getInputValues();
+
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
             if (tabName === "purchase1") {
                 window.open(`/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
@@ -854,9 +872,12 @@
         }
 
         function downloadPDF(tabName){
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+            const { fromDate, toDate, acc_id } = getInputValues();
+
+            if (!fromDate || !toDate || !acc_id) {
+                alert('Please fill in all required fields.');
+                return;
+            }
 
             if (tabName === "purchase1") {
                 window.location.href = `/rep-by-acc-name/pur1/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
