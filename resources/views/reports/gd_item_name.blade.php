@@ -442,6 +442,9 @@
 
                         // Populate the table with new data
                         $.each(result, function (k, v) {
+                            let salesQty = safeVal(v['sales_qty']);
+                            totalSalesQty += parseFloat(salesQty) || 0; // Accumulate the total
+
                             let html = `<tr>
                                 <td>${k + 1}</td>
                                 <td>${safeVal(v['prefix'])}${safeVal(v['Sal_inv_no'])}</td>
@@ -454,6 +457,13 @@
                             </tr>`;
                             $(tableID).append(html);
                         });
+                           // Display total above the table
+                            const totalRowHtml = `<tr>
+                                <td colspan="7" class="text-end"><strong>Total Quantity:</strong></td>
+                                <td>${totalSalesQty}</td>
+                            </tr>`;
+                            $(tableID).prepend(totalRowHtml); // Prepend the total row
+                        },
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
