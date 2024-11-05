@@ -191,7 +191,7 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockin(Request $request){
         $pipe_pur_by_item_group = pipe_pur_by_item_group::where('item_group_cod',$request->acc_id)
-        ->join('ac','pipe_pur_by_item_group.account_name','=','ac.ac_code')
+        ->join('ac','ac.ac_code','=','pipe_pur_by_item_group.account_name')
         ->join('item_entry2','item_entry2.it_cod','=','pipe_pur_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->select('pipe_pur_by_item_group.*','ac.ac_name','item_entry2.item_name')
