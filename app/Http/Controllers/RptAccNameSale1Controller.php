@@ -74,7 +74,7 @@ class RptAccNameSale1Controller extends Controller
                     <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
                         Account Name: <span style="color:black;">' . htmlspecialchars($sale_by_account[0]['ac_name']) . '</span>
                     </td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                         Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
                     </td>
                 </tr>
@@ -82,13 +82,13 @@ class RptAccNameSale1Controller extends Controller
                     <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
                     Remarks: <span style="color:black;">' . htmlspecialchars($sale_by_account[0]['remarks']) . '</span>
                     </td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                         From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;"></td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:right; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                         To Date: <span style="color:black;">' . htmlspecialchars($formattedToDate) . '</span>
                     </td>
                 </tr>
@@ -126,16 +126,16 @@ class RptAccNameSale1Controller extends Controller
             $totalAmount += $items['cr_amt'];
             $count++;
         }
+            // Add totals row
+            $html .= '
+            <tr style="background-color:#d9edf7; font-weight:bold;">
+                <td colspan="6" style="text-align:right;">Total:</td>
+                <td style="width:15%;">' . $totalAmount . '</td>
+            </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Display Total
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+      
 
         // Filename and Output
         $filename = "sale1_report_{$request->acc_id}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
@@ -231,12 +231,12 @@ class RptAccNameSale1Controller extends Controller
             $totalAmount += $items['cr_amt'];
             $count++;
         }
-        // Add totals row
-        $html .= '
-        <tr style="background-color:#d9edf7; font-weight:bold;">
-            <td colspan="6" style="text-align:right;">Total:</td>
-            <td style="width:15%;">' . $totalAmount . '</td>
-        </tr>';
+            // Add totals row
+            $html .= '
+            <tr style="background-color:#d9edf7; font-weight:bold;">
+                <td colspan="6" style="text-align:right;">Total:</td>
+                <td style="width:15%;">' . $totalAmount . '</td>
+            </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
