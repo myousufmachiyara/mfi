@@ -396,17 +396,15 @@
                         $(tableID).empty(); // Clear the loading message
 
                         // Populate the table with new data
-                        $.each(result, function (k, v) {
-                            let html = `<tr>
-                                <td>${k + 1}</td>
-                                <td>${safeVal(v['prefix'])}${safeVal(v['Sal_inv_no'])}</td>
-                                <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
-                                <td>${safeVal(v['pur_inv'])}</td>
-                                <td>${safeVal(v['ac_name'])}</td>
-                                <td>${safeVal(v['mill_gate'])}</td>
-                                <td>${safeVal(v['remarks'])}</td>
-                                <td>${safeVal(v['sales_qty'])}</td>
-                            </tr>`;
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v[''] ? v[''] : "") + "</td>";
+                            html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
+                            html +="</tr>";
                             $(tableID).append(html);
                         });
                     },
