@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item_entry2;
 use App\Models\Item_Groups;
 use App\Models\pipe_stock_all_by_item_group;
-use App\Models\pipe_pur_by_item_group;
+use App\Models\gd_pipe_pur_by_item_group;
 use App\Models\pipe_sales_by_item_group;
 use App\Models\AC;
 use Maatwebsite\Excel\Facades\Excel;
@@ -191,7 +191,6 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockin(Request $request){
 
-        return $request->all();
         $pipe_pur_by_item_group = pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
         ->join('ac', 'ac.ac_code', '=', 'pipe_pur_by_item_group.account_name')
         ->join('item_entry2', 'item_entry2.it_cod', '=', 'pipe_pur_by_item_group.item_cod')
