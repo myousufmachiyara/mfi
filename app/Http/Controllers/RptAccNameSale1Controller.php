@@ -231,16 +231,16 @@ class RptAccNameSale1Controller extends Controller
             $totalAmount += $items['cr_amt'];
             $count++;
         }
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="5" style="text-align:right;">Total:</td>
+            <td style="width:15%;">' . $totalAmount . '</td>
+        </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Display Total
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+      
 
         // Filename and Output
         $filename = "sale1_report_{$request->acc_id}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
