@@ -191,14 +191,14 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockin(Request $request){
 
-        $pipe_pur_by_item_group = pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
-        ->join('ac', 'ac.ac_code', '=', 'pipe_pur_by_item_group.account_name')
-        ->join('item_entry2', 'item_entry2.it_cod', '=', 'pipe_pur_by_item_group.item_cod')
+        $gd_pipe_pur_by_item_group = gd_pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
+        ->join('ac', 'ac.ac_code', '=', 'gd_pipe_pur_by_item_group.account_name')
+        ->join('item_entry2', 'item_entry2.it_cod', '=', 'gd_pipe_pur_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
-        ->select('pipe_pur_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
+        ->select('gd_pipe_pur_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
         ->get();
 
-        return $pipe_pur_by_item_group;
+        return $gd_pipe_pur_by_item_group;
     }
 
     public function tstockinExcel(Request $request)
