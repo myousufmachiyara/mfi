@@ -45,6 +45,7 @@ class ReportingController extends Controller
 
     public function commissions()
     {
-        return view('reports.commissions');
+        $coa = AC::orderBy('ac_name', 'asc')->get();
+        return view('reports.commissions',compact('coa'));
     }
 }
