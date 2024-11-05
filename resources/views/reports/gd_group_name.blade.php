@@ -37,16 +37,16 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SA" href="#SA" data-bs-toggle="tab">Stock All</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#SA" href="#SA" data-bs-toggle="tab">Stock All</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SI" href="#SI" data-bs-toggle="tab">Stock In</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#SI" href="#SI" data-bs-toggle="tab">Stock In</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SO" href="#SO" data-bs-toggle="tab">Stock Out</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#SO" href="#SO" data-bs-toggle="tab">Stock Out</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#SAT" href="#SAT" data-bs-toggle="tab">Stock All Tabuller</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#SAT" href="#SAT" data-bs-toggle="tab">Stock All Tabuller</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -256,7 +256,7 @@
 	</body>
     <script>
 
-        document.querySelectorAll('.nav-link').forEach(tabLink => {
+        document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
                 tabChanged(tabId);

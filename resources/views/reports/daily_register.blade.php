@@ -26,37 +26,37 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_pipe" href="#sale_pipe" data-bs-toggle="tab">Sale Pipe</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_pipe" href="#sale_pipe" data-bs-toggle="tab">Sale Pipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_pipe" href="#purchase_pipe" data-bs-toggle="tab">Purchase Pipe</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_pipe" href="#purchase_pipe" data-bs-toggle="tab">Purchase Pipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#JV1" href="#JV1" data-bs-toggle="tab">JV1</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#JV1" href="#JV1" data-bs-toggle="tab">JV1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#JV2" href="#JV2" data-bs-toggle="tab">JV2</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#JV2" href="#JV2" data-bs-toggle="tab">JV2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_1_return" href="#sale_1_return" data-bs-toggle="tab">Sale 1 Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_1_return" href="#sale_1_return" data-bs-toggle="tab">Sale 1 Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_pipe_return" href="#sale_pipe_return" data-bs-toggle="tab">Sale Pipe Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_pipe_return" href="#sale_pipe_return" data-bs-toggle="tab">Sale Pipe Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_1_return" href="#purchase_1_return" data-bs-toggle="tab">Purchase 1 Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_1_return" href="#purchase_1_return" data-bs-toggle="tab">Purchase 1 Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_pipe_return" href="#purchase_pipe_return" data-bs-toggle="tab">Purchase Pipe Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_pipe_return" href="#purchase_pipe_return" data-bs-toggle="tab">Purchase Pipe Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#daily_reg" href="#daily_reg" data-bs-toggle="tab">Daily Register</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#daily_reg" href="#daily_reg" data-bs-toggle="tab">Daily Register</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -495,7 +495,7 @@
 	</body>
     <script>
 
-        document.querySelectorAll('.nav-link').forEach(tabLink => {
+        document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
                 tabChanged(tabId);
