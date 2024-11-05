@@ -191,6 +191,7 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockin(Request $request){
 
+        return $request->all();
         $pipe_pur_by_item_group = pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
         ->join('ac', 'ac.ac_code', '=', 'pipe_pur_by_item_group.account_name')
         ->join('item_entry2', 'item_entry2.it_cod', '=', 'pipe_pur_by_item_group.item_cod')
