@@ -604,5 +604,6 @@
                 window.location.href = `/rep-godown-by-item-name/bal/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
         }
+        
     </script>
 </html>

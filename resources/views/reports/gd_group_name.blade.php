@@ -264,9 +264,10 @@
         });
 
         function tabChanged(tabId) {
-            fromDate=$('#fromDate').val();
-            toDate=$('#toDate').val();
-            acc_id=$('#acc_id').val();
+
+            var fromDate=$('#fromDate').val();
+            var toDate=$('#toDate').val();
+            var acc_id=$('#acc_id').val();
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
