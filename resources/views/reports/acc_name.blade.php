@@ -37,43 +37,43 @@
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">General Ledger</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#GL" href="#GL" data-bs-toggle="tab">General Ledger</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">General Ledger R</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#GL_R" href="#GL_R" data-bs-toggle="tab">General Ledger R</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_age" href="#sale_age" data-bs-toggle="tab">Sales Ageing</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_age" href="#sale_age" data-bs-toggle="tab">Sales Ageing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_age" href="#pur_age" data-bs-toggle="tab">Purchase Ageing</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#pur_age" href="#pur_age" data-bs-toggle="tab">Purchase Ageing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_1" href="#sale_1" data-bs-toggle="tab">Sale 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sale_2" href="#sale_2" data-bs-toggle="tab">Sale 2</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sale_2" href="#sale_2" data-bs-toggle="tab">Sale 2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#comb_sale" href="#comb_sale" data-bs-toggle="tab">Combine Sale</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#comb_sale" href="#comb_sale" data-bs-toggle="tab">Combine Sale</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_1" href="#purchase_1" data-bs-toggle="tab">Purchase 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#purchase_2" href="#purchase_2" data-bs-toggle="tab">Purchase 2</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#purchase_2" href="#purchase_2" data-bs-toggle="tab">Purchase 2</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#comb_purchase" href="#comb_purchase" data-bs-toggle="tab">Combine Purchase</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#comb_purchase" href="#comb_purchase" data-bs-toggle="tab">Combine Purchase</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#JV" href="#JV" data-bs-toggle="tab">Vouchers</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#JV" href="#JV" data-bs-toggle="tab">Vouchers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#sal_ret" href="#sal_ret" data-bs-toggle="tab">Sale Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#sal_ret" href="#sal_ret" data-bs-toggle="tab">Sale Return</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-target="#pur_ret" href="#pur_ret" data-bs-toggle="tab">Purchase Return</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#pur_ret" href="#pur_ret" data-bs-toggle="tab">Purchase Return</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -431,7 +431,7 @@
 	</body>
     <script>
 
-        document.querySelectorAll('.nav-link').forEach(tabLink => {
+        document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
                 tabChanged(tabId);
