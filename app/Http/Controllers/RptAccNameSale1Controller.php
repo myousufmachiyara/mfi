@@ -123,9 +123,9 @@ class RptAccNameSale1Controller extends Controller
                         <td style='width:15%;'>{$items['remarks']}</td>
                         <td style='width:15%;'>{$items['cr_amt']}</td>
                     </tr>";
-            $totalAmount += $items['cr_amt'];
-            $count++;
-        }
+                $totalAmount += $items['cr_amt'];
+                $count++;
+            }
             // Add totals row
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">

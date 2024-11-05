@@ -130,7 +130,7 @@ class RptAccNameSale2Controller extends Controller
               $html .= '
               <tr style="background-color:#d9edf7; font-weight:bold;">
                   <td colspan="7" style="text-align:right;">Total:</td>
-                  <td style="width:15%;">' . $totalAmount . '</td>
+                  <td style="width:12%;">' . $totalAmount . '</td>
               </tr>';
               $html .= '</table>';
              $pdf->writeHTML($html, true, false, true, false, '');
