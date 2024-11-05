@@ -56,8 +56,8 @@ class RptAccNameSale2Controller extends Controller
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sale Pipe Report Of Account '.$request->acc_id);
-        $pdf->SetSubject('Sale Pipe Report Of Account '.$request->acc_id);
+        $pdf->SetTitle("Sale Report Of Account - {$pipe_sale_by_account[0]['ac_name']}");
+        $pdf->SetSubject("Sale Report Of Account - {$pipe_sale_by_account[0]['ac_name']}");
         $pdf->SetKeywords('Sale Pipe Report Of Account, TCPDF, PDF');
         $pdf->setPageOrientation('P');
 
