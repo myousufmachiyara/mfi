@@ -107,36 +107,29 @@ class RptAccNameSale2Controller extends Controller
                             <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
                       </tr>';
-
-
-
-
-
-                     
-  
-          // Table Rows
-          $count = 1;
-          $totalAmount = 0;
-          foreach ($pipe_sale_by_account as $items) {
-              $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-              $html .= "<tr style='background-color:{$bgColor};'>
-                            <td style='width:7%;'>{$count}</td>
-                            <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                            <td style='width:10%;'>{$items['NO']}</td>
-                            <td style='width:10%;'>{$items['pur_bill_no']}</td>
-                            <td style='width:22%;'>{$items['ac2']}</td>
-                            <td style='width:11%;'>{$items['sal_inv']}</td>
-                            <td style='width:15%;'>{$items['remarks']}</td>
-                            <td style='width:12%;'>{$items['cr_amt']}</td>
-                        </tr>";
-  
-                 $totalAmount += $items['cr_amt'];
-                 $count++;
-                }
+                    // Table Rows
+                $count = 1;
+                $totalAmount = 0;
+                foreach ($pipe_sale_by_account as $items) {
+                    $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+                    $html .= "<tr style='background-color:{$bgColor};'>
+                                    <td style='width:7%;'>{$count}</td>
+                                    <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
+                                    <td style='width:10%;'>{$items['NO']}</td>
+                                    <td style='width:10%;'>{$items['pur_bill_no']}</td>
+                                    <td style='width:22%;'>{$items['ac2']}</td>
+                                    <td style='width:11%;'>{$items['sal_inv']}</td>
+                                    <td style='width:15%;'>{$items['remarks']}</td>
+                                    <td style='width:12%;'>{$items['cr_amt']}</td>
+                                </tr>";
+        
+                        $totalAmount += $items['cr_amt'];
+                        $count++;
+                        }
               // Add totals row
               $html .= '
               <tr style="background-color:#d9edf7; font-weight:bold;">
-                  <td colspan="6" style="text-align:right;">Total:</td>
+                  <td colspan="7" style="text-align:right;">Total:</td>
                   <td style="width:15%;">' . $totalAmount . '</td>
               </tr>';
               $html .= '</table>';
