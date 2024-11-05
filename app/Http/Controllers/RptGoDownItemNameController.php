@@ -729,7 +729,7 @@ class RptGoDownItemNameController extends Controller
         $currentY = $pdf->GetY();
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        $pdf->MultiCell(28, 5, $totaladd, 1, 'C');
         $pdf->SetXY(175, $currentY + 5);
         $pdf->MultiCell(28, 5, $totaladd, 1, 'C');
 
