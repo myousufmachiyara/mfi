@@ -666,7 +666,7 @@ class RptGoDownItemNameController extends Controller
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Initialize totals
+       // Initialize totals
         $totalAddQty = 0;
         $totalLess = 0;
 
@@ -676,11 +676,11 @@ class RptGoDownItemNameController extends Controller
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
             // Update balance safely
-            if (!empty($item['add_qty'])) {
+            if (isset($item['add_qty']) && !empty($item['add_qty'])) {
                 $balance += $item['add_qty'];
                 $totalAddQty += $item['add_qty']; // Accumulate total add_qty
             }
-            if (!empty($item['less'])) {
+            if (isset($item['less']) && !empty($item['less'])) {
                 $balance -= $item['less'];
                 $totalLess += $item['less']; // Accumulate total less
             }
@@ -688,11 +688,11 @@ class RptGoDownItemNameController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:9%;">' . $item['entry_of'] . '</td>
-                    <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
-                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
-                    <td style="width:22%;">' . $item['ac_name'] . '</td>
-                    <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:9%;">' . ($item['entry_of'] ?? '') . '</td>
+                    <td style="width:10%;">' . ($item['Sal_inv_no'] ?? '') . '</td>
+                    <td style="width:11%;">' . (isset($item['sa_date']) ? Carbon::parse($item['sa_date'])->format('d-m-y') : '') . '</td>
+                    <td style="width:22%;">' . ($item['ac_name'] ?? '') . '</td>
+                    <td style="width:20%;">' . ($item['Sales_Remarks'] ?? '') . '</td>
                     <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
                     <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
                     <td style="width:7%;">' . $balance . '</td>
@@ -711,6 +711,7 @@ class RptGoDownItemNameController extends Controller
 
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
 
 
         // Display total amount at the bottom
