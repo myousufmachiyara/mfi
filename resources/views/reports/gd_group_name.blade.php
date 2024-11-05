@@ -264,7 +264,7 @@
         });
 
         function tabChanged(tabId) {
-            
+
             const { fromDate, toDate, acc_id } = getInputValues();
             if (!fromDate || !toDate || !acc_id) {
                 alert('Please fill in all required fields.');
@@ -295,6 +295,8 @@
                         $('#sa_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#sa_acc').text(selectedAcc);
+
+                        $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
                             var html="<tr>";
