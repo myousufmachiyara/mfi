@@ -666,72 +666,60 @@ class RptGoDownItemNameController extends Controller
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Table header for data
-        $html = '
-            <table border="1" style="border-collapse: collapse; text-align: center;">
-                <tr>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:9%;color:#17365D;font-weight:bold;">Entry</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">ID</th>
-                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Add</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Less</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Bal</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th colspan="2" style="text-align:center; font-weight:bold"> +-----Opening Quantity-----+ </th>
-                    <th></th>
-                    <th></th>
-                    <th style="font-weight:bold">' . $opening_qty . '</th>
-                </tr>';
+        // Initialize totals
+        $totalAddQty = 0;
+        $totalLess = 0;
 
-                // Iterate through items and add rows
-                $count = 1;
-                $totaladd = 0;
-                foreach ($gd_pipe_item_ledger as $item) {
-                $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+        // Iterate through items and add rows
+        $count = 1;
+        foreach ($gd_pipe_item_ledger as $item) {
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
-                // Update balance safely
-                if (!empty($item['add_qty'])) {
-                    $balance += $item['add_qty'];
-                }
-                if (!empty($item['less'])) {
-                    $balance -= $item['less'];
-                }
-
-                $html .= '
-                    <tr style="background-color:' . $backgroundColor . ';">
-                        <td style="width:7%;">' . $count . '</td>
-                        <td style="width:9%;">' . $item['entry_of'] . '</td>
-                        <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
-                        <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
-                        <td style="width:22%;">' . $item['ac_name'] . '</td>
-                        <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
-                        <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
-                        <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
-                        <td style="width:7%;">' . $balance . '</td>
-                    </tr>';
-
-                 $totaladd += $item['add_qty'];
-                $count++;
+            // Update balance safely
+            if (!empty($item['add_qty'])) {
+                $balance += $item['add_qty'];
+                $totalAddQty += $item['add_qty']; // Accumulate total add_qty
+            }
+            if (!empty($item['less'])) {
+                $balance -= $item['less'];
+                $totalLess += $item['less']; // Accumulate total less
             }
 
-         $html .= '</table>';
+            $html .= '
+                <tr style="background-color:' . $backgroundColor . ';">
+                    <td style="width:7%;">' . $count . '</td>
+                    <td style="width:9%;">' . $item['entry_of'] . '</td>
+                    <td style="width:10%;">' . $item['Sal_inv_no'] . '</td>
+                    <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+                    <td style="width:22%;">' . $item['ac_name'] . '</td>
+                    <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
+                    <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
+                    <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
+                    <td style="width:7%;">' . $balance . '</td>
+                </tr>';
+            $count++;
+        }
+
+        // Add totals row
+        $html .= '
+            <tr style="background-color:#d9edf7; font-weight:bold;">
+                <td colspan="6" style="text-align:right;">Total:</td>
+                <td style="width:7%;">' . $totalAddQty . '</td>
+                <td style="width:7%;">' . $totalLess . '</td>
+                <td style="width:7%;">' . $balance . '</td>
+            </tr>';
+
+        $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
+
         // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totaladd, 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totaladd, 1, 'C');
+        // $currentY = $pdf->GetY();
+        // $pdf->SetFont('helvetica', 'B', 12);
+        // $pdf->SetXY(155, $currentY + 5);
+        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        // $pdf->SetXY(175, $currentY + 5);
+        // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
 
         // Prepare filename for the PDF
         $accId = $request->acc_id;
