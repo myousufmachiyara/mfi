@@ -335,6 +335,7 @@
                         $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     }, 
                     success: function(result){
+                        console.log(result);
                         $('#si_from').text(formattedfromDate);
                         $('#si_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
@@ -343,19 +344,19 @@
                         $(tableID).empty(); // Clear the loading message
 
                         
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
-                            html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
-                            html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['pur_qty'] ? v['pur_qty'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
+                        // $.each(result, function(k,v){
+                        //     var html="<tr>";
+                        //     html += "<td>"+(k+1)+"</td>"
+                        //     html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                        //     html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
+                        //     html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
+                        //     html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                        //     html += "<td>" + (v['mill_gate_no'] ? v['mill_gate_no'] : "") + "</td>";
+                        //     html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
+                        //     html += "<td>" + (v['pur_qty'] ? v['pur_qty'] : "") + "</td>";
+                        //     html +="</tr>";
+                        //     $(tableID).append(html);
+                        // });
                     },
                     error: function(){
                         alert("error");
