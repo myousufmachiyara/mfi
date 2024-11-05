@@ -204,17 +204,18 @@ class RptGoDownItemNameController extends Controller
             $totalAmount += $item['pur_qty']; // Accumulate total quantity
             $count++;
         }
+
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="7" style="text-align:right;">Total:</td>
+            <td style="width:12%;">' . $totalAmount . '</td>
+        </tr>';
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
     
-        // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+      
     
         // Prepare filename for the PDF
         $accId = $request->acc_id;
@@ -356,17 +357,18 @@ class RptGoDownItemNameController extends Controller
             $totalAmount += $item['sales_qty']; // Accumulate total quantity
             $count++;
         }
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="7" style="text-align:right;">Total:</td>
+            <td style="width:12%;">' . $totalAmount . '</td>
+        </tr>';
+    
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
     
-        // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        
     
         // Prepare filename for the PDF
         $accId = $request->acc_id;
@@ -506,6 +508,14 @@ class RptGoDownItemNameController extends Controller
             $totalLess += $item['pc_less']; // Accumulate total quantity
             $count++;
         }
+
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="5" style="text-align:right;">Total:</td>
+            <td style="width:15%;">' . $totalAdd . '</td>
+            <td style="width:15%;">' . $totalLess . '</td>
+        </tr>';
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -514,13 +524,7 @@ class RptGoDownItemNameController extends Controller
         $cellWidth = 25;
         $currentY = $pdf->GetY();
 
-        // Render $totalLess
-        $pdf->SetXY(148, $currentY + 2);
-        $pdf->MultiCell($cellWidth, 5, $totalAdd, 1, 'C');
-
-        // Render $totalAdd adjacent to $totalLess
-        $pdf->SetXY(148 + $cellWidth, $currentY + 2);
-        $pdf->MultiCell($cellWidth, 5, $totalLess, 1, 'C');
+       
 
     
         // Prepare filename for the PDF
@@ -693,6 +697,8 @@ class RptGoDownItemNameController extends Controller
 
                 // Iterate through items and add rows
                 $count = 1;
+                $totalAddQty = 0;
+                $totalLess = 0;
                 foreach ($gd_pipe_item_ledger as $item) {
                 $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
@@ -716,19 +722,26 @@ class RptGoDownItemNameController extends Controller
                         <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
                         <td style="width:7%;">' . $balance . '</td>
                     </tr>';
+                    $totalAddQty += $item['add_qty'];
+                    $totalLess += $item['less'];
                 $count++;
             }
 
-         $html .= '</table>';
+
+                // Add totals row
+                $html .= '
+                <tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="6" style="text-align:right;">Total:</td>
+                    <td style="width:7%;">' . $totalAddQty . '</td>
+                    <td style="width:7%;">' . $totalLess . '</td>
+                    <td style="width:7%;">' . $balance . '</td>
+                </tr>';
+
+
+            $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Display total amount at the bottom
-        // $currentY = $pdf->GetY();
-        // $pdf->SetFont('helvetica', 'B', 12);
-        // $pdf->SetXY(155, $currentY + 5);
-        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        // $pdf->SetXY(175, $currentY + 5);
-        // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+   
 
         // Prepare filename for the PDF
         $accId = $request->acc_id;
