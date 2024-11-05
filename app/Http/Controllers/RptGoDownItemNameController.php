@@ -693,6 +693,8 @@ class RptGoDownItemNameController extends Controller
 
                 // Iterate through items and add rows
                 $count = 1;
+                $totalAddQty = 0;
+                $totalLess = 0;
                 foreach ($gd_pipe_item_ledger as $item) {
                 $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
@@ -716,8 +718,21 @@ class RptGoDownItemNameController extends Controller
                         <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
                         <td style="width:7%;">' . $balance . '</td>
                     </tr>';
+                    $totalAddQty += $item['add_qty'];
+                    $totalLess += $item['less'];
                 $count++;
             }
+
+
+                    // Add totals row
+                $html .= '
+                <tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="6" style="text-align:right;">Total:</td>
+                    <td style="width:7%;">' . $totalAddQty . '</td>
+                    <td style="width:7%;">' . $totalLess . '</td>
+                    <td style="width:7%;">' . $balance . '</td>
+                </tr>';
+
 
          $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
