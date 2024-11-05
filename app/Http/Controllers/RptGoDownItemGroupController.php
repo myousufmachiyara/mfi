@@ -7,7 +7,7 @@ use App\Models\Item_entry2;
 use App\Models\Item_Groups;
 use App\Models\pipe_stock_all_by_item_group;
 use App\Models\gd_pipe_pur_by_item_group;
-use App\Models\pipe_sales_by_item_group;
+use App\Models\gd_pipe_sale_by_item_name;
 use App\Models\AC;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
