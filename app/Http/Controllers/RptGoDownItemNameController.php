@@ -693,6 +693,7 @@ class RptGoDownItemNameController extends Controller
 
                 // Iterate through items and add rows
                 $count = 1;
+                $totaladd = 0;
                 foreach ($gd_pipe_item_ledger as $item) {
                 $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
 
@@ -716,6 +717,8 @@ class RptGoDownItemNameController extends Controller
                         <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
                         <td style="width:7%;">' . $balance . '</td>
                     </tr>';
+
+                 $totaladd += $item['add_qty'];
                 $count++;
             }
 
@@ -723,12 +726,12 @@ class RptGoDownItemNameController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 
         // Display total amount at the bottom
-        // $currentY = $pdf->GetY();
-        // $pdf->SetFont('helvetica', 'B', 12);
-        // $pdf->SetXY(155, $currentY + 5);
-        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        // $pdf->SetXY(175, $currentY + 5);
-        // $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        $currentY = $pdf->GetY();
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetXY(155, $currentY + 5);
+        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
+        $pdf->SetXY(175, $currentY + 5);
+        $pdf->MultiCell(28, 5, $totaladd, 1, 'C');
 
         // Prepare filename for the PDF
         $accId = $request->acc_id;
