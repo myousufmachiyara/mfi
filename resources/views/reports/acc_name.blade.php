@@ -572,7 +572,8 @@
                         $('#sale_comb_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#sale_comb_acc').text(selectedAcc);
-
+                        console.log(result);
+                        
                         $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
