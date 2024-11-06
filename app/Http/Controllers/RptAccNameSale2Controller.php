@@ -134,10 +134,10 @@ class RptAccNameSale2Controller extends Controller
                         }
               // Add totals row
               $html .= '
-              <tr style="background-color:#d9edf7; font-weight:bold;">
+                <tr style="background-color:#d9edf7; font-weight:bold;">
                   <td colspan="7" style="text-align:right;">Total:</td>
-                  <td style="width:14%;">' . $totalAmount . '</td>
-              </tr>';
+                  <td style="width:14%;"><?php echo number_format($totalAmount, 0); ?></td>
+                </tr>';
               $html .= '</table>';
              $pdf->writeHTML($html, true, false, true, false, '');
   
