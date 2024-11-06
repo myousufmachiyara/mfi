@@ -216,7 +216,6 @@
                                                     <th>Date</th>
                                                     <th>Entry OF</th>
                                                     <th>Inv No.</th>
-                                                    <th>Bill</th>
                                                     <th>Detail</th>
                                                     <th>Ramrks</th>
                                                     <th>Amount</th>
