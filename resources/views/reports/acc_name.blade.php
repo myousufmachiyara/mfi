@@ -535,7 +535,7 @@
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['company_name'] ? v['company_name'] : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['pur_no'] ? v['pur_no'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
                             html += "<td>" + (v['dr_amt'] ? v['dr_amt'] : "") + "</td>";
