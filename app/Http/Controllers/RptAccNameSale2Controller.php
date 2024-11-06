@@ -123,7 +123,7 @@ class RptAccNameSale2Controller extends Controller
                                     <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
                                     <td style='width:10%;'>{$items['NO']}</td>
                                     <td style='width:10%;'>{$items['pur_bill_no']}</td>
-                                    <td style='width:22%;'>{$items['ac2']}</td>
+                                    <td style='width:22%;'>{$items['ac2_name']}</td>
                                     <td style='width:11%;'>{$items['sal_inv']}</td>
                                     <td style='width:15%;'>{$items['remarks']}</td>
                                     <td style='width:12%;'>{$items['cr_amt']}</td>
