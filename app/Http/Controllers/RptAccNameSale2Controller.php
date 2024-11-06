@@ -43,10 +43,13 @@ class RptAccNameSale2Controller extends Controller
     public function sale2PDF(Request $request)
     {
         $pipe_sale_by_account = pipe_sale_by_account::where('ac1', $request->acc_id)
-            ->whereBetween('date', [$request->fromDate, $request->toDate])
-            ->leftjoin('ac','ac.ac_code','=','pipe_sale_by_account.ac1')
-            ->select('pipe_sale_by_account.*', 'ac.ac_name',  'ac.remarks')
-            ->get();
+        ->whereBetween('date', [$request->fromDate, $request->toDate])
+        ->leftjoin('ac as ac1', 'ac1.ac_code', '=', 'pipe_sale_by_account.ac1')  // Alias ac table as ac1
+        ->leftjoin('ac as ac2', 'pipe_sale_by_account.company_name', '=', 'ac2.ac_code')  // Alias ac table as ac2
+        ->select('pipe_sale_by_account.*', 'ac1.ac_name as ac1_name', 'ac1.remarks', 'ac2.ac_name as ac2_name') 
+        ->orderBy('date', 'asc')
+        ->get();
+
 
           // Get and format current and report dates
           $currentDate = Carbon::now()->format('d-m-y');
@@ -57,8 +60,8 @@ class RptAccNameSale2Controller extends Controller
           $pdf = new MyPDF();
           $pdf->SetCreator(PDF_CREATOR);
           $pdf->SetAuthor('MFI');
-          $pdf->SetTitle("Sale Report Of Account - {$pipe_sale_by_account[0]['ac_name']}");
-          $pdf->SetSubject("Sale Report Of Account - {$pipe_sale_by_account[0]['ac_name']}");
+          $pdf->SetTitle("Sale Report Of Account - {$pipe_sale_by_account[0]['ac1_name']}");
+          $pdf->SetSubject("Sale Report Of Account - {$pipe_sale_by_account[0]['ac1_name']}");
           $pdf->SetKeywords('Sale Report, TCPDF, PDF');
           $pdf->setPageOrientation('P');
           $pdf->AddPage();
@@ -73,7 +76,7 @@ class RptAccNameSale2Controller extends Controller
               <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
                   <tr>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                          Account Name: <span style="color:black;">' . htmlspecialchars($pipe_sale_by_account[0]['ac_name']) . '</span>
+                          Account Name: <span style="color:black;">' . htmlspecialchars($pipe_sale_by_account[0]['ac1_name']) . '</span>
                       </td>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                           Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
@@ -141,7 +144,7 @@ class RptAccNameSale2Controller extends Controller
         
   
           // Filename and Output
-          $filename = "sale1_report_{$pipe_sale_by_account[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+          $filename = "sale1_report_{$pipe_sale_by_account[0]['ac1_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
           $pdf->Output($filename, 'I');
     }
   
