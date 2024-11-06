@@ -153,7 +153,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;font-size:20px;" id="sale_2_acc" class="text-danger"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="sale_2_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
