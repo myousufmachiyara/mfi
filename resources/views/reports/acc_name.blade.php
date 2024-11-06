@@ -528,15 +528,15 @@
                         });
 
                         var opening_bal = SOD - SOC;
+
                         var html = "<tr>";
                             html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th></th>";
-                            html += "<th colspan='2' style='text-align: center'><-----Opening Quantity-----></th>"; // Merged and centered across two columns
+                            html += "<th colspan='2' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
                             html += "<th></th>"; 
-                            html += "<th></th>";
-                            html += "<th style='text-align: left'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
+                            html += "<th style='text-align: left'>" + opening_bal + "</th>"; // Display opening quantity in the last column, right-aligned
                             html += "</tr>";
                             $(tableID).append(html);
 
