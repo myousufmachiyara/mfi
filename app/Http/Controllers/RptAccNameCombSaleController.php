@@ -57,15 +57,15 @@ class RptAccNameCombSaleController extends Controller
           $pdf = new MyPDF();
           $pdf->SetCreator(PDF_CREATOR);
           $pdf->SetAuthor('MFI');
-          $pdf->SetTitle("Sale 2 Report Of Account - {$both_sale_rpt_by_account[0]['ac_name']}");
-          $pdf->SetSubject("Sale 2 Report Of Account - {$both_sale_rpt_by_account[0]['ac_name']}");
-          $pdf->SetKeywords('Sale 2 Report, TCPDF, PDF');
+          $pdf->SetTitle("Combine Sale Report Of Account - {$both_sale_rpt_by_account[0]['ac_name']}");
+          $pdf->SetSubject("Combine Sale Report Of Account - {$both_sale_rpt_by_account[0]['ac_name']}");
+          $pdf->SetKeywords('Combine Sale Report, TCPDF, PDF');
           $pdf->setPageOrientation('P');
           $pdf->AddPage();
-          $pdf->setCellPadding(1.2);
+          $pdf->setCellPadding(1);
   
           // Document header
-          $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale 2 Report Of Account</h1>';
+          $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Combine Sale Report Of Account</h1>';
           $pdf->writeHTML($heading, true, false, true, false, '');
   
           // Account Info Table
@@ -141,7 +141,7 @@ class RptAccNameCombSaleController extends Controller
         
   
           // Filename and Output
-        $filename = "sale2_report_{$both_sale_rpt_by_account[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "combine_sale_report_{$both_sale_rpt_by_account[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
   
