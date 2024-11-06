@@ -45,7 +45,7 @@ class ReportingController extends Controller
 
     public function commissions()
     {
-        $coa = AC::orderBy('ac_name', 'asc')->get();
-        return view('reports.commissions',compact('coa'));
+        $item_group = Item_Groups::orderBy('group_name', 'asc')->get();
+        return view('reports.commissions',compact('item_group'));
     }
 }
