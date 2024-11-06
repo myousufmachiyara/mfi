@@ -121,7 +121,7 @@ class RptAccNameSale1Controller extends Controller
                         <td style='width:11%;'>{$items['bill']}</td>
                         <td style='width:22%;'>{$items['ac2']}</td>
                         <td style='width:15%;'>{$items['remarks']}</td>
-                        <td style='width:15%;'>{$items['cr_amt']}</td>
+                        <td style='width:15%;'>" . number_format($items['Cr_amt'], 0) . "</td>
                     </tr>";
                 $totalAmount += $items['cr_amt'];
                 $count++;
@@ -130,7 +130,7 @@ class RptAccNameSale1Controller extends Controller
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
                 <td colspan="6" style="text-align:right;">Total:</td>
-                <td style="width:15%;">' . $totalAmount . '</td>
+                <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
             </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');

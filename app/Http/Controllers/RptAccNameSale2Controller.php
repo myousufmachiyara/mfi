@@ -134,19 +134,19 @@ class RptAccNameSale2Controller extends Controller
                         }
               // Add totals row
               $html .= '
-                        <tr style="background-color:#d9edf7; font-weight:bold;">
-                            <td colspan="7" style="text-align:right;">Total:</td>
-                            <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
-                        </tr>';
-                        $html .= '</table>';
-                        $pdf->writeHTML($html, true, false, true, false, '');
+                <tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="7" style="text-align:right;">Total:</td>
+                    <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
+                </tr>';
+                $html .= '</table>';
+                $pdf->writeHTML($html, true, false, true, false, '');
 
   
         
   
           // Filename and Output
-          $filename = "sale1_report_{$pipe_sale_by_account[0]['ac1_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
-          $pdf->Output($filename, 'I');
+        $filename = "sale2_report_{$pipe_sale_by_account[0]['ac1_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $pdf->Output($filename, 'I');
     }
   
 
@@ -255,7 +255,7 @@ class RptAccNameSale2Controller extends Controller
         
   
           // Filename and Output
-          $filename = "sale1_report_{$pipe_sale_by_account[0]['ac1_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+          $filename = "sale2_report_{$pipe_sale_by_account[0]['ac1_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
           $pdf->Output($filename, 'D');
     }
   
