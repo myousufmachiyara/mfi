@@ -583,7 +583,7 @@
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Entry_of'] ? v['Entry_of'] : "") + "</td>";
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['ac2']) + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
                             html += "<td>" + (v['dr_amt'] ? v['dr_amt'].toFixed(0) : "") + "</td>";
                             html +="</tr>";
