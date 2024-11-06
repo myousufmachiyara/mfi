@@ -14,7 +14,7 @@ class RptAccNameSale2Controller extends Controller
 {
     public function sale2(Request $request){
         $pipe_sale_by_account = pipe_sale_by_account::where('ac1',$request->acc_id)
-        ->join('ac', 'pipe_sale_by_account.company_name', '=', 'ac.ac_code')
+        ->leftjoin('ac', 'pipe_sale_by_account.company_name', '=', 'ac.ac_code')
         ->whereBetween('date', [$request->fromDate, $request->toDate])
         ->select('pipe_sale_by_account.*', 'ac.ac_name')
         ->orderBy('date','asc')
