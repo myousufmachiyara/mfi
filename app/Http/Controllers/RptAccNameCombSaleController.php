@@ -121,7 +121,7 @@ class RptAccNameCombSaleController extends Controller
                                     <td style='width:12%;'>{$items['no']}</td>
                                     <td style='width:10%;'>{$items['ac2']}</td>
                                     <td style='width:31%;'>{$items['remarks']}</td>
-                                    <td style='width:36%;'>" . number_format($items['dr_amt'], 0) . "</td>
+                                    <td style='width:16%;'>" . number_format($items['dr_amt'], 0) . "</td>
                                 </tr>";
         
                         $totalAmount += $items['dr_amt'];
@@ -229,7 +229,7 @@ class RptAccNameCombSaleController extends Controller
                                     <td style='width:12%;'>{$items['no']}</td>
                                     <td style='width:10%;'>{$items['ac2']}</td>
                                     <td style='width:31%;'>{$items['remarks']}</td>
-                                    <td style='width:36%;'>" . number_format($items['dr_amt'], 0) . "</td>
+                                    <td style='width:16%;'>" . number_format($items['dr_amt'], 0) . "</td>
                                 </tr>";
         
                         $totalAmount += $items['dr_amt'];
