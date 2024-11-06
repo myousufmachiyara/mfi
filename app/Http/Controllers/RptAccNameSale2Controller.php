@@ -138,8 +138,9 @@ class RptAccNameSale2Controller extends Controller
                     <td colspan="7" style="text-align:right;">Total:</td>
                     <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
                 </tr>';
-                $html .= '</table>';
-                $pdf->writeHTML($html, true, false, true, false, '');
+                
+            $html .= '</table>';
+            $pdf->writeHTML($html, true, false, true, false, '');
 
   
         
