@@ -15,6 +15,7 @@ class RptAccNameCombSaleController extends Controller
     public function combineSale(Request $request){
         $both_sale_rpt_by_account = both_sale_rpt_by_account::where('ac1',$request->acc_id)
         ->whereBetween('date', [$request->fromDate, $request->toDate])
+        ->orderBy('date', 'asc')
         ->get();
 
         return $both_sale_rpt_by_account;
