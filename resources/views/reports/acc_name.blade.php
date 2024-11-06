@@ -108,7 +108,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_1_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="sale_1_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sale_comb_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="sale_comb_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -244,7 +244,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur1_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="pur1_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -293,7 +293,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur2_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="pur2_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -340,7 +340,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="pur_comb_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="pur_comb_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -385,7 +385,7 @@
                                             
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="jv_acc"></span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="jv_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
