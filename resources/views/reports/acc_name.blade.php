@@ -538,7 +538,7 @@
                             html += "<th></th>"; 
                             html += "<th></th>";
                             html += "<th></th>"; 
-                            html += "<th colspan='2' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
+                            html += "<th colspan='3' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
                             html += "<th></th>"; 
                             html += "<th style='text-align: left'>" + opening_bal + "</th>"; // Display opening quantity in the last column, right-aligned
                             html += "</tr>";
