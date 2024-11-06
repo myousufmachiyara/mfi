@@ -538,7 +538,7 @@
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['pur_no'] ? v['pur_no'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['dr_amt'] ? v['dr_amt'].toFixed(0).replace(/\d(?=(\d{3})+\.)/g, '$&,') : "") + "</td>";
+                            html += "<td>" + (v['dr_amt'] ? v['dr_amt'].toFixed(2) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
