@@ -43,7 +43,7 @@ class RptAccNameCombSaleController extends Controller
         $both_sale_rpt_by_account = both_sale_rpt_by_account::where('ac1',$request->acc_id)
         ->whereBetween('date', [$request->fromDate, $request->toDate])
         ->leftjoin('ac', 'ac.ac_code', '=', 'both_sale_rpt_by_account.ac1')
-        ->select('both_sale_rpt_by_account.*', 'ac.ac_name', 'ac.remarks') 
+        ->select('both_sale_rpt_by_account.*', 'ac.ac_name', 'ac.remarks as ac_remarks') 
         ->orderBy('date', 'asc')
         ->get();
 
@@ -81,7 +81,7 @@ class RptAccNameCombSaleController extends Controller
                   </tr>
                   <tr>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                      Remarks: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['remarks']) . '</span>
+                      Remarks: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['ac_remarks']) . '</span>
                       </td>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                           From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
@@ -104,10 +104,10 @@ class RptAccNameCombSaleController extends Controller
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:14%;color:#17365D;font-weight:bold;">Date</th>
                             <th style="width:10%;color:#17365D;font-weight:bold;">Entry Of</th>
-                            <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
-                            <th style="width:30%;color:#17365D;font-weight:bold;">Detail</th>
-                            <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                            <th style="width:14%;color:#17365D;font-weight:bold;">Amount</th>
+                            <th style="width:12%;color:#17365D;font-weight:bold;">Inv No.</th>
+                            <th style="width:10%;color:#17365D;font-weight:bold;">Bill no</th>
+                            <th style="width:31%;color:#17365D;font-weight:bold;">Detail</th>
+                            <th style="width:16%;color:#17365D;font-weight:bold;">Amount</th>
                       </tr>';
                     // Table Rows
                 $count = 1;
@@ -118,10 +118,10 @@ class RptAccNameCombSaleController extends Controller
                                     <td style='width:7%;'>{$count}</td>
                                     <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
                                     <td style='width:10%;'>{$items['Entry_of']}</td>
-                                    <td style='width:10%;'>{$items['no']}</td>
-                                    <td style='width:30%;'>{$items['ac2']}</td>
-                                    <td style='width:15%;'>{$items['remarks']}</td>
-                                    <td style='width:14%;'>" . number_format($items['dr_amt'], 0) . "</td>
+                                    <td style='width:12%;'>{$items['no']}</td>
+                                    <td style='width:10%;'>{$items['ac2']}</td>
+                                    <td style='width:31%;'>{$items['remarks']}</td>
+                                    <td style='width:36%;'>" . number_format($items['dr_amt'], 0) . "</td>
                                 </tr>";
         
                         $totalAmount += $items['dr_amt'];
@@ -131,7 +131,7 @@ class RptAccNameCombSaleController extends Controller
               $html .= '
                 <tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
-                    <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
+                    <td style="width:16%;">' . number_format($totalAmount, 0) . '</td>
                 </tr>';
                 
             $html .= '</table>';
