@@ -316,8 +316,6 @@
                             opening_qty += v['add_total'] || 0;
                         });
 
-                        
-
                         var html = "<tr>";
                             html += "<th></th>"; 
                             html += "<th></th>"; 
@@ -331,7 +329,6 @@
                             $(tableID).append(html);
 
                         var balance = opening_qty;
-
 
                         $.each(result['ledger'], function(k,v){
                             var html="<tr>";

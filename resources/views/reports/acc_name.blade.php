@@ -78,7 +78,50 @@
                         </ul>
                         <div class="tab-content">
                             <div id="GL" class="tab-pane">
-                               
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="gl_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="gl_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="gl_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('gl')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('gl')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('gl')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>R/No</th>
+                                                    <th>Date</th>
+                                                    <th>Account Name</th>
+                                                    <th>Remarks</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="GLTbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="GL_R" class="tab-pane">
                                 <p>GL_R</p>
@@ -450,6 +493,83 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#GL"){
+                var table = document.getElementById('GLTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/gl";
+                tableID="#GLTbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+                        $('#gl_from').text(formattedfromDate);
+                        $('#gl_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        
+                        $('#gl_acc').text(selectedAcc);
+                        $(tableID).empty(); // Clear the loading message
+
+                        var SOD = 0;                        
+                        var SOC = 0;                        
+
+                        $.each(result['lager_much_op_bal'], function(k,v){
+                            SOD += v['SumOfDebit'] || 0;
+                            SOC += v['SumOfrec_cr'] || 0;
+                        });
+
+                        var opening_bal = SOD - SOC;
+                        var html = "<tr>";
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>";
+                            html += "<th colspan='2' style='text-align: center'><-----Opening Quantity-----></th>"; // Merged and centered across two columns
+                            html += "<th></th>"; 
+                            html += "<th></th>";
+                            html += "<th style='text-align: left'>" + opening_qty + "</th>"; // Display opening quantity in the last column, right-aligned
+                            html += "</tr>";
+                            $(tableID).append(html);
+
+                        var balance = opening_bal;
+
+                        $.each(result['lager_much_all'], function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") +"</td>";
+                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'] : "0") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'] : "0") + "</td>";
+                            if (v['Debit'] !== undefined && v['Debit'] !== null) {
+                                balance += v['Debit']; // Add to balance
+                            }
+
+                            // Check if less exists and is not empty
+                            if (v['Credit'] !== undefined && v['Credit'] !== null) {
+                                balance -= v['Credit']; // Subtract from balance
+                            }
+
+                            html += "<td>" + balance + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
             }
             else if(tabId=="#GL_R"){
             }

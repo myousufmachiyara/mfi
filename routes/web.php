@@ -360,6 +360,12 @@
         Route::get('/rep-daily-register', [App\Http\Controllers\ReportingController::class, 'dailyRegister'])->name('rep-daily-register');
         Route::get('/rep-commissions', [App\Http\Controllers\ReportingController::class, 'commissions'])->name('rep-commissions');
 
+        // RPT by Acc Name GL
+        Route::get('/rep-by-acc-name/gl', [App\Http\Controllers\RptAccNameGLController::class, 'gl'])->name('gl-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/gl/excel', [App\Http\Controllers\RptAccNameGLController::class, 'glExcel'])->name('gl-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/gl/PDF', [App\Http\Controllers\RptAccNameGLController::class, 'glPDF'])->name('gl-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/gl/download', [App\Http\Controllers\RptAccNameGLController::class, 'glDownload'])->name('gl-rep-by-acc-name-download');
+
         // RPT by Acc Name Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
         Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
