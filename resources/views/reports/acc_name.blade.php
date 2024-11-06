@@ -108,6 +108,7 @@
                                                 <tr>
                                                     <th>S/No</th>
                                                     <th>R/No</th>
+                                                    <th>Voucher</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Remarks</th>
