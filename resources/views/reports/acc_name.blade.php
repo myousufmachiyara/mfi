@@ -512,6 +512,8 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
+
+                        console.log(result);
                         $('#gl_from').text(formattedfromDate);
                         $('#gl_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
