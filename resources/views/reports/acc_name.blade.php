@@ -572,11 +572,12 @@
                         $('#sale_comb_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#sale_comb_acc').text(selectedAcc);
-                        console.log(result);
                         
                         $(tableID).empty(); // Clear the loading message
 
                         $.each(result, function(k,v){
+                            console.log(v['ac2']);
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
