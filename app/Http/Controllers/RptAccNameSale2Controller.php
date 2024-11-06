@@ -121,12 +121,12 @@ class RptAccNameSale2Controller extends Controller
                     $html .= "<tr style='background-color:{$bgColor};'>
                                     <td style='width:7%;'>{$count}</td>
                                     <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                                    <td style='width:10%;'>{$items['NO']}</td>
-                                    <td style='width:10%;'>{$items['pur_bill_no']}</td>
+                                    <td style='width:10%;'>{$items['sal_inv']}</td>
+                                    <td style='width:10%;'>{$items['pur_ord_no']}</td>
                                     <td style='width:22%;'>{$items['ac2_name']}</td>
-                                    <td style='width:11%;'>{$items['sal_inv']}</td>
+                                    <td style='width:11%;'>{$items['pur_no']}</td>
                                     <td style='width:15%;'>{$items['remarks']}</td>
-                                    <td style='width:12%;'>{$items['cr_amt']}</td>
+                                    <td style='width:12%;'>{$items['dr_amt']}</td>
                                 </tr>";
         
                         $totalAmount += $items['cr_amt'];
