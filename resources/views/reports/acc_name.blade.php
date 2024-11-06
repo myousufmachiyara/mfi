@@ -213,11 +213,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
+                                                    <th>Entry OF</th>
                                                     <th>Inv No.</th>
                                                     <th>Bill</th>
-                                                    <th>Detail To Party</th>
-                                                    <th>Entry Of</th>
+                                                    <th>Detail</th>
+                                                    <th>Ramrks</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
@@ -579,11 +580,11 @@
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['Entry_of'] ? v['Entry_of'] : "") + "</td>";
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['dr_amt'] ? v['dr_amt'] : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
