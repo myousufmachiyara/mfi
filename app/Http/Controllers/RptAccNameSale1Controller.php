@@ -56,15 +56,15 @@ class RptAccNameSale1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("Sale Report Of Account - {$sale_by_account[0]['ac_name']}");
-        $pdf->SetSubject("Sale Report Of Account - {$sale_by_account[0]['ac_name']}");
-        $pdf->SetKeywords('Sale Report, TCPDF, PDF');
+        $pdf->SetTitle("Sale 1 Report Of Account - {$sale_by_account[0]['ac_name']}");
+        $pdf->SetSubject("Sale 1 Report Of Account - {$sale_by_account[0]['ac_name']}");
+        $pdf->SetKeywords('Sale 1 Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale 1 Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Account Info Table
@@ -121,7 +121,7 @@ class RptAccNameSale1Controller extends Controller
                         <td style='width:11%;'>{$items['bill']}</td>
                         <td style='width:22%;'>{$items['ac2']}</td>
                         <td style='width:15%;'>{$items['remarks']}</td>
-                        <td style='width:15%;'>" . number_format($items['Cr_amt'], 0) . "</td>
+                        <td style='width:15%;'>" . number_format($items['cr_amt'], 0) . "</td>
                     </tr>";
                 $totalAmount += $items['cr_amt'];
                 $count++;
@@ -161,15 +161,15 @@ class RptAccNameSale1Controller extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("Sale Report Of Account - {$sale_by_account[0]['ac_name']}");
-        $pdf->SetSubject("Sale Report Of Account - {$sale_by_account[0]['ac_name']}");
-        $pdf->SetKeywords('Sale Report, TCPDF, PDF');
+        $pdf->SetTitle("Sale 1 Report Of Account - {$sale_by_account[0]['ac_name']}");
+        $pdf->SetSubject("Sale 1 Report Of Account - {$sale_by_account[0]['ac_name']}");
+        $pdf->SetKeywords('Sale 1 Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sale 1 Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Account Info Table
@@ -226,16 +226,16 @@ class RptAccNameSale1Controller extends Controller
                         <td style='width:11%;'>{$items['bill']}</td>
                         <td style='width:22%;'>{$items['ac2']}</td>
                         <td style='width:15%;'>{$items['remarks']}</td>
-                        <td style='width:15%;'>{$items['cr_amt']}</td>
+                        <td style='width:15%;'>" . number_format($items['cr_amt'], 0) . "</td>
                     </tr>";
-            $totalAmount += $items['cr_amt'];
-            $count++;
-        }
+                $totalAmount += $items['cr_amt'];
+                $count++;
+            }
             // Add totals row
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
                 <td colspan="6" style="text-align:right;">Total:</td>
-                <td style="width:15%;">' . $totalAmount . '</td>
+                <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
             </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
