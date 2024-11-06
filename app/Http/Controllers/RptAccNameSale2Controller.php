@@ -108,10 +108,10 @@ class RptAccNameSale2Controller extends Controller
                             <th style="width:14%;color:#17365D;font-weight:bold;">Sales Date</th>
                             <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
                             <th style="width:10%;color:#17365D;font-weight:bold;">Bill</th>
-                            <th style="width:22%;color:#17365D;font-weight:bold;">Company Name</th>
+                            <th style="width:20%;color:#17365D;font-weight:bold;">Company Name</th>
                             <th style="width:11%;color:#17365D;font-weight:bold;">Pur Inv</th>
                             <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                            <th style="width:12%;color:#17365D;font-weight:bold;">Amount</th>
+                            <th style="width:14%;color:#17365D;font-weight:bold;">Amount</th>
                       </tr>';
                     // Table Rows
                 $count = 1;
@@ -123,20 +123,20 @@ class RptAccNameSale2Controller extends Controller
                                     <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
                                     <td style='width:10%;'>{$items['sal_inv']}</td>
                                     <td style='width:10%;'>{$items['pur_ord_no']}</td>
-                                    <td style='width:22%;'>{$items['ac2_name']}</td>
+                                    <td style='width:20%;'>{$items['ac2_name']}</td>
                                     <td style='width:11%;'>{$items['pur_no']}</td>
                                     <td style='width:15%;'>{$items['remarks']}</td>
-                                    <td style='width:12%;'>{$items['dr_amt']}</td>
+                                    <td style='width:14%;'>" . number_format($items['dr_amt'], 0) . "</td>
                                 </tr>";
         
-                        $totalAmount += $items['cr_amt'];
+                        $totalAmount += $items['dr_amt'];
                         $count++;
                         }
               // Add totals row
               $html .= '
               <tr style="background-color:#d9edf7; font-weight:bold;">
                   <td colspan="7" style="text-align:right;">Total:</td>
-                  <td style="width:12%;">' . $totalAmount . '</td>
+                  <td style="width:14%;">' . $totalAmount . '</td>
               </tr>';
               $html .= '</table>';
              $pdf->writeHTML($html, true, false, true, false, '');
