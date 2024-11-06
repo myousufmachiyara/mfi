@@ -15,7 +15,8 @@ class RptAccNameCombPurController extends Controller
 
     public function combinePurchase(Request $request){
         $both_pur_rpt_by_account = both_pur_rpt_by_account::where('ac1',$request->acc_id)
-        ->whereBetween('date', [$request->fromDate, $request->toDate])
+        ->whereBetween('DATE', [$request->fromDate, $request->toDate])
+        ->orderBy('date', 'asc')
         ->get();
 
         return $both_pur_rpt_by_account;

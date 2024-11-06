@@ -303,10 +303,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Mill No.</th>
-                                                    <th>Dispatch To Party</th>
+                                                    <th>Name Of Person</th>
                                                     <th>Sale Inv</th>
                                                     <th>Remarks</th>
                                                     <th>Amount</th>
@@ -351,7 +351,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Mill No.</th>
                                                     <th>Dispatch To Party</th>
@@ -397,11 +397,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
+                                                    <th>Entry OF</th>
                                                     <th>Inv No.</th>
-                                                    <th>Bill</th>
-                                                    <th>Detail To Party</th>
-                                                    <th>Entry Of</th>
+                                                    <th>Mill No</th>
+                                                    <th>Detail</th>
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
@@ -744,13 +744,13 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['DATE'] ? moment(v['DATE']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['NO'] ? v['NO'] : "") + "</td>";
-                            html += "<td>" + (v['pur_bill_no'] ? v['pur_bill_no'] : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                            html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
+                            html += "<td>" + (v['mill_inv'] ? v['mill_inv'] : "") + "</td>";
+                            html += "<td>" + (v['name_of'] ? v['name_of'] : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
@@ -795,7 +795,7 @@
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
@@ -836,11 +836,11 @@
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);

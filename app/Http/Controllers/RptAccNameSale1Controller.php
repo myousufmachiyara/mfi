@@ -16,6 +16,7 @@ class RptAccNameSale1Controller extends Controller
     public function sale1(Request $request){
         $sale_by_account = sale_by_account::where('ac1',$request->acc_id)
         ->whereBetween('date', [$request->fromDate, $request->toDate])
+        ->orderBy('date', 'asc')
         ->get();
 
         return $sale_by_account;
