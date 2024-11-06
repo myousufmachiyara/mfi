@@ -308,7 +308,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Sales Date</th>
+                                                    <th>Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Mill No.</th>
                                                     <th>Dispatch To Party</th>
@@ -675,7 +675,7 @@
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
