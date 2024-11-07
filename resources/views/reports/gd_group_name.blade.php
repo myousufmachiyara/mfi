@@ -496,8 +496,13 @@
                             // Check if the first row exists, and then count the number of <th> elements (columns)
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
-                            for(i=0;i<v.length;i++){
-                                console.log(v[i]);
+                            for(i=0;i<columnCount;i++){
+                                if(i<v.length){
+                                    html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                }
+                                else{
+                                    html += "<td>-</td>";
+                                }
                                 // if(v[i]['item_mm']=="12G"){
                                 //     // set value in 1st coloum
                                 //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
