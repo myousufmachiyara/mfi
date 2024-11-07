@@ -560,7 +560,7 @@
                                 else{
                                     html += "<td>-</td>"
                                 }
-                                else if(m['item_mm']=="23G"){
+                                if(m['item_mm']=="23G"){
                                     // set value in 1st coloum
                                     html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
                                 }
@@ -571,7 +571,6 @@
                                     // set value in 1st coloum
                                     html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
                                 }
-                                
                                 else{
                                     html += "<td>-</td>"
                                 }
