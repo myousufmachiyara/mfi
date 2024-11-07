@@ -488,80 +488,88 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>";
 
-                            let table1 = document.getElementById('TSAThead');
+                            // let table1 = document.getElementById('TSAThead');
 
                             // Get the first row (<tr>) inside the <thead> section
-                            let firstRow = table1.querySelector('thead tr'); 
+                            // let firstRow = table1.querySelector('thead tr'); 
 
                             // Check if the first row exists, and then count the number of <th> elements (columns)
-                            let columnCount = firstRow ? firstRow.cells.length : 0;
+                            // let columnCount = firstRow ? firstRow.cells.length : 0;
 
-                            const headerRow = document.querySelector("#TSAThead thead tr");
+                            // const headerRow = document.querySelector("#TSAThead thead tr");
 
-                            for(i=0;i<columnCount-1;i++){
-                                col=headerRow.cells[i+1];
-                                let col_id = col ? col.id : null; // Return the ID, or null if not found
-                                const exists = v.some(item => item.item_mm === col_id);
-                                console.log(exists);
-                                if(exists){
-                                    html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
-                                }
-                                else{
-                                    html += "<td>-</td>";
-                                }
+                            $('#TSAThead thead tr').children('th').each(function() {
+                                const col_id = $(this).attr('id');  // Get the column ID (e.g., "12G")
+                                const item = v.find(i => i.item_mm === col_id); // Find the matching item
+
+                                // If item found, use its opp_bal, otherwise add a '-'
+                                html += item ? `<td>${item.opp_bal || '-'}</td>` : '<td>-</td>';
+                            });
+
+                            // for(i=0;i<columnCount-1;i++){
+                            //     col=headerRow.cells[i+1];
+                            //     let col_id = col ? col.id : null; // Return the ID, or null if not found
+                            //     const exists = v.some(item => item.item_mm === col_id);
+                            //     console.log(exists);
+                            //     if(exists){
+                            //         html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
+                            //     }
+                            //     else{
+                            //         html += "<td>-</td>";
+                            //     }
                             
-                                // if(v[i]['item_mm']=="12G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="14G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="16G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="1.5"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (m['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="18G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="1.10"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="19G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="20G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="21G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="22G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="23G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else if(v[i]['item_mm']=="24G"){
-                                //     // set value in 1st coloum
-                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                                // }
-                                // else{
-                                //     html += "<td>-</td>"
-                                // }
-                            }
+                            //     // if(v[i]['item_mm']=="12G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="14G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="16G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="1.5"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (m['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="18G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="1.10"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="19G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="20G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="21G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="22G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="23G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else if(v[i]['item_mm']=="24G"){
+                            //     //     // set value in 1st coloum
+                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                            //     // }
+                            //     // else{
+                            //     //     html += "<td>-</td>"
+                            //     // }
+                            // }
 
                             html +="</tr>";
                             $(tableID).append(html);
