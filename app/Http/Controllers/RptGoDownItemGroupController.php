@@ -20,7 +20,6 @@ class RptGoDownItemGroupController extends Controller
 
     public function stockAll(Request $request){
         $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
-        ->where('opp_bal', '<>', 0)
         ->get();
 
         return $pipe_stock_all_by_item_group;
