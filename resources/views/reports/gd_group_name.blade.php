@@ -502,7 +502,7 @@
                                 col=headerRow.cells[i+1];
                                 let col_id = col ? col.id : null; // Return the ID, or null if not found
                                 const exists = v.some(item => item.item_mm === col_id);
-
+                                console.log(exists);
                                 if(exists){
                                     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
                                 }
@@ -510,8 +510,6 @@
                                     html += "<td>-</td>";
                                 }
                             
-                                
-                               
                                 // if(v[i]['item_mm']=="12G"){
                                 //     // set value in 1st coloum
                                 //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
