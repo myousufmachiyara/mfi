@@ -482,7 +482,7 @@
                             return acc;
                         }, {});
                         $.each(groupedByChunk3, function(k,v){
-                            console.log(v[k]);
+                            console.log(v);
 
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>"
