@@ -481,7 +481,7 @@
 
                             return acc;
                         }, {});
-                        
+
                         $.each(groupedByChunk3, function(k,v){
                             var html="<tr>";
                             html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
@@ -489,6 +489,7 @@
                                 html += "<td>"+ (m['item_mm'] ? m['item_mm'] : "") +"</td>"
                             });
                             html +="</tr>";
+                            $(tableID).append(html);
                         });
                     },
                     error: function () {
