@@ -502,7 +502,7 @@
                                 const th = header.cells[columnCount+1]; // Get the cell at the specified index
                                 var col_id = th ? th.id : null; // Return the ID, or null if not found
 
-                                if(i<v.length-1){
+                                if(i<v.length){
                                     if(col_id == v[i]['item_mm']){
                                         console.log(v[i]['item_mm']);
 
