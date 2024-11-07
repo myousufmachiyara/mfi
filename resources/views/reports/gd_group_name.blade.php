@@ -497,13 +497,12 @@
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
                             const headerRow = document.querySelector("#TSAThead thead tr");
-                            console.log(v);
 
                             for(i=0;i<columnCount-1;i++){
                                 console.log(v.length);
                                 col=headerRow.cells[i+1];
                                 let col_id = col ? col.id : null; // Return the ID, or null if not found
-
+                                console.log(col_id)
                                 if(i<v.length){
                                     if(col_id == v[i]['item_mm']){
                                         html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
