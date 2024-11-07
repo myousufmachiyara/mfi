@@ -443,7 +443,6 @@
                             </div>
                             <div id="purchase_pipe_return" class="tab-pane">
                                 <div class="row form-group pb-3">
-
                                     <div class="col-lg-6">
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
@@ -463,6 +462,7 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pp_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('pp_return')"><i class="fa fa-file-excel"></i> Excel</a>      
                                     </div>
+
                                     <div class="col-12 mt-4">
                                         <table class="table table-bordered table-striped mb-0">
                                             <thead>
@@ -485,6 +485,31 @@
                                 </div>
                             </div>
                             <div id="daily_reg" class="tab-pane">
+                                <div class="col-lg-6">
+                                    <div class="bill-to">
+                                        <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                            <span style="color: #17365D;">From: &nbsp;</span>
+                                            <span style="font-weight: 400; color: black;" id="daily_reg_from"></span>
+                                        
+                                            <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                        
+                                            <span style="color: #17365D;">To: &nbsp;</span>
+                                            <span style="font-weight: 400; color: black;" id="daily_reg_to"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 text-end">
+                                    <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('pp_return')"><i class="fa fa-download"></i> Download</a>
+                                    <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pp_return')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                    <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('pp_return')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                </div>
+
+                                <div class="col-12 mt-4" id="div_daily_reg">
+                                    <table class="table table-bordered table-striped mb-0" id="Daily Reg">
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -494,7 +519,6 @@
         @include('../layouts.footerlinks')
 	</body>
     <script>
-
         document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
@@ -957,6 +981,9 @@
                 });
             }
             else if(tabId=="#daily_reg"){
+                var div_daily_reg = document.getElementById('div_daily_reg');
+                div_daily_reg.innerHTML = '';
+                
             }
         }
 

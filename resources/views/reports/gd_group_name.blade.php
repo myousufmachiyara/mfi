@@ -205,44 +205,31 @@
                                         <div class="bill-to">
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
                                                 <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="bal_from"></span>
+                                                <span style="font-weight: 400; color: black;" id="SAT_from"></span>
                                             
                                                 <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
                                             
                                                 <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="bal_to"></span>
+                                                <span style="font-weight: 400; color: black;" id="SAT_to"></span>
                                             </h4>
                                             
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
                                                 <span style="color:#17365D">Item Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="bal_acc"></span>
+                                                <span style="font-weight:400; color:black;" id="SAT_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
                                     
                                     <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('bal')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('bal')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('bal')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('SAT')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('SAT')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('SAT')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/No</th>
-                                                    <th>ID</th>
-                                                    <th>Date</th>
-                                                    <th>Reason</th>
-                                                    <th>Remarks</th>
-                                                    <th>Qty Add</th>
-                                                    <th>Qty Less</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="balTbleBody">
+                                        <table class="table table-bordered table-striped mb-0" id="SATTble">
 
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -415,15 +402,15 @@
             }
 
             else if(tabId=="#SAT"){
-                let table = document.getElementById('SATTbleBody');
+                let table = document.getElementById('SATTble');
                 
                 // Clear the table
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
 
-                const url = "/rep-godown-by-item-name/bal";
-                const tableID = "#SATTbleBody";
+                const url = "/rep-godown-by-item-grp/sa";
+                const tableID = "#SATTble";
 
                 // Helper function to safely access data
                 const safeVal = (val) => val ? val : "";
@@ -440,27 +427,29 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function (result) {
-                        $('#bal_from').text(formattedfromDate);
-                        $('#bal_to').text(formattedtoDate);
+                        $('#SAT_from').text(formattedfromDate);
+                        $('#SAT_to').text(formattedtoDate);
 
                         const selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#bal_acc').text(selectedAcc);
+                        $('#SAT_acc').text(selectedAcc);
 
                         $(tableID).empty(); // Clear the loading message
 
                         // Populate the table with new data
-                        $.each(result, function (k, v) {
-                            let html = `<tr>
-                                <td>${k + 1}</td>
-                                <td>${safeVal(v['Sal_inv_no'])}</td>
-                                <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
-                                <td>${safeVal(v['reason'])}</td>
-                                <td>${safeVal(v['remarks'])}</td>
-                                <td>${safeVal(v['pc_add'])}</td>
-                                <td>${safeVal(v['pc_less'])}</td>
-                            </tr>`;
-                            $(tableID).append(html);
-                        });
+                        console.log(result);
+                        // $.each(result, function (k, v) {
+
+                        //     let html = `<tr>
+                        //         <td>${k + 1}</td>
+                        //         <td>${safeVal(v['Sal_inv_no'])}</td>
+                        //         <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
+                        //         <td>${safeVal(v['reason'])}</td>
+                        //         <td>${safeVal(v['remarks'])}</td>
+                        //         <td>${safeVal(v['pc_add'])}</td>
+                        //         <td>${safeVal(v['pc_less'])}</td>
+                        //     </tr>`;
+                        //     $(tableID).append(html);
+                        // });
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');

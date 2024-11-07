@@ -473,6 +473,11 @@
         Route::get('/rep-godown-by-item-grp/so/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'ttockoutExcel'])->name('so-rep-godown-by-item-grp-excel');
         Route::get('/rep-godown-by-item-grp/so/report', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockoutReport'])->name('so-rep-godown-by-item-grp-report');
       
+        // RPT Godown By Item Name sat
+        Route::get('/rep-godown-by-item-grp/sat', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockout'])->name('so-rep-godown-by-item-grp');
+        Route::get('/rep-godown-by-item-grp/so/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'ttockoutExcel'])->name('so-rep-godown-by-item-grp-excel');
+        Route::get('/rep-godown-by-item-grp/so/report', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockoutReport'])->name('so-rep-godown-by-item-grp-report');
+
         // RPT Commissions 
         Route::get('/rep-comm/comm', [App\Http\Controllers\RptCommissionsController::class, 'comm'])->name('comm-rep');
         Route::get('/rep-comm/comm/excel', [App\Http\Controllers\RptCommissionsController::class, 'commExcel'])->name('comm-rep-excel');
