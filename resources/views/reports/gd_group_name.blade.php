@@ -497,7 +497,7 @@
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
                             const headerRow = document.querySelector("#TSAThead thead tr");
-                            console.log(v[i]);
+                            console.log(v);
 
                             // for(i=0;i<columnCount-1;i++){
                             //     col=headerRow.cells[i+1];
@@ -567,7 +567,7 @@
                             //     //     html += "<td>-</td>"
                             //     // }
                             // }
-                            
+
                             html +="</tr>";
                             $(tableID).append(html);
                         });
