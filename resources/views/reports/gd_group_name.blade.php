@@ -498,13 +498,25 @@
 
                             // const headerRow = document.querySelector("#TSAThead thead tr");
 
-                            $('#TSAThead thead tr').children('th').each(function() {
+                            // $('#TSAThead thead tr').children('th').each(function() {
+                            //     const col_id = $(this).attr('id');  // Get the column ID (e.g., "12G")
+                            //     const item = v.find(i => i.item_mm === col_id); // Find the matching item
+
+                            //     // If item found, use its opp_bal, otherwise add a '-'
+                            //     html += item ? `<td>${item.opp_bal || '-'}</td>` : '<td>-</td>';
+                            // });
+
+                            $('#TSAThead thead tr').children('th').each(function(index) {
+                                // Skip the first column (index 0) by starting from 1
+                                if (index === 0) return;
+
                                 const col_id = $(this).attr('id');  // Get the column ID (e.g., "12G")
                                 const item = v.find(i => i.item_mm === col_id); // Find the matching item
 
                                 // If item found, use its opp_bal, otherwise add a '-'
                                 html += item ? `<td>${item.opp_bal || '-'}</td>` : '<td>-</td>';
                             });
+
 
                             // for(i=0;i<columnCount-1;i++){
                             //     col=headerRow.cells[i+1];
