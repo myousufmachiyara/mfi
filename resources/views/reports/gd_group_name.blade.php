@@ -499,7 +499,7 @@
 
                             for(i=0;i<columnCount-1;i++){
                                 console.log(v[i]);
-                                if(i<v.length && header.cells[columnCount+1] == v[i]['item_mm']){
+                                if(i<v.length && header.cells[columnCount+1].id == v[i]['item_mm']){
                                     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>"
                                 }
                                 else{
