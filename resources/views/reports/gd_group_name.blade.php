@@ -232,16 +232,16 @@
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
-                                                    <th>14G</th>
-                                                    <th>16G</th>
-                                                    <th>18G</th>
-                                                    <th>1.10</th>
-                                                    <th>19G</th>
-                                                    <th>20G</th>
-                                                    <th>21G</th>
-                                                    <th>22G</th>
-                                                    <th>23G</th>
-                                                    <th>24G</th>
+                                                    <th id="14G">14G</th>
+                                                    <th id="16G">16G</th>
+                                                    <th id="18G">18G</th>
+                                                    <th id="1.10">1.10</th>
+                                                    <th id="19G">19G</th>
+                                                    <th id="20G">20G</th>
+                                                    <th id="21G">21G</th>
+                                                    <th id="22G">22G</th>
+                                                    <th id="23G">23G</th>
+                                                    <th id="24G">24G</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SATTble">
@@ -483,28 +483,22 @@
 
                         // Output the grouped result
                         console.log(groupedByChunk3);
-                        let mm = {}; // Initialize mm as an object
 
                         $.each(groupedByChunk3, function(k,v){
-
+                            let mm = {};
+                            var html="<tr>";
+                            html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
                             $.each(v, function(l, m) {
                                 // Check if the item_mm already exists as a key
                                 if (!mm[m['item_mm']]) {
                                     mm[m['item_mm']] = []; // If it doesn't exist, initialize as an empty array
                                 }
-                                
                                 // Push the opp_bal value into the array for that item_mm
                                 mm[m['item_mm']].push(m['opp_bal']);
+                                setColumnValue(m['item_mm'], m['opp_bal']);
                             });
-                            // var html="<tr>";
-                            // html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
-                            // html += "<td>" + (v[''] ? v[''] : "") + "</td>";
-                            // html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
-                            // html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            // html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                            // html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
-                            // html +="</tr>";
-                            // $(tableID).append(html);
+                            html +="</tr>";
+                            $(tableID).append(html);
                         });
                         console.log(mm);
                     },
