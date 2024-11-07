@@ -499,10 +499,10 @@
                             
 
                             for(i=0;i<columnCount-1;i++){
-                                console.log(v[i]);
+                                console.log(v[i]['item_mm']);
                                 const th = header.cells[columnCount+1]; // Get the cell at the specified index
                                 var col_id = th ? th.id : null; // Return the ID, or null if not found
-
+                                
                                 if(i<v.length && col_id == v[i]['item_mm']){
                                     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>"
                                 }
