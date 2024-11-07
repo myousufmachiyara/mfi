@@ -443,6 +443,7 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function (result) {
+                        console.log(result);
                         $('#SAT_from').text(formattedfromDate);
                         $('#SAT_to').text(formattedtoDate);
 
@@ -481,7 +482,6 @@
 
                             return acc;
                         }, {});
-                        console.log(groupedByChunk3);
                         $.each(groupedByChunk3, function(k,v){
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>"
