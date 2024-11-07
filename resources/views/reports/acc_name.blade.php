@@ -828,6 +828,7 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
+                    console.log(result)
                         $('#pur_comb_from').text(formattedfromDate);
                         $('#pur_comb_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
