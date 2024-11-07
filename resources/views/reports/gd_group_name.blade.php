@@ -491,7 +491,11 @@
 
                             
                             let table1 = document.getElementById('TSAThead');
-                            let firstRow = table1.querySelector('thead th');
+
+                            // Get the first row (<tr>) inside the <thead> section
+                            let firstRow = table1.querySelector('thead tr'); 
+
+                            // Check if the first row exists, and then count the number of <th> elements (columns)
                             const columnCount = firstRow ? firstRow.cells.length : 0;
 
                             for(i=1;i<columnCount;i++){
