@@ -495,9 +495,10 @@
 
                             // Check if the first row exists, and then count the number of <th> elements (columns)
                             let columnCount = firstRow ? firstRow.cells.length : 0;
+                            let header = table.querySelector("thead tr");
 
                             for(i=0;i<columnCount-1;i++){
-                                if(i<v.length){
+                                if(i<v.length && header.cells[columnCount+1] == v[i]['item_mm']){
                                     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>"
                                 }
                                 else{
