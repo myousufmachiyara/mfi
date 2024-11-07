@@ -497,23 +497,20 @@
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
                             const headerRow = document.querySelector("#TSAThead thead tr");
-                            console.log(v);
 
                             for(i=0;i<columnCount-1;i++){
                                 col=headerRow.cells[i+1];
                                 let col_id = col ? col.id : null; // Return the ID, or null if not found
-                                if(i<v.length){
-                                    if(col_id == v[i]['item_mm']){
+                                const exists = v.some(item => item.item_mm === col_id);
 
-                                        html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
-                                    }
-                                    else{
-                                        html += "<td>-</td>";
-                                    }
+                                if(exists){
+                                    html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
                                 }
                                 else{
                                     html += "<td>-</td>";
                                 }
+                            
+                                
                                
                                 // if(v[i]['item_mm']=="12G"){
                                 //     // set value in 1st coloum
