@@ -499,74 +499,75 @@
                             const headerRow = document.querySelector("#TSAThead thead tr");
                             console.log(v);
 
-                            // for(i=0;i<columnCount-1;i++){
-                            //     col=headerRow.cells[i+1];
-                            //     let col_id = col ? col.id : null; // Return the ID, or null if not found
+                            for(i=0;i<columnCount-1;i++){
+                                console.log(v.length);
+                                col=headerRow.cells[i+1];
+                                let col_id = col ? col.id : null; // Return the ID, or null if not found
 
-                            //     if(i<v.length){
-                            //         if(col_id == v[i]['item_mm']){
-                            //             html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
-                            //         }
-                            //         else{
-                            //             html += "<td>-</td>";
-                            //         }
-                            //     }
-                            //     else{
-                            //         html += "<td>-</td>";
-                            //     }
+                                if(i<v.length){
+                                    if(col_id == v[i]['item_mm']){
+                                        html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
+                                    }
+                                    else{
+                                        html += "<td>-</td>";
+                                    }
+                                }
+                                else{
+                                    html += "<td>-</td>";
+                                }
                                
-                            //     // if(v[i]['item_mm']=="12G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="14G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="16G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="1.5"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (m['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="18G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="1.10"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="19G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="20G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="21G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="22G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="23G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else if(v[i]['item_mm']=="24G"){
-                            //     //     // set value in 1st coloum
-                            //     //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
-                            //     // }
-                            //     // else{
-                            //     //     html += "<td>-</td>"
-                            //     // }
-                            // }
+                                // if(v[i]['item_mm']=="12G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="14G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="16G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="1.5"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (m['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="18G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="1.10"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="19G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="20G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="21G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="22G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="23G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else if(v[i]['item_mm']=="24G"){
+                                //     // set value in 1st coloum
+                                //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                // }
+                                // else{
+                                //     html += "<td>-</td>"
+                                // }
+                            }
 
                             html +="</tr>";
                             $(tableID).append(html);
