@@ -483,9 +483,15 @@
                         }, {});
                         $.each(groupedByChunk3, function(k,v){
                             let mm = {};
+                            var html="<tr>";
+                            html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
+
                             $.each(v, function(l, m) {
-                                mm[m['item_mm']] = mm[m['opp_bal']]
+                                setColumnHtmlById(m['item_mm'], "50"); // Sets the content in column with id="col2"
+                                // html += "<td>"+ (m['item_mm'] ? m['item_mm'] : "") +"</td>"
+                                // mm[m['item_mm']] = mm[m['opp_bal']]
                             });
+                            html +="</tr>";
                             console.log(mm)
                         });
                     },
