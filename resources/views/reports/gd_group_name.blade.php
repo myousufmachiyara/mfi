@@ -496,9 +496,9 @@
                             // Check if the first row exists, and then count the number of <th> elements (columns)
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
-                            for(i=0;i<columnCount;i++){
+                            for(i=0;i<columnCount-1;i++){
                                 if(i<v.length){
-                                    html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
+                                    html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>"
                                 }
                                 else{
                                     html += "<td>-</td>";
