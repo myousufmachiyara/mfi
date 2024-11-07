@@ -153,7 +153,7 @@
                             html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
                             html += "<td>" + (((v['B_amount']*v['comm_disc'])/100) ? ((v['B_amount']*v['comm_disc'])/100) : "") + "</td>";
                             html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 81.182 * v['cd_disc'])/118) : "") + "</td>";
+                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 1.182 * v['cd_disc'])/118) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
