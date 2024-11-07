@@ -492,7 +492,7 @@
                             $.each(v, function(l, m) {
                                 // Assuming you want to set the column dynamically based on item_mm
                                 // This function should set the correct column based on m['item_mm']
-                                setColumnValue(m['item_mm'], m['opp_bal']);
+                                setColumnValue(m['item_mm'], m['opp_bal'], tableID);
                             });
 
                             html += "</tr>"; // Close the row
@@ -577,7 +577,7 @@
             }
         }
 
-        function setColumnValue(item_mm, opp_bal) {
+        function setColumnValue(item_mm, opp_bal,tableID) {
             // Find the column index for the item_mm
             var columnIndex = getColumnIndexForItemMm(item_mm);
 
