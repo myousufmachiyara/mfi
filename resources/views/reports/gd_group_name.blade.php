@@ -436,7 +436,7 @@
                         $(tableID).empty(); // Clear the loading message
 
                         // Step 1: Break item_name into 3 chunks based on space
-                        const processedData = data.map(item => {
+                        const processedData = result.map(item => {
                             const itemChunks = item.item_name.split(' ');
                             const chunk1 = itemChunks[0] || '';   // First chunk (before the first space)
                             const chunk2 = itemChunks[1] || '';   // Second chunk (between the first and second space)
