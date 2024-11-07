@@ -435,36 +435,26 @@
 
                         $(tableID).empty(); // Clear the loading message
 
-                        // Populate the table with new data
-                        const processedData = result.map(item => {
-                            // Split the item_name into 3 chunks
-                            const itemChunks = item.item_name.split(' ');
+                        // Step 2: Group items by the third chunk
+                        const groupedByChunk3 = processedData.reduce((acc, item) => {
+                            const chunk3 = item.item_name_chunk_3;
 
-                            // Ensure the chunks are of the expected length (you can adjust logic as needed)
-                            const chunk1 = itemChunks[0] || '';
-                            const chunk2 = itemChunks[1] || '';
-                            const chunk3 = itemChunks.slice(2).join(' ') || '';
+                            // If a group for this chunk3 doesn't exist, create an empty array
+                            if (!acc[chunk3]) {
+                                acc[chunk3] = [];
+                            }
 
-                            // Create a new object structure
-                            return {
-                                item_group_cod: item.item_group_cod,
-                                it_cod: item.it_cod,
-                                item_name_chunk_1: chunk1,
-                                item_name_chunk_2: chunk2,
-                                item_name_chunk_3: chunk3,
-                                item_remark: item.item_remark,
-                                opp_bal: item.opp_bal,
-                                wt: item.wt
-                            };
-                        });
+                            // Push the item into the corresponding group
+                            acc[chunk3].push(item);
 
-                        // Sort the processedData array by the 3rd chunk (item_name_chunk_3)
-                        const sortedData = processedData.sort((a, b) => {
-                            // Compare based on item_name_chunk_3 (strings)
-                            return a.item_name_chunk_3.localeCompare(b.item_name_chunk_3);
-                        });
+                            return acc;
+                        }, {});
 
-                        console.log(sortedData);
+                        // Step 3: Convert the object into an array of arrays
+                        const groupedArrays = Object.values(groupedByChunk3);
+
+                        console.log(groupedArrays);
+
                         // $.each(result, function (k, v) {
 
                         //     let html = `<tr>
