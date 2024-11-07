@@ -462,7 +462,8 @@
                                 ...item,
                                 item_group: item_group,
                                 item_mm: item_gauge,
-                                item_name: item_name
+                                item_name: item_name,
+                                // item_qty: item.opp_bal
                             };
                         });
 
@@ -481,14 +482,11 @@
                             return acc;
                         }, {});
                         $.each(groupedByChunk3, function(k,v){
-                            console.log(v);
-
                             let mm = {};
                             $.each(v, function(l, m) {
                                 console.log(m);
                                 mm[m['item_mm']] = mm[m['opp_bal']]
                             });
-                            console.log(mm);
                         });
                     },
                     error: function () {
