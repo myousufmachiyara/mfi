@@ -485,10 +485,8 @@
                             let mm = {};
                             var html="<tr>";
                             html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
-
                             $.each(v, function(l, m) {
-                                var column = $("#" + m['item_mm']);
-                                column.html("abc");
+                                html += "<td>"+ (m['item_mm'] ? m['item_mm'] : "") +"</td>"
                             });
                             html +="</tr>";
                         });
