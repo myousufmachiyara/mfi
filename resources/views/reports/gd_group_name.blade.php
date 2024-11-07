@@ -436,7 +436,7 @@
                         $(tableID).empty(); // Clear the loading message
 
                         // Step 2: Group items by the third chunk
-                        const groupedByChunk3 = processedData.reduce((acc, item) => {
+                        const groupedByChunk3 = result.reduce((acc, item) => {
                             const chunk3 = item.item_name_chunk_3;
 
                             // If a group for this chunk3 doesn't exist, create an empty array
