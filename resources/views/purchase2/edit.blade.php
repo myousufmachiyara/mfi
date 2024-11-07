@@ -115,21 +115,21 @@
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" autofocus value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" autofocus value="{{$pur2->bamount}}" class="form-control comm-form-field" required step="any">
 											</div>
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required>
+												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required step="any">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field">
+												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field" step="any">
 											</div>
 
 											<div class="col-sm-12 col-md-2 mb-2">
 												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field">
+												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field" step="any">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
@@ -139,7 +139,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field">
+												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field" step="any">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
