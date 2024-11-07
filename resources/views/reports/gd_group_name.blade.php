@@ -497,9 +497,6 @@
                             const columnCount = firstRow ? firstRow.cells.length : 0;
 
                             for(i=1;i<columnCount;i++){
-                                console.log(i);
-                            }
-                            $.each(v, function(l, m) {
                                 if(m['item_mm']=="12G"){
                                     // set value in 1st coloum
                                     html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
@@ -551,7 +548,7 @@
                                 else{
                                     html += "<td>-</td>"
                                 }
-                            });
+                            }
                             html +="</tr>";
                             $(tableID).append(html);
                         });
