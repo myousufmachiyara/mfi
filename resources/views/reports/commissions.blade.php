@@ -152,8 +152,8 @@
                             html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
                             html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
                             html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
-                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
-                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
+                            html += "<td>" + (v['cd_amount'] ? v['cd_amount'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
