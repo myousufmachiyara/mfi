@@ -485,8 +485,49 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>"
                             $.each(v, function(l, m) {
-                                console.log(m);
-                                html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                if(m['item_mm']=="14G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="16G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="18G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="1.10"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="19G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="20G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="21G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="22G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="23G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else if(m['item_mm']=="24G"){
+                                    // set value in 1st coloum
+                                    html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
+                                }
+                                else{
+                                    html += "<td></td>"
+                                }
                             });
                             html +="</tr>";
                             $(tableID).append(html);
