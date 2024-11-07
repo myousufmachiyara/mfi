@@ -483,9 +483,9 @@
 
                         // Output the grouped result
                         console.log(groupedByChunk3);
+                        var mm = {}; // Initialize mm as an object
 
                         $.each(groupedByChunk3, function(k,v){
-                            var mm = {}; // Initialize mm as an object
 
                             $.each(v, function(l, m) {
                                 // Check if the item_mm already exists as a key
@@ -506,7 +506,7 @@
                             // html +="</tr>";
                             // $(tableID).append(html);
                         });
-                        console.log(mm);
+                        console.log(mm[]);
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
