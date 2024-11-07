@@ -438,29 +438,29 @@
                         // Step 1: Break item_name into 3 chunks based on space
                         const processedData = result.map(item => {
                             const itemChunks = item.item_name.split(' ');
-                            const chunk1 = itemChunks[0] || '';   // First chunk (before the first space)
-                            const chunk2 = itemChunks[1] || '';   // Second chunk (between the first and second space)
-                            const chunk3 = itemChunks.slice(2).join(' ') || ''; // Everything after the second space
+                            const item_group = itemChunks[0] || '';   // First chunk (before the first space)
+                            const item_gauge = itemChunks[1] || '';   // Second chunk (between the first and second space)
+                            const item_name = itemChunks.slice(2).join(' ') || ''; // Everything after the second space
 
                             return {
                                 ...item,
-                                item_name_chunk_1: chunk1,
-                                item_name_chunk_2: chunk2,
-                                item_name_chunk_3: chunk3
+                                item_name_chunk_1: item_group,
+                                item_name_chunk_2: item_gauge,
+                                item_name_chunk_3: item_name
                             };
                         });
 
                         // Step 2: Group the items under the third chunk value
                         const groupedByChunk3 = processedData.reduce((acc, item) => {
-                            const chunk3 = item.item_name_chunk_3;
+                            const item_name = item.item_name_chunk_3;
 
-                            // If a group for this chunk3 doesn't exist, create an empty array
-                            if (!acc[chunk3]) {
-                                acc[chunk3] = [];
+                            // If a group for this item_name doesn't exist, create an empty array
+                            if (!acc[item_name]) {
+                                acc[item_name] = [];
                             }
 
                             // Push the item into the corresponding group under the third chunk
-                            acc[chunk3].push(item);
+                            acc[item_name].push(item);
 
                             return acc;
                         }, {});
@@ -468,19 +468,6 @@
                         // Output the grouped result
                         console.log(groupedByChunk3);
 
-                        // $.each(result, function (k, v) {
-
-                        //     let html = `<tr>
-                        //         <td>${k + 1}</td>
-                        //         <td>${safeVal(v['Sal_inv_no'])}</td>
-                        //         <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
-                        //         <td>${safeVal(v['reason'])}</td>
-                        //         <td>${safeVal(v['remarks'])}</td>
-                        //         <td>${safeVal(v['pc_add'])}</td>
-                        //         <td>${safeVal(v['pc_less'])}</td>
-                        //     </tr>`;
-                        //     $(tableID).append(html);
-                        // });
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
