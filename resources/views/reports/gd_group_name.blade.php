@@ -436,7 +436,35 @@
                         $(tableID).empty(); // Clear the loading message
 
                         // Populate the table with new data
-                        console.log(result);
+                        const processedData = result.map(item => {
+                            // Split the item_name into 3 chunks
+                            const itemChunks = item.item_name.split(' ');
+
+                            // Ensure the chunks are of the expected length (you can adjust logic as needed)
+                            const chunk1 = itemChunks[0] || '';
+                            const chunk2 = itemChunks[1] || '';
+                            const chunk3 = itemChunks.slice(2).join(' ') || '';
+
+                            // Create a new object structure
+                            return {
+                                item_group_cod: item.item_group_cod,
+                                it_cod: item.it_cod,
+                                item_name_chunk_1: chunk1,
+                                item_name_chunk_2: chunk2,
+                                item_name_chunk_3: chunk3,
+                                item_remark: item.item_remark,
+                                opp_bal: item.opp_bal,
+                                wt: item.wt
+                            };
+                        });
+
+                        // Sort the processedData array by the 3rd chunk (item_name_chunk_3)
+                        const sortedData = processedData.sort((a, b) => {
+                            // Compare based on item_name_chunk_3 (strings)
+                            return a.item_name_chunk_3.localeCompare(b.item_name_chunk_3);
+                        });
+
+                        console.log(sortedData);
                         // $.each(result, function (k, v) {
 
                         //     let html = `<tr>
