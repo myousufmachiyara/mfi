@@ -495,13 +495,13 @@
 
                             // Check if the first row exists, and then count the number of <th> elements (columns)
                             let columnCount = firstRow ? firstRow.cells.length : 0;
-                            console.log("col tot:"+columnCount)
 
-                            const header = table1.querySelector("thead tr th");
+                            const headerRow = document.querySelector("#TSAThead thead tr");
 
                             for(i=0;i<columnCount-1;i++){
-                                const th = header[columnCount+1]; // Get the cell at the specified index
-                                let col_id = th ? th.id : null; // Return the ID, or null if not found
+                                col=headerRow.cell[i+1];
+
+                                let col_id = col ? col.id : null; // Return the ID, or null if not found
                                 console.log(col_id);
 
                                 if(i<=v.length){
