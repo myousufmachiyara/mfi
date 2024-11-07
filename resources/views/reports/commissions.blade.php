@@ -143,16 +143,20 @@
 
                         console.log(result);
                         
-                        // $.each(result, function(k,v){
-                        //     var html="<tr>";
-                        //     html += "<td>"+(k+1)+"</td>"
-                        //     html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
-                        //     html += "<td>" + (v['item_remarks'] ? v['item_remarks'] : "") + "</td>";
-                        //     html += "<td>" + (v['opp_bal'] ? v['opp_bal'] : "") + "</td>";
-                        //     html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                        //     html +="</tr>";
-                        //     $(tableID).append(html);
-                        // });
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
+                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html += "<td>" + (v['bamount'] ? v['bamount'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
                     },
                     error: function(){
                         alert("error");
