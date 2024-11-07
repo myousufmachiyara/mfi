@@ -504,7 +504,7 @@
                                 let col_id = col ? col.id : null; // Return the ID, or null if not found
                                 console.log(col_id);
 
-                                if(i<=v.length){
+                                if(i<v.length){
                                     if(col_id == v[i]['item_mm']){
                                         console.log(v[i]['item_mm']);
                                         html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>";
