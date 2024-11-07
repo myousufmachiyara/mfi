@@ -485,8 +485,12 @@
                         console.log(groupedByChunk3);
 
                         $.each(groupedByChunk3, function(k,v){
+                            var mm[]; 
+                            $.each(v, function(l,m){
+                                mm[m['item_mm']]=[m['opp_bal']];
+                            });
                             // var html="<tr>";
-                            // html += "<td>"+(k+1)+"</td>"
+                            // html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
                             // html += "<td>" + (v[''] ? v[''] : "") + "</td>";
                             // html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
                             // html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
@@ -495,7 +499,7 @@
                             // html +="</tr>";
                             // $(tableID).append(html);
                         });
-
+                        console.log(mm);
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
