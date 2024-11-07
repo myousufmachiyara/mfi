@@ -485,9 +485,16 @@
                         console.log(groupedByChunk3);
 
                         $.each(groupedByChunk3, function(k,v){
-                            var mm[]; 
-                            $.each(v, function(l,m){
-                                mm[m['item_mm']]=[m['opp_bal']];
+                            var mm = {}; // Initialize mm as an object
+
+                            $.each(v, function(l, m) {
+                                // Check if the item_mm already exists as a key
+                                if (!mm[m['item_mm']]) {
+                                    mm[m['item_mm']] = []; // If it doesn't exist, initialize as an empty array
+                                }
+                                
+                                // Push the opp_bal value into the array for that item_mm
+                                mm[m['item_mm']].push(m['opp_bal']);
                             });
                             // var html="<tr>";
                             // html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
