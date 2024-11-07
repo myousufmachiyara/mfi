@@ -483,7 +483,6 @@
 
                             return acc;
                         }, {});
-                        console.log(groupedByChunk3);
                         $.each(groupedByChunk3, function(k,v){
 
                             var html="<tr>";
@@ -498,7 +497,7 @@
                             let columnCount = firstRow ? firstRow.cells.length : 0;
 
                             for(i=0;i<columnCount;i++){
-                                html += "<td>hello</td>";
+                                console.log(v[i]);
                                 // if(v[i]['item_mm']=="12G"){
                                 //     // set value in 1st coloum
                                 //     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "") +"</td>"
