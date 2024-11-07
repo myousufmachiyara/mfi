@@ -232,8 +232,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
+                                                    <th id="12G">12G</th>
                                                     <th id="14G">14G</th>
                                                     <th id="16G">16G</th>
+                                                    <th id="1.5">1.5</th>
                                                     <th id="18G">18G</th>
                                                     <th id="1.10">1.10</th>
                                                     <th id="19G">19G</th>
