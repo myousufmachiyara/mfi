@@ -483,7 +483,7 @@
                         $.each(groupedByChunk3, function(k,v){
                             let mm = {};
                             $.each(v, function(l, m) {
-                                mm[v['item_mm']] = mm[v['opp_bal']]
+                                mm[m['item_mm']] = mm[m['opp_bal']]
                             });
                             console.log(mm);
                         });
