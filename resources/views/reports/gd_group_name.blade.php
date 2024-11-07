@@ -485,6 +485,7 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>"
                             $.each(v, function(l, m) {
+                                console.log(m);
                                 if(m['item_mm']=="14G"){
                                     // set value in 1st coloum
                                     html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
