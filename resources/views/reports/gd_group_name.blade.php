@@ -499,7 +499,7 @@
                             const headerRow = document.querySelector("#TSAThead thead tr");
 
                             for(i=0;i<columnCount-1;i++){
-                                col=headerRow.cell[i+1];
+                                col=headerRow.cells[i+1];
 
                                 let col_id = col ? col.id : null; // Return the ID, or null if not found
                                 console.log(col_id);
