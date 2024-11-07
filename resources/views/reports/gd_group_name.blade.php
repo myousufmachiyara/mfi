@@ -444,15 +444,15 @@
 
                             return {
                                 ...item,
-                                item_name_chunk_1: item_group,
-                                item_name_chunk_2: item_gauge,
-                                item_name_chunk_3: item_name
+                                item_group: item_group,
+                                item_mm: item_gauge,
+                                item_name: item_name
                             };
                         });
 
                         // Step 2: Group the items under the third chunk value
                         const groupedByChunk3 = processedData.reduce((acc, item) => {
-                            const item_name = item.item_name_chunk_3;
+                            const item_name = item.item_name;
 
                             // If a group for this item_name doesn't exist, create an empty array
                             if (!acc[item_name]) {
@@ -467,6 +467,18 @@
 
                         // Output the grouped result
                         console.log(groupedByChunk3);
+                        $.each(groupedByChunk3, function(k,v){
+
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v[''] ? v[''] : "") + "</td>";
+                            html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
+                            html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
 
                     },
                     error: function () {
