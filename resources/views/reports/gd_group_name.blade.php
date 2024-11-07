@@ -481,7 +481,7 @@
 
                             return acc;
                         }, {});
-
+                        console.log(groupedByChunk3);
                         $.each(groupedByChunk3, function(k,v){
                             var html="<tr>";
                             html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
