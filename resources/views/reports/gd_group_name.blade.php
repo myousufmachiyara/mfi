@@ -228,8 +228,24 @@
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0" id="SATTble">
-
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Name</th>
+                                                    <th>14G</th>
+                                                    <th>16G</th>
+                                                    <th>18G</th>
+                                                    <th>1.10</th>
+                                                    <th>19G</th>
+                                                    <th>20G</th>
+                                                    <th>21G</th>
+                                                    <th>22G</th>
+                                                    <th>23G</th>
+                                                    <th>24G</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="SATTble">
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -467,17 +483,17 @@
 
                         // Output the grouped result
                         console.log(groupedByChunk3);
-                        $.each(groupedByChunk3, function(k,v){
 
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v[''] ? v[''] : "") + "</td>";
-                            html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
+                        $.each(groupedByChunk3, function(k,v){
+                            // var html="<tr>";
+                            // html += "<td>"+(k+1)+"</td>"
+                            // html += "<td>" + (v[''] ? v[''] : "") + "</td>";
+                            // html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
+                            // html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            // html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
+                            // html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
+                            // html +="</tr>";
+                            // $(tableID).append(html);
                         });
 
                     },
