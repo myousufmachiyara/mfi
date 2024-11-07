@@ -466,7 +466,7 @@
                             };
                         });
 
-                        // Step 2: Group the items under the third chunk value (item_name)
+                        // Step 2: Group the items under the third chunk value
                         const groupedByChunk3 = processedData.reduce((acc, item) => {
                             const item_name = item.item_name;
 
@@ -480,25 +480,12 @@
 
                             return acc;
                         }, {});
-
-                        // Step 3: Generate table rows based on grouped data
-                        $.each(groupedByChunk3, function(k, v) {
-                            let html = "<tr>"; // Start a new row for each unique item_name group
-
-                            // Add the item_name as the first column (the third chunk)
-                            html += "<td>" + (k ? k : "") + "</td>";
-
-                            // Iterate over the items in the group and add columns based on item_mm
+                        $.each(groupedByChunk3, function(k,v){
+                            let mm = {};
                             $.each(v, function(l, m) {
-                                // Assuming you want to set the column dynamically based on item_mm
-                                // This function should set the correct column based on m['item_mm']
-                                setColumnValue(m['item_mm'], m['opp_bal'], tableID);
+                                mm[v['item_mm']] = mm[v['opp_bal']]
                             });
-
-                            html += "</tr>"; // Close the row
-
-                            // Append the generated row to the table (using tableID for the selector)
-                            $(tableID).append(html);
+                            console.log(mm);
                         });
                     },
                     error: function () {
@@ -575,31 +562,6 @@
             else if (tabName === "bal") {
                 window.location.href = `/rep-godown-by-item-name/bal/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
-        }
-
-        function setColumnValue(item_mm, opp_bal,tableID) {
-            // Find the column index for the item_mm
-            var columnIndex = getColumnIndexForItemMm(item_mm);
-
-            // Find the row in the table where you want to update the value
-            // You may want to set this in a specific row or dynamically adjust as needed
-            // Assuming you're modifying a specific row in the table
-            var row = $(tableID).find("tr").last(); // You can adjust this to target the right row
-            row.find("td").eq(columnIndex).text(opp_bal); // Set the opp_bal value in the correct cell
-        }
-
-        // Helper function to determine column index based on item_mm
-        function getColumnIndexForItemMm(item_mm) {
-            // Logic to determine the column index based on item_mm
-            // Example: You can map item_mm to column indexes
-            const columnMapping = {
-                "12MM": 1,
-                "20MM": 2,
-                "25MM": 3,
-                // Add other item_mm to column index mappings as needed
-            };
-
-            return columnMapping[item_mm] || 0; // Default to 0 if no match found
         }
     </script>
 </html>
