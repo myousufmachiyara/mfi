@@ -228,7 +228,7 @@
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
+                                        <table class="table table-bordered table-striped mb-0" id="TSAThead">
                                             <thead>
                                                 <tr>
                                                     <th>Item Name</th>
@@ -488,11 +488,14 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>";
 
-                            const firstRow = table.querySelector('tbody tr');
+
+                            
+                            let table1 = document.getElementById('TSAThead');
+                            let firstRow = table1.querySelector('thead th');
                             const columnCount = firstRow ? firstRow.cells.length : 0;
 
                             for(i=1;i<columnCount;i++){
-                                console.log(v);
+                                console.log(i);
                             }
                             // $.each(v, function(l, m) {
                             //     if(m['item_mm']=="12G"){
