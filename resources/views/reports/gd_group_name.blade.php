@@ -495,11 +495,15 @@
 
                             // Check if the first row exists, and then count the number of <th> elements (columns)
                             let columnCount = firstRow ? firstRow.cells.length : 0;
-                            let header = table1.querySelector("thead tr");
+                            const header = table1.querySelector("thead tr");
+                            
 
                             for(i=0;i<columnCount-1;i++){
                                 console.log(v[i]);
-                                if(i<v.length && header.cells[columnCount+1].id == v[i]['item_mm']){
+                                const th = header.cells[columnCount+1]; // Get the cell at the specified index
+                                var col_id = th ? th.id : null; // Return the ID, or null if not found
+
+                                if(i<v.length && col_id == v[i]['item_mm']){
                                     html += "<td>"+ (v[i]['opp_bal'] ? v[i]['opp_bal'] : "0") +"</td>"
                                 }
                                 else{
