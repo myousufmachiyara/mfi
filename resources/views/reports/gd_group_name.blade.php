@@ -443,7 +443,6 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function (result) {
-                        console.log(result);
                         $('#SAT_from').text(formattedfromDate);
                         $('#SAT_to').text(formattedtoDate);
 
@@ -486,6 +485,7 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>"
                             $.each(v, function(l, m) {
+                                console.log(m);
                                 html += "<td>"+ (m['opp_bal'] ? m['opp_bal'] : "") +"</td>"
                             });
                             html +="</tr>";
