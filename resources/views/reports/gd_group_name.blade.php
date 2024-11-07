@@ -435,8 +435,23 @@
 
                         $(tableID).empty(); // Clear the loading message
 
-                        // Step 2: Group items by the third chunk
-                        const groupedByChunk3 = result.reduce((acc, item) => {
+                        // Step 1: Break item_name into 3 chunks based on space
+                        const processedData = data.map(item => {
+                            const itemChunks = item.item_name.split(' ');
+                            const chunk1 = itemChunks[0] || '';   // First chunk (before the first space)
+                            const chunk2 = itemChunks[1] || '';   // Second chunk (between the first and second space)
+                            const chunk3 = itemChunks.slice(2).join(' ') || ''; // Everything after the second space
+
+                            return {
+                                ...item,
+                                item_name_chunk_1: chunk1,
+                                item_name_chunk_2: chunk2,
+                                item_name_chunk_3: chunk3
+                            };
+                        });
+
+                        // Step 2: Group the items under the third chunk value
+                        const groupedByChunk3 = processedData.reduce((acc, item) => {
                             const chunk3 = item.item_name_chunk_3;
 
                             // If a group for this chunk3 doesn't exist, create an empty array
@@ -444,16 +459,14 @@
                                 acc[chunk3] = [];
                             }
 
-                            // Push the item into the corresponding group
+                            // Push the item into the corresponding group under the third chunk
                             acc[chunk3].push(item);
 
                             return acc;
                         }, {});
 
-                        // Step 3: Convert the object into an array of arrays
-                        const groupedArrays = Object.values(groupedByChunk3);
-
-                        console.log(groupedArrays);
+                        // Output the grouped result
+                        console.log(groupedByChunk3);
 
                         // $.each(result, function (k, v) {
 
