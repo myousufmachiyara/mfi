@@ -487,12 +487,10 @@
                             html += "<td>"+ (v['item_name'] ? v['item_name'] : "") +"</td>"
 
                             $.each(v, function(l, m) {
-                                setColumnHtmlById(m['item_mm'], "50"); // Sets the content in column with id="col2"
-                                // html += "<td>"+ (m['item_mm'] ? m['item_mm'] : "") +"</td>"
-                                // mm[m['item_mm']] = mm[m['opp_bal']]
+                                var column = $("#" + m['item_mm']);
+                                column.html("abc");
                             });
                             html +="</tr>";
-                            console.log(mm)
                         });
                     },
                     error: function () {
