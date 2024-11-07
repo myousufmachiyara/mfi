@@ -14,7 +14,7 @@ use App\Exports\TStockInExport;
 class RptCommissionsController extends Controller
 {
     public function comm(Request $request){
-        $comm_pipe_rpt = comm_pipe_rpt::where('account_name',$request->acc_id)
+        $comm_pipe_rpt = comm_pipe_rpt::where('item',$request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->get();
 
