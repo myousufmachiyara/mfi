@@ -427,7 +427,7 @@
                     table.deleteRow(0);
                 }
 
-                const url = "/rep-godown-by-item-grp/sa";
+                const url = "/rep-godown-by-item-grp/sat";
                 const tableID = "#SATTble";
 
                 // Helper function to safely access data
@@ -442,7 +442,7 @@
                         acc_id: acc_id,
                     },
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="13" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function (result) {
                         $('#SAT_from').text(formattedfromDate);
