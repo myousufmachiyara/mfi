@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="col-form-label"><strong>Item Group</strong></label>
+                                <label class="col-form-label"><strong>Account Group</strong></label>
                                 <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
-                                    <option value="" disabled selected>Item Group</option>
-                                    @foreach($item_group as $key => $row)	
-                                        <option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
+                                    <option value="" disabled selected>Account Group</option>
+                                    @foreach($ac_group as $key => $row)	
+                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
