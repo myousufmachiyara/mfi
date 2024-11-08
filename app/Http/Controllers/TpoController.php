@@ -1267,9 +1267,10 @@ $html .= '</tr>';
                 $count++;
                 }
         
+                
                 // Subtotal row for each group
                 $html .= '<tr>';
-                $html .= '<td colspan="3" style="text-align:right;padding:5px 0;font-weight:bold;color:#17365D;border-top:1px solid #000;">Sub Total ===>></td>';
+                $html .= '<td colspan="3" style="text-align:right;padding:5px 0;font-weight:bold;color:#17365D;border:1px solid #000;border-top:1px solid #000;">Sub Total ===>></td>';
                 $html .= '<td style="width:12%;text-align:center;padding:5px 0;font-weight:bold;color:red;border:1px solid #000;">' . $group_total_quantity . '</td>';
                 $html .= '<td style="width:20%;text-align:center;padding:5px 0;font-weight:bold;color:red;border:1px solid #000;">' . round($group_total_weight, 2) . ' Kgs</td>';
                 $html .= '</tr>';
