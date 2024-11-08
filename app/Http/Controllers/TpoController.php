@@ -1261,7 +1261,7 @@ $html .= '</tr>';
                 $group_total_quantity += $item['Sales_qty2'];
                 $group_total_weight += $weight;
                 
-                // $html .= '<td style="width:20%;border-right:1px dashed #000; text-align:center">' . round($weight, 2) . '</td>';
+                $html .= '<td style="width:20%;border-right:1px dashed #000; text-align:center">' . round($weight, 2) . '</td>';
                 $html .= '</tr>';
                 
                 $count++;
