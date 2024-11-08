@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AC;
+use App\Models\ac_group;
+use App\Models\sub_head_of_acc;
 use App\Models\Item_entry2;
 use App\Models\Item_Groups;
 use App\Models\pur_by_account;
@@ -20,6 +22,14 @@ class ReportingController extends Controller
     {
         $coa = AC::orderBy('ac_name', 'asc')->get();
         return view('reports.acc_name',compact('coa'));
+    }
+
+    // By Account Group
+    public function byAccountGroup()
+    {
+        $ac_group = ac_group::orderBy('group_name', 'asc')->get();
+        $sub_head_of_acc = sub_head_of_acc::orderBy('sub', 'asc')->get();
+        return view('reports.acc_group',compact('ac_group','sub_head_of_acc'));
     }
 
     // By Godown Item Name

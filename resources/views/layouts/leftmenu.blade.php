@@ -394,12 +394,12 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a class="nav-link" href="/rep-by-acc-name">
+                                <a class="nav-link" href="{{ route('rep-by-acc-name')}}">
                                     Account Name
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('rep-by-acc-grp')}}">
                                     Account Group
                                 </a>
                             </li>

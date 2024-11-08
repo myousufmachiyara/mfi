@@ -489,7 +489,6 @@
                             var html="<tr>";
                             html += "<td>"+ (k ? k : "") +"</td>";
 
-
                             $('#TSAThead thead tr').children('th').each(function(index) {
                                 // Skip the first column (index 0) by starting from 1
                                 if (index === 0) return;
