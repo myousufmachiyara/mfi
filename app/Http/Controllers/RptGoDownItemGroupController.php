@@ -534,7 +534,7 @@ class RptGoDownItemGroupController extends Controller
         }
     }
 
-    public function stockAllT(){
+    public function stockAllT(Request $request){
         $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
         ->get();
 
