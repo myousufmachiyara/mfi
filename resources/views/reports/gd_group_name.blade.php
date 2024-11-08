@@ -510,7 +510,7 @@
                         });
                     },
                     error: function () {
-                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        $(tableID).html('<tr><td colspan="13" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
