@@ -1245,28 +1245,27 @@ $html .= '</tr>';
             $html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Weight</th>';
             $html .= '</tr>';
         
-             // Start item rows
-                $count = 1;
-                foreach ($items_group as $item) {
-                    $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
-                    
-                    $html .= '<tr style="' . $bg_color . '">';
-                    $html .= '<td style="width:6%;border:1px solid #000;border-top:1px solid #000;border-right:1px dashed #000;border-left:1px dashed #000;text-align:center;">' . $count . '</td>';
-                    $html .= '<td style="width:34%;border:1px solid #000;border-top:1px solid #000;border-right:1px dashed #000;">' . $item['item_name'] . '</td>';
-                    $html .= '<td style="width:28%;border:1px solid #000;border-top:1px solid #000;border-right:1px dashed #000;">' . $item['remarks'] . '</td>';
-                    $html .= '<td style="width:12%;border:1px solid #000;border-top:1px solid #000;border-right:1px dashed #000;text-align:center;">' . $item['Sales_qty2'] . '</td>';
-                    
-                    // Calculate weight for each item
-                    $weight = $item['Sales_qty2'] * $item['weight_pc'];
-                    $group_total_quantity += $item['Sales_qty2'];
-                    $group_total_weight += $weight;
-                    
-                    $html .= '<td style="width:20%;border:1px solid #000;border-top:1px solid #000;border-right:1px dashed #000;text-align:center;">' . round($weight, 2) . '</td>';
-                    $html .= '</tr>';
-                    
-                    $count++;
+            // Start item rows
+            $count = 1;
+            foreach ($items_group as $item) {
+                $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
+                
+                $html .= '<tr style="' . $bg_color . '">';
+                $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
+                $html .= '<td style="width:34%;border-right:1px dashed #000">' . $item['item_name'] . '</td>';
+                $html .= '<td style="width:28%;border-right:1px dashed #000">' . $item['remarks'] . '</td>';
+                $html .= '<td style="width:12%;border-right:1px dashed #000; text-align:center">' . $item['Sales_qty2'] . '</td>';
+                
+                // Calculate weight for each item
+                $weight = $item['Sales_qty2'] * $item['weight_pc'];
+                $group_total_quantity += $item['Sales_qty2'];
+                $group_total_weight += $weight;
+                
+                $html .= '<td style="width:20%;border-right:1px dashed #000; text-align:center">' . round($weight, 2) . '</td>';
+                $html .= '</tr>';
+                
+                $count++;
                 }
-
         
                 
                 // Subtotal row for each group
