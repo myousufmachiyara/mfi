@@ -497,7 +497,7 @@
                                 const item = v.find(i => i.item_mm === col_id); // Find the matching item
 
                                 // If item found, use its opp_bal, otherwise add a '-'
-                                html += item ? `<td>${item.opp_bal || '-'}</td>` : '<td></td>';
+                                html += item ? `<td>${item.opp_bal || '0'}</td>` : '<td></td>';
                             });
 
                             html +="</tr>";
