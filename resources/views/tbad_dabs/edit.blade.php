@@ -65,10 +65,10 @@
                                             @foreach($tbad_dabs_items as $key1 => $tbad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails({{$key1+1}},'1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
+                                                    <input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails({{$key1+1}},'1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1}}" onchange="getItemDetails({{$key1+1}},'2')" name="item_name2[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},'2')" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $tbad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -76,13 +76,13 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="remarks{{$key1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
+                                                    <input type="text" id="remarks{{$key1+1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyadd{{$key1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
+                                                    <input type="number" id="qtyadd{{$key1+1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyless{{$key1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
+                                                    <input type="number" id="qtyless{{$key1+1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -239,7 +239,8 @@ function tableTotal(){
     $('#total_add_show').val(totaladd);
 }
 
-function getItemDetails(row_no,option){
+function getItemDetails(row_no,option){       
+        console.log(row_no);
 		var itemId;
 		if(option==1){
 			itemId = document.getElementById("item_code"+row_no).value;
