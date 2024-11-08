@@ -1220,16 +1220,23 @@ $html .= '</tr>';
         }
         
         foreach ($grouped_items as $dispatch_to => $items_group) {
-                    
-                    // Display 'Dispatch To' before the table and page header content
-                      $html = '<h4 style="text-align:left;font-size:14px;margin-top:20px">
-                     <span style="color:#17365D;">Dispatch To:</span> 
-                     <span style="color:red;">' . $dispatch_to . '</span>
-                         </h4>';
-
+            // Initialize group totals
+            $group_total_amount = 0;
+            $group_total_quantity = 0;
+            $group_total_weight = 0;
         
-            // Page header and table structure
-            $html .= '<table border="0.3" style="text-align:center;margin-top:10px">';
+            // Begin table with 'Dispatch To' header row
+            $html = '<table border="0.3" style="text-align:center;margin-top:20px;width:100%;">';
+        
+            // Dispatch To row
+            $html .= '<tr>';
+            $html .= '<td colspan="5" style="text-align:left;font-size:14px;padding:10px 0;font-weight:bold;">
+                         <span style="color:#17365D;">Dispatch To:</span> 
+                         <span style="color:red;">' . $dispatch_to . '</span>
+                      </td>';
+            $html .= '</tr>';
+        
+            // Column headers
             $html .= '<tr>';
             $html .= '<th style="width:6%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">S/R</th>';
             $html .= '<th style="width:34%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
@@ -1237,53 +1244,46 @@ $html .= '</tr>';
             $html .= '<th style="width:12%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Qty</th>';
             $html .= '<th style="width:20%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Weight</th>';
             $html .= '</tr>';
-            $html .= '</table>';
         
+            // Start item rows
             $count = 1;
-            $group_total_amount = 0;
-            $group_total_quantity = 0;
-            $group_total_weight = 0;
-        
-            $html .= '<table cellspacing="0" cellpadding="5">'; // Starting the detailed rows
-        
             foreach ($items_group as $item) {
-                // Determine background color based on odd/even rows
                 $bg_color = ($count % 2 == 0) ? 'background-color:#f1f1f1' : '';
-        
+                
                 $html .= '<tr style="' . $bg_color . '">';
                 $html .= '<td style="width:6%;border-right:1px dashed #000;border-left:1px dashed #000; text-align:center">' . $count . '</td>';
                 $html .= '<td style="width:34%;border-right:1px dashed #000">' . $item['item_name'] . '</td>';
                 $html .= '<td style="width:28%;border-right:1px dashed #000">' . $item['remarks'] . '</td>';
                 $html .= '<td style="width:12%;border-right:1px dashed #000; text-align:center">' . $item['Sales_qty2'] . '</td>';
-                $group_total_quantity += $item['Sales_qty2'];
-                // Calculate the total weight and amount for the group
+                
+                // Calculate weight for each item
                 $weight = $item['Sales_qty2'] * $item['weight_pc'];
+                $group_total_quantity += $item['Sales_qty2'];
                 $group_total_weight += $weight;
+                
                 $html .= '<td style="width:20%;border-right:1px dashed #000; text-align:center">' . round($weight, 2) . '</td>';
                 $html .= '</tr>';
+                
                 $count++;
-             }
+            }
         
-             $html .= '<tr>';
-             $html .= '<td colspan="2" style="width:70%;text-align:right;padding:5px 0;font-weight:bold;color:#17365D;border-top:1px solid #000;">Sub Total ===>></td>';
-             $html .= '<td style="width:10%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . $group_total_quantity . '</td>';
-             $html .= '<td style="width:20%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . round($group_total_weight, 2) . ' Kgs</td>';
-             $html .= '</tr>';
-             
-             
-
-        
-            // Add the group totals to the overall totals
-            $total_quantity += $group_total_quantity;
-            $total_amount += $group_total_amount;
-            $total_weight += $group_total_weight;
+            // Subtotal row for each group
+            $html .= '<tr>';
+            $html .= '<td colspan="3" style="text-align:right;padding:5px 0;font-weight:bold;color:#17365D;border-top:1px solid #000;">Sub Total ===>></td>';
+            $html .= '<td style="width:12%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . $group_total_quantity . '</td>';
+            $html .= '<td style="width:20%;text-align:center;padding:5px 0;font-weight:bold;color:red;border-top:1px solid #000;">' . round($group_total_weight, 2) . ' Kgs</td>';
+            $html .= '</tr>';
         
             $html .= '</table>';
+        
+            // Add group totals to overall totals
+            $total_quantity += $group_total_quantity;
+            $total_weight += $group_total_weight;
         
             // Write HTML content for each group to PDF
             $pdf->writeHTML($html, true, false, true, false, '');
         }
-        
+                
         
         $currentY = $pdf->GetY();
             
