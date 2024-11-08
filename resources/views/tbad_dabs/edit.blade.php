@@ -79,10 +79,10 @@
                                                     <input type="text" id="remarks{{$key1+1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyadd{{$key1+1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
+                                                    <input type="number" id="qtyadd{{$key1+1}}" name="qty_add[]" onchange="tableTotal()" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyless{{$key1+1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
+                                                    <input type="number" id="qtyless{{$key1+1}}" name="qty_less[]" onchange="tableTotal()" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
