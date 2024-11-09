@@ -497,6 +497,10 @@
                                 // If item found, use its opp_bal, otherwise add a '-'
                                 // html += item ? `<td>${item.opp_bal || '0'}</td>` : '<td></td>';
 
+
+                                // Mark the column as having data if an item is found
+                                if (item) columnsWithData[index] = true;
+
                                 html +=item ? `<td style="text-align: center; font-size: 20px;">${item.opp_bal || '0'}</td>`
                                 : '<td style="text-align: center; font-size: 20px;"></td>';
 
