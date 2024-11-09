@@ -769,9 +769,11 @@
                         $(tableID).empty(); // Clear the loading message
 
                         var totalCrAmt = 0; // Variable to accumulate total
-                        totalCrAmt += crAmt; // Add to total
 
                         $.each(result, function(k,v){
+                            var crAmt = v['cr_amt'] ? parseFloat(v['cr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -779,7 +781,7 @@
                             html += "<td>" + (v['bill'] ? v['bill'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'] : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
