@@ -24,12 +24,6 @@
                             <div id="AG" class="tab-pane">
                                 <div class="row form-group pb-3">
                                     <div class="col-lg-8 row">
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <label class="col-form-label" ><strong>To</strong></label>
-                                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
-                                            </div>
-                                        </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Account Group</strong></label>
@@ -111,8 +105,6 @@
                     type: "GET",
                     url: url,
                     data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
                         acc_id: acc_id,
                     }, 
                     success: function(result){

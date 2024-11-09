@@ -410,7 +410,7 @@
         Route::get('/rep-by-acc-name/jv/download', [App\Http\Controllers\RptAccNameJVController::class, 'jvDownload'])->name('jv-rep-by-acc-name-download');
 
         // RPT by Acc Group AG
-        Route::get('/rep-by-acc-grp/ag', [App\Http\Controllers\RptAccNameJVController::class, 'ag'])->name('ag-rep-by-acc-grp');
+        Route::get('/rep-by-acc-grp/ag', [App\Http\Controllers\RptAccGrpAGController::class, 'ag'])->name('ag-rep-by-acc-grp');
 
 
         // RPT by Daily Register Sale 1
