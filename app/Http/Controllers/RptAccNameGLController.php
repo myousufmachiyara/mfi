@@ -30,4 +30,22 @@ class RptAccNameGLController extends Controller
 
         return response()->json($response);
     }
+
+    public function glr(Request $request){
+        $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
+        ->where('date', '<', $request->fromDate)
+        ->get();
+
+        $lager_much_all = lager_much_all::where('account_cod', $request->acc_id)
+        ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+        ->orderBy('jv_date','asc')
+        ->get();
+    
+        $response = [
+            'lager_much_op_bal' => $lager_much_op_bal,
+            'lager_much_all' => $lager_much_all,
+        ];
+
+        return response()->json($response);
+    }
 }

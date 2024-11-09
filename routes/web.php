@@ -367,6 +367,12 @@
         Route::get('/rep-by-acc-name/gl/PDF', [App\Http\Controllers\RptAccNameGLController::class, 'glPDF'])->name('gl-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/gl/download', [App\Http\Controllers\RptAccNameGLController::class, 'glDownload'])->name('gl-rep-by-acc-name-download');
 
+        // RPT by Acc Name GLR
+        Route::get('/rep-by-acc-name/glr', [App\Http\Controllers\RptAccNameGLController::class, 'glr'])->name('glr-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/glr/excel', [App\Http\Controllers\RptAccNameGLController::class, 'glrExcel'])->name('glr-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/glr/PDF', [App\Http\Controllers\RptAccNameGLController::class, 'glrPDF'])->name('glr-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/glr/download', [App\Http\Controllers\RptAccNameGLController::class, 'glrDownload'])->name('glr-rep-by-acc-name-download');
+
         // RPT by Acc Name Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
         Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
