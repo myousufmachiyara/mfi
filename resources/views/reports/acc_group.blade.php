@@ -239,20 +239,18 @@
 
             if(tabId=="#BA"){
                 var table = document.getElementById('BATbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
+
                 url="/rep-by-acc-grp/ba";
                 tableID="#BATbleBody";
 
                 $.ajax({
                     type: "GET",
                     url: url,
-                    beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
-                    },
+                    // beforeSend: function() {
+                    //     $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
+                    // },
                     success: function(result){
-                        $(tableID).empty(); // Clear the loading message
+                        tableID.textContent = '';
 
                         const AllData = groupByHeadAndSub(result);
                         // var html="<h3>"+headCount+"</h3>";
