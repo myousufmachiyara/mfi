@@ -577,12 +577,16 @@
                         });
 
                         // After the loop, add the totals row
-                        var totalHtml = "<tr><td colspan='6' style='text-align: right;'><strong>Total</strong></td>";
+                        var netAmount = <?php echo json_encode($balance); ?>;
+		                var words = convertCurrencyToWords(netAmount);
+                        var totalHtml = "<tr><td colspan='5'>"+words+"</td>";
+                        totalHtml +="<td  style='text-align: right;'><strong>Total</strong></td>";
                         totalHtml += "<td>" + totalDebit.toFixed(0) + "</td>";
                         totalHtml += "<td>" + totalCredit.toFixed(0) + "</td>";
                         totalHtml += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
 
                         $(tableID).append(totalHtml);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
