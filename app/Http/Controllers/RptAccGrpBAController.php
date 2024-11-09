@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\DB;
 class RptAccGrpBAController extends Controller
 {
     public function ba(Request $request){
-        $balance_all = balance_all::all()->groupBy('heads')
-        ->where('Bal', '<>', 0)
-        ->get();
-
+        $balance_all = balance_all::all()->groupBy('heads');
 
         return $balance_all;
     }
