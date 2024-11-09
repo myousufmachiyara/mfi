@@ -25,11 +25,12 @@ class myPDF extends TCPDF
         }
     }
 
+
     public function Footer()
     {
         $this->SetY(-15);
     
-        // Set font
+        // Set font for the rest of the footer
         $this->SetFont('helvetica', 'I', 13);
         $this->SetTextColor(23, 54, 93);
     
@@ -60,8 +61,8 @@ class myPDF extends TCPDF
         $this->SetX($leftX);
         $this->Cell($leftTextWidth, 10, $websiteLink, 0, 0, 'L');
     
-        // Company name in the center
-        $this->SetFont('helvetica', 'B', 13); // Set font to bold for company name
+        // Company name in the center with increased boldness
+        $this->SetFont('helvetica', 'B', 15); // Increase font size for extra bold effect
         $this->SetX($centerX);
         $this->Cell($centerTextWidth, 10, $companyName, 0, 0, 'C');
     
@@ -70,6 +71,7 @@ class myPDF extends TCPDF
         $this->SetX($rightX);
         $this->Cell($rightTextWidth, 10, $pageNumber, 0, 0, 'R');
     }
+    
     
     
     function convertCurrencyToWords($number) {
