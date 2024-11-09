@@ -270,9 +270,7 @@
 
                         const AllData = groupByHeadAndSub(result);
                         $.each(AllData, function(headCount,heads){
-                            console.log(headCount);
                             $.each(heads, function(subHeadCount,subheads){
-                                console.log(subheads['sub']);
                             });
                         });
                     },
@@ -344,11 +342,8 @@
                     if (!groupedData[head][sub]) {
                         groupedData[head][sub] = []; // Initialize subhead if it doesn't exist
                     }
-                    // Add the item to the array, with 'sub' as the key
-                    groupedData[head][sub].push({
-                        sub: sub,  // Include 'sub' as a key for each item in the array
-                        item: item // Add the item object itself
-                    });
+                    // Push the item into the appropriate subhead category under the head
+                    groupedData[head][sub].push(item);
                 });
             });
 
