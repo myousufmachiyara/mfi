@@ -270,9 +270,7 @@
 
                         const AllData = groupByHeadAndSub(result);
                         $.each(AllData, function(headCount,heads){
-                            console.log(headCount);
                             $.each(heads, function(subHeadCount,subheads){
-                                console.log(subheads);
                             });
                         });
                     },
@@ -341,6 +339,7 @@
                 // Loop through each item under the current head (Assets or Liabilities, etc.)
                 data[head].forEach(item => {
                     const sub = item.sub; // Get the subhead from each item
+                    console.log(sub);
                     if (!groupedData[head][sub]) {
                         groupedData[head][sub] = []; // Initialize subhead if it doesn't exist
                     }
