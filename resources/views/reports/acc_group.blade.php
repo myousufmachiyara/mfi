@@ -274,13 +274,13 @@
                             $.each(heads, function(subHeadCount,subheads){
                                 html+="<table><tr colspan='6'>"+subHeadCount+"</tr>";
                                 $.each(subheads, function(itemCount,item){
-                                    html+= "<tr>"; 
+                                    html+= "<tr>";
                                     html+="<td>"+itemCount+"</td>";
-                                    html+="<td>"+ac_code+"</td>";
+                                    html += "<td>" + (item['ac_code'] ? v['ac_code'] : "") +"</td>";
                                     html+="<td></td>";
                                     html+="<td></td>";
-                                    html+="<td>"+Debit+"</td>";
-                                    html+="<td>"+Credit+"</td>";
+                                    html += "<td>" + (item['Debit'] ? v['Debit'] : "") +"</td>";
+                                    html += "<td>" + (item['Credit'] ? v['Credit'] : "") +"</td>";
                                     html+= "</tr>"; 
                                 });
                                 html+="</table>";
