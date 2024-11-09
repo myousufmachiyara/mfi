@@ -27,7 +27,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Account Group</strong></label>
-                                                <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
+                                                <select data-plugin-selecttwo class="form-control select2-js" id="ag_acc_id">
                                                     <option value="" disabled selected>Account Group</option>
                                                     @foreach($ac_group as $key => $row)	
                                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
@@ -73,7 +73,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Sub Head Of Account</strong></label>
-                                                <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
+                                                <select data-plugin-selecttwo class="form-control select2-js" id="shoa_acc_id">
                                                     <option value="" disabled selected>Sub Head Of Account</option>
                                                     @foreach($sub_head_of_acc as $key => $row)	
                                                         <option value="{{$row->id}}">{{$row->sub}}</option>
@@ -130,7 +130,8 @@
         function tabChanged(tabId) {
 
             if(tabId=="#AG"){
-                const { acc_id } = getInputValues();
+                var acc_id = $('#ag_acc_id').val()
+
                 if (!acc_id) {
                     alert('Please fill in all required fields.');
                     return;
@@ -176,7 +177,8 @@
             }
 
             if(tabId=="#SHOA"){
-                const { acc_id } = getInputValues();
+                var acc_id = $('#shoa_acc_id').val()
+
                 if (!acc_id) {
                     alert('Please fill in all required fields.');
                     return;
@@ -228,11 +230,6 @@
             }
         }
 
-        function getInputValues() {
-            return {
-                acc_id: $('#acc_id').val()
-            };
-        }
 
         function downloadExcel(tabName) {
             const { fromDate, toDate, acc_id } = getInputValues();
