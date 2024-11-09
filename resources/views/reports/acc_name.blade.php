@@ -553,7 +553,7 @@
                         acc_id:acc_id,
                     }, 
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="7" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
 
@@ -580,7 +580,6 @@
                         var totalCredit = 0;
 
                         var html = "<tr>";
-                            html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th></th>"; 
                             html += "<th></th>";
