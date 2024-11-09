@@ -277,18 +277,6 @@
                             });
                         });
                         console.log(result);
-
-                        // $.each(result, function(k,v){
-                        //     var html="<tr>";
-                        //     html += "<td>"+(k+1)+"</td>"
-                        //     html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
-                        //     html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                        //     html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
-                        //     html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                        //     html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
-                        //     html +="</tr>";
-                        //     $(tableID).append(html);
-                        // });
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
