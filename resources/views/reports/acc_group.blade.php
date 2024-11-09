@@ -285,8 +285,8 @@
                                 });
                                 html+="</table>";
                             });
+                            $(tableID).append(html);
                         });
-                        $(tableID).append(html);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
