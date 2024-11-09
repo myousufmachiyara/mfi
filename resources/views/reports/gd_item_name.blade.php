@@ -83,7 +83,7 @@
                                     </div>
 
                                     <div class="col-12 mt-4">
-                                        <table id="rep-datatable-default"class="table table-bordered table-striped mb-0">
+                                        <table id="rep-datatable-default" class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
@@ -138,7 +138,7 @@
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table id="rep-datatable-default"class="table table-bordered table-striped mb-0">
+                                        <table id="rep-datatable-default" class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
@@ -192,7 +192,7 @@
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table id="rep-datatable-default"class="table table-bordered table-striped mb-0">
+                                        <table id="rep-datatable-default" class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
@@ -241,7 +241,7 @@
                                     </div>
                                     
                                     <div class="col-12 mt-4">
-                                        <table id="rep-datatable-default"class="table table-bordered table-striped mb-0">
+                                        <table id="rep-datatable-default" class="table table-bordered table-striped mb-0">
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
