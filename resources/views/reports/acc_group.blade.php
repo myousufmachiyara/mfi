@@ -256,14 +256,14 @@
 
                         $.each(AllData, function(headCount,heads){
                             html="<table class='table table-bordered table-striped mb-0'>";
-                            html+="<thead><tr colspan='6'>"+headCount+"<tr></thead>";
+                            html+="<thead><tr colspan='6'>"+headCount+"<tr>";
+                            html+="<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
+                            html+="</thead>";
 
                             $.each(heads, function(subHeadCount,subheads){
-                                html+="<thead>";
-                                html+="<tr colspan='6'>"+subHeadCount+"</tr>";
-                                html+="<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>"; 
-                                html+="</thead>";
                                 html+="<tbody>";
+                                html+="<tr colspan='6'>"+subHeadCount+"</tr>";
+
                                 $.each(subheads, function(itemCount,item){
                                     html += "<tr>";
                                     html += "<td>"+(itemCount+1)+"</td>";
@@ -275,8 +275,8 @@
                                     html += "</tr>"; 
                                 });
                                 html+="</tbody>"; 
-                                html+="</table>";
                             });
+                            html+="</table>";
                             $(tableID).append(html);
                         });
                     },
