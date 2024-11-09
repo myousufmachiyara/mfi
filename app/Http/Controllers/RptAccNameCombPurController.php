@@ -106,8 +106,7 @@ class RptAccNameCombPurController extends Controller
                             <th style="width:14%;color:#17365D;font-weight:bold;">Date</th>
                             <th style="width:10%;color:#17365D;font-weight:bold;">Entry Of</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Inv No.</th>
-                            <th style="width:10%;color:#17365D;font-weight:bold;">Bill no</th>
-                            <th style="width:31%;color:#17365D;font-weight:bold;">Detail</th>
+                            <th style="width:41%;color:#17365D;font-weight:bold;">Detail</th>
                             <th style="width:16%;color:#17365D;font-weight:bold;">Amount</th>
                         </tr>';
                     // Table Rows
@@ -120,9 +119,8 @@ class RptAccNameCombPurController extends Controller
                                     <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
                                     <td style='width:10%;'>{$items['entry_of']}</td>
                                     <td style='width:12%;'>{$items['no']}</td>
-                                    <td style='width:10%;'>{$items['ac2']}</td>
-                                    <td style='width:31%;'>{$items['remarks']}</td>
-                                    <td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
+                                    <td style='width:41%;'>{$items['ac2']} {$items['remarks']}</td>
+                                    td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
                                 </tr>";
         
                         $totalAmount += $items['cr_amt'];
