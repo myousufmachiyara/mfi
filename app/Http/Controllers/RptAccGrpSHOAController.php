@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class RptAccGrpSHOAController extends Controller
 {
     public function shoa(Request $request){
-        $balance_sub_head = balance_sub_head::where('group_cod',$request->acc_id)
+        $balance_sub_head = balance_sub_head::where('ac_code',$request->acc_id)
         ->get();
 
         return $balance_sub_head;
