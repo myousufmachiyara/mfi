@@ -58,15 +58,15 @@ class RptAccNameJVController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("Purchase 1 Report Of Account - {$pur_by_account[0]['ac_name']}");
-        $pdf->SetSubject("Purchase 1 Report Of Account - {$pur_by_account[0]['ac_name']}");
-        $pdf->SetKeywords('Purchase 1 Report, TCPDF, PDF');
+        $pdf->SetTitle("Journal Voucher Payments Report Of Account - {$all_payments_by_party[0]['ac_name']}");
+        $pdf->SetSubject("Journal Voucher Payments Report Of Account - {$all_payments_by_party[0]['ac_name']}");
+        $pdf->SetKeywords('Journal Voucher Payments Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Purchase 1 Report Of Account</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Journal Voucher Payments Report Of Account</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Account Info Table
@@ -74,7 +74,7 @@ class RptAccNameJVController extends Controller
             <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
                 <tr>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                        Account Name: <span style="color:black;">' . htmlspecialchars($pur_by_account[0]['ac_name']) . '</span>
+                        Account Name: <span style="color:black;">' . htmlspecialchars($all_payments_by_party[0]['ac_name']) . '</span>
                     </td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                         Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
@@ -82,7 +82,7 @@ class RptAccNameJVController extends Controller
                 </tr>
                 <tr>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                    Remarks: <span style="color:black;">' . htmlspecialchars($pur_by_account[0]['ac_remarks']) . '</span>
+                    Remarks: <span style="color:black;">' . htmlspecialchars($all_payments_by_party[0]['ac_remarks']) . '</span>
                     </td>
                     <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                         From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
@@ -104,37 +104,38 @@ class RptAccNameJVController extends Controller
                     <tr>
                         <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                         <th style="width:14%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">Inv No.</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">Mill Inv</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Name</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Sale Inv</th>
-                        <th style="width:19%;color:#17365D;font-weight:bold;">Remarks</th>
-                        <th style="width:16%;color:#17365D;font-weight:bold;">Amount</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Voucher</th>
+                        <th style="width:16%;color:#17365D;font-weight:bold;">Account Name</th>
+                        <th style="width:21%;color:#17365D;font-weight:bold;">Remarks</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                     </tr>';
                 // Table Rows
             $count = 1;
             $totalAmount = 0;
-            foreach ($pur_by_account as $items) {
+            $totalAmount2 = 0;
+            foreach ($all_payments_by_party as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $html .= "<tr style='background-color:{$bgColor};'>
                                 <td style='width:7%;'>{$count}</td>
-                                <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                                <td style='width:12%;'>{$items['no']}</td>
-                                <td style='width:12%;'>{$items['mill_inv']}</td>
-                                <td style='width:10%;'>{$items['name_of']}</td>
-                                <td style='width:10%;'>{$items['sal_inv']}</td>
-                                <td style='width:19%;'>{$items['remarks']}</td>
-                                <td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
+                                <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
+                                <td style='width:14%;'>{$items['entry_of']}."-".{$items['auto_lager']}</td>
+                                <td style='width:16%;'>{$items['ac2']}</td>
+                                <td style='width:21%;'>{$items['Narration']}</td>
+                                <td style='width:14%;'>" . number_format($items['Debit'], 0) . "</td>
+                                <td style='width:14%;'>" . number_format($items['Credit'], 0) . "</td>
                             </tr>";
     
-                    $totalAmount += $items['cr_amt'];
+                    $totalAmount += $items['Debit'];
+                    $totalAmount2 += $items['Credit'];
                     $count++;
                     }
             // Add totals row
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
                 <td colspan="7" style="text-align:right;">Total:</td>
-                <td style="width:16%;">' . number_format($totalAmount, 0) . '</td>
+                <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
+                <td style="width:14%;">' . number_format($totalAmount2, 0) . '</td>
             </tr>';
                 
             $html .= '</table>';
@@ -144,7 +145,7 @@ class RptAccNameJVController extends Controller
         
     
             // Filename and Output
-        $filename = "pur1_report_{$pur_by_account[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "jv_all_report_{$all_payments_by_party[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
 
