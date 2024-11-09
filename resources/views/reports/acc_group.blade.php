@@ -276,7 +276,7 @@
                                     html += "<tr>";
                                     html += "<td>" + (itemCount + 1) + "</td>"; // Serial number (S/No)
                                     html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") + "</td>"; // Account Code (AC)
-                                    html += "<td>" + (item['account_name'] ? item['account_name'] : "") + "</td>"; // Account Name (default empty if not present)
+                                    html += "<td>" + (item['ac_name'] ? item['ac_name'] : "") + "</td>"; // Account Name (default empty if not present)
                                     html += "<td>" + (item['address'] ? item['address'] : "") + "</td>"; // Address (default empty if not present)
                                     html += "<td>" + (item['Debit'] ? item['Debit'] : "") + "</td>"; // Debit (default empty if not present)
                                     html += "<td>" + (item['Credit'] ? item['Credit'] : "") + "</td>"; // Credit (default empty if not present)

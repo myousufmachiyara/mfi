@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\balance_all;
+use App\Models\AC;
 use App\Exports\PurchaseCombExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Services\myPDF;
@@ -13,7 +14,10 @@ use Illuminate\Support\Facades\DB;
 class RptAccGrpBAController extends Controller
 {
     public function ba(Request $request){
-        $balance_all = balance_all::all()->groupBy('heads');
+        $balance_all = balance_all::join('ac','ac.ac_code','=','balance_all.ac_code')
+        ->groupBy('heads')
+        ->select('balance_all.*','ac.ac_name','ac.address')
+        ->get();
 
         return $balance_all;
     }
