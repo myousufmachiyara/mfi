@@ -276,11 +276,11 @@
                                 $.each(subheads, function(itemCount,item){
                                     html+= "<tr>";
                                     html+="<td>"+itemCount+"</td>";
-                                    html += "<td>" + (item['ac_code'] ? v['ac_code'] : "") +"</td>";
+                                    html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") +"</td>";
                                     html+="<td></td>";
                                     html+="<td></td>";
-                                    html += "<td>" + (item['Debit'] ? v['Debit'] : "") +"</td>";
-                                    html += "<td>" + (item['Credit'] ? v['Credit'] : "") +"</td>";
+                                    html += "<td>" + (item['Debit'] ? item['Debit'] : "") +"</td>";
+                                    html += "<td>" + (item['Credit'] ? item['Credit'] : "") +"</td>";
                                     html+= "</tr>"; 
                                 });
                                 html+="</table>";
