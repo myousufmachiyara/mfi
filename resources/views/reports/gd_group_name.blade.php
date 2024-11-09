@@ -309,7 +309,7 @@
                             var op = v['opp_bal'] ? parseFloat(v['opp_bal']) : 0;
                             var wt = v['wt'] ? parseFloat(v['wt']) : 0;
                             totalop += op; // Add to total
-                            totalop += wt; // Add to total
+                            totalwt += wt; // Add to total
 
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
