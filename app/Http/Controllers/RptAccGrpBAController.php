@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\DB;
 class RptAccGrpBAController extends Controller
 {
     public function ba(Request $request){
-        $balance_all = balance_all::join('ac', 'ac.ac_code', '=', 'balance_all.ac_code')
-        ->groupBy('balance_all.heads')
-        ->select('balance_all.heads','ac.ac_name', 'ac.address')
+        $balance_all = balance_all::leftjoin('ac', 'ac.ac_code', '=', 'balance_all.ac_code')
+        ->groupBy('balance_all.heads', 'ac.ac_name', 'ac.address')  // Include all non-aggregated columns in groupBy
+        ->select('balance_all.heads', 'ac.ac_name', 'ac.address')  // Select these columns
         ->get();
-
-        return $balance_all;
     }
 }
