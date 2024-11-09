@@ -322,7 +322,7 @@
                         });
 
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
+                        var totalRow = "<tr><td colspan='3' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalop.toFixed(0) + "</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalwt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
