@@ -336,22 +336,21 @@
             }
         }
 
-        function groupBySub(data) {
+        function groupByHeadAndSub(data) {
             const groupedData = {};
 
             // Loop through all available heads (keys in the data object)
             Object.keys(data).forEach(head => {
-                // Loop through each item under the current head (Assets or Liabilities)
+                groupedData[head] = {}; // Initialize the head category
+
+                // Loop through each item under the current head (Assets or Liabilities, etc.)
                 data[head].forEach(item => {
                     const sub = item.sub; // Get the subhead from each item
-                    if (!groupedData[sub]) {
-                        groupedData[sub] = {}; // Initialize sub if it doesn't exist
+                    if (!groupedData[head][sub]) {
+                        groupedData[head][sub] = []; // Initialize subhead if it doesn't exist
                     }
-                    // Push the item into the appropriate head category (Assets or Liabilities)
-                    if (!groupedData[sub][head]) {
-                        groupedData[sub][head] = [];
-                    }
-                    groupedData[sub][head].push(item);
+                    // Push the item into the appropriate subhead category under the head
+                    groupedData[head][sub].push(item);
                 });
             });
 
