@@ -271,11 +271,9 @@
 
         function tabChanged(tabId) {
 
-            const { fromDate, toDate, acc_id } = getInputValues();
-            if (!fromDate || !toDate || !acc_id) {
-                alert('Please fill in all required fields.');
-                return;
-            }
+            fromDate=$('#fromDate').val();
+            toDate=$('#toDate').val();
+            acc_id=$('#acc_id').val();
 
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
