@@ -58,6 +58,7 @@ class RptGoDownItemNameController extends Controller
         ->join('ac','gd_pipe_sale_by_item_name.account_name','=','ac.ac_code')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->select('gd_pipe_sale_by_item_name.*','ac.ac_name')
+        ->orderBy('sa_date', 'asc')
         ->get();
         
         $accId = $request->acc_id;
@@ -75,6 +76,7 @@ class RptGoDownItemNameController extends Controller
     {
         $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod',$request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->orderBy('sa_date', 'asc')
         ->get();
                 
         $accId = $request->acc_id;
@@ -104,6 +106,7 @@ class RptGoDownItemNameController extends Controller
             ->join('item_entry2', 'gd_pipe_pur_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('pur_date', [$request->fromDate, $request->toDate])
             ->select('gd_pipe_pur_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name', 'item_entry2.item_remark')
+            ->orderBy('sa_date', 'asc')
             ->get();
     
         // Check if data exists
@@ -257,6 +260,7 @@ class RptGoDownItemNameController extends Controller
             ->join('item_entry2', 'gd_pipe_sale_by_item_name.item_cod', '=', 'item_entry2.it_cod')
             ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
             ->select('gd_pipe_sale_by_item_name.*', 'item_entry2.item_name', 'ac.ac_name', 'item_entry2.item_remark')
+            ->orderBy('sa_date', 'asc')
             ->get();
     
         // Check if data exists
@@ -387,6 +391,7 @@ class RptGoDownItemNameController extends Controller
     public function tstockbal(Request $request){
         $gd_pipe_addless_by_item_name = gd_pipe_addless_by_item_name::where('item_cod',$request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->orderBy('sa_date', 'asc')
         ->get();
 
         return $gd_pipe_addless_by_item_name;
@@ -544,6 +549,7 @@ class RptGoDownItemNameController extends Controller
     public function IL(Request $request){
         $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         ->where('date', '<', $request->fromDate)
+        ->orderBy('sa_date', 'asc')
         ->get();
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
@@ -597,6 +603,7 @@ class RptGoDownItemNameController extends Controller
 
         $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         ->where('date', '<', $request->fromDate)
+        ->orderBy('sa_date', 'asc')
         ->get();
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
