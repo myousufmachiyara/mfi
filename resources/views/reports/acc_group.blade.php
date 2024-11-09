@@ -270,7 +270,12 @@
 
                         const AllData = groupByHeadAndSub(result);
                         $.each(AllData, function(headCount,heads){
+                            console.log(headCount);
                             $.each(heads, function(subHeadCount,subheads){
+                                console.log(subHeadCount);
+                                $.each(subheads, function(itemCount,item){
+                                    console.log(item);
+                                });
                             });
                         });
                     },
