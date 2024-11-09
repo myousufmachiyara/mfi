@@ -577,7 +577,7 @@
                         });
 
                         // After the loop, add the totals row
-                        var netAmount = <?php echo json_encode($balance); ?>;
+                        var netAmount = <?php echo json_encode(balance); ?>;
 		                var words = convertCurrencyToWords(netAmount);
                         var totalHtml = "<tr><td colspan='5'>"+words+"</td>";
                         totalHtml +="<td  style='text-align: right;'><strong>Total</strong></td>";
