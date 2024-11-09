@@ -125,8 +125,51 @@
                                 </div>
                             </div>
                             <div id="GL_R" class="tab-pane">
-                                <p>GL_R</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="glr_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="glr_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="glr_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('glr')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('glr')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('glr')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>R/No</th>
+                                                    <th>Voucher</th>
+                                                    <th>Date</th>
+                                                    <th>Account Name</th>
+                                                    <th>Remarks</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="GLRTbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="sale_age" class="tab-pane">
                                 <p>Purchase Report</p>
@@ -596,6 +639,106 @@
                 });
             }
             else if(tabId=="#GL_R"){
+                var table = document.getElementById('GLRTbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-name/glr";
+                tableID="#GLRTbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id:acc_id,
+                    }, 
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+
+                        console.log(result);
+                        $('#glr_from').text(formattedfromDate);
+                        $('#glr_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        
+                        $('#glr_acc').text(selectedAcc);
+                        $(tableID).empty(); // Clear the loading message
+
+                        var SOD = 0;                        
+                        var SOC = 0;                        
+
+                        $.each(result['lager_much_op_bal'], function(k,v){
+                            SOD += v['SumOfDebit'] || 0;
+                            SOC += v['SumOfrec_cr'] || 0;
+                        });
+
+                        var opening_bal = SOD - SOC;
+                        
+                        var balance = opening_bal || 0; // Ensure balance starts as 0 if opening_bal is not defined
+                        var totalDebit = 0;
+                        var totalCredit = 0;
+
+                        var html = "<tr>";
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>"; 
+                            html += "<th></th>";
+                            html += "<th></th>"; 
+                            html += "<th colspan='3' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
+                            html += "<th style='text-align: left'>" + (typeof opening_bal === 'number' ? opening_bal.toFixed(0) : opening_bal) + "</th>";// Display opening quantity in the last column, right-aligned
+
+                            html += "</tr>";
+                            $(tableID).append(html);
+
+
+                            $.each(result['lager_much_all'], function(k, v) {
+                                var html = "<tr>";
+                                html += "<td>" + (k + 1) + "</td>";
+                                html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                                html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                                html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                                html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                                html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                                html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
+                                html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
+
+                                // Add to totals (check for valid numbers)
+                                if (v['Debit'] && !isNaN(v['Debit'])) {
+                                    balance += v['Debit']; // Add to balance
+                                    totalDebit += v['Debit']; // Accumulate total debit
+                                }
+
+                                // Subtract from balance and accumulate credit total (check for valid numbers)
+                                if (v['Credit'] && !isNaN(v['Credit'])) {
+                                    balance -= v['Credit']; // Subtract from balance
+                                    totalCredit += v['Credit']; // Accumulate total credit
+                                }
+
+                                html += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
+                                html += "</tr>";
+                                $(tableID).append(html);
+                            });
+
+                            // After the loop, add the totals row
+                            var netAmount = balance; 
+                            var words = convertCurrencyToWords(netAmount);
+                            var totalHtml = "<tr><td style='color:#17365D' colspan='5'><strong>" + words + "</strong></td>";
+                            totalHtml += "<td style='text-align: right;'><strong>Total</strong></td>";
+                            totalHtml += "<td class='text-danger'><strong>" + totalDebit.toFixed(0) + "</strong></td>";
+                            totalHtml += "<td class='text-danger'><strong>" + totalCredit.toFixed(0) + "</strong></td>";
+                            totalHtml += "<td class='text-danger'><strong>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</strong></td>";
+
+                            $(tableID).append(totalHtml);
+
+
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
             }
             else if(tabId=="#sale_age"){
             }
