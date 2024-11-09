@@ -15,7 +15,8 @@ class RptAccGrpBAController extends Controller
 {
     public function ba(Request $request){
         $balance_all = balance_all::join('ac', 'ac.ac_code', '=', 'balance_all.ac_code')
-        ->groupBy('balance_all.heads')  // Include other fields from SELECT that are not aggregated
+        ->groupBy('balance_all.heads')
+        ->select('balance_all.heads','ac.ac_name', 'ac.address')
         ->get();
 
         return $balance_all;
