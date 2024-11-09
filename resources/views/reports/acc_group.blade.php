@@ -84,6 +84,7 @@
 
         function tabChanged(tabId) {
             const { acc_id } = getInputValues();
+
             if (!acc_id) {
                 alert('Please fill in all required fields.');
                 return;
@@ -113,8 +114,8 @@
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
                             html += "<td>" + (v['phone_no'] ? v['phone_no'] : "") + "</td>";
-                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
-                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
