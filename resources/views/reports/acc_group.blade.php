@@ -120,22 +120,8 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('BA')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
-                                    <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>Account Name</th>
-                                                    <th>Address</th>
-                                                    <th>Debit</th>
-                                                    <th>Credit</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="BATbleBody">
-                                                    
-                                            </tbody>
-                                        </table>
+                                    <div class="col-12 mt-4" id="BATbleBody">
+                                        
                                     </div>
                                 </div>
                             </div>
