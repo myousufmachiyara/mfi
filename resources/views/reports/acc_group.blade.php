@@ -36,7 +36,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
-                                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="getReport()"><i class="fa fa-filter"></i></a>
+                                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
                                         </div>
                                     </div>
                                     
@@ -78,12 +78,11 @@
         document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
-                // tabChanged(tabId);
+                tabChanged(tabId);
             });
         });
 
         function tabChanged(tabId) {
-
             const { acc_id } = getInputValues();
             if (!acc_id) {
                 alert('Please fill in all required fields.');
