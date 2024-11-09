@@ -268,7 +268,25 @@
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
                         const groupedData = groupBySub(result);
-                        console.log(groupedData);
+                        Object.keys(groupedData).forEach(sub => {
+                            const subData = groupedData[sub];
+
+                            // Loop through each head (e.g., Assets, Liabilities) and render corresponding rows
+                            Object.keys(subData).forEach(head => {
+                                const items = subData[head];
+
+                                // Render each item under the current head
+                                items.forEach(item => {
+                                    const row = tableID.insertRow();
+                                    row.insertCell(0).textContent = item.ac_code;
+                                    row.insertCell(1).textContent = item.SumOfrec_able;
+                                    row.insertCell(2).textContent = item.SumOfpay_able;
+                                    row.insertCell(3).textContent = item.Bal;
+                                    row.insertCell(4).textContent = item.Debit;
+                                    row.insertCell(5).textContent = item.Credit;
+                                });
+                            });
+                        });
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
