@@ -119,7 +119,7 @@ class RptAccNameJVController extends Controller
                 $html .= "<tr style='background-color:{$bgColor};'>
                                 <td style='width:7%;'>{$count}</td>
                                 <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
-                                <td style='width:14%;'>{$items['entry_of']}."-".{$items['auto_lager']}</td>
+                                <td style='width:14%;'>{$items['entry_of']}-{$items['auto_lager']}</td>
                                 <td style='width:16%;'>{$items['ac2']}</td>
                                 <td style='width:21%;'>{$items['Narration']}</td>
                                 <td style='width:14%;'>" . number_format($items['Debit'], 0) . "</td>
