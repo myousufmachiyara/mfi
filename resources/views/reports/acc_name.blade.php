@@ -575,6 +575,13 @@
                             html += "</tr>";
                             $(tableID).append(html);
                         });
+                        // After the loop, add the totals row
+                        var totalHtml = "<tr><td colspan='6' style='text-align: right;'><strong>Total</strong></td>";
+                        totalHtml += "<td>" + totalDebit.toFixed(0) + "</td>";
+                        totalHtml += "<td>" + totalCredit.toFixed(0) + "</td>";
+                        totalHtml += "<td></td></tr>";
+
+                        $(tableID).append(totalHtml);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
