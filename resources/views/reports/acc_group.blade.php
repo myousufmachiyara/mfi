@@ -111,6 +111,34 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="BA" class="tab-pane">
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('BA')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('BA')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('BA')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                    </div>
+                                    
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>AC</th>
+                                                    <th>Account Name</th>
+                                                    <th>Address</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="BATbleBody">
+                                                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>		
@@ -220,7 +248,41 @@
                     }
                 });
             }
-            
+
+            if(tabId=="#BA"){
+                var table = document.getElementById('BATbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-grp/ba";
+                tableID="#BATbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+                        $(tableID).empty(); // Clear the loading message
+                        console.log(result);
+                        // $.each(result, function(k,v){
+                        //     var html="<tr>";
+                        //     html += "<td>"+(k+1)+"</td>"
+                        //     html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
+                        //     html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                        //     html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
+                        //     html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
+                        //     html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                        //     html +="</tr>";
+                        //     $(tableID).append(html);
+                        // });
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
+            }
         }
 
         function getReport() {
