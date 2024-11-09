@@ -250,33 +250,45 @@
                     //     $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
                     // },
                     success: function(result){
-                        tableID.textContent = '';
+                        tableID.textContent = ''; // Or you can use $(tableID).empty() in jQuery
 
+                        // Group data by head and subhead
                         const AllData = groupByHeadAndSub(result);
 
-                        $.each(AllData, function(headCount,heads){
-                            html="<table class='table table-bordered table-striped mb-0'>";
-                            html+="<thead><tr colspan='6'>"+headCount+"<tr>";
-                            html+="<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
-                            html+="</thead>";
+                        // Iterate through each head
+                        $.each(AllData, function(headCount, heads){
+                            let html = "<table class='table table-bordered table-striped mb-0'>";
+                            
+                            // Add table header
+                            html += "<thead><tr><th colspan='6'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
+                            html += "<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
+                            html += "</thead>";
 
-                            $.each(heads, function(subHeadCount,subheads){
-                                html+="<tbody>";
-                                html+="<tr colspan='6'>"+subHeadCount+"</tr>";
+                            // Iterate through each subhead (grouped data under the current head)
+                            $.each(heads, function(subHeadCount, subheads){
+                                html += "<tbody>";  // Start tbody
 
-                                $.each(subheads, function(itemCount,item){
+                                // Add subhead title row
+                                html += "<tr><td colspan='6'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
+                                
+                                // Iterate through each item in subheads
+                                $.each(subheads, function(itemCount, item){
                                     html += "<tr>";
-                                    html += "<td>"+(itemCount+1)+"</td>";
-                                    html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") +"</td>";
-                                    html += "<td></td>";
-                                    html += "<td></td>";
-                                    html += "<td>" + (item['Debit'] ? item['Debit'] : "") +"</td>";
-                                    html += "<td>" + (item['Credit'] ? item['Credit'] : "") +"</td>";
-                                    html += "</tr>"; 
+                                    html += "<td>" + (itemCount + 1) + "</td>"; // Serial number (S/No)
+                                    html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") + "</td>"; // Account Code (AC)
+                                    html += "<td>" + (item['account_name'] ? item['account_name'] : "") + "</td>"; // Account Name (default empty if not present)
+                                    html += "<td>" + (item['address'] ? item['address'] : "") + "</td>"; // Address (default empty if not present)
+                                    html += "<td>" + (item['Debit'] ? item['Debit'] : "") + "</td>"; // Debit (default empty if not present)
+                                    html += "<td>" + (item['Credit'] ? item['Credit'] : "") + "</td>"; // Credit (default empty if not present)
+                                    html += "</tr>";
                                 });
-                                html+="</tbody>"; 
+
+                                html += "</tbody>";  // Close tbody
                             });
-                            html+="</table>";
+
+                            html += "</table>";  // Close table
+
+                            // Append the generated table HTML to the DOM
                             $(tableID).append(html);
                         });
                     },
