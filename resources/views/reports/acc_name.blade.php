@@ -544,48 +544,49 @@
                             html += "</tr>";
                             $(tableID).append(html);
 
-                        var balance = opening_bal;
-                        var totalDebit = 0;
-                        var totalCredit = 0;
+                            var balance = opening_bal || 0; // Ensure balance starts as 0 if opening_bal is not defined
+                            var totalDebit = 0;
+                            var totalCredit = 0;
 
-                        $.each(result['lager_much_all'], function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") +"</td>";
-                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
+                            $.each(result['lager_much_all'], function(k, v) {
+                                var html = "<tr>";
+                                html += "<td>" + (k + 1) + "</td>";
+                                html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                                html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                                html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                                html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
+                                html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                                html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
+                                html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
 
-                            // Add to totals
-                            if (v['Debit'] !== undefined && v['Debit'] !== null) {
-                                balance += v['Debit']; // Add to balance
-                                totalDebit += v['Debit']; // Accumulate total debit
-                            }
+                                // Add to totals (check for valid numbers)
+                                if (v['Debit'] && !isNaN(v['Debit'])) {
+                                    balance += v['Debit']; // Add to balance
+                                    totalDebit += v['Debit']; // Accumulate total debit
+                                }
 
-                            // Subtract from balance and accumulate credit total
-                            if (v['Credit'] !== undefined && v['Credit'] !== null) {
-                                balance -= v['Credit']; // Subtract from balance
-                                totalCredit += v['Credit']; // Accumulate total credit
-                            }
+                                // Subtract from balance and accumulate credit total (check for valid numbers)
+                                if (v['Credit'] && !isNaN(v['Credit'])) {
+                                    balance -= v['Credit']; // Subtract from balance
+                                    totalCredit += v['Credit']; // Accumulate total credit
+                                }
 
-                            html += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
-                            html += "</tr>";
-                            $(tableID).append(html);
-                        });
+                                html += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
+                                html += "</tr>";
+                                $(tableID).append(html);
+                            });
 
-                        // After the loop, add the totals row
-                        var netAmount = <?php echo json_encode(balance); ?>;
-		                var words = convertCurrencyToWords(netAmount);
-                        var totalHtml = "<tr><td colspan='5'>"+words+"</td>";
-                        totalHtml +="<td  style='text-align: right;'><strong>Total</strong></td>";
-                        totalHtml += "<td>" + totalDebit.toFixed(0) + "</td>";
-                        totalHtml += "<td>" + totalCredit.toFixed(0) + "</td>";
-                        totalHtml += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
+                            // After the loop, add the totals row
+                            var netAmount = <?php echo json_encode($balance); ?>; // Ensure balance is correctly passed from PHP
+                            var words = convertCurrencyToWords(netAmount);
+                            var totalHtml = "<tr><td colspan='5'>" + words + "</td>";
+                            totalHtml += "<td style='text-align: right;'><strong>Total</strong></td>";
+                            totalHtml += "<td>" + totalDebit.toFixed(0) + "</td>";
+                            totalHtml += "<td>" + totalCredit.toFixed(0) + "</td>";
+                            totalHtml += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
 
-                        $(tableID).append(totalHtml);
+                            $(tableID).append(totalHtml);
+
 
                     },
                     error: function(){
