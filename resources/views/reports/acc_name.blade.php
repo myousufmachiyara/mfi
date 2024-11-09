@@ -880,8 +880,11 @@
                         
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
-                            console.log(v['ac2']);
+                            var crAmt = v['dr_amt'] ? parseFloat(v['dr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
 
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
@@ -890,11 +893,16 @@
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['dr_amt'] ? v['dr_amt'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -926,7 +934,12 @@
                         var selectedAcc = $('#acc_id').find("option:selected").text();
                         $('#pur1_acc').text(selectedAcc);
                         $(tableID).empty(); // Clear the loading message
+
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var crAmt = v['cr_amt'] ? parseFloat(v['cr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -935,10 +948,15 @@
                             html += "<td>" + (v['name_of'] ? v['name_of'] : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -971,7 +989,11 @@
                         $('#pur2_acc').text(selectedAcc);
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var crAmt = v['cr_amt'] ? parseFloat(v['cr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -980,10 +1002,15 @@
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['sal_inv'] ? v['sal_inv'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -1018,7 +1045,11 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var crAmt = v['cr_amt'] ? parseFloat(v['cr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -1026,11 +1057,15 @@
                             html += "<td>" + (v['no'] ? v['no'] : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['cr_amt'] ? v['cr_amt'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -1064,19 +1099,32 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+                        var totalDrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var crAmt = v['Credit'] ? parseFloat(v['Credit']) : 0;
+                            var drAmt = v['Debit'] ? parseFloat(v['Debit']) : 0;
+                            totalCrAmt += crAmt; // Add to total
+                            totalDrAmt += drAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + (v['auto_lager'] ? "-" + v['auto_lager'] : "") + "</td>";
                             html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (drAmt ? drAmt.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='4' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td></tr>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
