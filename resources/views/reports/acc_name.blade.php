@@ -545,6 +545,8 @@
                             $(tableID).append(html);
 
                         var balance = opening_bal;
+                        var totalDebit = 0;
+                        var totalCredit = 0;
 
                         $.each(result['lager_much_all'], function(k,v){
                             var html="<tr>";
@@ -557,17 +559,20 @@
                             html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
                             html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
 
+                            // Add to totals
                             if (v['Debit'] !== undefined && v['Debit'] !== null) {
                                 balance += v['Debit']; // Add to balance
+                                totalDebit += v['Debit']; // Accumulate total debit
                             }
 
-                            // Check if less exists and is not empty
+                            // Subtract from balance and accumulate credit total
                             if (v['Credit'] !== undefined && v['Credit'] !== null) {
                                 balance -= v['Credit']; // Subtract from balance
+                                totalCredit += v['Credit']; // Accumulate total credit
                             }
 
                             html += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
-                            html +="</tr>";
+                            html += "</tr>";
                             $(tableID).append(html);
                         });
                     },
