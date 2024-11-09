@@ -539,7 +539,8 @@
                             html += "<th></th>";
                             html += "<th></th>"; 
                             html += "<th colspan='3' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
-                            html += "<th style='text-align: left'>" + opening_bal + "</th>"; // Display opening quantity in the last column, right-aligned
+                            html += "<th style='text-align: left'>" + (typeof opening_bal === 'number' ? opening_bal.toFixed(0) : opening_bal) + "</th>";// Display opening quantity in the last column, right-aligned
+
                             html += "</tr>";
                             $(tableID).append(html);
 
@@ -553,8 +554,8 @@
                             html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(2) : "0") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(2) : "0") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
 
                             if (v['Debit'] !== undefined && v['Debit'] !== null) {
                                 balance += v['Debit']; // Add to balance
@@ -565,7 +566,7 @@
                                 balance -= v['Credit']; // Subtract from balance
                             }
 
-                            html += "<td>" + balance + "</td>";
+                            html += "<td>" + (typeof balance === 'number' ? balance.toFixed(2) : balance) + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
