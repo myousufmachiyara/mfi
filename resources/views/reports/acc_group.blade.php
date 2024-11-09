@@ -272,7 +272,7 @@
                         $.each(AllData, function(headCount,heads){
                             var html="<h3>"+headCount+"</h3>";
                             $.each(heads, function(subHeadCount,subheads){
-                                html+="<table><tr colspan='6'>"+subHeadCount+"</tr>";
+                                html+="<table class='table table-bordered table-striped mb-0'><tr colspan='6'>"+subHeadCount+"</tr>";
                                 $.each(subheads, function(itemCount,item){
                                     html+= "<tr>";
                                     html+="<td>"+itemCount+"</td>";
