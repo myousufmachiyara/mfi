@@ -66,6 +66,51 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="SHOA" class="tab-pane">
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-8 row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="col-form-label"><strong>Sub Head Of Account</strong></label>
+                                                <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
+                                                    <option value="" disabled selected>Sub Head Of Account</option>
+                                                    @foreach($sub_head_of_acc as $key => $row)	
+                                                        <option value="{{$row->id}}">{{$row->sub}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#SHOA')"><i class="fa fa-filter"></i></a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-4 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('SHOA')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('SHOA')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('SHOA')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                    </div>
+                                    
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>AC</th>
+                                                    <th>AC Name</th>
+                                                    <th>Address</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="SHOATbleBody">
+                                                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>		
@@ -83,18 +128,19 @@
         });
 
         function tabChanged(tabId) {
-            const { acc_id } = getInputValues();
-
-            if (!acc_id) {
-                alert('Please fill in all required fields.');
-                return;
-            }
 
             if(tabId=="#AG"){
+                const { acc_id } = getInputValues();
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
                 var table = document.getElementById('AGTbleBody');
+
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
+
                 url="/rep-by-acc-grp/ag";
                 tableID="#AGTbleBody";
 
@@ -105,7 +151,7 @@
                         acc_id: acc_id,
                     },
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="7" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
@@ -124,7 +170,51 @@
                         });
                     },
                     error: function(){
-                        alert("error");
+                        $(tableID).html('<tr><td colspan="7" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    }
+                });
+            }
+
+            if(tabId=="#SHOA"){
+                const { acc_id } = getInputValues();
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                var table = document.getElementById('SHOATbleBody');
+                while (table.rows.length > 0) {
+                    table.deleteRow(0);
+                }
+                url="/rep-by-acc-grp/shoa";
+                tableID="#SHOATbleBody";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data:{
+                        acc_id: acc_id,
+                    },
+                    beforeSend: function() {
+                        $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function(result){
+                        $(tableID).empty(); // Clear the loading message
+                        
+                        $.each(result, function(k,v){
+                            var html="<tr>";
+                            html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
+                    },
+                    error: function(){
+                        $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
