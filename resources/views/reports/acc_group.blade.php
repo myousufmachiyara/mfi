@@ -23,7 +23,7 @@
                         <div class="tab-content">
                             <div id="AG" class="tab-pane">
                                 <div class="row form-group pb-3">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-8 row">
                                         <div class="col-lg-2">
                                             <div class="form-group">
                                                 <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
