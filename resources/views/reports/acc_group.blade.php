@@ -270,10 +270,11 @@
                         const groupedData = groupBySub(result);
                         Object.keys(groupedData).forEach(sub => {
                             const subData = groupedData[sub];
-
+                            console.log("new head");
                             // Loop through each head (e.g., Assets, Liabilities) and render corresponding rows
                             Object.keys(subData).forEach(head => {
                                 const items = subData[head];
+                                console.log("new sub head");
 
                                 // Render each item under the current head
                                 items.forEach(item => {
