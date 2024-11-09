@@ -416,10 +416,10 @@
         Route::get('/rep-by-acc-grp/shoa', [App\Http\Controllers\RptAccGrpSHOAController::class, 'shoa'])->name('shoa-rep-by-acc-grp');
 
         // RPT by Acc Group Balance All
-        Route::get('/rep-by-acc-grp/ba', [App\Http\Controllers\RptAccGrpAGController::class, 'ba'])->name('ba-rep-by-acc-grp');
+        Route::get('/rep-by-acc-grp/ba', [App\Http\Controllers\RptAccGrpBAController::class, 'ba'])->name('ba-rep-by-acc-grp');
 
-        // RPT by Acc Group Trial Balance
-        Route::get('/rep-by-acc-grp/tb', [App\Http\Controllers\RptAccGrpAGController::class, 'tb'])->name('tb-rep-by-acc-grp');
+        // RPT by Acc Group Trial Balance       
+        Route::get('/rep-by-acc-grp/tb', [App\Http\Controllers\RptAccGrpTBController::class, 'tb'])->name('tb-rep-by-acc-grp');
 
         // RPT by Daily Register Sale 1
         Route::get('/rep-by-daily-reg/sale1', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1'])->name('sale1-rep-by-daily-reg');
