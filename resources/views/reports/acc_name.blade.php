@@ -566,7 +566,7 @@
                                 balance -= v['Credit']; // Subtract from balance
                             }
 
-                            html += "<td>" + (typeof balance === 'number' ? balance.toFixed(2) : balance) + "</td>";
+                            html += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
