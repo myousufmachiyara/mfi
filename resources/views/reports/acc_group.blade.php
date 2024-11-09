@@ -260,7 +260,7 @@
                             let html = "<table class='table table-bordered table-striped mb-0'>";
                             
                             // Add table header
-                            html += "<thead><tr><th colspan='6'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
+                            html += "<thead><tr><th colspan='6' style='text-align:center;font-size:13px'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
                             html += "<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
                             html += "</thead>";
 
@@ -269,7 +269,7 @@
                                 html += "<tbody>";  // Start tbody
 
                                 // Add subhead title row
-                                html += "<tr><td colspan='6'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
+                                html += "<tr><td colspan='6' style='text-align:center;font-size:13px'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
                                 
                                 // Iterate through each item in subheads
                                 $.each(subheads, function(itemCount, item){
