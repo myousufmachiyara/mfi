@@ -84,8 +84,8 @@
 
         function tabChanged(tabId) {
 
-            const { fromDate, toDate, acc_id } = getInputValues();
-            if (!fromDate || !toDate || !acc_id) {
+            const { acc_id } = getInputValues();
+            if (!acc_id) {
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -137,8 +137,6 @@
 
         function getInputValues() {
             return {
-                fromDate: $('#fromDate').val(),
-                toDate: $('#toDate').val(),
                 acc_id: $('#acc_id').val()
             };
         }
