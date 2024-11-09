@@ -120,7 +120,7 @@ class RptAccNameCombPurController extends Controller
                                     <td style='width:10%;'>{$items['entry_of']}</td>
                                     <td style='width:12%;'>{$items['no']}</td>
                                     <td style='width:41%;'>{$items['ac2']} {$items['remarks']}</td>
-                                    td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
+                                    <td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
                                 </tr>";
         
                         $totalAmount += $items['cr_amt'];
@@ -129,7 +129,7 @@ class RptAccNameCombPurController extends Controller
                 // Add totals row
                 $html .= '
                 <tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="6" style="text-align:right;">Total:</td>
+                    <td colspan="5" style="text-align:right;">Total:</td>
                     <td style="width:16%;">' . number_format($totalAmount, 0) . '</td>
                 </tr>';
                 
