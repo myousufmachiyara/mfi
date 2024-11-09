@@ -267,6 +267,8 @@
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
+                        console.log(result);
+
                         const groupedData = groupBySub(result);
                         Object.keys(groupedData).forEach(sub => {
                             const subData = groupedData[sub];
@@ -337,7 +339,6 @@
 
         function groupByHeadAndSub(data) {
             const groupedData = {};
-            console.log(data);
 
             // Loop through all available heads (keys in the data object)
             Object.keys(data).forEach(head => {
