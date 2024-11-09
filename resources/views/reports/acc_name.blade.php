@@ -111,7 +111,7 @@
                                                     <th>Voucher</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
-                                                    <th>Remarks</th>
+                                                    {{-- <th>Remarks</th> --}}
                                                     <th>Debit</th>
                                                     <th>Credit</th>
                                                     <th>Amount</th>
@@ -553,7 +553,7 @@
                         acc_id:acc_id,
                     }, 
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="7" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
 
@@ -582,7 +582,6 @@
                         var html = "<tr>";
                             html += "<th></th>"; 
                             html += "<th></th>"; 
-                            html += "<th></th>"; 
                             html += "<th></th>";
                             html += "<th></th>"; 
                             html += "<th colspan='3' style='text-align: center'><-----Opening Balance-----></th>"; // Merged and centered across two columns
@@ -599,7 +598,7 @@
                                 html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
-                                html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                                // html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
                                 html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(0) : "0") + "</td>";
                                 html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(0) : "0") + "</td>";
 
