@@ -784,10 +784,10 @@
                         });
 
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='6' class='text-right'><strong>Total:</strong></td>";
-                        totalRow += "<td><strong>" + totalCrAmt.toFixed(2) + "</strong></td></tr>";
+                        var totalRow = "<tr><td colspan='6' style='text-align: right; ><strong>Total:</strong></td>";
+                        totalRow += "<td><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
-                        
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
