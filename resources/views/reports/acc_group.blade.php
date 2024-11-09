@@ -192,7 +192,7 @@
                 });
             }
 
-            if(tabId=="#SHOA"){
+            else if(tabId=="#SHOA"){
                 var acc_id = $('#shoa_acc_id').val()
 
                 if (!acc_id) {
@@ -237,63 +237,69 @@
                 });
             }
 
-            if(tabId=="#BA"){
-                var table = document.getElementById('BATbleBody');
-
-                url="/rep-by-acc-grp/ba";
-                tableID="#BATbleBody";
-
+            else if (tabId === "#BA") {
+                // Cache table body element
+                const $tableBody = $('#BATbleBody');
+                
+                // Define URL and table ID
+                const url = "/rep-by-acc-grp/ba";
+                
+                // Start the AJAX request
                 $.ajax({
                     type: "GET",
                     url: url,
                     beforeSend: function() {
-                        $(tableID).html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr></table>');
+                        // Show loading message before the data is fetched
+                        $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr></table>');
                     },
-                    success: function(result){
-                        tableID.textContent = ''; // Or you can use $(tableID).empty() in jQuery
+                    success: function(result) {
+                        // Clear previous content
+                        $tableBody.empty();
 
                         // Group data by head and subhead
                         const AllData = groupByHeadAndSub(result);
 
+                        // Initialize HTML for the table
+                        let html = '';
+
                         // Iterate through each head
-                        $.each(AllData, function(headCount, heads){
-                            let html = "<table class='table table-bordered table-striped mb-0'>";
-                            
-                            // Add table header
-                            html += "<thead><tr><th colspan='6' style='text-align:center;font-size:18px'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
-                            html += "<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
-                            html += "</thead>";
+                        $.each(AllData, function(headCount, heads) {
+                            // Table structure for each head
+                            html += `<table class='table table-bordered table-striped mb-0'>
+                                        <thead>
+                                            <tr><th colspan='6' style='text-align:center;font-size:18px;'>${headCount}</th></tr>
+                                            <tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>
+                                        </thead>`;
 
-                            // Iterate through each subhead (grouped data under the current head)
-                            $.each(heads, function(subHeadCount, subheads){
-                                html += "<tbody>";  // Start tbody
+                            // Iterate through each subhead
+                            $.each(heads, function(subHeadCount, subheads) {
+                                html += `<tbody>
+                                            <tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600;'>${subHeadCount}</td></tr>`;
 
-                                // Add subhead title row
-                                html += "<tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
-                                
-                                // Iterate through each item in subheads
-                                $.each(subheads, function(itemCount, item){
-                                    html += "<tr>";
-                                    html += "<td>" + (itemCount + 1) + "</td>"; // Serial number (S/No)
-                                    html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") + "</td>"; // Account Code (AC)
-                                    html += "<td>" + (item['ac_name'] ? item['ac_name'] : "") + "</td>"; // Account Name (default empty if not present)
-                                    html += "<td>" + (item['address'] ? item['address'] : "") + "</td>"; // Address (default empty if not present)
-                                    html += "<td>" + (item['Debit'] ? item['Debit'] : "") + "</td>"; // Debit (default empty if not present)
-                                    html += "<td>" + (item['Credit'] ? item['Credit'] : "") + "</td>"; // Credit (default empty if not present)
-                                    html += "</tr>";
+                                // Iterate through each item in the subhead
+                                $.each(subheads, function(itemCount, item) {
+                                    html += `<tr>
+                                                <td>${itemCount + 1}</td>
+                                                <td>${item.ac_code || ""}</td>
+                                                <td>${item.ac_name || ""}</td>
+                                                <td>${item.address || ""}</td>
+                                                <td>${item.Debit || ""}</td>
+                                                <td>${item.Credit || ""}</td>
+                                            </tr>`;
                                 });
 
-                                html += "</tbody>";  // Close tbody
+                                html += `</tbody>`;
                             });
 
-                            html += "</table>";  // Close table
-
-                            // Append the generated table HTML to the DOM
-                            $(tableID).append(html);
+                            html += `</table>`;
                         });
+
+                        // Append all the generated HTML at once
+                        $tableBody.html(html);
                     },
-                    error: function(){
-                        $(tableID).html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr></table>');
+                    error: function() {
+                        // Show error message if the AJAX request fails
+                        $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr></table>');
                     }
                 });
             }
