@@ -16,6 +16,7 @@ class RptAccNameJVController extends Controller
     public function jv(Request $request){
         $all_payments_by_party = all_payments_by_party::where('account_cod',$request->acc_id)
         ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+        ->orderBy('jv_date', 'asc')
         ->get();
 
         return $all_payments_by_party;
