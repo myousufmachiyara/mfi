@@ -267,16 +267,8 @@
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
-                        result.forEach(head => {
-                            data[head].forEach(item => {
-                                const sub = item.sub;
-                                if (!result[sub]) {
-                                    result[sub] = { "Assets": [], "Liabilities": [] };
-                                }
-                                result[sub][head].push(item);
-                            });
-                        });
-                        console.log(result);
+                        const groupedData = groupBySub(result);
+                        console.log(groupedData);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -331,6 +323,28 @@
             if (tabName === "SI") {
                 window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
+        }
+
+        function groupBySub(data) {
+            const groupedData = {};
+
+            // Loop through all available heads (keys in the data object)
+            Object.keys(data).forEach(head => {
+                // Loop through each item under the current head (Assets or Liabilities)
+                data[head].forEach(item => {
+                    const sub = item.sub; // Get the subhead from each item
+                    if (!groupedData[sub]) {
+                        groupedData[sub] = {}; // Initialize sub if it doesn't exist
+                    }
+                    // Push the item into the appropriate head category (Assets or Liabilities)
+                    if (!groupedData[sub][head]) {
+                        groupedData[sub][head] = [];
+                    }
+                    groupedData[sub][head].push(item);
+                });
+            });
+
+            return groupedData;
         }
     </script>
 </html>
