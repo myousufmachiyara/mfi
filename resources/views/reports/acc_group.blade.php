@@ -269,9 +269,10 @@
                         $(tableID).empty(); // Clear the loading message
 
                         const AllData = groupByHeadAndSub(result);
-                        console.log(AllData);
                         $.each(AllData, function(headCount,heads){
+                            console.log(headCount);
                             $.each(heads, function(subHeadCount,subheads){
+                                console.log(subheads);
                             });
                         });
                     },
