@@ -272,7 +272,7 @@
                         $.each(AllData, function(headCount,heads){
                             console.log(headCount);
                             $.each(heads, function(subHeadCount,subheads){
-                                console.log(subheads);
+                                console.log(subheads['sub']);
                             });
                         });
                     },
