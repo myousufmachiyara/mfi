@@ -339,12 +339,14 @@
                 // Loop through each item under the current head (Assets or Liabilities, etc.)
                 data[head].forEach(item => {
                     const sub = item.sub; // Get the subhead from each item
-                    console.log(sub);
                     if (!groupedData[head][sub]) {
                         groupedData[head][sub] = []; // Initialize subhead if it doesn't exist
                     }
-                    // Push the item into the appropriate subhead category under the head
-                    groupedData[head][sub].push(item);
+                    // Add the item to the array, with 'sub' as the key
+                    groupedData[head][sub].push({
+                        sub: sub,  // Include 'sub' as a key for each item in the array
+                        item: item // Add the item object itself
+                    });
                 });
             });
 
