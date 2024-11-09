@@ -270,14 +270,23 @@
 
                         const AllData = groupByHeadAndSub(result);
                         $.each(AllData, function(headCount,heads){
-                            console.log(headCount);
+                            var html="<h3>"+headCount+"</h3>";
                             $.each(heads, function(subHeadCount,subheads){
-                                console.log(subHeadCount);
+                                html+="<table><tr colspan='6'>"+subHeadCount+"</tr>";
                                 $.each(subheads, function(itemCount,item){
-                                    console.log(item);
+                                    html+= "<tr>"; 
+                                    html+="<td>"+itemCount+"</td>";
+                                    html+="<td>"+ac_code+"</td>";
+                                    html+="<td></td>";
+                                    html+="<td></td>";
+                                    html+="<td>"+Debit+"</td>";
+                                    html+="<td>"+Credit+"</td>";
+                                    html+= "</tr>"; 
                                 });
+                                html+="</table>";
                             });
                         });
+                        $(tableID).append(html);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
