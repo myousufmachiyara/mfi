@@ -768,6 +768,8 @@
                         $('#sale_1_acc').text(selectedAcc);
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
@@ -780,6 +782,12 @@
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' class='text-right'><strong>Total:</strong></td>";
+                        totalRow += "<td><strong>" + totalCrAmt.toFixed(2) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+                        
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
