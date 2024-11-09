@@ -268,18 +268,12 @@
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
 
-                        const groupedData = groupByHeadAndSub(result);
+                        const AllData = groupByHeadAndSub(result);
                         console.log(groupedData);
-
-                        Object.keys(groupedData).forEach(head => {
-                            const headData = groupedData[head];
-                            // Loop through each head (e.g., Assets, Liabilities) and render corresponding rows
-                            Object.keys(headData).forEach(sub => {
-                                const items = headData[sub];
-                                // Render each item under the current head
-                                items.forEach(item => {
-                                    // console.log(item);
-                                });
+                        $.each(AllData, function(headCount,heads){
+                            console.log(headCount);
+                            $.each(heads, function(subHeadCount,subheads){
+                                console.log(subheads);
                             });
                         });
                     },
