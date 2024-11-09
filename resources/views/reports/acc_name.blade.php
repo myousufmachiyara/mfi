@@ -531,6 +531,10 @@
                         });
 
                         var opening_bal = SOD - SOC;
+                        
+                        var balance = opening_bal || 0; // Ensure balance starts as 0 if opening_bal is not defined
+                        var totalDebit = 0;
+                        var totalCredit = 0;
 
                         var html = "<tr>";
                             html += "<th></th>"; 
@@ -544,9 +548,6 @@
                             html += "</tr>";
                             $(tableID).append(html);
 
-                            var balance = opening_bal || 0; // Ensure balance starts as 0 if opening_bal is not defined
-                            var totalDebit = 0;
-                            var totalCredit = 0;
 
                             $.each(result['lager_much_all'], function(k, v) {
                                 var html = "<tr>";
@@ -577,7 +578,7 @@
                             });
 
                             // After the loop, add the totals row
-                            var netAmount = <?php echo json_encode($balance); ?>; // Ensure balance is correctly passed from PHP
+                            var netAmount = balance; 
                             var words = convertCurrencyToWords(netAmount);
                             var totalHtml = "<tr><td colspan='5'>" + words + "</td>";
                             totalHtml += "<td style='text-align: right;'><strong>Total</strong></td>";
