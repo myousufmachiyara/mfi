@@ -65,8 +65,8 @@
                                             </h4>
                                                                 
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="sa_acc"></span>
+                                                <span style="color:#17365D;font-size:20px;">Item Group: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="sa_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -111,8 +111,8 @@
                                             
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Item Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="si_acc"></span>
+                                                <span style="color:#17365D;font-size:20px;">Item Group: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="si_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -163,8 +163,8 @@
                                             
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Item Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="so_acc"></span>
+                                                <span style="color:#17365D;font-size:20px;">Item Group: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="so_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -215,8 +215,8 @@
                                             
                                     
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Item Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="SAT_acc"></span>
+                                                <span style="color:#17365D;font-size:20px;">Item Group: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="SAT_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
