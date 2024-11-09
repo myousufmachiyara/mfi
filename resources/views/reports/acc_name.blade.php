@@ -114,7 +114,7 @@
                                                     {{-- <th>Remarks</th> --}}
                                                     <th>Debit</th>
                                                     <th>Credit</th>
-                                                    <th>Amount</th>
+                                                    <th>Balance</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="GLTbleBody">
@@ -161,7 +161,7 @@
                                                     <th>Remarks</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
-                                                    <th>Amount</th>
+                                                    <th>Balance</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="GLRTbleBody">
@@ -622,7 +622,7 @@
                             // After the loop, add the totals row
                             var netAmount = balance; 
                             var words = convertCurrencyToWords(netAmount);
-                            var totalHtml = "<tr><td style='color:#17365D' colspan='5'><strong>" + words + "</strong></td>";
+                            var totalHtml = "<tr><td style='color:#17365D' colspan='4'><strong>" + words + "</strong></td>";
                             totalHtml += "<td style='text-align: right;'><strong>Total</strong></td>";
                             totalHtml += "<td class='text-danger'><strong>" + totalDebit.toFixed(0) + "</strong></td>";
                             totalHtml += "<td class='text-danger'><strong>" + totalCredit.toFixed(0) + "</strong></td>";
