@@ -214,7 +214,7 @@
                                                     <th>Bill</th>
                                                     <th>Name/Address</th>
                                                     <th>Remarks</th>
-                                                    <th>Net Bill Amount</th>
+                                                    <th>Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="Sale1TbleBody">
@@ -954,7 +954,7 @@
                         });
 
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
                     },
@@ -1008,7 +1008,7 @@
                         });
 
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
                     },
@@ -1121,8 +1121,8 @@
                         });
 
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='4' style='text-align: right;'><strong>Total:</strong></td>";
-                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td></tr>";
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
                     },
