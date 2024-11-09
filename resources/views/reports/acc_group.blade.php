@@ -120,22 +120,8 @@
                                         <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('BA')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
-                                    <div class="col-12 mt-4">
-                                        <table class="table table-bordered table-striped mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>Account Name</th>
-                                                    <th>Address</th>
-                                                    <th>Debit</th>
-                                                    <th>Credit</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="BATbleBody">
-                                                    
-                                            </tbody>
-                                        </table>
+                                    <div class="col-12 mt-4" id="BATbleBody">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -253,36 +239,41 @@
 
             if(tabId=="#BA"){
                 var table = document.getElementById('BATbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
+
                 url="/rep-by-acc-grp/ba";
                 tableID="#BATbleBody";
 
                 $.ajax({
                     type: "GET",
                     url: url,
-                    beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
-                    },
+                    // beforeSend: function() {
+                    //     $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
+                    // },
                     success: function(result){
-                        $(tableID).empty(); // Clear the loading message
+                        tableID.textContent = '';
 
                         const AllData = groupByHeadAndSub(result);
+                        // var html="<h3>"+headCount+"</h3>";
+
                         $.each(AllData, function(headCount,heads){
-                            var html="<h3>"+headCount+"</h3>";
                             $.each(heads, function(subHeadCount,subheads){
-                                html+="<table class='table table-bordered table-striped mb-0'><tr colspan='6'>"+subHeadCount+"</tr>";
+                                html="<table class='table table-bordered table-striped mb-0'>"; 
+                                html+="<thead><tr>"; 
+                                html+="<th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th>"; 
+                                html+="</tr></thead>";
+                                html+="<tr colspan='6'>"+subHeadCount+"</tr>";
+                                html+="<tbody>"; 
                                 $.each(subheads, function(itemCount,item){
-                                    html+= "<tr>";
-                                    html+="<td>"+itemCount+"</td>";
+                                    html += "<tr>";
+                                    html += "<td>"+itemCount+"</td>";
                                     html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") +"</td>";
-                                    html+="<td></td>";
-                                    html+="<td></td>";
+                                    html += "<td></td>";
+                                    html += "<td></td>";
                                     html += "<td>" + (item['Debit'] ? item['Debit'] : "") +"</td>";
                                     html += "<td>" + (item['Credit'] ? item['Credit'] : "") +"</td>";
-                                    html+= "</tr>"; 
+                                    html += "</tr>"; 
                                 });
+                                html+="</tbody>"; 
                                 html+="</table>";
                             });
                             $(tableID).append(html);
