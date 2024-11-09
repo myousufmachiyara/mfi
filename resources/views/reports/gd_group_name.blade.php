@@ -497,27 +497,14 @@
                                 // If item found, use its opp_bal, otherwise add a '-'
                                 // html += item ? `<td>${item.opp_bal || '0'}</td>` : '<td></td>';
 
+                                html +=item ? `<td style="text-align: center; font-size: 20px;">${item.opp_bal || '0'}</td>`
+                                : '<td style="text-align: center; font-size: 20px;"></td>';
 
-                                // Mark the column as having data if an item is found
-                                if (item) columnsWithData[index] = true;
-
-                                html += item ? `<td style="text-align: center; font-size: 20px;">${item.opp_bal || '0'}</td>`
-                                            : '<td style="text-align: center; font-size: 20px;"></td>';
-                                });
-
-                            html += "</tr>";
-                            $(tableID).append(html);
                             });
 
-                                // Step 4: Hide columns without data
-                                $('#TSAThead thead tr').children('th').each(function(index) {
-                                if (!columnsWithData[index]) {
-                                $(this).hide();  // Hide the header
-                                $('#SATTble tr').each(function() {
-                                    $(this).children('td').eq(index).hide();  // Hide the cells in the body for that column
-                                });
-                             }
-                         });
+                            html +="</tr>";
+                            $(tableID).append(html);
+                        });
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="13" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
