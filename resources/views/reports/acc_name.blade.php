@@ -580,11 +580,11 @@
                             // After the loop, add the totals row
                             var netAmount = balance; 
                             var words = convertCurrencyToWords(netAmount);
-                            var totalHtml = "<tr><td colspan='5'>" + words + "</td>";
+                            var totalHtml = "<tr><td class='text-danger' colspan='5'>" + words + "</td>";
                             totalHtml += "<td style='text-align: right;'><strong>Total</strong></td>";
-                            totalHtml += "<td>" + totalDebit.toFixed(0) + "</td>";
-                            totalHtml += "<td>" + totalCredit.toFixed(0) + "</td>";
-                            totalHtml += "<td>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
+                            totalHtml += "<td class='text-danger'>" + totalDebit.toFixed(0) + "</td>";
+                            totalHtml += "<td class='text-danger'>" + totalCredit.toFixed(0) + "</td>";
+                            totalHtml += "<td class='text-danger'>" + (typeof balance === 'number' ? balance.toFixed(0) : balance) + "</td>";
 
                             $(tableID).append(totalHtml);
 
