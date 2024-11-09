@@ -553,8 +553,9 @@
                             html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
                             html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "0") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "0") + "</td>";
+                            html += "<td>" + (v['Debit'] ? v['Debit'].toFixed(2) : "0") + "</td>";
+                            html += "<td>" + (v['Credit'] ? v['Credit'].toFixed(2) : "0") + "</td>";
+
                             if (v['Debit'] !== undefined && v['Debit'] !== null) {
                                 balance += v['Debit']; // Add to balance
                             }
