@@ -253,19 +253,20 @@
                         tableID.textContent = '';
 
                         const AllData = groupByHeadAndSub(result);
-                        // var html="<h3>"+headCount+"</h3>";
 
                         $.each(AllData, function(headCount,heads){
+                            html="<table class='table table-bordered table-striped mb-0'>";
+                            html+="<thead><tr colspan='6'>"+headCount+"<tr></thead>";
+
                             $.each(heads, function(subHeadCount,subheads){
-                                html="<table class='table table-bordered table-striped mb-0'>"; 
-                                html+="<thead><tr>"; 
-                                html+="<th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th>"; 
-                                html+="</tr></thead>";
+                                html+="<thead>";
                                 html+="<tr colspan='6'>"+subHeadCount+"</tr>";
-                                html+="<tbody>"; 
+                                html+="<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>"; 
+                                html+="</thead>";
+                                html+="<tbody>";
                                 $.each(subheads, function(itemCount,item){
                                     html += "<tr>";
-                                    html += "<td>"+itemCount+"</td>";
+                                    html += "<td>"+(itemCount+1)+"</td>";
                                     html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") +"</td>";
                                     html += "<td></td>";
                                     html += "<td></td>";
