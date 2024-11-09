@@ -4,68 +4,59 @@
             @include('layouts.homepageheader')
 			<div class="inner-wrapper cust-pad">
 				@include('layouts.leftmenu')
-				<section role="main" class="content-body">
-                    <div class="row mb-4">
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
-                                <label class="col-form-label"><strong>From</strong></label>
-                                <input type="date" class="form-control" id="fromDate" value="<?php echo $previousDate; ?>">
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class="col-form-label" ><strong>To</strong></label>
-                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label class="col-form-label"><strong>Account Group</strong></label>
-                                <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
-                                    <option value="" disabled selected>Account Group</option>
-                                    @foreach($ac_group as $key => $row)	
-                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="getReport()"><i class="fa fa-filter"></i></a>
-                        </div>
-                    </div>   
+				<section role="main" class="content-body">  
                     <div class="tabs">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link nav-link-rep" data-bs-target="#Comm" href="#Comm" data-bs-toggle="tab">Commissions</a>
+                                <a class="nav-link nav-link-rep" data-bs-target="#AG" href="#AG" data-bs-toggle="tab">Acc Group</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-rep" data-bs-target="#SHOA" href="#SHOA" data-bs-toggle="tab">SHOA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-rep" data-bs-target="#BA" href="#BA" data-bs-toggle="tab">Balance All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-rep" data-bs-target="#TB" href="#TB" data-bs-toggle="tab"> Trial Balance</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="Comm" class="tab-pane">
+                            <div id="AG" class="tab-pane">
                                 <div class="row form-group pb-3">
-                                    <div class="col-lg-6 ">
-                                        <div class="bill-to">
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
-                                                <span style="color: #17365D;">From: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="comm_from"></span>
-                                            
-                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
-                                            
-                                                <span style="color: #17365D;">To: &nbsp;</span>
-                                                <span style="font-weight: 400; color: black;" id="comm_to"></span>
-                                            </h4>
-                                                                
-                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="comm_acc"></span>
-                                            </h4>
+                                    <div class="col-lg-8">
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
+                                                <label class="col-form-label"><strong>From</strong></label>
+                                                <input type="date" class="form-control" id="fromDate" value="<?php echo $previousDate; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="col-form-label" ><strong>To</strong></label>
+                                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="col-form-label"><strong>Account Group</strong></label>
+                                                <select data-plugin-selecttwo class="form-control select2-js" id="acc_id">
+                                                    <option value="" disabled selected>Account Group</option>
+                                                    @foreach($ac_group as $key => $row)	
+                                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="getReport()"><i class="fa fa-filter"></i></a>
                                         </div>
                                     </div>
                                     
-                                    <div class="col-lg-6 text-end">
-                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('comm')"><i class="fa fa-download"></i> Download</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('comm')"><i class="fa fa-file-pdf"></i> Print PDF</a>
-                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('comm')"><i class="fa fa-file-excel"></i> Excel</a>   
+                                    <div class="col-lg-4 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('AG')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('AG')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('AG')"><i class="fa fa-file-excel"></i> Excel</a>   
                                     </div>
                                     
                                     <div class="col-12 mt-4">
@@ -83,7 +74,7 @@
                                                     <th>C.d Amnt</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="CommTbleBody">
+                                            <tbody id="AGTbleBody">
                                                     
                                             </tbody>
                                         </table>
@@ -117,13 +108,13 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#Comm"){
-                var table = document.getElementById('CommTbleBody');
+            if(tabId=="#AG"){
+                var table = document.getElementById('AGTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-comm/comm";
-                tableID="#CommTbleBody";
+                url="/rep-by-acc-grp/ag";
+                tableID="#AGTbleBody";
 
                 $.ajax({
                     type: "GET",
@@ -134,14 +125,7 @@
                         acc_id: acc_id,
                     }, 
                     success: function(result){
-                        $('#comm_from').text(formattedfromDate);
-                        $('#comm_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#comm_acc').text(selectedAcc);
-
                         $(tableID).empty(); // Clear the loading message
-
-                        console.log(result);
                         
                         $.each(result, function(k,v){
                             var html="<tr>";

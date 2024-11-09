@@ -409,6 +409,10 @@
         Route::get('/rep-by-acc-name/jv/PDF', [App\Http\Controllers\RptAccNameJVController::class, 'jvPDF'])->name('jv-sale-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/jv/download', [App\Http\Controllers\RptAccNameJVController::class, 'jvDownload'])->name('jv-rep-by-acc-name-download');
 
+        // RPT by Acc Group AG
+        Route::get('/rep-by-acc-grp/ag', [App\Http\Controllers\RptAccNameJVController::class, 'ag'])->name('ag-rep-by-acc-grp');
+
+
         // RPT by Daily Register Sale 1
         Route::get('/rep-by-daily-reg/sale1', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1'])->name('sale1-rep-by-daily-reg');
         Route::get('/rep-by-daily-reg/sale1/excel', [App\Http\Controllers\RptDailyRegSale1Controller::class, 'sale1Excel'])->name('sale1-rep-by-daily-reg-excel');
