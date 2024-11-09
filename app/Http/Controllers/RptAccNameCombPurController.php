@@ -41,7 +41,7 @@ class RptAccNameCombPurController extends Controller
 
     public function combinePurchasePDF(Request $request)
     {
-        $pur_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
+        $both_pur_rpt_by_account = both_pur_rpt_by_account::where('ac1', $request->acc_id)
         ->whereBetween('date', [$request->fromDate, $request->toDate])
         ->leftjoin('ac','ac.ac_code','=','both_pur_rpt_by_account.ac1')
         ->select('both_pur_rpt_by_account.*', 'ac.ac_name', 'ac.remarks as ac_remarks') 
