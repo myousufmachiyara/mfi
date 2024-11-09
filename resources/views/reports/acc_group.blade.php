@@ -277,13 +277,7 @@
 
                                 // Render each item under the current head
                                 items.forEach(item => {
-                                    const row = tableID.insertRow();
-                                    row.insertCell(0).textContent = item.ac_code;
-                                    row.insertCell(1).textContent = item.SumOfrec_able;
-                                    row.insertCell(2).textContent = item.SumOfpay_able;
-                                    row.insertCell(3).textContent = item.Bal;
-                                    row.insertCell(4).textContent = item.Debit;
-                                    row.insertCell(5).textContent = item.Credit;
+                                    console.log(item);
                                 });
                             });
                         });
