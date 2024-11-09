@@ -250,6 +250,7 @@
                     //     $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
                     // },
                     success: function(result){
+                        console.log(result);
                         tableID.textContent = ''; // Or you can use $(tableID).empty() in jQuery
 
                         // Group data by head and subhead
