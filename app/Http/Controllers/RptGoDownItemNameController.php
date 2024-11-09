@@ -603,7 +603,6 @@ class RptGoDownItemNameController extends Controller
 
         $gd_pipe_item_ledger5_opp = gd_pipe_item_ledger5_opp::where('it_cod', $request->acc_id)
         ->where('date', '<', $request->fromDate)
-        ->orderBy('sa_date', 'asc')
         ->get();
 
         $gd_pipe_item_ledger = gd_pipe_item_ledger::where('item_cod', $request->acc_id)
