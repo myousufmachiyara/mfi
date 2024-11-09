@@ -788,7 +788,7 @@
 
                         // Display the total in the last row or specific cell
                         var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
-                        totalRow += "<td><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
 
                     },
@@ -824,7 +824,12 @@
                         $('#sale_2_acc').text(selectedAcc);
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var crAmt = v['dr_amt'] ? parseFloat(v['dr_amt']) : 0;
+                            totalCrAmt += crAmt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['date'] ? moment(v['date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -833,10 +838,15 @@
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['pur_no'] ? v['pur_no'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['dr_amt'] ? v['dr_amt'].toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
