@@ -268,7 +268,6 @@
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
                         const groupedData = groupBySub(result);
-                        console.log(groupedData);
                         Object.keys(groupedData).forEach(sub => {
                             const subData = groupedData[sub];
                             // Loop through each head (e.g., Assets, Liabilities) and render corresponding rows
@@ -338,6 +337,7 @@
 
         function groupByHeadAndSub(data) {
             const groupedData = {};
+            console.log(data);
 
             // Loop through all available heads (keys in the data object)
             Object.keys(data).forEach(head => {
