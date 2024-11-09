@@ -12,8 +12,7 @@ use Carbon\Carbon;
 class RptAccGrpBAController extends Controller
 {
     public function ba(Request $request){
-        $balance_all = balance_all::where('ac_code',$request->acc_id)
-        ->groupby('heads')
+        $balance_all = balance_all::groupby('heads')
         ->get();
 
         return $balance_all;
