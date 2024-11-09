@@ -151,7 +151,9 @@
         document.querySelectorAll('.nav-link-rep').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
-                // tabChanged(tabId);
+                if(tabId=="#BA"){
+                    tabChanged(tabId);
+                }
             });
         });
 
