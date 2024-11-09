@@ -267,7 +267,17 @@
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
+                        result.forEach(head => {
+                            data[head].forEach(item => {
+                                const sub = item.sub;
+                                if (!result[sub]) {
+                                    result[sub] = { "Assets": [], "Liabilities": [] };
+                                }
+                                result[sub][head].push(item);
+                            });
+                        });
                         console.log(result);
+
                         // $.each(result, function(k,v){
                         //     var html="<tr>";
                         //     html += "<td>"+(k+1)+"</td>"
