@@ -90,9 +90,6 @@
                 return;
             }
 
-            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
-            const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
-
             if(tabId=="#AG"){
                 var table = document.getElementById('AGTbleBody');
                 while (table.rows.length > 0) {
@@ -113,13 +110,12 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
-                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
-                            html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount']*v['comm_disc'])/100) ? ((v['B_amount']*v['comm_disc'])/100) : "") + "</td>";
-                            html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 1.182 * v['cd_disc'])/118) : "") + "</td>";
+                            html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
+                            html += "<td>" + (v['phone_no'] ? v['phone_no'] : "") + "</td>";
+                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
+                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
