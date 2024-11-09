@@ -769,6 +769,7 @@
                         $(tableID).empty(); // Clear the loading message
 
                         var totalCrAmt = 0; // Variable to accumulate total
+                        totalCrAmt += crAmt; // Add to total
 
                         $.each(result, function(k,v){
                             var html="<tr>";
