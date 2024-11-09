@@ -260,7 +260,7 @@
                             let html = "<table class='table table-bordered table-striped mb-0'>";
                             
                             // Add table header
-                            html += "<thead><tr><th colspan='6' style='text-align:center;font-size:13px'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
+                            html += "<thead><tr><th colspan='6' style='text-align:center;font-size:18px'>" + headCount + "</th></tr>";  // Correct the 'thead' structure
                             html += "<tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>";
                             html += "</thead>";
 
@@ -269,14 +269,14 @@
                                 html += "<tbody>";  // Start tbody
 
                                 // Add subhead title row
-                                html += "<tr><td colspan='6' style='text-align:center;font-size:13px'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
+                                html += "<tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600'>" + subHeadCount + "</td></tr>";  // Correct row structure with colspan
                                 
                                 // Iterate through each item in subheads
                                 $.each(subheads, function(itemCount, item){
                                     html += "<tr>";
                                     html += "<td>" + (itemCount + 1) + "</td>"; // Serial number (S/No)
                                     html += "<td>" + (item['ac_code'] ? item['ac_code'] : "") + "</td>"; // Account Code (AC)
-                                    html += "<td>" + (item['account_name'] ? item['account_name'] : "") + "</td>"; // Account Name (default empty if not present)
+                                    html += "<td>" + (item['ac_name'] ? item['ac_name'] : "") + "</td>"; // Account Name (default empty if not present)
                                     html += "<td>" + (item['address'] ? item['address'] : "") + "</td>"; // Address (default empty if not present)
                                     html += "<td>" + (item['Debit'] ? item['Debit'] : "") + "</td>"; // Debit (default empty if not present)
                                     html += "<td>" + (item['Credit'] ? item['Credit'] : "") + "</td>"; // Credit (default empty if not present)
