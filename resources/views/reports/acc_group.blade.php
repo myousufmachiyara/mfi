@@ -269,7 +269,7 @@
                         $(tableID).empty(); // Clear the loading message
 
                         const groupedData = groupByHeadAndSub(result);
-                        console.log(headData['head']);
+                        console.log(groupedData['head']);
 
                         Object.keys(groupedData).forEach(head => {
                             const headData = groupedData[head];
