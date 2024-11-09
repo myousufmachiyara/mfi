@@ -16,11 +16,11 @@ Theme Version: 	4.0.0
 			"pageLength": 25
 		});
 
-		$('#rep-datatable-default').dataTable({
+		$('.rep-datatable-default').dataTable({
 			dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>',
 			"order": [[0, "desc"]],
 			"pageLength": -1,  // Show all rows
-			"searching": true  // Ensure search functionality is enabled
+			"searching": false  // Ensure search functionality is enabled
 		});
 
 	};

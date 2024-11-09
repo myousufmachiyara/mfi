@@ -26,13 +26,6 @@
                                     <div class="col-lg-8 row">
                                         <div class="col-lg-2">
                                             <div class="form-group">
-                                                <?php $previousDate = date('Y-m-d', strtotime('-30 days')); ?>
-                                                <label class="col-form-label"><strong>From</strong></label>
-                                                <input type="date" class="form-control" id="fromDate" value="<?php echo $previousDate; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
                                                 <label class="col-form-label" ><strong>To</strong></label>
                                                 <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
                                             </div>
@@ -64,14 +57,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Date</th>
-                                                    <th>Inv No.</th>
-                                                    <th>Ord No.</th>
-                                                    <th>Basic Amnt</th>
-                                                    <th>Comm %</th>
-                                                    <th>Comm Amnt</th>
-                                                    <th>C.d %</th>
-                                                    <th>C.d Amnt</th>
+                                                    <th>AC</th>
+                                                    <th>AC Name</th>
+                                                    <th>Address</th>
+                                                    <th>Phone</th>
+                                                    <th>Debit</th>
+                                                    <th>Credit</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="AGTbleBody">
@@ -130,7 +121,6 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
