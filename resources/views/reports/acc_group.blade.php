@@ -269,10 +269,10 @@
                         $(tableID).empty(); // Clear the loading message
 
                         const groupedData = groupByHeadAndSub(result);
+                        console.log(headData['head']);
 
                         Object.keys(groupedData).forEach(head => {
                             const headData = groupedData[head];
-                            console.log(headData);
                             // Loop through each head (e.g., Assets, Liabilities) and render corresponding rows
                             Object.keys(headData).forEach(sub => {
                                 const items = headData[sub];
