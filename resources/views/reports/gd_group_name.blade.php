@@ -84,8 +84,8 @@
                                                     <th>S/No</th>
                                                     <th>Item Name</th>
                                                     <th>Remarks</th>
-                                                    <th>Qty. in Hand</th>
-                                                    <th>Wg. in Hand</th>
+                                                    <th>Quantity In Hand</th>
+                                                    <th>Weight In Hand</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SATbleBody">
@@ -302,16 +302,30 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalop = 0; // Variable to accumulate total
+                        var totalwt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var op = v['opp_bal'] ? parseFloat(v['opp_bal']) : 0;
+                            var wt = v['wt'] ? parseFloat(v['wt']) : 0;
+                            totalop += op; // Add to total
+                            totalwt += wt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
                             html += "<td>" + (v['item_remark'] ? v['item_remark'] : "") + "</td>";
-                            html += "<td>" + (v['opp_bal'] ? v['opp_bal'] : "") + "</td>";
-                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
+                            html += "<td>" + (op ? op.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (wt ? wt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='3' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalop.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalwt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         alert("error");

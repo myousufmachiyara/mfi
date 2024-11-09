@@ -35,7 +35,6 @@ class RptGoDownItemGroupController extends Controller
         ->join('item_entry2', 'item_entry2.it_cod', '=', 'gd_pipe_pur_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->select('gd_pipe_pur_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
-        ->orderBy('sa_date','asc')
         ->get();
 
         return $gd_pipe_pur_by_item_group;
@@ -51,7 +50,6 @@ class RptGoDownItemGroupController extends Controller
         ->join('item_entry2', 'item_entry2.it_cod', '=', 'gd_pipe_sales_by_item_group.item_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->select('gd_pipe_sales_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
-        ->orderBy('sa_date','asc')
         ->get();
 
         return $gd_pipe_sales_by_item_group;
