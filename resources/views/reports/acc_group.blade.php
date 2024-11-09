@@ -246,11 +246,10 @@
                 $.ajax({
                     type: "GET",
                     url: url,
-                    // beforeSend: function() {
-                    //     $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
-                    // },
+                    beforeSend: function() {
+                        $(tableID).html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr></table>');
+                    },
                     success: function(result){
-                        console.log(result);
                         tableID.textContent = ''; // Or you can use $(tableID).empty() in jQuery
 
                         // Group data by head and subhead
@@ -294,7 +293,7 @@
                         });
                     },
                     error: function(){
-                        $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        $(tableID).html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr></table>');
                     }
                 });
             }
