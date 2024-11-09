@@ -401,7 +401,7 @@
                                                     <th>Date</th>
                                                     <th>Entry OF</th>
                                                     <th>Inv No.</th>
-                                                    <th>Mill No</th>
+                                                    <th>Bill No</th>
                                                     <th>Detail</th>
                                                     <th>Amount</th>
                                                 </tr>
