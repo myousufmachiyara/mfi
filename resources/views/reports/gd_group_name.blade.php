@@ -308,7 +308,7 @@
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
-                            html += "<td>" + (v['item_remarks'] ? v['item_remarks'] : "") + "</td>";
+                            html += "<td>" + (v['item_remark'] ? v['item_remark'] : "") + "</td>";
                             html += "<td>" + (v['opp_bal'] ? v['opp_bal'] : "") + "</td>";
                             html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
                             html +="</tr>";
