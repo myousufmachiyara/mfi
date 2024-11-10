@@ -4,7 +4,6 @@
     </div>
 </div>
 <header class="header header-nav-menu header-nav-top-line ">
-	
 	<div class="logo-container">
 		<a href="/home" class="logo" style="float:left !important">						
 			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
