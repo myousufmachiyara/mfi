@@ -145,7 +145,7 @@
                                 if (lastAcName !== null) {
                                     // Append subtotal row for the previous account with white background color
                                     html += `
-                                        <tr style="background-color: #FFFFFF;">
+                                        <tr>
                                             <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
                                             <td class="text-danger">${totalBAmount.toFixed(0)}</td>
                                             <td></td>
@@ -187,7 +187,7 @@
                         // Append last subtotal row with white background color
                         if (lastAcName !== null) {
                             html += `
-                                <tr style="background-color: #FFFFFF;">
+                                <tr>
                                     <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
                                     <td class="text-danger">${totalBAmount.toFixed(0)}</td>
                                     <td></td>
