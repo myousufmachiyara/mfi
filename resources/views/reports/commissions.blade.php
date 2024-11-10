@@ -167,15 +167,30 @@
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
+                            html += "<td>" + bAmount + "</td>";
                             html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * v['comm_disc']) / 100) ? ((v['B_amount'] * v['comm_disc']) / 100) : "") + "</td>";
+                            html += "<td>" + commDisc + "</td>";
                             html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc']) / 118) ? ((v['B_amount'] * 1.182 * v['cd_disc']) / 118) : "") + "</td>";
+                            html += "<td>" + cdDisc + "</td>";
                             html += "</tr>";
+
+                                // Update totals
+                                totalBAmount += bAmount;
+                                totalCommDisc += commDisc;
+                                totalCdDisc += cdDisc;
+
+                            
 
                             $(tableID).append(html);
                         });
+                        // After the loop, add a row for the totals
+                        var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
+                        totalHtml += "<td>" + totalBAmount.toFixed(2) + "</td>";
+                        totalHtml += "<td>" + totalCommDisc.toFixed(2) + "</td>";
+                        totalHtml += "<td>" + totalCdDisc.toFixed(2) + "</td>";
+                        totalHtml += "</tr>";
+
+                        $(tableID).append(totalHtml);
 
                     },
                     error: function(){
