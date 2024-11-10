@@ -155,7 +155,7 @@
                                 }
                                 html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
                                 lastAcName = v['ac_name'];  // Update last account name
-                            }
+                            
 
                             var bAmount = v['B_amount'] ? v['B_amount'] : 0;
                             var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
@@ -185,15 +185,15 @@
                         });
                         // After the loop, add a row for the totals
                         var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
-                        totalHtml += "<td>" + totalBAmount.toFixed(2) + "</td>";
+                        totalHtml += "<td>" + totalBAmount.toFixed(0) + "</td>";
                         totalHtml += "<td></td>";  // Empty cell for this column
-                        totalHtml += "<td>" + totalCommDisc.toFixed(2) + "</td>";
+                        totalHtml += "<td>" + totalCommDisc.toFixed(0) + "</td>";
                         totalHtml += "<td></td>";  // Empty cell for this column
-                        totalHtml += "<td>" + totalCdDisc.toFixed(2) + "</td>";
+                        totalHtml += "<td>" + totalCdDisc.toFixed(0) + "</td>";
                         totalHtml += "</tr>";
 
                         $(tableID).append(totalHtml);
-
+                    }
 
                     },
                     error: function(){
