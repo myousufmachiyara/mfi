@@ -61,7 +61,7 @@ a:active {
 .inner-wrapper {
 	display: table;
 	min-height: 100vh;
-	padding-top: 60px;
+	/* padding-top: 60px; */
 	table-layout: fixed;
 	overflow: hidden;
 	width: 100%;
@@ -70,7 +70,7 @@ a:active {
 /* Layout Base - Content Body */
 .content-body {
 	display: table-cell;
-	padding: 35px 10px;
+	/* padding: 35px 10px; */
 	position: relative;
 	vertical-align: top;
 }
@@ -119,10 +119,10 @@ a:active {
 
 /* Layout Base - Page Header */
 .page-header {
-	background: #1d2127;
+	background: #ffffff;
 	border-bottom: none;
-	border-left: 1px solid #3A3A3A;
-	box-shadow: 1px 3px 0 1px #CCCCCC;
+	/* border-left: 1px solid #3A3A3A; */
+	/* box-shadow: 1px 3px 0 1px #CCCCCC; */
 	height: 50px;
 	margin: -40px -40px 40px -40px;
 	padding: 0;
@@ -250,11 +250,11 @@ a:active {
 
 	/* Layout Fixed - Page header */
 	html.fixed .page-header {
-		left: 300px;
+		left: 250px;
 		margin: 0;
 		position: fixed;
 		right: 0;
-		top: 60px;
+		/* top: 60px; */
 	}
 
 	html.fixed.has-top-menu:not(.has-left-sidebar-half) .page-header {
@@ -267,7 +267,7 @@ a:active {
 		left: 0;
 		padding-bottom: 50px;
 		position: fixed;
-		top: 60px;
+		top: 0px;
 	}
 
 	html.fixed .sidebar-left .nano-content {
@@ -1304,7 +1304,7 @@ a:active {
 .sidebar-left .sidebar-header .sidebar-title {
 	background: #1D2127;
 	color: #fff;
-	padding: 15px;
+	padding: 8px;
 	font-size: 12.8px;
 	font-size: 1rem;
 }
@@ -17642,7 +17642,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 /* Userbox */
 .userbox {
 	display: inline-block;
-	margin: 3px 17px 0 0;
+	margin: 10px 10px 0 0;
 	position: relative;
 	vertical-align: middle;
 }
@@ -17669,7 +17669,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 }
 
 .userbox .profile-info {
-	margin: -3px 25px 0 10px;
+	margin: -3px 10px 0 10px;
 }
 
 .userbox .name,
@@ -17726,12 +17726,12 @@ p.drop-caps.drop-caps-style-2:first-letter {
 	border: none;
 	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
 	box-sizing: content-box;
-	left: -11px !important;
-	padding: 45px 10px 0;
-	top: -10px !important;
+	left: -6px !important;
+	padding: 0px 0px;
+	top: 41px !important;
 	transform: none !important;
 	width: 100%;
-	min-width: 0;
+	/* min-width: 0; */
 	z-index: 992;
 }
 

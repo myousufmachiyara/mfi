@@ -1,7 +1,9 @@
 <aside id="sidebar-left" class="sidebar-left">
     <div class="sidebar-header">
         <div class="sidebar-title">
-            <strong>MENU</strong>
+        <a href="/home" class="logo">						
+			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
+		</a>
         </div>
         <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
@@ -12,7 +14,6 @@
         <div class="nano-content">
             <nav id="menu" class="nav-main" role="navigation">
                 <ul class="nav nav-main">
-
                     <li class="active">
                         <a class="nav-link" href="/">
                             <i class="fa fa-home" aria-hidden="true"></i>
