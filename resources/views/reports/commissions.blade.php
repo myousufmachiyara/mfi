@@ -116,92 +116,91 @@
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
             if(tabId=="#Comm"){
-                var table = document.getElementById('CommTbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
-                url="/rep-comm/comm";
-                tableID="#CommTbleBody";
-
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id: acc_id,
-                    }, 
-                    success: function(result){
-                        $('#comm_from').text(formattedfromDate);
-                        $('#comm_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#comm_acc').text(selectedAcc);
-
-                        $(tableID).empty(); // Clear the loading message
-
-                        var lastAcName = null;  // Track the last account name to group rows
-                        var totalBAmount = 0;  // Total for B_amount
-                        var totalCommDisc = 0;  // Total for commission discount
-                        var totalCdDisc = 0;  // Total for cd_disc
-                        var rowCounter = 1;  // Initialize row counter for each account
-
-                        $.each(result, function(k, v) {
-                            var html = "";
-
-                            // Check if the account name has changed and insert a group header
-                            if (v['ac_name'] !== lastAcName) {
-                                // Add a header row for this new account name
-                                if (lastAcName !== null) {
-                                    html += "</tr>"; // Close previous data rows if any
-                                }
-                                html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
-                                lastAcName = v['ac_name'];  // Update last account name
-                            }
-
-                            var bAmount = v['B_amount'] ? v['B_amount'] : 0;
-                            var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
-                            var cdDisc = (bAmount * 1.182 * v['cd_disc']) / 118 || 0;
-
-                            // Add the data row under the current account name group
-                            html += "<tr>";
-                            html += "<td>" + rowCounter++ + "</td>";  // Use rowCounter and then increment
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
-                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + bAmount + "</td>";
-                            html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + commDisc + "</td>";
-                            html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + cdDisc + "</td>";
-                            html += "</tr>";
-
-                                // Update totals
-                                totalBAmount += bAmount;
-                                totalCommDisc += commDisc;
-                                totalCdDisc += cdDisc;
-
-                            
-
-                            $(tableID).append(html);
-                        });
-                        // After the loop, add a row for the totals
-                        var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
-                        totalHtml += "<td>" + totalBAmount.toFixed(0) + "</td>";
-                        totalHtml += "<td></td>";  // Empty cell for this column
-                        totalHtml += "<td>" + totalCommDisc.toFixed(0) + "</td>";
-                        totalHtml += "<td></td>";  // Empty cell for this column
-                        totalHtml += "<td>" + totalCdDisc.toFixed(0) + "</td>";
-                        totalHtml += "</tr>";
-
-                        $(tableID).append(totalHtml);
-
-
-                    },
-                    error: function(){
-                        alert("error");
-                    }
-                });
+            var table = document.getElementById('CommTbleBody');
+            while (table.rows.length > 0) {
+                table.deleteRow(0);
             }
+            url="/rep-comm/comm";
+            tableID="#CommTbleBody";
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data:{
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    acc_id: acc_id,
+                }, 
+                success: function(result){
+                    $('#comm_from').text(formattedfromDate);
+                    $('#comm_to').text(formattedtoDate);
+                    var selectedAcc = $('#acc_id').find("option:selected").text();
+                    $('#comm_acc').text(selectedAcc);
+
+                    $(tableID).empty(); // Clear the loading message
+
+                    var lastAcName = null;  // Track the last account name to group rows
+                    var totalBAmount = 0;  // Total for B_amount
+                    var totalCommDisc = 0;  // Total for commission discount
+                    var totalCdDisc = 0;  // Total for cd_disc
+                    var rowCounter = 1;  // Initialize row counter for each account
+
+                    $.each(result, function(k, v) {
+                        var html = "";
+
+                        // Check if the account name has changed and insert a group header
+                        if (v['ac_name'] !== lastAcName) {
+                            // Add a header row for this new account name
+                            if (lastAcName !== null) {
+                                html += "</tr>"; // Close previous data rows if any
+                            }
+                            html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
+                            lastAcName = v['ac_name'];  // Update last account name
+                            rowCounter = 1;  // Reset row counter for this new account group
+                        }
+
+                        var bAmount = v['B_amount'] ? v['B_amount'] : 0;
+                        var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
+                        var cdDisc = (bAmount * 1.182 * v['cd_disc']) / 118 || 0;
+
+                        // Add the data row under the current account name group
+                        html += "<tr>";
+                        html += "<td>" + rowCounter++ + "</td>";  // Use rowCounter and then increment
+                        html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                        html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
+                        html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                        html += "<td>" + bAmount + "</td>";
+                        html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
+                        html += "<td>" + commDisc + "</td>";
+                        html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
+                        html += "<td>" + cdDisc + "</td>";
+                        html += "</tr>";
+
+                        // Update totals
+                        totalBAmount += bAmount;
+                        totalCommDisc += commDisc;
+                        totalCdDisc += cdDisc;
+
+                        $(tableID).append(html);
+                    });
+
+                    // After the loop, add a row for the totals
+                    var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
+                    totalHtml += "<td>" + totalBAmount.toFixed(0) + "</td>";
+                    totalHtml += "<td></td>";  // Empty cell for this column
+                    totalHtml += "<td>" + totalCommDisc.toFixed(0) + "</td>";
+                    totalHtml += "<td></td>";  // Empty cell for this column
+                    totalHtml += "<td>" + totalCdDisc.toFixed(0) + "</td>";
+                    totalHtml += "</tr>";
+
+                    $(tableID).append(totalHtml);
+                },
+                error: function(){
+                    alert("error");
+                }
+            });
+        }
+
             
         }
 
