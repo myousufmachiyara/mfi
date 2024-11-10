@@ -150,7 +150,7 @@
                                 if (lastAcName !== null) {
                                     html += "</tr>"; // Close previous data rows if any
                                 }
-                                html += "<tr><td colspan='1' style='background-color: #cfe8e3;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
+                                html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
                                 lastAcName = v['ac_name'];  // Update last account name
                             }
 
