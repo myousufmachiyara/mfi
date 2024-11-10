@@ -140,77 +140,62 @@
                         $(tableID).empty(); // Clear the loading message
 
                         var lastAcName = null;  // Track the last account name to group rows
-                        var totalBAmount = 0;  // Total for B_amount for the current ac_name
-                        var totalCommDisc = 0;  // Total for commission discount for the current ac_name
-                        var totalCdDisc = 0;  // Total for cd_disc for the current ac_name
+                        var totalBAmount = 0;  // Total for B_amount
+                        var totalCommDisc = 0;  // Total for commission discount
+                        var totalCdDisc = 0;  // Total for cd_disc
 
                         $.each(result, function(k, v) {
                             var html = "";
 
                             // Check if the account name has changed and insert a group header
                             if (v['ac_name'] !== lastAcName) {
-                                // If it's not the first account, display the totals for the previous account
+                                // Add a header row for this new account name
                                 if (lastAcName !== null) {
-                                    html += "<tr><td colspan='4' style='text-align: center;'><strong>Total for " + lastAcName + "</strong></td>";
-                                    html += "<td>" + totalBAmount.toFixed(2) + "</td>";
-                                    html += "<td></td>";  // Empty cell for commission discount column
-                                    html += "<td>" + totalCommDisc.toFixed(2) + "</td>";
-                                    html += "<td></td>";  // Empty cell for cd_disc column
-                                    html += "<td>" + totalCdDisc.toFixed(2) + "</td>";
-                                    html += "</tr>";  // Close the total row for the previous account
+                                    html += "</tr>"; // Close previous data rows if any
                                 }
-
-                                // Add a header row for the new account name
                                 html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
-
-                                // Reset the totals for the new account name
-                                totalBAmount = 0;
-                                totalCommDisc = 0;
-                                totalCdDisc = 0;
-
                                 lastAcName = v['ac_name'];  // Update last account name
                             }
 
-                            // Calculate the values
-                            var bAmount = v['B_amount'] ? parseFloat(v['B_amount']) : 0;
+                            var bAmount = v['B_amount'] ? v['B_amount'] : 0;
                             var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
                             var cdDisc = (bAmount * 1.182 * v['cd_disc']) / 118 || 0;
 
                             // Add the data row under the current account name group
                             html += "<tr>";
-                            html += "<td>" + (k + 1) + "</td>";
+                            html += "<td>" + (k+1) + "</td>";
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + bAmount.toFixed(2) + "</td>";
+                            html += "<td>" + bAmount + "</td>";
                             html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + commDisc.toFixed(2) + "</td>";
+                            html += "<td>" + commDisc + "</td>";
                             html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + cdDisc.toFixed(2) + "</td>";
+                            html += "<td>" + cdDisc + "</td>";
                             html += "</tr>";
 
-                            // Update totals for the current account name
-                            totalBAmount += bAmount;
-                            totalCommDisc += commDisc;
-                            totalCdDisc += cdDisc;
+                                // Update totals
+                                totalBAmount += bAmount;
+                                totalCommDisc += commDisc;
+                                totalCdDisc += cdDisc;
 
-                            // Append the current row to the table
+                            
+
                             $(tableID).append(html);
                         });
+                        // After the loop, add a row for the totals
+                        var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
+                        totalHtml += "<td>" + totalBAmount.toFixed(2) + "</td>";
+                        totalHtml += "<td></td>";  // Empty cell for this column
+                        totalHtml += "<td>" + totalCommDisc.toFixed(2) + "</td>";
+                        totalHtml += "<td></td>";  // Empty cell for this column
+                        totalHtml += "<td>" + totalCdDisc.toFixed(2) + "</td>";
+                        totalHtml += "</tr>";
 
-                        // After the loop, add a row for the total of the last account
-                        if (lastAcName !== null) {
-                            var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total for " + lastAcName + "</strong></td>";
-                            totalHtml += "<td>" + totalBAmount.toFixed(2) + "</td>";
-                            totalHtml += "<td></td>";  // Empty cell for this column
-                            totalHtml += "<td>" + totalCommDisc.toFixed(2) + "</td>";
-                            totalHtml += "<td></td>";  // Empty cell for this column
-                            totalHtml += "<td>" + totalCdDisc.toFixed(2) + "</td>";
-                            totalHtml += "</tr>";
+                        $(tableID).append(totalHtml);
 
-                            $(tableID).append(totalHtml);
-                        }
 
+                    },
                     error: function(){
                         alert("error");
                     }
