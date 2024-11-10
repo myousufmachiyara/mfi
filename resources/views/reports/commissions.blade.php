@@ -158,7 +158,7 @@
 
                                 html += `
                                     <tr>
-                                        <td colspan="9" style="background-color: #cfe8e3;text-align: center;font-weight: bold;">
+                                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
                                             ${v.ac_name || "No Account Name"}
                                         </td>
                                     </tr>`;
@@ -205,6 +205,7 @@
                 });
             }
         }
+
 
         function getReport() {
             const activeTabLink = document.querySelector('.nav-link.active');
