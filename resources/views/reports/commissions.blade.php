@@ -73,6 +73,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
+                                                    <th>Account Name</th>
                                                     <th>Date</th>
                                                     <th>Inv No.</th>
                                                     <th>Ord No.</th>
@@ -144,6 +145,7 @@
                         $.each(result, function(k,v){
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") +"</td>";
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
