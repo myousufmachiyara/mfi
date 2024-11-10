@@ -140,23 +140,38 @@
 
                         $(tableID).empty(); // Clear the loading message
 
-                        console.log(result);
-                        
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") +"</td>";
+                        var lastAcName = null;  // Track the last account name to group rows
+
+                        $.each(result, function(k, v) {
+                            var html = "";
+
+                            // Check if the account name has changed and insert a group header
+                            if (v['ac_name'] !== lastAcName) {
+                                // Add a header row for this new account name
+                                if (lastAcName !== null) {
+                                    html += "</tr>"; // Close previous data rows if any
+                                }
+                                html += "<tr><td colspan='10' style='background-color: #f1f1f1; font-weight: bold;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
+                                lastAcName = v['ac_name'];  // Update last account name
+                            }
+
+                            // Add the data row under the current account name group
+                            html += "<tr>";
+                            html += "<td>" + (k+1) + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
+                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
                             html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount']*v['comm_disc'])/100) ? ((v['B_amount']*v['comm_disc'])/100) : "") + "</td>";
+                            html += "<td>" + (((v['B_amount'] * v['comm_disc']) / 100) ? ((v['B_amount'] * v['comm_disc']) / 100) : "") + "</td>";
                             html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 1.182 * v['cd_disc'])/118) : "") + "</td>";
-                            html +="</tr>";
+                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc']) / 118) ? ((v['B_amount'] * 1.182 * v['cd_disc']) / 118) : "") + "</td>";
+                            html += "</tr>";
+
                             $(tableID).append(html);
                         });
+
                     },
                     error: function(){
                         alert("error");
