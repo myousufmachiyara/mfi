@@ -133,7 +133,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Gate Pass#</th>
+                                                    <th>Voucher#</th>
                                                     <th>Item Name</th>
                                                     <th>Party Name</th>
                                                     <th>Quantity</th>
@@ -185,7 +185,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Gate Pass#</th>
+                                                    <th>Voucher#</th>
                                                     <th>Item Name</th>
                                                     <th>Party Name</th>
                                                     <th>Quantity</th>
@@ -361,17 +361,32 @@
                         $(tableID).empty(); // Clear the loading message
 
                         
+                        var totalop = 0; // Variable to accumulate total
+                        var totalwt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var op = v['Sales_qty'] ? parseFloat(v['Sales_qty']) : 0;
+                            var wt = v['wt'] ? parseFloat(v['wt']) : 0;
+                            totalop += op; // Add to total
+                            totalwt += wt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v[''] ? v[''] : "") + "</td>";
+                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
+                            html += "<td>" + (op ? op.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (wt ? wt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='4' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalop.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalwt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         alert("error");
@@ -412,19 +427,30 @@
                         $('#so_acc').text(selectedAcc);
 
                         $(tableID).empty(); // Clear the loading message
+                        var totalop = 0; // Variable to accumulate total
+                        var totalwt = 0; // Variable to accumulate total
 
-                        // Populate the table with new data
                         $.each(result, function(k,v){
+                            var op = v['Sales_qty'] ? parseFloat(v['Sales_qty']) : 0;
+                            var wt = v['wt'] ? parseFloat(v['wt']) : 0;
+                            totalop += op; // Add to total
+                            totalwt += wt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v[''] ? v[''] : "") + "</td>";
+                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['item_name'] ? v['item_name'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['wt'] ? v['wt'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_qty'] ? v['Sales_qty'] : "") + "</td>";
+                            html += "<td>" + (op ? op.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (wt ? wt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                         // Display the total in the last row or specific cell
+                         var totalRow = "<tr><td colspan='4' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalop.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalwt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function () {
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
