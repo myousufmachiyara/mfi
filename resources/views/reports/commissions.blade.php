@@ -145,7 +145,7 @@
                                 if (lastAcName !== null) {
                                     // Append subtotal row for the previous account with consistent background color
                                     html += `
-                                        <tr style="background-color: #f0f0f0;">
+                                        <tr style="background-color: #FFFFFF;">
                                             <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
                                             <td class="text-danger">${totalBAmount.toFixed(0)}</td>
                                             <td></td>
@@ -187,7 +187,7 @@
                         // Append last subtotal row with consistent background color
                         if (lastAcName !== null) {
                             html += `
-                                <tr style="background-color: #f0f0f0;">
+                                <tr style="background-color: #FFFFFF;">
                                     <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
                                     <td class="text-danger">${totalBAmount.toFixed(0)}</td>
                                     <td></td>
@@ -205,7 +205,7 @@
                 });
             }
         }
-        
+
         function getReport() {
             const activeTabLink = document.querySelector('.nav-link.active');
             if (activeTabLink) {
