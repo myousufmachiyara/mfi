@@ -155,7 +155,7 @@
                                 }
                                 html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
                                 lastAcName = v['ac_name'];  // Update last account name
-                            
+                            }
 
                             var bAmount = v['B_amount'] ? v['B_amount'] : 0;
                             var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
@@ -193,7 +193,7 @@
                         totalHtml += "</tr>";
 
                         $(tableID).append(totalHtml);
-                    }
+
 
                     },
                     error: function(){
