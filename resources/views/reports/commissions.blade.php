@@ -186,13 +186,14 @@
                         // After the loop, add a row for the totals
                         var totalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Total</strong></td>";
                         totalHtml += "<td>" + totalBAmount.toFixed(2) + "</td>";
-                        totalHtml += "<td>""</td>";
+                        totalHtml += "<td></td>";  // Empty cell for this column
                         totalHtml += "<td>" + totalCommDisc.toFixed(2) + "</td>";
-                        totalHtml += "<td>""</td>";
+                        totalHtml += "<td></td>";  // Empty cell for this column
                         totalHtml += "<td>" + totalCdDisc.toFixed(2) + "</td>";
                         totalHtml += "</tr>";
 
                         $(tableID).append(totalHtml);
+
 
                     },
                     error: function(){
