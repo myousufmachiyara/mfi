@@ -431,9 +431,9 @@
 		sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
 		$('#BillAfterDisc').val(sum.toFixed(0));
 
-		 // Update GST and IT amount based on the discounted bill
-		 CalGSTAmount();
-		 CalITAmount();
+		// Update GST and IT amount based on the discounted bill
+		CalGSTAmount();
+		CalITAmount();
 	}
 
 	function CalGSTAmount() {
@@ -563,9 +563,10 @@
 
 		inputGroups.forEach(input => {
 			// Show or hide input groups based on the toggle switch state
-			if (input.id !== 'BillAfterDisc') {
+			if (input.id !== 'BillAfterDisc' && input.id !== 'GSTAmount' && input.id !== 'ITAmount') {
 				input.disabled = !isChecked;
 			}
+			
 		});
 
 		// Update hidden input field
