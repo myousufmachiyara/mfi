@@ -17,6 +17,7 @@ class RptCommissionsController extends Controller
         $comm_pipe_rpt = comm_pipe_rpt::where('item',$request->acc_id)
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
         ->orderBy('sa_date', 'asc')
+        ->orderBy('ac_name', 'asc')
         ->get();
 
         return $comm_pipe_rpt;
