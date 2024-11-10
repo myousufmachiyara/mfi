@@ -167,7 +167,7 @@
                                     totalCdDisc = 0;
                                 }
 
-                                html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
+                                html += "<tr><td colspan='9' style='background-color: #cfe8e3;text-align: center;font-weight: bold;'>" + (v['ac_name'] ? v['ac_name'] : "No Account Name") + "</td></tr>";
                                 lastAcName = v['ac_name']; // Update last account name
                                 rowCounter = 1; // Reset row counter for this new account group
                             }
@@ -200,11 +200,11 @@
                         // Add subtotal for the last account after the loop
                         if (lastAcName !== null) {
                             var subtotalHtml = "<tr><td colspan='4' style='text-align: center;'><strong>Subtotal for " + lastAcName + "</strong></td>";
-                            subtotalHtml += "<td>" + totalBAmount.toFixed(0) + "</td>";
+                            subtotalHtml += "<td class='text-danger'>" + totalBAmount.toFixed(0) + "</td>";
                             subtotalHtml += "<td></td>";  // Empty cell for this column
-                            subtotalHtml += "<td>" + totalCommDisc.toFixed(0) + "</td>";
+                            subtotalHtml += "<td class='text-danger'>" + totalCommDisc.toFixed(0) + "</td>";
                             subtotalHtml += "<td></td>";  // Empty cell for this column
-                            subtotalHtml += "<td>" + totalCdDisc.toFixed(0) + "</td>";
+                            subtotalHtml += "<td class='text-danger'>" + totalCdDisc.toFixed(0) + "</td>";
                             subtotalHtml += "</tr>";
                             $(tableID).append(subtotalHtml); // Append last subtotal row
                         }
