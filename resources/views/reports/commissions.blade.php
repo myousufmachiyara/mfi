@@ -171,21 +171,22 @@
                                 lastAcName = v['ac_name'];  // Update last account name
                             }
 
-                            var bAmount = v['B_amount'] ? v['B_amount'] : 0;
+                            // Calculate the values
+                            var bAmount = v['B_amount'] ? parseFloat(v['B_amount']) : 0;
                             var commDisc = (bAmount * v['comm_disc']) / 100 || 0;
                             var cdDisc = (bAmount * 1.182 * v['cd_disc']) / 118 || 0;
 
                             // Add the data row under the current account name group
                             html += "<tr>";
-                            html += "<td>" + (k+1) + "</td>";
+                            html += "<td>" + (k + 1) + "</td>";
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + bAmount + "</td>";
+                            html += "<td>" + bAmount.toFixed(2) + "</td>";
                             html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + commDisc + "</td>";
+                            html += "<td>" + commDisc.toFixed(2) + "</td>";
                             html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + cdDisc + "</td>";
+                            html += "<td>" + cdDisc.toFixed(2) + "</td>";
                             html += "</tr>";
 
                             // Update totals for the current account name
