@@ -152,7 +152,7 @@
 
                                 html += `
                                     <tr>
-                                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
+                                        <td colspan="9"  text-align: center; font-weight: bold;">
                                             ${data.ac_name || "No Account Name"}
                                         </td>
                                     </tr>`;
