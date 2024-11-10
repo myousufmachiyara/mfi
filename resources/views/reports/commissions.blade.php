@@ -111,8 +111,8 @@
             const toDate = $('#toDate').val();
             const acc_id = $('#acc_id').val();
 
-            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY');
-            const formattedtoDate = moment(toDate).format('DD-MM-YYYY');
+            const formattedFromDate = moment(fromDate).format('DD-MM-YYYY');
+            const formattedToDate = moment(toDate).format('DD-MM-YYYY');
 
             if (tabId === "#Comm") {
                 const tableBody = $('#CommTbleBody');
@@ -125,84 +125,89 @@
                     url: url,
                     data: { fromDate, toDate, acc_id },
                     success: function(result) {
-                        $('#comm_from').text(formattedfromDate);
-                        $('#comm_to').text(formattedtoDate);
+                        $('#comm_from').text(formattedFromDate);
+                        $('#comm_to').text(formattedToDate);
                         $('#comm_acc').text($('#acc_id option:selected').text());
 
+                        let html = "";
                         let lastAcName = null;
                         let totalBAmount = 0;
                         let totalCommDisc = 0;
                         let totalCdDisc = 0;
                         let rowCounter = 1;
-                        let html = "";
 
-                        $.each(result, function(k, v) {
-                            const bAmount = v.B_amount || 0;
-                            const commDisc = (bAmount * (v.comm_disc || 0)) / 100;
-                            const cdDisc = (bAmount * 1.182 * (v.cd_disc || 0)) / 118;
+                        $.each(result, function(index, record) {
+                            const bAmount = record.B_amount || 0;
+                            const commDisc = (bAmount * (record.comm_disc || 0)) / 100;
+                            const cdDisc = (bAmount * 1.182 * (record.cd_disc || 0)) / 118;
 
-                            if (v.ac_name !== lastAcName) {
-                                if (lastAcName !== null) {
-                                    // Append subtotal row for the previous account with white background color
-                                    html += `
-                                        <tr style="background-color: #FFFFFF;">
-                                            <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
-                                            <td class="text-danger">${totalBAmount.toFixed(0)}</td>
-                                            <td></td>
-                                            <td class="text-danger">${totalCommDisc.toFixed(0)}</td>
-                                            <td></td>
-                                            <td class="text-danger">${totalCdDisc.toFixed(0)}</td>
-                                        </tr>`;
-                                    totalBAmount = totalCommDisc = totalCdDisc = 0;
+                            if (record.ac_name !== lastAcName) {
+                                if (lastAcName) {
+                                    html += generateSubtotalRow(lastAcName, totalBAmount, totalCommDisc, totalCdDisc);
+                                    resetTotals();
                                 }
-
-                                html += `
-                                    <tr>
-                                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
-                                            ${v.ac_name || "No Account Name"}
-                                        </td>
-                                    </tr>`;
-                                lastAcName = v.ac_name;
+                                html += generateAccountHeaderRow(record.ac_name || "No Account Name");
+                                lastAcName = record.ac_name;
                                 rowCounter = 1;
                             }
 
-                            html += `
-                                <tr>
-                                    <td>${rowCounter++}</td>
-                                    <td>${v.sa_date ? moment(v.sa_date).format('DD-MM-YYYY') : ""}</td>
-                                    <td>${v.Sale_inv_no || ""}</td>
-                                    <td>${v.pur_ord_no || ""}</td>
-                                    <td>${bAmount.toFixed(0)}</td>
-                                    <td>${v.comm_disc || ""}</td>
-                                    <td>${commDisc.toFixed(0)}</td>
-                                    <td>${v.cd_disc || ""}</td>
-                                    <td>${cdDisc.toFixed(0)}</td>
-                                </tr>`;
+                            html += generateDataRow(rowCounter++, record, bAmount, commDisc, cdDisc);
 
                             totalBAmount += bAmount;
                             totalCommDisc += commDisc;
                             totalCdDisc += cdDisc;
                         });
 
-                        // Append last subtotal row with white background color
-                        if (lastAcName !== null) {
-                            html += `
-                                <tr style="background-color: #FFFFFF;">
-                                    <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
-                                    <td class="text-danger">${totalBAmount.toFixed(0)}</td>
-                                    <td></td>
-                                    <td class="text-danger">${totalCommDisc.toFixed(0)}</td>
-                                    <td></td>
-                                    <td class="text-danger">${totalCdDisc.toFixed(0)}</td>
-                                </tr>`;
+                        if (lastAcName) {
+                            html += generateSubtotalRow(lastAcName, totalBAmount, totalCommDisc, totalCdDisc);
                         }
 
-                        tableBody.html(html); // Append all rows at once for efficiency
+                        tableBody.html(html);
                     },
                     error: function() {
-                        alert("Error occurred while fetching data.");
+                        alert("An error occurred while fetching data.");
                     }
                 });
+            }
+
+            function generateSubtotalRow(accountName, bAmount, commDisc, cdDisc) {
+                return `
+                    <tr style="background-color: #FFFFFF;">
+                        <td colspan="4" style="text-align: center;"><strong>Subtotal for ${accountName}</strong></td>
+                        <td class="text-danger">${bAmount.toFixed(0)}</td>
+                        <td></td>
+                        <td class="text-danger">${commDisc.toFixed(0)}</td>
+                        <td></td>
+                        <td class="text-danger">${cdDisc.toFixed(0)}</td>
+                    </tr>`;
+            }
+
+            function generateAccountHeaderRow(accountName) {
+                return `
+                    <tr>
+                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
+                            ${accountName}
+                        </td>
+                    </tr>`;
+            }
+
+            function generateDataRow(counter, record, bAmount, commDisc, cdDisc) {
+                return `
+                    <tr>
+                        <td>${counter}</td>
+                        <td>${record.sa_date ? moment(record.sa_date).format('DD-MM-YYYY') : ""}</td>
+                        <td>${record.Sale_inv_no || ""}</td>
+                        <td>${record.pur_ord_no || ""}</td>
+                        <td>${bAmount.toFixed(0)}</td>
+                        <td>${record.comm_disc || ""}</td>
+                        <td>${commDisc.toFixed(0)}</td>
+                        <td>${record.cd_disc || ""}</td>
+                        <td>${cdDisc.toFixed(0)}</td>
+                    </tr>`;
+            }
+
+            function resetTotals() {
+                totalBAmount = totalCommDisc = totalCdDisc = 0;
             }
         }
 
