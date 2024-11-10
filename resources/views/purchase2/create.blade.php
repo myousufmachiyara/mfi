@@ -101,19 +101,19 @@
 										<div class="row form-group mb-2">
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field" disabled>
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()"  autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field" disabled>
 											</div>
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field" disabled>
 											</div>
 
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
@@ -126,6 +126,23 @@
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field" disabled>
+											</div>
+
+											<div class="col-3 mb-2">
+												<label class="col-form-label" >GST<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" value="18" name="gst" id="gst_id" onchange="CalGSTAmount()" step="any" required class="form-control comm-form-field" disabled>
+											</div>
+											<div class="col-3 mb-2">
+												<label class="col-form-label" >GST Amount</label>
+												<input type="number" value="0" id="GSTAmount"  step="any" required disabled class="form-control comm-form-field">
+											</div>
+											<div class="col-3 mb-2">
+												<label class="col-form-label" >Income Tax<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" value="0" name="income_tax" id="it_id" step="any" onchange="CalITAmount()" required class="form-control comm-form-field" disabled>
+											</div>
+											<div class="col-3 mb-2">
+												<label class="col-form-label" >IT Amount</label>
+												<input type="number" value="0" id="ITAmount"  step="any" required disabled class="form-control comm-form-field">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
@@ -412,8 +429,36 @@
 		var basic_amount_disc = parseFloat($('#basic_amount_disc').val());
 
 		sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
-		$('#BillAfterDisc').val(sum);
+		$('#BillAfterDisc').val(sum.toFixed(0));
+
+		// Update GST and IT amount based on the discounted bill
+		CalGSTAmount();
+		CalITAmount();
 	}
+
+	function CalGSTAmount() {
+        var gst_id = parseFloat($('#gst_id').val());
+        var BillAfterDisc = parseFloat($('#BillAfterDisc').val());
+
+        if (!isNaN(gst_id) && !isNaN(BillAfterDisc)) {
+            var sum = (BillAfterDisc * gst_id) / 100;
+            $('#GSTAmount').val(sum.toFixed(0));
+        }
+    }
+
+	function CalITAmount() {
+		var it_id = parseFloat($('#it_id').val());
+		var GSTAmount = parseFloat($('#GSTAmount').val());
+		var BillAfterDisc = parseFloat($('#BillAfterDisc').val());
+
+		if (!isNaN(it_id) && !isNaN(BillAfterDisc) && !isNaN(GSTAmount)) {
+			// Calculate the income tax amount
+			var sum = ((BillAfterDisc + GSTAmount) * it_id) / 100;
+			$('#ITAmount').val(sum.toFixed(0));
+		}
+	}
+
+
 
 	function getCOADetails(){
 		var coaId = document.getElementById("coa_name").value;
@@ -518,9 +563,10 @@
 
 		inputGroups.forEach(input => {
 			// Show or hide input groups based on the toggle switch state
-			if (input.id !== 'BillAfterDisc') {
+			if (input.id !== 'BillAfterDisc' && input.id !== 'GSTAmount' && input.id !== 'ITAmount') {
 				input.disabled = !isChecked;
 			}
+			
 		});
 
 		// Update hidden input field

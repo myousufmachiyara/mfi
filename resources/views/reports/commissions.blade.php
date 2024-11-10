@@ -56,8 +56,8 @@
                                             </h4>
                                                                 
                                             <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-                                                <span style="color:#17365D">Account Name: &nbsp;</span>
-                                                <span style="font-weight:400; color:black;" id="comm_acc"></span>
+                                                <span style="color:#17365D;font-size:20px;">Item Group: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="comm_acc"></span>
                                             </h4>
                                         </div>
                                     </div>
@@ -107,64 +107,98 @@
         });
 
         function tabChanged(tabId) {
+            const fromDate = $('#fromDate').val();
+            const toDate = $('#toDate').val();
+            const accId = $('#acc_id').val();
 
-            const { fromDate, toDate, acc_id } = getInputValues();
-            if (!fromDate || !toDate || !acc_id) {
-                alert('Please fill in all required fields.');
-                return;
-            }
+            const formattedFromDate = moment(fromDate).format('DD-MM-YYYY');
+            const formattedToDate = moment(toDate).format('DD-MM-YYYY');
 
-            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
-            const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
-
-            if(tabId=="#Comm"){
-                var table = document.getElementById('CommTbleBody');
-                while (table.rows.length > 0) {
-                    table.deleteRow(0);
-                }
-                url="/rep-comm/comm";
-                tableID="#CommTbleBody";
+            if (tabId === "#Comm") {
+                $('#CommTbleBody').empty();
 
                 $.ajax({
                     type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id: acc_id,
-                    }, 
-                    success: function(result){
-                        $('#comm_from').text(formattedfromDate);
-                        $('#comm_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#comm_acc').text(selectedAcc);
+                    url: "/rep-comm/comm",
+                    data: { fromDate, toDate, acc_id: accId },
+                    success: function(result) {
+                        $('#comm_from').text(formattedFromDate);
+                        $('#comm_to').text(formattedToDate);
+                        $('#comm_acc').text($('#acc_id option:selected').text());
 
-                        $(tableID).empty(); // Clear the loading message
+                        let html = "";
+                        let lastAccountName = null;
+                        let subtotalBAmount = 0, subtotalCommDisc = 0, subtotalCdDisc = 0;
+                        let rowNumber = 1;
 
-                        console.log(result);
-                        
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
-                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                            html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
-                            html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount']*v['comm_disc'])/100) ? ((v['B_amount']*v['comm_disc'])/100) : "") + "</td>";
-                            html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 1.182 * v['cd_disc'])/118) : "") + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
+                        $.each(result, function(_, data) {
+                            const bAmount = data.B_amount || 0;
+                            const commDisc = (bAmount * (data.comm_disc || 0)) / 100;
+                            const cdDisc = (bAmount * 1.182 * (data.cd_disc || 0)) / 118;
+
+                            if (data.ac_name !== lastAccountName) {
+                                if (lastAccountName) {
+                                    html += `
+                                        <tr style="background-color: #FFFFFF;">
+                                            <td colspan="4" class="text-center"><strong>Subtotal for ${lastAccountName}</strong></td>
+                                            <td class="text-danger">${subtotalBAmount.toFixed(0)}</td>
+                                            <td></td>
+                                            <td class="text-danger">${subtotalCommDisc.toFixed(0)}</td>
+                                            <td></td>
+                                            <td class="text-danger">${subtotalCdDisc.toFixed(0)}</td>
+                                        </tr>`;
+                                    subtotalBAmount = subtotalCommDisc = subtotalCdDisc = 0;
+                                }
+
+                                html += `
+                                    <tr>
+                                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
+                                            ${data.ac_name || "No Account Name"}
+                                        </td>
+                                    </tr>`;
+                                lastAccountName = data.ac_name;
+                                rowNumber = 1;
+                            }
+
+                            html += `
+                                <tr>
+                                    <td>${rowNumber++}</td>
+                                    <td>${data.sa_date ? moment(data.sa_date).format('DD-MM-YYYY') : ""}</td>
+                                    <td>${data.Sale_inv_no || ""}</td>
+                                    <td>${data.pur_ord_no || ""}</td>
+                                    <td>${bAmount.toFixed(0)}</td>
+                                    <td>${data.comm_disc || ""}</td>
+                                    <td>${commDisc.toFixed(0)}</td>
+                                    <td>${data.cd_disc || ""}</td>
+                                    <td>${cdDisc.toFixed(0)}</td>
+                                </tr>`;
+
+                            subtotalBAmount += bAmount;
+                            subtotalCommDisc += commDisc;
+                            subtotalCdDisc += cdDisc;
                         });
+
+                        if (lastAccountName) {
+                            html += `
+                                <tr style="background-color: #FFFFFF;">
+                                    <td colspan="4" class="text-center"><strong>Sub Total for ${lastAccountName}</strong></td>
+                                    <td class="text-danger">${subtotalBAmount.toFixed(0)}</td>
+                                    <td></td>
+                                    <td class="text-danger">${subtotalCommDisc.toFixed(0)}</td>
+                                    <td></td>
+                                    <td class="text-danger">${subtotalCdDisc.toFixed(0)}</td>
+                                </tr>`;
+                        }
+
+                        $('#CommTbleBody').html(html);
                     },
-                    error: function(){
-                        alert("error");
+                    error: function() {
+                        alert("Error occurred while fetching data.");
                     }
                 });
             }
-            
         }
+
 
         function getReport() {
             const activeTabLink = document.querySelector('.nav-link.active');

@@ -159,6 +159,12 @@ class Purchase2Controller extends Controller
             if ($request->has('comm_disc') && $request->comm_disc) {
                 $tax_pur2->comm_disc=$request->comm_disc;
             }
+            if ($request->has('gst') && $request->gst) {
+                $tax_pur2->gst=$request->gst;
+            }
+            if ($request->has('income_tax') && $request->income_tax) {
+                $tax_pur2->income_tax=$request->income_tax;
+            }
             if ($request->has('comm_amount') && $request->comm_amount) {
                 $tax_pur2->comm_amount=$request->comm_amount;
             }
@@ -198,13 +204,13 @@ class Purchase2Controller extends Controller
         ->select(
             'tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no', 'tpurchase.Cash_pur_name','tpurchase.Sales_Remarks','tpurchase.sales_against',
             'tpurchase.ConvanceCharges','tpurchase.cash_Pur_address','tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.prefix','tpurchase.account_name',
-            'tpurchase.Cash_pur_name_ac','bamount', 'disc', 'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id',
+            'tpurchase.Cash_pur_name_ac','bamount', 'disc', 'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id','income_tax','gst',
             'tax_tpurchase_2.remarks as tax_remarks'
         )
         ->groupby('tpurchase.Sale_inv_no','tpurchase.sa_date','tpurchase.pur_ord_no','tpurchase.Cash_pur_name',
         'tpurchase.Sales_Remarks','tpurchase.cash_Pur_address','tpurchase.sales_against','tpurchase.ConvanceCharges','tpurchase.account_name',
         'tpurchase.LaborCharges','tpurchase.Bill_discount','tpurchase.prefix','tpurchase.Cash_pur_name_ac','bamount', 'disc',
-        'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id', 'tax_remarks' )
+        'item', 'comm_amount', 'comm_disc', 'cd_disc','tax_id', 'income_tax','gst','tax_remarks' )
         ->first();
 
         $pur2_item = tpurchase_2::where('tpurchase_2.sales_inv_cod',$id)->get();
@@ -329,6 +335,12 @@ class Purchase2Controller extends Controller
                 if ($request->has('comm_disc') && $request->comm_disc OR $request->comm_disc==0) {
                     $new_tax_pur2->comm_disc=$request->comm_disc;
                 }
+                if ($request->has('gst') && $request->gst OR $request->gst==0) {
+                    $new_tax_pur2->gst=$request->gst;
+                }
+                if ($request->has('income_tax') && $request->income_tax OR $request->income_tax==0) {
+                    $new_tax_pur2->income_tax=$request->income_tax;
+                }
                 if ($request->has('comm_amount') && $request->comm_amount OR $request->comm_amount==0) {
                     $new_tax_pur2->comm_amount=$request->comm_amount;
                 }
@@ -355,6 +367,12 @@ class Purchase2Controller extends Controller
                 if ($request->has('comm_disc') && $request->comm_disc OR $request->comm_disc==0) {
                     $tax_pur2->comm_disc=$request->comm_disc;
                 }
+                if ($request->has('gst') && $request->gst OR $request->gst==0) {
+                    $tax_pur2->gst=$request->gst;
+                }
+                if ($request->has('income_tax') && $request->income_tax OR $request->income_tax==0) {
+                    $tax_pur2->income_tax=$request->income_tax;
+                }
                 if ($request->has('comm_amount') && $request->comm_amount OR $request->comm_amount==0) {
                     $tax_pur2->comm_amount=$request->comm_amount;
                 }
@@ -370,6 +388,8 @@ class Purchase2Controller extends Controller
                     'disc'=>$tax_pur2->disc,
                     'cd_disc'=>$tax_pur2->cd_disc,
                     'comm_disc'=>$tax_pur2->comm_disc,
+                    'gst'=>$tax_pur2->gst,
+                    'income_tax'=>$tax_pur2->income_tax,
                     'comm_amount'=>$tax_pur2->comm_amount,
                     'item'=>$tax_pur2->item,
                     'remarks'=>$tax_pur2->remarks,
