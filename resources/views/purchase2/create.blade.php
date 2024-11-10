@@ -103,17 +103,17 @@
 												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" name="bamount" onchange="CalBillAfterDisc()" autofocus id="basic_amount" required value="0" step="any" class="form-control comm-form-field" disabled>
 											</div>
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="disc" id="basic_amount_disc" required onchange="CalBillAfterDisc()" step="any" class="form-control comm-form-field" disabled>
 											</div>
 
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0"  name="cd_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
-											<div class="col-6 mb-2">
+											<div class="col-2 mb-2">
 												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_disc" step="any" required class="form-control comm-form-field" disabled>
 											</div>
@@ -126,6 +126,15 @@
 											<div class="col-6 mb-2">
 												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
 												<input type="number" value="0" name="comm_amount" step="any" required class="form-control comm-form-field" disabled>
+											</div>
+
+											<div class="col-6 mb-2">
+												<label class="col-form-label" >GST<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" value="0" name="gst" step="any" required class="form-control comm-form-field" disabled>
+											</div>
+											<div class="col-6 mb-2">
+												<label class="col-form-label" >Income Tax<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" value="0" name="income_tax" step="any" required class="form-control comm-form-field" disabled>
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
