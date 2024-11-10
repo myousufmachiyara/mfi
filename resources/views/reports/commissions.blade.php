@@ -172,11 +172,11 @@
                                     <td>${v.sa_date ? moment(v.sa_date).format('DD-MM-YYYY') : ""}</td>
                                     <td>${v.Sale_inv_no || ""}</td>
                                     <td>${v.pur_ord_no || ""}</td>
-                                    <td>${bAmount}</td>
+                                    <td>${bAmount.toFixed(0)}</td>
                                     <td>${v.comm_disc || ""}</td>
-                                    <td>${commDisc}</td>
+                                    <td>${commDisc.toFixed(0)}</td>
                                     <td>${v.cd_disc || ""}</td>
-                                    <td>${cdDisc}</td>
+                                    <td>${cdDisc.toFixed(0)}</td>
                                 </tr>`;
 
                             totalBAmount += bAmount;
