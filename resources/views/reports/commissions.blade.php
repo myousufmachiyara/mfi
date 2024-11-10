@@ -109,95 +109,88 @@
         function tabChanged(tabId) {
             const fromDate = $('#fromDate').val();
             const toDate = $('#toDate').val();
-            const acc_id = $('#acc_id').val();
+            const accId = $('#acc_id').val();
 
-            const formattedfromDate = moment(fromDate).format('DD-MM-YYYY');
-            const formattedtoDate = moment(toDate).format('DD-MM-YYYY');
+            const formattedFromDate = moment(fromDate).format('DD-MM-YYYY');
+            const formattedToDate = moment(toDate).format('DD-MM-YYYY');
 
             if (tabId === "#Comm") {
-                const tableBody = $('#CommTbleBody');
-                tableBody.empty(); // Clear table content
-
-                const url = "/rep-comm/comm";
+                $('#CommTbleBody').empty();
 
                 $.ajax({
                     type: "GET",
-                    url: url,
-                    data: { fromDate, toDate, acc_id },
+                    url: "/rep-comm/comm",
+                    data: { fromDate, toDate, acc_id: accId },
                     success: function(result) {
-                        $('#comm_from').text(formattedfromDate);
-                        $('#comm_to').text(formattedtoDate);
+                        $('#comm_from').text(formattedFromDate);
+                        $('#comm_to').text(formattedToDate);
                         $('#comm_acc').text($('#acc_id option:selected').text());
 
-                        let lastAcName = null;
-                        let totalBAmount = 0;
-                        let totalCommDisc = 0;
-                        let totalCdDisc = 0;
-                        let rowCounter = 1;
                         let html = "";
+                        let lastAccountName = null;
+                        let subtotalBAmount = 0, subtotalCommDisc = 0, subtotalCdDisc = 0;
+                        let rowNumber = 1;
 
-                        $.each(result, function(k, v) {
-                            const bAmount = v.B_amount || 0;
-                            const commDisc = (bAmount * (v.comm_disc || 0)) / 100;
-                            const cdDisc = (bAmount * 1.182 * (v.cd_disc || 0)) / 118;
+                        $.each(result, function(_, data) {
+                            const bAmount = data.B_amount || 0;
+                            const commDisc = (bAmount * (data.comm_disc || 0)) / 100;
+                            const cdDisc = (bAmount * 1.182 * (data.cd_disc || 0)) / 118;
 
-                            if (v.ac_name !== lastAcName) {
-                                if (lastAcName !== null) {
-                                    // Append subtotal row for the previous account with white background color
+                            if (data.ac_name !== lastAccountName) {
+                                if (lastAccountName) {
                                     html += `
-                                        <tr>
-                                            <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
-                                            <td class="text-danger">${totalBAmount.toFixed(0)}</td>
+                                        <tr style="background-color: #FFFFFF;">
+                                            <td colspan="4" class="text-center"><strong>Subtotal for ${lastAccountName}</strong></td>
+                                            <td class="text-danger">${subtotalBAmount.toFixed(0)}</td>
                                             <td></td>
-                                            <td class="text-danger">${totalCommDisc.toFixed(0)}</td>
+                                            <td class="text-danger">${subtotalCommDisc.toFixed(0)}</td>
                                             <td></td>
-                                            <td class="text-danger">${totalCdDisc.toFixed(0)}</td>
+                                            <td class="text-danger">${subtotalCdDisc.toFixed(0)}</td>
                                         </tr>`;
-                                    totalBAmount = totalCommDisc = totalCdDisc = 0;
+                                    subtotalBAmount = subtotalCommDisc = subtotalCdDisc = 0;
                                 }
 
                                 html += `
                                     <tr>
                                         <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
-                                            ${v.ac_name || "No Account Name"}
+                                            ${data.ac_name || "No Account Name"}
                                         </td>
                                     </tr>`;
-                                lastAcName = v.ac_name;
-                                rowCounter = 1;
+                                lastAccountName = data.ac_name;
+                                rowNumber = 1;
                             }
 
                             html += `
                                 <tr>
-                                    <td>${rowCounter++}</td>
-                                    <td>${v.sa_date ? moment(v.sa_date).format('DD-MM-YYYY') : ""}</td>
-                                    <td>${v.Sale_inv_no || ""}</td>
-                                    <td>${v.pur_ord_no || ""}</td>
+                                    <td>${rowNumber++}</td>
+                                    <td>${data.sa_date ? moment(data.sa_date).format('DD-MM-YYYY') : ""}</td>
+                                    <td>${data.Sale_inv_no || ""}</td>
+                                    <td>${data.pur_ord_no || ""}</td>
                                     <td>${bAmount.toFixed(0)}</td>
-                                    <td>${v.comm_disc || ""}</td>
+                                    <td>${data.comm_disc || ""}</td>
                                     <td>${commDisc.toFixed(0)}</td>
-                                    <td>${v.cd_disc || ""}</td>
+                                    <td>${data.cd_disc || ""}</td>
                                     <td>${cdDisc.toFixed(0)}</td>
                                 </tr>`;
 
-                            totalBAmount += bAmount;
-                            totalCommDisc += commDisc;
-                            totalCdDisc += cdDisc;
+                            subtotalBAmount += bAmount;
+                            subtotalCommDisc += commDisc;
+                            subtotalCdDisc += cdDisc;
                         });
 
-                        // Append last subtotal row with white background color
-                        if (lastAcName !== null) {
+                        if (lastAccountName) {
                             html += `
-                                <tr>
-                                    <td colspan="4" style="text-align: center;"><strong>Subtotal for ${lastAcName}</strong></td>
-                                    <td class="text-danger">${totalBAmount.toFixed(0)}</td>
+                                <tr style="background-color: #FFFFFF;">
+                                    <td colspan="4" class="text-center"><strong>Subtotal for ${lastAccountName}</strong></td>
+                                    <td class="text-danger">${subtotalBAmount.toFixed(0)}</td>
                                     <td></td>
-                                    <td class="text-danger">${totalCommDisc.toFixed(0)}</td>
+                                    <td class="text-danger">${subtotalCommDisc.toFixed(0)}</td>
                                     <td></td>
-                                    <td class="text-danger">${totalCdDisc.toFixed(0)}</td>
+                                    <td class="text-danger">${subtotalCdDisc.toFixed(0)}</td>
                                 </tr>`;
                         }
 
-                        tableBody.html(html); // Append all rows at once for efficiency
+                        $('#CommTbleBody').html(html);
                     },
                     error: function() {
                         alert("Error occurred while fetching data.");
