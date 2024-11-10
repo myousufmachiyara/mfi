@@ -117,18 +117,18 @@
             const formattedfromDate = moment(fromDate).format('DD-MM-YYYY'); // Format the date
             const formattedtoDate = moment(toDate).format('DD-MM-YYYY'); // Format the date
 
-            if(tabId=="#Comm"){
+            if(tabId == "#Comm"){
                 var table = document.getElementById('CommTbleBody');
                 while (table.rows.length > 0) {
                     table.deleteRow(0);
                 }
-                url="/rep-comm/comm";
-                tableID="#CommTbleBody";
+                url = "/rep-comm/comm";
+                tableID = "#CommTbleBody";
 
                 $.ajax({
                     type: "GET",
                     url: url,
-                    data:{
+                    data: {
                         fromDate: fromDate,
                         toDate: toDate,
                         acc_id: acc_id,
@@ -141,35 +141,25 @@
 
                         $(tableID).empty(); // Clear the loading message
 
-                        // Grouping the data by 'ac_name'
-                        var groupedData = {};
-                        $.each(result, function(k, v) {
-                            var acName = v['ac_name'] ? v['ac_name'] : "Unknown"; // Default to "Unknown" if 'ac_name' is missing
-                            if (!groupedData[acName]) {
-                                groupedData[acName] = [];
-                            }
-                            groupedData[acName].push(v);
-                        });
+                        // Add the group header for ac_name at the top of the table
+                        var groupHeaderHtml = "<tr><th colspan='10' style='text-align: center;'>" + selectedAcc + "</th></tr>";
+                        $(tableID).append(groupHeaderHtml);
 
-                        
-                        // Iterate over each group and append rows to the table
-                        $.each(groupedData, function(acName, data) {
-                            // For each 'ac_name', create a row with grouped data
-                            $.each(data, function(k, v) {
-                                var html = "<tr>";
-                                html += "<td>" + (k+1) + "</td>";
-                                html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                                html += "<td>" + acName + "</td>"; // Use the grouped 'ac_name' here
-                                html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
-                                html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
-                                html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
-                                html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
-                                html += "<td>" + (((v['B_amount']*v['comm_disc'])/100) ? ((v['B_amount']*v['comm_disc'])/100) : "") + "</td>";
-                                html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
-                                html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc'])/118) ? ((v['B_amount'] * 1.182 * v['cd_disc'])/118) : "") + "</td>";
-                                html += "</tr>";
-                                $(tableID).append(html);
-                            });
+                        // Add table rows
+                        $.each(result, function(k, v){
+                            var html = "<tr>";
+                            html += "<td>" + (k + 1) + "</td>";
+                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
+                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
+                            html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
+                            html += "<td>" + (v['B_amount'] ? v['B_amount'] : "") + "</td>";
+                            html += "<td>" + (v['comm_disc'] ? v['comm_disc'] : "") + "</td>";
+                            html += "<td>" + (((v['B_amount'] * v['comm_disc']) / 100) ? ((v['B_amount'] * v['comm_disc']) / 100) : "") + "</td>";
+                            html += "<td>" + (v['cd_disc'] ? v['cd_disc'] : "") + "</td>";
+                            html += "<td>" + (((v['B_amount'] * 1.182 * v['cd_disc']) / 118) ? ((v['B_amount'] * 1.182 * v['cd_disc']) / 118) : "") + "</td>";
+                            html += "</tr>";
+                            $(tableID).append(html);
                         });
                     },
                     error: function(){
@@ -177,7 +167,8 @@
                     }
                 });
             }
-            
+
+         
         }
 
         function getReport() {
