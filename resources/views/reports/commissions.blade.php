@@ -152,7 +152,7 @@
 
                                 html += `
                                     <tr>
-                                        <td colspan="9"  text-align: center; font-weight: bold;">
+                                        <td colspan="9" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
                                             ${data.ac_name || "No Account Name"}
                                         </td>
                                     </tr>`;
@@ -181,7 +181,7 @@
                         if (lastAccountName) {
                             html += `
                                 <tr style="background-color: #FFFFFF;">
-                                    <td colspan="4" class="text-center"><strong>Subtotal for ${lastAccountName}</strong></td>
+                                    <td colspan="4" class="text-center"><strong>Sub Total for ${lastAccountName}</strong></td>
                                     <td class="text-danger">${subtotalBAmount.toFixed(0)}</td>
                                     <td></td>
                                     <td class="text-danger">${subtotalCommDisc.toFixed(0)}</td>
