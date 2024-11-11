@@ -181,7 +181,7 @@
 							<div class="tab-content">
 								<div id="sales" class="tab-pane">
 									<div class="row form-group pb-3">
-										<div class="col-12 mt-2 mb-3">
+										<div class="col-12 col-md-6 mt-2 mb-3">
 											<section class="card">
 												<div class="card-body">
 													<table class="table table-responsive-md table-striped mb-0">
