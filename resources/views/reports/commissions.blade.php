@@ -137,7 +137,8 @@
                             const commDisc = (bAmount * (data.comm_disc || 0)) / 100;
                             const cdDisc = ((data.gst || 0) + (data.income_tax || 0)) === 0 
                             ? 0 
-                            : (bAmount * ((data.gst || 0) + (data.income_tax || 0)) * (data.cd_disc || 0)) / ((data.gst || 0) + (data.income_tax || 0));
+                            : (bAmount * ((data.gst || 0) + (data.income_tax || 0)) * (data.cd_disc || 0)) / ((data.gst || 0) + (data.income_tax || 0)) / 100;
+
 
 
                             if (data.ac_name !== lastAccountName) {
