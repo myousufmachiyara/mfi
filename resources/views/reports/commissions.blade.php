@@ -77,7 +77,7 @@
                                                     <th>Inv No.</th>
                                                     <th>Ord No.</th>
                                                     <th>Basic Amnt</th>
-                                                    <th>GST/I-Tax</th>
+                                                    <th>GST / I-Tax</th>
                                                     <th>Comm %</th>
                                                     <th>Comm Amnt</th>
                                                     <th>C.d %</th>
@@ -137,11 +137,8 @@
                             const commDisc = (bAmount * (data.comm_disc || 0)) / 100;
                             const totalTax = 1 + (((data.gst || 0) + (data.income_tax || 0)) / 100);
                             const cdDisc = bAmount && totalTax !== 0 
-                                ? (bAmount * totalTax * (data.cd_disc || 0) / 100) / totalTax
-                                : 0;
-
-
-
+                            ? (bAmount * totalTax * (data.cd_disc || 0) / 100) / totalTax
+                            : 0;
 
                             if (data.ac_name !== lastAccountName) {
                                 if (lastAccountName) {
