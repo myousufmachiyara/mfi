@@ -417,6 +417,7 @@
 
         // RPT by Acc Group Account Group
         Route::get('/rep-by-acc-grp/ag', [App\Http\Controllers\RptAccGrpAGController::class, 'ag'])->name('ag-rep-by-acc-grp');
+        Route::get('/rep-by-acc-grp/ag/excel', [App\Http\Controllers\RptAccGrpAGController::class, 'agExcel'])->name('ag-rep-by-acc-grp-excel');
 
         // RPT by Acc Group Sub Head Of Account
         Route::get('/rep-by-acc-grp/shoa', [App\Http\Controllers\RptAccGrpSHOAController::class, 'shoa'])->name('shoa-rep-by-acc-grp');
