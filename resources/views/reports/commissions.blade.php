@@ -132,19 +132,14 @@
                         let subtotalBAmount = 0, subtotalCommDisc = 0, subtotalCdDisc = 0;
                         let rowNumber = 1;
 
-                        function calculateCommDisc(bAmount, commDiscRate) {
-                            return (bAmount * (commDiscRate || 0)) / 100;
-                        }
-
-                        function calculateCdDisc(bAmount, gst, incomeTax, cdDiscRate) {
-                            const totalTax = (gst || 0) + (incomeTax || 0);
-                            return totalTax === 0 ? 0 : (bAmount * totalTax * (cdDiscRate || 0)) / totalTax / 100;
-                        }
-
                         $.each(result, function(_, data) {
                             const bAmount = data.B_amount || 0;
-                            const commDisc = calculateCommDisc(bAmount, data.comm_disc);
-                            const cdDisc = calculateCdDisc(bAmount, data.gst, data.income_tax, data.cd_disc);
+                            const commDisc = (bAmount * (data.comm_disc || 0)) / 100;
+                            const cdDisc = ((data.gst || 0) + (data.income_tax || 0)) === 0 
+                            ? 0 
+                            : (bAmount * ((data.gst || 0) + (data.income_tax || 0)) * (data.cd_disc || 0)) / ((data.gst || 0) + (data.income_tax || 0)) / 100;
+
+
 
                             if (data.ac_name !== lastAccountName) {
                                 if (lastAccountName) {
@@ -204,7 +199,7 @@
                         }
 
                         $('#CommTbleBody').html(html);
-
+                    },
                     error: function() {
                         alert("Error occurred while fetching data.");
                     }
