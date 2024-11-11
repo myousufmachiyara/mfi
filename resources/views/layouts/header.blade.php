@@ -17,17 +17,15 @@
 		<!-- Vendor CSS -->
 
 		<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="/assets/vendor/animate/animate.compat.css">
 		<link rel="stylesheet" href="/assets/vendor/font-awesome/css/all.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/magnific-popup/magnific-popup.css" />
-		<!-- <link rel="stylesheet" href="/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css" /> -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
-
 		<link rel="stylesheet" href="/assets/vendor/datatables/media/css/dataTables.bootstrap5.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2/css/select2.css" />
 		<link rel="stylesheet" href="/assets/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 		<link rel="stylesheet" href="/assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
-
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/assets/css/theme.css" />
@@ -60,7 +58,7 @@
 		}
 		@media (min-width: 768px) {
 			.cust-pad {
-				padding-top: 50px;
+				padding-top: 85px;
 			}	
 		}
     </style>
