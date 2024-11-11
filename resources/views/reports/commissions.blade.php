@@ -77,6 +77,7 @@
                                                     <th>Inv No.</th>
                                                     <th>Ord No.</th>
                                                     <th>Basic Amnt</th>
+                                                    <th>GST/I-Tax</th>
                                                     <th>Comm %</th>
                                                     <th>Comm Amnt</th>
                                                     <th>C.d %</th>
@@ -168,6 +169,7 @@
                                     <td>${data.pur_ord_no || ""}</td>
                                     <td>${bAmount.toFixed(0)}</td>
                                     <td>${data.comm_disc || ""}</td>
+                                   <td>${(data.gst || "") + (data.gst && data.income_tax ? " / " : "") + (data.income_tax || "")}</td>
                                     <td>${commDisc.toFixed(0)}</td>
                                     <td>${data.cd_disc || ""}</td>
                                     <td>${cdDisc.toFixed(0)}</td>
