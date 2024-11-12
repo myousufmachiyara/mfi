@@ -77,8 +77,24 @@ class RptAccGrpAGController extends Controller
     
         // Header details
         $html = '
-        <table style="border:1px solid #000; padding:6px;">
-            <tr colspan="8">
+        <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
+            <tr>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
+                    Account Name: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['ac_name']) . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
+                Remarks: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['ac_remarks']) . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
+                    From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
+                </td>
+            </tr>
+            <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Group Name:
                 </td>
