@@ -145,15 +145,7 @@ class RptAccGrpAGController extends Controller
             
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-    
-        // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
-    
+        
         $accId = $request->acc_id;
         $filename = "acc_group_bal_1_report{$accId}.pdf";
 
