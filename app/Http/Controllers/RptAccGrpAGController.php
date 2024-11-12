@@ -107,8 +107,8 @@ class RptAccGrpAGController extends Controller
                     <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
-                    <th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
     
         // Iterate through items and add rows
@@ -126,8 +126,8 @@ class RptAccGrpAGController extends Controller
                     <td style="width:25%;">' . $item['ac_name'] . '</td>
                     <td style="width:18%;">' . $item['address'] . '</td>
                     <td style="width:15%;">' . $item['phone'] . '</td>
-                    <td style="width:13%;">' . $item['Debit'] . '</td>
-                    <td style="width:13%;">' . $item['Credit'] . '</td>
+                    <td style="width:14%;">' . $item['Debit'] . '</td>
+                    <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
             
             $totalDebit += $item['Debit']; // Accumulate total quantity
