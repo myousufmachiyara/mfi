@@ -125,9 +125,9 @@ class RptAccGrpSHOAController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:9%;">' . $item['ac_code']. '</td>
-                    <td style="width:30%;">' . $item['ac_name'] . '</td>
-                    <td style="width:18%;">' . $item['address'] . '</td>
+                    <td style="width:10%;">' . $item['ac_code']. '</td>
+                    <td style="width:32%;">' . $item['ac_name'] . '</td>
+                    <td style="width:20%;">' . $item['address'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
                     <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
