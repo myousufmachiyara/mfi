@@ -104,7 +104,7 @@ class RptAccGrpAGController extends Controller
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                     <th style="width:8%;color:#17365D;font-weight:bold;">Acc#</th>
-                    <th style="width:23%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:24%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
@@ -123,7 +123,7 @@ class RptAccGrpAGController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:8%;">' . $item['ac_code']. '</td>
-                    <td style="width:23%;">' . $item['ac_name'] . '</td>
+                    <td style="width:24%;">' . $item['ac_name'] . '</td>
                     <td style="width:18%;">' . $item['address'] . '</td>
                     <td style="width:15%;">' . $item['phone'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
