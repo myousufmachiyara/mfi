@@ -103,13 +103,12 @@ class RptAccGrpAGController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">JV No</th>
-                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Acc No</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Phone</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:16%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Narration</th>
                 </tr>';
     
         // Iterate through items and add rows
