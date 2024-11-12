@@ -313,14 +313,14 @@
 				{
 				label: 'Dataset 1',
 				data: Utils.months(NUMBER_CFG),
-				borderColor: red,
-				backgroundColor: red,
+				borderColor: #FF0000,
+				backgroundColor: #FF0000
 				},
 				{
 				label: 'Dataset 2',
 				data: Utils.months(NUMBER_CFG),
-				borderColor: blue,
-				backgroundColor: blue,
+				borderColor: #0000FF,
+				backgroundColor: #0000FF,
 				}
 			]
 		};
