@@ -146,7 +146,8 @@ class RptAccGrpAGController extends Controller
         $pdf->SetXY(175, $currentY + 5);
         $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
     
-        $filename = "acc_group_bal_1_report{$acc_id}.pdf";
+        $accId = $request->acc_id;
+        $filename = "acc_group_bal_1_report{$accId}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
