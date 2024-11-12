@@ -83,7 +83,7 @@ class RptAccGrpAGController extends Controller
                     Group Name:
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date <span style="color:black;"></span>
+                    Print Date: <span style="color:black;"></span>
                 </td>
             </tr>
             <tr>
