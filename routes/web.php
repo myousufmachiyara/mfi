@@ -422,6 +422,8 @@
 
         // RPT by Acc Group Sub Head Of Account
         Route::get('/rep-by-acc-grp/shoa', [App\Http\Controllers\RptAccGrpSHOAController::class, 'shoa'])->name('shoa-rep-by-acc-grp');
+        Route::get('/rep-by-acc-grp/shoa/excel', [App\Http\Controllers\RptAccGrpAGController::class, 'shoaExcel'])->name('shoa-rep-by-acc-grp-excel');
+        Route::get('/rep-by-acc-grp/shoa/report', [App\Http\Controllers\RptAccGrpAGController::class, 'shoaReport'])->name('shoa-rep-by-acc-grp-report');
 
         // RPT by Acc Group Balance All
         Route::get('/rep-by-acc-grp/ba', [App\Http\Controllers\RptAccGrpBAController::class, 'ba'])->name('ba-rep-by-acc-grp');

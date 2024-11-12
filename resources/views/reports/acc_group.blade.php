@@ -325,6 +325,17 @@
 
                 window.location.href = `/rep-by-acc-grp/ag/excel?acc_id=${acc_id}`;
             }
+
+            if (tabName === "SHOA") {
+                var acc_id = $('#shoa_acc_id').val()
+
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                window.location.href = `/rep-by-acc-grp/shoa/excel?acc_id=${acc_id}`;
+            }
         }
 
         function printPDF(tabName) {
