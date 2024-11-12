@@ -182,7 +182,7 @@
 								<div id="sales" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
-										<div class="col-12 col-md-6">
+										<div class="col-12 col-md-6 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -198,7 +198,7 @@
 										</div>
 
 										<!-- Half Year Sales -->
-										<div class="col-12 col-md-6">
+										<div class="col-12 col-md-6 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -214,7 +214,7 @@
 										</div>
 
 										<!-- Top 5 Customers -->
-										<div class="col-12 col-md-6">
+										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
