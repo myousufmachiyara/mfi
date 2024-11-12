@@ -533,9 +533,6 @@ class RptGoDownItemNameController extends Controller
         $cellWidth = 25;
         $currentY = $pdf->GetY();
 
-       
-
-    
         // Prepare filename for the PDF
         $accId = $request->acc_id;
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
