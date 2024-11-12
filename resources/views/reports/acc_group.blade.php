@@ -328,29 +328,29 @@
         }
 
         function printPDF(tabName) {
-            const { fromDate, toDate, acc_id } = getInputValues();
 
-            if (!fromDate || !toDate || !acc_id) {
-                alert('Please fill in all required fields.');
-                return;
-            }
+            if (tabName === "AG") {
+                var acc_id = $('#ag_acc_id').val()
 
-            if (tabName === "SI") {
-                window.open(`/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
 
+                window.open(`/rep-by-acc-grp/ag/report?outputType=view&acc_id=${acc_id}`, '_blank');
             }
         }
 
         function downloadPDF(tabName) {
-            const { fromDate, toDate, acc_id } = getInputValues();
 
-            if (!fromDate || !toDate || !acc_id) {
-                alert('Please fill in all required fields.');
-                return;
-            }
+            if (tabName === "AG") {
+                var acc_id = $('#ag_acc_id').val()
 
-            if (tabName === "SI") {
-                window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                window.location.href = `/rep-by-acc-grp/ag/report?outputType=download&acc_id=${acc_id}`;
             }
         }
 
