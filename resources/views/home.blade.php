@@ -305,7 +305,7 @@
 		}); 
 		
 		const halfYearSale2 = document.getElementById('halfYearSale2');
-		const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+		const NUMBER_CFG = {count: 6, min: -100, max: 100};
 		const data = {
 			labels: labels,
 			datasets: [
