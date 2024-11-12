@@ -2,7 +2,7 @@
     <div class="sidebar-header">
         <div class="sidebar-title">
         <a href="/home" class="logo">						
-			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
+			<img src="/assets/img/logo.png" width="55" height="400" alt="MFI Logo" />
 		</a>
         </div>
         <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
