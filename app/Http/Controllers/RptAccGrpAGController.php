@@ -80,12 +80,12 @@ class RptAccGrpAGController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;">Group Name</span>
+                    Group Name:
                 </td>
             </tr>
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    From Date: <span style="color:black;">'.$balance_acc_group[0]['group_name'].'</span>
+                    '.$balance_acc_group[0]['group_name'].'
                 </td>
             </tr>
         </table>';
