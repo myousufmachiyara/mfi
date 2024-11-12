@@ -121,12 +121,12 @@ class RptAccGrpAGController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:8%;">' . $item['jv_no']. '</td>
-                    <td style="width:18%;">' . $item['ac_name'] . '</td>
-                    <td style="width:12%;">' . $item['debit'] . '</td>
-                    <td style="width:12%;">' . $item['credit'] . '</td>
-                    <td style="width:16%;">' . $item['Remark'] . '</td>
-                    <td style="width:18%;">' . $item['Narration'] . '</td>
+                    <td style="width:10%;">' . $item['jv_no']. '</td>
+                    <td style="width:25%;">' . $item['ac_name'] . '</td>
+                    <td style="width:18%;">' . $item['debit'] . '</td>
+                    <td style="width:15%;">' . $item['credit'] . '</td>
+                    <td style="width:13%;">' . $item['Remark'] . '</td>
+                    <td style="width:13%;">' . $item['Narration'] . '</td>
                 </tr>';
             
             $totalAmount += $item['Amount']; // Accumulate total quantity
