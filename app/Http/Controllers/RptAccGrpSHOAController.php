@@ -34,7 +34,7 @@ class RptAccGrpSHOAController extends Controller
         return Excel::download(new ACGroupSHOAExport($balance_sub_head), $filename);
     }
 
-    public function agReport(Request $request)
+    public function shoaReport(Request $request)
     {
         // Validate the request
         $request->validate([
@@ -43,19 +43,21 @@ class RptAccGrpSHOAController extends Controller
         ]);
     
         // Retrieve data from the database
-        $balance_acc_group = balance_acc_group::where('group_cod',$request->acc_id)
+        $balance_sub_head = balance_sub_head::where('sub',$request->acc_id)
+        ->join('sub_head_of_acc as shoa','shoa.id','=','balance_sub_head.sub')
+        ->select('balance_sub_head.*','shoa.sub as shoa_name')
         ->get();
     
         // Check if data exists
-        if ($balance_acc_group->isEmpty()) {
+        if ($balance_sub_head->isEmpty()) {
             return response()->json(['message' => 'No records found for the Account.'], 404);
         }
     
         // Generate the PDF
-        return $this->aggeneratePDF($balance_acc_group, $request);
+        return $this->shoageneratePDF($balance_sub_head, $request);
     }
 
-    private function aggeneratePDF($balance_acc_group, Request $request)
+    private function shoageneratePDF($balance_sub_head, Request $request)
     {
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
@@ -63,9 +65,9 @@ class RptAccGrpSHOAController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Acc Grp Balance 1 Report ' . $request->acc_id);
-        $pdf->SetSubject('Acc Grp Balance 1 Report');
-        $pdf->SetKeywords('Acc Grp Balance 1 Report, TCPDF, PDF');
+        $pdf->SetTitle('Sub Head Of Acc Report' . $request->acc_id);
+        $pdf->SetSubject('Sub Head Of Acc Report');
+        $pdf->SetKeywords('Sub Head Of Acc Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -73,7 +75,7 @@ class RptAccGrpSHOAController extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Account Recievables & Payables</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Closing Balance</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
@@ -81,7 +83,7 @@ class RptAccGrpSHOAController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                    Group Name:
+                    Account Type Name:
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Print Date: <span style="color:black;"></span>
@@ -89,7 +91,7 @@ class RptAccGrpSHOAController extends Controller
             </tr>
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                '.$balance_acc_group[0]['group_name'].'
+                '.$balance_sub_head[0]['shoa_name'].'
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                     Balance Date: <span style="color:black;"></span>
@@ -105,10 +107,9 @@ class RptAccGrpSHOAController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Acc#</th>
-                    <th style="width:24%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:9%;color:#17365D;font-weight:bold;">Acc No.</th>
+                    <th style="width:30%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
@@ -118,16 +119,15 @@ class RptAccGrpSHOAController extends Controller
         $totalDebit = 0;
         $totalCredit = 0;
 
-        foreach ($balance_acc_group as $item) {
+        foreach ($balance_sub_head as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:8%;">' . $item['ac_code']. '</td>
-                    <td style="width:24%;">' . $item['ac_name'] . '</td>
+                    <td style="width:9%;">' . $item['ac_code']. '</td>
+                    <td style="width:30%;">' . $item['ac_name'] . '</td>
                     <td style="width:18%;">' . $item['address'] . '</td>
-                    <td style="width:15%;">' . $item['phone'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
                     <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
