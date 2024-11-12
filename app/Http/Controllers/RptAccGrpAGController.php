@@ -77,8 +77,8 @@ class RptAccGrpAGController extends Controller
     
         // Header details
         $html = '
-        <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
-            <tr>
+        <table style="border:1px solid #000; padding:6px; border-collapse:collapse;">
+            <tr colspan="8">
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Group Name:
                 </td>
