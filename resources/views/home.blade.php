@@ -197,22 +197,6 @@
 											</section>
 										</div>
 
-										<!-- Top 5 Customers -->
-										<div class="col-12 col-md-6">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Customers Of The Month</h2>
-												</header>
-												<div class="card-body">
-													<canvas id="top5Customers"></canvas>
-												</div>
-											</section>
-										</div>
-
 										<!-- Half Year Sales -->
 										<div class="col-12 col-md-6">
 											<section class="card">
@@ -225,6 +209,22 @@
 												</header>
 												<div class="card-body">
 													<canvas id="halfYearSale"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<!-- Top 5 Customers -->
+										<div class="col-12 col-md-6">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Customers Of The Month</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="top5Customers"></canvas>
 												</div>
 											</section>
 										</div>
