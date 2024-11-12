@@ -4,7 +4,6 @@
     </div>
 </div>
 <header class="header header-nav-menu header-nav-top-line ">
-	
 	<div class="logo-container">
 		<a href="/home" class="logo" style="float:left !important">						
 			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
@@ -21,11 +20,11 @@
 
 			<div class="dropdown-menu" >
 				<ul class="list-unstyled">
-					<li>
+					<!-- <li>
 						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-user"></i> Profile</a>
-					</li>
+					</li> -->
 					<li>
-						<a role="menuitem" tabindex="-1" href="#"><i class="bx bx-lock"></i> Reset Password</a>
+						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
 					</li>
 					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>

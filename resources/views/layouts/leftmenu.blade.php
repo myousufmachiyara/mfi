@@ -1,7 +1,9 @@
 <aside id="sidebar-left" class="sidebar-left">
     <div class="sidebar-header">
         <div class="sidebar-title">
-            <strong>MENU</strong>
+        <a href="/home" class="logo">						
+			<img src="/assets/img/white-logo.png" width="55" height="50" alt="MFI Logo" />
+		</a>
         </div>
         <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
@@ -12,7 +14,6 @@
         <div class="nano-content">
             <nav id="menu" class="nav-main" role="navigation">
                 <ul class="nav nav-main">
-
                     <li class="active">
                         <a class="nav-link" href="/">
                             <i class="fa fa-home" aria-hidden="true"></i>
@@ -297,7 +298,7 @@
 
                             @if(((session('user_access')[23]['module_id'])==24 && (session('user_access')[23]['view'])==1))
                             <li>
-                                <a class="nav-link"   href="{{ route('all-bad-dabs')}}">
+                                <a class="nav-link" href="{{ route('all-bad-dabs')}}">
                                     Stock Balance
                                 </a>
                             </li>
@@ -394,19 +395,32 @@
                         </a>
                         <ul class="nav nav-children">
                             <li>
-                                <a class="nav-link" href="/rep-by-acc-name">
+                                <a class="nav-link" href="{{ route('rep-by-acc-name')}}">
                                     Account Name
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('rep-by-acc-grp')}}">
                                     Account Group
                                 </a>
                             </li>
-                            <li>
+                            <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    Item Name
+                                    <i class="fa fa-pallet" style="font-size:16px;"></i>
+                                    <span>Item Name</span>
                                 </a>
+                                <ul class="nav nav-children">
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#">
+                                            By Item Name 2
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a class="nav-link" href="#">
@@ -414,12 +428,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('rep-daily-register')}}">
                                     Daily Register
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('rep-commissions')}}">
                                     Commissions
                                 </a>
                             </li>
@@ -431,12 +445,12 @@
                                 </a>
                                 <ul class="nav nav-children">
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="/rep-godown-by-item-name">
                                             By Item Name
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="/rep-godown-by-group-name">
                                             By Item Group
                                         </a>
                                     </li>

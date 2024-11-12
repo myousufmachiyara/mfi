@@ -27,6 +27,7 @@ class TStockInController extends Controller
 
     public function index()
     {
+        
         $tstock_in = tstock_in::where('tstock_in.status', 1)
         ->leftjoin ('tstock_in_2', 'tstock_in_2.sales_inv_cod' , '=', 'tstock_in.Sal_inv_no')
         ->join('ac','tstock_in.account_name','=','ac.ac_code')

@@ -3,34 +3,18 @@
         <span class="sr-only">Loading...</span>
     </div>
 </div>
-<header class="header header-nav-menu header-nav-top-line ">
-	<div class="logo-container">
-		<a href="/home" class="logo">						
-			<img src="/assets/img/logo.png" width="55" height="35" alt="MFI Logo" />
-		</a>					
-		<div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">						
-			<i class="fas fa-bars" aria-label="Toggle sidebar" style="line-height:2.3"></i>					
-		</div>
-	</div>
-
-	<div class="header-right">	
-		<span class="separator"></span>
-		<div id="userbox" class="userbox">
+<header class="page-header">
+	<div class="right-wrapper text-end">
+		<div id="userbox" class="userbox" style="float:right !important;">
 			<a href="#" data-bs-toggle="dropdown">
-				<div class="profile-info">
+				<div class="profile-info"> 
 					<span class="name">{{session('user_name')}}</span>
 					<span class="role">{{session('role_name')}}</span>
 				</div>
-
 				<i class="fa custom-caret"></i>
 			</a>
-
-			<div class="dropdown-menu">
+			<div class="dropdown-menu" >
 				<ul class="list-unstyled">
-					<li class="divider"></li>
-					<!-- <li>
-						<a role="menuitem" tabindex="-1" href="#changeUserDetails" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-user"></i> Profile</a>
-					</li> -->
 					<li>
 						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
 					</li>
@@ -39,9 +23,8 @@
 					</li>
 				</ul>
 			</div>
-		</div>
+		</div>	
 	</div>
-
 	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
 		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 			@csrf
