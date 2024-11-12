@@ -181,135 +181,66 @@
 							<div class="tab-content">
 								<div id="sales" class="tab-pane">
 									<div class="row form-group pb-3">
-										<div class="col-12 col-md-6">
+										<!-- Category Sale -->
+										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-														<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 													</div>
 
-													<h2 class="card-title">Basic Chart</h2>
+													<h2 class="card-title">Category Sales Chart</h2>
 												</header>
 												<div class="card-body">
-
+													<canvas id="catSalesChart"></canvas>
 												</div>
 											</section>
 										</div>
-										<div class="col-12 col-md-6">
+
+										<!-- Half Year Sales -->
+										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-														<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 													</div>
 
-													<h2 class="card-title">Real-Time Chart</h2>
+													<h2 class="card-title">Half Year Sale</h2>
 												</header>
 												<div class="card-body">
-
+													<canvas id="halfYearSale"></canvas>
 												</div>
 											</section>
 										</div>
-										<div class="col-12 col-md-6 mt-2 mb-3">
+
+										<!-- Half Year Sales 2 -->
+										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Half Year Sale 2</h2>
+												</header>
 												<div class="card-body">
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
-																<th>#</th>
-																<th>Project</th>
-																<th>Status</th>
-																<th>Progress</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>1</td>
-																<td>Porto - Responsive HTML5 Template</td>
-																<td><span class="badge badge-success">Success</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																			100%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>2</td>
-																<td>Porto - Responsive Drupal 7 Theme</td>
-																<td><span class="badge badge-success">Success</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																			100%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>3</td>
-																<td>Tucson - Responsive HTML5 Template</td>
-																<td><span class="badge badge-warning">Warning</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-																			60%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>4</td>
-																<td>Tucson - Responsive Business WordPress Theme</td>
-																<td><span class="badge badge-success">Success</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-																			90%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>5</td>
-																<td>Porto - Responsive Admin HTML5 Template</td>
-																<td><span class="badge badge-warning">Warning</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-																			45%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>6</td>
-																<td>Porto - Responsive HTML5 Template</td>
-																<td><span class="badge badge-danger">Danger</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-																			40%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-															<tr>
-																<td>7</td>
-																<td>Porto - Responsive Drupal 7 Theme</td>
-																<td><span class="badge badge-success">Success</span></td>
-																<td>
-																	<div class="progress progress-sm progress-half-rounded mt-1 light">
-																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
-																			95%
-																		</div>
-																	</div>
-																</td>
-															</tr>
-														</tbody>
-													</table>
+													<canvas id="halfYearSale2"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<!-- Top 5 Customers -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Customers Of The Month</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="top5Customers"></canvas>
 												</div>
 											</section>
 										</div>
@@ -324,4 +255,109 @@
 		</section>
         @include('layouts.footerlinks')
 	</body>
+	<script>
+		const catSalesChart = document.getElementById('catSalesChart');
+
+		new Chart(catSalesChart, {
+			type: 'bar',
+			data: {
+			labels: ['Pipe', 'Garder', 'TR', 'ABC', 'XYZ', 'Orange'],
+			datasets: [{
+				label: 'No. Of Tons',
+				data: [20, 11, 50, 12, 100, 38],
+				borderWidth: 1
+			}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: false
+					}
+				}
+			}
+		});
+
+		const halfYearSale = document.getElementById('halfYearSale');
+		const Utils = {
+			months: function(options) {
+				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				return months.slice(0, options.count);  // Returns first 'count' months
+			}
+		};
+		const labels = Utils.months({count: 6});
+
+		new Chart(halfYearSale, {
+			type: 'line',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: 'My First Dataset',
+					data: [65, 59, 80, 81, 56, 55],
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: false
+					}
+				}
+			}
+		}); 
+		
+		const halfYearSale2 = document.getElementById('halfYearSale2');
+		const NUMBER_CFG = {count: 6, min: -100, max: 100};
+
+		const data = {
+			labels: labels,
+			datasets: [
+				{
+				label: 'Dataset 1',
+				data: [65, 59, 80, 81, 56, 55],
+				borderColor: '#FF0000',
+				backgroundColor:' #FF0000'
+				},
+				{
+				label: 'Dataset 2',
+				data: [21, 34, 53, 88, 71, 86],
+				borderColor: '#0000FF',
+				backgroundColor: '#0000FF',
+				}
+			]
+		};
+		new Chart(halfYearSale2, {
+			type: 'line',
+			data: data,
+			options: {
+				responsive: true,
+				plugins: {
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart'
+				}
+				}
+			},
+		}); 
+
+		const top5Customers = document.getElementById('top5Customers');
+
+		new Chart(top5Customers, {
+			type: 'doughnut',
+			data: {
+				labels: ['Red','Blue','Yellow'],
+				datasets: [{
+					label: 'My First Dataset',
+					data: [300, 50, 100],
+					backgroundColor: [
+						'rgb(255, 99, 132)',
+						'rgb(54, 162, 235)',
+						'rgb(255, 205, 86)'
+					],
+					hoverOffset: 4
+				}]
+			},
+		});
+	</script>
 </html>
