@@ -43,7 +43,7 @@ class RptAccGrpSHOAController extends Controller
         ]);
     
         // Retrieve data from the database
-        $balance_sub_head = balance_sub_head::where('sub',$request->acc_id)
+        $balance_sub_head = balance_sub_head::where('balance_sub_head.sub',$request->acc_id)
         ->join('sub_head_of_acc as shoa','shoa.id','=','balance_sub_head.sub')
         ->select('balance_sub_head.*','shoa.sub as shoa_name')
         ->get();
