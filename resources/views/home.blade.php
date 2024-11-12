@@ -213,6 +213,22 @@
 											</section>
 										</div>
 
+										<!-- Half Year Sales 2 -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Half Year Sale 2</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="halfYearSale2"></canvas>
+												</div>
+											</section>
+										</div>
+
 										<!-- Top 5 Customers -->
 										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
@@ -287,7 +303,42 @@
 				}
 			}
 		}); 
-
+		
+		const halfYearSale2 = document.getElementById('halfYearSale2');
+		const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+		const data = {
+			labels: labels,
+			datasets: [
+				{
+				label: 'Dataset 1',
+				data: Utils.numbers(NUMBER_CFG),
+				borderColor: Utils.CHART_COLORS.red,
+				backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
+				},
+				{
+				label: 'Dataset 2',
+				data: Utils.numbers(NUMBER_CFG),
+				borderColor: Utils.CHART_COLORS.blue,
+				backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+				}
+			]
+		};
+		new Chart(halfYearSale2, {
+			type: 'line',
+			data: data,
+			options: {
+				responsive: true,
+				plugins: {
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart'
+				}
+				}
+			},
+		}); 
 
 		const top5Customers = document.getElementById('top5Customers');
 
