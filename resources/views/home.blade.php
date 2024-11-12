@@ -318,7 +318,7 @@
 				},
 				{
 				label: 'Dataset 2',
-				data: [21,34,53,88,71,86],
+				data: [21, 34, 53, 88, 71, 86],
 				borderColor: '#0000FF',
 				backgroundColor: '#0000FF',
 				}
