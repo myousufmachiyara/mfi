@@ -103,7 +103,7 @@ class RptAccGrpAGController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Acc No</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Acc#</th>
                     <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
