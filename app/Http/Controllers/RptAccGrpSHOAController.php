@@ -109,7 +109,7 @@ class RptAccGrpSHOAController extends Controller
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">Acc No.</th>
                     <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:20%;color:#17365D;font-weight:bold;">Address</th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
@@ -127,7 +127,7 @@ class RptAccGrpSHOAController extends Controller
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:10%;">' . $item['ac_code']. '</td>
                     <td style="width:32%;">' . $item['ac_name'] . '</td>
-                    <td style="width:20%;">' . $item['address'] . '</td>
+                    <td style="width:22%;">' . $item['address'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
                     <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
