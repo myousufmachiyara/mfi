@@ -88,11 +88,6 @@ class RptAccGrpAGController extends Controller
                     From Date: <span style="color:black;"></span>
                 </td>
             </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
-                    To Date: <span style="color:black;"></span>
-                </td>
-            </tr>
         </table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
