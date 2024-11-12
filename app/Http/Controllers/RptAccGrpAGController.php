@@ -122,7 +122,6 @@ class RptAccGrpAGController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:8%;">' . $item['jv_no']. '</td>
-                    <td style="width:11%;">' . Carbon::parse($item['jv_date'])->format('d-m-y') . '</td>
                     <td style="width:18%;">' . $item['ac_name'] . '</td>
                     <td style="width:12%;">' . $item['debit'] . '</td>
                     <td style="width:12%;">' . $item['credit'] . '</td>
