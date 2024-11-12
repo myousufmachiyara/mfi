@@ -113,8 +113,9 @@ class RptAccGrpAGController extends Controller
     
         // Iterate through items and add rows
         $count = 1;
-        $totalAmount = 0;
-    
+        $totalDebit = 0;
+        $totalCredit = 0;
+
         foreach ($balance_acc_group as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
@@ -129,10 +130,19 @@ class RptAccGrpAGController extends Controller
                     <td style="width:13%;">' . $item['Credit'] . '</td>
                 </tr>';
             
-            $totalAmount += $item['Amount']; // Accumulate total quantity
+            $totalDebit += $item['Debit']; // Accumulate total quantity
+            $totalCredit += $item['Credit']; // Accumulate total quantity
             $count++;
         }
     
+        // Add totals row
+        $html .= '
+        <tr style="background-color:#d9edf7; font-weight:bold;">
+            <td colspan="5" style="text-align:right;">Total:</td>
+            <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
+            <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
+        </tr>';
+            
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
     
