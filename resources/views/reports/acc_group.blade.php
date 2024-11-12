@@ -326,7 +326,7 @@
                 window.location.href = `/rep-by-acc-grp/ag/excel?acc_id=${acc_id}`;
             }
 
-            if (tabName === "SHOA") {
+            else if (tabName === "SHOA") {
                 var acc_id = $('#shoa_acc_id').val()
 
                 if (!acc_id) {
@@ -350,10 +350,19 @@
 
                 window.open(`/rep-by-acc-grp/ag/report?outputType=view&acc_id=${acc_id}`, '_blank');
             }
+
+            else if (tabName === "SHOA") {
+                var acc_id = $('#shoa_acc_id').val()
+
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                window.location.href = `/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`;
+            }
         }
 
         function downloadPDF(tabName) {
-
             if (tabName === "AG") {
                 var acc_id = $('#ag_acc_id').val()
 
@@ -362,6 +371,16 @@
                     return;
                 }
                 window.location.href = `/rep-by-acc-grp/ag/report?outputType=download&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "SHOA") {
+                var acc_id = $('#shoa_acc_id').val()
+
+                if (!acc_id) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                window.location.href = `/rep-by-acc-grp/shoa/report?outputType=download&acc_id=${acc_id}`;
             }
         }
 
