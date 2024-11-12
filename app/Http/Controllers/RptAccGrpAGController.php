@@ -82,8 +82,16 @@ class RptAccGrpAGController extends Controller
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Group Name:
                 </td>
+
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    Group Name:
+                </td>
             </tr>
             <tr>
+                <td style="font-size:14px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    '.$balance_acc_group[0]['group_name'].'
+                </td>
+
                 <td style="font-size:14px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     '.$balance_acc_group[0]['group_name'].'
                 </td>
