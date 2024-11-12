@@ -107,9 +107,9 @@ class RptAccGrpSHOAController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:9%;color:#17365D;font-weight:bold;">Acc No.</th>
-                    <th style="width:30%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Acc No.</th>
+                    <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:20%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
@@ -140,7 +140,7 @@ class RptAccGrpSHOAController extends Controller
         // Add totals row
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
-            <td colspan="5" style="text-align:right;">Total:</td>
+            <td colspan="4" style="text-align:right;">Total:</td>
             <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
