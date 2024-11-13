@@ -259,17 +259,37 @@
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
                         
+                        var totalDrAmt = 0; // Variable to accumulate total
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+
+                            var drAmt = v['Debit'] ? parseFloat(v['Debit']) : 0;
+                            var crAmt = v['Credit'] ? parseFloat(v['Credit']) : 0;
+                            totalDrAmt += drAmt; // Add to total
+                            totalCrAmt += crAmt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html += "<td>" + (drAmt ? drAmt.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+                        
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
+                        var balanceAmt = totalDrAmt + totalCrAmt;
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Balance:</strong></td>";
+                        totalRow += "<td colspan='2' class='text-danger text-center'><strong>" + balanceAmt.toFixed(0) + "</strong></td>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
