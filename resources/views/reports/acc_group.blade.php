@@ -34,6 +34,12 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" ><strong>Date</strong></label>
+                                                    <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
