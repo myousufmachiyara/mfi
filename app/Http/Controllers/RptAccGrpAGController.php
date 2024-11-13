@@ -44,6 +44,7 @@ class RptAccGrpAGController extends Controller
     
         // Retrieve data from the database
         $balance_acc_group = balance_acc_group::where('group_cod',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
     
         // Check if data exists
@@ -63,9 +64,9 @@ class RptAccGrpAGController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Acc Grp Balance 1 Report ' . $request->acc_id);
-        $pdf->SetSubject('Acc Grp Balance 1 Report');
-        $pdf->SetKeywords('Acc Grp Balance 1 Report, TCPDF, PDF');
+        $pdf->SetTitle('Acc Grp Balance Report ' . $request->acc_id);
+        $pdf->SetSubject('Acc Grp Balance Report');
+        $pdf->SetKeywords('Acc Grp Balance Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -105,7 +106,7 @@ class RptAccGrpAGController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Acc#</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
                     <th style="width:24%;color:#17365D;font-weight:bold;">Account Name</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
