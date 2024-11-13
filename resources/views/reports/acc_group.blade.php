@@ -120,6 +120,7 @@
                                                     <th>AC-Code</th>
                                                     <th>Account Name</th>
                                                     <th>Address</th>
+                                                    <th>Phone</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
                                                 </tr>
@@ -274,12 +275,13 @@
                             html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
+                            html += "<td>" + (v['phone_no'] ? v['phone_no'] : "") + "</td>";
                             html += "<td>" + (drAmt ? drAmt.toFixed(0) : "") + "</td>";
                             html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
-                        
+
                         var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
