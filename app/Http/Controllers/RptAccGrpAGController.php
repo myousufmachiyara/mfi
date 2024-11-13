@@ -64,7 +64,7 @@ class RptAccGrpAGController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Acc Grp Balance Report ' . $request->acc_id);
+        $pdf->SetTitle('Acc Grp Balance Report ' . $balance_acc_group[0]['group_name']);
         $pdf->SetSubject('Acc Grp Balance Report');
         $pdf->SetKeywords('Acc Grp Balance Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -85,7 +85,7 @@ class RptAccGrpAGController extends Controller
                     Group Name: <span style="color:black;">'.$balance_acc_group[0]['group_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;"></span>
+                    Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
                 </td>
             </tr>
             
