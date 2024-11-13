@@ -138,9 +138,9 @@ class RptAccGrpAGController extends Controller
         </tr>';
 
         // Calculate balance and add balance row
-        $balance = $totalDebit - $totalCredit;
+        $balance = $totalDebit + $totalCredit;
         $html .= '
-        <tr style="background-color:#f7d9e3; font-weight:bold;">
+        <tr style="background-color:#d2edc7; font-weight:bold;">
             <td colspan="4" style="text-align:right;">Balance:</td>
             <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
         </tr>';
