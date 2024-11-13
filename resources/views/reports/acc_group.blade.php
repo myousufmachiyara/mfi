@@ -51,8 +51,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>AC Name</th>
+                                                    <th>AC-Code</th>
+                                                    <th>Account Name</th>
                                                     <th>Address</th>
                                                     <th>Phone</th>
                                                     <th>Debit</th>
@@ -97,8 +97,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>AC Name</th>
+                                                    <th>AC-Code</th>
+                                                    <th>Account Name</th>
                                                     <th>Address</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
