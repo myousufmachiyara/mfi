@@ -136,9 +136,18 @@ class RptAccGrpAGController extends Controller
             <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
-            
+
+        // Calculate balance and add balance row
+        $balance = $totalDebit - $totalCredit;
+        $html .= '
+        <tr style="background-color:#f7d9e3; font-weight:bold;">
+            <td colspan="4" style="text-align:right;">Balance:</td>
+            <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+        </tr>';
+
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
         
         $accId = $request->acc_id;
         $filename = "acc_group_bal_1_report_{$balance_acc_group[0]['group_name']}.pdf";
