@@ -420,7 +420,7 @@
                     alert('Please fill in all required fields.');
                     return;
                 }
-                window.location.href = `/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`, '_blank');
             }
         }
 
