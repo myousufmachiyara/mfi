@@ -67,7 +67,7 @@ class RptAccGrpSHOAController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sub Head Of Acc Report' . $balance_sub_head[0]['shoa_name']);
+        $pdf->SetTitle('Sub Head Of Acc Report-' . $balance_sub_head[0]['shoa_name']);
         $pdf->SetSubject('Sub Head Of Acc Report');
         $pdf->SetKeywords('Sub Head Of Acc Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');

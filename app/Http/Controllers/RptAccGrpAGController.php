@@ -64,7 +64,7 @@ class RptAccGrpAGController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Acc Grp Balance Report ' . $balance_acc_group[0]['group_name']);
+        $pdf->SetTitle('Acc Grp Balance Report-' . $balance_acc_group[0]['group_name']);
         $pdf->SetSubject('Acc Grp Balance Report');
         $pdf->SetKeywords('Acc Grp Balance Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
