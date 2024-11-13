@@ -85,7 +85,7 @@ class RptAccGrpAGController extends Controller
                     Group Name: <span style="color:black;">'.$balance_acc_group[0]['group_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
+                    Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
                 </td>
             </tr>
             
@@ -100,9 +100,8 @@ class RptAccGrpAGController extends Controller
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                     <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
-                    <th style="width:24%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
+                    <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
@@ -119,9 +118,8 @@ class RptAccGrpAGController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:8%;">' . $item['ac_code']. '</td>
-                    <td style="width:24%;">' . $item['ac_name'] . '</td>
-                    <td style="width:18%;">' . $item['address'] . '</td>
-                    <td style="width:15%;">' . $item['phone'] . '</td>
+                    <td style="width:32%;">' . $item['ac_name'] . '</td>
+                    <td style="width:25%;">' . $item['address'] . '' . $item['phone'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
                     <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
