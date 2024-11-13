@@ -136,8 +136,8 @@ class RptAccGrpSHOAController extends Controller
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
             <td colspan="4" style="text-align:right;">Total:</td>
-            <td style="width:15%;">' . number_format($totalDebit, 0) . '</td>
-            <td style="width:15%;">' . number_format($totalCredit, 0) . '</td>
+            <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
+            <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
 
         // Calculate balance and add balance row
