@@ -221,7 +221,7 @@
                         $(tableID).append(totalRow);
 
                         var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Balance:</strong></td>";
-                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
+                        totalRow += "<td colspan='1' class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
                         $(tableID).append(totalRow);
 
                      },
