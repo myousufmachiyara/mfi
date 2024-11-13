@@ -85,20 +85,13 @@ class RptAccGrpSHOAController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                    Account Type Name:
+                    Group Name: <span style="color:black;">'.$balance_sub_head[0]['shoa_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;"></span>
+                    Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
                 </td>
             </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                '.$balance_sub_head[0]['shoa_name'].'
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
-                    Balance Date: <span style="color:black;"></span>
-                </td>
-            </tr>
+            
         </table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
