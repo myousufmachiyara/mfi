@@ -85,7 +85,7 @@ class RptAccGrpAGController extends Controller
                     Group Name: <span style="color:black;">'.$balance_acc_group[0]['group_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
+                    Print Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
                 </td>
             </tr>
             
