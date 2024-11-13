@@ -37,7 +37,7 @@
                                         </div>
                                         
                                         <!-- Show Button Here -->
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-2">
                                             <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
                                         </div>
 
