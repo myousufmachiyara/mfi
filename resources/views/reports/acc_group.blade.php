@@ -39,7 +39,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Today's Date</strong></label>
-                                                <input type="text" class="form-control" id="todays_date" readonly>
+                                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
