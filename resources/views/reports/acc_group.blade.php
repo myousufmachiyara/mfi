@@ -426,5 +426,11 @@
 
             return groupedData;
         }
+
+
+        
+        // JavaScript to set today's date
+        document.getElementById('todays_date').value = new Date().toLocaleDateString();
+
     </script>
 </html>
