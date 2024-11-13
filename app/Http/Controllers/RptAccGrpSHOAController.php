@@ -14,6 +14,7 @@ class RptAccGrpSHOAController extends Controller
 {
     public function shoa(Request $request){
         $balance_sub_head = balance_sub_head::where('sub',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
 
         return $balance_sub_head;
@@ -46,6 +47,7 @@ class RptAccGrpSHOAController extends Controller
         $balance_sub_head = balance_sub_head::where('balance_sub_head.sub',$request->acc_id)
         ->join('sub_head_of_acc as shoa','shoa.id','=','balance_sub_head.sub')
         ->select('balance_sub_head.*','shoa.sub as shoa_name')
+        ->orderBy('ac_name', 'asc')
         ->get();
     
         // Check if data exists
@@ -65,7 +67,7 @@ class RptAccGrpSHOAController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sub Head Of Acc Report' . $request->acc_id);
+        $pdf->SetTitle('Sub Head Of Acc Report' . $balance_sub_head[0]['shoa_name']);
         $pdf->SetSubject('Sub Head Of Acc Report');
         $pdf->SetKeywords('Sub Head Of Acc Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
