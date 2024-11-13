@@ -42,7 +42,7 @@
                                         </div>
 
                                         <!-- Show Today's Date Here -->
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Date</strong></label>
                                                 <input type="date" readonly class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
@@ -98,7 +98,7 @@
                                         </div>
 
                                         <!-- Show Today's Date Here -->
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Date</strong></label>
                                                 <input type="date" readonly class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
