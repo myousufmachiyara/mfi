@@ -150,7 +150,7 @@ class RptAccGrpAGController extends Controller
 
         
         $accId = $request->acc_id;
-        $filename = "acc_group_bal_1_report_{$balance_acc_group[0]['group_name']}.pdf";
+        $filename = "acc_group_bal_report_{$balance_acc_group[0]['group_name']}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {

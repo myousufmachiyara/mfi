@@ -102,11 +102,11 @@ class RptAccGrpSHOAController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Acc No.</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
                     <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:21%;color:#17365D;font-weight:bold;">Address</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
     
         // Iterate through items and add rows
@@ -120,11 +120,11 @@ class RptAccGrpSHOAController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . $item['ac_code']. '</td>
+                    <td style="width:8%;">' . $item['ac_code']. '</td>
                     <td style="width:32%;">' . $item['ac_name'] . '</td>
-                    <td style="width:21%;">' . $item['address'] . '</td>
-                    <td style="width:15%;">' . $item['Debit'] . '</td>
-                    <td style="width:15%;">' . $item['Credit'] . '</td>
+                    <td style="width:25%;">' . $item['address'] . '' . $item['phone'] . '</td>
+                    <td style="width:14%;">' . $item['Debit'] . '</td>
+                    <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
             
             $totalDebit += $item['Debit']; // Accumulate total quantity
@@ -139,12 +139,21 @@ class RptAccGrpSHOAController extends Controller
             <td style="width:15%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:15%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
+
+        // Calculate balance and add balance row
+        $balance = $totalDebit + $totalCredit;
+        $html .= '
+        <tr style="background-color:#d2edc7; font-weight:bold;">
+            <td colspan="4" style="text-align:right;">Balance:</td>
+            <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+        </tr>';
+
             
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
         
         $accId = $request->acc_id;
-        $filename = "acc_group_bal_1_report{$accId}.pdf";
+        $filename = "sub_head_bal_report_{$balance_sub_head[0]['shoa_name']}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
