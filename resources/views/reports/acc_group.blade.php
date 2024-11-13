@@ -222,7 +222,7 @@
 
                         var balanceAmt = totalDrAmt + totalCrAmt;
                         var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Balance:</strong></td>";
-                        totalRow += "<td colspan='2' class='text-danger'><strong>" + balanceAmt.toFixed(0) + "</strong></td>";
+                        totalRow += "<td colspan='2' class='text-danger text-center'><strong>" + balanceAmt.toFixed(0) + "</strong></td>";
                         $(tableID).append(totalRow);
 
                      },
