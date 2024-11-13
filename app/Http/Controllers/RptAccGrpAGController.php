@@ -13,6 +13,7 @@ class RptAccGrpAGController extends Controller
 {
     public function ag(Request $request){
         $balance_acc_group = balance_acc_group::where('group_cod',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
 
         return $balance_acc_group;
