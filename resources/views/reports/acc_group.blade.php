@@ -189,7 +189,7 @@
                         acc_id: acc_id,
                     },
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="7" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
