@@ -39,9 +39,10 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="col-form-label"><strong>Today's Date</strong></label>
-                                                <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                                <input type="date" readonly class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
                                             </div>
                                         </div>
+
                                         <div class="col-lg-4">
                                             <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
                                         </div>
@@ -426,11 +427,6 @@
 
             return groupedData;
         }
-
-
-        
-        // JavaScript to set today's date
-        document.getElementById('todays_date').value = new Date().toLocaleDateString();
 
     </script>
 </html>
