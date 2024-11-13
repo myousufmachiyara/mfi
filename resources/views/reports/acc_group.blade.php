@@ -21,28 +21,34 @@
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div id="AG" class="tab-pane">
-                                <div class="row form-group pb-3">
-                                    <div class="col-lg-8 row">
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label class="col-form-label"><strong>Account Group</strong></label>
-                                                <select data-plugin-selecttwo class="form-control select2-js" id="ag_acc_id">
-                                                    <option value="" disabled selected>Account Group</option>
-                                                    @foreach($ac_group as $key => $row)	
-                                                        <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="form-group">
-                                                    <label class="col-form-label" ><strong>Date</strong></label>
-                                                    <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                    <div id="AG" class="tab-pane">
+                                        <div class="row form-group pb-3">
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label"><strong>Account Group</strong></label>
+                                                            <select data-plugin-selecttwo class="form-control select2-js" id="ag_acc_id">
+                                                                <option value="" disabled selected>Account Group</option>
+                                                                @foreach($ac_group as $key => $row)    
+                                                                    <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label"><strong>Date</strong></label>
+                                                            <input type="date" class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
+                                            <div class="col-lg-4">
+                                                <a class="btn btn-primary" style="margin-top: 2.1rem; padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')">
+                                                    <i class="fa fa-filter"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     
