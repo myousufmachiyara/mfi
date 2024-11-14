@@ -4,7 +4,35 @@
     </div>
 </div>
 <header class="page-header">
-	<div class="right-wrapper text-end">
+	<div class="logo-container d-md-none">
+		<a href="/" class="logo ">
+			<img src="/assets/img/logo.png" width="70px" alt="MFI Logo" />
+		</a>
+
+		<div id="userbox" class="userbox" style="float:right !important;">
+			<a href="#" data-bs-toggle="dropdown" style="margin-right: 20px;">
+				<div class="profile-info"> 
+					<span class="name">{{session('user_name')}}</span>
+					<span class="role">{{session('role_name')}}</span>
+				</div>
+				<i class="fa custom-caret"></i>
+			</a>
+			<div class="dropdown-menu" >
+				<ul class="list-unstyled">
+					<li>
+						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
+					</li>
+					<li>
+						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
+					</li>
+				</ul>
+			</div>
+			<i class="fas fa-bars toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened" aria-label="Toggle sidebar"></i>
+		<div class="toggle-sidebar-left" >
+		</div>
+
+	</div>
+	<div class="right-wrapper text-end d-none d-md-block">
 		<div id="userbox" class="userbox" style="float:right !important;">
 			<a href="#" data-bs-toggle="dropdown">
 				<div class="profile-info"> 
@@ -23,8 +51,11 @@
 					</li>
 				</ul>
 			</div>
-		</div>	
+			<i class="fas fa-bars toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened" aria-label="Toggle sidebar"></i>
+
+		</div>
 	</div>
+
 	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
 		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 			@csrf
@@ -53,4 +84,5 @@
 			</footer>
 		</form>
 	</div>
+
 </header>

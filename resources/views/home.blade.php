@@ -6,7 +6,7 @@
 				<section role="main" class="content-body">
 					@include('layouts.homepageheader')
 					<!-- start: page -->
-					<div class="row" style="padding: 80px 0px 0px 0px;">
+					<div class="row cust-pad">
 						<!-- summaries -->
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
