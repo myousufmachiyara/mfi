@@ -144,7 +144,7 @@
 												<strong class="amount">Long Term Loan
 												</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -153,7 +153,7 @@
 												<strong class="amount">Short Term Loan
 												</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
