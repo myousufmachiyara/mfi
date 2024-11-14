@@ -8,38 +8,48 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<!-- summaries -->
-						<div class="col-12 col-md-6 mb-2">
+						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fas fa-calendar-check"></i> <!-- PDC Icon -->
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
 											</div>
 										</div>
 										<div class="row">
-											<div class="summary col-4">
+											<div class="summary col-6">
 												<h4 class="title">PDC</h4>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
 												</div>
 											</div>
-											<div class="summary col-4">
+											<div class="summary col-6">
 												<h4 class="title">Bank</h4>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
 												</div>
 											</div>
-											<div class="summary col-4">
+											<div class="summary col-6">
 												<h4 class="title">Cash</h4>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
+												</div>
+											</div>
+											<div class="summary col-6">
+												<h4 class="title">Foreign Currency</h4>
+												<div class="info">
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
 												</div>
 											</div>
 										</div>
 										<div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
 											</div>
 										</div>
 									</div>
@@ -47,30 +57,42 @@
 							</section>
 						</div>
 					
-						<div class="col-12 col-md-6 mb-2">
+						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fas fa-university"></i> <!-- Bank Icon -->
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
 											</div>
 										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Total Receivables</h4>
-												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
-												</div>
-											</div>
-											<div class="summary">
+										<div class="row">
+											<div class="summary col-6">
 												<h4 class="title">Total Payables</h4>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
 												</div>
 											</div>
+											<div class="summary col-6">
+												<h4 class="title">Total Receivables</h4>
+												<div class="info">
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
+												</div>
+											</div>
+											<div class="summary col-6">
+												<h4 class="title">Total Balance</h4>
+												<div class="info">
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
+												</div>
+											</div>
+											
+										</div>
+										<div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
 											</div>
 										</div>
 									</div>
@@ -78,6 +100,30 @@
 							</section>
 						</div>
 					
+						<div class="col-12 col-md-2 mb-2">
+							<section class="card card-featured-left card-featured-quaternary">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-quaternary">
+												<i class="fas fa-user"></i>
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<h4 class="title">Login Users</h4>
+												<div class="info">
+													<strong class="amount">3765</strong>
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(View All)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
@@ -109,30 +155,7 @@
 							</section>
 						</div>
 					
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-quaternary">
-								<div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-quaternary">
-												<i class="fas fa-user"></i>
-											</div>
-										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Login Users</h4>
-												<div class="info">
-													<strong class="amount">3765</strong>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(report)</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
+
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary">
