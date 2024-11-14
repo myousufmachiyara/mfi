@@ -62,7 +62,7 @@
 								</div>
 							</section>
 						</div>
-					
+
 						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
@@ -74,24 +74,27 @@
 										</div>
 										<div class="row">
 											<div class="summary col-6">
-												<h4 class="title">Total Payables</h4>
+												<strong class="amount">Total Payables</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
-												<h4 class="title">Total Receivables</h4>
+												<strong class="amount">Total Receivables</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
-												<h4 class="title">Total Balance</h4>
+												<strong class="amount">Total Balance</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											
