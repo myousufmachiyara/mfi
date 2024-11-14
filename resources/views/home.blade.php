@@ -177,14 +177,15 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="amount mb-2">Last Month Sale</h4>
+												<strong class="amount">Last Month Purchase
+												</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
-												</div>
-												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">Tonage</p>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">M-Ton</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -195,6 +196,39 @@
 								</div>
 							</section>
 						</div>
+
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<strong class="amount">Last Month Sale
+												</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">M-Ton</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
+
 
 						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-primary">
