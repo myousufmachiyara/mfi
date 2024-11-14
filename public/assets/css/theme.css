@@ -1305,7 +1305,7 @@ a:active {
 .sidebar-left .sidebar-header .sidebar-title {
 	background: #1D2127;
 	color: #fff;
-	padding: 8px;
+	padding: 5px 8px;
 	font-size: 12.8px;
 	font-size: 1rem;
 }
@@ -1965,6 +1965,7 @@ html.no-overflowscrolling .nano {
 	position: relative;
 	overflow: hidden;
 	width: 100%;
+	top: 30px;
 }
 
 html.no-overflowscrolling .nano > .nano-content {
