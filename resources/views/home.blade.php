@@ -180,11 +180,11 @@
 											<div class="summary">
 												<strong class="amount">Last Month Purchase
 												</strong>
-												<div class="info">
-													<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+												<div class="info ">
+													<h4 class="amount m-0 text-danger mt-3 mb-3"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mb-4"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">M-Ton</span>
 													</h4>
 												</div>
