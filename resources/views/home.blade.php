@@ -19,31 +19,36 @@
 										</div>
 										<div class="row">
 											<div class="summary col-6">
-												<h4 class="title">PDC</h4>
+												<strong class="amount">PDC</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
-												<h4 class="title">Bank</h4>
+												<strong class="amount">Bank</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
-												<h4 class="title">Cash</h4>
+												<strong class="amount">Cash</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
-												<h4 class="title">Foreign Currency</h4>
+												<strong class="amount">Foreign Currency
+												</strong>
 												<div class="info">
-													<strong class="amount">14,890.30</strong>
-													<span class="title text-end">PKR</p>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 										</div>
@@ -135,15 +140,21 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title">Long-Term Loans</h4>
+												<strong class="amount">Long Term Loan
+												</strong>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary">
-												<h4 class="title">Short-Term Loans</h4>
+												<strong class="amount">Short Term Loan
+												</strong>
 												<div class="info">
-													<strong class="amount">PKR 14,890.30</strong>
+													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -154,10 +165,38 @@
 								</div>
 							</section>
 						</div>
-					
-
 
 						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<h4 class="amount mb-2">Last Month Sale</h4>
+												<div class="info">
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">PKR</p>
+												</div>
+												<div class="info">
+													<strong class="amount">14,890.30</strong>
+													<span class="title text-end">Tonage</p>
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-primary">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -168,7 +207,7 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title mb-2">Last Day Cash Flow</h4>
+												<h4 class="amount mb-2">Last Month Cash Flow</h4>
 												<div class="info">
 													<span>CASH IN:</span> <strong class="amount">3765</strong>
 												</div>
