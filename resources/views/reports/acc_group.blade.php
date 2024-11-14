@@ -29,17 +29,27 @@
                                                 <label class="col-form-label"><strong>Account Group</strong></label>
                                                 <select data-plugin-selecttwo class="form-control select2-js" id="ag_acc_id">
                                                     <option value="" disabled selected>Account Group</option>
-                                                    @foreach($ac_group as $key => $row)	
+                                                    @foreach($ac_group as $key => $row)    
                                                         <option value="{{$row->group_cod}}">{{$row->group_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        
+                                        <!-- Show Button Here -->
+                                        <div class="col-lg-1">
                                             <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#AG')"><i class="fa fa-filter"></i></a>
                                         </div>
+
+                                        <!-- Show Today's Date Here -->
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="col-form-label"><strong>Date</strong></label>
+                                                <input type="date" readonly class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                            </div>
+                                        </div>
                                     </div>
-                                    
+                            
                                     <div class="col-lg-4 text-end">
                                         <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('AG')"><i class="fa fa-download"></i> Download</a>
                                         <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('AG')"><i class="fa fa-file-pdf"></i> Print PDF</a>
@@ -51,8 +61,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>AC Name</th>
+                                                    <th>AC-Code</th>
+                                                    <th>Account Name</th>
                                                     <th>Address</th>
                                                     <th>Phone</th>
                                                     <th>Debit</th>
@@ -60,7 +70,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="AGTbleBody">
-                                                    
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -81,8 +91,18 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+
+                                        <!-- Show Button Here -->
+                                        <div class="col-lg-1">
                                             <a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="tabChanged('#SHOA')"><i class="fa fa-filter"></i></a>
+                                        </div>
+
+                                        <!-- Show Today's Date Here -->
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label class="col-form-label"><strong>Date</strong></label>
+                                                <input type="date" readonly class="form-control" id="toDate" value="<?php echo date('Y-m-d'); ?>">
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -97,9 +117,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>AC</th>
-                                                    <th>AC Name</th>
+                                                    <th>AC-Code</th>
+                                                    <th>Account Name</th>
                                                     <th>Address</th>
+                                                    <th>Phone</th>
                                                     <th>Debit</th>
                                                     <th>Credit</th>
                                                 </tr>
@@ -173,19 +194,39 @@
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
                         
+                        var totalDrAmt = 0; // Variable to accumulate total
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+
+                            var drAmt = v['Debit'] ? parseFloat(v['Debit']) : 0;
+                            var crAmt = v['Credit'] ? parseFloat(v['Credit']) : 0;
+                            totalDrAmt += drAmt; // Add to total
+                            totalCrAmt += crAmt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
                             html += "<td>" + (v['phone_no'] ? v['phone_no'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html += "<td>" + (drAmt ? drAmt.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
-                    },
+
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
+                        var balanceAmt = totalDrAmt + totalCrAmt;
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Balance:</strong></td>";
+                        totalRow += "<td colspan='2' class='text-danger text-center'><strong>" + balanceAmt.toFixed(0) + "</strong></td>";
+                        $(tableID).append(totalRow);
+
+                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="7" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
@@ -214,22 +255,43 @@
                         acc_id: acc_id,
                     },
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="7" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
                         $(tableID).empty(); // Clear the loading message
                         
+                        var totalDrAmt = 0; // Variable to accumulate total
+                        var totalCrAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+
+                            var drAmt = v['Debit'] ? parseFloat(v['Debit']) : 0;
+                            var crAmt = v['Credit'] ? parseFloat(v['Credit']) : 0;
+                            totalDrAmt += drAmt; // Add to total
+                            totalCrAmt += crAmt; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['ac_code'] ? v['ac_code'] : "") +"</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['address'] ? v['address'] : "") + "</td>";
-                            html += "<td>" + (v['Debit'] ? v['Debit'] : "") + "</td>";
-                            html += "<td>" + (v['Credit'] ? v['Credit'] : "") + "</td>";
+                            html += "<td>" + (v['phone_no'] ? v['phone_no'] : "") + "</td>";
+                            html += "<td>" + (drAmt ? drAmt.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (crAmt ? crAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDrAmt.toFixed(0) + "</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCrAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
+                        var balanceAmt = totalDrAmt + totalCrAmt;
+                        var totalRow = "<tr><td colspan='5' style='text-align: right;'><strong>Balance:</strong></td>";
+                        totalRow += "<td colspan='2' class='text-danger text-center'><strong>" + balanceAmt.toFixed(0) + "</strong></td>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -358,7 +420,7 @@
                     alert('Please fill in all required fields.');
                     return;
                 }
-                window.location.href = `/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`, '_blank');
             }
         }
 
@@ -404,5 +466,6 @@
 
             return groupedData;
         }
+
     </script>
 </html>

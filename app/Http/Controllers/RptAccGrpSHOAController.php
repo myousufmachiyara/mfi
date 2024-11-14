@@ -14,6 +14,7 @@ class RptAccGrpSHOAController extends Controller
 {
     public function shoa(Request $request){
         $balance_sub_head = balance_sub_head::where('sub',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
 
         return $balance_sub_head;
@@ -46,6 +47,7 @@ class RptAccGrpSHOAController extends Controller
         $balance_sub_head = balance_sub_head::where('balance_sub_head.sub',$request->acc_id)
         ->join('sub_head_of_acc as shoa','shoa.id','=','balance_sub_head.sub')
         ->select('balance_sub_head.*','shoa.sub as shoa_name')
+        ->orderBy('ac_name', 'asc')
         ->get();
     
         // Check if data exists
@@ -65,7 +67,7 @@ class RptAccGrpSHOAController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Sub Head Of Acc Report' . $request->acc_id);
+        $pdf->SetTitle('Sub Head Of Acc Report-' . $balance_sub_head[0]['shoa_name']);
         $pdf->SetSubject('Sub Head Of Acc Report');
         $pdf->SetKeywords('Sub Head Of Acc Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -83,20 +85,13 @@ class RptAccGrpSHOAController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                    Account Type Name:
+                    Group Name: <span style="color:black;">'.$balance_sub_head[0]['shoa_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;"></span>
+                    Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
                 </td>
             </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                '.$balance_sub_head[0]['shoa_name'].'
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
-                    Balance Date: <span style="color:black;"></span>
-                </td>
-            </tr>
+            
         </table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -107,11 +102,11 @@ class RptAccGrpSHOAController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Acc No.</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
                     <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:21%;color:#17365D;font-weight:bold;">Address</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
     
         // Iterate through items and add rows
@@ -125,11 +120,11 @@ class RptAccGrpSHOAController extends Controller
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . $item['ac_code']. '</td>
+                    <td style="width:8%;">' . $item['ac_code']. '</td>
                     <td style="width:32%;">' . $item['ac_name'] . '</td>
-                    <td style="width:21%;">' . $item['address'] . '</td>
-                    <td style="width:15%;">' . $item['Debit'] . '</td>
-                    <td style="width:15%;">' . $item['Credit'] . '</td>
+                    <td style="width:25%;">' . $item['address'] . '' . $item['phone'] . '</td>
+                    <td style="width:14%;">' . $item['Debit'] . '</td>
+                    <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
             
             $totalDebit += $item['Debit']; // Accumulate total quantity
@@ -141,15 +136,24 @@ class RptAccGrpSHOAController extends Controller
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
             <td colspan="4" style="text-align:right;">Total:</td>
-            <td style="width:15%;">' . number_format($totalDebit, 0) . '</td>
-            <td style="width:15%;">' . number_format($totalCredit, 0) . '</td>
+            <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
+            <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
+
+        // Calculate balance and add balance row
+        $balance = $totalDebit + $totalCredit;
+        $html .= '
+        <tr style="background-color:#d2edc7; font-weight:bold;">
+            <td colspan="4" style="text-align:right;">Balance:</td>
+            <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+        </tr>';
+
             
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
         
         $accId = $request->acc_id;
-        $filename = "acc_group_bal_1_report{$accId}.pdf";
+        $filename = "sub_head_bal_report_{$balance_sub_head[0]['shoa_name']}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {

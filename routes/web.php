@@ -427,6 +427,8 @@
 
         // RPT by Acc Group Balance All
         Route::get('/rep-by-acc-grp/ba', [App\Http\Controllers\RptAccGrpBAController::class, 'ba'])->name('ba-rep-by-acc-grp');
+        Route::get('/rep-by-acc-grp/ba/excel', [App\Http\Controllers\RptAccGrpBAController::class, 'baExcel'])->name('ba-rep-by-acc-grp-excel');
+        Route::get('/rep-by-acc-grp/ba/report', [App\Http\Controllers\RptAccGrpBAController::class, 'baReport'])->name('ba-rep-by-acc-grp-report');
 
         // RPT by Acc Group Trial Balance       
         Route::get('/rep-by-acc-grp/tb', [App\Http\Controllers\RptAccGrpTBController::class, 'tb'])->name('tb-rep-by-acc-grp');
