@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="logo-container d-none d-md-block">
-		<div id="userbox" class="userbox" style="float:right !important;left: -55px !important;">
+		<div id="userbox" class="userbox" style="float:right !important;">
 			<a href="#" data-bs-toggle="dropdown" style="margin-right: 20px;">
 				<div class="profile-info"> 
 					<span class="name">{{session('user_name')}}</span>
