@@ -44,9 +44,16 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
+												<h4 class="title">Total Receivables</h4>
+												<div class="info">
+													<strong class="amount">PKR 14,890.30</strong>
+												</div>
+											</div>
+
+											<div class="summary">
 												<h4 class="title">Total Payables</h4>
 												<div class="info">
-													<strong class="amount">$ 14,890.30</strong>
+													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -57,30 +64,39 @@
 								</div>
 							</section>
 						</div>
+
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-tertiary mb-2">
+							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-tertiary">
-												<i class="fas fa-shopping-cart"></i>
+											<div class="summary-icon bg-secondary">
+												<i class="fas fa-dollar-sign"></i>
 											</div>
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title">Total Receivables</h4>
+												<h4 class="title">Long-Term Loans</h4>
 												<div class="info">
-													<strong class="amount">38</strong>
+													<strong class="amount">PKR 14,890.30</strong>
+												</div>
+											</div>
+
+											<div class="summary">
+												<h4 class="title">Short-Term Loans</h4>
+												<div class="info">
+													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(statement)</a>
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</section>
 						</div>
+
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
 								<div class="card-body">
