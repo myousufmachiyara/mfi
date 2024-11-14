@@ -14,9 +14,10 @@
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fa-solid fa-building-columns"></i>
+												<i class="fas fa-dollar-sign"></i>
 											</div>
 										</div>
+										
 										<div class="widget-summary-col">
 											<div class="summary">
 												<h4 class="title">PDC</h4>
