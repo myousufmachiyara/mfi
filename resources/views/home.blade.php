@@ -14,10 +14,9 @@
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fas fa-dollar-sign"></i>
+												<i class="fas fa-calendar-check"></i> <!-- PDC Icon -->
 											</div>
 										</div>
-										
 										<div class="widget-summary-col">
 											<div class="summary">
 												<h4 class="title">PDC</h4>
@@ -25,14 +24,12 @@
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-
 											<div class="summary">
 												<h4 class="title">Bank</h4>
 												<div class="info">
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-
 											<div class="summary">
 												<h4 class="title">Cash</h4>
 												<div class="info">
@@ -47,14 +44,14 @@
 								</div>
 							</section>
 						</div>
-
+					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fas fa-dollar-sign"></i>
+												<i class="fas fa-university"></i> <!-- Bank Icon -->
 											</div>
 										</div>
 										<div class="widget-summary-col">
@@ -64,7 +61,6 @@
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-
 											<div class="summary">
 												<h4 class="title">Total Payables</h4>
 												<div class="info">
@@ -79,14 +75,14 @@
 								</div>
 							</section>
 						</div>
-
+					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-tertiary">
-												<i class="fas fa-dollar-sign"></i>
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
 											</div>
 										</div>
 										<div class="widget-summary-col">
@@ -96,7 +92,6 @@
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-
 											<div class="summary">
 												<h4 class="title">Short-Term Loans</h4>
 												<div class="info">
@@ -111,7 +106,7 @@
 								</div>
 							</section>
 						</div>
-
+					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
 								<div class="card-body">
