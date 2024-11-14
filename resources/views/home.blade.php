@@ -178,13 +178,12 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<strong class="amount">Last Month Purchase
-												</strong>
+												<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
 												<div class="info ">
-													<h4 class="amount m-0 text-danger mt-3 mb-3"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
-													<h4 class="amount m-0 text-danger mb-4"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">M-Ton</span>
 													</h4>
 												</div>
@@ -209,13 +208,12 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<strong class="amount">Last Month Sale
-												</strong>
+												<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
 												<div class="info ">
-													<h4 class="amount m-0 text-danger mt-3 mb-3"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
-													<h4 class="amount m-0 text-danger mb-4"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">M-Ton</span>
 													</h4>
 												</div>
@@ -240,14 +238,14 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="amount mb-2">Last Month Cash Flow</h4>
+												<h4 class="amount mb-2"><strong>Last Month Cash Flow</strong></h4>
 												<div class="info ">
 													
-													<h4 class="amount m-0 text-danger mb-3"><span>CASH IN:</span><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH IN:  </span><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 													
-													<h4 class="amount m-0 text-danger mb-2"><span>CASH OUT:</span><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH OUT:  </span><strong>14,890.30</strong>
 														<span class="title text-end text-dark">M-Ton</span>
 													</h4>
 												</div>
