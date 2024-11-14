@@ -9,30 +9,44 @@
 					<div class="row" style="padding: 80px 0px 0px 0px;">
 						<!-- summaries -->
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2">
+							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-primary">
-												<i class="fas fa-life-ring"></i>
+											<div class="summary-icon bg-secondary">
+												<i class="fa-solid fa-building-columns"></i>
 											</div>
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title">Pending Complains</h4>
+												<h4 class="title">PDC</h4>
 												<div class="info">
-													<strong class="amount">1281</strong>
-													<span class="text-primary">(14 unread)</span>
+													<strong class="amount">PKR 14,890.30</strong>
+												</div>
+											</div>
+
+											<div class="summary">
+												<h4 class="title">Bank</h4>
+												<div class="info">
+													<strong class="amount">PKR 14,890.30</strong>
+												</div>
+											</div>
+
+											<div class="summary">
+												<h4 class="title">Cash</h4>
+												<div class="info">
+													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(view all)</a>
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</section>
 						</div>
+
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
@@ -66,11 +80,11 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-secondary mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-secondary">
+											<div class="summary-icon bg-tertiary">
 												<i class="fas fa-dollar-sign"></i>
 											</div>
 										</div>
@@ -121,20 +135,24 @@
 								</div>
 							</section>
 						</div>
+
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-quaternary">
+							<section class="card card-featured-left card-featured-primary">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-quaternary">
-												<i class="fas fa-user"></i>
+											<div class="summary-icon bg-primary">
+												<i class="fas fa-cash-register"></i>
 											</div>
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title">Today's Sales</h4>
+												<h4 class="title mb-2">Last Day Cash Flow</h4>
 												<div class="info">
-													<strong class="amount">3765</strong>
+													<span>CASH IN:</span> <strong class="amount">3765</strong>
+												</div>
+												<div class="info">
+													<span>CASH OUT:</span> <strong class="amount">3765</strong>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -145,30 +163,7 @@
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-quaternary">
-								<div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-quaternary">
-												<i class="fas fa-user"></i>
-											</div>
-										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Today's Purchases</h4>
-												<div class="info">
-													<strong class="amount">3765</strong>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(report)</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
+
 						<!-- summaries ends here -->
 						<div class="tabs">
 							<ul class="nav nav-tabs">
