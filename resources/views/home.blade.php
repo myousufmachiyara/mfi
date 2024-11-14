@@ -9,7 +9,7 @@
 					<div class="row cust-pad">
 						<!-- summaries -->
 
-						<div class="col-12 col-md-4 mb-2">
+						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -106,7 +106,7 @@
 							</section>
 						</div>
 					
-						<div class="col-12 col-md-4 mb-2">
+						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -130,43 +130,6 @@
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-4 mb-2">
-							<section class="card card-featured-left card-featured-tertiary mb-2">
-								<div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-tertiary">
-												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
-											</div>
-										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<strong class="amount">Long Term Loan
-												</strong>
-												<div class="info">
-													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
-												</div>
-											</div>
-											<div class="summary">
-												<strong class="amount">Short Term Loan
-												</strong>
-												<div class="info">
-													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-
 						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
@@ -209,8 +172,7 @@
 								</div>
 							</section>
 						</div>
-
-						{{-- <div class="col-12 col-md-5 mb-2">
+						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -221,13 +183,20 @@
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
-												<div class="info ">
-													<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+												<strong class="amount">Long Term Loan
+												</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
-													<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">M-Ton</span>
+												</div>
+											</div>
+											<div class="summary">
+												<strong class="amount">Short Term Loan
+												</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
 											</div>
@@ -238,7 +207,7 @@
 									</div>
 								</div>
 							</section>
-						</div> --}}
+						</div>
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary">
