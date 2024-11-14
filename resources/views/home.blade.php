@@ -130,7 +130,7 @@
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -167,7 +167,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -177,17 +177,30 @@
 											</div>
 										</div>
 										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
-												<div class="info ">
-													<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
-													<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">M-Ton</span>
-													</h4>
+											<div class="row">
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
+													<div class="info ">
+														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">PKR</span>
+														</h4>
+														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">M-Ton</span>
+														</h4>
+													</div>
 												</div>
-											</div>
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
+													<div class="info ">
+														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">PKR</span>
+														</h4>
+														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">M-Ton</span>
+														</h4>
+													</div>
+												</div>
+											<div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
 											</div>
@@ -197,7 +210,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-3 mb-2">
+						{{-- <div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -225,7 +238,7 @@
 									</div>
 								</div>
 							</section>
-						</div>
+						</div> --}}
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary">
