@@ -17,25 +17,27 @@
 												<i class="fas fa-calendar-check"></i> <!-- PDC Icon -->
 											</div>
 										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
+										<div class="row">
+											<div class="summary col-4">
 												<h4 class="title">PDC</h4>
 												<div class="info">
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-											<div class="summary">
+											<div class="summary col-4">
 												<h4 class="title">Bank</h4>
 												<div class="info">
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
-											<div class="summary">
+											<div class="summary col-4">
 												<h4 class="title">Cash</h4>
 												<div class="info">
 													<strong class="amount">PKR 14,890.30</strong>
 												</div>
 											</div>
+										</div>
+										<div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
 											</div>
