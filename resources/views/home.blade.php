@@ -22,7 +22,7 @@
 											<div class="summary col-6">
 												<strong class="amount">PDC</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -30,7 +30,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Bank</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -38,7 +38,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Cash</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -47,7 +47,7 @@
 												<strong class="amount">Foreign Currency
 												</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-danger"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
