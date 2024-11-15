@@ -2,10 +2,13 @@
     <div class="sidebar-header">
         <div class="sidebar-title">
         <a href="/home" class="logo">						
-			<img src="/assets/img/white-logo.png" width="55" height="50" alt="MFI Logo" />
+			<img src="/assets/img/white-logo-new.png" class="sidebar-logo" alt="MFI Logo" />
 		</a>
         </div>
         <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+            <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
+        </div>
+        <div class="sidebar-toggle d-block d-md-none" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
         </div>
     </div>
