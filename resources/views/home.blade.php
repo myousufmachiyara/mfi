@@ -92,7 +92,10 @@
 													@endif
 												</div>
 											</div>
-											@php $balance = $receivables->total_balance - $payables->total_balance
+											@php 
+												$balance = $receivables->total_balance - $payables->total_balance;
+											@endphp
+
 											<div class="summary col-6">
 												<strong class="amount">Total Balance</strong>
 												<div class="info">
