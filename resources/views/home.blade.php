@@ -92,12 +92,15 @@
 													@endif
 												</div>
 											</div>
+											@php $balance = $receivables->total_balance - $payables->total_balance
 											<div class="summary col-6">
 												<strong class="amount">Total Balance</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
+													@if (strpos($balance, '.') !== false && substr($balance, strpos($balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@endif
 												</div>
 											</div>
 											
