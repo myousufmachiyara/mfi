@@ -4,6 +4,21 @@
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
+					<style>
+						@keyframes slideIn {
+							from {
+								transform: translateY(-50px);
+								opacity: 0;
+							}
+							to {
+								transform: translateY(0);
+								opacity: 1;
+							}
+						}
+						.animated-amount {
+							animation: slideIn 1s ease-out;
+						}
+					</style>
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
@@ -21,7 +36,7 @@
 											<div class="summary col-6">
 												<strong class="amount">PDC</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+													<strong class="rolling-number amount m-0 text-primary" data-target="14890.30">0</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -29,7 +44,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Bank</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+													<strong class="rolling-number amount m-0 text-primary" data-target="14890.30">0</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -37,7 +52,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Cash</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+													<strong class="rolling-number amount m-0 text-primary" data-target="14890.30">0</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -46,7 +61,7 @@
 												<strong class="amount">Foreign Currency
 												</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+													<strong class="rolling-number amount m-0 text-primary" data-target="14890.30">0</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -62,7 +77,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-4 mb-2">
+						{{-- <div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -116,7 +131,7 @@
 									</div>
 								</div>
 							</section>
-						</div>
+						</div> --}}
 					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
@@ -155,22 +170,27 @@
 											<div class="row">
 												<div class="summary col-6">
 													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
-													<div class="info ">
-														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+													<div class="info">
+														<h4 class="amount m-0 text-danger mt-2 mb-3">
+															<strong class="rolling-number" data-target="14890.30">0</strong>
 															<span class="title text-end text-dark">PKR</span>
 														</h4>
-														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+														<h4 class="amount m-0 text-danger mb-3">
+															<strong class="rolling-number" data-target="14890.30">0</strong>
 															<span class="title text-end text-dark">M-Ton</span>
 														</h4>
 													</div>
 												</div>
+												
 												<div class="summary col-6">
 													<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
-													<div class="info ">
-														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+													<div class="info">
+														<h4 class="amount m-0 text-danger mt-2 mb-3">
+															<strong class="rolling-number" data-target="14890.30">0</strong>
 															<span class="title text-end text-dark">PKR</span>
 														</h4>
-														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+														<h4 class="amount m-0 text-danger mb-3">
+															<strong class="rolling-number" data-target="14890.30">0</strong>
 															<span class="title text-end text-dark">M-Ton</span>
 														</h4>
 													</div>
@@ -459,5 +479,59 @@
 				}]
 			},
 		});
+
+			document.addEventListener("DOMContentLoaded", () => {
+			const rollNumbers = document.querySelectorAll('.rolling-number');
+			
+			rollNumbers.forEach((element) => {
+				const target = parseFloat(element.getAttribute('data-target')); // Final value
+				const duration = 2000; // Animation duration in ms
+				const stepTime = 20; // Time between updates
+				const increment = target / (duration / stepTime);
+
+				let current = 0;
+
+				const updateNumber = () => {
+					current += increment;
+					if (current >= target) {
+						element.textContent = target.toLocaleString(); // Stop at the target value
+					} else {
+						element.textContent = current.toFixed(2).toLocaleString(); // Continue animating
+						setTimeout(updateNumber, stepTime);
+					}
+				};
+
+				updateNumber();
+			});
+		});
+
+
+		document.addEventListener("DOMContentLoaded", () => {
+        const rollNumbers = document.querySelectorAll('.rolling-number');
+
+        rollNumbers.forEach((element) => {
+            const target = parseFloat(element.getAttribute('data-target')); // Final value
+            const duration = 2000; // Animation duration in ms
+            const stepTime = 20; // Time between updates (ms)
+            const increment = target / (duration / stepTime); // Calculate incremental value
+            let current = 0;
+
+            const roll = () => {
+                current += increment;
+
+                // Check if we've reached the target
+                if (current >= target) {
+                    element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Final value
+                } else {
+                    element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Rolling effect
+                    setTimeout(roll, stepTime); // Continue rolling
+                }
+            };
+
+            roll();
+        });
+    });
+
+		
 	</script>
 </html>
