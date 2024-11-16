@@ -75,21 +75,21 @@
 											<div class="summary col-6">
 												<strong class="amount">Total Payables</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>{{$payables->total_balance}}</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
+													@if (strpos($payables->total_balance, '.') !== false && substr($payables->total_balance, strpos($payables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@endif
 												</div>
 											</div>
 											<div class="summary col-6">
 												<strong class="amount">Total Receivables</strong>
 												<div class="info">
-												@if (strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
-													<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong>
-                                                @else
-													<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong>
-                                                @endif
-												<span class="title text-end text-dark">PKR</span>
-													</h4>
+													@if (strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@endif
 												</div>
 											</div>
 											<div class="summary col-6">
