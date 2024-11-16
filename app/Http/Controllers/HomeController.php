@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\role_access;
+use App\Models\dash_sub_head;
+use App\Models\dash_month_sale;
+use App\Models\dash_month_purchase;
+use App\Models\dash_acc_group;
 
 class HomeController extends Controller
 {
@@ -25,7 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        return view('home');
+        $receivables = dash_sub_head::where('sub',1)->get();
+        $payables  = dash_sub_head::where('sub',7)->get();
+        $short_term_loan = dash_sub_head::where('sub',23)->get();
+        $long_term_loan = dash_sub_head::where('sub',24)->get();
+
+        return view('home', compact('receivables','payables','short_term_loan','long_term_loan'));
     }
 }

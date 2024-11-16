@@ -8,7 +8,6 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<!-- summaries -->
-
 						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
@@ -76,7 +75,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Total Payables</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>{{$receivables->total_balance}}</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
