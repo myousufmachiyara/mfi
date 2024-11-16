@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $receivables = dash_sub_head::where('sub',1)->get();
+        $receivables = dash_sub_head::where('sub',1)->first();
         $payables  = dash_sub_head::where('sub',7)->get();
         $short_term_loan = dash_sub_head::where('sub',23)->get();
         $long_term_loan = dash_sub_head::where('sub',24)->get();
