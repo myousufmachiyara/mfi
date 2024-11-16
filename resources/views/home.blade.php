@@ -75,7 +75,7 @@
 											<div class="summary col-6">
 												<strong class="amount">Total Payables</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>{{$receivables->total_balance}}</strong>
+													<h4 class="amount m-0 text-primary"><strong>{{$payables->total_balance}}</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
@@ -83,8 +83,8 @@
 											<div class="summary col-6">
 												<strong class="amount">Total Receivables</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
+												<h4 class="amount m-0 text-primary"><strong>{{$receivables->total_balance}}</strong>
+												<span class="title text-end text-dark">PKR</span>
 													</h4>
 												</div>
 											</div>
