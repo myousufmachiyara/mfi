@@ -6,81 +6,118 @@
 				<section role="main" class="content-body">
 					@include('layouts.homepageheader')
 					<!-- start: page -->
-					<div class="row" style="padding: 80px 0px 0px 0px;">
+					<div class="row cust-pad">
 						<!-- summaries -->
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2">
-								<div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-primary">
-												<i class="fas fa-life-ring"></i>
-											</div>
-										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Pending Complains</h4>
-												<div class="info">
-													<strong class="amount">1281</strong>
-													<span class="text-primary">(14 unread)</span>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(view all)</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
-												<i class="fas fa-dollar-sign"></i>
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
 											</div>
 										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Total Payables</h4>
+										<div class="row">
+											<div class="summary col-6">
+												<strong class="amount">PDC</strong>
 												<div class="info">
-													<strong class="amount">$ 14,890.30</strong>
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
 												</div>
 											</div>
+											<div class="summary col-6">
+												<strong class="amount">Bank</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary col-6">
+												<strong class="amount">Cash</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary col-6">
+												<strong class="amount">Foreign Currency
+												</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+												</div>
+											</div>
+										</div>
+										<div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-tertiary mb-2">
+
+						<div class="col-12 col-md-4 mb-2">
+							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-tertiary">
-												<i class="fas fa-shopping-cart"></i>
+											<div class="summary-icon bg-secondary">
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
 											</div>
 										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Total Receivables</h4>
+										<div class="row">
+											<div class="summary col-6">
+												<strong class="amount">Total Payables</strong>
 												<div class="info">
-													<strong class="amount">38</strong>
+													@if (strpos($payables->total_balance, '.') !== false && substr($payables->total_balance, strpos($payables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@endif
 												</div>
 											</div>
+											<div class="summary col-6">
+												<strong class="amount">Total Receivables</strong>
+												<div class="info">
+													@if (strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											@php 
+												$balance = $receivables->total_balance - $payables->total_balance;
+											@endphp
+
+											<div class="summary col-6">
+												<strong class="amount">Total Balance</strong>
+												<div class="info">
+													@if (strpos($balance, '.') !== false && substr($balance, strpos($balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											
+										</div>
+										<div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(statement)</a>
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</section>
 						</div>
+					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
 								<div class="card-body">
@@ -98,27 +135,113 @@
 												</div>
 											</div>
 											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(report)</a>
+												<a class="text-muted text-uppercase" href="#">(View All)</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-quaternary">
+						<div class="col-12 col-md-5 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-quaternary">
-												<i class="fas fa-user"></i>
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="row">
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
+													<div class="info ">
+														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">PKR</span>
+														</h4>
+														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">M-Ton</span>
+														</h4>
+													</div>
+												</div>
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
+													<div class="info ">
+														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">PKR</span>
+														</h4>
+														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
+															<span class="title text-end text-dark">M-Ton</span>
+														</h4>
+													</div>
+												</div>
+											<div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="col-12 col-md-4 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
 											</div>
 										</div>
 										<div class="widget-summary-col">
 											<div class="summary">
-												<h4 class="title">Today's Sales</h4>
+												<strong class="amount">Long Term Loan
+												</strong>
 												<div class="info">
-													<strong class="amount">3765</strong>
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary">
+												<strong class="amount">Short Term Loan
+												</strong>
+												<div class="info">
+													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-primary">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-primary">
+												<i class="fas fa-cash-register"></i>
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<h4 class="amount mb-2"><strong>Last Month Cash Flow</strong></h4>
+												<div class="info ">
+													
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH IN:  </span><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+													
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH OUT:  </span><strong>14,890.30</strong>
+														<span class="title text-end text-dark">M-Ton</span>
+													</h4>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -129,30 +252,7 @@
 								</div>
 							</section>
 						</div>
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-quaternary">
-								<div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-quaternary">
-												<i class="fas fa-user"></i>
-											</div>
-										</div>
-										<div class="widget-summary-col">
-											<div class="summary">
-												<h4 class="title">Today's Purchases</h4>
-												<div class="info">
-													<strong class="amount">3765</strong>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(report)</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
+
 						<!-- summaries ends here -->
 						<div class="tabs">
 							<ul class="nav nav-tabs">

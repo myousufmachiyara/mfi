@@ -486,7 +486,7 @@ a:active {
 		min-height: 0;
 		min-width: 100%;
 		min-width: 100vw;
-		padding-top: 60px;
+		/* padding-top: 60px; */
 		padding-bottom: 50px;
 		position: fixed;
 		overflow: hidden;
@@ -1305,7 +1305,7 @@ a:active {
 .sidebar-left .sidebar-header .sidebar-title {
 	background: #1D2127;
 	color: #fff;
-	padding: 8px;
+	padding: 5px 8px;
 	font-size: 12.8px;
 	font-size: 1rem;
 }
@@ -1965,6 +1965,7 @@ html.no-overflowscrolling .nano {
 	position: relative;
 	overflow: hidden;
 	width: 100%;
+	top: 30px;
 }
 
 html.no-overflowscrolling .nano > .nano-content {
@@ -2027,6 +2028,7 @@ html.no-overflowscrolling.custom-scroll .nano > .nano-content {
 html.no-overflowscrolling .sidebar-left .nano {
 	background: #1D2127;
 	box-shadow: -5px 0 0 #2F3139 inset;
+	top: 30px;
 }
 
 html.no-overflowscrolling.sidebar-light:not(.dark) .sidebar-left .nano {
@@ -2328,7 +2330,7 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 /* Page Header - Mobile */
 @media only screen and (max-width: 767px) {
 	.page-header {
-		padding-right: 80px;
+		padding: 2px 20px 0px 15px;
 	}
 
 	.page-header .breadcrumbs {
@@ -17727,7 +17729,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 	border: none;
 	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
 	box-sizing: content-box;
-	left: -6px !important;
+	left: -54px !important;
 	padding: 0px 0px;
 	top: 41px !important;
 	transform: none !important;
@@ -17790,8 +17792,8 @@ p.drop-caps.drop-caps-style-2:first-letter {
 	}
 
 	.userbox .dropdown-menu {
-		left: -5px !important;
-		padding: 43px 0 0 0;
+		left: -58px !important;
+		padding: 5px 0 0 0;
 	}
 }
 /* Header Dark - Userbox */

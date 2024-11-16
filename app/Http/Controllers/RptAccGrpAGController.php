@@ -13,6 +13,7 @@ class RptAccGrpAGController extends Controller
 {
     public function ag(Request $request){
         $balance_acc_group = balance_acc_group::where('group_cod',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
 
         return $balance_acc_group;
@@ -43,6 +44,7 @@ class RptAccGrpAGController extends Controller
     
         // Retrieve data from the database
         $balance_acc_group = balance_acc_group::where('group_cod',$request->acc_id)
+        ->orderBy('ac_name', 'asc')
         ->get();
     
         // Check if data exists
@@ -62,9 +64,9 @@ class RptAccGrpAGController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Acc Grp Balance 1 Report ' . $request->acc_id);
-        $pdf->SetSubject('Acc Grp Balance 1 Report');
-        $pdf->SetKeywords('Acc Grp Balance 1 Report, TCPDF, PDF');
+        $pdf->SetTitle('Acc Grp Balance Report-' . $balance_acc_group[0]['group_name']);
+        $pdf->SetSubject('Acc Grp Balance Report');
+        $pdf->SetKeywords('Acc Grp Balance Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
     
         // Add a page and set padding
@@ -80,20 +82,13 @@ class RptAccGrpAGController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                    Group Name:
+                    Group Name: <span style="color:black;">'.$balance_acc_group[0]['group_name'].'</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    Print Date: <span style="color:black;"></span>
+                    Date: <span style="color:black;">' . htmlspecialchars($formattedDate) . '</span>
                 </td>
             </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                '.$balance_acc_group[0]['group_name'].'
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
-                    Balance Date: <span style="color:black;"></span>
-                </td>
-            </tr>
+            
         </table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -104,10 +99,9 @@ class RptAccGrpAGController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Acc#</th>
-                    <th style="width:24%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Address</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Phone</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
+                    <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                 </tr>';
@@ -124,9 +118,8 @@ class RptAccGrpAGController extends Controller
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
                     <td style="width:8%;">' . $item['ac_code']. '</td>
-                    <td style="width:24%;">' . $item['ac_name'] . '</td>
-                    <td style="width:18%;">' . $item['address'] . '</td>
-                    <td style="width:15%;">' . $item['phone'] . '</td>
+                    <td style="width:32%;">' . $item['ac_name'] . '</td>
+                    <td style="width:25%;">' . $item['address'] . '' . $item['phone'] . '</td>
                     <td style="width:14%;">' . $item['Debit'] . '</td>
                     <td style="width:14%;">' . $item['Credit'] . '</td>
                 </tr>';
@@ -139,16 +132,25 @@ class RptAccGrpAGController extends Controller
         // Add totals row
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
-            <td colspan="5" style="text-align:right;">Total:</td>
+            <td colspan="4" style="text-align:right;">Total:</td>
             <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
-            
+
+        // Calculate balance and add balance row
+        $balance = $totalDebit + $totalCredit;
+        $html .= '
+        <tr style="background-color:#d2edc7; font-weight:bold;">
+            <td colspan="4" style="text-align:right;">Balance:</td>
+            <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+        </tr>';
+
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
         
         $accId = $request->acc_id;
-        $filename = "acc_group_bal_1_report{$accId}.pdf";
+        $filename = "acc_group_bal_report_{$balance_acc_group[0]['group_name']}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
