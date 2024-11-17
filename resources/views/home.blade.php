@@ -113,8 +113,20 @@
 													@endif
 												</div>
 											</div>
-											@php 
-												$balance = $receivables->total_balance - $payables->total_balance;
+											@php
+												// Check if the variables are set and have non-null values
+												$balance = 0;  // Default value to prevent any errors
+
+												if (isset($receivables) && isset($payables) && !empty($receivables->total_balance) && !empty($payables->total_balance)) {
+													// If both variables exist and have a total_balance value
+													$balance = $receivables->total_balance - $payables->total_balance;
+												} elseif (isset($receivables) && !empty($receivables->total_balance)) {
+													// If only receivables has a total_balance value
+													$balance = $receivables->total_balance;
+												} elseif (isset($payables) && !empty($payables->total_balance)) {
+													// If only payables has a total_balance value
+													$balance = -$payables->total_balance;  // Assuming you want a negative balance when only payables exist
+												}
 											@endphp
 
 											<div class="summary col-6">
