@@ -218,7 +218,11 @@ class UsersController extends Controller
             // if ($allowed_macs->contains($user_mac)) {
 
                 $request->session()->regenerate();
-    
+
+                users::where('id', $user['id'])->update([
+                    'is_login'=>1,
+                ]);
+
                 $user_roles = user_roles::where('user_id',$user['id'])
                 ->join('roles','roles.id','=','user_roles.role_id')
                 ->select('user_roles.*','roles.name as role_name')
