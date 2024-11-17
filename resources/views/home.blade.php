@@ -33,8 +33,10 @@
 												<div class="info">
 													@if (isset($banks) && isset($banks->Total_Balance) && strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
 														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
-													@else
+													@elseif(isset($banks) && isset($banks->Total_Balance))
 														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark">PKR</span></h4>
 													@endif
 												</div>
 											</div>
