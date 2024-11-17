@@ -31,7 +31,7 @@ class HomeController extends Controller
         $receivables = dash_sub_head::where('sub',1)->first();
         $payables  = dash_sub_head::where('sub',7)->first();
         $short_term_loan = dash_sub_head::where('sub',23)->first();
-        $long_term_loan = dash_sub_head::where('sub',24)->first();
+        $long_term_loan = dash_sub_head::where('sub',18)->first();
 
         return view('home', compact('receivables','payables','short_term_loan','long_term_loan'));
     }
