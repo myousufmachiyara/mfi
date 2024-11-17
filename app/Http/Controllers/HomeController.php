@@ -39,9 +39,7 @@ class HomeController extends Controller
         $cash = dash_acc_group::where('group_cod',3)->first();
         $foreign = dash_acc_group::where('group_cod',4)->first();
 
-        $login_users = users::where('is_login',1)
-        ->select('count(id) as login_users')
-        ->get();
+        $login_users = users::where('is_login', 1)->count();
 
         return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users'));
     }
