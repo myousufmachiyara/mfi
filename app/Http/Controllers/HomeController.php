@@ -33,6 +33,11 @@ class HomeController extends Controller
         $short_term_loan = dash_sub_head::where('sub',23)->first();
         $long_term_loan = dash_sub_head::where('sub',18)->first();
 
-        return view('home', compact('receivables','payables','short_term_loan','long_term_loan'));
+        $pdc = dash_acc_group::where('group_cod',1)->first();
+        $banks = dash_acc_group::where('group_cod',2)->first();
+        $cash = dash_acc_group::where('group_cod',3)->first();
+        $foreign = dash_acc_group::where('group_cod',4)->first();
+
+        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign'));
     }
 }

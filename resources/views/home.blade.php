@@ -21,13 +21,22 @@
 											<div class="summary col-6">
 												<strong class="amount">PDC</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
+													@if (strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@endif
 												</div>
 											</div>
 											<div class="summary col-6">
 												<strong class="amount">Bank</strong>
+												<div class="info">
+													@if (strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+													@endif
+												</div>
 												<div class="info">
 													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
