@@ -51,7 +51,7 @@
                                                     @foreach($users as $key => $row)
                                                         <tr>
                                                             <td>{{$row->id}}</td>
-                                                            <td class="active-user">{{$row->name}} </td>
+                                                            <td class="login-user">{{$row->name}} </td>
                                                             <td>{{$row->username}}</td>
                                                             <td>{{$row->role_name}}</td>
                                                             <td>{{$row->cnic_no}}</td>
