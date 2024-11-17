@@ -66,11 +66,7 @@
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
-												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
-												</div>
+												
 											</div>
 										</div>
 										<div>
