@@ -164,7 +164,11 @@
 											<div class="summary">
 												<h4 class="title">Login Users</h4>
 												<div class="info">
-													<strong class="amount">{{$login_users}}</strong>
+													@if (isset($login_users))
+														<strong class="amount">{{$login_users}}</strong>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>-</strong>
+													@endif
 												</div>
 											</div>
 											<div class="summary-footer">
