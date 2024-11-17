@@ -31,16 +31,11 @@
 											<div class="summary col-6">
 												<strong class="amount">Bank</strong>
 												<div class="info">
-													@if (strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
+													@if (isset($banks) && isset($banks->Total_Balance) && strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
 														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
 													@else
 														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
 													@endif
-												</div>
-												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
-													</h4>
 												</div>
 											</div>
 											<div class="summary col-6">
