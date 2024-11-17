@@ -198,6 +198,13 @@
 												<strong class="amount">Long Term Loan
 												</strong>
 												<div class="info">
+													@if (strpos($long_term_loan->total_balance, '.') !== false && substr($long_term_loan->total_balance, strpos($long_term_loan->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($long_term_loan->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($long_term_loan->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+												<div class="info">
 													<h4 class="amount m-0 text-success"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
