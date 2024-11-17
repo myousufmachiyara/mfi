@@ -58,6 +58,15 @@
 												<strong class="amount">Foreign Currency
 												</strong>
 												<div class="info">
+													@if (isset($foreign) && isset($foreign->Total_Balance) && strpos($foreign->Total_Balance, '.') !== false && substr($foreign->Total_Balance, strpos($foreign->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($foreign->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($foreign) && isset($foreign->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($foreign->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+												<div class="info">
 													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
 														<span class="title text-end text-dark">PKR</span>
 													</h4>
