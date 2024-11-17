@@ -278,29 +278,41 @@
 						<div class="tabs">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#sales" href="#sales" data-bs-toggle="tab">Sales</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#BNF" href="#BNF" data-bs-toggle="tab">Bills Not Final</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#pur" href="#pur" data-bs-toggle="tab">Purchases</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#BNR" href="#BNR" data-bs-toggle="tab">Bills Not Recieved </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#vouchers" href="#vouchers" data-bs-toggle="tab">Vouchers</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#complains" href="#complains" data-bs-toggle="tab">Complains</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#HR_Sale" href="#HR_Sale" data-bs-toggle="tab">HR Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#items" href="#items" data-bs-toggle="tab">Items</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#GS" href="#GS" data-bs-toggle="tab">Garder Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#ret" href="#ret" data-bs-toggle="tab">Returns</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#DS" href="#DS" data-bs-toggle="tab">Door Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#acc" href="#acc" data-bs-toggle="tab">Accounts</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#IIL_Sale" href="#IIL_Sale" data-bs-toggle="tab">IIL Sale</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#annual" href="#annual" data-bs-toggle="tab">Annual</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#overDues" href="#overDues" data-bs-toggle="tab">Overdues</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#overDays" href="#overDays" data-bs-toggle="tab">Over Days</a>
 								</li>
 							</ul>
 							<div class="tab-content">
-								<div id="sales" class="tab-pane">
+								<div id="BNF" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
 										<div class="col-12 col-md-4 mb-2">
