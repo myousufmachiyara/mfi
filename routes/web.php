@@ -288,7 +288,6 @@
     // });
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
