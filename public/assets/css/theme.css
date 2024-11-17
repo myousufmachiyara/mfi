@@ -21736,26 +21736,3 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
-
-tbody td.login-user::after{
-	border: 6px solid #4dd79c;
-    border-radius: 100px;
-    content: '';
-    display: inline-block;
-    left: 0;
-    margin: 0;
-    position: absolute;
-    top: 5px;
-    z-index: 2;
-}
-tbody td.non-login-user::after{
-	border: 6px solid #CCC;
-    border-radius: 100px;
-    content: '';
-    display: inline-block;
-    left: 0;
-    margin: 0;
-    position: absolute;
-    top: 5px;
-    z-index: 2;
-}
