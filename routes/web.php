@@ -2,8 +2,8 @@
 
     use Illuminate\Support\Facades\Route;
 
-    Route::get('/', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
-    Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen']);
+    // Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
+    Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
 
     Route::middleware(['checkPermission:view'])->group(function () {
