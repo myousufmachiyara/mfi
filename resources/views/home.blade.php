@@ -104,10 +104,12 @@
 											<div class="summary col-6">
 												<strong class="amount">Total Receivables</strong>
 												<div class="info">
-													@if (strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@if (isset($receivables) && isset($receivables->total_balance) && strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($receivables) && isset($receivables->total_balance))
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
