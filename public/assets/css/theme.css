@@ -21736,7 +21736,10 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
-.login-user::after{
+.login-user{
+	position: relative;
+}
+td.login-user::after{
 	border: 6px solid #4dd79c;
     border-radius: 100px;
     content: '';
@@ -21747,7 +21750,7 @@ input[type="number"] {
     top: 5px;
     z-index: 2;
 }
-.non-login-user::after{
+td.non-login-user::after{
 	border: 6px solid #CCC;
     border-radius: 100px;
     content: '';
