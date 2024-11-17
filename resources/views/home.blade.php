@@ -21,10 +21,12 @@
 											<div class="summary col-6">
 												<strong class="amount">PDC</strong>
 												<div class="info">
-													@if (strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+													@if (isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($pdc) && isset($pdc->Total_Balance))
 														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
@@ -43,9 +45,13 @@
 											<div class="summary col-6">
 												<strong class="amount">Cash</strong>
 												<div class="info">
-													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark"> PKR</span>
-													</h4>
+													@if (isset($cash) && isset($cash->Total_Balance) && strpos($cash->Total_Balance, '.') !== false && substr($cash->Total_Balance, strpos($cash->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($cash->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($cash) && isset($cash->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($cash->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
 												</div>
 											</div>
 											<div class="summary col-6">
