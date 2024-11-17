@@ -32,11 +32,11 @@
 												<strong class="amount">Bank</strong>
 												<div class="info">
 													@if (isset($banks) && isset($banks->Total_Balance) && strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($banks) && isset($banks->Total_Balance))
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark">PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
@@ -44,7 +44,7 @@
 												<strong class="amount">Cash</strong>
 												<div class="info">
 													<h4 class="amount m-0 text-primary"><strong>14,890.30</strong>
-														<span class="title text-end text-dark">PKR</span>
+														<span class="title text-end text-dark"> PKR</span>
 													</h4>
 												</div>
 											</div>
@@ -82,9 +82,9 @@
 												<strong class="amount">Total Payables</strong>
 												<div class="info">
 													@if (strpos($payables->total_balance, '.') !== false && substr($payables->total_balance, strpos($payables->total_balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark">PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
