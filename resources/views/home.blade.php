@@ -147,7 +147,7 @@
 											<div class="summary">
 												<h4 class="title">Login Users</h4>
 												<div class="info">
-													<strong class="amount">3765</strong>
+													<strong class="amount">{{$login_users}}</strong>
 												</div>
 											</div>
 											<div class="summary-footer">

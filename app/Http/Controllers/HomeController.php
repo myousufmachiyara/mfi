@@ -7,6 +7,7 @@ use App\Models\dash_sub_head;
 use App\Models\dash_month_sale;
 use App\Models\dash_month_purchase;
 use App\Models\dash_acc_group;
+use App\Models\users;
 
 class HomeController extends Controller
 {
@@ -38,6 +39,10 @@ class HomeController extends Controller
         $cash = dash_acc_group::where('group_cod',3)->first();
         $foreign = dash_acc_group::where('group_cod',4)->first();
 
-        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign'));
+        $login_users = users::where('is_login',1)
+        ->select('count(id) as login_users')
+        ->get();
+
+        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users'));
     }
 }
