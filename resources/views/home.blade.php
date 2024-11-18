@@ -94,7 +94,7 @@
 					<div class="row cust-pad">
 						<!-- summaries -->
 
-						<div class="col-12 col-md-2 mb-2">
+						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2">
 								<div class="card-body">
 									<h3 class="amount">PDC</h3>
