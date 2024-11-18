@@ -104,16 +104,16 @@ class RptCommissionsController extends Controller
         $html = '
         <table border="1" style="border-collapse: collapse; text-align: center;">
             <tr>
-                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                <th style="width:8%;color:#17365D;font-weight:bold;">Inv #</th>
-                <th style="width:8%;color:#17365D;font-weight:bold;">Ord #</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
-                <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
-                <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
+                <th>S/No</th>
+                <th>Date</th>
+                <th  >Inv #</th>
+                <th  >Ord #</th>
+                <th   >B-Amount</th>
+                <th   >GST / I-Tax</th>
+                <th    >Comm %</th>
+                <th   >Comm Amt</th>
+                <th    >C.d %</th>
+                <th   >C.d Amt</th>
             </tr>';
 
             foreach ($comm_pipe_rpt as $data) {
