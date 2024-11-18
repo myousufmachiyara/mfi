@@ -413,7 +413,7 @@ class RptAccNameGLController extends Controller
                         <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
                     </tr>
                     <tr>
-                        <th colspan="7" style="text-align: right">------Opening Balance------</th>
+                        <th colspan="8" style="text-align: right">------Opening Balance------</th>
                         <th style="text-align: left">'. $opening_bal .'</th>
                     </tr>';
                 // Table Rows
@@ -435,8 +435,8 @@ class RptAccNameGLController extends Controller
                                 <td style='width:7%;'>{$items['auto_lager']}</td>
                                 <td style='width:11%;'>{$items['entry_of']}</td>
                                 <td style='width:11%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
-                                <td style='width:18%;'>{$items['ac2']}</td>
-                                <td style='width:10%;'>{$items['Narration']}</td>
+                                <td style='width:19%;'>{$items['ac2']}</td>
+                                <td style='width:11%;'>{$items['Narration']}</td>
                                 <td style='width:12%;'>" . number_format($items['Debit'], 0) . "</td>
                                 <td style='width:12%;'>" . number_format($items['Credit'], 0) . "</td>
                                 <td style='width:12%;'>" . number_format($balance, 0) . "</td>
