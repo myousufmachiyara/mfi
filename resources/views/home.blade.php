@@ -224,8 +224,8 @@
 													@endif
 												</div>
 												<div class="seen-users">
-													<div class="user-icon-container">
-														<div class="user-icon" style="background-image: url('user1.jpg');"></div>
+													<div class="user-icon-container">													
+														<div class="user-icon" style="background-image: url('/assets/img/!happy-face.png');"></div>
 														<div class="user-icon" style="background-image: url('user2.jpg');"></div>
 														<div class="user-icon" style="background-image: url('user3.jpg');"></div>
 														<div class="user-icon" style="background-image: url('user4.jpg');"></div>
@@ -515,7 +515,7 @@
 		if (seenUsers.length > 5) {
 			seenUsersContainer.classList.add('more-than-5'); // Show the "+5" icon
 		}
-		
+
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
