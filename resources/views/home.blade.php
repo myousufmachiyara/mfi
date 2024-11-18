@@ -193,7 +193,6 @@
 							</section>
 						</div>
 
-
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
@@ -284,6 +283,9 @@
 											</tr>
 										</tbody>
 									</table>
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View All</a>
+									</div>
 								</div>
 							</section>
 						</div>
