@@ -95,39 +95,87 @@ class RptCommissionsController extends Controller
 
     
         $html = '
-    <table border="1" style="border-collapse: collapse; text-align: center;">
-        <tr>
-            <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-            <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-            <th style="width:8%;color:#17365D;font-weight:bold;">Inv #</th>
-            <th style="width:8%;color:#17365D;font-weight:bold;">Ord #</th>
-            <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
-            <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
-            <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
-            <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
-            <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
-            <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
-        </tr>';
+        <table border="1" style="border-collapse: collapse; text-align: center;">
+            <tr>
+                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
+                <th style="width:8%;color:#17365D;font-weight:bold;">Inv #</th>
+                <th style="width:8%;color:#17365D;font-weight:bold;">Ord #</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
+            </tr>';
 
-$lastAccountName = '';
-$subtotalBAmount = 0;
-$subtotalCommDisc = 0;
-$subtotalCdDisc = 0;
-$rowNumber = 1;
-$count = 1;
+            $lastAccountName = '';
+            $subtotalBAmount = 0;
+            $subtotalCommDisc = 0;
+            $subtotalCdDisc = 0;
+            $rowNumber = 1;
+            $count = 1;
 
-foreach ($comm_pipe_rpt as $data) {
-    $bAmount = $data['B_amount'] ?? 0;
-    $commDisc = ($bAmount * ($data['comm_disc'] ?? 0)) / 100;
-    $totalTax = 1 + (((($data['gst'] ?? 0) + ($data['income_tax'] ?? 0)) / 100));
-    $cdDisc = ($bAmount && $totalTax !== 0) 
-        ? ($bAmount * $totalTax * ($data['cd_disc'] ?? 0) / 100) / $totalTax 
-        : 0;
+            foreach ($comm_pipe_rpt as $data) {
+                $bAmount = $data['B_amount'] ?? 0;
+                $commDisc = ($bAmount * ($data['comm_disc'] ?? 0)) / 100;
+                $totalTax = 1 + (((($data['gst'] ?? 0) + ($data['income_tax'] ?? 0)) / 100));
+                $cdDisc = ($bAmount && $totalTax !== 0) 
+                    ? ($bAmount * $totalTax * ($data['cd_disc'] ?? 0) / 100) / $totalTax 
+                    : 0;
 
-    if ($data['ac_name'] !== $lastAccountName) {
-        if ($lastAccountName) {
-            // Ensure colspan covers the correct number of columns
-            $html .= "
+                if ($data['ac_name'] !== $lastAccountName) {
+                    if ($lastAccountName) {
+                        // Ensure colspan covers the correct number of columns
+                        $html .= "
+                            <tr style='background-color: #FFFFFF;'>
+                                <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
+                                <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
+                                <td></td>
+                                <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
+                            </tr>";
+                        // Reset subtotals
+                        $subtotalBAmount = $subtotalCommDisc = $subtotalCdDisc = 0;
+                    }
+
+                    // Add account header with correct colspan (10 columns in total)
+                    $html .= "
+                        <tr>
+                            <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
+                                " . ($data['ac_name'] ?? "No Account Name") . "
+                            </td>
+                        </tr>";
+                    $lastAccountName = $data['ac_name'];
+                    $rowNumber = 1;
+                }
+
+                // Add current row
+                $html .= "
+                    <tr>
+                        <td>" . $count++ . "</td>
+                        <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-Y') : "") . "</td>
+                        <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
+                        <td>" . ($data['pur_ord_no'] ?? "") . "</td>
+                        <td>" . number_format($bAmount, 0) . "</td>
+                        <td>" . (($data['gst'] ?? "") . ($data['gst'] && $data['income_tax'] ? " / " : "") . ($data['income_tax'] ?? "")) . "</td>
+                        <td>" . ($data['comm_disc'] ?? "") . "</td>
+                        <td>" . number_format($commDisc, 0) . "</td>
+                        <td>" . ($data['cd_disc'] ?? "") . "</td>
+                        <td>" . number_format($cdDisc, 0) . "</td>
+                    </tr>";
+
+                // Accumulate subtotals
+                $subtotalBAmount += $bAmount;
+                $subtotalCommDisc += $commDisc;
+                $subtotalCdDisc += $cdDisc;
+            }
+
+            // Final subtotal for the last account
+            if ($lastAccountName) {
+                $html .= "
                 <tr style='background-color: #FFFFFF;'>
                     <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
                     <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
@@ -137,60 +185,12 @@ foreach ($comm_pipe_rpt as $data) {
                     <td></td>
                     <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
                 </tr>";
-            // Reset subtotals
-            $subtotalBAmount = $subtotalCommDisc = $subtotalCdDisc = 0;
-        }
+            }
 
-        // Add account header with correct colspan (10 columns in total)
-        $html .= "
-            <tr>
-                <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
-                    " . ($data['ac_name'] ?? "No Account Name") . "
-                </td>
-            </tr>";
-        $lastAccountName = $data['ac_name'];
-        $rowNumber = 1;
-    }
-
-    // Add current row
-    $html .= "
-        <tr>
-            <td>" . $count++ . "</td>
-            <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-Y') : "") . "</td>
-            <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
-            <td>" . ($data['pur_ord_no'] ?? "") . "</td>
-            <td>" . number_format($bAmount, 0) . "</td>
-            <td>" . (($data['gst'] ?? "") . ($data['gst'] && $data['income_tax'] ? " / " : "") . ($data['income_tax'] ?? "")) . "</td>
-            <td>" . ($data['comm_disc'] ?? "") . "</td>
-            <td>" . number_format($commDisc, 0) . "</td>
-            <td>" . ($data['cd_disc'] ?? "") . "</td>
-            <td>" . number_format($cdDisc, 0) . "</td>
-        </tr>";
-
-    // Accumulate subtotals
-    $subtotalBAmount += $bAmount;
-    $subtotalCommDisc += $commDisc;
-    $subtotalCdDisc += $cdDisc;
-}
-
-// Final subtotal for the last account
-if ($lastAccountName) {
-    $html .= "
-        <tr style='background-color: #FFFFFF;'>
-            <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
-            <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
-            <td></td>
-            <td></td>
-            <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
-            <td></td>
-            <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
-        </tr>";
-}
-
-$html .= '</table>';
+        $html .= '</table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
- 
+
         // // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
