@@ -225,12 +225,11 @@
 												</div>
 												<div class="seen-users">
 													<div class="user-icon-container">													
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');">
-														</div>
-														<div class="user-icon" style="background-image: url('user2.jpg');"></div>
-														<div class="user-icon" style="background-image: url('user3.jpg');"></div>
-														<div class="user-icon" style="background-image: url('user4.jpg');"></div>
-														<div class="user-icon" style="background-image: url('user5.jpg');"></div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
 														<div class="user-icon more-users">+5</div> <!-- This will show only if there are more than 5 users -->
 													</div>
 												</div>
