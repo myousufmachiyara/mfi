@@ -156,7 +156,7 @@ class RptCommissionsController extends Controller
                 $html .= "
                     <tr>
                         <td>" . $count++ . "</td>
-                        <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-Y') : "") . "</td>
+                        <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-y') : "") . "</td>
                         <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
                         <td>" . ($data['pur_ord_no'] ?? "") . "</td>
                         <td>" . number_format($bAmount, 0) . "</td>
