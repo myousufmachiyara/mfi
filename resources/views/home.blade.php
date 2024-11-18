@@ -94,7 +94,7 @@
 					<div class="row cust-pad">
 						<!-- summaries -->
 
-						<div class="col-12 col-md-5 mb-2">
+						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
