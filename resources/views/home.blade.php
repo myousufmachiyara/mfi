@@ -180,7 +180,7 @@
 								</div>
 							</section>
 
-							<section class="card card-featured-left card-featured-tertiary mt-2">
+							<section class="card card-featured-left card-featured-tertiary mt-3">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
 									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_sale->total_weight) )
