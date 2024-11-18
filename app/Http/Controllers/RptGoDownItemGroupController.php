@@ -104,18 +104,18 @@ class RptGoDownItemGroupController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Item Name</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">12G/2.50mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">14G/2.00mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">16G/1.60mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">1.50mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">18G/1.20mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">1.10mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">19G/1.0mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">20G/0.9mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">21G/0.8mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">22G/0.7mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">23G/0.6mm</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">24G/0.5mm</th>
                 </tr>';
     
         // Iterate through items and add rows
