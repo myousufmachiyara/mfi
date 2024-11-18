@@ -1,4 +1,57 @@
 @include('layouts.header')
+	<style>
+		/* Main container for the seen users */
+		.seen-users {
+			display: flex;
+			align-items: center;
+		}
+
+		/* Container for user icons */
+		.user-icon-container {
+			display: flex;
+			justify-content: flex-start;
+			position: relative;
+		}
+
+		/* Styling for each user icon */
+		.user-icon {
+			width: 40px;
+			height: 40px;
+			margin-right: -10px; /* Slight overlap */
+			border-radius: 50%;
+			background-size: cover;
+			background-position: center;
+			border: 2px solid #fff;
+			transition: transform 0.3s ease;
+		}
+
+		.user-icon:hover {
+			transform: scale(1.1); /* Slightly enlarge on hover */
+		}
+
+		/* Styling for the "more users" icon */
+		.user-icon.more-users {
+			display: none; /* Hidden by default */
+			width: 40px;
+			height: 40px;
+			background-color: #f1f1f1;
+			color: #007bff;
+			font-weight: bold;
+			text-align: center;
+			line-height: 40px;
+			border-radius: 50%;
+			border: 2px solid #fff;
+		}
+
+		/* Show the "more users" icon if there are more than 5 users */
+		.seen-users.more-than-5 .user-icon-container .user-icon:nth-child(n+6) {
+			display: none;
+		}
+
+		.seen-users.more-than-5 .user-icon-container .user-icon.more-users {
+			display: block;
+		}
+	</style>
 	<body>
 		<section class="body">
 			<div class="inner-wrapper">
@@ -169,6 +222,16 @@
 													@else
 														<h4 class="amount m-0 text-primary"><strong>-</strong>
 													@endif
+												</div>
+												<div class="seen-users">
+													<div class="user-icon-container">
+														<div class="user-icon" style="background-image: url('user1.jpg');"></div>
+														<div class="user-icon" style="background-image: url('user2.jpg');"></div>
+														<div class="user-icon" style="background-image: url('user3.jpg');"></div>
+														<div class="user-icon" style="background-image: url('user4.jpg');"></div>
+														<div class="user-icon" style="background-image: url('user5.jpg');"></div>
+														<div class="user-icon more-users">+5</div> <!-- This will show only if there are more than 5 users -->
+													</div>
 												</div>
 											</div>
 											<div class="summary-footer">
@@ -431,6 +494,28 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
+		// Example: Assume you have a list of users who have seen the message
+		let seenUsers = ['user1', 'user2', 'user3', 'user4', 'user5', 'user6', 'user7'];
+
+		// Select the container for seen users
+		let seenUsersContainer = document.querySelector('.seen-users');
+		let userIconContainer = seenUsersContainer.querySelector('.user-icon-container');
+
+		// Loop through the users and create user icons
+		seenUsers.forEach((user, index) => {
+			if (index < 5) { // Show only up to 5 user icons
+				let userIcon = document.createElement('div');
+				userIcon.classList.add('user-icon');
+				userIcon.style.backgroundImage = `url('user${index + 1}.jpg')`; // Example user icon
+				userIconContainer.appendChild(userIcon);
+			}
+		});
+
+		// Check if there are more than 5 users
+		if (seenUsers.length > 5) {
+			seenUsersContainer.classList.add('more-than-5'); // Show the "+5" icon
+		}
+		
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
