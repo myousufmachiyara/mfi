@@ -167,8 +167,8 @@
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
-									@if(isset($foreign) && isset($foreign->Total_Balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -284,9 +284,7 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="summary-footer">
-									<a class="text-muted text-uppercase" href="#">View All</a>
-								</div>
+								
 							</section>
 						</div>
 							
