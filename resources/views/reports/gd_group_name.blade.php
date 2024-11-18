@@ -602,7 +602,7 @@
 
             }
             else if (tabName === "SAT") {
-                window.open(`/rep-godown-by-item-name/sat/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+                window.open(`/rep-godown-by-item-grp/sat/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
         }
 
