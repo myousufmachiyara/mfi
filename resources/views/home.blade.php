@@ -21,25 +21,10 @@
 		}
 
 		.icon-container {
-			width: 200px; /* Set the desired width */
-			height: 200px; /* Set the desired height */
-			position: relative; /* Needed for positioning the pseudo-element */
-			background-color: #f0f0f0; /* Optional background color */
-		}
-
-		.icon-container::before {
-			content: ''; /* Empty content for the pseudo-element */
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-image: url('path-to-your-icon.png'); /* Path to your icon image */
+			background-image: url('/assets/img/favicon.png'); /* Path to your icon image */
 			background-size: contain; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
-			opacity: 0.5; /* Set the opacity to 50% */
-			z-index: -1; /* Make sure the background stays behind any content */
 		}
 	</style>
 	<body>
