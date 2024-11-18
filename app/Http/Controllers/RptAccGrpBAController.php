@@ -67,22 +67,22 @@ class RptAccGrpBAController extends Controller
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
         // Table header for data
-        $html = '
-            <table border="1" style="border-collapse: collapse; text-align: center;">
-                <tr>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
-                    <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
-                    <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
-                </tr>';
+        // $html = '
+        //     <table border="1" style="border-collapse: collapse; text-align: center;">
+        //         <tr>
+        //             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+        //             <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
+        //             <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
+        //             <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
+        //             <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+        //             <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
+        //         </tr>';
     
         // Iterate through items and add rows
         $count = 1;
         $totalDebit = 0;
         $totalCredit = 0;
-
+        $html = '';
         foreach ($groupedData as $headCount => $heads) {
             $html .= '<table style="width:100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 10px;">
                         <thead>
