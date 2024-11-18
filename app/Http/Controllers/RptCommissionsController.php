@@ -114,28 +114,82 @@ class RptCommissionsController extends Controller
         $count = 1;
         $totalAmount = 0;
     
-        foreach ($comm_pipe_rpt as $item) {
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+        $lastAccountName = '';
+        $subtotalBAmount = 0;
+        $subtotalCommDisc = 0;
+        $subtotalCdDisc = 0;
+        $rowNumber = 1;
     
-            $html .= '
-                <tr style="background-color:' . $backgroundColor . ';">
-                    <td style="width:7%;">' . $count . '</td>
-                    <td style="width:10%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
-                    <td style="width:8%;">' . $item['auto_lager']. '</td>
-                    <td style="width:8%;">' . $item['Debit_Acc'] . '</td>
-                    <td style="width:12%;">' . $item['Credit_Acc'] . '</td>
-                    <td style="width:12%;">' . $item['remarks'] . '</td>
-                    <td style="width:10%;">' . $item['Amount'] . '</td>
-                    <td style="width:12%;">' . $item['Amount'] . '</td>
-                    <td style="width:10%;">' . $item['Amount'] . '</td>
-                    <td style="width:12%;">' . $item['Amount'] . '</td>
-
-                </tr>';
-            
-            $totalAmount += $item['Amount']; // Accumulate total quantity
-            $count++;
+        // Loop through each item in the result data
+        foreach ($comm_pipe_rpt as $data) {
+            $bAmount = $data['B_amount'] ?? 0;
+            $commDisc = ($bAmount * ($data['comm_disc'] ?? 0)) / 100;
+            $totalTax = 1 + (((($data['gst'] ?? 0) + ($data['income_tax'] ?? 0)) / 100));
+            $cdDisc = ($bAmount && $totalTax !== 0) 
+                ? ($bAmount * $totalTax * ($data['cd_disc'] ?? 0) / 100) / $totalTax 
+                : 0;
+    
+            // Check if the account name has changed to add subtotals
+            if ($data['ac_name'] !== $lastAccountName) {
+                if ($lastAccountName) {
+                    $html .= "
+                        <tr style='background-color: #FFFFFF;'>
+                            <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
+                            <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
+                            <td></td>
+                            <td></td>
+                            <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
+                            <td></td>
+                            <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
+                        </tr>";
+                    $subtotalBAmount = $subtotalCommDisc = $subtotalCdDisc = 0;
+                }
+    
+                $html .= "
+                    <tr>
+                        <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
+                            " . ($data['ac_name'] ?? "No Account Name") . "
+                        </td>
+                    </tr>";
+                $lastAccountName = $data['ac_name'];
+                $rowNumber = 1;
+            }
+    
+            // Add the row for the current item
+            $html .= "
+                <tr>
+                    <td>" . $rowNumber++ . "</td>
+                    <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-Y') : "") . "</td>
+                    <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
+                    <td>" . ($data['pur_ord_no'] ?? "") . "</td>
+                    <td>" . number_format($bAmount, 0) . "</td>
+                    <td>" . (($data['gst'] ?? "") . ($data['gst'] && $data['income_tax'] ? " / " : "") . ($data['income_tax'] ?? "")) . "</td>
+                    <td>" . ($data['comm_disc'] ?? "") . "</td>
+                    <td>" . number_format($commDisc, 0) . "</td>
+                    <td>" . ($data['cd_disc'] ?? "") . "</td>
+                    <td>" . number_format($cdDisc, 0) . "</td>
+                </tr>";
+    
+            // Accumulate subtotals
+            $subtotalBAmount += $bAmount;
+            $subtotalCommDisc += $commDisc;
+            $subtotalCdDisc += $cdDisc;
         }
     
+        // Add final subtotal for the last account
+        if ($lastAccountName) {
+            $html .= "
+                <tr style='background-color: #FFFFFF;'>
+                    <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
+                    <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
+                    <td></td>
+                    <td></td>
+                    <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
+                    <td></td>
+                    <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
+                </tr>";
+        }
+            
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
     
