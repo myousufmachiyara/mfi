@@ -436,6 +436,7 @@ class RptAccNameGLController extends Controller
                                 <td style='width:10%;'>{$items['entry_of']}</td>
                                 <td style='width:11%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
                                 <td style='width:20%;'>{$items['ac2']}</td>
+                                <td style='width:9%;'>{$items['Narration']}</td>
                                 <td style='width:12%;'>" . number_format($items['Debit'], 0) . "</td>
                                 <td style='width:12%;'>" . number_format($items['Credit'], 0) . "</td>
                                 <td style='width:12%;'>" . number_format($balance, 0) . "</td>
