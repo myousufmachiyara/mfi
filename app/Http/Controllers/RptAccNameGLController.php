@@ -173,7 +173,7 @@ class RptAccNameGLController extends Controller
                 <td colspan="5" style="text-align:right;">Total:</td>
                 <td style="width:13%;">' . number_format($totalDebit, 0) . '</td>
                 <td style="width:13%;">' . number_format($totalCredit, 0) . '</td>
-                <td style="width:13%;">' . number_format($balance, 0) . '</td>
+                <td style="width:13%;">' . number_format($totalDebit-$totalCredit, 0) . '</td>
             </tr>';
             
         $html .= '</table>';
