@@ -105,9 +105,9 @@ class RptCommissionsController extends Controller
                     <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amnt</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amnt</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
                 </tr>';
     
         // Iterate through items and add rows
