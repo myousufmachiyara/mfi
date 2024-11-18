@@ -94,29 +94,27 @@ class RptCommissionsController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 
     
+        $lastAccountName = '';
+        $subtotalBAmount = 0;
+        $subtotalCommDisc = 0;
+        $subtotalCdDisc = 0;
+        $rowNumber = 1;
+        $count = 1;
+        
         $html = '
         <table border="1" style="border-collapse: collapse; text-align: center;">
-            <thead>
-                <tr>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Inv #</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">Ord #</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
-                </tr> 
-            <thead>';
-
-            $lastAccountName = '';
-            $subtotalBAmount = 0;
-            $subtotalCommDisc = 0;
-            $subtotalCdDisc = 0;
-            $rowNumber = 1;
-            $count = 1;
+            <tr>
+                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
+                <th style="width:8%;color:#17365D;font-weight:bold;">Inv #</th>
+                <th style="width:8%;color:#17365D;font-weight:bold;">Ord #</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">B-Amount</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">Comm %</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
+                <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
+                <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
+            </tr>';
 
             foreach ($comm_pipe_rpt as $data) {
                 $bAmount = $data['B_amount'] ?? 0;
