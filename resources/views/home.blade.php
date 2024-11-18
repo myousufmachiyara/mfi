@@ -97,6 +97,14 @@
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
+									<div class="small-chart float-right" id="sparklineBar"><canvas width="79" height="50" style="display: inline-block; width: 79px; height: 50px; vertical-align: top;"></canvas></div>
+									<script type="text/javascript">
+										var sparklineBarData = [5, 6, 7, 2, 0, 4 , 2, 4, 2, 0, 4 , 2, 4, 2, 0, 4];
+									</script>
+									<div class="h4 font-weight-bold mb-0">488</div>
+									<p class="text-3 text-muted mb-0">Nullam quis ris</p>
+								</div>
+								{{-- <div class="card-body">
 									<div class="widget-summary">
 										<div class="widget-summary-col widget-summary-col-icon">
 											<div class="summary-icon bg-secondary">
@@ -115,9 +123,13 @@
 												@endif
 											</div>
 										</div>
-										
+										<div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
+											</div>
+										</div>
 									</div>
-								</div>
+								</div> --}}
 							</section>
 						</div>
 
