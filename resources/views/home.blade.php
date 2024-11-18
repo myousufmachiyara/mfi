@@ -177,30 +177,31 @@
 												<strong class="amount">Total Payables</strong>
 												<div class="info">
 													@if (isset($payables) && isset($payables->total_balance) && strpos($payables->total_balance, '.') !== false && substr($payables->total_balance, strpos($payables->total_balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($payables) && isset($payables->total_balance))
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary rolling-number"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
+												
 											</div>
 											<div class="summary col-6">
 												<strong class="amount">Total Receivables</strong>
 												<div class="info">
 													@if (isset($receivables) && isset($receivables->total_balance) && strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($receivables) && isset($receivables->total_balance))
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary rolling-number"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
 											@php
 												// Check if the variables are set and have non-null values
 												$balance = 0;  // Default value to prevent any errors
-						
+
 												if (isset($receivables) && isset($payables) && !empty($receivables->total_balance) && !empty($payables->total_balance)) {
 													// If both variables exist and have a total_balance value
 													$balance = $receivables->total_balance - $payables->total_balance;
@@ -212,18 +213,19 @@
 													$balance = -$payables->total_balance;  // Assuming you want a negative balance when only payables exist
 												}
 											@endphp
-						
+
 											<div class="summary col-6">
 												<strong class="amount">Total Balance</strong>
 												<div class="info">
 													@if (strpos($balance, '.') !== false && substr($balance, strpos($balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
 													@else
-														<h4 class="amount m-0 text-primary rolling-number"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
 													@endif
 												</div>
 											</div>
-										</div>						
+											
+										</div>
 										<div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(View Details)</a>
