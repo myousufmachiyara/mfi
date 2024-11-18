@@ -93,165 +93,320 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<!-- summaries -->
-						<div class="row">
-							<!-- PDC, Bank, Cash, and Foreign Currency Summary -->
-							<div class="col-12 col-md-5 mb-2">
-								<section class="card card-featured-left card-featured-secondary mb-2">
-									<div class="card-body">
-										<div class="widget-summary">
-											<div class="widget-summary-col widget-summary-col-icon">
-												<div class="summary-icon bg-secondary">
-													<i class="fas fa-university"></i>
-												</div>
+						<div class="col-12 col-md-5 mb-2">
+							<section class="card card-featured-left card-featured-secondary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-secondary">
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
 											</div>
-											<div class="row">
-												@foreach (['PDC' => $pdc, 'Bank' => $banks, 'Cash' => $cash, 'Foreign Currency' => $foreign] as $label => $data)
-												<div class="summary col-6">
-													<strong class="amount">{{ $label }}</strong>
-													<div class="info">
-														@if (isset($data) && isset($data->Total_Balance) && strpos($data->Total_Balance, '.') !== false && substr($data->Total_Balance, strpos($data->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary">
-															<strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($data->Total_Balance, 0, '.', ',') }}">0</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-														@elseif(isset($data) && isset($data->Total_Balance))
-														<h4 class="amount m-0 text-primary">
-															<strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($data->Total_Balance, 0, '.', ',') }}">0</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-														@else
+										</div>
+										<div class="row">
+											<div class="summary col-6">
+												<strong class="amount">PDC</strong>
+												<div class="info">
+													@if(isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($pdc) && isset($pdc->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
-														@endif
-													</div>
+													@endif
 												</div>
-												@endforeach
 											</div>
+											<div class="summary col-6">
+												<strong class="amount">Bank</strong>
+												<div class="info">
+													@if (isset($banks) && isset($banks->Total_Balance) && strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($banks->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($banks) && isset($banks->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($banks->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											<div class="summary col-6">
+												<strong class="amount">Cash</strong>
+												<div class="info">
+													@if (isset($cash) && isset($cash->Total_Balance) && strpos($cash->Total_Balance, '.') !== false && substr($cash->Total_Balance, strpos($cash->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($cash->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($cash) && isset($cash->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($cash->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											<div class="summary col-6">
+												<strong class="amount">Foreign Currency
+												</strong>
+												<div class="info">
+													@if (isset($foreign) && isset($foreign->Total_Balance) && strpos($foreign->Total_Balance, '.') !== false && substr($foreign->Total_Balance, strpos($foreign->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($foreign->Total_Balance, 0, '.', ',') }}"></strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($foreign) && isset($foreign->Total_Balance))
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($foreign->Total_Balance, 0, '.', ',') }}"></strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+										</div>
+										<div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(View Details)</a>
 											</div>
 										</div>
 									</div>
-								</section>
-							</div>
-						
-							<!-- Payables, Receivables, and Balance Summary -->
-							<div class="col-12 col-md-4 mb-2">
-								<section class="card card-featured-left card-featured-secondary mb-2">
-									<div class="card-body">
-										<div class="widget-summary">
-											<div class="widget-summary-col widget-summary-col-icon">
-												<div class="summary-icon bg-secondary">
-													<i class="fas fa-university"></i>
-												</div>
-											</div>
-											<div class="row">
-												@foreach (['Total Payables' => $payables, 'Total Receivables' => $receivables] as $label => $data)
-												<div class="summary col-6">
-													<strong class="amount">{{ $label }}</strong>
-													<div class="info">
-														@if (isset($data) && isset($data->total_balance) && strpos($data->total_balance, '.') !== false && substr($data->total_balance, strpos($data->total_balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary">
-															<strong>{{ number_format($data->total_balance, 0, '.', ',') }}</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-														@elseif(isset($data) && isset($data->total_balance))
-														<h4 class="amount m-0 text-primary">
-															<strong>{{ number_format($data->total_balance, 0, '.', ',') }}</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-														@else
-														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
-														@endif
-													</div>
-												</div>
-												@endforeach
-						
-												<div class="summary col-6">
-													<strong class="amount">Total Balance</strong>
-													<div class="info">
-														@php
-														$balance = isset($receivables, $payables)
-															? $receivables->total_balance - $payables->total_balance
-															: (isset($receivables) ? $receivables->total_balance : -($payables->total_balance ?? 0));
-														@endphp
-														<h4 class="amount m-0 text-primary">
-															<strong>{{ number_format($balance, 0, '.', ',') }}</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-													</div>
-												</div>
-											</div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(View Details)</a>
-											</div>
-										</div>
-									</div>
-								</section>
-							</div>
-						
-							<!-- Login Users Summary -->
-							<div class="col-12 col-md-3 mb-2">
-								<section class="card card-featured-left card-featured-quaternary">
-									<div class="card-body">
-										<div class="widget-summary">
-											<div class="widget-summary-col widget-summary-col-icon">
-												<div class="summary-icon bg-quaternary">
-													<i class="fas fa-user"></i>
-												</div>
-											</div>
-											<div class="widget-summary-col">
-												<div class="summary">
-													<h4 class="title">Login Users</h4>
-													<div class="info">
-														<strong class="amount">{{ $login_users ?? '-' }}</strong>
-													</div>
-												</div>
-												<div class="summary-footer mt-5">
-													<a class="text-muted text-uppercase" href="{{ route('all-users') }}">(View All Users)</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</section>
-							</div>
-						
-							<!-- Last Month Purchase/Sale Summary -->
-							<div class="col-12 col-md-5 mb-2">
-								<section class="card card-featured-left card-featured-tertiary mb-2">
-									<div class="card-body">
-										<div class="widget-summary">
-											<div class="widget-summary-col widget-summary-col-icon">
-												<div class="summary-icon bg-tertiary">
-													<i class="fas fa-wallet"></i>
-												</div>
-											</div>
-											<div class="row">
-												@foreach (['Last Month Purchase' => $last_month_purchase, 'Last Month Sale' => $last_month_sale] as $label => $data)
-												<div class="summary col-6">
-													<h4 class="amount mb-2"><strong>{{ $label }}</strong></h4>
-													<div class="info">
-														@if (isset($data->total_cr_amt))
-														<h4 class="amount m-0 text-danger mt-2 mb-3">
-															<strong>{{ number_format($data->total_cr_amt, 0, '.', ',') }}</strong>
-															<span class="title text-end text-dark"> PKR</span>
-														</h4>
-														@endif
-														@if (isset($data->total_weight))
-														<h4 class="amount m-0 text-danger mt-2 mb-3">
-															<strong>{{ number_format($data->total_weight, 0, '.', ',') }}</strong>
-															<span class="title text-end text-dark"> M-Ton</span>
-														</h4>
-														@endif
-													</div>
-												</div>
-												@endforeach
-											</div>
-										</div>
-									</div>
-								</section>
-							</div>
+								</div>
+							</section>
 						</div>
-						
+
+						<div class="col-12 col-md-4 mb-2">
+							<section class="card card-featured-left card-featured-secondary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-secondary">
+												<i class="fas fa-university"></i> <!-- PDC Icon -->
+											</div>
+										</div>
+										<div class="row">
+											<div class="summary col-6">
+												<strong class="amount">Total Payables</strong>
+												<div class="info">
+													@if (isset($payables) && isset($payables->total_balance) && strpos($payables->total_balance, '.') !== false && substr($payables->total_balance, strpos($payables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($payables) && isset($payables->total_balance))
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($payables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+												
+											</div>
+											<div class="summary col-6">
+												<strong class="amount">Total Receivables</strong>
+												<div class="info">
+													@if (isset($receivables) && isset($receivables->total_balance) && strpos($receivables->total_balance, '.') !== false && substr($receivables->total_balance, strpos($receivables->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($receivables) && isset($receivables->total_balance))
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($receivables->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											@php
+												// Check if the variables are set and have non-null values
+												$balance = 0;  // Default value to prevent any errors
+
+												if (isset($receivables) && isset($payables) && !empty($receivables->total_balance) && !empty($payables->total_balance)) {
+													// If both variables exist and have a total_balance value
+													$balance = $receivables->total_balance - $payables->total_balance;
+												} elseif (isset($receivables) && !empty($receivables->total_balance)) {
+													// If only receivables has a total_balance value
+													$balance = $receivables->total_balance;
+												} elseif (isset($payables) && !empty($payables->total_balance)) {
+													// If only payables has a total_balance value
+													$balance = -$payables->total_balance;  // Assuming you want a negative balance when only payables exist
+												}
+											@endphp
+
+											<div class="summary col-6">
+												<strong class="amount">Total Balance</strong>
+												<div class="info">
+													@if (strpos($balance, '.') !== false && substr($balance, strpos($balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>{{ number_format($balance, 0, '.', ',') }} </strong> <span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											
+										</div>
+										<div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(View Details)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-quaternary">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-quaternary">
+												<i class="fas fa-user"></i>
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<h4 class="title">Login Users</h4>
+												<div class="info">
+													@if (isset($login_users))
+														<strong class="amount">{{$login_users}}</strong>
+													@else
+														<h4 class="amount m-0 text-primary"><strong>-</strong>
+													@endif
+													<div class="seen-users">
+														<div class="user-icon-container">
+														
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="summary-footer mt-5">
+												<a class="text-muted text-uppercase"  href="{{ route('all-users')}}" >(View All Users)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="col-12 col-md-5 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="row">
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
+													<div class="info">
+														@if (isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && strpos($last_month_purchase->total_cr_amt, '.') !== false && substr($last_month_purchase->total_cr_amt, strpos($last_month_purchase->total_cr_amt, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong  class="rolling-number" data-target="{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt))
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@endif
+
+														@if (isset($last_month_purchase) && isset($last_month_purchase->total_weight) && strpos($last_month_purchase->total_weight, '.') !== false && substr($last_month_purchase->total_weight, strpos($last_month_purchase->total_weight, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_weight))
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@endif
+													</div>
+												</div>
+												
+												<div class="summary col-6">
+													<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
+													<div class="info">
+														@if (isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && strpos($last_month_sale->total_dr_amt, '.') !== false && substr($last_month_sale->total_dr_amt, strpos($last_month_sale->total_dr_amt, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@elseif(isset($last_month_sale) && isset($last_month_sale->total_dr_amt))
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong  class="rolling-number" data-target="{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@endif
+
+														@if (isset($last_month_sale) && isset($last_month_sale->total_weight) && strpos($last_month_sale->total_weight, '.') !== false && substr($last_month_sale->total_weight, strpos($last_month_sale->total_weight, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@elseif(isset($last_month_sale) && isset($last_month_sale->total_weight))
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@endif
+													</div>
+												</div>
+											<div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="col-12 col-md-4 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-tertiary">
+												<i class="fas fa-wallet"></i> <!-- Cash Icon -->
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<strong class="amount">Long Term Loan
+												</strong>
+												<div class="info">
+													@if (isset($long_term_loan) && isset($long_term_loan->total_balance) && strpos($long_term_loan->total_balance, '.') !== false && substr($long_term_loan->total_balance, strpos($long_term_loan->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($long_term_loan->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($long_term_loan) && isset($long_term_loan->total_balance))
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($long_term_loan->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											<div class="summary">
+												<strong class="amount">Short Term Loan
+												</strong>
+												<div class="info">
+													@if (isset($short_term_loan) && isset($short_term_loan->total_balance) && strpos($short_term_loan->total_balance, '.') !== false && substr($short_term_loan->total_balance, strpos($short_term_loan->total_balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($short_term_loan->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@elseif(isset($short_term_loan) && isset($short_term_loan->total_balance))
+														<h4 class="amount m-0 text-success"><strong>{{ number_format($short_term_loan->total_balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@else
+														<h4 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@endif
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(withdraw)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-primary">
+								<div class="card-body">
+									<div class="widget-summary">
+										<div class="widget-summary-col widget-summary-col-icon">
+											<div class="summary-icon bg-primary">
+												<i class="fas fa-cash-register"></i>
+											</div>
+										</div>
+										<div class="widget-summary-col">
+											<div class="summary">
+												<h4 class="amount mb-2"><strong>Last Month Cash Flow</strong></h4>
+												<div class="info ">
+													
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH IN:  </span><strong>14,890.30</strong>
+														<span class="title text-end text-dark">PKR</span>
+													</h4>
+													
+													<h4 class="amount m-0 text-danger mb-3"><span class="h6 text-dark">CASH OUT:  </span><strong>14,890.30</strong>
+														<span class="title text-end text-dark">M-Ton</span>
+													</h4>
+												</div>
+											</div>
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">(report)</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+
 						<!-- summaries ends here -->
 						<div class="tabs">
 							<ul class="nav nav-tabs">
