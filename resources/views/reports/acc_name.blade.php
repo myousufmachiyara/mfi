@@ -650,7 +650,7 @@
                         acc_id:acc_id,
                     }, 
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
 
@@ -731,7 +731,7 @@
 
                     },
                     error: function(){
-                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        $(tableID).html('<tr><td colspan="9" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
@@ -1195,7 +1195,15 @@
                 return;
             }
 
-            if (tabName === "purchase1") {
+            if (tabName === "gl") {
+                window.location.href = `/rep-by-acc-name/gl/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "glr") {
+                window.location.href = `/rep-by-acc-name/glr/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "purchase1") {
                 window.open(`/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
@@ -1235,6 +1243,10 @@
 
             if (tabName === "gl") {
                 window.location.href = `/rep-by-acc-name/gl/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "glr") {
+                window.location.href = `/rep-by-acc-name/glr/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
             else if (tabName === "purchase1") {
