@@ -173,7 +173,7 @@
 								</div>
 							</section>
 
-							<section class="card card-featured-left card-featured-tertiary mb-2">
+							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
 									@if(isset($foreign) && isset($foreign->Total_Balance))
