@@ -99,9 +99,9 @@
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark"> PKR</span></h2>
+										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark"> PKR</span></h2>
 									@else
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h2>
+										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
 									@endif
 									<p class="text-3 text-muted mb-0 text-end">Nullam quis ris</p>
 								</div>
