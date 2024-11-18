@@ -130,11 +130,11 @@ class RptAccNameGLController extends Controller
                     <tr>
                         <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                         <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
-                        <th style="width:7%;color:#17365D;font-weight:bold;">Voucher</th>
-                        <th style="width:14%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:31%;color:#17365D;font-weight:bold;">Account Name</th>
-                        <th style="width:16%;color:#17365D;font-weight:bold;">Debit</th>
-                        <th style="width:16%;color:#17365D;font-weight:bold;">Credit</th>
+                        <th style="width:10%;color:#17365D;font-weight:bold;">Voucher</th>
+                        <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
+                        <th style="width:30%;color:#17365D;font-weight:bold;">Account Name</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
                         <th style="width:16%;color:#17365D;font-weight:bold;">Balance</th>
                     </tr>
                     <tr>
@@ -158,11 +158,11 @@ class RptAccNameGLController extends Controller
                 $html .= "<tr style='background-color:{$bgColor};'>
                                 <td style='width:7%;'>{$count}</td>
                                 <td style='width:7%;'>{$items['auto_lager']}</td>
-                                <td style='width:7%;'>{$items['entry_of']}</td>
-                                <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
-                                <td style='width:10%;'>{$items['ac2']}</td>
-                                <td style='width:16%;'>" . number_format($items['Debit'], 0) . "</td>
-                                <td style='width:16%;'>" . number_format($items['Credit'], 0) . "</td>
+                                <td style='width:10%;'>{$items['entry_of']}</td>
+                                <td style='width:10%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
+                                <td style='width:30%;'>{$items['ac2']}</td>
+                                <td style='width:14%;'>" . number_format($items['Debit'], 0) . "</td>
+                                <td style='width:14%;'>" . number_format($items['Credit'], 0) . "</td>
                                 <td style='width:16%;'>" . number_format($balance, 0) . "</td>
                             </tr>";
     
