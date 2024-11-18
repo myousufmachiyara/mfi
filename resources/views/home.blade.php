@@ -225,10 +225,8 @@
 												</div>
 												<div class="seen-users">
 													<div class="user-icon-container">													
-														<div class="user-icon" style="background-image: url('/assets/img/!happy-face.png');">
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');">
 														</div>
-														<p>user name here</p>
-
 														<div class="user-icon" style="background-image: url('user2.jpg');"></div>
 														<div class="user-icon" style="background-image: url('user3.jpg');"></div>
 														<div class="user-icon" style="background-image: url('user4.jpg');"></div>
