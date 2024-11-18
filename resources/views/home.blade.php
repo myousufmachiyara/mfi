@@ -212,7 +212,7 @@
 								</div>
 							</section>
 
-							<section class="card card-featured-left card-featured-tertiary">
+							<section class="card card-featured-left card-featured-tertiary mt-3">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
 									@if(isset($foreign) && isset($foreign->Total_Balance))
@@ -242,7 +242,7 @@
 								</div>
 							</section>
 
-							<section class="card card-featured-left card-featured-tertiary">
+							<section class="card card-featured-left card-featured-tertiary mt-3">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
 									@if(isset($foreign) && isset($foreign->Total_Balance))
@@ -287,7 +287,6 @@
 										</tbody>
 									</table>
 								</div>
-								
 							</section>
 						</div>
 							
