@@ -14,78 +14,19 @@
 		.animated-amount {
 			animation: slideIn 1s ease-out;
 		}
-		/* Main container for the seen users */
-		.seen-users {
-			display: flex;
-			align-items: center;
-			flex-wrap: wrap;  /* Allow wrapping for smaller screens */
-		}
-
-		/* Container for user icons */
-		.user-icon-container {
-			display: flex;
-			justify-content: flex-start;
-			position: relative;
-		}
-
-		/* Styling for each user icon */
-		.user-icon {
-			width: 50px;
-			height: 50px;
-			margin-right: -10px; /* Slight overlap */
-			border-radius: 50%;
-			background-size: cover;
-			background-position: center;
-			border: 2px solid #fff;
-			transition: transform 0.3s ease;
-			position: relative;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-
-		/* Add hover effect */
-		.user-icon:hover {
-			transform: scale(1.1); /* Slightly enlarge on hover */
-		}
-
-		/* Styling for the "more users" icon */
-		.user-icon.more-users {
-			display: none; /* Hidden by default */
-			width: 50px;
-			height: 50px;
-			background-color: #f1f1f1;
-			color: #007bff;
-			font-weight: bold;
-			text-align: center;
-			line-height: 50px;
-			border-radius: 50%;
-			border: 2px solid #fff;
-		}
-
-		/* Title below user icon */
-		.user-title {
-			position: absolute;
-			bottom: -18px;
-			text-align: center;
-			font-size: 12px;
-			color: #333;
-			width: 100%;
-			overflow: hidden;
-		}
-
-		/* Show the "more users" icon if there are more than 5 users */
-		.seen-users.more-than-5 .user-icon-container .user-icon:nth-child(n+6) {
-			display: none;
-		}
-
-		.seen-users.more-than-5 .user-icon-container .user-icon.more-users {
-			display: block;
-		}
 
 		h3{
 			margin-top: 7px;
 			margin-bottom: 10px;
+		}
+
+		.icon-container {
+			width: 200px; /* Set the desired width */
+			height: 200px; /* Set the desired height */
+			background-image: url('/assets/img/favicon.png'); /* Path to your icon image */
+			background-size: contain; /* Adjust the size of the icon to fit within the div */
+			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
+			background-position: right center; /* Align the icon to the center-right */
 		}
 	</style>
 	<body>
@@ -99,7 +40,7 @@
 					<div class="row cust-pad">
 
 						<div class="col-12 col-md-2 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2">
+							<section class="card card-featured-left card-featured-primary mb-2 icon-container">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
