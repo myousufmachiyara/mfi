@@ -189,7 +189,7 @@
 							</section>
 						</div>
 						
-						<div class="col-12 col-md-6 mb-2">
+						<div class="col-12 col-md-6 mb-2 mt-3">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body">
 									<div class="row">
