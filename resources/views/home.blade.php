@@ -101,7 +101,7 @@
 									@if(isset($pdc) && isset($pdc->Total_Balance))
 										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
-										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
+										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
 									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
@@ -111,13 +111,13 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2">
+							<section class="card card-featured-left card-featured-danger mb-2">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Bank</strong></h3>
 									@if(isset($banks) && isset($banks->Total_Balance))
-										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
-										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
+										<h2 class="amount m-0 text-danger"><strong>-</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
 									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
