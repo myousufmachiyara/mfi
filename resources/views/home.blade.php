@@ -13,7 +13,7 @@
 		}
 		.animated-amount {
 			animation: slideIn 1s ease-out;
-
+		}
 		/* Main container for the seen users */
 		.seen-users {
 			display: flex;
