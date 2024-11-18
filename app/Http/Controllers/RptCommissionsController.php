@@ -114,7 +114,7 @@ class RptCommissionsController extends Controller
         $count = 1;
         $totalAmount = 0;
     
-        foreach ($activites10_gen_ac as $item) {
+        foreach ($comm_pipe_rpt as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
             $html .= '
