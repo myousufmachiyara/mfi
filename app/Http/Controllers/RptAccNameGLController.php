@@ -456,7 +456,7 @@ class RptAccNameGLController extends Controller
 
 
         // Filename and Output
-        $filename = "general_ledgerr_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "general_ledger_r_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
 
     }
