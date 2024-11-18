@@ -265,6 +265,9 @@
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 											@endif
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">View Details</a>
+											</div>
 										</div>
 										<div class="col-12 col-md-6">
 											<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
@@ -275,11 +278,13 @@
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 											@endif
+											<div class="summary-footer">
+												<a class="text-muted text-uppercase" href="#">View Details</a>
+											</div>
 										</div>
+										
 									</div>
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
-									</div>
+									
 								</div>
 							</section>
 						</div>
