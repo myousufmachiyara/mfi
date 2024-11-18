@@ -525,7 +525,7 @@
 			if (index < 5) { // Show only up to 5 user icons
 				let userIcon = document.createElement('div');
 				userIcon.classList.add('user-icon');
-				userIcon.style.backgroundImage = `url(/assets/img/'${user.image}')`; // Set user image
+				userIcon.style.backgroundImage = `url('/assets/img/${user.image}')`; // Corrected URL interpolation
 				let userTitle = document.createElement('span');
 				userTitle.classList.add('user-title');
 				userTitle.textContent = user.name; // Set user name as title
