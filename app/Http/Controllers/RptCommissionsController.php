@@ -114,23 +114,23 @@ class RptCommissionsController extends Controller
         $count = 1;
         $totalAmount = 0;
     
-        // foreach ($activites10_gen_ac as $item) {
-        //     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+        foreach ($activites10_gen_ac as $item) {
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
-        //     $html .= '
-        //         <tr style="background-color:' . $backgroundColor . ';">
-        //             <td style="width:7%;">' . $count . '</td>
-        //             <td style="width:8%;">' . $item['auto_lager']. '</td>
-        //             <td style="width:11%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
-        //             <td style="width:18%;">' . $item['Debit_Acc'] . '</td>
-        //             <td style="width:18%;">' . $item['Credit_Acc'] . '</td>
-        //             <td style="width:27%;">' . $item['remarks'] . '</td>
-        //             <td style="width:12%;">' . $item['Amount'] . '</td>
-        //         </tr>';
+            $html .= '
+                <tr style="background-color:' . $backgroundColor . ';">
+                    <td style="width:7%;">' . $count . '</td>
+                    <td style="width:8%;">' . $item['auto_lager']. '</td>
+                    <td style="width:11%;">' . Carbon::parse($item['Date'])->format('d-m-y') . '</td>
+                    <td style="width:18%;">' . $item['Debit_Acc'] . '</td>
+                    <td style="width:18%;">' . $item['Credit_Acc'] . '</td>
+                    <td style="width:27%;">' . $item['remarks'] . '</td>
+                    <td style="width:12%;">' . $item['Amount'] . '</td>
+                </tr>';
             
-        //     $totalAmount += $item['Amount']; // Accumulate total quantity
-        //     $count++;
-        // }
+            $totalAmount += $item['Amount']; // Accumulate total quantity
+            $count++;
+        }
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -141,7 +141,7 @@ class RptCommissionsController extends Controller
         $pdf->SetXY(155, $currentY + 5);
         $pdf->MultiCell(20, 5, 'Total', 1, 'C');
         $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        $pdf->MultiCell(20, 5, $totalAmount, 1, 'C');
     
         // // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
