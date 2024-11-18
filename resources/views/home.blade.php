@@ -283,9 +283,9 @@
 											</tr>
 										</tbody>
 									</table>
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View All</a>
-									</div>
+								</div>
+								<div class="summary-footer">
+									<a class="text-muted text-uppercase" href="#">View All</a>
 								</div>
 							</section>
 						</div>
