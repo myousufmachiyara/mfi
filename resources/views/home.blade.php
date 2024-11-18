@@ -246,7 +246,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="summary-footer mt-4">
+											<div class="summary-footer mt-5">
 												<a class="text-muted text-uppercase" href="#">(View All)</a>
 											</div>
 										</div>
