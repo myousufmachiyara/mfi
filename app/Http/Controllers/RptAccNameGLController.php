@@ -147,13 +147,13 @@ class RptAccNameGLController extends Controller
             foreach ($lager_much_all as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 if ($items->Debit && !is_nan($items->Debit)) {
-                    $balance += $record->Debit;
-                    $totalDebit += $record->Debit;
+                    $balance += $items->Debit;
+                    $totalDebit += $items->Debit;
                 }
 
                 if ($items->Credit && !is_nan($items->Credit)) {
-                    $balance -= $record->Credit;
-                    $totalCredit += $record->Credit;
+                    $balance -= $items->Credit;
+                    $totalCredit += $items->Credit;
                 }
                 $html .= "<tr style='background-color:{$bgColor};'>
                                 <td style='width:7%;'>{$count}</td>
