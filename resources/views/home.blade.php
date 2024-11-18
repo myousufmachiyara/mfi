@@ -507,10 +507,10 @@
 	</body>
 	<script>
 		let seenUsers = [
-			{ name: 'Waseem', image: 'user-icon.png' },
-			{ name: 'Masood', image: 'user-icon.png' },
-			{ name: 'Hamza Shaukat', image: 'user-icon.png' },
-			{ name: 'Saad Shaukat', image: 'user-icon.png' },
+			{ name: 'User 1', image: 'user-icon.png' },
+			{ name: 'User 2', image: 'user-icon.png' },
+			{ name: 'User 3', image: 'user-icon.png' },
+			{ name: 'User 4', image: 'user-icon.png' },
 			{ name: 'User 5', image: 'user-icon.png' },
 			{ name: 'User 6', image: 'user-icon.png' },
 			{ name: 'User 7', image: 'user-icon.png' }

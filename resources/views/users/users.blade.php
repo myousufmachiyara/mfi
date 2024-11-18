@@ -1,4 +1,24 @@
 @include('../layouts.header')
+    <style>
+        /* Circle styles */
+        .status-circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px; /* Spacing between circle and username */
+        }
+
+        /* Green circle for active/logged-in users */
+        .green-circle {
+            background-color: green;
+        }
+
+        /* Gray circle for inactive/not logged-in users */
+        .gray-circle {
+            background-color: lightgray;
+        }
+    </style>
 	<body>
 		<section class="body">
         @include('layouts.homepageheader')
@@ -48,33 +68,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                    @foreach($users as $key => $row)
-                                                        <tr>
-                                                            <td>{{$row->id}}</td>
-                                                            <td class="login-user">{{$row->name}} </td>
-                                                            <td>{{$row->username}}</td>
-                                                            <td>{{$row->role_name}}</td>
-                                                            <td>{{$row->cnic_no}}</td>
-                                                            <td>{{$row->address}}</td>
-                                                            <td>{{$row->phone_no}}</td>
-                                                            <td>{{$row->email}}</td>
-                                                            <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View</a></td>
-                                                            @if($row->status==1)
-                                                            <td class="actions">
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#macAddModal" onclick="getMacAdd({{$row->id}})"><i class="fas fa-minus"></i></a>
-                                                            </td>
-                                                            @elseif($row->status==0)
-                                                            <td class="actions">
-                                                                <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" href="#activateUser" onclick="setActivateID({{$row->id}})"><i class="fa fa-user-check"></i></a>
-                                                                <!-- <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a> -->
-                                                            </td>
-                                                            @endif
-                                                        </tr>
-                                                    @endforeach
+                                                @foreach($users as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->id}}</td>
+                                                        @if({{$row->is_login}}==0)
+                                                            <td>{{$row->name}} <span class="status-circle gray-circle"></span></td>
+                                                        @elseif({{$row->is_login}}==1)
+                                                            <td>{{$row->name}} <span class="status-circle green-circle"></span></td>
+                                                        @endif
+                                                        <td>{{$row->username}}</td>
+                                                        <td>{{$row->role_name}}</td>
+                                                        <td>{{$row->cnic_no}}</td>
+                                                        <td>{{$row->address}}</td>
+                                                        <td>{{$row->phone_no}}</td>
+                                                        <td>{{$row->email}}</td>
+                                                        <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->id}})" href="#attModal">View</a></td>
+                                                        @if($row->status==1)
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#macAddModal" onclick="getMacAdd({{$row->id}})"><i class="fas fa-minus"></i></a>
+                                                        </td>
+                                                        @elseif($row->status==0)
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-success" href="#activateUser" onclick="setActivateID({{$row->id}})"><i class="fa fa-user-check"></i></a>
+                                                            <!-- <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setId(1)" href="#deleteModal"><i class="fa fa-trash"></i></a> -->
+                                                        </td>
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
