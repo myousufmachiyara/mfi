@@ -40,8 +40,8 @@
 					<div class="row cust-pad">
 
 						<div class="col-12 col-md-2 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2 icon-container">
-								<div class="card-body"  >
+							<section class="card card-featured-left card-featured-primary mb-2 ">
+								<div class="card-body icon-container"  >
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
 										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
