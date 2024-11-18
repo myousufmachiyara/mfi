@@ -103,19 +103,19 @@ class RptGoDownItemGroupController extends Controller
         $html = '
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Item Name</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Item Name</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:8%;color:#17365D;font-weight:bold;">Date</th>
                 </tr>';
     
         // Iterate through items and add rows
