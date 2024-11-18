@@ -167,9 +167,6 @@
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
-
-									
-
 									@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && isset($last_month_purchase->total_weight))
 										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
@@ -259,7 +256,6 @@
 								</div>
 							</section>
 						</div>
-
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary">
