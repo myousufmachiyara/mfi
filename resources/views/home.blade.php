@@ -113,6 +113,20 @@
 									</div>
 								</div>
 							</section>
+
+							<section class="card card-featured-left card-featured-tertiary mt-3">
+								<div class="card-body"  >
+									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
+									@if(isset($payables) && isset($payables->total_balance))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
 						</div>
 
 						<div class="col-12 col-md-2 mb-2">
@@ -123,6 +137,20 @@
 										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+
+							<section class="card card-featured-left card-featured-tertiary mt-3">
+								<div class="card-body"  >
+									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+									@if(isset($receivables) && isset($receivables->total_balance))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
 									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
@@ -231,33 +259,9 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-tertiary">
-								<div class="card-body"  >
-									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
-									@if(isset($payables) && isset($payables->total_balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
-									</div>
-								</div>
-							</section>
+							
 
-							<section class="card card-featured-left card-featured-tertiary mt-3">
-								<div class="card-body"  >
-									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
-									@if(isset($receivables) && isset($receivables->total_balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
-									</div>
-								</div>
-							</section>
+							
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
