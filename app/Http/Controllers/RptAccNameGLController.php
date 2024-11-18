@@ -51,6 +51,7 @@ class RptAccNameGLController extends Controller
 
     public function glPDF(Request $request){
         $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
+        ->join('ac','ac.ac_code','=','lager_much_op_bal.ac1')
         ->where('date', '<', $request->fromDate)
         ->get();
 
@@ -80,7 +81,7 @@ class RptAccNameGLController extends Controller
               <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
                   <tr>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                          Account Name: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['ac_name']) . '</span>
+                          Account Name: <span style="color:black;">' . htmlspecialchars($lager_much_op_bal[0]['ac_name']) . '</span>
                       </td>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                           Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
@@ -88,7 +89,7 @@ class RptAccNameGLController extends Controller
                   </tr>
                   <tr>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                      Remarks: <span style="color:black;">' . htmlspecialchars($both_sale_rpt_by_account[0]['ac_remarks']) . '</span>
+                      Remarks: <span style="color:black;">' . htmlspecialchars($lager_much_op_bal[0]['ac_remarks']) . '</span>
                       </td>
                       <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000;width:30%;">
                           From Date: <span style="color:black;">' . htmlspecialchars($formattedFromDate) . '</span>
@@ -119,7 +120,7 @@ class RptAccNameGLController extends Controller
                     // Table Rows
                 $count = 1;
                 $totalAmount = 0;
-                foreach ($both_sale_rpt_by_account as $items) {
+                foreach ($lager_much_op_bal as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                     $html .= "<tr style='background-color:{$bgColor};'>
                                     <td style='width:7%;'>{$count}</td>
@@ -148,7 +149,7 @@ class RptAccNameGLController extends Controller
         
   
           // Filename and Output
-        $filename = "combine_sale_report_{$both_sale_rpt_by_account[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "combine_sale_report_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
 
     }
