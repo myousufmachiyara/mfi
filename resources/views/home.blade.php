@@ -45,7 +45,7 @@
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -75,7 +75,7 @@
 									@else
 										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -89,7 +89,7 @@
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -105,7 +105,7 @@
 									@else
 										<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -135,7 +135,7 @@
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -149,7 +149,7 @@
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
-									<div class="summary-footer text-end">
+									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
@@ -202,7 +202,7 @@
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 											@endif
-											<div class="summary-footer text-end">
+											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">View Details</a>
 											</div>
 										</div>
@@ -215,7 +215,7 @@
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 											@endif
-											<div class="summary-footer text-end">
+											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">View Details</a>
 											</div>
 										</div>
