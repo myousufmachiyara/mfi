@@ -358,15 +358,15 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger");
-        $pdf->SetSubject("General Ledger");
-        $pdf->SetKeywords('General Ledger, TCPDF, PDF');
+        $pdf->SetTitle("General Ledger R");
+        $pdf->SetSubject("General Ledger R");
+        $pdf->SetKeywords('General Ledger R, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
   
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger R</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
   
         // Account Info Table
