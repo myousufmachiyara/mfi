@@ -21,7 +21,6 @@
 		}
 
 		.icon-container {
-			background-image: url('/assets/img/favicon.png'); /* Path to your icon image */
 			background-size: contain; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
@@ -39,7 +38,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2 ">
-								<div class="card-body icon-container"  >
+								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
 										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -69,7 +68,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-danger mb-2">
-								<div class="card-body"  >
+								<div class="card-body icon-container" style="background-image: url('/assets/img/bank-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Bank</strong></h3>
 									@if(isset($banks) && isset($banks->Total_Balance))
 										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -99,7 +98,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-success mb-2">
-								<div class="card-body"  >
+								<div class="card-body icon-container" style="background-image: url('/assets/img/cash-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Cash</strong></h3>
 									@if(isset($cash) && isset($cash->Total_Balance))
 										<h2 class="amount m-0 text-success"><strong class="amount m-0 text-primary">{{ $cash->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
