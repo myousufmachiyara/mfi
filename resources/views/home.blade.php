@@ -219,7 +219,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-4 mb-2">
+						<div class="col-12 col-md-4">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body">
 									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
