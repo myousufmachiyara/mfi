@@ -96,7 +96,7 @@
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2">
-								<div class="card-body" style="background-image: url('/assets/img/favicon.png'); background-position: right center; background-repeat: no-repeat; opacity: 0.5;">
+								<div class="card-body" style="background-image: url('/assets/img/favicon.png'); background-position: right center; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
 										<h2 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h2>
