@@ -271,7 +271,7 @@
 						</div>
 
 						<div class="col-12 col-md-6 mb-2">
-							<section class="card card-featured-left card-featured-tertiary mt-3">
+							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
 									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_sale->total_weight) )
