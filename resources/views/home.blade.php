@@ -192,13 +192,22 @@
 											<div class="row">
 												<div class="summary col-6">
 													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
-													<div class="info ">
-														<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>14,890.30</strong>
-															<span class="title text-end text-dark">PKR</span>
-														</h4>
-														<h4 class="amount m-0 text-danger mb-3"><strong>14,890.30</strong>
-															<span class="title text-end text-dark">M-Ton</span>
-														</h4>
+													<div class="info">
+														@if (isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && strpos($last_month_purchase->total_cr_amt, '.') !== false && substr($last_month_purchase->total_cr_amt, strpos($last_month_purchase->total_cr_amt, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger"><strong>{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt))
+															<h4 class="amount m-0 text-danger"><strong>{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+														@endif
+
+														@if (isset($last_month_purchase) && isset($last_month_purchase->total_weight) && strpos($last_month_purchase->total_weight, '.') !== false && substr($last_month_purchase->total_weight, strpos($last_month_purchase->total_weight, '.') + 1) > '0')
+															<h4 class="amount m-0 text-danger"><strong>{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_weight))
+															<h4 class="amount m-0 text-danger"><strong>{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@else
+															<h4 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+														@endif
 													</div>
 												</div>
 												<div class="summary col-6">
