@@ -4,6 +4,7 @@
 		.seen-users {
 			display: flex;
 			align-items: center;
+			flex-wrap: wrap;  /* Allow wrapping for smaller screens */
 		}
 
 		/* Container for user icons */
@@ -15,16 +16,21 @@
 
 		/* Styling for each user icon */
 		.user-icon {
-			width: 40px;
-			height: 40px;
+			width: 50px;
+			height: 50px;
 			margin-right: -10px; /* Slight overlap */
 			border-radius: 50%;
 			background-size: cover;
 			background-position: center;
 			border: 2px solid #fff;
 			transition: transform 0.3s ease;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
+		/* Add hover effect */
 		.user-icon:hover {
 			transform: scale(1.1); /* Slightly enlarge on hover */
 		}
@@ -32,15 +38,26 @@
 		/* Styling for the "more users" icon */
 		.user-icon.more-users {
 			display: none; /* Hidden by default */
-			width: 40px;
-			height: 40px;
+			width: 50px;
+			height: 50px;
 			background-color: #f1f1f1;
 			color: #007bff;
 			font-weight: bold;
 			text-align: center;
-			line-height: 40px;
+			line-height: 50px;
 			border-radius: 50%;
 			border: 2px solid #fff;
+		}
+
+		/* Title below user icon */
+		.user-title {
+			position: absolute;
+			bottom: -18px;
+			text-align: center;
+			font-size: 12px;
+			color: #333;
+			width: 100%;
+			overflow: hidden;
 		}
 
 		/* Show the "more users" icon if there are more than 5 users */
@@ -224,15 +241,28 @@
 													@endif
 												</div>
 												<div class="seen-users">
-													<div class="user-icon-container">													
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');"></div>
-														<div class="user-icon more-users">+5</div> <!-- This will show only if there are more than 5 users -->
+													<div class="user-icon-container">
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+															<span class="user-title">User 1</span>
+														</div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+															<span class="user-title">User 2</span>
+														</div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+															<span class="user-title">User 3</span>
+														</div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+															<span class="user-title">User 4</span>
+														</div>
+														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+															<span class="user-title">User 5</span>
+														</div>
+														<div class="user-icon more-users">
+															<span class="user-title">+5</span>
+														</div> <!-- This will show only if there are more than 5 users -->
 													</div>
 												</div>
+												
 											</div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(View All)</a>
@@ -494,19 +524,30 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		// Example: Assume you have a list of users who have seen the message
-		let seenUsers = ['user1', 'user2', 'user3', 'user4', 'user5', 'user6', 'user7'];
+		let seenUsers = [
+			{ name: 'User 1', image: 'user1.jpg' },
+			{ name: 'User 2', image: 'user2.jpg' },
+			{ name: 'User 3', image: 'user3.jpg' },
+			{ name: 'User 4', image: 'user4.jpg' },
+			{ name: 'User 5', image: 'user5.jpg' },
+			{ name: 'User 6', image: 'user6.jpg' },
+			{ name: 'User 7', image: 'user7.jpg' }
+		];
 
 		// Select the container for seen users
 		let seenUsersContainer = document.querySelector('.seen-users');
 		let userIconContainer = seenUsersContainer.querySelector('.user-icon-container');
 
-		// Loop through the users and create user icons
+		// Loop through the users and create user icons with titles
 		seenUsers.forEach((user, index) => {
 			if (index < 5) { // Show only up to 5 user icons
 				let userIcon = document.createElement('div');
 				userIcon.classList.add('user-icon');
-				userIcon.style.backgroundImage = `url('user${index + 1}.jpg')`; // Example user icon
+				userIcon.style.backgroundImage = `url('${user.image}')`; // Set user image
+				let userTitle = document.createElement('span');
+				userTitle.classList.add('user-title');
+				userTitle.textContent = user.name; // Set user name as title
+				userIcon.appendChild(userTitle);
 				userIconContainer.appendChild(userIcon);
 			}
 		});
