@@ -243,8 +243,8 @@
                 return;
             }
 
-            if (tabName === "SI") {
-                window.open(`/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            if (tabName === "Comm") {
+                window.open(`/rep-comm/comm/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
         }
@@ -257,9 +257,10 @@
                 return;
             }
 
-            if (tabName === "SI") {
-                window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            if (tabName === "Comm") {
+                window.open(`/rep-comm/comm/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
+
         }
     </script>
 </html>

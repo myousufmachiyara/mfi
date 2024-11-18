@@ -502,7 +502,6 @@
         // RPT Godown By Item Name sat
         Route::get('/rep-godown-by-item-grp/sat', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockAllT'])->name('sat-rep-godown-by-item-grp');
 
-
         // RPT Commissions 
         Route::get('/rep-comm/comm', [App\Http\Controllers\RptCommissionsController::class, 'comm'])->name('comm-rep');
         Route::get('/rep-comm/comm/excel', [App\Http\Controllers\RptCommissionsController::class, 'commExcel'])->name('comm-rep-excel');
