@@ -58,7 +58,7 @@ class RptCommissionsController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Commission Report ' . $request->acc_id);
+        $pdf->SetTitle('Commission Report Of Item ' . $request->acc_id);
         $pdf->SetSubject('Commission Report');
         $pdf->SetKeywords('Commission Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
