@@ -1199,6 +1199,10 @@
                 window.location.href = `/rep-by-acc-name/gl/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
+            else if (tabName === "glr") {
+                window.location.href = `/rep-by-acc-name/glr/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
             else if (tabName === "purchase1") {
                 window.open(`/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
@@ -1239,6 +1243,10 @@
 
             if (tabName === "gl") {
                 window.location.href = `/rep-by-acc-name/gl/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "glr") {
+                window.location.href = `/rep-by-acc-name/glr/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
             else if (tabName === "purchase1") {
