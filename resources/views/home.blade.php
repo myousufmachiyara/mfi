@@ -215,8 +215,8 @@
 							<section class="card card-featured-left card-featured-tertiary mt-3">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
-									@if(isset($foreign) && isset($foreign->Total_Balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@if(isset($receivables) && isset($receivables->total_balance))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
