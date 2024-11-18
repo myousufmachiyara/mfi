@@ -129,7 +129,7 @@ class RptCommissionsController extends Controller
                         // Ensure colspan covers the correct number of columns
                         $html .= "
                             <tr style='background-color: #FFFFFF;'>
-                                <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
+                                <td colspan='4' class='text-center'>Subtotal for " . $lastAccountName ." </strong></td>
                                 <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
                                 <td></td>
                                 <td></td>
