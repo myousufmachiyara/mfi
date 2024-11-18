@@ -1,5 +1,19 @@
 @include('layouts.header')
+
 	<style>
+		@keyframes slideIn {
+			from {
+				transform: translateY(-50px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+		.animated-amount {
+			animation: slideIn 1s ease-out;
+
 		/* Main container for the seen users */
 		.seen-users {
 			display: flex;
@@ -74,6 +88,7 @@
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
+					
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
@@ -91,10 +106,10 @@
 											<div class="summary col-6">
 												<strong class="amount">PDC</strong>
 												<div class="info">
-													@if (isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+													@if(isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($pdc) && isset($pdc->Total_Balance))
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($pdc->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
@@ -104,9 +119,9 @@
 												<strong class="amount">Bank</strong>
 												<div class="info">
 													@if (isset($banks) && isset($banks->Total_Balance) && strpos($banks->Total_Balance, '.') !== false && substr($banks->Total_Balance, strpos($banks->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($banks->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($banks) && isset($banks->Total_Balance))
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($banks->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($banks->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
@@ -116,9 +131,9 @@
 												<strong class="amount">Cash</strong>
 												<div class="info">
 													@if (isset($cash) && isset($cash->Total_Balance) && strpos($cash->Total_Balance, '.') !== false && substr($cash->Total_Balance, strpos($cash->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($cash->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($cash->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($cash) && isset($cash->Total_Balance))
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($cash->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong  class="rolling-number amount m-0 text-primary" data-target="{{ number_format($cash->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
@@ -129,9 +144,9 @@
 												</strong>
 												<div class="info">
 													@if (isset($foreign) && isset($foreign->Total_Balance) && strpos($foreign->Total_Balance, '.') !== false && substr($foreign->Total_Balance, strpos($foreign->Total_Balance, '.') + 1) > '0')
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($foreign->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($foreign->Total_Balance, 0, '.', ',') }}"></strong><span class="title text-end text-dark"> PKR</span></h4>
 													@elseif(isset($foreign) && isset($foreign->Total_Balance))
-														<h4 class="amount m-0 text-primary"><strong>{{ number_format($foreign->Total_Balance, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+														<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($foreign->Total_Balance, 0, '.', ',') }}"></strong><span class="title text-end text-dark"> PKR</span></h4>
 													@else
 														<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 													@endif
@@ -148,7 +163,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-4 mb-2">
+						{{-- <div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
 								<div class="card-body">
 									<div class="widget-summary">
@@ -219,7 +234,7 @@
 									</div>
 								</div>
 							</section>
-						</div>
+						</div> --}}
 					
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-quaternary">
@@ -269,37 +284,38 @@
 													<h4 class="amount mb-2"><strong>Last Month Purchase</strong></h4>
 													<div class="info">
 														@if (isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && strpos($last_month_purchase->total_cr_amt, '.') !== false && substr($last_month_purchase->total_cr_amt, strpos($last_month_purchase->total_cr_amt, '.') + 1) > '0')
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong  class="rolling-number" data-target="{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt))
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_cr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@else
 															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@endif
 
 														@if (isset($last_month_purchase) && isset($last_month_purchase->total_weight) && strpos($last_month_purchase->total_weight, '.') !== false && substr($last_month_purchase->total_weight, strpos($last_month_purchase->total_weight, '.') + 1) > '0')
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@elseif(isset($last_month_purchase) && isset($last_month_purchase->total_weight))
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_purchase->total_weight, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@else
 															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@endif
 													</div>
 												</div>
+												
 												<div class="summary col-6">
 													<h4 class="amount mb-2"><strong>Last Month Sale</strong></h4>
 													<div class="info">
 														@if (isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && strpos($last_month_sale->total_dr_amt, '.') !== false && substr($last_month_sale->total_dr_amt, strpos($last_month_sale->total_dr_amt, '.') + 1) > '0')
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@elseif(isset($last_month_sale) && isset($last_month_sale->total_dr_amt))
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}</strong><span class="title text-end text-dark"> PKR</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong  class="rolling-number" data-target="{{ number_format($last_month_sale->total_dr_amt, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@else
 															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
 														@endif
 
 														@if (isset($last_month_sale) && isset($last_month_sale->total_weight) && strpos($last_month_sale->total_weight, '.') !== false && substr($last_month_sale->total_weight, strpos($last_month_sale->total_weight, '.') + 1) > '0')
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@elseif(isset($last_month_sale) && isset($last_month_sale->total_weight))
-															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}</strong><span class="title text-end text-dark"> M-Ton</span></h4>
+															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong class="rolling-number" data-target="{{ number_format($last_month_sale->total_weight, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@else
 															<h4 class="amount m-0 text-danger mt-2 mb-3"><strong>0</strong><span class="title text-end text-dark"> M-Ton</span></h4>
 														@endif
@@ -649,5 +665,59 @@
 				}]
 			},
 		});
+
+			document.addEventListener("DOMContentLoaded", () => {
+			const rollNumbers = document.querySelectorAll('.rolling-number');
+			
+			rollNumbers.forEach((element) => {
+				const target = parseFloat(element.getAttribute('data-target')); // Final value
+				const duration = 2000; // Animation duration in ms
+				const stepTime = 20; // Time between updates
+				const increment = target / (duration / stepTime);
+
+				let current = 0;
+
+				const updateNumber = () => {
+					current += increment;
+					if (current >= target) {
+						element.textContent = target.toLocaleString(); // Stop at the target value
+					} else {
+						element.textContent = current.toFixed(2).toLocaleString(); // Continue animating
+						setTimeout(updateNumber, stepTime);
+					}
+				};
+
+				updateNumber();
+			});
+		});
+
+
+		document.addEventListener("DOMContentLoaded", () => {
+        const rollNumbers = document.querySelectorAll('.rolling-number');
+
+        rollNumbers.forEach((element) => {
+            const target = parseFloat(element.getAttribute('data-target')); // Final value
+            const duration = 2000; // Animation duration in ms
+            const stepTime = 20; // Time between updates (ms)
+            const increment = target / (duration / stepTime); // Calculate incremental value
+            let current = 0;
+
+            const roll = () => {
+                current += increment;
+
+                // Check if we've reached the target
+                if (current >= target) {
+                    element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Final value
+                } else {
+                    element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Rolling effect
+                    setTimeout(roll, stepTime); // Continue rolling
+                }
+            };
+
+            roll();
+        });
+    });
+
+		
 	</script>
 </html>
