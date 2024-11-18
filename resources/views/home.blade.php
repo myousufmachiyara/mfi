@@ -103,7 +103,6 @@
 									@else
 										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
 									@endif
-									<p class="text-3 text-muted mb-0 text-end">Nullam quis ris</p>
 									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">(View Details)</a>
 									</div>
