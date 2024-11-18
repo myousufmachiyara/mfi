@@ -108,7 +108,7 @@ class RptCommissionsController extends Controller
                     <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
-                </tr><tbody>';
+                </tr>';
 
         // Initialize variables for subtotals
         $lastAccountName = '';
@@ -190,7 +190,7 @@ class RptCommissionsController extends Controller
                 </tr>";
         }
 
-        $html .= '</tbody></table>';
+        $html .= '</table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
  
