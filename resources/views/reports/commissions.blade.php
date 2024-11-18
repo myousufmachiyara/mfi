@@ -243,7 +243,7 @@
                 return;
             }
 
-            if (tabName === "Comm") {
+            if (tabName === "comm") {
                 window.open(`/rep-comm/comm/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
@@ -257,7 +257,7 @@
                 return;
             }
 
-            if (tabName === "Comm") {
+            if (tabName === "comm") {
                 window.open(`/rep-comm/comm/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
