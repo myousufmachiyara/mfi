@@ -99,7 +99,7 @@
 					<div class="row cust-pad">
 						<!-- summaries -->
 
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
@@ -115,7 +115,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-danger mb-2">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Bank</strong></h3>
@@ -131,7 +131,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-success mb-2">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Cash</strong></h3>
@@ -147,7 +147,7 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-3 mb-2">
+						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
