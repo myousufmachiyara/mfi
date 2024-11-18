@@ -108,7 +108,7 @@ class RptCommissionsController extends Controller
                     <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amt</th>
                     <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
-                </tr>';
+                </tr><tbody>';
 
         // Initialize variables for subtotals
         $lastAccountName = '';
@@ -147,7 +147,7 @@ class RptCommissionsController extends Controller
                 // Add account header
                 $html .= "
                     <tr>
-                        <td colspan='9' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
+                        <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
                             " . ($data['ac_name'] ?? "No Account Name") . "
                         </td>
                     </tr>";
@@ -190,7 +190,7 @@ class RptCommissionsController extends Controller
                 </tr>";
         }
 
-        $html .= '</table>';
+        $html .= '</tbody></table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
  
