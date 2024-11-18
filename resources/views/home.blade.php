@@ -241,24 +241,7 @@
 													@endif
 													<div class="seen-users">
 														<div class="user-icon-container">
-															<div class="user-icon" style="background-image: url('user1.jpg');">
-																<span class="user-title">User 1</span>
-															</div>
-															<div class="user-icon" style="background-image: url('user2.jpg');">
-																<span class="user-title">User 2</span>
-															</div>
-															<div class="user-icon" style="background-image: url('user3.jpg');">
-																<span class="user-title">User 3</span>
-															</div>
-															<div class="user-icon" style="background-image: url('user4.jpg');">
-																<span class="user-title">User 4</span>
-															</div>
-															<div class="user-icon" style="background-image: url('user5.jpg');">
-																<span class="user-title">User 5</span>
-															</div>
-															<div class="user-icon more-users">
-																<span class="user-title">+5</span>
-															</div> <!-- This will show only if there are more than 5 users -->
+															
 														</div>
 													</div>
 												</div>
