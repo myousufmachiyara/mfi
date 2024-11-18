@@ -241,7 +241,7 @@
 													@endif
 													<div class="seen-users">
 														<div class="user-icon-container">
-															
+														
 														</div>
 													</div>
 												</div>
@@ -534,9 +534,16 @@
 			}
 		});
 
-		// Check if there are more than 5 users
+		// Check if there are more than 5 users and add "+X" icon
 		if (seenUsers.length > 5) {
-			seenUsersContainer.classList.add('more-than-5'); // Show the "+5" icon
+			// Create and append the "+X" icon
+			let moreUsersIcon = document.createElement('div');
+			moreUsersIcon.classList.add('user-icon', 'more-users');
+			moreUsersIcon.textContent = `+${seenUsers.length - 5}`;  // Show the number of additional users
+			userIconContainer.appendChild(moreUsersIcon);
+
+			// Add the 'more-than-5' class to the container
+			seenUsersContainer.classList.add('more-than-5');
 		}
 
 		const catSalesChart = document.getElementById('catSalesChart');
