@@ -239,30 +239,29 @@
 													@else
 														<h4 class="amount m-0 text-primary"><strong>-</strong>
 													@endif
-												</div>
-												<div class="seen-users">
-													<div class="user-icon-container">
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
-															<span class="user-title">User 1</span>
+													<div class="seen-users">
+														<div class="user-icon-container">
+															<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+																<span class="user-title">User 1</span>
+															</div>
+															<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+																<span class="user-title">User 2</span>
+															</div>
+															<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+																<span class="user-title">User 3</span>
+															</div>
+															<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+																<span class="user-title">User 4</span>
+															</div>
+															<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
+																<span class="user-title">User 5</span>
+															</div>
+															<div class="user-icon more-users">
+																<span class="user-title">+5</span>
+															</div> <!-- This will show only if there are more than 5 users -->
 														</div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
-															<span class="user-title">User 2</span>
-														</div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
-															<span class="user-title">User 3</span>
-														</div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
-															<span class="user-title">User 4</span>
-														</div>
-														<div class="user-icon" style="background-image: url('/assets/img/user-icon.png');" title="user-name-here"></div>
-															<span class="user-title">User 5</span>
-														</div>
-														<div class="user-icon more-users">
-															<span class="user-title">+5</span>
-														</div> <!-- This will show only if there are more than 5 users -->
 													</div>
 												</div>
-												
 											</div>
 											<div class="summary-footer">
 												<a class="text-muted text-uppercase" href="#">(View All)</a>
