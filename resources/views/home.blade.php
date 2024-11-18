@@ -104,7 +104,7 @@
 										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
 									@endif
 									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">(View Details)</a>
+										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
 								{{-- <div class="card-body">
