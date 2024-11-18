@@ -145,7 +145,7 @@ class RptCommissionsController extends Controller
         $pdf->SetXY(155, $currentY + 5);
         $pdf->MultiCell(20, 5, 'Total', 1, 'C');
         $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(25, 5, $totalAmount, 1, 'C');
+        $pdf->MultiCell(26, 5, $totalAmount, 1, 'C');
     
         // // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
