@@ -1,24 +1,26 @@
 @include('layouts.header')
+
+	<style>
+		@keyframes slideIn {
+			from {
+				transform: translateY(-50px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+		.animated-amount {
+			animation: slideIn 1s ease-out;
+		}
+	</style>
 	<body>
 		<section class="body">
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
-					<style>
-						@keyframes slideIn {
-							from {
-								transform: translateY(-50px);
-								opacity: 0;
-							}
-							to {
-								transform: translateY(0);
-								opacity: 1;
-							}
-						}
-						.animated-amount {
-							animation: slideIn 1s ease-out;
-						}
-					</style>
+					
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
