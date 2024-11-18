@@ -289,7 +289,7 @@
 						</div>
 
 						<!-- summaries ends here -->
-						<div class="tabs mt-4">
+						<div class="tabs mt-3">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#BNF" href="#BNF" data-bs-toggle="tab">Bills Not Final</a>
