@@ -98,7 +98,13 @@
 							<section class="card card-featured-left card-featured-primary mb-2">
 								<div class="card-body">
 									<h3 class="amount">PDC</h3>
-									<div class="h4 font-weight-bold mb-0">488</div>
+									@if(isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
+										<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
+									@elseif(isset($pdc) && isset($pdc->Total_Balance))
+										<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
+									@else
+										<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
+									@endif
 									<p class="text-3 text-muted mb-0">Nullam quis ris</p>
 								</div>
 								{{-- <div class="card-body">
