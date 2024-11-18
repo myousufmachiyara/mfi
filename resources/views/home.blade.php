@@ -247,7 +247,7 @@
 												</div>
 											</div>
 											<div class="summary-footer mt-5">
-												<a class="text-muted text-uppercase"  href="{{ route('all-users')}}">(View All Users)</a>
+												<a class="text-muted text-uppercase"  href="{{ route('all-users')}}" >(View All Users)</a>
 											</div>
 										</div>
 									</div>
@@ -507,10 +507,10 @@
 	</body>
 	<script>
 		let seenUsers = [
-			{ name: 'User 1', image: 'user-icon.png' },
-			{ name: 'User 2', image: 'user-icon.png' },
-			{ name: 'User 3', image: 'user-icon.png' },
-			{ name: 'User 4', image: 'user-icon.png' },
+			{ name: 'Waseem', image: 'user-icon.png' },
+			{ name: 'Masood', image: 'user-icon.png' },
+			{ name: 'Hamza Shaukat', image: 'user-icon.png' },
+			{ name: 'Saad Shaukat', image: 'user-icon.png' },
 			{ name: 'User 5', image: 'user-icon.png' },
 			{ name: 'User 6', image: 'user-icon.png' },
 			{ name: 'User 7', image: 'user-icon.png' }
