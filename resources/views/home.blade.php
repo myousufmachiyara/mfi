@@ -507,13 +507,13 @@
 	</body>
 	<script>
 		let seenUsers = [
-			{ name: 'User 1', image: 'user1.jpg' },
-			{ name: 'User 2', image: 'user2.jpg' },
-			{ name: 'User 3', image: 'user3.jpg' },
-			{ name: 'User 4', image: 'user4.jpg' },
-			{ name: 'User 5', image: 'user5.jpg' },
-			{ name: 'User 6', image: 'user6.jpg' },
-			{ name: 'User 7', image: 'user7.jpg' }
+			{ name: 'User 1', image: 'user-icon.png' },
+			{ name: 'User 2', image: 'user-icon.png' },
+			{ name: 'User 3', image: 'user-icon.png' },
+			{ name: 'User 4', image: 'user-icon.png' },
+			{ name: 'User 5', image: 'user-icon.png' },
+			{ name: 'User 6', image: 'user-icon.png' },
+			{ name: 'User 7', image: 'user-icon.png' }
 		];
 
 		// Select the container for seen users
@@ -525,7 +525,7 @@
 			if (index < 5) { // Show only up to 5 user icons
 				let userIcon = document.createElement('div');
 				userIcon.classList.add('user-icon');
-				userIcon.style.backgroundImage = `url('${user.image}')`; // Set user image
+				userIcon.style.backgroundImage = `url(assets/img/'${user.image}')`; // Set user image
 				let userTitle = document.createElement('span');
 				userTitle.classList.add('user-title');
 				userTitle.textContent = user.name; // Set user name as title
