@@ -284,6 +284,9 @@ class UsersController extends Controller
 
     public function logout()
     {
+        users::where('id', $user['id'])->update([
+            'is_login'=>0,
+        ]);
         Auth::logout();
         return redirect()->route('login');
     }
