@@ -127,45 +127,45 @@ class RptCommissionsController extends Controller
                 if ($data['ac_name'] !== $lastAccountName) {
                     if ($lastAccountName) {
                         // Ensure colspan covers the correct number of columns
-                        $html .= "
-                            <tr style='background-color: #FFFFFF;'>
-                                <td colspan='4' class='text-center'><strong> Subtotal for " . $lastAccountName ." </strong></td>
-                                <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
+                        $html .= '
+                            <tr style="background-color: #FFFFFF;">
+                                <td colspan="4" class="text-center"><strong> Subtotal for ' . $lastAccountName .' </strong></td>
+                                <td class="text-danger">' . number_format($subtotalBAmount, 0) . '</td>
                                 <td></td>
                                 <td></td>
-                                <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
+                                <td class="text-danger">' . number_format($subtotalCommDisc, 0) . '</td>
                                 <td></td>
-                                <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
-                            </tr>";
+                                <td class="text-danger">' . number_format($subtotalCdDisc, 0) . '</td>
+                            </tr>';
                         // Reset subtotals
                         $subtotalBAmount = $subtotalCommDisc = $subtotalCdDisc = 0;
                     }
 
                     // Add account header with correct colspan (10 columns in total)
-                    $html .= "
+                    $html .= '
                         <tr>
-                            <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
-                                " . ($data['ac_name'] ?? "No Account Name") . "
+                            <td colspan="10" style="background-color: #cfe8e3; text-align: center; font-weight: bold;">
+                                ' . ($data['ac_name'] ?? "No Account Name") . '
                             </td>
-                        </tr>";
+                        </tr>';
                     $lastAccountName = $data['ac_name'];
                     $rowNumber = 1;
                 }
 
                 // Add current row
-                $html .= "
+                $html .= '
                     <tr>
-                        <td>" . $count++ . "</td>
-                        <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-y') : "") . "</td>
-                        <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
-                        <td>" . ($data['pur_ord_no'] ?? "") . "</td>
-                        <td>" . number_format($bAmount, 0) . "</td>
-                        <td>" . (($data['gst'] ?? "") . ($data['gst'] && $data['income_tax'] ? " / " : "") . ($data['income_tax'] ?? "")) . "</td>
-                        <td>" . ($data['comm_disc'] ?? "") . "</td>
-                        <td>" . number_format($commDisc, 0) . "</td>
-                        <td>" . ($data['cd_disc'] ?? "") . "</td>
-                        <td>" . number_format($cdDisc, 0) . "</td>
-                    </tr>";
+                        <td>' . $count++ . '</td>
+                        <td>' . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-y') : "") . '</td>
+                        <td>' . ($data['Sale_inv_no'] ?? "") . '</td>
+                        <td>' . ($data['pur_ord_no'] ?? "") . '</td>
+                        <td>' . number_format($bAmount, 0) . '</td>
+                        <td>' . (($data['gst'] ?? "") . ($data['gst'] && $data['income_tax'] ? " / " : "") . ($data['income_tax'] ?? "")) . '</td>
+                        <td>' . ($data['comm_disc'] ?? "") . '</td>
+                        <td>' . number_format($commDisc, 0) . '</td>
+                        <td>' . ($data['cd_disc'] ?? "") . '</td>
+                        <td>' . number_format($cdDisc, 0) . '</td>
+                    </tr>';
 
                 // Accumulate subtotals
                 $subtotalBAmount += $bAmount;
@@ -175,16 +175,16 @@ class RptCommissionsController extends Controller
 
             // Final subtotal for the last account
             if ($lastAccountName) {
-                $html .= "
-                <tr style='background-color: #FFFFFF;'>
-                    <td colspan='4' class='text-center'><strong>Subtotal for $lastAccountName</strong></td>
-                    <td class='text-danger'>" . number_format($subtotalBAmount, 0) . "</td>
+                $html .= '
+                <tr style="background-color: #FFFFFF;">
+                    <td colspan="4" class="text-center"><strong>Subtotal for '. $lastAccountName . '</strong></td>
+                    <td class="text-danger">' . number_format($subtotalBAmount, 0) . '</td>
                     <td></td>
                     <td></td>
-                    <td class='text-danger'>" . number_format($subtotalCommDisc, 0) . "</td>
+                    <td class="text-danger">' . number_format($subtotalCommDisc, 0) . '</td>
                     <td></td>
-                    <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
-                </tr>";
+                    <td class="text-danger">' . number_format($subtotalCdDisc, 0) . '</td>
+                </tr>';
             }
 
         $html .= '</table>';
