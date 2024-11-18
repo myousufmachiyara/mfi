@@ -157,79 +157,36 @@
 								</div>
 							</section>
 						</div>
-						<div class="row">
-							<div class="col-12 col-md-6 mb-2">
-								<div class="col-12 col-md-6 mb-2">
-									<section class="card card-featured-left card-featured-tertiary mb-2">
-										<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
-											<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
-											@if(isset($foreign) && isset($foreign->Total_Balance))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-12 col-md-6 mb-2">
-									<section class="card card-featured-left card-featured-tertiary mb-2">
-										<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
-											<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
-											@if(isset($foreign) && isset($foreign->Total_Balance))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-12 col-md-6 mb-2">
-									<section class="card card-featured-left card-featured-tertiary mb-2">
-										<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
-											<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
-											@if(isset($foreign) && isset($foreign->Total_Balance))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-12 col-md-6 mb-2">
-									<section class="card card-featured-left card-featured-tertiary mb-2">
-										<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
-											<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
-											@if(isset($foreign) && isset($foreign->Total_Balance))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-									</section>
-								</div>
-							</div>
-
-							<div class="col-12 col-md-3 mb-2">
-
-							</div>
-
-							<div class="col-12 col-md-3 mb-2">
-
-							</div>
-						</div>
 						
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
+									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
+									@if(isset($foreign) && isset($foreign->Total_Balance))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+
+							<section class="card card-featured-left card-featured-tertiary mb-2">
+								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
+									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
+									@if(isset($foreign) && isset($foreign->Total_Balance))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+						</div>
 
 						<div class="col-12 col-md-4 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
