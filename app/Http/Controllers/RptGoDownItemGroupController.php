@@ -26,8 +26,6 @@ class RptGoDownItemGroupController extends Controller
         return $pipe_stock_all_by_item_group;
     }
         
-    
-    
     public function stockin(Request $request){
 
         $gd_pipe_pur_by_item_group = gd_pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
@@ -40,10 +38,6 @@ class RptGoDownItemGroupController extends Controller
         return $gd_pipe_pur_by_item_group;
     }
 
-    
-
-   
-
     public function stockout(Request $request){
         $gd_pipe_sales_by_item_group = gd_pipe_sales_by_item_group::where('item_group_cod', $request->acc_id)
         ->join('ac', 'ac.ac_code', '=', 'gd_pipe_sales_by_item_group.account_name')
@@ -55,12 +49,110 @@ class RptGoDownItemGroupController extends Controller
         return $gd_pipe_sales_by_item_group;
     }
 
-  
-
     public function stockAllT(Request $request){
         $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
         ->get();
 
         return $pipe_stock_all_by_item_group;
     }
+
+    public function stockAllTReport(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'acc_id' => 'required',
+            'outputType' => 'required|in:download,view',
+        ]);
+    
+        // Retrieve data from the database
+        $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
+        ->get();
+    
+        // Check if data exists
+        if ($pipe_stock_all_by_item_group->isEmpty()) {
+            return response()->json(['message' => 'No records found for the selected date range.'], 404);
+        }
+    
+        // Generate the PDF
+        return $this->stockAllTgeneratePDF($pipe_stock_all_by_item_group, $request);
+    }
+
+    private function stockAllTgeneratePDF($pipe_stock_all_by_item_group, Request $request)
+    {
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->format('d-m-y');
+    
+        $pdf = new MyPDF();
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Stock All Tabular ' . $request->acc_id);
+        $pdf->SetSubject('Stock All Tabular');
+        $pdf->SetKeywords('Stock All Tabular, TCPDF, PDF');
+        $pdf->setPageOrientation('P');
+    
+        // Add a page and set padding
+        $pdf->AddPage();
+        $pdf->setCellPadding(1.2);
+    
+        // Report heading
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock All Tabular</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+    
+
+        // Table header for data
+        $html = '
+            <table border="1" style="border-collapse: collapse; text-align: center;">
+                <tr>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">Item Name</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:7%;color:#17365D;font-weight:bold;">Date</th>
+                </tr>';
+    
+        // Iterate through items and add rows
+        $count = 1;
+        $totalAmount = 0;
+    
+        // foreach ($activite11_sales_pipe as $item) {
+        //     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+    
+        //     $html .= '
+        //         <tr style="background-color:' . $backgroundColor . ';">
+        //             <td style="width:7%;">' . $count . '</td>
+        //             <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+        //             <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
+        //             <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
+        //             <td style="width:22%;">' . $item['acc_name'] . '</td>
+        //             <td style="width:15%;">' . $item['comp_name'] . '</td>
+        //             <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
+        //             <td style="width:12%;">' . $item['bill_amt'] . '</td>
+        //         </tr>';
+            
+        //     $totalAmount += $item['bill_amt']; // Accumulate total quantity
+        //     $count++;
+        // }
+    
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+
+        $filename = "stock_all_tabular.pdf";
+
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
+    }
+
 }

@@ -601,6 +601,9 @@
                 window.open(`/rep-godown-by-item-name/bal/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
+            else if (tabName === "SAT") {
+                window.open(`/rep-godown-by-item-name/sat/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            }
         }
 
         function downloadPDF(tabName) {
