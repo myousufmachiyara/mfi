@@ -247,7 +247,7 @@
 												</div>
 											</div>
 											<div class="summary-footer mt-5">
-												<a class="text-muted text-uppercase" href="#">(View All Users)</a>
+												<a class="text-muted text-uppercase"  href="{{ route('all-users')}}">(View All Users)</a>
 											</div>
 										</div>
 									</div>
