@@ -82,6 +82,11 @@
 		.seen-users.more-than-5 .user-icon-container .user-icon.more-users {
 			display: block;
 		}
+
+		h3{
+			margin-top: 7px;
+			margin-bottom: 10px;
+		}
 	</style>
 	<body>
 		<section class="body">
