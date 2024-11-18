@@ -107,34 +107,25 @@
 										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
 								</div>
-								{{-- <div class="card-body">
-									<div class="widget-summary">
-										<div class="widget-summary-col widget-summary-col-icon">
-											<div class="summary-icon bg-secondary">
-												<i class="fas fa-university"></i> <!-- PDC Icon -->
-											</div>
-										</div>
-										<div class="summary col-6">
-											<strong class="amount">PDC</strong>
-											<div class="info">
-												@if(isset($pdc) && isset($pdc->Total_Balance) && strpos($pdc->Total_Balance, '.') !== false && substr($pdc->Total_Balance, strpos($pdc->Total_Balance, '.') + 1) > '0')
-													<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}">0</strong><span class="title text-end text-dark"> PKR</span></h4>
-												@elseif(isset($pdc) && isset($pdc->Total_Balance))
-													<h4 class="amount m-0 text-primary"><strong class="rolling-number amount m-0 text-primary" data-target="{{ number_format($pdc->Total_Balance, 0, '.', ',') }}" >0</strong><span class="title text-end text-dark"> PKR</span></h4>
-												@else
-													<h4 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark"> PKR</span></h4>
-												@endif
-											</div>
-										</div>
-										<div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(View Details)</a>
-											</div>
-										</div>
-									</div>
-								</div> --}}
 							</section>
 						</div>
+
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-primary mb-2">
+								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
+									<h3 class="amount text-dark"><strong>Bank</strong></h3>
+									@if(isset($banks) && isset($banks->Total_Balance))
+										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-primary"><strong>-</strong><span class="title text-end text-dark"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+						</div>
+
 
 						<div class="col-12 col-md-5 mb-2">
 							<section class="card card-featured-left card-featured-secondary mb-2">
