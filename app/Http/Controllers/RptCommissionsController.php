@@ -102,9 +102,9 @@ class RptCommissionsController extends Controller
                     <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:8%;color:#17365D;font-weight:bold;">Inv No.</th>
                     <th style="width:8%;color:#17365D;font-weight:bold;">Ord No.</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Basic Amount</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
-                    <th style="width:27%;color:#17365D;font-weight:bold;">Comm %</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Basic Amount</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">GST / I-Tax</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Comm %</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Comm Amnt</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">C.d %</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amnt</th>
