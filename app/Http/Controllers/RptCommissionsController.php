@@ -109,17 +109,15 @@ class RptCommissionsController extends Controller
                     <th style="width:10%;color:#17365D;font-weight:bold;">C.d %</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">C.d Amt</th>
                 </tr>';
-    
-        // Iterate through items and add rows
-        $count = 1;
-        $totalAmount = 0;
-    
+
+        // Initialize variables for subtotals
         $lastAccountName = '';
         $subtotalBAmount = 0;
         $subtotalCommDisc = 0;
         $subtotalCdDisc = 0;
         $rowNumber = 1;
-    
+        $count = 1;  // This is used for serial number
+
         // Loop through each item in the result data
         foreach ($comm_pipe_rpt as $data) {
             $bAmount = $data['B_amount'] ?? 0;
@@ -128,7 +126,7 @@ class RptCommissionsController extends Controller
             $cdDisc = ($bAmount && $totalTax !== 0) 
                 ? ($bAmount * $totalTax * ($data['cd_disc'] ?? 0) / 100) / $totalTax 
                 : 0;
-    
+
             // Check if the account name has changed to add subtotals
             if ($data['ac_name'] !== $lastAccountName) {
                 if ($lastAccountName) {
@@ -142,9 +140,11 @@ class RptCommissionsController extends Controller
                             <td></td>
                             <td class='text-danger'>" . number_format($subtotalCdDisc, 0) . "</td>
                         </tr>";
+                    // Reset subtotals for next account
                     $subtotalBAmount = $subtotalCommDisc = $subtotalCdDisc = 0;
                 }
-    
+
+                // Add account header
                 $html .= "
                     <tr>
                         <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
@@ -154,11 +154,11 @@ class RptCommissionsController extends Controller
                 $lastAccountName = $data['ac_name'];
                 $rowNumber = 1;
             }
-    
+
             // Add the row for the current item
             $html .= "
                 <tr>
-                    <td>" . $rowNumber++ . "</td>
+                    <td>" . $count++ . "</td>
                     <td>" . ($data['sa_date'] ? \Carbon\Carbon::parse($data['sa_date'])->format('d-m-Y') : "") . "</td>
                     <td>" . ($data['Sale_inv_no'] ?? "") . "</td>
                     <td>" . ($data['pur_ord_no'] ?? "") . "</td>
@@ -169,13 +169,13 @@ class RptCommissionsController extends Controller
                     <td>" . ($data['cd_disc'] ?? "") . "</td>
                     <td>" . number_format($cdDisc, 0) . "</td>
                 </tr>";
-    
+
             // Accumulate subtotals
             $subtotalBAmount += $bAmount;
             $subtotalCommDisc += $commDisc;
             $subtotalCdDisc += $cdDisc;
         }
-    
+
         // Add final subtotal for the last account
         if ($lastAccountName) {
             $html .= "
@@ -191,6 +191,7 @@ class RptCommissionsController extends Controller
         }
 
         $html .= '</table>';
+        
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Display total amount at the bottom
