@@ -1195,7 +1195,11 @@
                 return;
             }
 
-            if (tabName === "purchase1") {
+            if (tabName === "gl") {
+                window.location.href = `/rep-by-acc-name/gl/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "purchase1") {
                 window.open(`/rep-by-acc-name/pur1/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 
             }
