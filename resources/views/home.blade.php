@@ -259,12 +259,6 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							
-
-							
-						</div>
-
-						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
