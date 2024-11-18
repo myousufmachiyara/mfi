@@ -72,9 +72,9 @@
                                                     <tr>
                                                         <td>{{$row->id}}</td>
                                                         @if($row->is_login==0)
-                                                            <td>{{$row->name}} <span class="status-circle gray-circle"></span></td>
+                                                            <td>{{$row->name}} <span class="status-circle gray-circle"> </span> </td>
                                                         @elseif($row->is_login==1)
-                                                            <td>{{$row->name}} <span class="status-circle green-circle"></span></td>
+                                                            <td>{{$row->name}} <span class="status-circle green-circle"> </span> </td>
                                                         @endif
                                                         <td>{{$row->username}}</td>
                                                         <td>{{$row->role_name}}</td>
