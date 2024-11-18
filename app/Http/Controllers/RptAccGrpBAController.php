@@ -138,8 +138,7 @@ class RptAccGrpBAController extends Controller
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
         
-        $accId = $request->acc_id;
-        $filename = "sub_head_bal_report_{$balance_sub_head[0]['shoa_name']}.pdf";
+        $filename = "balance_all.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {

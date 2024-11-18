@@ -424,7 +424,7 @@
 
             else if (tabName === "BA") {
 
-                window.open(`/rep-by-acc-grp/ba/report?outputType=view&acc_id=${acc_id}`, '_blank');
+                window.open(`/rep-by-acc-grp/ba/report?outputType=view`, '_blank');
             }
         }
 
