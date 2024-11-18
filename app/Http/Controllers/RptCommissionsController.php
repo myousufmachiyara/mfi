@@ -147,7 +147,7 @@ class RptCommissionsController extends Controller
                 // Add account header
                 $html .= "
                     <tr>
-                        <td colspan='10' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
+                        <td colspan='9' style='background-color: #cfe8e3; text-align: center; font-weight: bold;'>
                             " . ($data['ac_name'] ?? "No Account Name") . "
                         </td>
                     </tr>";
@@ -193,15 +193,7 @@ class RptCommissionsController extends Controller
         $html .= '</table>';
 
         $pdf->writeHTML($html, true, false, true, false, '');
-    
-        // // Display total amount at the bottom
-        // $currentY = $pdf->GetY();
-        // $pdf->SetFont('helvetica', 'B', 12);
-        // $pdf->SetXY(155, $currentY + 5);
-        // $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        // $pdf->SetXY(175, $currentY + 5);
-        // $pdf->MultiCell(26, 5, $totalAmount, 1, 'C');
-    
+ 
         // // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
