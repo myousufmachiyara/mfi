@@ -21,8 +21,6 @@
 		}
 
 		.icon-container {
-			width: 200px; /* Set the desired width */
-			height: 200px; /* Set the desired height */
 			background-image: url('/assets/img/favicon.png'); /* Path to your icon image */
 			background-size: contain; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
