@@ -115,11 +115,7 @@
 												@endif
 											</div>
 										</div>
-										<div>
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">(View Details)</a>
-											</div>
-										</div>
+										
 									</div>
 								</div>
 							</section>
