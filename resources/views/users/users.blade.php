@@ -71,9 +71,9 @@
                                                 @foreach($users as $key => $row)
                                                     <tr>
                                                         <td>{{$row->id}}</td>
-                                                        @if({{$row->is_login}}==0)
+                                                        @if($row->is_login==0)
                                                             <td>{{$row->name}} <span class="status-circle gray-circle"></span></td>
-                                                        @elseif({{$row->is_login}}==1)
+                                                        @elseif($row->is_login==1)
                                                             <td>{{$row->name}} <span class="status-circle green-circle"></span></td>
                                                         @endif
                                                         <td>{{$row->username}}</td>
