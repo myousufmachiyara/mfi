@@ -181,10 +181,12 @@
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body" style="background-image: url('/assets/img/pdc-bg-img.webp'); background-position: right bottom; background-repeat: no-repeat; background-size: contain;">
 									<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
-									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt))
+									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_sale->total_weight) )
 										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
 									@endif
 									<div class="summary-footer">
 										<a class="text-muted text-uppercase" href="#">View Details</a>
