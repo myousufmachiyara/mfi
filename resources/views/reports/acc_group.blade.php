@@ -374,7 +374,6 @@
             }
         }
 
-
         function downloadExcel(tabName) {
 
             if (tabName === "AG") {
@@ -421,6 +420,11 @@
                     return;
                 }
                 window.open(`/rep-by-acc-grp/shoa/report?outputType=view&acc_id=${acc_id}`, '_blank');
+            }
+
+            else if (tabName === "BA") {
+
+                window.open(`/rep-by-acc-grp/ba/report?outputType=view&acc_id=${acc_id}`, '_blank');
             }
         }
 
