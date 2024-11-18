@@ -497,15 +497,15 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger");
-        $pdf->SetSubject("General Ledger");
-        $pdf->SetKeywords('General Ledger, TCPDF, PDF');
+        $pdf->SetTitle("General Ledger R");
+        $pdf->SetSubject("General Ledger R");
+        $pdf->SetKeywords('General Ledger R, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
   
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger R</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
   
         // Account Info Table
@@ -545,13 +545,14 @@ class RptAccNameGLController extends Controller
                         <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
-                        <th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>
-                        <th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>
-                        <th style="width:13%;color:#17365D;font-weight:bold;">Balance</th>
+                        <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
+                        <th style="width:10%;color:#17365D;font-weight:bold;">Remarks</th>
+                        <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
+                        <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
+                        <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
                     </tr>
                     <tr>
-                        <th colspan="7" style="text-align: right">------Opening Balance------</th>
+                        <th colspan="8" style="text-align: right">------Opening Balance------</th>
                         <th style="text-align: left">'. $opening_bal .'</th>
                     </tr>';
                 // Table Rows
@@ -573,20 +574,21 @@ class RptAccNameGLController extends Controller
                                 <td style='width:7%;'>{$items['auto_lager']}</td>
                                 <td style='width:11%;'>{$items['entry_of']}</td>
                                 <td style='width:11%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
-                                <td style='width:25%;'>{$items['ac2']}</td>
-                                <td style='width:13%;'>" . number_format($items['Debit'], 0) . "</td>
-                                <td style='width:13%;'>" . number_format($items['Credit'], 0) . "</td>
-                                <td style='width:13%;'>" . number_format($balance, 0) . "</td>
+                                <td style='width:19%;'>{$items['ac2']}</td>
+                                <td style='width:11%;'>{$items['Narration']}</td>
+                                <td style='width:12%;'>" . number_format($items['Debit'], 0) . "</td>
+                                <td style='width:12%;'>" . number_format($items['Credit'], 0) . "</td>
+                                <td style='width:12%;'>" . number_format($balance, 0) . "</td>
                             </tr>";
                 $count++;
             }
             // Add totals row
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
-                <td colspan="5" style="text-align:right;">Total:</td>
-                <td style="width:13%;">' . number_format($totalDebit, 0) . '</td>
-                <td style="width:13%;">' . number_format($totalCredit, 0) . '</td>
-                <td style="width:13%;">' . number_format($totalDebit-$totalCredit, 0) . '</td>
+                <td colspan="6" style="text-align:right;">Total:</td>
+                <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
+                <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
+                <td style="width:12%;">' . number_format($totalDebit-$totalCredit, 0) . '</td>
             </tr>';
             
         $html .= '</table>';
@@ -594,7 +596,7 @@ class RptAccNameGLController extends Controller
 
 
         // Filename and Output
-        $filename = "general_ledger_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "general_ledger_r_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'D');
 
     }
