@@ -97,7 +97,7 @@
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2">
 								<div class="card-body">
-									<strong class="amount">PDC</strong>
+									<h3 class="amount">PDC</h3>
 									<div class="h4 font-weight-bold mb-0">488</div>
 									<p class="text-3 text-muted mb-0">Nullam quis ris</p>
 								</div>
