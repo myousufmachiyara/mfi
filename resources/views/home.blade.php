@@ -97,7 +97,6 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
-						<!-- summaries -->
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2">
@@ -290,7 +289,7 @@
 						</div>
 
 						<!-- summaries ends here -->
-						<div class="tabs">
+						<div class="tabs mt-4">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#BNF" href="#BNF" data-bs-toggle="tab">Bills Not Final</a>
@@ -396,6 +395,7 @@
 								</div>
 							</div>
 						</div>
+
 					</div>
 					<!-- end: page -->
 				</section>
