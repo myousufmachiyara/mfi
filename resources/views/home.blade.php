@@ -253,13 +253,9 @@
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body">
+									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
+
 									<table class="table table-responsive-md table-striped mb-0">
-										<thead>
-											<tr>
-												<th>User</th>
-												<th></th>
-											</tr>
-										</thead>
 										<tbody>
 											<tr>
 												<td>User Name Here</td>
