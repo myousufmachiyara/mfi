@@ -405,46 +405,7 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		let seenUsers = [
-			{ name: 'User 1', image: 'user-icon.png' },
-			{ name: 'User 2', image: 'user-icon.png' },
-			{ name: 'User 3', image: 'user-icon.png' },
-			{ name: 'User 4', image: 'user-icon.png' },
-			{ name: 'User 5', image: 'user-icon.png' },
-			{ name: 'User 6', image: 'user-icon.png' },
-			{ name: 'User 7', image: 'user-icon.png' }
-		];
-
-		// Select the container for seen users
-		let seenUsersContainer = document.querySelector('.seen-users');
-		let userIconContainer = seenUsersContainer.querySelector('.user-icon-container');
-
-		// Loop through the users and create user icons with titles
-		seenUsers.forEach((user, index) => {
-			if (index < 5) { // Show only up to 5 user icons
-				let userIcon = document.createElement('div');
-				userIcon.classList.add('user-icon');
-				userIcon.style.backgroundImage = `url('/assets/img/${user.image}')`; // Corrected URL interpolation
-				let userTitle = document.createElement('span');
-				userTitle.classList.add('user-title');
-				userTitle.textContent = user.name; // Set user name as title
-				userIcon.appendChild(userTitle);
-				userIconContainer.appendChild(userIcon);
-			}
-		});
-
-		// Check if there are more than 5 users and add "+X" icon
-		if (seenUsers.length > 5) {
-			// Create and append the "+X" icon
-			let moreUsersIcon = document.createElement('div');
-			moreUsersIcon.classList.add('user-icon', 'more-users');
-			moreUsersIcon.textContent = `+${seenUsers.length - 5}`;  // Show the number of additional users
-			userIconContainer.appendChild(moreUsersIcon);
-
-			// Add the 'more-than-5' class to the container
-			seenUsersContainer.classList.add('more-than-5');
-		}
-
+	
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
