@@ -157,39 +157,6 @@
 						</div>
 
 						<div class="col-12 col-md-6 mb-2 mt-3">
-							<section class="card card-featured-left card-featured-success">
-								<div class="card-body">
-									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
-
-									<table class="table table-responsive-md table-striped mb-0">
-										<tbody>
-											<tr>
-												<td>User Name Here</td>
-												<td><span class="badge badge-success">Active</span></td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-												<td><span class="badge badge-success">Active</span></td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-												<td><span class="badge badge-success">Active</span></td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-												<td><span class="badge badge-success">Active</span></td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-												<td><span class="badge badge-success">Active</span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</section>
-						</div>
-						
-						<div class="col-12 col-md-6 mb-2 mt-3">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body">
 									<div class="row">
@@ -225,6 +192,41 @@
 								</div>
 							</section>
 						</div>
+						
+						<div class="col-12 col-md-6 mb-2 mt-3">
+							<section class="card card-featured-left card-featured-success">
+								<div class="card-body">
+									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
+
+									<table class="table table-responsive-md table-striped mb-0">
+										<tbody>
+											<tr>
+												<td>User Name Here</td>
+												<td><span class="badge badge-success">Active</span></td>
+											</tr>
+											<tr>
+												<td>User Name Here</td>
+												<td><span class="badge badge-success">Active</span></td>
+											</tr>
+											<tr>
+												<td>User Name Here</td>
+												<td><span class="badge badge-success">Active</span></td>
+											</tr>
+											<tr>
+												<td>User Name Here</td>
+												<td><span class="badge badge-success">Active</span></td>
+											</tr>
+											<tr>
+												<td>User Name Here</td>
+												<td><span class="badge badge-success">Active</span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+						</div>
+						
+
 
 						<!-- summaries ends here -->
 						<div class="tabs mt-3">
