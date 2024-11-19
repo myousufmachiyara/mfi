@@ -821,11 +821,30 @@
                             html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "") + "</td>";
                             html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['remaining_amount'] ? v['remaining_amount'] : "0") )+ "</td>";
                             html += "<td>" + (v['ageing_days'] ? v['ageing_days'] : "") + "</td>";
-                            html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
-                            html += "<td></td>";
-                            html += "<td></td>";
-                            html += "<td></td>";
-                            html += "<td></td>";
+                            if(v['ageing_days']<21){
+                                html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
+                            }
+                            else{
+                                html += "<td>-</td>";
+                            }
+                            if(v['ageing_days']>=21 && v['ageing_days']<=35){
+                                html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
+                            }
+                            else{
+                                html += "<td>-</td>";
+                            }
+                            if(v['ageing_days']>=36 && v['ageing_days']<=50){
+                                html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
+                            }
+                            else{
+                                html += "<td>-</td>";
+                            }
+                            if(v['ageing_days']>50){
+                                html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
+                            }
+                            else{
+                                html += "<td>-</td>";
+                            }
                             html +="</tr>";
                             $(tableID).append(html);
                         });
