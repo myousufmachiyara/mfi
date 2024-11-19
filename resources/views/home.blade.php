@@ -1,5 +1,4 @@
 @include('layouts.header')
-
 	<style>
 		h3{
 			margin-top: 7px;
