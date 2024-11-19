@@ -447,31 +447,6 @@
 			},
 		});
 
-			document.addEventListener("DOMContentLoaded", () => {
-			const rollNumbers = document.querySelectorAll('.rolling-number');
-			
-			rollNumbers.forEach((element) => {
-				const target = parseFloat(element.getAttribute('data-target')); // Final value
-				const duration = 2000; // Animation duration in ms
-				const stepTime = 20; // Time between updates
-				const increment = target / (duration / stepTime);
-
-				let current = 0;
-
-				const updateNumber = () => {
-					current += increment;
-					if (current >= target) {
-						element.textContent = target.toLocaleString(); // Stop at the target value
-					} else {
-						element.textContent = current.toFixed(2).toLocaleString(); // Continue animating
-						setTimeout(updateNumber, stepTime);
-					}
-				};
-
-				updateNumber();
-			});
-		});
-
 		document.addEventListener("DOMContentLoaded", () => {
 		const counter = document.querySelector('.counter');
 		const target = +counter.getAttribute('data-target'); // Get the target number
