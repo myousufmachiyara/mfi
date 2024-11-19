@@ -110,7 +110,7 @@
 									</div>
 								</div>
 							</section>
-
+							
 							<section class="card card-featured-left card-featured-success mt-3">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
@@ -204,7 +204,7 @@
 
 						<div class="col-12 col-md-3 mb-2 mt-3">
 							<section class="card card-featured-left card-featured-danger">
-								<div class="card-body">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
 									@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
 										<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
