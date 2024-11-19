@@ -36,7 +36,7 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<div style="display: flex;justify-content: space-between;">
-							<h2>Purchase Ageing</h2>
+							<h3><strong>Purchase Ageing</strong></h3>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
 							</div>
