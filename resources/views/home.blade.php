@@ -52,7 +52,7 @@
 							</section>
 
 							<section class="card card-featured-left card-featured-primary mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); "
+								<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
 									@if(isset($receivables) && isset($receivables->total_balance))
 										<h2 class="amount m-0 text-primary"><strong>{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -82,7 +82,7 @@
 							</section>
 
 							<section class="card card-featured-left card-featured-danger mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/pay-icon.png'); "
+								<div class="card-body icon-container" style="background-image: url('/assets/img/pay-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
 									@if(isset($payables) && isset($payables->total_balance))
 										<h2 class="amount m-0 text-danger"><strong>{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -158,7 +158,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-success">
-								<div class="card-body">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/all-user-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
 
 									<table class="table table-responsive-md table-striped mb-0">
