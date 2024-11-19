@@ -36,12 +36,12 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<div style="display: flex;justify-content: space-between;">
-							<h2 class="card-title">Purchase Ageing </h2>
+							<h2>Purchase Ageing</h2>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
 							</div>
 						</div>
-						
+
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2 ">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
