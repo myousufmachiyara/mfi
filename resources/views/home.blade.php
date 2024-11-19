@@ -35,7 +35,42 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
+						<div style="display: flex;justify-content: space-between;">
+							<h2 class="card-title">Purchase Ageing </h2>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+							</div>
+						</div>
 						
+						<div class="col-12 col-md-3 mb-2">
+							<section class="card card-featured-left card-featured-primary mb-2 ">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
+									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
+									@if(isset($pdc) && isset($pdc->Total_Balance))
+										<h2 class="amount m-0 text-primary"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+
+							<section class="card card-featured-left card-featured-primary mt-3">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); ">
+									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+									@if(isset($receivables) && isset($receivables->total_balance))
+										<h2 class="amount m-0 text-primary"><strong>{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@else
+										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
+								</div>
+							</section>
+						</div>
 
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-danger mb-2">
