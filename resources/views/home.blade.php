@@ -35,7 +35,7 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
-						<div class="text-end">
+						<div class="text-end mt-1 mb-1">
 							<p>hello</p>
 						</div>
 						<div class="col-12 col-md-3 mb-2">
