@@ -41,7 +41,7 @@
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-primary"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -71,7 +71,7 @@
 								<div class="card-body icon-container" style="background-image: url('/assets/img/bank-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Bank</strong></h3>
 									@if(isset($banks) && isset($banks->Total_Balance))
-										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-primary">{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-danger"><strong>{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -101,7 +101,7 @@
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cash-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Cash</strong></h3>
 									@if(isset($cash) && isset($cash->Total_Balance))
-										<h2 class="amount m-0 text-success"><strong class="amount m-0 text-primary">{{ $cash->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-success"><strong>{{ $cash->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -131,7 +131,7 @@
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
 									@if(isset($foreign) && isset($foreign->Total_Balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong>{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
