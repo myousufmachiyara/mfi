@@ -35,9 +35,16 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
-						<div class="text-end mt-1 mb-1">
+						<header class="card-header" style="display: flex;justify-content: space-between;">
+							<h2 class="card-title">Purchase Ageing <span id="pur_span" style="color:red;font-size: 16px;display:none">More than 1 Debit not allowed</span></h2>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+							</div>
+						</header>
+						{{-- <div class="text-end mt-1 mb-1">
+
 							<p>hello</p>
-						</div>
+						</div> --}}
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2 ">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
