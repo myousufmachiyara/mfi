@@ -589,10 +589,10 @@
                 return;
             }
 
-            if (tabName === "SI") {
-                window.open(`/rep-godown-by-item-name/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
-
+            if (tabName === "SA") {
+                window.open(`/rep-godown-by-item-grp/sa/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
+
             else if (tabName === "SO") {
                 window.open(`/rep-godown-by-item-name/so/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
 

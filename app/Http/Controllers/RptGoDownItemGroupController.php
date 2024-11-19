@@ -26,6 +26,97 @@ class RptGoDownItemGroupController extends Controller
         return $pipe_stock_all_by_item_group;
     }
         
+    public function stockAllReport(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'acc_id' => 'required',
+            'outputType' => 'required|in:download,view',
+        ]);
+    
+        // Retrieve data from the database
+        $pipe_stock_all_by_item_group = pipe_stock_all_by_item_group::where('item_group_cod',$request->acc_id)
+        ->get();
+    
+        // Check if data exists
+        if ($pipe_stock_all_by_item_group->isEmpty()) {
+            return response()->json(['message' => 'No records found for the selected date range.'], 404);
+        }
+    
+        // Generate the PDF
+        return $this->stockAllgeneratePDF($pipe_stock_all_by_item_group, $request);
+    }
+
+    private function stockAllgeneratePDF($pipe_stock_all_by_item_group, Request $request)
+    {
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->format('d-m-y');
+    
+        $pdf = new MyPDF();
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Stock All Report ' . $request->acc_id);
+        $pdf->SetSubject('Stock All Report');
+        $pdf->SetKeywords('Stock All Report, TCPDF, PDF');
+        $pdf->setPageOrientation('L');
+    
+        // Add a page and set padding
+        $pdf->AddPage();
+        $pdf->setCellPadding(1.2);
+    
+        // Report heading
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock All</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+    
+
+        // Table header for data
+        $html = '
+            <table border="1" style="border-collapse: collapse; text-align: center;">
+                <tr>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">S/No.</th>
+                    <th style="width:30%;color:#17365D;font-weight:bold;">Item Name</th>
+                    <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Quantity in Hand</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Weight in Hand</th>
+                </tr>';
+    
+        // Iterate through items and add rows
+        $count = 1;
+        $totalAmount = 0;
+    
+        // foreach ($activite11_sales_pipe as $item) {
+        //     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+    
+        //     $html .= '
+        //         <tr style="background-color:' . $backgroundColor . ';">
+        //             <td style="width:7%;">' . $count . '</td>
+        //             <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
+        //             <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
+        //             <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
+        //             <td style="width:22%;">' . $item['acc_name'] . '</td>
+        //             <td style="width:15%;">' . $item['comp_name'] . '</td>
+        //             <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
+        //             <td style="width:12%;">' . $item['bill_amt'] . '</td>
+        //         </tr>';
+            
+        //     $totalAmount += $item['bill_amt']; // Accumulate total quantity
+        //     $count++;
+        // }
+    
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+
+        $filename = "stock_all_report.pdf";
+
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
+    }
+
     public function stockin(Request $request){
 
         $gd_pipe_pur_by_item_group = gd_pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
