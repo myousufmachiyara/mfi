@@ -128,7 +128,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-tertiary mb-2">
-								<div class="card-body"  >
+								<div class="card-body icon-container"  style="background-image: url('/assets/img/fc-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
 									@if(isset($foreign) && isset($foreign->Total_Balance))
 										<h2 class="amount m-0 text-tertiary"><strong>{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
