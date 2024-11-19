@@ -126,6 +126,96 @@ class RptGoDownItemGroupController extends Controller
         return $gd_pipe_pur_by_item_group;
     }
 
+    public function stockinReport(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'acc_id' => 'required',
+            'outputType' => 'required|in:download,view',
+        ]);
+    
+        $gd_pipe_pur_by_item_group = gd_pipe_pur_by_item_group::where('item_group_cod', $request->acc_id)
+        ->join('ac', 'ac.ac_code', '=', 'gd_pipe_pur_by_item_group.account_name')
+        ->join('item_entry2', 'item_entry2.it_cod', '=', 'gd_pipe_pur_by_item_group.item_cod')
+        ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('gd_pipe_pur_by_item_group.*', 'ac.ac_name', 'item_entry2.item_name')
+        ->get();
+    
+        // Check if data exists
+        if ($gd_pipe_pur_by_item_group->isEmpty()) {
+            return response()->json(['message' => 'No records found for the selected date range.'], 404);
+        }
+    
+        // Generate the PDF
+        return $this->stockingeneratePDF($gd_pipe_pur_by_item_group, $request);
+    }
+
+    private function stockingeneratePDF($gd_pipe_pur_by_item_group, Request $request)
+    {
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->format('d-m-y');
+    
+        $pdf = new MyPDF();
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('MFI');
+        $pdf->SetTitle('Stock In Report Item Group - ' . $request->acc_id);
+        $pdf->SetSubject('Stock In Report');
+        $pdf->SetKeywords('Stock In Report, TCPDF, PDF');
+        $pdf->setPageOrientation('P');
+    
+        // Add a page and set padding
+        $pdf->AddPage();
+        $pdf->setCellPadding(1.2);
+    
+        // Report heading
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Stock In Report</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+    
+
+        // Table header for data
+        $html = '
+            <table border="1" style="border-collapse: collapse; text-align: center;">
+                <tr>
+                    <th style="width:10%;color:#17365D;font-weight:bold;">S/No.</th>
+                    <th style="width:30%;color:#17365D;font-weight:bold;">Item Name</th>
+                    <th style="width:30%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Qty. in Hand</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Wg. in Hand</th>
+                </tr>';
+    
+        // Iterate through items and add rows
+        $count = 1;
+        $totalAmount = 0;
+    
+        foreach ($gd_pipe_pur_by_item_group as $item) {
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+    
+            $html .= '
+                <tr style="background-color:' . $backgroundColor . ';">
+                    <td style="width:10%;">' . $count . '</td>
+                    <td style="width:30%;">' . $item['item_name'] . '</td>
+                    <td style="width:30%;">' . $item['item_remark'] . '</td>
+                    <td style="width:15%;">' . $item['opp_bal'] . '</td>
+                    <td style="width:15%;">' . $item['wt'] . '</td>
+                </tr>';
+            
+            $totalAmount += $item['bill_amt']; // Accumulate total quantity
+            $count++;
+        }
+    
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+
+        $filename = "stock_all_report.pdf";
+
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
+    }
     public function stockout(Request $request){
         $gd_pipe_sales_by_item_group = gd_pipe_sales_by_item_group::where('item_group_cod', $request->acc_id)
         ->join('ac', 'ac.ac_code', '=', 'gd_pipe_sales_by_item_group.account_name')

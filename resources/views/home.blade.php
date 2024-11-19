@@ -21,7 +21,7 @@
 		}
 
 		.icon-container {
-			background-size: contain; /* Adjust the size of the icon to fit within the div */
+			background-size: auto; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
 		}
