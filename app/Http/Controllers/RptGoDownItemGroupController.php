@@ -177,7 +177,7 @@ class RptGoDownItemGroupController extends Controller
             <table border="1" style="border-collapse: collapse; text-align: center;">
                 <tr>
                     <th style="width:10%;color:#17365D;font-weight:bold;">S/No.</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Voucher #</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Voucher</th>
                     <th style="width:25%;color:#17365D;font-weight:bold;">Item Name</th>
                     <th style="width:25%;color:#17365D;font-weight:bold;">Party Name</th>
                     <th style="width:14%;color:#17365D;font-weight:bold;">Quantity</th>
