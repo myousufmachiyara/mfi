@@ -819,10 +819,10 @@
                             html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
                             html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "") + "</td>";
                             html += "<td>" + (v['ageing_days'] ? v['ageing_days'] : "") + "</td>";
-                            html += "<td>""</td>";
-                            html += "<td>""</td>";
-                            html += "<td>""</td>";
-                            html += "<td>""</td>";
+                            html += "<td></td>";
+                            html += "<td></td>";
+                            html += "<td></td>";
+                            html += "<td></td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
