@@ -474,30 +474,29 @@
 
 
 		document.addEventListener("DOMContentLoaded", () => {
-        const rollNumbers = document.querySelectorAll('.rolling-number');
+		const rollNumbers = document.querySelectorAll('.rolling-number');
 
-        rollNumbers.forEach((element) => {
-            const target = parseFloat(element.getAttribute('data-target')); // Final value
-            const duration = 2000; // Animation duration in ms
-            const stepTime = 20; // Time between updates (ms)
-            const increment = target / (duration / stepTime); // Calculate incremental value
-            let current = 0;
+		rollNumbers.forEach((element) => {
+			const target = parseFloat(element.getAttribute('data-target')) || 0; // Final value
+			const duration = 2000; // Animation duration in ms
+			const stepTime = 20; // Time between updates (ms)
+			const increment = target / (duration / stepTime); // Incremental value
+			let current = 0; // Start value
 
-            const roll = () => {
-                current += increment;
+			const roll = () => {
+				current += increment;
 
-                // Check if we've reached the target
-                if (current >= target) {
-                    element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Final value
-                } else {
-                    element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Rolling effect
-                    setTimeout(roll, stepTime); // Continue rolling
-                }
-            };
+				if (current >= target) {
+					element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Final value
+				} else {
+					element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Rolling effect
+					setTimeout(roll, stepTime); // Continue rolling
+				}
+			};
 
-            roll();
-        	});
-    	});
+			roll();
+			});
+		});
 
 		
 	</script>
