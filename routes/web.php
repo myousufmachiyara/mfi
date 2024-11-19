@@ -496,7 +496,7 @@
 
         // RPT Godown By Item Name so
         Route::get('/rep-godown-by-item-grp/so', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockout'])->name('so-rep-godown-by-item-grp');
-        Route::get('/rep-godown-by-item-grp/so/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'ttockoutExcel'])->name('so-rep-godown-by-item-grp-excel');
+        Route::get('/rep-godown-by-item-grp/so/excel', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockoutExcel'])->name('so-rep-godown-by-item-grp-excel');
         Route::get('/rep-godown-by-item-grp/so/report', [App\Http\Controllers\RptGoDownItemGroupController::class, 'stockoutReport'])->name('so-rep-godown-by-item-grp-report');
       
         // RPT Godown By Item Name sat
