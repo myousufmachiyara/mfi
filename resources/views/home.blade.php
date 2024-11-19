@@ -142,7 +142,7 @@
 							</section>
 
 							<section class="card card-featured-left card-featured-tertiary mt-3">
-								<div class="card-body">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
 									@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-tertiary">{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
