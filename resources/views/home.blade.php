@@ -448,23 +448,23 @@
 		});
 
 		document.addEventListener("DOMContentLoaded", () => {
-		const counter = document.querySelector('.counter');
-		const target = +counter.getAttribute('data-target'); // Get the target number
-		const speed = 200; // Adjust the speed of the animation
+			const counter = document.querySelector('.counter');
+			const target = +counter.getAttribute('data-target'); // Get the target number
+			const speed = 200; // Adjust the speed of the animation
 
-		const updateCounter = () => {
-		const current = +counter.innerText; // Convert current text to number
-		const increment = target / speed;
+			const updateCounter = () => {
+				const current = +counter.innerText; // Convert current text to number
+				const increment = target / speed;
 
-		if (current < target) {
-			counter.innerText = Math.ceil(current + increment);
-			setTimeout(updateCounter, 10); // Adjust interval time as needed
-		} else {
-			counter.innerText = target; // Ensure exact target number at the end
-		}
-		};
+				if (current < target) {
+				counter.innerText = Math.ceil(current + increment);
+				setTimeout(updateCounter, 10); // Adjust interval time as needed
+				} else {
+				counter.innerText = target; // Ensure exact target number at the end
+				}
+			};
 
-		updateCounter();
+			updateCounter();
 		});
 	</script>
 </html>
