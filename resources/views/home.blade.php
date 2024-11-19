@@ -158,7 +158,7 @@
 
 						<div class="col-12 col-md-2 mb-2">
 							<section class="card card-featured-left card-featured-success">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/all-user-icon.png'); ">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/all-user-icon.png');background-position: right center; ">
 									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
 
 									<table class="table table-responsive-md table-striped mb-0">
