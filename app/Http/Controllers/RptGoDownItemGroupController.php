@@ -55,7 +55,7 @@ class RptGoDownItemGroupController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Stock All Report ' . $request->acc_id);
+        $pdf->SetTitle('Stock All Report Item Group - ' . $request->acc_id);
         $pdf->SetSubject('Stock All Report');
         $pdf->SetKeywords('Stock All Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -84,24 +84,21 @@ class RptGoDownItemGroupController extends Controller
         $count = 1;
         $totalAmount = 0;
     
-        // foreach ($activite11_sales_pipe as $item) {
-        //     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
+        foreach ($pipe_stock_all_by_item_group as $item) {
+            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
     
-        //     $html .= '
-        //         <tr style="background-color:' . $backgroundColor . ';">
-        //             <td style="width:7%;">' . $count . '</td>
-        //             <td style="width:10%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
-        //             <td style="width:10%;">' . $item['Sal_inv_no']. '</td>
-        //             <td style="width:10%;">' . $item['pur_ord_no'] . '</td>
-        //             <td style="width:22%;">' . $item['acc_name'] . '</td>
-        //             <td style="width:15%;">' . $item['comp_name'] . '</td>
-        //             <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
-        //             <td style="width:12%;">' . $item['bill_amt'] . '</td>
-        //         </tr>';
+            $html .= '
+                <tr style="background-color:' . $backgroundColor . ';">
+                    <td style="width:10%;">' . $count . '</td>
+                    <td style="width:30%;">' . $item['item_name'] . '</td>
+                    <td style="width:30%;">' . $item['item_remark'] . '</td>
+                    <td style="width:15%;">' . $item['opp_bal'] . '</td>
+                    <td style="width:15%;">' . $item['wt'] . '</td>
+                </tr>';
             
-        //     $totalAmount += $item['bill_amt']; // Accumulate total quantity
-        //     $count++;
-        // }
+            $totalAmount += $item['bill_amt']; // Accumulate total quantity
+            $count++;
+        }
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');

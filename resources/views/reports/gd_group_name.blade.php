@@ -614,6 +614,10 @@
                 return;
             }
 
+            if (tabName === "SA") {
+                window.location.href = `/rep-godown-by-item-grp/sa/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
             if (tabName === "SI") {
                 window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
