@@ -826,8 +826,6 @@
                             html +="</tr>";
                             $(tableID).append(html);
                         });
-
-                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="12" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
