@@ -43,11 +43,11 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2 ">
+							<section class="card card-featured-left card-featured-primary mb-2">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2><strong class=" amount m-0 text-primary counter" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-primary"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
