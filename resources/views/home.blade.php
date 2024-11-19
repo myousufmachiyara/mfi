@@ -53,9 +53,9 @@
 
 							<section class="card card-featured-left card-featured-primary mt-3">
 								<div class="card-body"  >
-									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
-									@if(isset($payables) && isset($payables->total_balance))
-										<h2 class="amount m-0 text-primary"><strong class="amount m-0 text-primary">{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+									@if(isset($receivables) && isset($receivables->total_balance))
+										<h2 class="amount m-0 text-primary"><strong>{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -83,9 +83,9 @@
 
 							<section class="card card-featured-left card-featured-danger mt-3">
 								<div class="card-body"  >
-									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
-									@if(isset($receivables) && isset($receivables->total_balance))
-										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-danger">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
+									@if(isset($payables) && isset($payables->total_balance))
+										<h2 class="amount m-0 text-danger"><strong>{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
