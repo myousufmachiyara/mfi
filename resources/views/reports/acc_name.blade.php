@@ -816,8 +816,8 @@
                             html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td></td>";
                             html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
-                            html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "") + "</td>";
-                            html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['remaining_amount'] ? v['remaining_amount'] : "0") )+ "</td>";
+                            html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
+                            html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['total_jv_amount'] ? v['total_jv_amount'] : "0") )+ "</td>";
                             html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") +  "</td>";
                             html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") +  "</td>";
                             html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") +  "</td>";
