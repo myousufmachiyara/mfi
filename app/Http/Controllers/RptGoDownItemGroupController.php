@@ -58,7 +58,7 @@ class RptGoDownItemGroupController extends Controller
         $pdf->SetTitle('Stock All Report ' . $request->acc_id);
         $pdf->SetSubject('Stock All Report');
         $pdf->SetKeywords('Stock All Report, TCPDF, PDF');
-        $pdf->setPageOrientation('L');
+        $pdf->setPageOrientation('P');
     
         // Add a page and set padding
         $pdf->AddPage();
