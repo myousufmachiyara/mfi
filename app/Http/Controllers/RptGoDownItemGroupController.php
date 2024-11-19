@@ -75,7 +75,7 @@ class RptGoDownItemGroupController extends Controller
                 <tr>
                     <th style="width:10%;color:#17365D;font-weight:bold;">S/No.</th>
                     <th style="width:30%;color:#17365D;font-weight:bold;">Item Name</th>
-                    <th style="width:20%;color:#17365D;font-weight:bold;">Remarks</th>
+                    <th style="width:30%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Qty. in Hand</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Wg. in Hand</th>
                 </tr>';
