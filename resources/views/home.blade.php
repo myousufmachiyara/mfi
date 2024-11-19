@@ -36,7 +36,7 @@
 					<!-- start: page -->
 					<div class="row cust-pad">
 						<div style="display: flex;justify-content: space-between;">
-							<h3 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h3>
+							<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
 							</div>
