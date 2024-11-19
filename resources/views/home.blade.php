@@ -189,39 +189,38 @@
 							</section>
 						</div>
 
-						<div class="col-12 col-md-6 mb-2 mt-3">
+						<div class="col-12 col-md-3 mb-2 mt-3">
 							<section class="card card-featured-left card-featured-tertiary">
 								<div class="card-body">
-									<div class="row">
-										<div class="col-12 col-md-6">
-											<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
-											@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-										<div class="col-12 col-md-6">
-											<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
-											@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt)  && isset($last_month_purchase->total_weight))
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-												<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-											@else
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-												<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-											@endif
-											<div class="summary-footer">
-												<a class="text-muted text-uppercase" href="#">View Details</a>
-											</div>
-										</div>
-										
+									<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
+									@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
 									</div>
-									
+								</div>
+							</section>
+						</div>
+
+						<div class="col-12 col-md-3 mb-2 mt-3">
+							<section class="card card-featured-left card-featured-tertiary">
+								<div class="card-body">
+									<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
+									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt)  && isset($last_month_purchase->total_weight))
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+									@else
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+									@endif
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
 								</div>
 							</section>
 						</div>
