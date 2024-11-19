@@ -49,7 +49,7 @@
 								  @if(isset($pdc) && isset($pdc->Total_Balance))
 									<h2>
 									  <strong class="amount m-0 text-primary counter" data-target={{ $pdc->Total_Balance }}>
-										0
+										
 									  </strong>
 									  <span class="title text-end text-dark h6">PKR</span>
 									</h2>
