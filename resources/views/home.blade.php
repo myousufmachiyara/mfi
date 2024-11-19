@@ -177,8 +177,8 @@
 											</tr>
 										</tbody>
 									</table>
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+									<div class="summary-footer text-end mt-1">
+										<a class="text-muted text-uppercase" href="#">View All</a>
 									</div>
 								</div>
 							</section>
