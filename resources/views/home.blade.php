@@ -43,19 +43,28 @@
 						</div>
 
 						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2 ">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
-									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2 ><strong class=" amount m-0 text-primary counter" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
-									</div>
+							<section class="card card-featured-left card-featured-primary mb-2">
+								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png');">
+								  <h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
+								  @if(isset($pdc) && isset($pdc->Total_Balance))
+									<h2>
+									  <strong class="amount m-0 text-primary counter" data-target={{ $pdc->Total_Balance }}>
+										0
+									  </strong>
+									  <span class="title text-end text-dark h6">PKR</span>
+									</h2>
+								  @else
+									<h2 class="amount m-0 text-primary">
+									  <strong>0</strong>
+									  <span class="title text-end text-dark h6">PKR</span>
+									</h2>
+								  @endif
+								  <div class="summary-footer">
+									<a class="text-muted text-uppercase" href="#">View Details</a>
+								  </div>
 								</div>
-							</section>
+							  </section>
+							  
 
 							<section class="card card-featured-left card-featured-primary mt-3">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); ">
@@ -344,25 +353,29 @@
 	<script>
 	
 	document.addEventListener("DOMContentLoaded", () => {
-			const counter = document.querySelector('.counter');
-			const target = +counter.getAttribute('data-target'); // Get the target number
-			const speed = 200; // Adjust the speed of the animation
+	const counters = document.querySelectorAll('.counter'); // Select all counters
+	
+	counters.forEach(counter => {
+		const target = +counter.getAttribute('data-target'); // Get the target number
+		const speed = 200; // Adjust the speed of the animation
 
-			const updateCounter = () => {
-				const current = +counter.innerText; // Convert current text to number
-				const increment = target / speed;
+		const updateCounter = () => {
+		const current = +counter.innerText; // Convert current text to number
+		const increment = target / speed;
 
-				if (current < target) {
-				counter.innerText = Math.ceil(current + increment);
-				setTimeout(updateCounter, 10); // Adjust interval time as needed
-				} else {
-				counter.innerText = target; // Ensure exact target number at the end
-				}
-			};
+		if (current < target) {
+			counter.innerText = Math.ceil(current + increment);
+			setTimeout(updateCounter, 10); // Adjust interval time as needed
+		} else {
+			counter.innerText = target; // Ensure exact target number at the end
+		}
+		};
 
-			updateCounter();
-		});
-		
+		updateCounter();
+	});
+	});
+
+
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
