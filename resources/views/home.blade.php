@@ -85,7 +85,7 @@
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
 									@if(isset($receivables) && isset($receivables->total_balance))
-										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-primary">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-danger"><strong class="amount m-0 text-danger">{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -115,7 +115,7 @@
 								<div class="card-body"  >
 									<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
 									@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
-										<h2 class="amount m-0 text-success"><strong class="amount m-0 text-primary">{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-success"><strong class="amount m-0 text-success">{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
