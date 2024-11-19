@@ -35,7 +35,9 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
-
+						<div class="text-end">
+							<p>hello</p>
+						</div>
 						<div class="col-12 col-md-3 mb-2">
 							<section class="card card-featured-left card-featured-primary mb-2 ">
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
