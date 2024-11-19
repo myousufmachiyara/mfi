@@ -47,7 +47,7 @@
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2 class=" amount m-0 text-primary counter" data-target="{{ $pdc->Total_Balance }}"><strong >0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 ><strong class=" amount m-0 text-primary counter" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -343,6 +343,26 @@
 	</body>
 	<script>
 	
+	document.addEventListener("DOMContentLoaded", () => {
+			const counter = document.querySelector('.counter');
+			const target = +counter.getAttribute('data-target'); // Get the target number
+			const speed = 200; // Adjust the speed of the animation
+
+			const updateCounter = () => {
+				const current = +counter.innerText; // Convert current text to number
+				const increment = target / speed;
+
+				if (current < target) {
+				counter.innerText = Math.ceil(current + increment);
+				setTimeout(updateCounter, 10); // Adjust interval time as needed
+				} else {
+				counter.innerText = target; // Ensure exact target number at the end
+				}
+			};
+
+			updateCounter();
+		});
+		
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
@@ -445,26 +465,6 @@
 					hoverOffset: 4
 				}]
 			},
-		});
-
-		document.addEventListener("DOMContentLoaded", () => {
-			const counter = document.querySelector('.counter');
-			const target = +counter.getAttribute('data-target'); // Get the target number
-			const speed = 200; // Adjust the speed of the animation
-
-			const updateCounter = () => {
-				const current = +counter.innerText; // Convert current text to number
-				const increment = target / speed;
-
-				if (current < target) {
-				counter.innerText = Math.ceil(current + increment);
-				setTimeout(updateCounter, 10); // Adjust interval time as needed
-				} else {
-				counter.innerText = target; // Ensure exact target number at the end
-				}
-			};
-
-			updateCounter();
 		});
 	</script>
 </html>
