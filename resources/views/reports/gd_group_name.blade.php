@@ -593,9 +593,8 @@
                 window.open(`/rep-godown-by-item-grp/sa/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
-            else if (tabName === "SO") {
-                window.open(`/rep-godown-by-item-name/so/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
-
+            else if (tabName === "SI") {
+                window.open(`/rep-godown-by-item-grp/si/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
             else if (tabName === "bal") {
                 window.open(`/rep-godown-by-item-name/bal/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
@@ -619,7 +618,7 @@
             }
 
             if (tabName === "SI") {
-                window.location.href = `/rep-godown-by-item-name/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.location.href = `/rep-godown-by-item-grp/si/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
             else if (tabName === "SO") {
                 window.location.href = `/rep-godown-by-item-name/so/report?outputType=download&fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
