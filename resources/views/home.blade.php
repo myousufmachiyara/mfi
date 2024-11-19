@@ -1,20 +1,6 @@
 @include('layouts.header')
 
 	<style>
-		@keyframes slideIn {
-			from {
-				transform: translateY(-50px);
-				opacity: 0;
-			}
-			to {
-				transform: translateY(0);
-				opacity: 1;
-			}
-		}
-		.animated-amount {
-			animation: slideIn 1s ease-out;
-		}
-
 		h3{
 			margin-top: 7px;
 			margin-bottom: 10px;
@@ -342,27 +328,6 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-	
-		document.addEventListener("DOMContentLoaded", () => {
-			const counter = document.querySelector('.counter');
-			const target = +counter.getAttribute('data-target'); // Get the target number
-			const speed = 200; // Adjust the speed of the animation
-
-			const updateCounter = () => {
-				const current = +counter.innerText; // Convert current text to number
-				const increment = target / speed;
-
-				if (current < target) {
-				counter.innerText = Math.ceil(current + increment);
-				setTimeout(updateCounter, 10); // Adjust interval time as needed
-				} else {
-				counter.innerText = target; // Ensure exact target number at the end
-				}
-			};
-
-			updateCounter();
-		});
-
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
