@@ -142,7 +142,7 @@
 							</section>
 
 							<section class="card card-featured-left card-featured-tertiary mt-3">
-								<div class="card-body"  >
+								<div class="card-body">
 									<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
 									@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-primary">{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -175,11 +175,11 @@
 											<tr>
 												<td>User Name Here</td>
 											</tr>
-											<tr>
-												<td>User Name Here</td>
-											</tr>
 										</tbody>
 									</table>
+									<div class="summary-footer">
+										<a class="text-muted text-uppercase" href="#">View Details</a>
+									</div>
 								</div>
 							</section>
 						</div>
