@@ -208,6 +208,7 @@
                                                     <th>Balance Amount</th>
                                                     <th>Amount Due</th>
                                                     <th>Days</th>
+                                                    <th>JV Amount</th>
                                                     <th>1-20 Days</th>
                                                     <th>21-35 Days</th>
                                                     <th>36-50 Days</th>
@@ -820,6 +821,7 @@
                             html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "") + "</td>";
                             html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['remaining_amount'] ? v['remaining_amount'] : "0") )+ "</td>";
                             html += "<td>" + (v['ageing_days'] ? v['ageing_days'] : "") + "</td>";
+                            html += "<td>" + (v['jv_amount'] ? v['jv_amount'] : "") + "</td>";
                             html += "<td></td>";
                             html += "<td></td>";
                             html += "<td></td>";
