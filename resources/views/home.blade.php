@@ -47,7 +47,7 @@
 								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 									@if(isset($pdc) && isset($pdc->Total_Balance))
-										<h2 class=" amount m-0 text-primary" ><strong class="rolling-number animated-amount" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class=" amount m-0 text-primary" ><strong class="counter" data-target="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@else
 										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 									@endif
@@ -472,32 +472,24 @@
 			});
 		});
 
-
 		document.addEventListener("DOMContentLoaded", () => {
-		const rollNumbers = document.querySelectorAll('.rolling-number');
+		const counter = document.querySelector('.counter');
+		const target = +counter.getAttribute('data-target'); // Get the target number
+		const speed = 200; // Adjust the speed of the animation
 
-		rollNumbers.forEach((element) => {
-			const target = parseFloat(element.getAttribute('data-target')) || 0; // Final value
-			const duration = 2000; // Animation duration in ms
-			const stepTime = 20; // Time between updates (ms)
-			const increment = target / (duration / stepTime); // Incremental value
-			let current = 0; // Start value
+		const updateCounter = () => {
+		const current = +counter.innerText; // Convert current text to number
+		const increment = target / speed;
 
-			const roll = () => {
-				current += increment;
+		if (current < target) {
+			counter.innerText = Math.ceil(current + increment);
+			setTimeout(updateCounter, 10); // Adjust interval time as needed
+		} else {
+			counter.innerText = target; // Ensure exact target number at the end
+		}
+		};
 
-				if (current >= target) {
-					element.textContent = target.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Final value
-				} else {
-					element.textContent = current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Rolling effect
-					setTimeout(roll, stepTime); // Continue rolling
-				}
-			};
-
-			roll();
-			});
+		updateCounter();
 		});
-
-		
 	</script>
 </html>
