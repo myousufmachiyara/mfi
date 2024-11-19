@@ -207,8 +207,6 @@
                                                     <th>Bill Amount</th>
                                                     <th>Balance Amount</th>
                                                     <th>Amount Due</th>
-                                                    <th>Days</th>
-                                                    <th>JV Amount</th>
                                                     <th>1-20 Days</th>
                                                     <th>21-35 Days</th>
                                                     <th>36-50 Days</th>
@@ -799,7 +797,7 @@
                         acc_id:acc_id,
                     }, 
                     beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="12" class="text-center">Loading Data Please Wait...</td></tr>');
+                        $(tableID).html('<tr><td colspan="11" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
                         $('#sale_age_from').text(formattedfromDate);
@@ -829,7 +827,7 @@
                         });
                     },
                     error: function(){
-                        $(tableID).html('<tr><td colspan="12" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        $(tableID).html('<tr><td colspan="11" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
                     }
                 });
             }
