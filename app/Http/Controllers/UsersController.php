@@ -201,6 +201,10 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
+        // if (session()->has('expired') || !session()->has('user')) {
+        //     return redirect()->route('login')->withErrors(['Your session has expired. Please log in again.']);
+        // }
+
         // Validate the request
         $request->validate([
             'username' => 'required|string',
