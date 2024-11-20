@@ -3963,7 +3963,7 @@ html.has-left-sidebar-half .header {
 	.header .logo-container {
 		background-image: linear-gradient(#F6F6F6 0%, #FFFFFF 45%);
 		border-bottom: 1px solid #E9E9E6;
-		border-top: 3px solid #EDEDED;
+		border-top: 0px solid #EDEDED;
 	}
 
 	.header .logo-container .logo {
