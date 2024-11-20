@@ -330,21 +330,17 @@
 	<script>
 		function handleToggleSwitch(switchElement) {
 			if (switchElement.checked) {
-				console.log('Switch is ON'); // Call your function for ON
 				toggleOn();
 			} else {
-				console.log('Switch is OFF'); // Call your function for OFF
 				toggleOff();
 			}
 		}
 
 		function toggleOn() {
-			// Code to execute when the switch is turned ON
 			alert('Switch turned ON');
 		}
 
 		function toggleOff() {
-			// Code to execute when the switch is turned OFF
 			alert('Switch turned OFF');
 		}
 
