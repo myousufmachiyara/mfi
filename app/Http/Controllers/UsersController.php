@@ -237,8 +237,8 @@ class UsersController extends Controller
                 session([
                     'user_id' => $user['id'],
                     'user_name' => $user['name'],
-                    'role_name' => $user_roles['role_name'],
-                    'user_role' => $user_roles['role_id'],
+                    'role_name' => $user_roles->role_name,
+                    'user_role' => $user_roles->role_id,
                     'user_access' => $user_access,
                 ]);
     
