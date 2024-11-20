@@ -41,8 +41,7 @@
 							</div>
 
 							<div class="col-12 col-md-3 mb-2">
-
-								<section class="card card-featured-left card-featured-primary mt-3">
+								<section class="card card-featured-left card-featured-primary">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/rec-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
 										@if(isset($receivables) && isset($receivables->total_balance))
