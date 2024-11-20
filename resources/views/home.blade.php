@@ -36,7 +36,7 @@
 							<div style="display: flex;justify-content: space-between;">
 								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)">
+									<input class="form-check-input" type="checkbox" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)" style="margin-top:30px">
 								</div>
 							</div>
 
