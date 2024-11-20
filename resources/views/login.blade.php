@@ -60,7 +60,7 @@
 						@endif
 					
 						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
-							@csrf							
+							{{-- @csrf							 --}}
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
