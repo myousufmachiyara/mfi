@@ -154,7 +154,7 @@
 							</div>
 
 							<div class="col-12 col-md-2 mb-2">
-								<section class="card card-featured-left card-featured-success mb-2">
+								<section class="card card-featured-left card-featured-success">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Cash</strong></h3>
 										@if(isset($cash) && isset($cash->Total_Balance))
@@ -170,7 +170,7 @@
 									</div>
 								</section>
 								
-								<section class="card card-featured-left card-featured-success">
+								<section class="card card-featured-left card-featured-success mb-2">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
@@ -186,7 +186,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-success mt-3">
+								<section class="card card-featured-left card-featured-success">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Long Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
