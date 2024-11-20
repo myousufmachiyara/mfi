@@ -23,7 +23,7 @@
 							<div style="display: flex;justify-content: space-between;">
 								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+									<input class="form-check-input" type="checkbox" value="0" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)">
 								</div>
 							</div>
 
@@ -328,8 +328,27 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		const catSalesChart = document.getElementById('catSalesChart');
+		function handleToggleSwitch(switchElement) {
+			if (switchElement.checked) {
+				console.log('Switch is ON'); // Call your function for ON
+				toggleOn();
+			} else {
+				console.log('Switch is OFF'); // Call your function for OFF
+				toggleOff();
+			}
+		}
 
+		function toggleOn() {
+			// Code to execute when the switch is turned ON
+			alert('Switch turned ON');
+		}
+
+		function toggleOff() {
+			// Code to execute when the switch is turned OFF
+			alert('Switch turned OFF');
+		}
+
+		const catSalesChart = document.getElementById('catSalesChart');
 		new Chart(catSalesChart, {
 			type: 'bar',
 			data: {
