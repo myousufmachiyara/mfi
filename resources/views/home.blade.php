@@ -356,7 +356,7 @@
 		function handleToggleSwitch(switchElement) {
 			var dataContainer = document.querySelector('.data-container');
 
-			if (switchElement.checked) {
+			if (!switchElement.checked) {
 				dataContainer.classList.remove('switch-off');
 			} else {
 				dataContainer.classList.add('switch-off');
