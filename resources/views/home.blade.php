@@ -438,7 +438,7 @@
 				const totalFrames = Math.round(duration / (1000 / frameRate));
 				let frame = 0;
 				
-				if (totalBalance > 0) {
+				if (totalBalance <> 0) {
 					const counter = setInterval(() => {
 						frame++;
 						const progress = frame / totalFrames;
