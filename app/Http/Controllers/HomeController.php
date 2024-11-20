@@ -48,7 +48,7 @@ class HomeController extends Controller
         $previousMonth = $currentDate->subMonth();
         $previousMonthAndYear = $previousMonth->format('m-Y');
 
-        die($previousMonthAndYea);
+        die($previousMonthAndYear);
         
         $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
