@@ -52,7 +52,7 @@
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -68,7 +68,7 @@
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -90,7 +90,7 @@
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -109,7 +109,7 @@
 											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -125,7 +125,7 @@
 											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -147,7 +147,7 @@
 											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -165,7 +165,7 @@
 											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -181,7 +181,7 @@
 											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -197,7 +197,7 @@
 											<h2 class="amount m-0 text-success masked-data mb-4"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -215,7 +215,7 @@
 											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -231,7 +231,7 @@
 											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
@@ -247,7 +247,7 @@
 											<h2 class="amount m-0 text-tertiary masked-data mb-4"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
-											<a class="text-muted text-uppercase" href="#">View Details</a>
+											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
 								</section>
