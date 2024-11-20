@@ -357,7 +357,7 @@
 			var dataContainer = document.querySelector('.data-container');
 
 			if (switchElement.checked) {
-				dataContainer.classList.add('switch-off');
+				dataContainer.classList.add('switch-on');
 			} else {
 				dataContainer.classList.remove('switch-off');
 			}
