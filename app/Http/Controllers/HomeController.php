@@ -46,13 +46,11 @@ class HomeController extends Controller
 
         $currentDate = Carbon::now();
         $previousMonth = $currentDate->subMonth();
-        $previousMonthAndYear = $previousMonth->format('m-Y');
+        $previousMonthAndYear = $previousMonth->format('m-yy');
 
         $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
 
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
-
-        die(print_r($last_month_purchase));
 
         return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale'));
     }
