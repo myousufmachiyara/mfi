@@ -140,6 +140,22 @@
 										</div>
 									</div>
 								</section>
+
+								<section class="card card-featured-left card-featured-success mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Long Month Cash In</strong></h3>
+										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
+											<h2 class="amount m-0 text-success actual-data"><strong>{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-success actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
 							</div>
 
 							<div class="col-12 col-md-2 mb-2">
@@ -162,6 +178,22 @@
 								<section class="card card-featured-left card-featured-tertiary mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
+										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
+										<h2 class="amount m-0 text-tertiary actual-data"><strong>{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-tertiary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary actual-data"><strong>{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
