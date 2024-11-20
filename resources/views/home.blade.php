@@ -354,13 +354,15 @@
 	</body>
 	<script>
 		function handleToggleSwitch(switchElement) {
-			var dataContainer = document.querySelector('.data-container');
-
-			if (!switchElement.checked) {
-				dataContainer.classList.remove('switch-off');
-			} else {
-				dataContainer.classList.add('switch-off');
-			}
+			var dataContainers = document.querySelectorAll('.data-container');
+			
+			dataContainers.forEach(function(dataContainer) {
+				if (!switchElement.checked) {
+					dataContainer.classList.remove('switch-off');
+				} else {
+					dataContainer.classList.add('switch-off');
+				}
+			});
 		}
 
 		const catSalesChart = document.getElementById('catSalesChart');
