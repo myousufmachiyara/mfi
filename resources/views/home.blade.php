@@ -41,6 +41,22 @@
 							</div>
 
 							<div class="col-12 col-md-3 mb-2">
+								<section class="card card-featured-left card-featured-primary mb-2">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
+										@if(isset($pdc) && isset($pdc->Total_Balance))
+											<h2 class="amount m-0 text-primary actual-data"><strong data-value="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-primary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
 								<section class="card card-featured-left card-featured-primary">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/rec-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
