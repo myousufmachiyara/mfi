@@ -48,7 +48,11 @@ class HomeController extends Controller
         $previousMonth = $currentDate->subMonth();
         $previousMonthAndYear = $previousMonth->format('m-Y');
 
-        $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
+        $last_month_purchase = dash_month_purchase::select('month_year', DB::raw('SUM(purchase_amount) as total_purchase'))
+        ->where('month_year', $previousMonthAndYear)
+        ->groupBy('month_year')
+        ->first();        
+        
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
         // return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users'));
 
