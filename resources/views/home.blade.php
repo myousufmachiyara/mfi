@@ -423,14 +423,14 @@
 		$(document).ready(function() {
 
 			const elements = document.querySelectorAll(".actual-data strong");
-
+			console.log(elements);
 			elements.forEach(element => {
 				const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
 				const duration = 2000; // Animation duration in milliseconds
 				const frameRate = 60; // Frames per second
 				const totalFrames = Math.round(duration / (1000 / frameRate));
 				let frame = 0;
-
+				
 				if (totalBalance > 0) {
 					const counter = setInterval(() => {
 						frame++;
