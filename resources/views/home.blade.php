@@ -262,12 +262,14 @@
 											<thead>
 												<tr>
 													<th>User Names</th>
+													<th>Role</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach ($login_users as $key => $row)
 												<tr>
 													<td>{{$row->name}}</td>
+													<td>Role</td>
 												</tr>
 												@endforeach
 											</tbody>
