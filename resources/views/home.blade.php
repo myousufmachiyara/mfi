@@ -10,11 +10,6 @@
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
 		}
-
-		.rolling-number {
-			transition: transform 1s ease-in-out;
-			will-change: transform;
-		}
 	</style>
 	<body>
 		<section class="body">
@@ -37,8 +32,7 @@
 									<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
-										
-											<h2 class="amount m-0 text-primary"><strong class="rolling-number" data-value="{{ isset($pdc->Total_Balance) ? $pdc->Total_Balance : 0 }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 										@else
 											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 										@endif
@@ -334,29 +328,6 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			const rollingNumbers = document.querySelectorAll('.rolling-number');
-
-			rollingNumbers.forEach(rollingNumber => {
-				const targetValue = parseInt(rollingNumber.dataset.value, 10);
-				const duration = 1000; // Animation duration in milliseconds
-				const stepTime = Math.abs(Math.floor(duration / targetValue));
-
-				let currentValue = 0;
-
-				const incrementValue = () => {
-					if (currentValue < targetValue) {
-						currentValue += 1;
-						rollingNumber.textContent = currentValue.toLocaleString();
-						setTimeout(incrementValue, stepTime);
-					} else {
-						rollingNumber.textContent = targetValue.toLocaleString();
-					}
-				};
-
-				incrementValue();
-			});
-		});
 		const catSalesChart = document.getElementById('catSalesChart');
 
 		new Chart(catSalesChart, {
