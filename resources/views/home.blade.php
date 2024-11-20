@@ -41,7 +41,7 @@
 							</div>
 
 							<div class="col-12 col-md-3 mb-2">
-								<section class="card card-featured-left card-featured-primary mb-2">
+								<section class="card card-featured-left card-featured-primary">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
