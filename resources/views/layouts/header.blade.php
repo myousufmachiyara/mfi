@@ -67,7 +67,7 @@
 				padding: 85px 20px 0px 20px;
 			}
 			.home-cust-pad {
-				padding-top: 60px;
+				padding: 60px 15px 0px 15px;
 			}
 			.sidebar-logo{
 				width:50%;
