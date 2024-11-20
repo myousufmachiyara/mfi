@@ -403,26 +403,33 @@
 	</body>
 	<script>
 		$(document).ready(function() {
-			const element = document.querySelector(".actual-data strong");
-			const totalBalance = parseFloat("{{ $receivables->total_balance }}".replace(/[^0-9.-]/g, '')) || 0;
-			const duration = 2000; // Animation duration in milliseconds
-			const frameRate = 60; // Frames per second
-			const totalFrames = Math.round(duration / (1000 / frameRate));
-			let frame = 0;
 
-			if (totalBalance > 0) {
-				const counter = setInterval(() => {
-					frame++;
-					const progress = frame / totalFrames;
-					const currentValue = Math.floor(progress * totalBalance);
-					element.textContent = currentValue.toLocaleString();
+			const elements = document.querySelectorAll(".actual-data strong");
 
-					if (frame === totalFrames) {
-						clearInterval(counter);
-						element.textContent = totalBalance.toLocaleString();
-					}
-				}, 1000 / frameRate);
-			}
+			elements.forEach(element => {
+				const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
+				const duration = 2000; // Animation duration in milliseconds
+				const frameRate = 60; // Frames per second
+				const totalFrames = Math.round(duration / (1000 / frameRate));
+				let frame = 0;
+
+				if (totalBalance > 0) {
+					const counter = setInterval(() => {
+						frame++;
+						const progress = frame / totalFrames;
+						const currentValue = Math.floor(progress * totalBalance);
+						element.textContent = currentValue.toLocaleString();
+
+						if (frame === totalFrames) {
+							clearInterval(counter);
+							element.textContent = totalBalance.toLocaleString();
+						}
+					}, 1000 / frameRate);
+				} else {
+					element.textContent = "0"; // Set to 0 if no value
+				}
+			});
+
 			// Trigger the change event on the toggle switch when the page loads
 			$('#ShowDatatoggleSwitch').trigger('change');
 		});	
