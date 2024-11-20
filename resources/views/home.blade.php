@@ -150,10 +150,16 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/pay-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
 										@if(isset($payables) && isset($payables->total_balance))
-											<h2 class="amount m-0 text-danger actual-data"><strong>{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="{{ $payables->total_balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
 											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-danger actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
 											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
