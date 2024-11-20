@@ -259,6 +259,11 @@
 										<h3 class="amount text-dark"><strong>Active Users</strong></h3>
 
 										<table class="table table-responsive-md table-striped mb-0">
+											<thead>
+												<tr>
+													<td>Active Users</td>
+												</tr>
+											</thead>
 											<tbody>
 												@foreach ($login_users as $key => $row)
 												<tr>
