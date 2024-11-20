@@ -46,7 +46,7 @@ class HomeController extends Controller
 
         $currentDate = Carbon::now();
         $previousMonth = $currentDate->subMonth();
-        $previousMonthAndYear = $previousMonth->format('m-Y');
+        $previousMonthAndYear = $previousMonth->format('Y-m');
         
         $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
