@@ -260,22 +260,15 @@
 
 										<table class="table table-responsive-md table-striped mb-0">
 											<tbody>
+												@foreach ($login_users as $key => $row)
 												<tr>
-													<td>User Name Here</td>
+													<td>{{$row->name}}</td>
 												</tr>
-												<tr>
-													<td>User Name Here</td>
-												</tr>
-												<tr>
-													<td>User Name Here</td>
-												</tr>
-												<tr>
-													<td>User Name Here</td>
-												</tr>
+												@endforeach
 											</tbody>
 										</table>
 										<div class="summary-footer text-end mt-1">
-											<a class="text-muted text-uppercase" href="#">View All</a>
+											<a class="text-primary text-uppercase" href="#">View All</a>
 										</div>
 									</div>
 								</section>

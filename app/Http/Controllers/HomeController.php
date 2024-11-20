@@ -42,7 +42,9 @@ class HomeController extends Controller
         $cash = dash_acc_group::where('group_cod',3)->first();
         $foreign = dash_acc_group::where('group_cod',4)->first();
 
-        $login_users = users::where('is_login', 1)->count();
+        $login_users = users::where('is_login', 1)
+        ->select('users.name')
+        ->get();
 
         $currentDate = Carbon::now();
         $previousMonth = $currentDate->subMonth();
