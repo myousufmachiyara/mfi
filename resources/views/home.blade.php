@@ -254,11 +254,17 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
-											<h2 class="amount m-0 text-success actual-data mb-4"><strong>{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-success masked-data mb-4"><strong>******</strong></h2>
+										<h2 class="amount m-0 text-success actual-data">
+											<strong data-value="{{ $long_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-success actual-data mb-4"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-success masked-data mb-4"><strong>******</strong></h2>
+											<h2 class="amount m-0 text-success actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
 											<a class="text-primary text-uppercase" href="#">View Details</a>
@@ -271,13 +277,21 @@
 								<section class="card card-featured-left card-featured-tertiary mb-2">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/fc-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
+
 										@if(isset($foreign) && isset($foreign->Total_Balance))
-										<h2 class="amount m-0 text-tertiary actual-data"><strong>{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $foreign->Total_Balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
 										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-tertiary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
 											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@endif
+
 										<div class="summary-footer">
 											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
@@ -288,10 +302,16 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
-										<h2 class="amount m-0 text-tertiary actual-data"><strong>{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $short_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
 										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-tertiary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
 											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
@@ -304,11 +324,17 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
-										<h2 class="amount m-0 text-tertiary actual-data mb-4"><strong>{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-										<h2 class="amount m-0 text-tertiary masked-data mb-4"><strong>******</strong></h2>
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $short_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-tertiary actual-data mb-4"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-tertiary masked-data mb-4"><strong>******</strong></h2>
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
 											<a class="text-primary text-uppercase" href="#">View Details</a>
