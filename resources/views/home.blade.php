@@ -12,9 +12,6 @@
 		}
 
 		.rolling-number {
-			position: absolute;
-			left: 0;
-			width: 100%;
 			transition: transform 1s ease-in-out;
 			will-change: transform;
 		}
