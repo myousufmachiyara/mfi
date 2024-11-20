@@ -209,11 +209,17 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-sale-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
 										@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_purchase->total_weight))
-											<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary actual-data"><strong>{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-primary actual-data"><strong>{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-primary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
 											<a class="text-muted text-uppercase" href="#">View Details</a>
