@@ -65,30 +65,7 @@
 												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
 											</h2>
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
-											<script>
-												document.addEventListener("DOMContentLoaded", function () {
-													const element = document.querySelector(".actual-data strong");
-													const totalBalance = parseFloat("{{ $receivables->total_balance }}".replace(/[^0-9.-]/g, '')) || 0;
-													const duration = 2000; // Animation duration in milliseconds
-													const frameRate = 60; // Frames per second
-													const totalFrames = Math.round(duration / (1000 / frameRate));
-													let frame = 0;
-								
-													if (totalBalance > 0) {
-														const counter = setInterval(() => {
-															frame++;
-															const progress = frame / totalFrames;
-															const currentValue = Math.floor(progress * totalBalance);
-															element.textContent = currentValue.toLocaleString();
-								
-															if (frame === totalFrames) {
-																clearInterval(counter);
-																element.textContent = totalBalance.toLocaleString();
-															}
-														}, 1000 / frameRate);
-													}
-												});
-											</script>
+											
 										@else
 											<h2 class="amount m-0 text-primary actual-data">
 												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
@@ -562,5 +539,28 @@
 				}]
 			},
 		});
-	</script>
+		
+		document.addEventListener("DOMContentLoaded", function () {
+			const element = document.querySelector(".actual-data strong");
+			const totalBalance = parseFloat("{{ $receivables->total_balance }}".replace(/[^0-9.-]/g, '')) || 0;
+			const duration = 2000; // Animation duration in milliseconds
+			const frameRate = 60; // Frames per second
+			const totalFrames = Math.round(duration / (1000 / frameRate));
+			let frame = 0;
+
+			if (totalBalance > 0) {
+				const counter = setInterval(() => {
+					frame++;
+					const progress = frame / totalFrames;
+					const currentValue = Math.floor(progress * totalBalance);
+					element.textContent = currentValue.toLocaleString();
+
+					if (frame === totalFrames) {
+						clearInterval(counter);
+						element.textContent = totalBalance.toLocaleString();
+					}
+				}, 1000 / frameRate);
+			}
+		});
+											
 </html>
