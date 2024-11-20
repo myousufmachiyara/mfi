@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Add this line
 use App\Models\dash_sub_head;
 use App\Models\dash_month_sale;
 use App\Models\dash_month_purchase;
@@ -48,7 +49,7 @@ class HomeController extends Controller
         $previousMonth = $currentDate->subMonth();
         $previousMonthAndYear = $previousMonth->format('m-Y');
 
-        $last_month_purchase = dash_month_purchase::select('dash_month_purchase.*')
+        $last_month_purchase = dash_month_purchase::select('dash_month_purchase.*', DB::raw('SUM(total_cr_amt) as total_cr_amt'))
         ->where('month_year', $previousMonthAndYear)
         ->groupBy('month_year')
         ->first();        
