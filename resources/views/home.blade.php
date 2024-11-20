@@ -21,7 +21,7 @@
 		}
 
 		.switch-off .masked-data {
-			display: inline;
+			display: block;
 		}
 	</style>
 	<body>
@@ -232,12 +232,18 @@
 								<section class="card card-featured-left card-featured-danger">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
-										@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
-											<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+										@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && isset($last_month_purchase->total_weight))
+											<h2 class="amount m-0 text-danger actual-data"><strong>{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-danger actual-data"><strong>{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@else
-											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-danger actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-danger actual-data"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
 										@endif
 										<div class="summary-footer">
 											<a class="text-muted text-uppercase" href="#">View Details</a>
