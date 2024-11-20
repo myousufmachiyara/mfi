@@ -353,8 +353,11 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		$('#ShowDatatoggleSwitch').trigger('change');
-		
+		$(document).ready(function() {
+			// Trigger the change event on the toggle switch when the page loads
+			$('#ShowDatatoggleSwitch').trigger('change');
+		});	
+			
 		function handleToggleSwitch(switchElement) {
 			var dataContainers = document.querySelectorAll('.data-container');
 			
