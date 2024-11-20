@@ -73,7 +73,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-primary">
+								<section class="card card-featured-left card-featured-primary mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-sale-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
 										@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_purchase->total_weight))
@@ -114,7 +114,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-danger">
+								<section class="card card-featured-left card-featured-danger mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/pay-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
 										@if(isset($payables) && isset($payables->total_balance))
@@ -130,7 +130,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-danger">
+								<section class="card card-featured-left card-featured-danger mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
 										@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && isset($last_month_purchase->total_weight))
@@ -170,7 +170,7 @@
 									</div>
 								</section>
 								
-								<section class="card card-featured-left card-featured-success mb-2">
+								<section class="card card-featured-left card-featured-success mb-2 mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
@@ -186,7 +186,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-success">
+								<section class="card card-featured-left card-featured-success mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Long Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
