@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Add this line
 use App\Models\dash_sub_head;
 use App\Models\dash_month_sale;
 use App\Models\dash_month_purchase;
