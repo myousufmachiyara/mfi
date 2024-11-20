@@ -539,28 +539,37 @@
 				}]
 			},
 		});
+
+
 		
 		document.addEventListener("DOMContentLoaded", function () {
-			const element = document.querySelector(".actual-data strong");
-			const totalBalance = parseFloat("{{ $receivables->total_balance }}".replace(/[^0-9.-]/g, '')) || 0;
-			const duration = 2000; // Animation duration in milliseconds
-			const frameRate = 60; // Frames per second
-			const totalFrames = Math.round(duration / (1000 / frameRate));
-			let frame = 0;
+			const elements = document.querySelectorAll(".actual-data strong");
 
-			if (totalBalance > 0) {
-				const counter = setInterval(() => {
-					frame++;
-					const progress = frame / totalFrames;
-					const currentValue = Math.floor(progress * totalBalance);
-					element.textContent = currentValue.toLocaleString();
+			elements.forEach(element => {
+				const totalBalance = parseFloat(element.getAttribute("data-value")) || 0;
+				const duration = 2000; // Animation duration in milliseconds
+				const frameRate = 60; // Frames per second
+				const totalFrames = Math.round(duration / (1000 / frameRate));
+				let frame = 0;
 
-					if (frame === totalFrames) {
-						clearInterval(counter);
-						element.textContent = totalBalance.toLocaleString();
-					}
-				}, 1000 / frameRate);
-			}
+				if (totalBalance > 0) {
+					const counter = setInterval(() => {
+						frame++;
+						const progress = frame / totalFrames;
+						const currentValue = Math.floor(progress * totalBalance);
+						element.textContent = currentValue.toLocaleString();
+
+						if (frame === totalFrames) {
+							clearInterval(counter);
+							element.textContent = totalBalance.toLocaleString();
+						}
+					}, 1000 / frameRate);
+				} else {
+					element.textContent = "0";
+				}
+			});
 		});
+		
+	</script>
 											
 </html>
