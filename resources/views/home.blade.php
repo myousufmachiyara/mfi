@@ -21,7 +21,6 @@
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
-					
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
