@@ -261,7 +261,7 @@
 										<table class="table table-responsive-md table-striped mb-0">
 											<thead>
 												<tr>
-													<td>Active Users</td>
+													<th>User Names</th>
 												</tr>
 											</thead>
 											<tbody>
