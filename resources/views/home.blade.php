@@ -98,7 +98,7 @@
 							</div>
 
 							<div class="col-12 col-md-3 mb-2">
-								<section class="card card-featured-left card-featured-danger mb-2">
+								<section class="card card-featured-left card-featured-danger">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/bank-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Bank</strong></h3>
 										@if(isset($banks) && isset($banks->Total_Balance))
