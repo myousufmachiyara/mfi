@@ -262,7 +262,7 @@
 											<thead>
 												<tr>
 													<th>User Names</th>
-													<th>Role</th>
+													<th></th>
 												</tr>
 											</thead>
 											<tbody>
