@@ -10,15 +10,8 @@
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
 		}
-		.rolling-number {
-			display: inline-block;
-			font-variant-numeric: tabular-nums; /* For consistent digit alignment */
-			overflow: hidden;
-			position: relative;
-			height: 1em; /* Match your font size */
-		}
 
-		.rolling-number span {
+		.rolling-number {
 			position: absolute;
 			left: 0;
 			width: 100%;
