@@ -45,7 +45,7 @@
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
-											<h2 class="amount m-0 text-primary actual-data"><strong data-value="{{ $pdc->Total_Balance }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary actual-data"><strong data-value={{ $pdc->Total_Balance }}>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@else
 											<h2 class="amount m-0 text-primary actual-data"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
@@ -62,12 +62,14 @@
 										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
 										@if(isset($receivables) && isset($receivables->total_balance))
 											<h2 class="amount m-0 text-primary actual-data">
-												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
+												<strong data-value="{{ $receivables->total_balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
 											</h2>
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@else
 											<h2 class="amount m-0 text-primary actual-data">
-												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
 											</h2>
 											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@endif
