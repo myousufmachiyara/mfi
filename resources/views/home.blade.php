@@ -41,7 +41,7 @@
 							</div>
 
 							<div class="col-12 col-md-3 mb-2">
-								<section class="card card-featured-left card-featured-primary mb-2">
+								{{-- <section class="card card-featured-left card-featured-primary mb-2">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
@@ -55,7 +55,52 @@
 											<a class="text-primary text-uppercase" href="#">View Details</a>
 										</div>
 									</div>
+								</section> --}}
+
+								<section class="card card-featured-left card-featured-primary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/rec-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+										@if(isset($receivables) && isset($receivables->total_balance))
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+											<script>
+												document.addEventListener("DOMContentLoaded", function () {
+													const element = document.querySelector(".actual-data strong");
+													const totalBalance = parseFloat("{{ $receivables->total_balance }}".replace(/[^0-9.-]/g, '')) || 0;
+													const duration = 2000; // Animation duration in milliseconds
+													const frameRate = 60; // Frames per second
+													const totalFrames = Math.round(duration / (1000 / frameRate));
+													let frame = 0;
+								
+													if (totalBalance > 0) {
+														const counter = setInterval(() => {
+															frame++;
+															const progress = frame / totalFrames;
+															const currentValue = Math.floor(progress * totalBalance);
+															element.textContent = currentValue.toLocaleString();
+								
+															if (frame === totalFrames) {
+																clearInterval(counter);
+																element.textContent = totalBalance.toLocaleString();
+															}
+														}, 1000 / frameRate);
+													}
+												});
+											</script>
+										@else
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong>0</strong><span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
 								</section>
+								
 								
 
 								<section class="card card-featured-left card-featured-primary mt-3">
