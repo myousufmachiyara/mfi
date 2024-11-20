@@ -188,7 +188,7 @@
 
 								<section class="card card-featured-left card-featured-success mt-3">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
-										<h3 class="amount text-dark"><strong>Long Month Cash In</strong></h3>
+										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
 											<h2 class="amount m-0 text-success actual-data"><strong>{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
