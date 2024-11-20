@@ -24,197 +24,199 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row cust-pad">
-						<div style="display: flex;justify-content: space-between;">
-							<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+						@if(session['user_role']==1 || session['user_role']==2)
+							<div style="display: flex;justify-content: space-between;">
+								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" value="0" id="PurtoggleSwitch">
+								</div>
 							</div>
-						</div>
 
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-primary mb-2">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
-									@if(isset($pdc) && isset($pdc->Total_Balance))
-									
-										<h2 class="amount m-0 text-primary"><strong class="rolling-number" data-value="{{ isset($pdc->Total_Balance) ? $pdc->Total_Balance : 0 }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-3 mb-2">
+								<section class="card card-featured-left card-featured-primary mb-2">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
+										@if(isset($pdc) && isset($pdc->Total_Balance))
+										
+											<h2 class="amount m-0 text-primary"><strong class="rolling-number" data-value="{{ isset($pdc->Total_Balance) ? $pdc->Total_Balance : 0 }}">0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
+								</section>
 
-							<section class="card card-featured-left card-featured-primary mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
-									@if(isset($receivables) && isset($receivables->total_balance))
-										<h2 class="amount m-0 text-primary"><strong>{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+								<section class="card card-featured-left card-featured-primary mt-3">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/rec-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+										@if(isset($receivables) && isset($receivables->total_balance))
+											<h2 class="amount m-0 text-primary"><strong>{{ $receivables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-3 mb-2">
-							<section class="card card-featured-left card-featured-danger mb-2">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/bank-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Bank</strong></h3>
-									@if(isset($banks) && isset($banks->Total_Balance))
-										<h2 class="amount m-0 text-danger"><strong>{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-3 mb-2">
+								<section class="card card-featured-left card-featured-danger mb-2">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/bank-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Bank</strong></h3>
+										@if(isset($banks) && isset($banks->Total_Balance))
+											<h2 class="amount m-0 text-danger"><strong>{{ $banks->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
+								</section>
 
-							<section class="card card-featured-left card-featured-danger mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/pay-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
-									@if(isset($payables) && isset($payables->total_balance))
-										<h2 class="amount m-0 text-danger"><strong>{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+								<section class="card card-featured-left card-featured-danger mt-3">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/pay-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
+										@if(isset($payables) && isset($payables->total_balance))
+											<h2 class="amount m-0 text-danger"><strong>{{ $payables->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-2 mb-2">
-							<section class="card card-featured-left card-featured-success mb-2">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/cash-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Cash</strong></h3>
-									@if(isset($cash) && isset($cash->Total_Balance))
-										<h2 class="amount m-0 text-success"><strong>{{ $cash->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-success mb-2">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/cash-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Cash</strong></h3>
+										@if(isset($cash) && isset($cash->Total_Balance))
+											<h2 class="amount m-0 text-success"><strong>{{ $cash->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-							
-							<section class="card card-featured-left card-featured-success mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
-									@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
-										<h2 class="amount m-0 text-success"><strong class="amount m-0 text-success">{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+								</section>
+								
+								<section class="card card-featured-left card-featured-success mt-3">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
+										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
+											<h2 class="amount m-0 text-success"><strong class="amount m-0 text-success">{{ $long_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-success"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-2 mb-2">
-							<section class="card card-featured-left card-featured-tertiary mb-2">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/fc-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
-									@if(isset($foreign) && isset($foreign->Total_Balance))
-										<h2 class="amount m-0 text-tertiary"><strong>{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-tertiary mb-2">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/fc-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
+										@if(isset($foreign) && isset($foreign->Total_Balance))
+											<h2 class="amount m-0 text-tertiary"><strong>{{ $foreign->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
+								</section>
 
-							<section class="card card-featured-left card-featured-tertiary mt-3">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
-									@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
-										<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-tertiary">{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@else
-										<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+								<section class="card card-featured-left card-featured-tertiary mt-3">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
+										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
+											<h2 class="amount m-0 text-tertiary"><strong class="amount m-0 text-tertiary">{{ $short_term_loan->total_balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-2 mb-2">
-							<section class="card card-featured-left card-featured-success">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/all-user-icon.png');background-position: top right;background-size: 44%;">
-									<h3 class="amount text-dark"><strong>Active Users</strong></h3>
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-success">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/all-user-icon.png');background-position: top right;background-size: 44%;">
+										<h3 class="amount text-dark"><strong>Active Users</strong></h3>
 
-									<table class="table table-responsive-md table-striped mb-0">
-										<tbody>
-											<tr>
-												<td>User Name Here</td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-											</tr>
-											<tr>
-												<td>User Name Here</td>
-											</tr>
-										</tbody>
-									</table>
-									<div class="summary-footer text-end mt-1">
-										<a class="text-muted text-uppercase" href="#">View All</a>
+										<table class="table table-responsive-md table-striped mb-0">
+											<tbody>
+												<tr>
+													<td>User Name Here</td>
+												</tr>
+												<tr>
+													<td>User Name Here</td>
+												</tr>
+												<tr>
+													<td>User Name Here</td>
+												</tr>
+												<tr>
+													<td>User Name Here</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="summary-footer text-end mt-1">
+											<a class="text-muted text-uppercase" href="#">View All</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-3 mb-2 mt-3">
-							<section class="card card-featured-left card-featured-primary">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/last-month-sale-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
-									@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_purchase->total_weight))
-										<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-										<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-									@else
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-										<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-3 mb-2 mt-3">
+								<section class="card card-featured-left card-featured-primary">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/last-month-sale-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
+										@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_purchase->total_weight))
+											<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_dr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary"><strong>{{ $last_month_sale->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+										@else
+											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
 
-						<div class="col-12 col-md-3 mb-2 mt-3">
-							<section class="card card-featured-left card-featured-danger">
-								<div class="card-body icon-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
-									<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
-									@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
-										<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-										<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-									@else
-										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
-										<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
-									@endif
-									<div class="summary-footer">
-										<a class="text-muted text-uppercase" href="#">View Details</a>
+							<div class="col-12 col-md-3 mb-2 mt-3">
+								<section class="card card-featured-left card-featured-danger">
+									<div class="card-body icon-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
+										@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt)  && isset($last_month_purchase->total_weight))
+											<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_cr_amt }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger"><strong>{{ $last_month_purchase->total_weight }}</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+										@else
+											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger"><strong>0</strong><span class="title text-end text-dark h6"> M-Ton</span></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-muted text-uppercase" href="#">View Details</a>
+										</div>
 									</div>
-								</div>
-							</section>
-						</div>
+								</section>
+							</div>
+						@endif
 					
 						<!-- summaries ends here -->
 						<div class="tabs mt-3">
