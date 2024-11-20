@@ -10,6 +10,19 @@
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
 			background-position: right center; /* Align the icon to the center-right */
 		}
+		/* Initially hide the masked data */
+		.masked-data {
+			display: none;
+		}
+
+		/* When the switch is toggled ON, show the masked data and hide the actual data */
+		.switch-off .actual-data {
+			display: none;
+		}
+
+		.switch-off .masked-data {
+			display: inline;
+		}
 	</style>
 	<body>
 		<section class="body">
@@ -29,10 +42,11 @@
 
 							<div class="col-12 col-md-3 mb-2">
 								<section class="card card-featured-left card-featured-primary mb-2">
-									<div class="card-body icon-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
-											<h2 class="amount m-0 text-primary"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary actual-data"><strong>{{ $pdc->Total_Balance }}</strong><span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
 										@else
 											<h2 class="amount m-0 text-primary"><strong>0</strong><span class="title text-end text-dark h6"> PKR</span></h2>
 										@endif
@@ -329,19 +343,13 @@
 	</body>
 	<script>
 		function handleToggleSwitch(switchElement) {
+			var dataContainer = document.querySelector('.data-container');
+
 			if (switchElement.checked) {
-				toggleOn();
+				dataContainer.classList.remove('switch-off');
 			} else {
-				toggleOff();
+				dataContainer.classList.add('switch-off');
 			}
-		}
-
-		function toggleOn() {
-			alert('Switch turned ON');
-		}
-
-		function toggleOff() {
-			alert('Switch turned OFF');
 		}
 
 		const catSalesChart = document.getElementById('catSalesChart');
