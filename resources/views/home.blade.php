@@ -36,7 +36,7 @@
 							<div style="display: flex;justify-content: space-between;">
 								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" value="1" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)">
+									<input class="form-check-input" type="checkbox" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)">
 								</div>
 							</div>
 
@@ -357,7 +357,7 @@
 			// Trigger the change event on the toggle switch when the page loads
 			$('#ShowDatatoggleSwitch').trigger('change');
 		});	
-			
+
 		function handleToggleSwitch(switchElement) {
 			var dataContainers = document.querySelectorAll('.data-container');
 			
