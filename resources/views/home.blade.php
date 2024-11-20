@@ -114,7 +114,7 @@
 									</div>
 								</section>
 
-								<section class="card card-featured-left card-featured-danger mt-3">
+								<section class="card card-featured-left card-featured-danger">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/pay-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
 										@if(isset($payables) && isset($payables->total_balance))
@@ -170,7 +170,7 @@
 									</div>
 								</section>
 								
-								<section class="card card-featured-left card-featured-success mt-3">
+								<section class="card card-featured-left card-featured-success">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
@@ -279,7 +279,7 @@
 										</div>
 									</div>
 								</section>
-							</div>
+							</div>	
 						@endif
 					
 						<!-- summaries ends here -->
