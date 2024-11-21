@@ -4,32 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Str;
 
 class MacAddressController extends Controller
 {
     public function showMacAddress()
     {
-        $macAddress = $this->getMacAddress();
-        return view('mac_address', compact('macAddress'));
+        $deviceAddress = $this->getDeviceAddress();
+        return view('mac_address', compact('deviceAddress'));
     }
 
-    private function getMacAddress()
+    private function getDeviceAddress()
     {
         try {
             // Attempt to fetch MAC address using system commands
             $macAddress = $this->fetchMacAddressFromSystem();
 
-            // If MAC address not found or access is restricted, return fallback information (IP or hostname)
+            // If MAC address not found or access is restricted, return fallback information (IP, Hostname, or UUID)
             if ($macAddress === 'MAC address not found') {
-                // Try fetching server IP and hostname as an alternative
-                $macAddress = $this->getServerIpOrHostname();
+                $macAddress = $this->getFallbackDeviceAddress();
             }
 
             return $macAddress;
         } catch (\Exception $e) {
             // If an error occurs, log and return fallback
-            \Log::error('Error fetching MAC address: ' . $e->getMessage());
-            return 'MAC address not found';
+            \Log::error('Error fetching device address: ' . $e->getMessage());
+            return 'Device address not found';
         }
     }
 
@@ -57,12 +57,18 @@ class MacAddressController extends Controller
         return 'MAC address not found';
     }
 
-    private function getServerIpOrHostname()
+    private function getFallbackDeviceAddress()
     {
-        // Attempt to get IP or hostname as fallback
+        // Get server's IP address (unique to the server)
         $serverIp = $_SERVER['SERVER_ADDR'] ?? 'IP not found';
+
+        // Get the server's hostname
         $serverHostname = gethostname() ?? 'Hostname not found';
 
-        return "IP: $serverIp, Hostname: $serverHostname";
+        // Generate a UUID (unique identifier)
+        $uuid = (string) Str::uuid();
+
+        // Return a combination of IP, Hostname, or UUID based on what you need
+        return "IP: $serverIp, Hostname: $serverHostname, UUID: $uuid";
     }
 }
