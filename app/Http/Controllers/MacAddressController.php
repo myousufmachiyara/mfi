@@ -20,35 +20,39 @@ class MacAddressController extends Controller
 
             // Use platform-specific commands to fetch MAC address
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                // Windows system
+                // Windows system: Using getmac
                 $process = new Process(['getmac']);
             } else {
-                // Unix-based system (Linux, macOS)
+                // Unix-based system (Linux, macOS): Using ifconfig
                 $process = new Process(['ifconfig', '-a']);
             }
 
             // Execute the command
             $process->run();
 
+            // Check if the command was successful
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                \Log::info('Command Output: ' . $output); // Log for debugging
+                \Log::info('Command Output: ' . $output); // Log the output for debugging
 
                 // Extract MAC address from command output
                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
-                $macAddress = $matches[0] ?? 'MAC address not found'; // Return fallback message if no MAC found
+
+                // Log the matches found
+                \Log::info('MAC Address Matches: ' . json_encode($matches));
+
+                $macAddress = $matches[0] ?? 'MAC address not found'; // Fallback message if no MAC found
+            } else {
+                // If the command fails, log the error output
+                \Log::error('Command failed: ' . $process->getErrorOutput());
+                $macAddress = 'MAC address not found';
             }
 
-            return $macAddress ?: 'MAC address not found'; // If nothing is returned, fallback message
+            return $macAddress ?: 'MAC address not found'; // Fallback message in case no MAC found
         } catch (\Exception $e) {
+            // Log the exception message for debugging
             \Log::error('Error fetching MAC address: ' . $e->getMessage());
             return 'MAC address not found'; // Fallback message in case of error
         }
-    }
-
-    private function isSharedHosting()
-    {
-        // Check for shared hosting environment based on server name or other criteria
-        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example check for shared hosting
     }
 }
