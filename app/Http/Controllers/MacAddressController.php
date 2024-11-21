@@ -46,6 +46,8 @@ class MacAddressController extends Controller
     //     }
     // }
 
+    use Symfony\Component\Process\Process;
+
     private function getMacAddress()
     {
         try {
@@ -63,6 +65,9 @@ class MacAddressController extends Controller
 
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
+                \Log::info('Command Output: ' . $output); // Log the command output for debugging
+
+                // Attempt to extract a MAC address
                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
                 $macAddress = $matches[0] ?? null;
             }
