@@ -56,12 +56,18 @@
 		.cust-pad {
 			padding-top: 0; /* or any other default padding */
 		}
+		.home-cust-pad {
+			padding-top: 0; /* or any other default padding */
+		}
 		.sidebar-logo{
 			width:30%;
 		}
 		@media (min-width: 768px) {
 			.cust-pad {
-				padding-top: 85px;
+				padding: 85px 20px 0px 20px;
+			}
+			.home-cust-pad {
+				padding: 60px 15px 0px 15px;
 			}
 			.sidebar-logo{
 				width:50%;
