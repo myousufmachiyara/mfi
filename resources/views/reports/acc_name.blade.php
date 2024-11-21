@@ -814,7 +814,7 @@
                         html += "<td>" + (k + 1) + "</td>";
                         html += "<td>" + ((v['sale_prefix'] ? v['sale_prefix'] : "") + " " + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "")).trim() + "</td>";
                         html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
-                        html += "<td>" + (v['detail'] ? v['detail'] : "0") + "</td>";
+                        html += "<td>" + (v['detail'] ? v['detail'] : "") + "</td>";;
                         html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
                         html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
 
