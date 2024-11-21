@@ -15,14 +15,16 @@ class MacAddressController extends Controller
 
     private function getMacAddress()
     {
-        // Check if the current environment is not shared hosting
+        // Check if we're in a shared hosting environment (e.g., cPanel)
         if ($this->isSharedHosting()) {
+            // Simulate MAC address on shared hosting
             return $this->simulateMacAddress();
         }
 
         try {
             $macAddress = null;
 
+            // Use platform-specific commands to fetch MAC address
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 // Windows system
                 $process = new Process(['getmac']);
@@ -31,13 +33,14 @@ class MacAddressController extends Controller
                 $process = new Process(['ifconfig', '-a']);
             }
 
+            // Execute the command
             $process->run();
 
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                \Log::info('Command Output: ' . $output); // Log the command output for debugging
+                \Log::info('Command Output: ' . $output); // Log for debugging
 
-                // Attempt to extract a MAC address
+                // Extract MAC address from command output
                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
                 $macAddress = $matches[0] ?? null;
             }
@@ -51,15 +54,15 @@ class MacAddressController extends Controller
 
     private function isSharedHosting()
     {
-        // Check for shared hosting (You may need to modify this based on your environment)
-        // This can be done by checking specific environment variables or server properties.
-        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example: Check if it's cPanel or shared host
+        // This check is a simple example. You may need to adjust this based on your hosting provider.
+        // For example, you can look for specific environment variables that indicate shared hosting (e.g., cPanel, shared hosting names).
+        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example condition for shared hosting
     }
 
     private function simulateMacAddress()
     {
-        // Return a simulated MAC address when on shared hosting
-        return 'C8-D3-FF-BB-1B-AF'; // Fake MAC address
+        // Return a fake MAC address for shared hosting
+        return 'C8-D3-FF-BB-1B-AF'; // Fake MAC address for simulation
     }
 
     private function getServerInfo()
@@ -67,7 +70,7 @@ class MacAddressController extends Controller
         try {
             $serverInfo = [];
 
-            // Get server's hostname and IP address as fallback
+            // Fetch server hostname and IP address as fallback
             $hostname = gethostname();
             $ipAddress = $_SERVER['SERVER_ADDR'];
 
