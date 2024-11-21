@@ -42,45 +42,25 @@ class MacAddressController extends Controller
 
                 // Extract MAC address from command output
                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
-                $macAddress = $matches[0] ?? null;
+                $macAddress = $matches[0] ?? 'MAC address not found'; // Return fallback message if no MAC found
             }
 
-            return $macAddress ?: $this->getServerInfo();
+            return $macAddress;
         } catch (\Exception $e) {
             \Log::error('Error fetching MAC address: ' . $e->getMessage());
-            return $this->getServerInfo();
+            return 'MAC address not found'; // Fallback message in case of error
         }
     }
 
     private function isSharedHosting()
     {
-        // This check is a simple example. You may need to adjust this based on your hosting provider.
-        // For example, you can look for specific environment variables that indicate shared hosting (e.g., cPanel, shared hosting names).
-        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example condition for shared hosting
+        // Simple check for shared hosting
+        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example check
     }
 
     private function simulateMacAddress()
     {
         // Return a fake MAC address for shared hosting
-        return 'C8-D3-FF-BB-1B-AF'; // Fake MAC address for simulation
-    }
-
-    private function getServerInfo()
-    {
-        try {
-            $serverInfo = [];
-
-            // Fetch server hostname and IP address as fallback
-            $hostname = gethostname();
-            $ipAddress = $_SERVER['SERVER_ADDR'];
-
-            $serverInfo['hostname'] = $hostname ?: 'Hostname not available';
-            $serverInfo['ipAddress'] = $ipAddress ?: 'IP Address not available';
-
-            return $serverInfo;
-        } catch (\Exception $e) {
-            \Log::error('Error fetching server information: ' . $e->getMessage());
-            return 'Error fetching server information';
-        }
+        return 'C8-D3-FF-BB-1B-AF'; // Simulated MAC address
     }
 }

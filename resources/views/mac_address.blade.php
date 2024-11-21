@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Information</title>
+    <title>MAC Address</title>
 </head>
 <body>
 
-    <h1>Server Information</h1>
+    <h1>MAC Address</h1>
 
-    {{-- @if(is_array($macAddress)) --}}
-        <h2>Server Information:</h2>
-        
-    {{-- @else --}}
-        <h2>MAC Address:</h2>
-        <p>{{ $macAddress }}</p>
-    {{-- @endif --}}
+    <p>{{ $macAddress }}</p> <!-- Display MAC address directly -->
 
 </body>
 </html>
