@@ -7,9 +7,9 @@
 </head>
 <body>
 
-    <h1>MAC Address</h1>
+    <h1>Server Information</h1>
 
-    <p>{{ $macAddress }}</p> <!-- Display MAC address directly -->
+    <p>{{ $macAddress }}</p> <!-- Display the MAC address, or IP/hostname -->
 
 </body>
 </html>
