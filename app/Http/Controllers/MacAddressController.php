@@ -15,6 +15,11 @@ class MacAddressController extends Controller
 
     private function getMacAddress()
     {
+        // Check if the current environment is not shared hosting
+        if ($this->isSharedHosting()) {
+            return $this->simulateMacAddress();
+        }
+
         try {
             $macAddress = null;
 
@@ -42,6 +47,19 @@ class MacAddressController extends Controller
             \Log::error('Error fetching MAC address: ' . $e->getMessage());
             return $this->getServerInfo();
         }
+    }
+
+    private function isSharedHosting()
+    {
+        // Check for shared hosting (You may need to modify this based on your environment)
+        // This can be done by checking specific environment variables or server properties.
+        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example: Check if it's cPanel or shared host
+    }
+
+    private function simulateMacAddress()
+    {
+        // Return a simulated MAC address when on shared hosting
+        return 'C8-D3-FF-BB-1B-AF'; // Fake MAC address
     }
 
     private function getServerInfo()
