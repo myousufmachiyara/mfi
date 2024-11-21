@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAC Address</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Server Information</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">MAC Address of the Server</h1>
-        <div class="card mt-3">
-            <div class="card-body">
-                <h3 class="text-center">{{ $macAddress }}</h3>
-            </div>
-        </div>
-        <div class="text-center mt-3">
-            <a href="/" class="btn btn-primary">Back to Home</a>
-        </div>
-    </div>
+
+    <h1>Server Information</h1>
+
+    @if(is_array($macAddress))
+        <h2>Server Information:</h2>
+        <ul>
+            <li><strong>Hostname:</strong> {{ $macAddress['hostname'] }}</li>
+            <li><strong>IP Address:</strong> {{ $macAddress['ipAddress'] }}</li>
+        </ul>
+    @else
+        <h2>MAC Address:</h2>
+        <p>{{ $macAddress }}</p>
+    @endif
+
 </body>
 </html>

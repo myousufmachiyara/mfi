@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Process; // Proper namespace import for Process
+use Symfony\Component\Process\Process;
 
 class MacAddressController extends Controller
 {
@@ -37,10 +37,29 @@ class MacAddressController extends Controller
                 $macAddress = $matches[0] ?? null;
             }
 
-            return $macAddress ?: 'MAC address not found';
+            return $macAddress ?: $this->getServerInfo();
         } catch (\Exception $e) {
             \Log::error('Error fetching MAC address: ' . $e->getMessage());
-            return 'Error fetching MAC address';
+            return $this->getServerInfo();
+        }
+    }
+
+    private function getServerInfo()
+    {
+        try {
+            $serverInfo = [];
+
+            // Get server's hostname and IP address as fallback
+            $hostname = gethostname();
+            $ipAddress = $_SERVER['SERVER_ADDR'];
+
+            $serverInfo['hostname'] = $hostname ?: 'Hostname not available';
+            $serverInfo['ipAddress'] = $ipAddress ?: 'IP Address not available';
+
+            return $serverInfo;
+        } catch (\Exception $e) {
+            \Log::error('Error fetching server information: ' . $e->getMessage());
+            return 'Error fetching server information';
         }
     }
 }
