@@ -58,7 +58,10 @@ class MacAddressController extends Controller
 
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                preg_match('/\S+/', $output, $matches); // Get first non-whitespace word
+                // Trim and clean the output to get the serial number
+                $output = trim($output);
+                // Remove any unwanted characters or spaces
+                preg_match('/([A-Za-z0-9]+)/', $output, $matches);
                 return $matches[0] ?? 'Motherboard ID not found';
             }
 
@@ -84,7 +87,9 @@ class MacAddressController extends Controller
 
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                preg_match('/\S+/', $output, $matches); // Get first non-whitespace word
+                // Clean the output and match a serial number pattern
+                $output = trim($output);
+                preg_match('/([A-Za-z0-9]+)/', $output, $matches);
                 return $matches[0] ?? 'Hard drive ID not found';
             }
 
