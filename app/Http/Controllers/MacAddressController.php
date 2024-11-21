@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Process; // Proper namespace import for Process
 
 class MacAddressController extends Controller
 {
@@ -12,41 +12,6 @@ class MacAddressController extends Controller
         $macAddress = $this->getMacAddress();
         return view('mac_address', compact('macAddress'));
     }
-
-    // private function getMacAddress()
-    // {
-    //     try {
-    //         $macAddress = null;
-
-    //         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    //             // Windows system
-    //             $output = shell_exec('getmac');
-    //             if ($output) {
-    //                 $lines = explode("\n", trim($output));
-    //                 foreach ($lines as $line) {
-    //                     if (strpos($line, 'Physical Address') === false && preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $line, $matches)) {
-    //                         $macAddress = $matches[0];
-    //                         break;
-    //                     }
-    //                 }
-    //             }
-    //         } else {
-    //             // Unix-based system (Linux, macOS)
-    //             $output = shell_exec('ifconfig -a');
-    //             if ($output) {
-    //                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
-    //                 $macAddress = $matches[0] ?? null;
-    //             }
-    //         }
-
-    //         return $macAddress ?: 'MAC address not found';
-    //     } catch (\Exception $e) {
-    //         \Log::error('Error fetching MAC address: ' . $e->getMessage());
-    //         return 'Error fetching MAC address';
-    //     }
-    // }
-
-    use Symfony\Component\Process\Process;
 
     private function getMacAddress()
     {
@@ -78,5 +43,4 @@ class MacAddressController extends Controller
             return 'Error fetching MAC address';
         }
     }
-
 }
