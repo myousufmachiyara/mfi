@@ -205,12 +205,12 @@
                                                     <th>Date</th>
                                                     <th>Detail</th>
                                                     <th>Bill Amount</th>
-                                                    <th>Balance Amount</th>
-                                                    <th>Amount Due</th>
+                                                    <th>UnPaid Amount</th>
                                                     <th>1-20 Days</th>
                                                     <th>21-35 Days</th>
                                                     <th>36-50 Days</th>
                                                     <th>Over 50 Days</th>
+                                                    <th>Cleared In Days</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SaleAgeTbleBody">
@@ -817,11 +817,12 @@
                             html += "<td></td>";
                             html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
                             html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
-                            html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['total_jv_amt'] ? v['total_jv_amt'] : "0") )+ "</td>";
                             html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") +  "</td>";
                             html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") +  "</td>";
                             html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") +  "</td>";
                             html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") +  "</td>";
+                            html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") +  "</td>";
+                            html += "<td>" + (v['max_days'] ? v['max_days'] : "") +  "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
