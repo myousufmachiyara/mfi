@@ -56,13 +56,18 @@ class MacAddressController extends Controller
 
             $process->run();
 
+            // Log the raw output to debug
+            \Log::info('Motherboard Output: ' . $process->getOutput());
+
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                // Clean the output, remove extra characters, and match the serial number
+                // Clean the output and check for the presence of serial number
                 $output = trim($output);
-                // Use regex to capture alphanumeric sequences, allowing for full serial number extraction
-                preg_match('/([A-Za-z0-9\-]+)/', $output, $matches);
-                return $matches[0] ?? 'Motherboard ID not found';
+                \Log::info('Trimmed Output: ' . $output);  // Log the cleaned output
+
+                // Try a broader search for serial number or motherboard identifier
+                preg_match('/(?:SerialNumber\s*[:\-]?\s*)([A-Za-z0-9\-]+)/', $output, $matches);
+                return $matches[1] ?? 'Motherboard ID not found';
             }
 
             return 'Motherboard ID not found';
@@ -85,13 +90,18 @@ class MacAddressController extends Controller
 
             $process->run();
 
+            // Log the raw output to debug
+            \Log::info('Hard Drive Output: ' . $process->getOutput());
+
             if ($process->isSuccessful()) {
                 $output = $process->getOutput();
-                // Clean the output, remove extra characters, and match the serial number
+                // Clean the output and check for the presence of serial number
                 $output = trim($output);
-                // Use regex to capture alphanumeric sequences for hard drive ID
-                preg_match('/([A-Za-z0-9\-]+)/', $output, $matches);
-                return $matches[0] ?? 'Hard drive ID not found';
+                \Log::info('Trimmed Output: ' . $output);  // Log the cleaned output
+
+                // Try a broader search for serial number or disk identifier
+                preg_match('/(?:SerialNumber\s*[:\-]?\s*)([A-Za-z0-9\-]+)/', $output, $matches);
+                return $matches[1] ?? 'Hard drive ID not found';
             }
 
             return 'Hard drive ID not found';
