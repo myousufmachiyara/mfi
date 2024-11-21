@@ -9,16 +9,13 @@
 
     <h1>Server Information</h1>
 
-    @if(is_array($macAddress))
+    {{-- @if(is_array($macAddress)) --}}
         <h2>Server Information:</h2>
-        <ul>
-            <li><strong>Hostname:</strong> {{ $macAddress['hostname'] }}</li>
-            <li><strong>IP Address:</strong> {{ $macAddress['ipAddress'] }}</li>
-        </ul>
-    @else
+        
+    {{-- @else --}}
         <h2>MAC Address:</h2>
         <p>{{ $macAddress }}</p>
-    @endif
+    {{-- @endif --}}
 
 </body>
 </html>
