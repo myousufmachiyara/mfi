@@ -15,12 +15,6 @@ class MacAddressController extends Controller
 
     private function getMacAddress()
     {
-        // Check if we're in a shared hosting environment (e.g., cPanel)
-        if ($this->isSharedHosting()) {
-            // Simulate MAC address on shared hosting
-            return $this->simulateMacAddress();
-        }
-
         try {
             $macAddress = null;
 
@@ -42,7 +36,7 @@ class MacAddressController extends Controller
 
                 // Extract MAC address from command output
                 preg_match('/([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}/', $output, $matches);
-                $macAddress = $matches[0] ?? 'MAC address not found'; // Return fallback message if no MAC found
+                $macAddress = $matches[0] ?? 'MAC address not found'; // Fallback message if no MAC found
             }
 
             return $macAddress;
@@ -50,17 +44,5 @@ class MacAddressController extends Controller
             \Log::error('Error fetching MAC address: ' . $e->getMessage());
             return 'MAC address not found'; // Fallback message in case of error
         }
-    }
-
-    private function isSharedHosting()
-    {
-        // Simple check for shared hosting
-        return strpos($_SERVER['SERVER_NAME'], 'wehostwebserver') !== false; // Example check
-    }
-
-    private function simulateMacAddress()
-    {
-        // Return a fake MAC address for shared hosting
-        return 'C8-D3-FF-BB-1B-AF'; // Simulated MAC address
     }
 }
