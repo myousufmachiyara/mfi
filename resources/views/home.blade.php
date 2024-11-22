@@ -490,52 +490,52 @@
 	<script>
 
 		$(document).ready(function() {
-
+			
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
-            toggleSwitch.checked = false; // Set to "off" by default
+            toggleSwitch.checked = true; // Set to "on" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
 
-			const elements = document.querySelectorAll(".actual-data strong");
-			elements.forEach(element => {
-				const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
-				const duration = 2000; // Animation duration in milliseconds
-				const frameRate = 60; // Frames per second
-				const totalFrames = Math.round(duration / (1000 / frameRate));
-				let frame = 0;
-				
-				if (totalBalance !== 0) {
-					const counter = setInterval(() => {
-						frame++;
-						const progress = frame / totalFrames;
-						const currentValue = Math.floor(progress * totalBalance);
-						element.textContent = currentValue.toLocaleString();
 
-						if (frame === totalFrames) {
-							clearInterval(counter);
-							element.textContent = totalBalance.toLocaleString();
-						}
-					}, 1000 / frameRate);
-				} else {
-					element.textContent = "0"; // Set to 0 if no value
-				}
-			});
 
 			// Trigger the change event on the toggle switch when the page loads
-			$('#ShowDatatoggleSwitch').trigger('change');
+			// $('#ShowDatatoggleSwitch').trigger('change');
 		});	
 
 		function handleToggleSwitch(switchElement) {
 			var dataContainers = document.querySelectorAll('.data-container');
-			
 			dataContainers.forEach(function(dataContainer) {
 				if (!switchElement.checked) {
 					dataContainer.classList.remove('switch-off');
+					const elements = document.querySelectorAll(".actual-data strong");
+					elements.forEach(element => {
+						const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
+						const duration = 2000; // Animation duration in milliseconds
+						const frameRate = 60; // Frames per second
+						const totalFrames = Math.round(duration / (1000 / frameRate));
+						let frame = 0;
+						
+						if (totalBalance !== 0) {
+							const counter = setInterval(() => {
+								frame++;
+								const progress = frame / totalFrames;
+								const currentValue = Math.floor(progress * totalBalance);
+								element.textContent = currentValue.toLocaleString();
+
+								if (frame === totalFrames) {
+									clearInterval(counter);
+									element.textContent = totalBalance.toLocaleString();
+								}
+							}, 1000 / frameRate);
+						} else {
+							element.textContent = "0"; // Set to 0 if no value
+						}
+					});
 				} else {
 					dataContainer.classList.add('switch-off');
 				}
 			});
 		}
-		
+
 		const catSalesChart = document.getElementById('catSalesChart');
 		new Chart(catSalesChart, {
 			type: 'bar',
