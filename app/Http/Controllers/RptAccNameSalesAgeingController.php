@@ -102,12 +102,12 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
                             <td>{$items['sale_prefix']}{$items['Sal_inv_no']}</td>
                             <td>{$items['ac2']}{$items['remarks']}</td>
-                            <td>{$items['bill_amount']}</td>
-                            <td>{$items['remaining_amount']}</td>
-                            <td>{$items['1_20_Days']}</td>
-                            <td>{$items['21_35_Days']}</td>
-                            <td>{$items['36_50_Days']}</td>
-                            <td>{$items['over_50_Days']}</td>
+                            <td>" . number_format($items['bill_amount'], 0) . "</td>
+                            <td>" . number_format($items['remaining_amount'], 0) . "</td>
+                            <td>" . number_format($items['1_20_Days'], 0) . "</td>
+                            <td>" . number_format($items['21_35_Days'], 0) . "</td>
+                            <td>" . number_format($items['36_50_Days'], 0) . "</td>
+                            <td>" . number_format($items['over_50_Days'], 0) . "</td>
                             <td>{$items['max_days']}</td>
                             <td>{$items['max_days']}</td>
                         </tr>";
