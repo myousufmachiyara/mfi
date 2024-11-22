@@ -107,7 +107,6 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . number_format($items['21_35_Days'], 0) . "</td>
                             <td>" . number_format($items['36_50_Days'], 0) . "</td>
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            //  <td>{$items['max_days']}</td>
                             <td>" . ($items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared') . "</td>
                         </tr>";
                 $count++;
