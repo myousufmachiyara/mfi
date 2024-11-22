@@ -813,26 +813,28 @@
                         return;
                     }
 
-                    // Build rows in a single operation for better performance
                     var rows = '';
                     $.each(result, function (k, v) {
-                        var maxDaysStyle = (v['remaining_amount'] && parseFloat(v['remaining_amount']) !== 0) 
-                            ? "color: red;" 
-                            : "";
-
+                        // Parse remaining amount and handle possible issues with null/undefined or invalid values
+                        const remainingAmount = isNaN(parseFloat(v['remaining_amount'])) ? 0 : parseFloat(v['remaining_amount']);
+                        
+                        // Apply red color style if remaining amount is not 0
+                        const maxDaysStyle = (remainingAmount !== 0) ? "color: red;" : "";
+                        
+                        // Generate row
                         rows += `<tr>
                             <td>${k + 1}</td>
                             <td>${(v['sale_prefix'] ? v['sale_prefix'] : '')} ${(v['Sal_inv_no'] ? v['Sal_inv_no'] : '')}</td>
                             <td>${v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : ''}</td>
                             <td>${(v['ac2'] ? v['ac2'] : '')} ${(v['remarks'] ? v['remarks'] : '')}</td>
                             <td>${v['bill_amount'] ? v['bill_amount'] : ''}</td>
-                            <td>${v['remaining_amount'] ? v['remaining_amount'] : '0'}</td>
+                            <td>${remainingAmount}</td>
                             <td>${v['1_20_Days'] ? v['1_20_Days'] : ''}</td>
                             <td>${v['21_35_Days'] ? v['21_35_Days'] : ''}</td>
                             <td>${v['36_50_Days'] ? v['36_50_Days'] : ''}</td>
                             <td>${v['over_50_Days'] ? v['over_50_Days'] : ''}</td>
                             <td style="${maxDaysStyle}">${v['max_days'] ? v['max_days'] : ''}</td>
-                            <td>${v['remaining_amount'] && parseFloat(v['remaining_amount']) === 0 ? 'test' : 'Not Cleared'}</td>
+                            <td>${remainingAmount === 0 ? 'Cleared' : 'Not Cleared'}</td>
                         </tr>`;
                     });
 
