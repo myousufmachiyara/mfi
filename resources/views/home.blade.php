@@ -488,13 +488,12 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-            var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
+
+		$(document).ready(function() {
+
+			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = false; // Set to "off" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
-        });
-		
-		$(document).ready(function() {
 
 			const elements = document.querySelectorAll(".actual-data strong");
 			elements.forEach(element => {
@@ -536,10 +535,7 @@
 				}
 			});
 		}
-
-		document.addEventListener("DOMContentLoaded", function () {
-
-												});
+		
 		const catSalesChart = document.getElementById('catSalesChart');
 		new Chart(catSalesChart, {
 			type: 'bar',
