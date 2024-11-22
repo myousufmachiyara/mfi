@@ -99,9 +99,13 @@ class RptAccNameSalesAgeingController extends Controller
             foreach ($sales_days as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';
-                
-                // Apply red color only if "Not Cleared"
-                $statusStyle = ($items['remaining_amount'] != 0) ? 'color:red;' : '';
+            
+                // Set text color based on status
+                if ($items['remaining_amount'] != 0) {
+                    $pdf->SetTextColor(255, 0, 0);  // Red for "Not Cleared"
+                } else {
+                    $pdf->SetTextColor(0, 0, 0);   // Black for "Cleared"
+                }
             
                 $html .= "<tr style='background-color:{$bgColor};'>
                             <td>{$count}</td>
@@ -114,14 +118,16 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . number_format($items['21_35_Days'], 0) . "</td>
                             <td>" . number_format($items['36_50_Days'], 0) . "</td>
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            <td style='{$statusStyle}'>" . $items['max_days'] . " - {$status}</td>
+                            <td>{$items['max_days']} - {$status}</td>
                         </tr>";
+            
                 $count++;
             }
-            $html .= '</table>';
             
-            // Write to PDF
+            $html .= '</table>';
             $pdf->writeHTML($html, true, false, true, false, '');
+            
+
             
             // Filename and Output
         $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
