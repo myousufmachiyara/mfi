@@ -78,43 +78,43 @@ class RptAccNameSalesAgeingController extends Controller
     
     
             // Table Headers
-            $html = '<table border="1" style="border-collapse: collapse;text-align:center">
-                        <tr>
-                        <th style="width:5%;color:#17365D;font-weight:bold;">S/No</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:8%;color:#17365D;font-weight:bold;">Inv No.</th>
-                        <th style="width:20%;color:#17365D;font-weight:bold;">Detail</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">UnPaid Amount</th>
-                        <th style="width:8%;color:#17365D;font-weight:bold;">1-20 Days</th>
-                        <th style="width:8%;color:#17365D;font-weight:bold;">21-35 Days</th>
-                        <th style="width:8%;color:#17365D;font-weight:bold;">36-50 Days</th>
-                        <th style="width:8%;color:#17365D;font-weight:bold;">Over 50 Days</th>
-                        <th style="width:9%;color:#17365D;font-weight:bold;">Cleared In Days</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Status</th>
-                    </tr>';
-                    // Table Rows
-                $count = 1;
-                foreach ($sales_days as $items) {
-                    $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                    $html .= "<tr style='background-color:{$bgColor};'>
-                                    <td style='width:5%;'>{$count}</td>
-                                    <td style='width:10%;'>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
-                                    <td style='width:8%;'>{$items['sale_prefix']}{$items['Sal_inv_no']}</td>
-                                    <td style='width:20%;'>{$items['ac2']}{$items['remarks']}</td>
-                                    <td style='width:12%;'>{$items['bill_amount']}</td>
-                                    <td style='width:12%;'>{$items['remaining_amount']}</td>
-                                    <td style='width:8%;'>{$items['1_20_Days']}</td>
-                                    <td style='width:8%;'>{$items['21_35_Days']}</td>
-                                    <td style='width:8%;'>{$items['36_50_Days']}</td>
-                                    <td style='width:8%;'>{$items['over_50_Days']}</td>
-                                    <td style='width:9%;'>{$items['max_days']}</td>
-                                    <td style='width:10%;'>{$items['max_days']}</td>
-                                </tr>";
-                        $count++;
-                }
-
+            $html = '<table border="1" style="border-collapse: collapse; text-align:center; width:100%;">
+            <tr>
+                <th style="color:#17365D; font-weight:bold;">S/No</th>
+                <th style="color:#17365D; font-weight:bold;">Date</th>
+                <th style="color:#17365D; font-weight:bold;">Inv No.</th>
+                <th style="color:#17365D; font-weight:bold;">Detail</th>
+                <th style="color:#17365D; font-weight:bold;">Bill Amount</th>
+                <th style="color:#17365D; font-weight:bold;">UnPaid Amount</th>
+                <th style="color:#17365D; font-weight:bold;">1-20 Days</th>
+                <th style="color:#17365D; font-weight:bold;">21-35 Days</th>
+                <th style="color:#17365D; font-weight:bold;">36-50 Days</th>
+                <th style="color:#17365D; font-weight:bold;">Over 50 Days</th>
+                <th style="color:#17365D; font-weight:bold;">Cleared In Days</th>
+                <th style="color:#17365D; font-weight:bold;">Status</th>
+            </tr>';
+            // Table Rows
+            $count = 1;
+            foreach ($sales_days as $items) {
+                $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+                $html .= "<tr style='background-color:{$bgColor};'>
+                            <td>{$count}</td>
+                            <td>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
+                            <td>{$items['sale_prefix']}{$items['Sal_inv_no']}</td>
+                            <td>{$items['ac2']}{$items['remarks']}</td>
+                            <td>{$items['bill_amount']}</td>
+                            <td>{$items['remaining_amount']}</td>
+                            <td>{$items['1_20_Days']}</td>
+                            <td>{$items['21_35_Days']}</td>
+                            <td>{$items['36_50_Days']}</td>
+                            <td>{$items['over_50_Days']}</td>
+                            <td>{$items['max_days']}</td>
+                            <td>{$items['max_days']}</td>
+                        </tr>";
+                $count++;
+            }
             $html .= '</table>';
+
             $pdf->writeHTML($html, true, false, true, false, '');
 
     
