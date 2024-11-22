@@ -80,18 +80,17 @@ class RptAccNameSalesAgeingController extends Controller
             // Table Headers
             $html = '<table border="1" style="border-collapse: collapse; text-align:center; width:100%;">
             <tr>
-                <th style="width:6%;color:#17365D; font-weight:bold;">S/No</th>
+                <th style="width:4%;color:#17365D; font-weight:bold;">S/No</th>
                 <th style="width:9%;color:#17365D; font-weight:bold;">Date</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">Inv No.</th>
-                <th style="width:17%; color:#17365D; font-weight:bold;">Detail</th>
+                <th style="width:19%; color:#17365D; font-weight:bold;">Detail</th>
                 <th style="width:10%;color:#17365D; font-weight:bold;">Bill Amount</th>
                 <th style="width:10%;color:#17365D; font-weight:bold;">UnPaid Amount</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">1-20 Days</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">21-35 Days</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">36-50 Days</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">Over 50 Days</th>
-                <th style="width:4%;color:#17365D; font-weight:bold;">Cleared In Days</th>
-                <th style="width:4%;color:#17365D; font-weight:bold;">Status</th>
+                <th style="width:8%;color:#17365D; font-weight:bold;">Cleared In Days</th>
             </tr>';
             // Table Rows
             $count = 1;
@@ -108,8 +107,8 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . number_format($items['21_35_Days'], 0) . "</td>
                             <td>" . number_format($items['36_50_Days'], 0) . "</td>
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            <td>{$items['max_days']}</td>
-                            <td>{$items['max_days']}</td>
+                            //  <td>{$items['max_days']}</td>
+                            <td>" . ($items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared') . "</td>
                         </tr>";
                 $count++;
             }
