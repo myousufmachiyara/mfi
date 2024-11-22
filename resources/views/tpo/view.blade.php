@@ -131,80 +131,74 @@
 											
 										</tbody>
 									</table>
-									
+									@php($grand_total_quantity += $subtotal_quantity)
+									@php($grand_total_weight += $subtotal_weight)
+									@php($grand_subtotal += $subtotal)
+									@endforeach
 								
-									
-									
-								</div>
-								
-								
-								@php($grand_total_quantity += $subtotal_quantity)
-								@php($grand_total_weight += $subtotal_weight)
-								@php($grand_subtotal += $subtotal)
-								@endforeach
-							
 									<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
+										<div class="col-8">
+											<div class="row">
+												<div class="col-6">
+													<table class="table h6 text-dark">
+														<tbody>
+															<tr class="b-top-0">
+																<td colspan="2"  style="color:#17365D">Total Quantity</td>
+																<td class="text-left">{{$grand_total_quantity}}</td>
+															</tr>
+															<tr>
+																<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
+																<td class="text-left">{{$grand_total_weight}}</td>
+															</tr>
+														</tbody>
+													</table>
+													<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+												</div>
+												
+												<div>
+													<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+														Terms And Conditions:&nbsp
+													</span><br><br>
+													<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
+													</h2>
+												</div>
+											</div>
+										</div>
+										<div class="col-4 invoice-summary">
+											<div class="row justify-content-end">
 												<table class="table h6 text-dark">
 													<tbody>
 														<tr class="b-top-0">
-															<td colspan="2"  style="color:#17365D">Total Quantity</td>
-															<td class="text-left">{{$grand_total_quantity}}</td>
+															<td colspan="2"  style="color:#17365D" >Bill total</td>
+															<td class="text-left">{{$grand_subtotal}}</td>
 														</tr>
 														<tr>
-															<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
-															<td class="text-left">{{$grand_total_weight}}</td>
+															<td colspan="2"  style="color:#17365D">Labour Charges</td>
+															<td class="text-left">{{$pur->LaborCharges}} PKR</td>
 														</tr>
+															<td colspan="2"  style="color:#17365D">Convance Charges</td>
+															<td class="text-left">{{$pur->ConvanceCharges}} PKR</td>
+														</tr>
+														</tr>
+															<td colspan="2"  style="color:#17365D">Discount</td>
+															<td class="text-left">{{$pur->Bill_discount}} PKR</td>
+														</tr>
+														<?php $netamount=round($grand_subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
+														<tr class="h5">
+															<td colspan="2"  style="color:#17365D">Net Amount</td>
+															<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
+														</tr>
+														
+														
 													</tbody>
 												</table>
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
-											</div>
-											
-											<div>
-												<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
-													Terms And Conditions:&nbsp
-												</span><br><br>
-												<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
-												</h2>
 											</div>
 										</div>
+										<div>
 									</div>
-									<div class="col-4 invoice-summary">
-										<div class="row justify-content-end">
-											<table class="table h6 text-dark">
-												<tbody>
-													<tr class="b-top-0">
-														<td colspan="2"  style="color:#17365D" >Bill total</td>
-														<td class="text-left">{{$grand_subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2"  style="color:#17365D">Labour Charges</td>
-														<td class="text-left">{{$pur->LaborCharges}} PKR</td>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Convance Charges</td>
-														<td class="text-left">{{$pur->ConvanceCharges}} PKR</td>
-													</tr>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Discount</td>
-														<td class="text-left">{{$pur->Bill_discount}} PKR</td>
-													</tr>
-													<?php $netamount=round($grand_subtotal + $pur->LaborCharges + $pur->ConvanceCharges - $pur->Bill_discount) ?>
-													<tr class="h5">
-														<td colspan="2"  style="color:#17365D">Net Amount</td>
-														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
-													</tr>
-													
-													
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div>
 								</div>
-
+								
 								<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
 								<a onclick="window.location='{{ route('all-tpo') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
