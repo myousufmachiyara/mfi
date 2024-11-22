@@ -24,10 +24,9 @@ class RptAccNameSalesAgeingController extends Controller
     {
         $sales_days = sales_days::where('account_name',$request->acc_id)
         ->whereBetween('bill_date', [$request->fromDate, $request->toDate])
-        ->leftjoin('ac', 'ac.ac_code', '=', 'sales_days.account_name')
-        ->select('sales_days.*', 'ac.ac_name as ac_name2',  'ac.remarks')
         ->orderBy('bill_date','asc')
         ->get();
+
         
             // Get and format current and report dates
             $currentDate = Carbon::now()->format('d-m-y');
@@ -38,8 +37,8 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf = new MyPDF();
             $pdf->SetCreator(PDF_CREATOR);
             $pdf->SetAuthor('MFI');
-            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name2']}");
-            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_name2']}");
+            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
+            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
             $pdf->SetKeywords('Sales Ageing Report, TCPDF, PDF');
             $pdf->setPageOrientation('L');
             $pdf->AddPage();
@@ -118,7 +117,7 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf->writeHTML($html, true, false, true, false, '');        
     
             // Filename and Output
-        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name2']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
 
