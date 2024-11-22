@@ -2,7 +2,7 @@
 	<body>
 		<section class="body">
 			@include('../layouts.pageheader')
-			<div class="inner-wrapper">
+			<div class="inner-wrapper cust-pad">
 				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" id="myForm" action="{{ route('store-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
