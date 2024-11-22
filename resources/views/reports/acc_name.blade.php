@@ -205,12 +205,12 @@
                                                     <th>Date</th>
                                                     <th>Detail</th>
                                                     <th>Bill Amount</th>
-                                                    <th>Balance Amount</th>
-                                                    <th>Amount Due</th>
+                                                    <th>UnPaid Amount</th>
                                                     <th>1-20 Days</th>
                                                     <th>21-35 Days</th>
                                                     <th>36-50 Days</th>
                                                     <th>Over 50 Days</th>
+                                                    <th>Cleared In Days</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SaleAgeTbleBody">
@@ -809,22 +809,29 @@
 
                         var totalCrAmt = 0; // Variable to accumulate total
 
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + ((v['sale_prefix'] ? v['sale_prefix'] : "") + " " + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "")).trim() + "</td>";
-                            html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td></td>";
-                            html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
-                            html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
-                            html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['total_jv_amt'] ? v['total_jv_amt'] : "0") )+ "</td>";
-                            html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") +  "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
+                        $.each(result, function(k, v) {
+                        var html = "<tr>";
+                        html += "<td>" + (k + 1) + "</td>";
+                        html += "<td>" + ((v['sale_prefix'] ? v['sale_prefix'] : "") + " " + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "")).trim() + "</td>";
+                        html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
+                        html += "<td>" + ((v['ac2'] ? v['ac2'] : "") + " " + (v['remarks'] ? v['remarks'] : "")).trim() + "</td>";
+                        html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
+                        html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
+
+                        // Conditional color styling for max_days
+                        var maxDaysStyle = (v['remaining_amount'] && parseFloat(v['remaining_amount']) !== 0) 
+                            ? "color: red;" 
+                            : "";
+                        html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") + "</td>";
+                        html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") + "</td>";
+                        html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") + "</td>";
+                        html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") + "</td>";
+                        html += `<td style="${maxDaysStyle}">` + (v['max_days'] ? v['max_days'] : "") + "</td>";
+                        html += "</tr>";
+
+                        $(tableID).append(html);
+                    });
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="11" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
