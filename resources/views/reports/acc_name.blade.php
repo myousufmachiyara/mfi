@@ -798,7 +798,7 @@
                     acc_id: acc_id,
                 },
                 beforeSend: function () {
-                    $(tableID).html('<tr><td colspan="11" class="text-center">Loading Data Please Wait...</td></tr>');
+                    $(tableID).html('<tr><td colspan="12" class="text-center">Loading Data Please Wait...</td></tr>');
                 },
                 success: function (result) {
                     // Update the header fields with the formatted dates and selected account name
@@ -809,7 +809,7 @@
 
                     // Check if the result has data
                     if (!result.length) {
-                        $(tableID).html('<tr><td colspan="11" class="text-center">No data available for the selected criteria.</td></tr>');
+                        $(tableID).html('<tr><td colspan="12" class="text-center">No data available for the selected criteria.</td></tr>');
                         return;
                     }
 
