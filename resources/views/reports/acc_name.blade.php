@@ -832,6 +832,7 @@
                             <td>${v['36_50_Days'] ? v['36_50_Days'] : ''}</td>
                             <td>${v['over_50_Days'] ? v['over_50_Days'] : ''}</td>
                             <td style="${maxDaysStyle}">${v['max_days'] ? v['max_days'] : ''}</td>
+                            <td>${v['remaining_amount'] && parseFloat(v['remaining_amount']) === 0 ? 'Cleared' : 'Not Cleared'}</td>
                         </tr>`;
                     });
 
