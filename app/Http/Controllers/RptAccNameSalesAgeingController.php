@@ -27,13 +27,22 @@ class RptAccNameSalesAgeingController extends Controller
         ->orderBy('bill_date','asc')
         ->get();
         
-            // Get and format current and report dates
+           // Get and format current and report dates
             $currentDate = Carbon::now()->format('d-m-y');
             $formattedFromDate = Carbon::createFromFormat('Y-m-d', $request->fromDate)->format('d-m-y');
             $formattedToDate = Carbon::createFromFormat('Y-m-d', $request->toDate)->format('d-m-y');
-    
+
             // Initialize PDF
             $pdf = new MyPDF();
+
+            // Custom page dimensions (e.g., 330mm width x 210mm height for a wider landscape page)
+            $pageWidth = 330; // in mm
+            $pageHeight = 210; // in mm
+            $pdf->AddPage('L', array($pageWidth, $pageHeight));
+
+            // Optionally adjust margins (Left, Top, Right margins)
+            $pdf->SetMargins(10, 10, 10); 
+
             $pdf->SetCreator(PDF_CREATOR);
             $pdf->SetAuthor('MFI');
             $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
@@ -42,11 +51,11 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf->setPageOrientation('L');
             $pdf->AddPage();
             $pdf->setCellPadding(1.2);
-    
+
             // Document header
             $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">Sales Ageing Report Of Account</h1>';
             $pdf->writeHTML($heading, true, false, true, false, '');
-    
+
             // Account Info Table
             $html = '
                 <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
@@ -73,26 +82,26 @@ class RptAccNameSalesAgeingController extends Controller
                         </td>
                     </tr>
                 </table>';
-    
+
             $pdf->writeHTML($html, true, false, true, false, '');
-    
-    
+
             // Table Headers
             $html = '<table border="1" style="border-collapse: collapse; text-align:center; width:100%;">
             <tr>
-                <th style="width:7%;color:#17365D; font-weight:bold;">S/No</th>
-                <th style="color:#17365D; font-weight:bold;">Date</th>
-                <th style="color:#17365D; font-weight:bold;">Inv No.</th>
-                <th style="width:20%; color:#17365D; font-weight:bold;">Detail</th>
-                <th style="color:#17365D; font-weight:bold;">Bill Amount</th>
-                <th style="color:#17365D; font-weight:bold;">UnPaid Amount</th>
-                <th style="color:#17365D; font-weight:bold;">1-20 Days</th>
-                <th style="color:#17365D; font-weight:bold;">21-35 Days</th>
-                <th style="color:#17365D; font-weight:bold;">36-50 Days</th>
-                <th style="color:#17365D; font-weight:bold;">Over 50 Days</th>
-                <th style="color:#17365D; font-weight:bold;">Cleared In Days</th>
-                <th style="color:#17365D; font-weight:bold;">Status</th>
+                <th style="width:6%;color:#17365D; font-weight:bold;">S/No</th>
+                <th style="width:10%;color:#17365D; font-weight:bold;">Date</th>
+                <th style="width:10%;color:#17365D; font-weight:bold;">Inv No.</th>
+                <th style="width:18%; color:#17365D; font-weight:bold;">Detail</th>
+                <th style="width:12%;color:#17365D; font-weight:bold;">Bill Amount</th>
+                <th style="width:12%;color:#17365D; font-weight:bold;">UnPaid Amount</th>
+                <th style="width:8%;color:#17365D; font-weight:bold;">1-20 Days</th>
+                <th style="width:8%;color:#17365D; font-weight:bold;">21-35 Days</th>
+                <th style="width:8%;color:#17365D; font-weight:bold;">36-50 Days</th>
+                <th style="width:8%;color:#17365D; font-weight:bold;">Over 50 Days</th>
+                <th style="width:4%;color:#17365D; font-weight:bold;">Cleared In Days</th>
+                <th style="width:7%;color:#17365D; font-weight:bold;">Status</th>
             </tr>';
+
             // Table Rows
             $count = 1;
             foreach ($sales_days as $items) {
@@ -117,12 +126,9 @@ class RptAccNameSalesAgeingController extends Controller
 
             $pdf->writeHTML($html, true, false, true, false, '');
 
-    
-        
-    
             // Filename and Output
-        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
-        $pdf->Output($filename, 'I');
+            $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+            $pdf->Output($filename, 'I');
     }
 
     public function purchase2Download(Request $request)
