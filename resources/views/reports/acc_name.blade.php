@@ -1316,7 +1316,7 @@
             }
 
             else if (tabName === "sales_ageing") {
-                window.location.href = `/rep-by-acc-name/sales_age/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/sales_age/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "purchase1") {
