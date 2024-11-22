@@ -25,7 +25,7 @@ class RptAccNameSalesAgeingController extends Controller
         $sales_days = sales_days::where('account_name',$request->acc_id)
         ->whereBetween('bill_date', [$request->fromDate, $request->toDate])
         ->leftjoin('ac', 'ac.ac_code', '=', 'sales_days.account_name')
-        ->select('sales_days.*', 'ac.ac_name',  'ac.remarks')
+        ->select('sales_days.*', 'ac.ac_name as ac_name2',  'ac.remarks')
         ->orderBy('bill_date','asc')
         ->get();
         
@@ -38,8 +38,8 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf = new MyPDF();
             $pdf->SetCreator(PDF_CREATOR);
             $pdf->SetAuthor('MFI');
-            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
-            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
+            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name2']}");
+            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_name2']}");
             $pdf->SetKeywords('Sales Ageing Report, TCPDF, PDF');
             $pdf->setPageOrientation('L');
             $pdf->AddPage();
@@ -98,15 +98,7 @@ class RptAccNameSalesAgeingController extends Controller
             $count = 1;
             foreach ($sales_days as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';
-            
-                // Set text color based on status
-                if ($items['remaining_amount'] != 0) {
-                    $pdf->SetTextColor(255, 0, 0);  // Red for "Not Cleared"
-                } else {
-                    $pdf->SetTextColor(0, 0, 0);   // Black for "Cleared"
-                }
-            
+                $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';  // Determine the status here
                 $html .= "<tr style='background-color:{$bgColor};'>
                             <td>{$count}</td>
                             <td>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
@@ -120,17 +112,13 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
                             <td>{$items['max_days']} - {$status}</td>
                         </tr>";
-            
                 $count++;
             }
-            
             $html .= '</table>';
-            $pdf->writeHTML($html, true, false, true, false, '');
-            
-
-            
+            $pdf->writeHTML($html, true, false, true, false, '');        
+    
             // Filename and Output
-        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name2']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
 
