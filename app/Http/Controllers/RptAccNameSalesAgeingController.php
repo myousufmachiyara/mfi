@@ -37,8 +37,7 @@ class RptAccNameSalesAgeingController extends Controller
 
             // Custom page dimensions (e.g., 330mm width x 210mm height for a wider landscape page)
             $pageWidth = 330; // in mm
-            $pageHeight = 210; // in mm
-            $pdf->AddPage('L', array($pageWidth, $pageHeight));
+            $pdf->AddPage('L', array($pageWidth));
 
             // Optionally adjust margins (Left, Top, Right margins)
             $pdf->SetMargins(10, 10, 10); 
