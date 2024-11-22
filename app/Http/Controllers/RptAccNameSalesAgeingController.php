@@ -96,13 +96,19 @@ class RptAccNameSalesAgeingController extends Controller
             </tr>';
             // Table Rows
             $count = 1;
+            $html .= "<style>
+            .not-cleared {
+                color: red;
+            }
+          </style>";
+
             foreach ($sales_days as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';
                 
-                // Apply red color only if "Not Cleared"
-                $statusStyle = ($items['remaining_amount'] != 0) ? 'color:red;' : '';
-            
+                // Apply class for red color if status is "Not Cleared"
+                $statusClass = ($items['remaining_amount'] != 0) ? 'not-cleared' : '';
+
                 $html .= "<tr style='background-color:{$bgColor};'>
                             <td>{$count}</td>
                             <td>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
@@ -114,14 +120,14 @@ class RptAccNameSalesAgeingController extends Controller
                             <td>" . number_format($items['21_35_Days'], 0) . "</td>
                             <td>" . number_format($items['36_50_Days'], 0) . "</td>
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            <td style='{$statusStyle}'>" . $items['max_days'] . " - {$status}</td>
+                            <td class='{$statusClass}'>{$items['max_days']} - {$status}</td>
                         </tr>";
                 $count++;
             }
             $html .= '</table>';
-            
-            // Write to PDF
+
             $pdf->writeHTML($html, true, false, true, false, '');
+
             
             // Filename and Output
         $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
