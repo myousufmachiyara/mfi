@@ -1,7 +1,6 @@
 <?php
 
     use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\MacAddressController;
 
     // Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
@@ -516,7 +515,6 @@
         Route::get('/rep-comm/comm/report', [App\Http\Controllers\RptCommissionsController::class, 'commReport'])->name('comm-rep-report');
 
 
-        // Getting MAC Address 
-        Route::get('/mac-address', [MacAddressController::class, 'showMacAddress'])->name('mac.address');
+        
 
     });
