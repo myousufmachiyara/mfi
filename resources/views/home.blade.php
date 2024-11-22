@@ -490,15 +490,9 @@
 	<script>
 
 		$(document).ready(function() {
-			
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
-
-
-
-			// Trigger the change event on the toggle switch when the page loads
-			// $('#ShowDatatoggleSwitch').trigger('change');
 		});	
 
 		function handleToggleSwitch(switchElement) {
