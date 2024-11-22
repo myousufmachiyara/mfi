@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\sales_days;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Services\myPDF;
+use Carbon\Carbon;
+use Illuminate\Validation\Validator;
 
 class RptAccNameSalesAgeingController extends Controller
 {
