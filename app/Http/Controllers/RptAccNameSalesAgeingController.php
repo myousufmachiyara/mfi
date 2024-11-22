@@ -80,7 +80,7 @@ class RptAccNameSalesAgeingController extends Controller
             // Table Headers
             $html = '<table border="1" style="border-collapse: collapse; text-align:center; width:100%;">
             <tr>
-                <th style="color:#17365D; font-weight:bold;">S/No</th>
+                <th style="width:7%;color:#17365D; font-weight:bold;">S/No</th>
                 <th style="color:#17365D; font-weight:bold;">Date</th>
                 <th style="color:#17365D; font-weight:bold;">Inv No.</th>
                 <th style="width:20%; color:#17365D; font-weight:bold;">Detail</th>
