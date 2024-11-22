@@ -211,6 +211,7 @@
                                                     <th>36-50 Days</th>
                                                     <th>Over 50 Days</th>
                                                     <th>Cleared In Days</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SaleAgeTbleBody">
@@ -789,54 +790,61 @@
                 tableID="#SaleAgeTbleBody";
 
                 $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
-                    beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="11" class="text-center">Loading Data Please Wait...</td></tr>');
-                    },
-                    success: function(result){
-                        $('#sale_age_from').text(formattedfromDate);
-                        $('#sale_age_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        
-                        $('#sale_age_acc').text(selectedAcc);
-                        $(tableID).empty(); // Clear the loading message
+                type: "GET",
+                url: url,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    acc_id: acc_id,
+                },
+                beforeSend: function () {
+                    $(tableID).html('<tr><td colspan="11" class="text-center">Loading Data Please Wait...</td></tr>');
+                },
+                success: function (result) {
+                    // Update the header fields with the formatted dates and selected account name
+                    $('#sale_age_from').text(formattedfromDate);
+                    $('#sale_age_to').text(formattedtoDate);
+                    var selectedAcc = $('#acc_id').find("option:selected").text();
+                    $('#sale_age_acc').text(selectedAcc);
 
-                        var totalCrAmt = 0; // Variable to accumulate total
+                    // Check if the result has data
+                    if (!result.length) {
+                        $(tableID).html('<tr><td colspan="11" class="text-center">No data available for the selected criteria.</td></tr>');
+                        return;
+                    }
 
-                        $.each(result, function(k, v) {
-                        var html = "<tr>";
-                        html += "<td>" + (k + 1) + "</td>";
-                        html += "<td>" + ((v['sale_prefix'] ? v['sale_prefix'] : "") + " " + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "")).trim() + "</td>";
-                        html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
-                        html += "<td>" + ((v['ac2'] ? v['ac2'] : "") + " " + (v['remarks'] ? v['remarks'] : "")).trim() + "</td>";
-                        html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
-                        html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
-
-                        // Conditional color styling for max_days
+                    // Build rows in a single operation for better performance
+                    var rows = '';
+                    $.each(result, function (k, v) {
                         var maxDaysStyle = (v['remaining_amount'] && parseFloat(v['remaining_amount']) !== 0) 
                             ? "color: red;" 
                             : "";
-                        html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") + "</td>";
-                        html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") + "</td>";
-                        html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") + "</td>";
-                        html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") + "</td>";
-                        html += `<td style="${maxDaysStyle}">` + (v['max_days'] ? v['max_days'] : "") + "</td>";
-                        html += "</tr>";
 
-                        $(tableID).append(html);
+                        rows += `<tr>
+                            <td>${k + 1}</td>
+                            <td>${(v['sale_prefix'] ? v['sale_prefix'] : '')} ${(v['Sal_inv_no'] ? v['Sal_inv_no'] : '')}</td>
+                            <td>${v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : ''}</td>
+                            <td>${(v['ac2'] ? v['ac2'] : '')} ${(v['remarks'] ? v['remarks'] : '')}</td>
+                            <td>${v['bill_amount'] ? v['bill_amount'] : ''}</td>
+                            <td>${v['remaining_amount'] ? v['remaining_amount'] : '0'}</td>
+                            <td>${v['1_20_Days'] ? v['1_20_Days'] : ''}</td>
+                            <td>${v['21_35_Days'] ? v['21_35_Days'] : ''}</td>
+                            <td>${v['36_50_Days'] ? v['36_50_Days'] : ''}</td>
+                            <td>${v['over_50_Days'] ? v['over_50_Days'] : ''}</td>
+                            <td style="${maxDaysStyle}">${v['max_days'] ? v['max_days'] : ''}</td>
+                        </tr>`;
                     });
 
-                    },
-                    error: function(){
-                        $(tableID).html('<tr><td colspan="11" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
-                    }
-                });
+                    // Replace table content with new rows
+                    $(tableID).html(rows);
+                },
+                error: function (xhr, status, error) {
+                    $(tableID).html(`<tr><td colspan="11" class="text-center text-danger">
+                        Error loading data: ${xhr.responseText || error}.
+                    </td></tr>`);
+                }
+            });
+
             }
             else if(tabId=="#pur_age"){
             }
