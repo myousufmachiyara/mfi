@@ -24,6 +24,8 @@ class RptAccNameSalesAgeingController extends Controller
     {
         $sales_days = sales_days::where('account_name',$request->acc_id)
         ->whereBetween('bill_date', [$request->fromDate, $request->toDate])
+        ->leftjoin('ac', 'ac.ac_code', '=', 'sales_days.account_name')
+        ->select('sales_days.*', 'ac.ac_name  as ac_nam', 'ac.remarks as ac_remarks')
         ->orderBy('bill_date','asc')
         ->get();
 
@@ -37,8 +39,8 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf = new MyPDF();
             $pdf->SetCreator(PDF_CREATOR);
             $pdf->SetAuthor('MFI');
-            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
-            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_name']}");
+            $pdf->SetTitle("Sales Ageing Report Of Account - {$sales_days[0]['ac_nam']}");
+            $pdf->SetSubject("Sales Ageing Report Of Account - {$sales_days[0]['ac_nam']}");
             $pdf->SetKeywords('Sales Ageing Report, TCPDF, PDF');
             $pdf->setPageOrientation('L');
             $pdf->AddPage();
@@ -53,7 +55,7 @@ class RptAccNameSalesAgeingController extends Controller
                 <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
                     <tr>
                         <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
-                            Account Name: <span style="color:black;">' . htmlspecialchars($sales_days[0]['ac_name']) . '</span>
+                            Account Name: <span style="color:black;">' . htmlspecialchars($sales_days[0]['ac_nam']) . '</span>
                         </td>
                         <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                             Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
@@ -117,7 +119,7 @@ class RptAccNameSalesAgeingController extends Controller
             $pdf->writeHTML($html, true, false, true, false, '');        
     
             // Filename and Output
-        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "Sales_Ageing_report_{$sales_days[0]['ac_nam']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
 
