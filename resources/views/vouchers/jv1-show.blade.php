@@ -6,11 +6,8 @@
 					@include('../layouts.pageheader')
 
                     <section class="card">
-
 						<div class="card-body">
-
 							<div class="invoice">
-
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-sm-6 mt-3">
