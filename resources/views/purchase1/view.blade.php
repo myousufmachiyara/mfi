@@ -1,7 +1,7 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			<div class="inner-wrapper" style="padding-top: 50px;">
+			<div class="inner-wrapper cust-pad">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body" >
 				@include('../layouts.pageheader')
