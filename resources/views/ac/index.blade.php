@@ -416,7 +416,7 @@
 	</body>
 </html>
 <script>
-    var table = document.getElementById('cust-datatable-default');
+    var table = document.getElementById('cust-datatable-default tbody').DataTable();
 
     $('#columnSearch').on('keyup change', function() {
         console.log(table);
