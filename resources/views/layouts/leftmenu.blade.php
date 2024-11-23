@@ -9,7 +9,7 @@
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
         </div>
         
-        <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+        <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
         </div>
     </div>
