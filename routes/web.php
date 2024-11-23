@@ -6,7 +6,7 @@
     Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
 
-    Route::middleware(['checkPermission:view'])->group(function () {
+    Route::middleware(['checkPermission:view','session.timeout'])->group(function () {
 
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
         Route::get('/user-role/all-roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('all-roles');
@@ -88,7 +88,7 @@
 
     });
 
-    Route::middleware(['checkPermission:add'])->group(function () {
+    Route::middleware(['checkPermission:add','session.timeout'])->group(function () {
 
         Route::post('/user/create', [App\Http\Controllers\UsersController::class, 'createUser'])->name('new-user');
         Route::post('/user/create/validate', [App\Http\Controllers\UsersController::class, 'createValidation'])->name('new-user-validation');
@@ -141,7 +141,7 @@
         Route::get('/vouchers2/purpendingInvoice/{id}', [App\Http\Controllers\JV2Controller::class, 'purpendingInvoice'])->name('jv2-pur-pend-invoices');
     });
 
-    Route::middleware(['checkPermission:edit'])->group(function () {
+    Route::middleware(['checkPermission:edit','session.timeout'])->group(function () {
 
         Route::get('/user/details', [App\Http\Controllers\UsersController::class, 'getUserDetails'])->name('user-details');
         Route::post('/user/change-credentials', [App\Http\Controllers\UsersController::class, 'changeCredentials'])->name('change-user-credentials');
@@ -201,7 +201,7 @@
         Route::post('/tstock_in/tstock_in_invoice/update', [App\Http\Controllers\TStockInController::class, 'update'])->name('update-tstock-in-invoice');
     });
 
-    Route::middleware(['checkPermission:delete'])->group(function () {
+    Route::middleware(['checkPermission:delete','session.timeout'])->group(function () {
         Route::post('/item-groups/delete', [App\Http\Controllers\ItemGroupsController::class, 'destroy'])->name('delete-item-group');
         Route::post('/items/delete', [App\Http\Controllers\ItemsController::class, 'destroy'])->name('delete-item');
         Route::post('/item2/delete', [App\Http\Controllers\Item2Controller::class, 'destroy'])->name('delete-item-2');
@@ -228,13 +228,13 @@
         Route::post('/tstock_out/delete', [App\Http\Controllers\TStockOutController::class, 'destroy'])->name('delete-tstock-out-invoice');
     });
 
-    Route::middleware(['checkPermission:att_add'])->group(function () {
+    Route::middleware(['checkPermission:att_add','session.timeout'])->group(function () {
         Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
         Route::post('/vouchers/addAtt/', [App\Http\Controllers\JV1Controller::class, 'addAtt'])->name('jv1-att-add');
 
     });
 
-    Route::middleware(['checkPermission:att_delete'])->group(function () {
+    Route::middleware(['checkPermission:att_delete','session.timeout'])->group(function () {
         Route::delete('/coa/deleteAtt/{id}', [App\Http\Controllers\COAController::class, 'deleteAtt'])->name('coa-att-delete');
         Route::delete('/vouchers/deleteAttachment/{id}', [App\Http\Controllers\JV1Controller::class, 'deleteAtt'])->name('jv1-att-delete');
         Route::delete('/purchase1/deleteAttachment/{id}', [App\Http\Controllers\PurchaseController::class, 'deleteAtt'])->name('purc1-att-delete');
@@ -254,10 +254,10 @@
         Route::delete('/vouchers2/deleteAttachment/{id}', [App\Http\Controllers\JV2Controller::class, 'deleteAtt'])->name('jv2-att-delete');
     });
 
-    Route::middleware(['checkPermission:report'])->group(function () {
+    Route::middleware(['checkPermission:report','session.timeout'])->group(function () {
     });
 
-    Route::middleware(['checkPermission:print'])->group(function (){
+    Route::middleware(['checkPermission:print','session.timeout'])->group(function (){
 
         Route::get('/coa/print', [App\Http\Controllers\COAController::class, 'print'])->name('print-acc');
         Route::get('/purchase2/generatePDF/{id}', [App\Http\Controllers\Purchase2Controller::class, 'generatePDF'])->name('print-purc2-invoice');
@@ -287,7 +287,7 @@
 
     // });
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth','session.timeout'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
@@ -352,7 +352,7 @@
     });
 
     // reporting
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth','session.timeout'])->group(function () {
 
         // Main Routes
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');
