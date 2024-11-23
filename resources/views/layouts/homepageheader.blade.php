@@ -25,6 +25,9 @@
 					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
+					<li>
+						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-power-off"></i> DB Backup</a>
+					</li>
 				</ul>
 			</div>
 			<i class="fas fa-bars toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened" aria-label="Toggle sidebar"></i>
@@ -70,6 +73,9 @@
 					</li>
 					<li>
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
+					</li>
+					<li>
+						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-power-off"></i> DB Backup</a>
 					</li>
 				</ul>
 			</div>
