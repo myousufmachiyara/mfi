@@ -245,7 +245,6 @@ class UsersController extends Controller
                     'role_name' => $user_roles->role_name,
                     'user_role' => $user_roles->role_id,
                     'user_access' => $user_access,
-                    'last_activity_time' => now(),
                 ]);
     
                 return redirect()->intended('/home');
