@@ -8,7 +8,7 @@
 		.icon-container {
 			background-size: auto; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
-			background-position: right center; /* Align the icon to the center-right */
+			background-position: right bottom; /* Align the icon to the center-right */
 		}
 		/* Initially hide the masked data */
 		.masked-data {
