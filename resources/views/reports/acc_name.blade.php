@@ -900,7 +900,7 @@
                     while (table.rows.length > 0) {
                         table.deleteRow(0);
                     }
-                    url="/rep-by-acc-name/sales_age";
+                    url="/rep-by-acc-name/pur_age";
                     tableID="#PurAgeTbleBody";
 
                     $.ajax({
