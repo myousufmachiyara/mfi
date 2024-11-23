@@ -16,7 +16,7 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                    <div>
+                                    <div >
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
                                                 <option selected disabled>Search by</option>
@@ -35,8 +35,8 @@
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default" style="overflow-x: auto;">
+                                    <div class="modal-wrapper" style="overflow-x: auto;">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
