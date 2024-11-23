@@ -196,13 +196,11 @@ $('#logoutSession').on('click', function() {
 $(document).on('mousemove keypress click scroll', resetTimer);
 resetTimer();
 
-var table = $('#searchableTable').DataTable({
-    "order": [[0, "desc"]],
-});
+var table = $('#cust-datatable-default').DataTable(); // Retrieve the existing instance
 
 $('#columnSearch').on('keyup change', function() {
-    var columnIndex = $('#columnSelect').val();
-    table.column(columnIndex).search(this.value).draw();
+    var columnIndex = $('#columnSelect').val(); // Get selected column index
+    table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
 });
 
 $('#changePasswordForm').on('submit', function(e){
