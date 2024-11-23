@@ -26,7 +26,7 @@
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
 					<li>
-						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-power-off"></i> DB Backup</a>
+						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-cloud-download"></i> DB Backup</a>
 					</li>
 				</ul>
 			</div>
@@ -75,7 +75,7 @@
 						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
 					<li>
-						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-power-off"></i> DB Backup</a>
+						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-cloud-download"></i> DB Backup</a>
 					</li>
 				</ul>
 			</div>
