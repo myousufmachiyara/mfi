@@ -416,7 +416,15 @@
 	</body>
 </html>
 <script>
-    
+    var table = document.getElementById('cust-datatable-default tbody').DataTable();
+
+    $('#columnSearch').on('keyup change', function() {
+        console.log(table);
+        var columnIndex = $('#columnSelect').val(); // Get selected column index
+        table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+    });
+
+
     $(document).ready(function(){
     
         $('#addForm').on('submit', function(e){

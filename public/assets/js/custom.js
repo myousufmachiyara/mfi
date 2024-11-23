@@ -196,15 +196,6 @@ $('#logoutSession').on('click', function() {
 $(document).on('mousemove keypress click scroll', resetTimer);
 resetTimer();
 
-var table = $('#searchableTable').DataTable({
-    "order": [[0, "desc"]],
-});
-
-$('#columnSearch').on('keyup change', function() {
-    var columnIndex = $('#columnSelect').val();
-    table.column(columnIndex).search(this.value).draw();
-});
-
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();
     var currentPassword=$('#current_passowrd').val();
