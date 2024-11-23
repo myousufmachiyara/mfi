@@ -1,12 +1,12 @@
 <aside id="sidebar-left" class="sidebar-left">
     <div class="sidebar-header">
-        <div class="sidebar-title">
-        <a href="/home" class="logo">						
-			<img src="/assets/img/white-logo-new.png" class="sidebar-logo" alt="MFI Logo" />
-		</a>
-        <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-            <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
-        </div>
+        <div class="sidebar-title" style="display: flex;justify-content: space-between;">
+            <a href="/home" class="logo">						
+                <img src="/assets/img/white-logo-new.png" class="sidebar-logo" alt="MFI Logo" />
+            </a>
+            <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+                <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
+            </div>
         </div>
         <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
             <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
