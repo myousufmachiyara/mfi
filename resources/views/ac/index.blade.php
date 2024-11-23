@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default" style="overflow-x: auto;">
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
