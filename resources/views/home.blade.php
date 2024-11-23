@@ -351,8 +351,8 @@
 										<table class="table table-responsive-md table-striped mb-0">
 											<thead>
 												<tr>
-													<th>User Names</th>
-													<th></th>
+													<th>Name</th>
+													<th>Role</th>
 												</tr>
 											</thead>
 											<tbody>
