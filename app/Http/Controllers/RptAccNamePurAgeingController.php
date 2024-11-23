@@ -98,7 +98,7 @@ class RptAccNamePurAgeingController extends Controller
         
         // Table Rows
         $count = 1;
-        foreach ($sales_days as $items) {
+        foreach ($pur_days as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
             $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';  // Determine the status here
             $maxDaysStyle = $items['remaining_amount'] != 0 ? 'style="color:red;"' : '';  // Apply red color if remaining_amount is not 0
