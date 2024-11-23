@@ -10,6 +10,18 @@ window.addEventListener('pageshow', function(event) {
 $(window).on('load', function() {
     // Hide the loader once the page is fully loaded
     $('#loader').addClass('hidden');
+
+    var table = $('#cust-datatable-default').DataTable();
+
+    $('#columnSelect').on('change', function () {
+        // Clear the previous search
+        table.search('').columns().search('').draw(); // Reset global and column-specific filters
+    });
+
+    $('#columnSearch').on('keyup change', function () {
+        var columnIndex = $('#columnSelect').val(); // Get selected column index
+        table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+    });
 });
 
 
@@ -226,15 +238,3 @@ $('#changePasswordForm').on('submit', function(e){
         }
     });
 });	
-
-var table = $('#cust-datatable-default').DataTable();
-
-$('#columnSelect').on('change', function () {
-    // Clear the previous search
-    table.search('').columns().search('').draw(); // Reset global and column-specific filters
-});
-
-$('#columnSearch').on('keyup change', function () {
-    var columnIndex = $('#columnSelect').val(); // Get selected column index
-    table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
-});
