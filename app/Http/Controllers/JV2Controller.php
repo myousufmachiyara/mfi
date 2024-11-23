@@ -207,22 +207,22 @@ class JV2Controller extends Controller
     
         // Fetch the related purchase ageing records.
     
-        // $purchase_ageing = purchase_ageing::where('jv2_id', $id)
-        // ->join('vw_union_pur_1_2_opbal', function ($join) {
-        //     $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
-        //          ->whereColumn('vw_union_pur_1_2_opbal.Sal_inv_no', 'purchase_ageing.sales_id');
-        // })
-        // ->select('purchase_ageing.*', 'vw_union_pur_1_2_opbal.*')
-        // ->get();
-
         $purchase_ageing = purchase_ageing::where('jv2_id', $id)
-        ->join('vw_union_pur_1_2_opbal', function($join) {
+        ->join('vw_union_pur_1_2_opbal', function ($join) {
             $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
-                ->on('vw_union_pur_1_2_opbal.Sal_inv_no', '=', 'purchase_ageing.sales_id');
+                 ->whereColumn('vw_union_pur_1_2_opbal.Sal_inv_no', 'purchase_ageing.sales_id');
         })
-        ->selectRaw('SUM(vw_purchase_ageing.aamount) as total_aamount')  // Apply aggregation here
-        ->groupBy('purchase_ageing.sales_prefix', 'purchase_ageing.sales_id')  // Group by relevant columns
+        ->select('purchase_ageing.*', 'vw_union_pur_1_2_opbal.*')
         ->get();
+
+        // $purchase_ageing = purchase_ageing::where('jv2_id', $id)
+        // ->join('vw_union_pur_1_2_opbal', function($join) {
+        //     $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
+        //         ->on('vw_union_pur_1_2_opbal.Sal_inv_no', '=', 'purchase_ageing.sales_id');
+        // })
+        // ->selectRaw('SUM(vw_purchase_ageing.aamount) as total_aamount')  // Apply aggregation here
+        // ->groupBy('purchase_ageing.sales_prefix', 'purchase_ageing.sales_id')  // Group by relevant columns
+        // ->get();
 
 
         $purchase_ageing = $purchase_ageing->isEmpty() ? null : $purchase_ageing;
