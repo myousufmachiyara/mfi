@@ -15,7 +15,7 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper" style="overflow-x:auto">
+                                    <div class="modal-wrapper">
                                         <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
