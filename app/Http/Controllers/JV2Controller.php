@@ -220,7 +220,7 @@ class JV2Controller extends Controller
             $join->on('vw_union_pur_1_2_opbal.prefix', '=', 'purchase_ageing.sales_prefix')
                 ->on('vw_union_pur_1_2_opbal.Sal_inv_no', '=', 'purchase_ageing.sales_id');
         })
-        ->selectRaw('SUM(vw_purchase_ageing.aamount) as total_aamount, other_columns')  // Apply aggregation here
+        ->selectRaw('SUM(vw_purchase_ageing.aamount) as total_aamount')  // Apply aggregation here
         ->groupBy('purchase_ageing.sales_prefix', 'purchase_ageing.sales_id')  // Group by relevant columns
         ->get();
 
