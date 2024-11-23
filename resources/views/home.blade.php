@@ -365,7 +365,7 @@
 											</tbody>
 										</table>
 										<div class="summary-footer text-end mt-1">
-											<a class="text-primary text-uppercase" href="#">View All</a>
+											<a class="text-primary text-uppercase" href="{{ route('all-users')}}">View All</a>
 										</div>
 									</div>
 								</section>
