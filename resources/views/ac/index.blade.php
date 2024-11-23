@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-wrapper" style="overflow-x:auto">
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
