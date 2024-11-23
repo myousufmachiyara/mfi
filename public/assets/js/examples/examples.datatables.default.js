@@ -23,6 +23,12 @@ Theme Version: 	4.0.0
 			"searching": false  // Ensure search functionality is enabled
 		});
 
+		$('.cust-datatable-default').dataTable({
+			dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>',
+			"order": [[0, "desc"]],
+			"pageLength": 25,  // Show all rows
+		});
+
 	};
 
 	
