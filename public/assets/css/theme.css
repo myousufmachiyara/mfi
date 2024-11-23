@@ -2351,6 +2351,9 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 		right: 0;
 		top: 0;
 	}
+	.table-scroll{
+		overflow-x: auto;
+	}
 }
 
 html.ie {

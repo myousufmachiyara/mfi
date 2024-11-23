@@ -73,9 +73,7 @@
 			.sidebar-logo{
 				width:50%;
 			}	
-			.table-scroll{
-				overflow-x: auto;
-			}
+			
 		}
     </style>
 	<div id="timeoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
