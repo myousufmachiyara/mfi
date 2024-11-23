@@ -196,7 +196,7 @@ $('#logoutSession').on('click', function() {
 $(document).on('mousemove keypress click scroll', resetTimer);
 resetTimer();
 
-var table = $('#cust-datatable-default').DataTable(); // Retrieve the existing instance
+var table = document.getElementById('cust-datatable-default');
 
 $('#columnSearch').on('keyup change', function() {
     var columnIndex = $('#columnSelect').val(); // Get selected column index
