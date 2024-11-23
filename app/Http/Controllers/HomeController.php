@@ -43,7 +43,9 @@ class HomeController extends Controller
         $foreign = dash_acc_group::where('group_cod',4)->first();
 
         $login_users = users::where('is_login', 1)
-        ->select('users.name')
+        ->join('user_roles','user_roles.user_id','=','users.id')
+        ->join('roles','roles.id','=','user_roles.role_id')
+        ->select('users.name as user_name','roles.name as user_role')
         ->get();
 
         $currentDate = Carbon::now();

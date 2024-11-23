@@ -8,7 +8,7 @@
 		.icon-container {
 			background-size: auto; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
-			background-position: right center; /* Align the icon to the center-right */
+			background-position: right bottom; /* Align the icon to the center-right */
 		}
 		/* Initially hide the masked data */
 		.masked-data {
@@ -251,7 +251,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-success mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-in-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
 										<h2 class="amount m-0 text-success actual-data">
@@ -321,7 +321,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-tertiary mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-out-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary actual-data">
@@ -358,8 +358,8 @@
 											<tbody>
 												@foreach ($login_users as $key => $row)
 												<tr>
-													<td>{{$row->name}}</td>
-													<td>Role</td>
+													<td>{{$row->user_name}}</td>
+													<td>{{$row->user_role}}</td>
 												</tr>
 												@endforeach
 											</tbody>
