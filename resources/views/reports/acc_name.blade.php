@@ -919,7 +919,7 @@
                         $('#pur_age_from').text(formattedfromDate);
                         $('#pur_age_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
-                        $('#purage_acc').text(selectedAcc);
+                        $('#pur_age_acc').text(selectedAcc);
 
                         // Check if the result has data
                         if (!result.length) {
