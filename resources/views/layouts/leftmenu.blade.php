@@ -1,10 +1,10 @@
 <aside id="sidebar-left" class="sidebar-left">
     <div class="sidebar-header">
-        <div class="sidebar-title" style="display: flex;justify-content: space-between;">
-            <a href="/home" class="logo">						
+        <div class="sidebar-title row" style="display: flex;justify-content: space-between;">
+            <a href="/home" class="logo col-8">						
                 <img src="/assets/img/white-logo-new.png" class="sidebar-logo" alt="MFI Logo" />
             </a>
-            <div class="d-md-none toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+            <div class="d-md-none toggle-sidebar-left col-4" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
                 <i class="fas fa-times" aria-label="Toggle sidebar"></i>
             </div>
         </div>
