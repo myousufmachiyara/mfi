@@ -14,7 +14,7 @@ Theme Version: 	4.0.0
 			dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>', // Removed pagination part
 			"order": [[0, "desc"]],
 			"pageLength": 25,
-			"searching": false,  // Ensure search functionality is enabled
+			"searching": true,  // Ensure search functionality is enabled
 			"paging": true,      // Explicitly enable pagination
 
 		});
