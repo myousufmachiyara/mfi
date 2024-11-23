@@ -83,7 +83,7 @@ class RptAccNamePurAgeingController extends Controller
             // Table Headers
             $html = '<table border="1" style="border-collapse: collapse; text-align:center; width:100%;">
             <tr>
-                <th style="width:4%;color:red; font-weight:bold;">S/No</th>
+                <th style="width:4%;color:#17365D; font-weight:bold;">S/No</th>
                 <th style="width:9%;color:#17365D; font-weight:bold;">Date</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">Inv No.</th>
                 <th style="width:19%; color:#17365D; font-weight:bold;">Detail</th>
@@ -111,7 +111,7 @@ class RptAccNamePurAgeingController extends Controller
                         <td>' . number_format($items['21_35_Days'], 0) . '</td>
                         <td>' . number_format($items['36_50_Days'], 0) . '</td>
                         <td>' . number_format($items['over_50_Days'], 0) . '</td>
-                        <td style="font-size:25px;">' . $items['max_days'] . ' - ' . $status . '</td>
+                        <td style="color:red;">' . $items['max_days'] . ' - ' . $status . '</td>
                     </tr>';
             $count++;
         }
