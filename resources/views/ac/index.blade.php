@@ -35,7 +35,7 @@
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper">
+                                    <div class="modal-wrapper" style="overflow-x: auto;">
                                         <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
