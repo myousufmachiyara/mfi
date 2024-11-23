@@ -422,7 +422,6 @@
         var table = $('#cust-datatable-default').DataTable();
 
         $('#columnSearch').on('keyup change', function () {
-            console.log(table)
             var columnIndex = $('#columnSelect').val(); // Get selected column index
             table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
         });
