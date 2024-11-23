@@ -111,7 +111,7 @@ class RptAccNamePurAgeingController extends Controller
                             <td>" . number_format($items['21_35_Days'], 0) . "</td>
                             <td>" . number_format($items['36_50_Days'], 0) . "</td>
                             <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            <td>{$items['max_days']} - {$status}</td>
+                            <td style='font-size:25px'>{$items['max_days']} - {$status}</td>
                         </tr>";
                 $count++;
             }
