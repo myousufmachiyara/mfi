@@ -2330,7 +2330,7 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 /* Page Header - Mobile */
 @media only screen and (max-width: 767px) {
 	.page-header {
-		padding: 0px 15px 0px 15px;
+		padding: 0px 25px 0px 25px;
 	}
 
 	.page-header .breadcrumbs {
