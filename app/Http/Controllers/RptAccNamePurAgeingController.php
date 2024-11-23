@@ -117,7 +117,7 @@ class RptAccNamePurAgeingController extends Controller
         }
         
         $html .= '</table>';
-            $pdf->writeHTML($html, true, false, true, false, '');        
+        $pdf->writeHTML($html, true, false, true, false, '');        
     
             // Filename and Output
         $filename = "Sales_Ageing_report_{$pur_days[0]['ac_nam']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
