@@ -381,6 +381,12 @@
         Route::get('/rep-by-acc-name/sales_age/PDF', [App\Http\Controllers\RptAccNameSalesAgeingController::class, 'salesAgeingPDF'])->name('sales-ageing-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/sales_age/download', [App\Http\Controllers\RptAccNameSalesAgeingController::class, 'salesAgeingDownload'])->name('sales-ageing-rep-by-acc-name-download');
 
+        // RPT by Acc Name Purchase Ageing
+        Route::get('/rep-by-acc-name/pur_age', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeing'])->name('pur-ageing-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur_age/excel', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingExcel'])->name('pur-ageing-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/pur_age/PDF', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingPDF'])->name('pur-ageing-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/pur_age/download', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingDownload'])->name('pur-ageing-rep-by-acc-name-download');
+
         // RPT by Acc Name Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
         Route::get('/rep-by-acc-name/pur1/excel', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1Excel'])->name('pur1-rep-by-acc-name-excel');
