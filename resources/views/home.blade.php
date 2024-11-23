@@ -358,8 +358,8 @@
 											<tbody>
 												@foreach ($login_users as $key => $row)
 												<tr>
-													<td>{{$row->name}}</td>
-													<td>Role</td>
+													<td>{{$row->user_name}}</td>
+													<td>{{$row->user_role}}</td>
 												</tr>
 												@endforeach
 											</tbody>
