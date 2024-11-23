@@ -416,7 +416,14 @@
 	</body>
 </html>
 <script>
-    
+    var table = document.getElementById('cust-datatable-default');
+
+    $('#columnSearch').on('keyup change', function() {
+        var columnIndex = $('#columnSelect').val(); // Get selected column index
+        table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+    });
+
+
     $(document).ready(function(){
     
         $('#addForm').on('submit', function(e){
