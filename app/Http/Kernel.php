@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'checkPermission' => \App\Http\Middleware\CheckUserPermission::class,
+        'session.timeout' => \App\Http\Middleware\SessionTimeoutMiddleware::class,
     ];
 }
