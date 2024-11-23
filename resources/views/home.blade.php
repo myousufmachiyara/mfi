@@ -251,7 +251,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-success mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-in-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
 										<h2 class="amount m-0 text-success actual-data">
@@ -321,7 +321,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-tertiary mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-out-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary actual-data">
