@@ -1,6 +1,6 @@
 <aside id="sidebar-left" class="sidebar-left">
     <div class="sidebar-header">
-        <div class="sidebar-title row" style="display: flex;justify-content: space-between;">
+        <div class="sidebar-title row pt-2" style="display: flex;justify-content: space-between;">
             <a href="/home" class="logo col-8">						
                 <img src="/assets/img/white-logo-new.png" class="sidebar-logo" alt="MFI Logo" />
             </a>
