@@ -16,7 +16,7 @@
                                 </header>
                                 <div class="card-body">
                                     <div class="modal-wrapper" style="overflow-x:auto">
-                                        <table class="table table-bordered table-striped mb-0" id="default-datatable">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
