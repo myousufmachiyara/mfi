@@ -100,24 +100,25 @@ class RptAccNameSalesAgeingController extends Controller
             foreach ($sales_days as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';  // Determine the status here
-                $html .= "<tr style='background-color:{$bgColor};'>
-                            <td>{$count}</td>
-                            <td>" . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . "</td>
-                            <td>{$items['sale_prefix']}{$items['Sal_inv_no']}</td>
-                            <td>{$items['ac2']}{$items['remarks']}</td>
-                            <td>" . number_format($items['bill_amount'], 0) . "</td>
-                            <td>" . number_format($items['remaining_amount'], 0) . "</td>
-                            <td>" . number_format($items['1_20_Days'], 0) . "</td>
-                            <td>" . number_format($items['21_35_Days'], 0) . "</td>
-                            <td>" . number_format($items['36_50_Days'], 0) . "</td>
-                            <td>" . number_format($items['over_50_Days'], 0) . "</td>
-                            <td>{$items['max_days']} - {$status}</td>
-                        </tr>";
+                $maxDaysStyle = $items['remaining_amount'] != 0 ? 'style="color:red;"' : '';  // Apply red color if remaining_amount is not 0
+                $html .= '<tr style="background-color:' . $bgColor . ';">
+                            <td>' . $count . '</td>
+                            <td>' . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . '</td>
+                            <td>' . $items["sale_prefix"] . $items["Sal_inv_no"] . '</td>
+                            <td>' . $items["ac2"] . $items["remarks"] . '</td>
+                            <td>' . number_format($items['bill_amount'], 0) . '</td>
+                            <td>' . number_format($items['remaining_amount'], 0) . '</td>
+                            <td>' . number_format($items['1_20_Days'], 0) . '</td>
+                            <td>' . number_format($items['21_35_Days'], 0) . '</td>
+                            <td>' . number_format($items['36_50_Days'], 0) . '</td>
+                            <td>' . number_format($items['over_50_Days'], 0) . '</td>
+                            <td ' . $maxDaysStyle . '>' . $items['max_days'] . ' - ' . $status . '</td>
+                        </tr>';
                 $count++;
             }
             $html .= '</table>';
-            $pdf->writeHTML($html, true, false, true, false, '');        
-    
+            $pdf->writeHTML($html, true, false, true, false, '');
+        
             // Filename and Output
         $filename = "Sales_Ageing_report_{$sales_days[0]['ac_nam']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
@@ -198,28 +199,30 @@ class RptAccNameSalesAgeingController extends Controller
                 <th style="width:8%;color:#17365D; font-weight:bold;">Over 50 Days</th>
                 <th style="width:8%;color:#17365D; font-weight:bold;">Cleared In Days</th>
             </tr>';
-            // Table Rows
-            $count = 1;
-            foreach ($sales_days as $items) {
-                $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';  // Determine the status here
-                $html .= '<tr style="background-color:' . $bgColor . ';">
-                            <td>' . $count . '</td>
-                            <td>' . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . '</td>
-                            <td>' . $items["sale_prefix"] . $items["Sal_inv_no"] . '</td>
-                            <td>' . $items["ac2"] . $items["remarks"] . '</td>
-                            <td>' . number_format($items['bill_amount'], 0) . '</td>
-                            <td>' . number_format($items['remaining_amount'], 0) . '</td>
-                            <td>' . number_format($items['1_20_Days'], 0) . '</td>
-                            <td>' . number_format($items['21_35_Days'], 0) . '</td>
-                            <td>' . number_format($items['36_50_Days'], 0) . '</td>
-                            <td>' . number_format($items['over_50_Days'], 0) . '</td>
-                            <td style="color:red;">' . $items['max_days'] . ' - ' . $status . '</td>
-                        </tr>';
-                $count++;
-            }
-            $html .= '</table>';
-            $pdf->writeHTML($html, true, false, true, false, '');        
+            
+           // Table Rows
+           $count = 1;
+           foreach ($sales_days as $items) {
+               $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+               $status = $items['remaining_amount'] == 0 ? 'Cleared' : 'Not Cleared';  // Determine the status here
+               $maxDaysStyle = $items['remaining_amount'] != 0 ? 'style="color:red;"' : '';  // Apply red color if remaining_amount is not 0
+               $html .= '<tr style="background-color:' . $bgColor . ';">
+                           <td>' . $count . '</td>
+                           <td>' . Carbon::createFromFormat('Y-m-d', $items['bill_date'])->format('d-m-y') . '</td>
+                           <td>' . $items["sale_prefix"] . $items["Sal_inv_no"] . '</td>
+                           <td>' . $items["ac2"] . $items["remarks"] . '</td>
+                           <td>' . number_format($items['bill_amount'], 0) . '</td>
+                           <td>' . number_format($items['remaining_amount'], 0) . '</td>
+                           <td>' . number_format($items['1_20_Days'], 0) . '</td>
+                           <td>' . number_format($items['21_35_Days'], 0) . '</td>
+                           <td>' . number_format($items['36_50_Days'], 0) . '</td>
+                           <td>' . number_format($items['over_50_Days'], 0) . '</td>
+                           <td ' . $maxDaysStyle . '>' . $items['max_days'] . ' - ' . $status . '</td>
+                       </tr>';
+               $count++;
+           }
+           $html .= '</table>';
+           $pdf->writeHTML($html, true, false, true, false, '');        
     
             // Filename and Output
         $filename = "Sales_Ageing_report_{$sales_days[0]['ac_nam']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
