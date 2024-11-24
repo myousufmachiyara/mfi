@@ -323,6 +323,7 @@
 
                         // Initialize HTML for the table
                         let html = '';
+                        let subtotaldebit = 0, subtotalcredit = 0
 
                         // Iterate through each head
                         $.each(AllData, function(headCount, heads) {
@@ -348,6 +349,8 @@
                                                 <td>${item.Debit || ""}</td>
                                                 <td>${item.Credit || ""}</td>
                                             </tr>`;
+                                            subtotaldebit += Debit;
+                                            subtotalcredit += Credit;
                                 });
 
                                 html += `</tbody>`;
@@ -355,6 +358,19 @@
 
                             html += `</table>`;
                         });
+
+                        if (subheads) {
+                            html += `
+                                <tr style="background-color: #FFFFFF;">
+                                    <td colspan="4" class="text-center"><strong>Sub Total for ${subheads}</strong></td>
+                                    <td class="text-danger">${subtotaldebit.toFixed(0)}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-danger">${subtotalcredit.toFixed(0)}</td>
+                                    <td></td>
+                                    <td class="text-danger">${subtotaldebit.toFixed(0)}</td>
+                                </tr>`;
+                        }
 
                         // Append all the generated HTML at once
                         $tableBody.html(html);
