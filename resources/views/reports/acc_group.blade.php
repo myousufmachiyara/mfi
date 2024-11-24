@@ -363,8 +363,8 @@
                             html += `
                                 <tr style="background-color: #FFFFFF;">
                                     <td colspan="4" class="text-center"><strong>Sub Total for ${subHeadCount}</strong></td>
-                                    <td class="text-danger">${subtotaldebit.toFixed(0)}</td>
-                                    <td class="text-danger">${subtotalcredit.toFixed(0)}</td>
+                                    <td class="text-danger">><strong>${subtotaldebit.toFixed(0)}></strong></td>
+                                    <td class="text-danger">><strong>${subtotalcredit.toFixed(0)}></strong></td>
                                 </tr>`;
                         });
 
