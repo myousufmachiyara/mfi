@@ -212,7 +212,7 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger");
+        $pdf->SetTitle('General Ledger-' . $lager_much_op_bal[0]['ac_name']);
         $pdf->SetSubject("General Ledger");
         $pdf->SetKeywords('General Ledger, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -375,7 +375,7 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger R");
+        $pdf->SetTitle('General Ledger R-' . $lager_much_op_bal[0]['ac_name']);
         $pdf->SetSubject("General Ledger R");
         $pdf->SetKeywords('General Ledger R, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -520,7 +520,7 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger R");
+        $pdf->SetTitle('General Ledger R-' . $lager_much_op_bal[0]['ac_name']);
         $pdf->SetSubject("General Ledger R");
         $pdf->SetKeywords('General Ledger R, TCPDF, PDF');
         $pdf->setPageOrientation('P');
