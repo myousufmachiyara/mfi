@@ -189,12 +189,13 @@ class RptCommissionsController extends Controller
                 $html .= '
                 <tr style="background-color: #FFFFFF;">
                     <td colspan="4" class="text-center"><strong>Subtotal for '. $lastAccountName . '</strong></td>
-                    <td style="color:red;">' . number_format($subtotalBAmount, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalBAmount, 0) . '</strong></td>
                     <td></td>
                     <td></td>
-                    <td style="color:red;">' . number_format($subtotalCommDisc, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalCommDisc, 0) . '</strong></td>
                     <td></td>
-                    <td style="color:red;">' . number_format($subtotalCdDisc, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalCdDisc, 0) . '</strong></td>
+
                 </tr>';
             }
 
