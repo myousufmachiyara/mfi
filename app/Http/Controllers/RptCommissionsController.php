@@ -76,7 +76,7 @@ class RptCommissionsController extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                  <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:70%;">
-                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
+                    Item Group: <span style="color:black;">' . $comm_pipe_rpt[0]['item_name'] . '</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Print Date: <span style="color:black;">' . $formattedDate . '</span>
