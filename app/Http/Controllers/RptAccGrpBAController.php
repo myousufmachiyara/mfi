@@ -77,7 +77,7 @@ class RptAccGrpBAController extends Controller
             $html .= '<div style="border: 2px solid #000; padding: 10px; margin-bottom: 15px;">
                         <h2 style="color:red; text-align:center; font-size:18px; border-bottom: 2px solid #000;">' . $headCount . '</h2>';
 
-            $html .= '<table style="width:100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 10px;">
+            $html .= '<table border="1" style="border-collapse: collapse; text-align: center;">
                         <thead>
                             <tr><th style="width:8%;color:#17365D;font-weight:bold;">S/No</th>
                                 <th style="width:10%;color:#17365D;font-weight:bold;">AC</th>
