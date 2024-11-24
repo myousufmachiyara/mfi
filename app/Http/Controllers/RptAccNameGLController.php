@@ -407,13 +407,13 @@ class RptAccNameGLController extends Controller
                 <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                <th style="width:28%;color:#17365D;font-weight:bold;">Account Name & Remarks</th>
+                <th style="width:28%;color:#17365D;font-weight:bold;">Details</th>
                 <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
                 <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
                 <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
             </tr>
             <tr>
-                <th colspan="7" style="text-align: right">------Opening Balance------</th>
+                <th colspan="7" style="text-align: center">+------Opening Balance------+</th>
                 <th style="text-align: left">' . number_format($opening_bal, 0) . '</th>
             </tr>';
         
@@ -449,7 +449,7 @@ class RptAccNameGLController extends Controller
         // Add totals row
         $num_to_words = $pdf->convertCurrencyToWords($balance);
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="5" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
+                    <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="text-align:right;">Total:</td>
                     <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
