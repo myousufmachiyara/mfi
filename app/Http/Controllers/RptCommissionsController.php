@@ -33,13 +33,14 @@ class RptCommissionsController extends Controller
             'outputType' => 'required|in:download,view',
         ]);
     
-        $comm_pipe_rpt = comm_pipe_rpt::where('item',$request->acc_id)
-        ->join('item_group', 'comm_pipe_rpt.item', '=', 'item_group.item_group_cod ')
+        $comm_pipe_rpt = comm_pipe_rpt::where('item', $request->acc_id)
+        ->join('item_group', 'comm_pipe_rpt.item', '=', 'item_group.item_group_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
-        ->select('comm_pipe_rpt.*', 'item_group.group_name','item_group.group_remarks')
+        ->select('comm_pipe_rpt.*', 'item_group.group_name', 'item_group.group_remarks')
         ->orderBy('ac_name', 'asc')
         ->orderBy('sa_date', 'asc')
         ->get();
+
     
         // Check if data exists
         if ($comm_pipe_rpt->isEmpty()) {
