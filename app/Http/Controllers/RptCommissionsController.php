@@ -208,7 +208,7 @@ class RptCommissionsController extends Controller
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $acc_id=$request->acc_id;
 
-        $filename = "commission_report_of_{$acc_id}_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "commission_report_of_{$comm_pipe_rpt[0]['group_name']}_{$fromDate}_to_{$toDate}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {
