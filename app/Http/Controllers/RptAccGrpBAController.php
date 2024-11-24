@@ -42,12 +42,12 @@ class RptAccGrpBAController extends Controller
         // Generate the PDF
         return $this->bageneratePDF($balance_all, $request);
     }
-    
+
     private function bageneratePDF($balance_all, Request $request)
     {
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
-    
+
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -55,27 +55,30 @@ class RptAccGrpBAController extends Controller
         $pdf->SetSubject('Balance All Report');
         $pdf->SetKeywords('Balance All Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-    
+
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-    
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-    
+
         $groupedData = $this->groupByHeadAndSub($balance_all);
-    
+
         // Table header for data
         $html = '';
         $count = 1;
         $totalDebit = 0;
         $totalCredit = 0;
-    
+
         foreach ($groupedData as $headCount => $heads) {
+            // Create a separate box for each $headCount and set text color to red
+            $html .= '<div style="border: 2px solid #000; padding: 10px; margin-bottom: 15px;">
+                        <h2 style="color:red; text-align:center; font-size:18px; border-bottom: 2px solid #000;">' . $headCount . '</h2>';
+
             $html .= '<table style="width:100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 10px;">
                         <thead>
-                            <tr><th colspan="6" style="text-align:center;font-size:18px; border-bottom: 2px solid #000;">' . $headCount . '</th></tr>
                             <tr><th style="border: 1px solid #000;">S/No</th>
                                 <th style="border: 1px solid #000;">AC</th>
                                 <th style="border: 1px solid #000;">Account Name</th>
@@ -85,14 +88,15 @@ class RptAccGrpBAController extends Controller
                             </tr>
                         </thead>
                         <tbody>';
+
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add subhead row
                 $html .= '<tr><td colspan="6" style="text-align:center;font-size:15px;font-weight:600; border: 1px solid #000;">' . $subHeadCount . '</td></tr>';
-    
+
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-    
+
                     $html .= '<tr style="background-color:' . $backgroundColor . ';">
                                 <td style="border: 1px solid #000; text-align:center;">' . $count . '</td>
                                 <td style="border: 1px solid #000; text-align:center;">' . $item['ac_code'] . '</td>
@@ -101,18 +105,18 @@ class RptAccGrpBAController extends Controller
                                 <td style="border: 1px solid #000; text-align:right;">' . number_format($item['Debit'], 2) . '</td>
                                 <td style="border: 1px solid #000; text-align:right;">' . number_format($item['Credit'], 2) . '</td>
                             </tr>';
-    
+
                     // Update totals
                     $totalDebit += $item['Debit'];
                     $totalCredit += $item['Credit'];
-    
+
                     $count++;
                 }
             }
-    
-            $html .= '</tbody></table>';
+
+            $html .= '</tbody></table></div>'; // Close the box for the current $headCount
         }
-    
+
         // Add totals row
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
@@ -120,7 +124,7 @@ class RptAccGrpBAController extends Controller
             <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
-    
+
         // Calculate balance and add balance row
         $balance = $totalDebit - $totalCredit;
         $html .= '
@@ -128,11 +132,11 @@ class RptAccGrpBAController extends Controller
             <td colspan="4" style="text-align:right;">Balance:</td>
             <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
         </tr>';
-    
+
         $pdf->writeHTML($html, true, false, true, false, '');
-    
+
         $filename = "balance_all.pdf";
-    
+
         // Determine output type
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
