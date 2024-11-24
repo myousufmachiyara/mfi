@@ -116,7 +116,7 @@ class RptAccNamePur1Controller extends Controller
                 $totalAmount = 0;
                 foreach ($pur_by_account as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                    $html .= '  <tr>
+                    $html .= '  <tr style="background-color:' . $bgColor . ';">
                                     <td>' . $count . '</td>
                                     <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
                                     <td>' . $items['no'] . '</td>
