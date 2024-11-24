@@ -96,15 +96,14 @@ class RptAccGrpBAController extends Controller
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-
-                    $html .= '<tr style="background-color:' . $backgroundColor . ';">
-                                <td style="border: 1px solid #000; text-align:center;">' . $count . '</td>
-                                <td style="border: 1px solid #000; text-align:center;">' . $item['ac_code'] . '</td>
-                                <td style="border: 1px solid #000;">' . $item['ac_name'] . '</td>
-                                <td style="border: 1px solid #000;">' . $item['address'] . ' ' . $item['phone'] . '</td>
-                                <td style="border: 1px solid #000; text-align:right;">' . number_format($item['Debit'], 2) . '</td>
-                                <td style="border: 1px solid #000; text-align:right;">' . number_format($item['Credit'], 2) . '</td>
-                            </tr>';
+                     $html .= '<tr>
+                        <td>' . $count++ . '</td>
+                        <td>' . ($item['ac_code'] ?? "") . '</td>
+                        <td>' . ($item['ac_name'] ?? "") . '</td>
+                        <td>' . ($item['address'] ?? "") . '</td>
+                        <td>' . number_format($item['Debit'], 0) . '</td>
+                        <td>' . number_format($item['Debit'], 0) . '</td>
+                    </tr>';
 
                     // Update totals
                     $totalDebit += $item['Debit'];
