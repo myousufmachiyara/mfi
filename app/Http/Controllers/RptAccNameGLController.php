@@ -403,7 +403,6 @@ class RptAccNameGLController extends Controller
         // Table Headers
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">
                     <tr>
-                        <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                         <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
@@ -436,15 +435,13 @@ class RptAccNameGLController extends Controller
     
             // Add row
             $html .= "<tr style='background-color:{$bgColor};'>
-                        <td style='width:7%;'>{$count}</td>
-                        <td style='width:7%;'>{$items['auto_lager']}</td>
+                        <td style='width:10%;'>{$items['auto_lager']}</td>
                         <td style='width:11%;'>{$items['entry_of']}</td>
                         <td style='width:11%;'>" . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . "</td>
-                        <td style='width:19%;'>{$items['ac2']}</td>
-                        <td style='width:11%;'>{$items['Narration']}</td>
+                        <td style='width:32%;'>{$items['ac2']}<br>{$items['Narration']}</td>
                         <td style='width:12%;'>" . number_format($items['Debit'] ?? 0, 0) . "</td>
                         <td style='width:12%;'>" . number_format($items['Credit'] ?? 0, 0) . "</td>
-                        <td style='width:12%;'>" . number_format($balance, 0) . "</td>
+                        <td style='width:14%;'>" . number_format($balance, 0) . "</td>
                     </tr>";
             $count++;
         }
