@@ -323,7 +323,7 @@ class RptAccNameGLController extends Controller
         return response()->json($response);
     }
 
-    
+
     public function glrPDF(Request $request) {
         // Fetch opening balance records
         $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
@@ -452,7 +452,7 @@ class RptAccNameGLController extends Controller
         // Add totals row
         $num_to_words = $pdf->convertCurrencyToWords($balance);
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="6" style="text-align:right; font-style:italic;">Amount in words: ' . htmlspecialchars($num_to_words) . '</td>
+                    <td colspan="5" style="text-align:right; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="text-align:right;">Total:</td>
                     <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
