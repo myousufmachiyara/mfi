@@ -68,15 +68,15 @@ class RptAccNameGLController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle("General Ledger R");
-        $pdf->SetSubject("General Ledger R");
-        $pdf->SetKeywords('General Ledger R, TCPDF, PDF');
+        $pdf->SetTitle("General Ledger");
+        $pdf->SetSubject("General Ledger");
+        $pdf->SetKeywords('General Ledger, TCPDF, PDF');
         $pdf->setPageOrientation('P');
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
     
         // Document header
-        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger R</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center;font-style:italic;text-decoration:underline;color:#17365D">General Ledger</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Account Info Table
@@ -150,7 +150,7 @@ class RptAccNameGLController extends Controller
                 <td>' . $items['auto_lager'] . '</td>
                 <td>' . $items['entry_of'] . '</td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
-                <td style="font-size: 10px;">' . $items['ac2'] . ' ' . $items['Narration'] . '</td>
+                <td>' . $items['ac2'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
                 <td>' . number_format($items['Credit'], 0) . '</td>
                 <td>' . number_format($balance, 0) . '</td>
@@ -171,7 +171,7 @@ class RptAccNameGLController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Filename and Output
-        $filename = "general_ledger_r_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
+        $filename = "general_ledger_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
 
