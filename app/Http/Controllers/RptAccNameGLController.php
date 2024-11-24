@@ -403,13 +403,13 @@ class RptAccNameGLController extends Controller
         // Table Headers
             $html = '<table border="1" style="border-collapse: collapse;text-align:center">
             <tr>
-                <th style="width:10%;color:#17365D;font-weight:bold;">R/No</th>
-                <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
+                <th style="width:11%;color:#17365D;font-weight:bold;">R/No</th>
+                <th style="width:8%;color:#17365D;font-weight:bold;">Vochr</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                <th style="width:30%;color:#17365D;font-weight:bold;">Details</th>
+                <th style="width:31%;color:#17365D;font-weight:bold;">Details</th>
                 <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
                 <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                <th style="width:14%;color:#17365D;font-weight:bold;">Balance</th>
+                <th style="width:15%;color:#17365D;font-weight:bold;">Balance</th>
             </tr>
             <tr>
                 <th colspan="6" style="text-align: center;font-weight:bold;">+------Opening Balance------+</th>
@@ -436,7 +436,7 @@ class RptAccNameGLController extends Controller
                 <td>' . $items['auto_lager'] . '</td>
                 <td>' . $items['entry_of'] . '</td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
-                <td>' . $items['ac2'] . ' - ' . $items['Narration'] . '</td>
+                <td>' . $items['ac2'] . ' ' . $items['Narration'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
                 <td>' . number_format($items['Credit'], 0) . '</td>
                 <td>' . number_format($balance, 0) . '</td>
@@ -450,7 +450,7 @@ class RptAccNameGLController extends Controller
                     <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
-                    <td style="width:14%;">' . number_format($balance, 0) . '</td>
+                    <td style="width:15%;">' . number_format($balance, 0) . '</td>
                 </tr>';
         
         $html .= '</table>';
