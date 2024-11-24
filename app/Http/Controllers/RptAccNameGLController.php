@@ -401,53 +401,52 @@ class RptAccNameGLController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
     
         // Table Headers
-            $html = '<table border="1" style="border-collapse: collapse;text-align:center">
-            <tr>
-                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
-                <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
-                <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
-                <th style="width:10%;color:#17365D;font-weight:bold;">Remarks</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
-            </tr>
-            <tr>
-                <th colspan="8" style="text-align: right">------Opening Balance------</th>
-                <th style="text-align: left">' . number_format($opening_bal, 0) . '</th>
-            </tr>';
+        $html = '<table border="1" style="border-collapse: collapse;text-align:center">
+        <tr>
+            <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+            <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
+            <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
+            <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
+            <th colspan="2" style="width:28%;color:#17365D;font-weight:bold;">Details</th> <!-- Merged columns -->
+            <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
+            <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
+            <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
+        </tr>
+        <tr>
+            <th colspan="8" style="text-align: right">------Opening Balance------</th>
+            <th style="text-align: left">' . number_format($opening_bal, 0) . '</th>
+        </tr>';
 
-            // Table Rows
-            $count = 1;
-            foreach ($lager_much_all as $items) {
-            $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+        // Table Rows
+        $count = 1;
+        foreach ($lager_much_all as $items) {
+        $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
 
-            // Update running balance
-            if (!empty($items['Debit']) && is_numeric($items['Debit'])) {
-            $balance += $items['Debit'];
-            $totalDebit += $items['Debit'];
-            }
+        // Update running balance
+        if (!empty($items['Debit']) && is_numeric($items['Debit'])) {
+        $balance += $items['Debit'];
+        $totalDebit += $items['Debit'];
+        }
 
-            if (!empty($items['Credit']) && is_numeric($items['Credit'])) {
-            $balance -= $items['Credit'];
-            $totalCredit += $items['Credit'];
-            }
+        if (!empty($items['Credit']) && is_numeric($items['Credit'])) {
+        $balance -= $items['Credit'];
+        $totalCredit += $items['Credit'];
+        }
 
-            // Add row with alternating background color
-            $html .= '<tr style="background-color:' . $bgColor . ';">
-            <td>' . $count . '</td>
-            <td>' . $items['auto_lager'] . '</td>
-            <td>' . $items['entry_of'] . '</td>
-            <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
-            <td>' . $items['ac2'] . '</td>
-            <td>' . $items['Narration'] . '</td>
-            <td>' . number_format($items['Debit'], 0) . '</td>
-            <td>' . number_format($items['Credit'], 0) . '</td>
-            <td>' . number_format($balance, 0) . '</td>
-            </tr>';
-            $count++;
-            }
+        // Add row with alternating background color
+        $html .= '<tr style="background-color:' . $bgColor . ';">
+        <td>' . $count . '</td>
+        <td>' . $items['auto_lager'] . '</td>
+        <td>' . $items['entry_of'] . '</td>
+        <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
+        <td>' . $items['ac2'] . '</td>
+        <td>' . $items['Narration'] . '</td>
+        <td>' . number_format($items['Debit'], 0) . '</td>
+        <td>' . number_format($items['Credit'], 0) . '</td>
+        <td>' . number_format($balance, 0) . '</td>
+        </tr>';
+        $count++;
+        }
 
 
     
