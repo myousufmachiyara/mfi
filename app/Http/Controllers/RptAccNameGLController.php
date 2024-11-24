@@ -323,6 +323,7 @@ class RptAccNameGLController extends Controller
         return response()->json($response);
     }
 
+    
     public function glrPDF(Request $request) {
         // Fetch opening balance records
         $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
@@ -378,7 +379,7 @@ class RptAccNameGLController extends Controller
                     <td style="font-size:12px; font-weight:bold; color:#17365D; padding:5px 10px; border-bottom:1px solid #000; width:70%;">
                         Account Name: <span style="color:black;">' . htmlspecialchars($lager_much_op_bal[0]['ac_name']) . '</span>
                     </td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000; width:30%;">
                         Print Date: <span style="color:black;">' . htmlspecialchars($currentDate) . '</span>
                     </td>
                 </tr>
@@ -392,7 +393,7 @@ class RptAccNameGLController extends Controller
                 </tr>
                 <tr>
                     <td style="padding:5px 10px; border-bottom:1px solid #000; width:70%;"></td>
-                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                    <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; padding:5px 10px; border-bottom:1px solid #000; border-left:1px solid #000; width:30%;">
                         To Date: <span style="color:black;">' . htmlspecialchars($formattedToDate) . '</span>
                     </td>
                 </tr>
@@ -421,7 +422,7 @@ class RptAccNameGLController extends Controller
         $count = 1;
         foreach ($lager_much_all as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-            
+    
             // Update running balance
             if (!empty($items['Debit']) && is_numeric($items['Debit'])) {
                 $balance += $items['Debit'];
@@ -449,13 +450,14 @@ class RptAccNameGLController extends Controller
         }
     
         // Add totals row
-        $html .= '
-        <tr style="background-color:#d9edf7; font-weight:bold;">
-            <td colspan="6" style="text-align:right;">Total:</td>
-            <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
-            <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
-            <td style="width:12%;">' . number_format($balance, 0) . '</td>
-        </tr>';
+        $num_to_words = $pdf->convertCurrencyToWords($balance);
+        $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="6" style="text-align:right; font-style:italic;">Amount in words: ' . htmlspecialchars($num_to_words) . '</td>
+                    <td style="text-align:right;">Total:</td>
+                    <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
+                    <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
+                    <td style="width:12%;">' . number_format($balance, 0) . '</td>
+                  </tr>';
     
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
@@ -464,6 +466,7 @@ class RptAccNameGLController extends Controller
         $filename = "general_ledger_r_of_{$lager_much_op_bal[0]['ac_name']}_from_{$formattedFromDate}_to_{$formattedToDate}.pdf";
         $pdf->Output($filename, 'I');
     }
+    
     
 
     public function glrDownload(Request $request){
