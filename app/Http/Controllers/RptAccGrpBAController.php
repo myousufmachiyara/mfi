@@ -42,7 +42,7 @@ class RptAccGrpBAController extends Controller
         // Generate the PDF
         return $this->bageneratePDF($balance_all, $request);
     }
-
+    
     private function bageneratePDF($balance_all, Request $request)
     {
         $currentDate = Carbon::now();
@@ -63,26 +63,15 @@ class RptAccGrpBAController extends Controller
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-
-        $groupedData = $this->groupByHeadAndSub($balance_all);
-
-        // Table header for data
-        // $html = '
-        //     <table border="1" style="border-collapse: collapse; text-align: center;">
-        //         <tr>
-        //             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-        //             <th style="width:8%;color:#17365D;font-weight:bold;">Code</th>
-        //             <th style="width:32%;color:#17365D;font-weight:bold;">Account Name</th>
-        //             <th style="width:25%;color:#17365D;font-weight:bold;">Address/Phone</th>
-        //             <th style="width:14%;color:#17365D;font-weight:bold;">Debit</th>
-        //             <th style="width:14%;color:#17365D;font-weight:bold;">Credit</th>
-        //         </tr>';
     
-        // Iterate through items and add rows
+        $groupedData = $this->groupByHeadAndSub($balance_all);
+    
+        // Table header for data
+        $html = '';
         $count = 1;
         $totalDebit = 0;
         $totalCredit = 0;
-        $html = '';
+    
         foreach ($groupedData as $headCount => $heads) {
             $html .= '<table style="width:100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 10px;">
                         <thead>
@@ -96,7 +85,6 @@ class RptAccGrpBAController extends Controller
                             </tr>
                         </thead>
                         <tbody>';
-            $count = 1;
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add subhead row
                 $html .= '<tr><td colspan="6" style="text-align:center;font-size:15px;font-weight:600; border: 1px solid #000;">' . $subHeadCount . '</td></tr>';
@@ -114,10 +102,17 @@ class RptAccGrpBAController extends Controller
                                 <td style="border: 1px solid #000; text-align:right;">' . number_format($item['Credit'], 2) . '</td>
                             </tr>';
     
+                    // Update totals
+                    $totalDebit += $item['Debit'];
+                    $totalCredit += $item['Credit'];
+    
                     $count++;
                 }
             }
+    
+            $html .= '</tbody></table>';
         }
+    
         // Add totals row
         $html .= '
         <tr style="background-color:#d9edf7; font-weight:bold;">
@@ -125,21 +120,19 @@ class RptAccGrpBAController extends Controller
             <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
             <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
         </tr>';
-
+    
         // Calculate balance and add balance row
-        $balance = $totalDebit + $totalCredit;
+        $balance = $totalDebit - $totalCredit;
         $html .= '
         <tr style="background-color:#d2edc7; font-weight:bold;">
             <td colspan="4" style="text-align:right;">Balance:</td>
             <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
         </tr>';
-
-            
-        $html .= '</table>';
+    
         $pdf->writeHTML($html, true, false, true, false, '');
-        
+    
         $filename = "balance_all.pdf";
-
+    
         // Determine output type
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
@@ -147,6 +140,7 @@ class RptAccGrpBAController extends Controller
             $pdf->Output($filename, 'I'); // For inline view
         }
     }
+    
 
     private function groupByHeadAndSub($data)
     {
