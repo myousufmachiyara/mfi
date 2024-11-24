@@ -403,14 +403,13 @@ class RptAccNameGLController extends Controller
         // Table Headers
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">
                     <tr>
-                        <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
+                        <th style="width:10%;color:#17365D;font-weight:bold;">R/No</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
                         <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Remarks</th>
+                        <th style="width:32%;color:#17365D;font-weight:bold;">Details</th>
                         <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
                         <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">Balance</th>
+                        <th style="width:14%;color:#17365D;font-weight:bold;">Balance</th>
                     </tr>
                     <tr>
                         <th colspan="8" style="text-align: right">------Opening Balance------</th>
