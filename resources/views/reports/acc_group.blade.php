@@ -336,7 +336,7 @@
                             // Iterate through each subhead
                             $.each(heads, function(subHeadCount, subheads) {
                                 html += `<tbody>
-                                            <tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600;'>${subHeadCount}</td></tr>`;
+                                            <tr><td colspan='6' style="background-color: #cfe8e3; text-align: center; font-weight: bold;"'>${subHeadCount}</td></tr>`;
 
                                 // Iterate through each item in the subhead
                                 $.each(subheads, function(itemCount, item) {
