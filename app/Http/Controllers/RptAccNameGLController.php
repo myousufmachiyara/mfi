@@ -403,7 +403,7 @@ class RptAccNameGLController extends Controller
         // Table Headers
             $html = '<table border="1" style="border-collapse: collapse;text-align:center">
             <tr>
-                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+                // <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                 <th style="width:7%;color:#17365D;font-weight:bold;">R/No</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Voucher</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
@@ -434,7 +434,7 @@ class RptAccNameGLController extends Controller
         
             // Add row with merged Account Name & Remarks column
             $html .= '<tr style="background-color:' . $bgColor . ';">
-                <td>' . $count . '</td>
+                // <td>' . $count . '</td>
                 <td>' . $items['auto_lager'] . '</td>
                 <td>' . $items['entry_of'] . '</td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
