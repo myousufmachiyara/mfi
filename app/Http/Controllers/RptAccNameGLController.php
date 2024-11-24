@@ -422,19 +422,19 @@ class RptAccNameGLController extends Controller
         $count = 1;
         foreach ($lager_much_all as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-    
+
             // Update running balance
             if (!empty($items['Debit']) && is_numeric($items['Debit'])) {
                 $balance += $items['Debit'];
                 $totalDebit += $items['Debit'];
             }
-    
+
             if (!empty($items['Credit']) && is_numeric($items['Credit'])) {
                 $balance -= $items['Credit'];
                 $totalCredit += $items['Credit'];
             }
-    
-            // Add row
+
+            // Add row with alternating background color
             $html .= "<tr style='background-color:{$bgColor};'>
                         <td style='width:7%;'>{$count}</td>
                         <td style='width:7%;'>{$items['auto_lager']}</td>
@@ -448,6 +448,7 @@ class RptAccNameGLController extends Controller
                     </tr>";
             $count++;
         }
+
     
         // Add totals row
         $num_to_words = $pdf->convertCurrencyToWords($balance);
