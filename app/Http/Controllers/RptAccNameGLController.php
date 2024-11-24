@@ -449,8 +449,7 @@ class RptAccNameGLController extends Controller
         // Add totals row
         $num_to_words = $pdf->convertCurrencyToWords($balance);
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
-                    <td style="text-align:right;">Total:</td>
+                    <td colspan="5" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
                     <td style="width:12%;">' . number_format($balance, 0) . '</td>
