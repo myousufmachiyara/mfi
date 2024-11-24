@@ -436,7 +436,7 @@ class RptAccNameGLController extends Controller
                 <td>' . $items['auto_lager'] . '</td>
                 <td>' . $items['entry_of'] . '</td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
-                <td style="font-size: 5px;">' . $items['ac2'] . ' ' . $items['Narration'] . '</td>
+                <td style="font-size: 8px;">' . $items['ac2'] . ' ' . $items['Narration'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
                 <td>' . number_format($items['Credit'], 0) . '</td>
                 <td>' . number_format($balance, 0) . '</td>
