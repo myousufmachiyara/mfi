@@ -361,11 +361,12 @@
 
                             // Append subtotal for the subhead
                             html += `
-                                <tr style="background-color: #FFFFFF;">
-                                    <td colspan="4" class="text-center"><strong>Sub Total for ${subHeadCount}</strong></td>
-                                    <td class="text-danger">><strong>${subtotaldebit.toFixed(0)}></strong></td>
-                                    <td class="text-danger">><strong>${subtotalcredit.toFixed(0)}></strong></td>
-                                </tr>`;
+                            <tr style="background-color: #FFFFFF;">
+                                <td colspan="4" class="text-center"><strong>Sub Total for ${subHeadCount}</strong></td>
+                                <td class="text-danger"><strong>${subtotaldebit.toFixed(0)}</strong></td>
+                                <td class="text-danger"><strong>${subtotalcredit.toFixed(0)}</strong></td>
+                            </tr>`;
+
                         });
 
                         // Append the subtotal for the head
