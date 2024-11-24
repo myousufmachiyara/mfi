@@ -79,12 +79,12 @@ class RptAccGrpBAController extends Controller
 
             $html .= '<table style="width:100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 10px;">
                         <thead>
-                            <tr><th style="border: 1px solid #000;">S/No</th>
-                                <th style="border: 1px solid #000;">AC</th>
-                                <th style="border: 1px solid #000;">Account Name</th>
-                                <th style="border: 1px solid #000;">Address</th>
-                                <th style="border: 1px solid #000;">Debit</th>
-                                <th style="border: 1px solid #000;">Credit</th>
+                            <tr><th style="width:8%;color:#17365D;font-weight:bold;">S/No</th>
+                                <th style="width:10%;color:#17365D;font-weight:bold;">AC</th>
+                                <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
+                                <th style="width:25%;color:#17365D;font-weight:bold;">Address</th>
+                                <th style="width:16%;color:#17365D;font-weight:bold;">Debit</th>
+                                <th style="width:16%;color:#17365D;font-weight:bold;">Credit</th>
                             </tr>
                         </thead>
                         <tbody>';
