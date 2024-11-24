@@ -300,71 +300,87 @@
             }
 
             else if (tabId === "#BA") {
-                // Cache table body element
-                const $tableBody = $('#BATbleBody');
-                
-                // Define URL and table ID
-                const url = "/rep-by-acc-grp/ba";
-                
-                // Start the AJAX request
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    beforeSend: function() {
-                        // Show loading message before the data is fetched
-                        $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr></table>');
-                    },
-                    success: function(result) {
-                        // Clear previous content
-                        $tableBody.empty();
+            // Cache table body element
+            const $tableBody = $('#BATbleBody');
 
-                        // Group data by head and subhead
-                        const AllData = groupByHeadAndSub(result);
+            // Define URL and table ID
+            const url = "/rep-by-acc-grp/ba";
 
-                        // Initialize HTML for the table
-                        let html = '';
+            // Start the AJAX request
+            $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function() {
+                    // Show loading message before the data is fetched
+                    $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center">Loading Data Please Wait...</td></tr></table>');
+                },
+                success: function(result) {
+                    // Clear previous content
+                    $tableBody.empty();
 
-                        // Iterate through each head
-                        $.each(AllData, function(headCount, heads) {
-                            // Table structure for each head
-                            html += `<table class='table table-bordered table-striped mb-0'>
-                                        <thead>
-                                            <tr><th colspan='6' style='text-align:center;font-size:18px;'>${headCount}</th></tr>
-                                            <tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>
-                                        </thead>`;
+                    // Group data by head and subhead
+                    const AllData = groupByHeadAndSub(result);
 
-                            // Iterate through each subhead
-                            $.each(heads, function(subHeadCount, subheads) {
-                                html += `<tbody>
-                                            <tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600;'>${subHeadCount}</td></tr>`;
+                    // Initialize HTML for the table
+                    let html = '';
 
-                                // Iterate through each item in the subhead
-                                $.each(subheads, function(itemCount, item) {
-                                    html += `<tr>
-                                                <td>${itemCount + 1}</td>
-                                                <td>${item.ac_code || ""}</td>
-                                                <td>${item.ac_name || ""}</td>
-                                                <td>${item.address || ""}</td>
-                                                <td>${item.Debit || ""}</td>
-                                                <td>${item.Credit || ""}</td>
-                                            </tr>`;
-                                });
+                    // Iterate through each head
+                    $.each(AllData, function(headCount, heads) {
+                        // Table structure for each head
+                        html += `<table class='table table-bordered table-striped mb-0'>
+                                    <thead>
+                                        <tr><th colspan='6' style='text-align:center;font-size:18px;'>${headCount}</th></tr>
+                                        <tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>
+                                    </thead>`;
 
-                                html += `</tbody>`;
+                        // Iterate through each subhead
+                        $.each(heads, function(subHeadCount, subheads) {
+                            let subHeadDebitTotal = 0; // Initialize total for Debit
+                            let subHeadCreditTotal = 0; // Initialize total for Credit
+
+                            html += `<tbody>
+                                        <tr><td colspan='6' style='text-align:center;font-size:15px;font-weight:600;'>${subHeadCount}</td></tr>`;
+
+                            // Iterate through each item in the subhead
+                            $.each(subheads, function(itemCount, item) {
+                                const debit = parseFloat(item.Debit) || 0; // Ensure Debit is a number
+                                const credit = parseFloat(item.Credit) || 0; // Ensure Credit is a number
+
+                                // Add to the totals
+                                subHeadDebitTotal += debit;
+                                subHeadCreditTotal += credit;
+
+                                html += `<tr>
+                                            <td>${itemCount + 1}</td>
+                                            <td>${item.ac_code || ""}</td>
+                                            <td>${item.ac_name || ""}</td>
+                                            <td>${item.address || ""}</td>
+                                            <td>${debit.toFixed(2) || ""}</td>
+                                            <td>${credit.toFixed(2) || ""}</td>
+                                        </tr>`;
                             });
 
-                            html += `</table>`;
+                            // Add row for totals in the subhead section
+                            html += `<tr>
+                                        <td colspan='4' style='text-align:right;font-weight:bold;'>Total</td>
+                                        <td>${subHeadDebitTotal.toFixed(2)}</td>
+                                        <td>${subHeadCreditTotal.toFixed(2)}</td>
+                                    </tr>`;
+
+                            html += `</tbody>`;
                         });
 
-                        // Append all the generated HTML at once
-                        $tableBody.html(html);
-                    },
-                    error: function() {
-                        // Show error message if the AJAX request fails
-                        $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr></table>');
-                    }
-                });
-            }
+                        html += `</table>`;
+                    });
+
+                    // Append all the generated HTML at once
+                    $tableBody.html(html);
+                },
+                error: function() {
+                    // Show error message if the AJAX request fails
+                    $tableBody.html('<table class="table table-bordered table-striped mb-0"><tr><td colspan="6" class="text-center text-danger">Error loading data. Please try again.</td></tr></table>');
+                }
+            });
         }
 
         function getReport() {
@@ -450,6 +466,7 @@
             }
         }
 
+        // Function to group data by head and subhead
         function groupByHeadAndSub(data) {
             const groupedData = {};
 
@@ -470,6 +487,7 @@
 
             return groupedData;
         }
+
 
     </script>
 </html>
