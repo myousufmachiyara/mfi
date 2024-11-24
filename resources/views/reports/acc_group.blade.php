@@ -329,7 +329,7 @@
                             // Table structure for each head
                             html += `<table class='table table-bordered table-striped mb-0'>
                                         <thead>
-                                            <tr><th class="text-danger" colspan="6" style="text-align:center; font-size:18px;">${headCount}</th></tr>
+                                            <tr><th class="text-danger" colspan="6" style="text-align:center; font-size:22px;">${headCount}</th></tr>
                                             <tr><th>S/No</th><th>AC</th><th>Account Name</th><th>Address</th><th>Debit</th><th>Credit</th></tr>
                                         </thead>`;
 
