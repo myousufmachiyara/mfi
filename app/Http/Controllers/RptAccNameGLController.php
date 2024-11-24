@@ -412,8 +412,8 @@ class RptAccNameGLController extends Controller
                 <th style="width:14%;color:#17365D;font-weight:bold;">Balance</th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center">+------Opening Balance------+</th>
-                <th style="text-align: left">' . number_format($opening_bal, 0) . '</th>
+                <th colspan="6" style="text-align: center;font-weight:bold;">+------Opening Balance------+</th>
+                <th style="text-align: center">' . number_format($opening_bal, 0) . '</th>
             </tr>';
         
         $count = 1;
@@ -450,7 +450,7 @@ class RptAccNameGLController extends Controller
                     <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
-                    <td style="width:12%;">' . number_format($balance, 0) . '</td>
+                    <td style="width:14%;">' . number_format($balance, 0) . '</td>
                 </tr>';
         
         $html .= '</table>';
