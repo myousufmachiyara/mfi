@@ -201,16 +201,17 @@
                                             <thead>
                                                 <tr>
                                                     <th>S/No</th>
-                                                    <th>Voucher </th>
+                                                    <th>Bill No.</th>
                                                     <th>Date</th>
                                                     <th>Detail</th>
                                                     <th>Bill Amount</th>
-                                                    <th>Balance Amount</th>
-                                                    <th>Amount Due</th>
+                                                    <th>UnPaid Amount</th>
                                                     <th>1-20 Days</th>
                                                     <th>21-35 Days</th>
                                                     <th>36-50 Days</th>
                                                     <th>Over 50 Days</th>
+                                                    <th>Cleared In Days</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="SaleAgeTbleBody">
@@ -221,8 +222,54 @@
                                 </div>
                             </div>
                             <div id="pur_age" class="tab-pane">
-                                <p>Ageing</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+                                <div class="row form-group pb-3">
+                                    <div class="col-lg-6">
+                                        <div class="bill-to">
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold" style="display: flex; align-items: center;">
+                                                <span style="color: #17365D;">From: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur_age_from"></span>
+                                            
+                                                <span style="flex: 0.3;"></span> <!-- Spacer to push the "To" to the right -->
+                                            
+                                                <span style="color: #17365D;">To: &nbsp;</span>
+                                                <span style="font-weight: 400; color: black;" id="pur_age_to"></span>
+                                            </h4>
+                                            
+                                            <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+                                                <span style="color:#17365D;font-size:20px;">Account Name: &nbsp;</span>
+                                                <span style="font-weight:400; color:rgb(238, 19, 19);font-size:20px;" id="pur_age_acc"></span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 text-end">
+                                        <a class="mb-1 mt-1 me-1 btn btn-warning" aria-label="Download" onclick="downloadPDF('pur_ageing')"><i class="fa fa-download"></i> Download</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-danger" aria-label="Print PDF" onclick="printPDF('pur_ageing')"><i class="fa fa-file-pdf"></i> Print PDF</a>
+                                        <a class="mb-1 mt-1 me-1 btn btn-success" aria-label="Export to Excel" onclick="downloadExcel('purs_ageing')"><i class="fa fa-file-excel"></i> Excel</a>      
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>Bill No.</th>
+                                                    <th>Date</th>
+                                                    <th>Detail</th>
+                                                    <th>Bill Amount</th>
+                                                    <th>UnPaid Amount</th>
+                                                    <th>1-20 Days</th>
+                                                    <th>21-35 Days</th>
+                                                    <th>36-50 Days</th>
+                                                    <th>Over 50 Days</th>
+                                                    <th>Cleared In Days</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="PurAgeTbleBody">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="sale_1" class="tab-pane">
                                 <div class="row form-group pb-3">
@@ -737,7 +784,7 @@
                             $.each(result['lager_much_all'], function(k, v) {
                                 var html = "<tr>";
                                 html += "<td>" + (k + 1) + "</td>";
-                                html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                                html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
                                 html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
@@ -789,49 +836,131 @@
                 tableID="#SaleAgeTbleBody";
 
                 $.ajax({
-                    type: "GET",
-                    url: url,
-                    data:{
-                        fromDate: fromDate,
-                        toDate: toDate,
-                        acc_id:acc_id,
-                    }, 
-                    beforeSend: function() {
-                        $(tableID).html('<tr><td colspan="11" class="text-center">Loading Data Please Wait...</td></tr>');
-                    },
-                    success: function(result){
-                        $('#sale_age_from').text(formattedfromDate);
-                        $('#sale_age_to').text(formattedtoDate);
-                        var selectedAcc = $('#acc_id').find("option:selected").text();
-                        
-                        $('#sale_age_acc').text(selectedAcc);
-                        $(tableID).empty(); // Clear the loading message
+                type: "GET",
+                url: url,
+                data: {
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    acc_id: acc_id,
+                },
+                beforeSend: function () {
+                    $(tableID).html('<tr><td colspan="12" class="text-center">Loading Data Please Wait...</td></tr>');
+                },
+                success: function (result) {
+                    // Update the header fields with the formatted dates and selected account name
+                    $('#sale_age_from').text(formattedfromDate);
+                    $('#sale_age_to').text(formattedtoDate);
+                    var selectedAcc = $('#acc_id').find("option:selected").text();
+                    $('#sale_age_acc').text(selectedAcc);
 
-                        var totalCrAmt = 0; // Variable to accumulate total
-
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + ((v['sale_prefix'] ? v['sale_prefix'] : "") + " " + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "")).trim() + "</td>";
-                            html += "<td>" + (v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td></td>";
-                            html += "<td>" + (v['bill_amount'] ? v['bill_amount'] : "") + "</td>";
-                            html += "<td>" + (v['remaining_amount'] ? v['remaining_amount'] : "0") + "</td>";
-                            html += "<td>" + ((v['bill_amount'] ? v['bill_amount'] : "0") - (v['total_jv_amt'] ? v['total_jv_amt'] : "0") )+ "</td>";
-                            html += "<td>" + (v['1_20_Days'] ? v['1_20_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['21_35_Days'] ? v['21_35_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['36_50_Days'] ? v['36_50_Days'] : "") +  "</td>";
-                            html += "<td>" + (v['over_50_Days'] ? v['over_50_Days'] : "") +  "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        $(tableID).html('<tr><td colspan="11" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                    // Check if the result has data
+                    if (!result.length) {
+                        $(tableID).html('<tr><td colspan="12" class="text-center">No data available for the selected criteria.</td></tr>');
+                        return;
                     }
-                });
+
+                    var rows = '';
+                    $.each(result, function (k, v) {
+                        // Parse remaining amount and handle possible issues with null/undefined or invalid values
+                        const remainingAmount = isNaN(parseFloat(v['remaining_amount'])) ? 0 : parseFloat(v['remaining_amount']);
+                        
+                        // Apply red color style if remaining amount is not 0
+                        const maxDaysStyle = (remainingAmount !== 0) ? "color: red;" : "";
+                        
+                        // Generate row
+                        rows += `<tr>
+                            <td>${k + 1}</td>
+                            <td>${(v['sale_prefix'] ? v['sale_prefix'] : '')} ${(v['Sal_inv_no'] ? v['Sal_inv_no'] : '')}</td>
+                            <td>${v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : ''}</td>
+                            <td>${(v['ac2'] ? v['ac2'] : '')} ${(v['remarks'] ? v['remarks'] : '')}</td>
+                            <td>${v['bill_amount'] ? v['bill_amount'] : ''}</td>
+                            <td>${remainingAmount}</td>
+                            <td>${v['1_20_Days'] ? v['1_20_Days'] : ''}</td>
+                            <td>${v['21_35_Days'] ? v['21_35_Days'] : ''}</td>
+                            <td>${v['36_50_Days'] ? v['36_50_Days'] : ''}</td>
+                            <td>${v['over_50_Days'] ? v['over_50_Days'] : ''}</td>
+                            <td style="${maxDaysStyle}">${v['max_days'] ? v['max_days'] : ''}</td>
+                            <td>${remainingAmount === 0 ? 'Cleared' : 'Not Cleared'}</td>
+                        </tr>`;
+                    });
+
+                    // Replace table content with new rows
+                    $(tableID).html(rows);
+                },
+                error: function (xhr, status, error) {
+                    $(tableID).html(`<tr><td colspan="11" class="text-center text-danger">
+                        Error loading data: ${xhr.responseText || error}.
+                    </td></tr>`);
+                }
+            });
+
             }
             else if(tabId=="#pur_age"){
+                var table = document.getElementById('PurAgeTbleBody');
+                    while (table.rows.length > 0) {
+                        table.deleteRow(0);
+                    }
+                    url="/rep-by-acc-name/pur_age";
+                    tableID="#PurAgeTbleBody";
+
+                    $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        acc_id: acc_id,
+                    },
+                    beforeSend: function () {
+                        $(tableID).html('<tr><td colspan="12" class="text-center">Loading Data Please Wait...</td></tr>');
+                    },
+                    success: function (result) {
+                        // Update the header fields with the formatted dates and selected account name
+                        $('#pur_age_from').text(formattedfromDate);
+                        $('#pur_age_to').text(formattedtoDate);
+                        var selectedAcc = $('#acc_id').find("option:selected").text();
+                        $('#pur_age_acc').text(selectedAcc);
+
+                        // Check if the result has data
+                        if (!result.length) {
+                            $(tableID).html('<tr><td colspan="12" class="text-center">No data available for the selected criteria.</td></tr>');
+                            return;
+                        }
+
+                        var rows = '';
+                        $.each(result, function (k, v) {
+                            // Parse remaining amount and handle possible issues with null/undefined or invalid values
+                            const remainingAmount = isNaN(parseFloat(v['remaining_amount'])) ? 0 : parseFloat(v['remaining_amount']);
+                            
+                            // Apply red color style if remaining amount is not 0
+                            const maxDaysStyle = (remainingAmount !== 0) ? "color: red;" : "";
+                            
+                            // Generate row
+                            rows += `<tr>
+                                <td>${k + 1}</td>
+                                <td>${(v['sale_prefix'] ? v['sale_prefix'] : '')} ${(v['Sal_inv_no'] ? v['Sal_inv_no'] : '')}</td>
+                                <td>${v['bill_date'] ? moment(v['bill_date']).format('DD-MM-YYYY') : ''}</td>
+                                <td>${(v['ac2'] ? v['ac2'] : '')} ${(v['remarks'] ? v['remarks'] : '')}</td>
+                                <td>${v['bill_amount'] ? v['bill_amount'] : ''}</td>
+                                <td>${remainingAmount}</td>
+                                <td>${v['1_20_Days'] ? v['1_20_Days'] : ''}</td>
+                                <td>${v['21_35_Days'] ? v['21_35_Days'] : ''}</td>
+                                <td>${v['36_50_Days'] ? v['36_50_Days'] : ''}</td>
+                                <td>${v['over_50_Days'] ? v['over_50_Days'] : ''}</td>
+                                <td style="${maxDaysStyle}">${v['max_days'] ? v['max_days'] : ''}</td>
+                                <td>${remainingAmount === 0 ? 'Cleared' : 'Not Cleared'}</td>
+                            </tr>`;
+                        });
+
+                        // Replace table content with new rows
+                        $(tableID).html(rows);
+                    },
+                    error: function (xhr, status, error) {
+                        $(tableID).html(`<tr><td colspan="11" class="text-center text-danger">
+                            Error loading data: ${xhr.responseText || error}.
+                        </td></tr>`);
+                    }
+                });
             }
             else if(tabId=="#sale_1"){
                 var table = document.getElementById('Sale1TbleBody');
@@ -1290,11 +1419,19 @@
             }
 
             if (tabName === "gl") {
-                window.location.href = `/rep-by-acc-name/gl/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/gl/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "glr") {
-                window.location.href = `/rep-by-acc-name/glr/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+                window.open(`/rep-by-acc-name/glr/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            }
+
+            else if (tabName === "sales_ageing") {
+                window.open(`/rep-by-acc-name/sales_age/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
+            }
+
+            else if (tabName === "pur_ageing") {
+                window.open(`/rep-by-acc-name/pur_age/PDF?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`, '_blank');
             }
 
             else if (tabName === "purchase1") {
@@ -1341,6 +1478,14 @@
 
             else if (tabName === "glr") {
                 window.location.href = `/rep-by-acc-name/glr/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "sales_ageing") {
+                window.location.href = `/rep-by-acc-name/sales_age/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
+            }
+
+            else if (tabName === "pur_ageing") {
+                window.location.href = `/rep-by-acc-name/pur_age/download?fromDate=${fromDate}&toDate=${toDate}&acc_id=${acc_id}`;
             }
 
             else if (tabName === "purchase1") {

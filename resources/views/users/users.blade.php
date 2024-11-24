@@ -35,24 +35,8 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                    <div>
-                                        <div class="col-md-5" style="display:flex;">
-                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
-                                                <option selected disabled>Search by</option>
-                                                <option value="0">by ID</option>
-                                                <option value="1">by Employee Name</option>
-                                                <option value="2">by Username</option>
-                                                <option value="3">by Role</option>
-                                                <option value="4">by CNIC</option>
-                                                <option value="5">by Address</option>
-                                                <option value="6">by Phone No.</option>
-                                                <option value="7">by Email</option>
-                                            </select>
-                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
-                                        </div>
-                                    </div>
-                                    <div class="modal-wrapper" style="overflow-x:auto">
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                    <div class="modal-wrapper">
+                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>

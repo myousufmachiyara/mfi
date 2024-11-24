@@ -62,6 +62,7 @@
 		.sidebar-logo{
 			width:30%;
 		}
+
 		@media (min-width: 768px) {
 			.cust-pad {
 				padding: 85px 20px 0px 20px;
@@ -72,6 +73,7 @@
 			.sidebar-logo{
 				width:50%;
 			}	
+			
 		}
     </style>
 	<div id="timeoutModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">

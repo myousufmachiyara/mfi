@@ -2330,7 +2330,7 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 /* Page Header - Mobile */
 @media only screen and (max-width: 767px) {
 	.page-header {
-		padding: 0px 15px 0px 15px;
+		padding: 0px 25px 0px 25px;
 	}
 
 	.page-header .breadcrumbs {
@@ -2350,6 +2350,9 @@ html.sidebar-right-opened .page-header .sidebar-right-toggle i:before {
 		position: absolute;
 		right: 0;
 		top: 0;
+	}
+	.table-scroll{
+		overflow-x: auto;
 	}
 }
 
@@ -17729,7 +17732,7 @@ p.drop-caps.drop-caps-style-2:first-letter {
 	border: none;
 	box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
 	box-sizing: content-box;
-	left: -54px !important;
+	left: -15px !important;
 	padding: 0px 0px;
 	top: 41px !important;
 	transform: none !important;

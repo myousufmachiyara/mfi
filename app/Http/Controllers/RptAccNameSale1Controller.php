@@ -115,15 +115,16 @@ class RptAccNameSale1Controller extends Controller
         $totalAmount = 0;
         foreach ($sale_by_account as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-            $html .= "<tr style='background-color:{$bgColor};'>
-                        <td style='width:7%;'>{$count}</td>
-                        <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                        <td style='width:16%;'>{$items['sal_inv']}</td>
-                        <td style='width:11%;'>{$items['bill']}</td>
-                        <td style='width:22%;'>{$items['ac2']}</td>
-                        <td style='width:15%;'>{$items['remarks']}</td>
-                        <td style='width:15%;'>" . number_format($items['cr_amt'], 0) . "</td>
-                    </tr>";
+            $html .= '<tr style="background-color:' . $bgColor . ';">
+                        <td>' . $count . '</td>
+                        <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
+                        <td>' . $items['sal_inv'] . '</td>
+                        <td>' . $items['bill'] . '</td>
+                        <td>' . $items['ac2'] . '</td>
+                        <td>' . $items['remarks'] . '</td>
+                        <td>' . number_format($items['cr_amt'], 0) . '</td>
+                    </tr>';
+
                 $totalAmount += $items['cr_amt'];
                 $count++;
             }
@@ -220,15 +221,16 @@ class RptAccNameSale1Controller extends Controller
         $totalAmount = 0;
         foreach ($sale_by_account as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-            $html .= "<tr style='background-color:{$bgColor};'>
-                        <td style='width:7%;'>{$count}</td>
-                        <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                        <td style='width:16%;'>{$items['sal_inv']}</td>
-                        <td style='width:11%;'>{$items['bill']}</td>
-                        <td style='width:22%;'>{$items['ac2']}</td>
-                        <td style='width:15%;'>{$items['remarks']}</td>
-                        <td style='width:15%;'>" . number_format($items['cr_amt'], 0) . "</td>
-                    </tr>";
+            $html .= '<tr style="background-color:' . $bgColor . ';">
+                        <td>' . $count . '</td>
+                        <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
+                        <td>' . $items['sal_inv'] . '</td>
+                        <td>' . $items['bill'] . '</td>
+                        <td>' . $items['ac2'] . '</td>
+                        <td>' . $items['remarks'] . '</td>
+                        <td>' . number_format($items['cr_amt'], 0) . '</td>
+                    </tr>';
+
                 $totalAmount += $items['cr_amt'];
                 $count++;
             }

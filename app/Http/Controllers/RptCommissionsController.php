@@ -33,11 +33,14 @@ class RptCommissionsController extends Controller
             'outputType' => 'required|in:download,view',
         ]);
     
-        $comm_pipe_rpt = comm_pipe_rpt::where('item',$request->acc_id)
+        $comm_pipe_rpt = comm_pipe_rpt::where('item', $request->acc_id)
+        ->join('item_group', 'comm_pipe_rpt.item', '=', 'item_group.item_group_cod')
         ->whereBetween('sa_date', [$request->fromDate, $request->toDate])
+        ->select('comm_pipe_rpt.*', 'item_group.group_name', 'item_group.group_remarks')
         ->orderBy('ac_name', 'asc')
         ->orderBy('sa_date', 'asc')
         ->get();
+
     
         // Check if data exists
         if ($comm_pipe_rpt->isEmpty()) {
@@ -58,7 +61,7 @@ class RptCommissionsController extends Controller
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
-        $pdf->SetTitle('Commission Report Of Item ' . $request->acc_id);
+        $pdf->SetTitle('Commission Report Of Item ' . $comm_pipe_rpt[0]['group_name']);
         $pdf->SetSubject('Commission Report');
         $pdf->SetKeywords('Commission Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
@@ -75,16 +78,24 @@ class RptCommissionsController extends Controller
         $html = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
+                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:70%;">
+                    Item Group: <span style="color:black;">' . $comm_pipe_rpt[0]['group_name'] . '</span>
+                </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     Print Date: <span style="color:black;">' . $formattedDate . '</span>
                 </td>
             </tr>
             <tr>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:70%;">
+                    Group Remarks: <span style="color:black;">' . $comm_pipe_rpt[0]['group_remarks'] . '</span>
+                </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
                     From Date: <span style="color:black;">' . $formattedFromDate . '</span>
                 </td>
             </tr>
             <tr>
+             <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:70%;">
+                </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
                     To Date: <span style="color:black;">' . $formattedToDate . '</span>
                 </td>
@@ -178,12 +189,13 @@ class RptCommissionsController extends Controller
                 $html .= '
                 <tr style="background-color: #FFFFFF;">
                     <td colspan="4" class="text-center"><strong>Subtotal for '. $lastAccountName . '</strong></td>
-                    <td class="text-danger">' . number_format($subtotalBAmount, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalBAmount, 0) . '</strong></td>
                     <td></td>
                     <td></td>
-                    <td class="text-danger">' . number_format($subtotalCommDisc, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalCommDisc, 0) . '</strong></td>
                     <td></td>
-                    <td class="text-danger">' . number_format($subtotalCdDisc, 0) . '</td>
+                    <td style="color:red;"><strong>' . number_format($subtotalCdDisc, 0) . '</strong></td>
+
                 </tr>';
             }
 
@@ -196,7 +208,7 @@ class RptCommissionsController extends Controller
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $acc_id=$request->acc_id;
 
-        $filename = "commission_report_of_{$acc_id}_{$fromDate}_to_{$toDate}.pdf";
+        $filename = "commission_report_of_{$comm_pipe_rpt[0]['group_name']}_{$fromDate}_to_{$toDate}.pdf";
 
         // Determine output type
         if ($request->outputType === 'download') {

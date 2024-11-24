@@ -77,7 +77,7 @@ class RptAccGrpSHOAController extends Controller
         $pdf->setCellPadding(1.2);
     
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Closing Balance</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Sub Head Of Account Report</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details

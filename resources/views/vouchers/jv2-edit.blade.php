@@ -2,7 +2,7 @@
 	<body>
 		<section class="body">
 		@include('../layouts.pageheader')
-			<div class="inner-wrapper">
+			<div class="inner-wrapper cust-pad">
 				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-jv2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="updateForm">
 						@csrf
@@ -286,7 +286,7 @@
 											<div class="row form-group mb-2">
 												<div class="col-4 mb-2">
 													<label class="col-form-label">Account Name <span><a onclick="refreshPurAgeing()" id="PurrefreshBtn" name="pur_customer_name" style="display:none"><i class="bx bx-refresh" style="font-size: 20px;color: red;"> </i></a></span> </label>
-													<select data-plugin-selecttwo class="form-control select2-js" id="pur_customer_name" onchange="getPurPendingInvoices()" required>
+													<select data-plugin-selecttwo class="form-control select2-js" name="pur_customer_name" id="pur_customer_name" onchange="getPurPendingInvoices()" required>
 														<option value="0" disabled selected>Select Account</option>
 														@foreach($acc as $key1 => $row1)	
 															<option value="{{$row1->ac_code}}">{{$row1->ac_name}}</option>

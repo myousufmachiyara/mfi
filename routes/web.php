@@ -1,7 +1,6 @@
 <?php
 
     use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\MacAddressController;
 
     // Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
@@ -291,6 +290,7 @@
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::get('/backup-database', [App\Http\Controllers\DatabaseBackupController::class, 'backupDatabase'])->name('backup.database');
         Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
         Route::get('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
         Route::post('/change-user-password', [App\Http\Controllers\UsersController::class, 'updateUserPassowrd'])->name('change-user-password');
@@ -380,6 +380,12 @@
         Route::get('/rep-by-acc-name/sales_age/excel', [App\Http\Controllers\RptAccNameSalesAgeingController::class, 'salesAgeingExcel'])->name('sales-ageing-rep-by-acc-name-excel');
         Route::get('/rep-by-acc-name/sales_age/PDF', [App\Http\Controllers\RptAccNameSalesAgeingController::class, 'salesAgeingPDF'])->name('sales-ageing-rep-by-acc-name-PDF');
         Route::get('/rep-by-acc-name/sales_age/download', [App\Http\Controllers\RptAccNameSalesAgeingController::class, 'salesAgeingDownload'])->name('sales-ageing-rep-by-acc-name-download');
+
+        // RPT by Acc Name Purchase Ageing
+        Route::get('/rep-by-acc-name/pur_age', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeing'])->name('pur-ageing-rep-by-acc-name');
+        Route::get('/rep-by-acc-name/pur_age/excel', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingExcel'])->name('pur-ageing-rep-by-acc-name-excel');
+        Route::get('/rep-by-acc-name/pur_age/PDF', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingPDF'])->name('pur-ageing-rep-by-acc-name-PDF');
+        Route::get('/rep-by-acc-name/pur_age/download', [App\Http\Controllers\RptAccNamePurAgeingController::class, 'purAgeingDownload'])->name('pur-ageing-rep-by-acc-name-download');
 
         // RPT by Acc Name Purchase 1
         Route::get('/rep-by-acc-name/pur1', [App\Http\Controllers\RptAccNamePur1Controller::class, 'purchase1'])->name('pur1-rep-by-acc-name');
@@ -516,7 +522,6 @@
         Route::get('/rep-comm/comm/report', [App\Http\Controllers\RptCommissionsController::class, 'commReport'])->name('comm-rep-report');
 
 
-        // Getting MAC Address 
-        Route::get('/mac-address', [MacAddressController::class, 'showMacAddress'])->name('mac.address');
+        
 
     });

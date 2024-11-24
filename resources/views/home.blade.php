@@ -8,7 +8,7 @@
 		.icon-container {
 			background-size: auto; /* Adjust the size of the icon to fit within the div */
 			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
-			background-position: right center; /* Align the icon to the center-right */
+			background-position: right bottom; /* Align the icon to the center-right */
 		}
 		/* Initially hide the masked data */
 		.masked-data {
@@ -43,7 +43,7 @@
 							<div class="col-12 col-md-3 mb-2">
 								<section class="card card-featured-left card-featured-primary">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
-										<h3 class="amount text-dark"><strong>Post Date Cheques</strong></h3>
+										<h3 class="amount text-dark"><strong>Post Dated Cheques</strong></h3>
 										@if(isset($pdc) && isset($pdc->Total_Balance))
 											<h2 class="amount m-0 text-primary actual-data">
 												<strong data-value="{{ $pdc->Total_Balance }}">0</strong>
@@ -251,7 +251,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-success mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-in-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
 										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
 										<h2 class="amount m-0 text-success actual-data">
@@ -321,7 +321,7 @@
 								</section>
 
 								<section class="card card-featured-left card-featured-tertiary mt-3">
-									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-out-icon.png'); ">
 										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
 										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
 										<h2 class="amount m-0 text-tertiary actual-data">
@@ -351,21 +351,21 @@
 										<table class="table table-responsive-md table-striped mb-0">
 											<thead>
 												<tr>
-													<th>User Names</th>
-													<th></th>
+													<th>Name</th>
+													<th>Role</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach ($login_users as $key => $row)
 												<tr>
-													<td>{{$row->name}}</td>
-													<td>Role</td>
+													<td>{{$row->user_name}}</td>
+													<td>{{$row->user_role}}</td>
 												</tr>
 												@endforeach
 											</tbody>
 										</table>
 										<div class="summary-footer text-end mt-1">
-											<a class="text-primary text-uppercase" href="#">View All</a>
+											<a class="text-primary text-uppercase" href="{{ route('all-users')}}">View All</a>
 										</div>
 									</div>
 								</section>
@@ -488,52 +488,48 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
+
 		$(document).ready(function() {
-
-			const elements = document.querySelectorAll(".actual-data strong");
-			elements.forEach(element => {
-				const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
-				const duration = 2000; // Animation duration in milliseconds
-				const frameRate = 60; // Frames per second
-				const totalFrames = Math.round(duration / (1000 / frameRate));
-				let frame = 0;
-				
-				if (totalBalance !== 0) {
-					const counter = setInterval(() => {
-						frame++;
-						const progress = frame / totalFrames;
-						const currentValue = Math.floor(progress * totalBalance);
-						element.textContent = currentValue.toLocaleString();
-
-						if (frame === totalFrames) {
-							clearInterval(counter);
-							element.textContent = totalBalance.toLocaleString();
-						}
-					}, 1000 / frameRate);
-				} else {
-					element.textContent = "0"; // Set to 0 if no value
-				}
-			});
-
-			// Trigger the change event on the toggle switch when the page loads
-			$('#ShowDatatoggleSwitch').trigger('change');
+			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
+            toggleSwitch.checked = true; // Set to "on" by default
+            handleToggleSwitch(toggleSwitch); // Trigger the function
 		});	
 
 		function handleToggleSwitch(switchElement) {
 			var dataContainers = document.querySelectorAll('.data-container');
-			
 			dataContainers.forEach(function(dataContainer) {
 				if (!switchElement.checked) {
 					dataContainer.classList.remove('switch-off');
+					const elements = document.querySelectorAll(".actual-data strong");
+					elements.forEach(element => {
+						const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
+						const duration = 2000; // Animation duration in milliseconds
+						const frameRate = 60; // Frames per second
+						const totalFrames = Math.round(duration / (1000 / frameRate));
+						let frame = 0;
+						
+						if (totalBalance !== 0) {
+							const counter = setInterval(() => {
+								frame++;
+								const progress = frame / totalFrames;
+								const currentValue = Math.floor(progress * totalBalance);
+								element.textContent = currentValue.toLocaleString();
+
+								if (frame === totalFrames) {
+									clearInterval(counter);
+									element.textContent = totalBalance.toLocaleString();
+								}
+							}, 1000 / frameRate);
+						} else {
+							element.textContent = "0"; // Set to 0 if no value
+						}
+					});
 				} else {
 					dataContainer.classList.add('switch-off');
 				}
 			});
 		}
 
-		document.addEventListener("DOMContentLoaded", function () {
-
-												});
 		const catSalesChart = document.getElementById('catSalesChart');
 		new Chart(catSalesChart, {
 			type: 'bar',

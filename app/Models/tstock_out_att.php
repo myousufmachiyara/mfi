@@ -12,3 +12,4 @@ class tstock_out_att extends Model
     protected $fillable = [
     ];
 }
+

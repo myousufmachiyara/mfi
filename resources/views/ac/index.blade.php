@@ -16,7 +16,7 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                    <div>
+                                    <div >
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
                                                 <option selected disabled>Search by</option>
@@ -35,8 +35,8 @@
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper" style="overflow-x:auto">
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable">
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
@@ -416,9 +416,21 @@
 	</body>
 </html>
 <script>
-    
+
     $(document).ready(function(){
-    
+
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+
         $('#addForm').on('submit', function(e){
             e.preventDefault();
 

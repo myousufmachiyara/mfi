@@ -215,6 +215,8 @@ class JV2Controller extends Controller
         ->select('purchase_ageing.*', 'vw_union_pur_1_2_opbal.*')
         ->get();
 
+       
+
         $purchase_ageing = $purchase_ageing->isEmpty() ? null : $purchase_ageing;
 
         // Return the view with the fetched data.

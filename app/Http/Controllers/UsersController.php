@@ -215,6 +215,7 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
+
             // $user_mac =  $this->getMacAddress();
 
             // $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');

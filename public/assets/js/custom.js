@@ -165,8 +165,8 @@ function convertTens(number) {
 
 // session maintain
 
-let timeoutWarning = 15 * 60 * 1000; // 1 minute in milliseconds
-let timeoutRedirect = 20 * 60 * 1000; // 2 minutes in milliseconds
+let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
+let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
 let warningTimeout;
 let warningShown = false;
 
@@ -195,15 +195,6 @@ $('#logoutSession').on('click', function() {
 
 $(document).on('mousemove keypress click scroll', resetTimer);
 resetTimer();
-
-var table = $('#searchableTable').DataTable({
-    "order": [[0, "desc"]],
-});
-
-$('#columnSearch').on('keyup change', function() {
-    var columnIndex = $('#columnSelect').val();
-    table.column(columnIndex).search(this.value).draw();
-});
 
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();

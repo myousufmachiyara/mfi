@@ -118,17 +118,17 @@ class RptAccNameSale2Controller extends Controller
                 $totalAmount = 0;
                 foreach ($pipe_sale_by_account as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                    $html .= "<tr style='background-color:{$bgColor};'>
-                                    <td style='width:7%;'>{$count}</td>
-                                    <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                                    <td style='width:10%;'>{$items['sal_inv']}</td>
-                                    <td style='width:10%;'>{$items['pur_ord_no']}</td>
-                                    <td style='width:20%;'>{$items['ac2_name']}</td>
-                                    <td style='width:11%;'>{$items['pur_no']}</td>
-                                    <td style='width:15%;'>{$items['remarks']}</td>
-                                    <td style='width:14%;'>" . number_format($items['dr_amt'], 0) . "</td>
-                                </tr>";
-        
+                    $html .= '<tr style="background-color:' . $bgColor . ';">
+                                <td>' . $count . '</td>
+                                <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
+                                <td>' . $items['sal_inv'] . '</td>
+                                <td>' . $items['pur_ord_no'] . '</td>
+                                <td>' . $items['ac2_name'] . '</td>
+                                <td>' . $items['pur_no'] . '</td>
+                                <td>' . $items['remarks'] . '</td>
+                                <td>' . number_format($items['dr_amt'], 0) . '</td>
+                            </tr>';
+
                         $totalAmount += $items['dr_amt'];
                         $count++;
                         }
@@ -229,17 +229,17 @@ class RptAccNameSale2Controller extends Controller
                 $totalAmount = 0;
                 foreach ($pipe_sale_by_account as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                    $html .= "<tr style='background-color:{$bgColor};'>
-                                    <td style='width:7%;'>{$count}</td>
-                                    <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                                    <td style='width:10%;'>{$items['sal_inv']}</td>
-                                    <td style='width:10%;'>{$items['pur_ord_no']}</td>
-                                    <td style='width:20%;'>{$items['ac2_name']}</td>
-                                    <td style='width:11%;'>{$items['pur_no']}</td>
-                                    <td style='width:15%;'>{$items['remarks']}</td>
-                                    <td style='width:14%;'>" . number_format($items['dr_amt'], 0) . "</td>
-                                </tr>";
-        
+                    $html .= '<tr style="background-color:' . $bgColor . ';">
+                                    <td>' . $count . '</td>
+                                    <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
+                                    <td>' . $items['sal_inv'] . '</td>
+                                    <td>' . $items['pur_ord_no'] . '</td>
+                                    <td>' . $items['ac2_name'] . '</td>
+                                    <td>' . $items['pur_no'] . '</td>
+                                    <td>' . $items['remarks'] . '</td>
+                                    <td>' . number_format($items['dr_amt'], 0) . '</td>
+                                </tr>';
+            
                         $totalAmount += $items['dr_amt'];
                         $count++;
                         }
