@@ -292,7 +292,7 @@ class RptAccNameGLController extends Controller
                 <td colspan="5" style="text-align:right;">Total:</td>
                 <td style="width:13%;">' . number_format($totalDebit, 0) . '</td>
                 <td style="width:13%;">' . number_format($totalCredit, 0) . '</td>
-                <td style="width:13%;">' . number_format($totalDebit-$totalCredit, 0) . '</td>
+                <td style="width:13%;">' . number_format($balance, 0) . '</td>
             </tr>';
             
         $html .= '</table>';
@@ -322,7 +322,7 @@ class RptAccNameGLController extends Controller
 
         return response()->json($response);
     }
-    
+
     public function glrPDF(Request $request) {
         // Fetch opening balance records
         $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
