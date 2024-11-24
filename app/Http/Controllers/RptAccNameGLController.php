@@ -414,7 +414,11 @@ class RptAccNameGLController extends Controller
                 <th style="width:15%;color:#17365D;font-weight:bold;">Balance</th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center;font-weight:bold;">+------Opening Balance------+</th>
+                <th></th>
+                <th></th>
+                <th colspan="4" style="text-align: center;font-weight:bold;">+------Opening Balance------+</th>
+                <th></th>
+                <th></th>
                 <th style="text-align: center">' . number_format($opening_bal, 0) . '</th>
             </tr>';
         
