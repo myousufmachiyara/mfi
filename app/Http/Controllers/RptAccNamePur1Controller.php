@@ -127,10 +127,10 @@ class RptAccNamePur1Controller extends Controller
                                     <td>' . number_format($items['cr_amt'], 0) . '</td>
                                 </tr>';
 
-        
-                        $totalAmount += $items['cr_amt'];
-                        $count++;
-                        }
+                    
+                            $totalAmount += $items['cr_amt'];
+                            $count++;
+                    }
                 // Add totals row
                 $html .= '
                 <tr style="background-color:#d9edf7; font-weight:bold;">
@@ -227,20 +227,21 @@ class RptAccNamePur1Controller extends Controller
                 $totalAmount = 0;
                 foreach ($pur_by_account as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                    $html .= "<tr style='background-color:{$bgColor};'>
-                                    <td style='width:7%;'>{$count}</td>
-                                    <td style='width:14%;'>" . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . "</td>
-                                    <td style='width:12%;'>{$items['no']}</td>
-                                    <td style='width:12%;'>{$items['mill_inv']}</td>
-                                    <td style='width:10%;'>{$items['name_of']}</td>
-                                    <td style='width:10%;'>{$items['sal_inv']}</td>
-                                    <td style='width:19%;'>{$items['remarks']}</td>
-                                    <td style='width:16%;'>" . number_format($items['cr_amt'], 0) . "</td>
-                                </tr>";
-        
-                        $totalAmount += $items['cr_amt'];
-                        $count++;
-                        }
+                    $html .= '  <tr style="background-color:' . $bgColor . ';">
+                                    <td>' . $count . '</td>
+                                    <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
+                                    <td>' . $items['no'] . '</td>
+                                    <td>' . $items['mill_inv'] . '</td>
+                                    <td>' . $items['name_of'] . '</td>
+                                    <td>' . $items['sal_inv'] . '</td>
+                                    <td>' . $items['remarks'] . '</td>
+                                    <td>' . number_format($items['cr_amt'], 0) . '</td>
+                                </tr>';
+
+                    
+                            $totalAmount += $items['cr_amt'];
+                            $count++;
+                    }
                 // Add totals row
                 $html .= '
                 <tr style="background-color:#d9edf7; font-weight:bold;">
