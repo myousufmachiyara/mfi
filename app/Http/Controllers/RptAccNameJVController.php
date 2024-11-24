@@ -117,15 +117,14 @@ class RptAccNameJVController extends Controller
             foreach ($all_payments_by_party as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $html .= '<tr style="background-color:' . $bgColor . ';">
-                            <td>' . $count . '</td>
-                            <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
-                            <td>' . $items['Entry_of'] . '</td>
-                            <td>' . $items['no'] . '</td>
-                            <td>' . $items['ac2'] . '</td>
-                            <td>' . $items['remarks'] . '</td>
-                            <td>' . number_format($items['dr_amt'], 0) . '</td>
-                        </tr>';
-
+                                <td>' . $count . '</td>
+                                <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
+                                <td>' . $items['entry_of'] . '-' . $items['auto_lager'] . '</td>
+                                <td>' . $items['ac2'] . '</td>
+                                <td>' . $items['Narration'] . '</td>
+                                <td>' . number_format($items['Debit'], 0) . '</td>
+                                <td>' . number_format($items['Credit'], 0) . '</td>
+                            </tr>';
                     $totalAmount += $items['Debit'];
                     $totalAmount2 += $items['Credit'];
                     $count++;
@@ -226,15 +225,15 @@ class RptAccNameJVController extends Controller
             foreach ($all_payments_by_party as $items) {
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $html .= '<tr style="background-color:' . $bgColor . ';">
-                            <td>' . $count . '</td>
-                            <td>' . Carbon::createFromFormat('Y-m-d', $items['date'])->format('d-m-y') . '</td>
-                            <td>' . $items['Entry_of'] . '</td>
-                            <td>' . $items['no'] . '</td>
-                            <td>' . $items['ac2'] . '</td>
-                            <td>' . $items['remarks'] . '</td>
-                            <td>' . number_format($items['dr_amt'], 0) . '</td>
-                        </tr>';
-    
+                                <td>' . $count . '</td>
+                                <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
+                                <td>' . $items['entry_of'] . '-' . $items['auto_lager'] . '</td>
+                                <td>' . $items['ac2'] . '</td>
+                                <td>' . $items['Narration'] . '</td>
+                                <td>' . number_format($items['Debit'], 0) . '</td>
+                                <td>' . number_format($items['Credit'], 0) . '</td>
+                            </tr>';
+
                     $totalAmount += $items['Debit'];
                     $totalAmount2 += $items['Credit'];
                     $count++;
