@@ -255,7 +255,6 @@ class UsersController extends Controller
         ]);
 
         return redirect()->route('all-users');
-
     }
 
     public function getMacAdd(Request $request){
