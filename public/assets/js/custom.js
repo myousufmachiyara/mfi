@@ -163,8 +163,6 @@ function convertTens(number) {
     return tens[number] || "";
 }
 
-// session maintain
-
 // Session expiration logic
 const timeoutWarning = 0.5 * 60 * 1000; // 30 seconds in milliseconds
 const timeoutRedirect = 0.7 * 60 * 1000; // 42 seconds in milliseconds
@@ -189,19 +187,11 @@ function showModal() {
 
 // Expire session due to inactivity
 function expireSession() {
+    // Send a request to backend to mark logout due to inactivity
     fetch('/logout-timeout', {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            // Handle successful response (e.g., redirect to login)
-            console.log('Session expired and logged out.');
-            window.location.href = '/login'; // Redirect to login page
-        } else {
-            console.error('Failed to log out:', response.statusText);
         }
     })
     .catch(err => {
@@ -211,12 +201,17 @@ function expireSession() {
 
 // Keep session alive after user confirms activity
 $('#continueSession').on('click', function() {
-    $.post('/keep-alive', { _token: '{{ csrf_token() }}' }) // Extend session duration
-        .done(() => {
-            $('#timeoutModal').hide(); // Hide the warning modal
-            resetTimer(); // Restart the timers
-        })
-        .fail(err => console.error('Failed to keep session alive:', err));
+    fetch('/keep-alive', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
+        }
+    })
+    .then(() => {
+        $('#timeoutModal').hide(); // Hide the warning modal
+        resetTimer(); // Restart the timers
+    })
+    .catch(err => console.error('Failed to keep session alive:', err));
 });
 
 // Logout manually from the warning modal
@@ -224,7 +219,7 @@ $('#logoutSession').on('click', function() {
     fetch('/logout', {
         method: 'GET',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
     }).then(() => {
         window.location.href = '/logout'; // Redirect to logout route
