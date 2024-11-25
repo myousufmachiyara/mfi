@@ -180,7 +180,7 @@ function resetTimer() {
     // Set new timeouts
     warningTimeout = setTimeout(showModal, timeoutWarning); // Warning modal
     redirectTimeout = setTimeout(expireSession, timeoutRedirect); // Expire session
-}
+}       
 
 // Show warning modal
 function showModal() {
@@ -193,7 +193,9 @@ function expireSession() {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
-        }
+        }.then(() => {
+            console.log('timeout function failed')
+        }).catch(err => console.error('Manual logout failed:', err));
     });
 }
 
