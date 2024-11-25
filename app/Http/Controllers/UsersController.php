@@ -273,7 +273,9 @@ class UsersController extends Controller
         ]);
 
         // Perform logout
+        session()->flush();
         Auth::logout();
+        
         return redirect()->route('login');
     }
 
