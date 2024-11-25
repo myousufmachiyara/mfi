@@ -145,8 +145,7 @@ class RptAccNameGLController extends Controller
         
             // Add row with merged Account Name & Remarks column
             $html .= '<tr style="background-color:' . $bgColor . ';">
-                <td>' . $items['auto_lager'] . '</td>
-                <td>' . $items['entry_of'] . '</td>
+                <td>' . $items['auto_lager'] . '' . $items['prefix'] . '></td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
                 <td>' . $items['ac2'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
