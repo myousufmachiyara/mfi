@@ -191,10 +191,14 @@ function expireSession() {
     fetch('/logout', {
         method: 'POST',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
+        },
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '/login'; // Redirect to login page after successful logout
+        } else {
+            console.error('Logout failed:', response);
         }
-    }).then(() => {
-        window.location.href = '/login'; // Redirect to logout route
     }).catch(err => console.error('Session Timeout logout failed:', err));
 }
 
