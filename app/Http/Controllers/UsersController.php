@@ -201,10 +201,6 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-        // if (session()->has('expired') || !session()->has('user')) {
-        //     return redirect()->route('login')->withErrors(['Your session has expired. Please log in again.']);
-        // }
-
         // Validate the request
         $request->validate([
             'username' => 'required|string',
@@ -216,55 +212,38 @@ class UsersController extends Controller
             // Authentication passed
             $user = Auth::user();
 
-            // $user_mac =  $this->getMacAddress();
+            $request->session()->regenerate();
 
-            // $allowed_macs = $user_mac_address::where('user_id',$user['id'])-get('mac_address');
+            users::where('id', $user['id'])->update([
+                'is_login'=>1,
+            ]);
 
-            // if ($allowed_macs->contains($user_mac)) {
+            $user_roles = user_roles::where('user_id',$user['id'])
+            ->join('roles','roles.id','=','user_roles.role_id')
+            ->select('user_roles.*','roles.name as role_name')
+            ->first();
 
-                $request->session()->regenerate();
-
-                users::where('id', $user['id'])->update([
-                    'is_login'=>1,
-                ]);
-
-                $user_roles = user_roles::where('user_id',$user['id'])
-                ->join('roles','roles.id','=','user_roles.role_id')
-                ->select('user_roles.*','roles.name as role_name')
-                ->first();
+            $user_permission = role_access::where('role_id',$user_roles['role_id'])
+            ->select('module_id','view')
+            ->get();
+            
+            $user_access = $user_permission->toArray();
     
-                $user_permission = role_access::where('role_id',$user_roles['role_id'])
-                ->select('module_id','view')
-                ->get();
-                
-                $user_access = $user_permission->toArray();
-        
-                session([
-                    'user_id' => $user['id'],
-                    'user_name' => $user['name'],
-                    'role_name' => $user_roles->role_name,
-                    'user_role' => $user_roles->role_id,
-                    'user_access' => $user_access,
-                ]);
-    
-                return redirect()->intended('/home');
-            // }
-            // else{
-            //     Auth::logout();
-            //     return view('login')->with([
-            //         'error' => 'Device Not registered',
-            //         'mac_add' => $user_mac,
-            //     ]);
-            // }
+            session([
+                'user_id' => $user['id'],
+                'user_name' => $user['name'],
+                'role_name' => $user_roles->role_name,
+                'user_role' => $user_roles->role_id,
+                'user_access' => $user_access,
+            ]);
 
-           
+            return redirect()->intended('/home');
         }
 
         // Authentication failed
         return back()->withErrors([
             'error' => 'Invalid Username or Password.',
         ]);
-
     }
 
     public function addDevice(Request $request){
@@ -296,7 +275,6 @@ class UsersController extends Controller
 
         // Perform logout
         Auth::logout();
-
         return redirect()->route('login');
     }
 
