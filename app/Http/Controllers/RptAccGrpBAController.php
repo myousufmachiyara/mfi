@@ -43,8 +43,7 @@ class RptAccGrpBAController extends Controller
         return $this->bageneratePDF($balance_all, $request);
     }
 
-    private function bageneratePDF($balance_all, Request $request)
-    {
+    private function bageneratePDF($balance_all, Request $request){
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
 
@@ -69,7 +68,7 @@ class RptAccGrpBAController extends Controller
 
         // Initialize HTML content
         $html = '';
-        $count = 1;
+        $rowCount = 1;
         $totalDebit = 0;
         $totalCredit = 0;
 
@@ -112,10 +111,10 @@ class RptAccGrpBAController extends Controller
 
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
-                    $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+                    $backgroundColor = ($rowCount % 2 == 0) ? '#f1f1f1' : '#ffffff';
 
                     $html .= '<tr style="background-color:' . $backgroundColor . ';">
-                                <td>' . $count . '</td>
+                                <td>' . $rowCount . '</td>
                                 <td>' . $item['ac_code'] . '</td>
                                 <td>' . $item['ac_name'] . '</td>
                                 <td>' . $item['address'] . ' ' . $item['phone'] . '</td>
@@ -129,7 +128,7 @@ class RptAccGrpBAController extends Controller
                     $totalDebit += $item['Debit'];
                     $totalCredit += $item['Credit'];
 
-                    $count++;
+                    $rowCount++;
                 }
 
                 // Add sub-total row for this sub-header
@@ -161,16 +160,13 @@ class RptAccGrpBAController extends Controller
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        
+        // Generate the file name and output type
         $filename = "balance_all.pdf";
+        $outputType = $request->outputType === 'download' ? 'D' : 'I'; // Default is inline view
 
-        // Determine output type
-        if ($request->outputType === 'download') {
-            $pdf->Output($filename, 'D'); // For download
-        } else {
-            $pdf->Output($filename, 'I'); // For inline view
-        }
-    }
+        // Output the PDF
+        $pdf->Output($filename, $outputType);
+}
     
 
     private function groupByHeadAndSub($data)
