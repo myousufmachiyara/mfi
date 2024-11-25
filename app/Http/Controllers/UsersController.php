@@ -267,6 +267,9 @@ class UsersController extends Controller
 
     public function logout(Request $request)
     {
+        users::where('id', session('user_id'))->update([
+            'is_login'=>0,
+        ]);
         // Log the user out
         Auth::logout();
         
