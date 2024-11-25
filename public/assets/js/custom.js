@@ -188,7 +188,14 @@ function showModal() {
 
 // Expire session due to inactivity
 function expireSession() {
-    window.location.href = '/logout';
+    fetch('/logout', {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
+        }
+    }).then(() => {
+        window.location.href = '/logout'; // Redirect to logout route
+    }).catch(err => console.error('Session Time logout failed:', err));
 }
 
 // Keep session alive after user confirms activity
