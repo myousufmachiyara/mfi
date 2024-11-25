@@ -188,7 +188,7 @@ function showModal() {
 
 // Expire session due to inactivity
 function expireSession() {
-    fetch('/logout-timeout', {
+    fetch('/logout', {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token for security
@@ -196,7 +196,6 @@ function expireSession() {
     })
     .then(response => {
         if (response.ok) {
-            console.log('Session expired and logged out.');
             // Check for redirection (redirect status)
             if (response.redirected) {
                 window.location.href = response.url; // Redirect to the URL Laravel sends in response

@@ -288,37 +288,15 @@ class UsersController extends Controller
         return $user_mac_address;
     }
 
-    // Route handler for session timeout
-    public function logoutTimeout()
-    {
-        session(['logout_reason' => 'session_timeout']);  // Set a flag for session timeout
-        
-        // Log out the user
-        return $this->logout();  // Call the logout method
-    }
-
     public function logout()
     {
-        // Check logout reason
-        $logoutReason = session('logout_reason');
-
         // Update the user's login status
         users::where('id', session('user_id'))->update([
             'is_login' => 0,
         ]);
 
-        // Clear the logout reason flag
-        session()->forget('logout_reason');
-
         // Perform logout
         Auth::logout();
-
-        // Return the appropriate response based on logout reason
-        if ($logoutReason == 'session_timeout') {
-            return redirect()->route('login')->withErrors([
-                'error' => 'Logged out due to inactivity.',
-            ]);
-        }
 
         return redirect()->route('login');
     }
