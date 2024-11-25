@@ -346,9 +346,9 @@
         })->name('unauthorized');
 
         Route::post('/keep-alive', function () {
-            session(['lastActivity' => time()]); // Update last activity time
+            session()->regenerate();
             return response()->json(['status' => 'success']);
-        });
+        })->name('keep-alive');
     });
 
     // reporting
