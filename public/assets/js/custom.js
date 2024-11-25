@@ -189,7 +189,7 @@ function showModal() {
 // Expire session due to inactivity
 function expireSession() {
     fetch('/logout-timeout', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
             'Content-Type': 'application/json',  // Specify content type if necessary
