@@ -188,15 +188,23 @@ function showModal() {
 
 // Expire session due to inactivity
 function expireSession() {
-    // Send a request to backend to mark logout due to inactivity
     fetch('/logout-timeout', {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
+            'Content-Type': 'application/json',  // Specify content type if necessary
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Session expired and logged out.');
+            // No need to redirect, the server handles it
+        } else {
+            console.error('Logout timeout failed:', response.statusText);
         }
     })
     .catch(err => {
-        console.error('Manual logout failed:', err);
+        console.error('Error with logout timeout request:', err);
     });
 }
 
