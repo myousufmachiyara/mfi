@@ -98,12 +98,12 @@ class RptAccGrpBAController extends Controller
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
 
                     $html .= '<tr style="background-color:' . $backgroundColor . ';">
-                                <td>' . $count . '</td>
-                                <td>' . $item['ac_code'] . '</td>
-                                <td>' . $item['ac_name'] . '</td>
-                                <td>' . $item['address'] . ' ' . $item['phone'] . '</td>
-                                <td>' . number_format($item['Debit'], 2) . '</td>
-                                <td>' . number_format($item['Credit'], 2) . '</td>
+                                <td style="width:8%;">' . $count . '</td>
+                                <td style="width:10%;">' . $item['ac_code'] . '</td>
+                                <td style="width:25%;">' . $item['ac_name'] . '</td>
+                                <td style="width:25%;">' . $item['address'] . ' ' . $item['phone'] . '</td>
+                                <td style="width:16%;">' . number_format($item['Debit'], 0) . '</td>
+                                <td style="width:16%;">' . number_format($item['Credit'], 0) . '</td>
                             </tr>';
 
                     // Update totals
