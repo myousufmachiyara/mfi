@@ -46,7 +46,7 @@ class RptAccGrpBAController extends Controller
     private function bageneratePDF($balance_all, Request $request){
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
-        
+
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -54,15 +54,15 @@ class RptAccGrpBAController extends Controller
         $pdf->SetSubject('Balance All Report');
         $pdf->SetKeywords('Balance All Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-        
+
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-        
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-        
+
         // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
@@ -162,7 +162,6 @@ class RptAccGrpBAController extends Controller
 
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
-
 
         
         $filename = "balance_all.pdf";
