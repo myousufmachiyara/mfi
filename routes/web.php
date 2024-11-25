@@ -5,6 +5,10 @@
     Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
 
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
+    });
+    
     Route::middleware(['checkPermission:view'])->group(function () {
 
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
