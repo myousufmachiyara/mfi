@@ -73,6 +73,7 @@
 					</li>
 					<li>
 						<form action="/logout" method="POST">
+							@csrf
 							<a type="submit" role="menuitem" tabindex="-1"><i class="bx bx-power-off"></i> Logout</a>
 						</form>
 					</li>
