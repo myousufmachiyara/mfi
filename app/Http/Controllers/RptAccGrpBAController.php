@@ -66,32 +66,36 @@ class RptAccGrpBAController extends Controller
 
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
-        // Table header for data
+       // Table header for data
         $html = '';
         $count = 1;
         $totalDebit = 0;
         $totalCredit = 0;
 
-        foreach ($groupedData as $headCount => $heads) {
-            // Create a separate box for each $headCount and set text color to red
-            $html .= '<div style="border: 1px solid #000; padding: 5px; margin-bottom: 10px;">
-                        <h2 style="color:red; text-align:center; font-size:18px; border-bottom: 1px solid #000;">' . $headCount . '</h2>';
+        $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
 
-            $html .= '<table border="1" style="border-collapse: collapse; text-align: center;">
-                        <thead>
-                            <tr><th style="width:8%;color:#17365D;font-weight:bold;">S/No</th>
-                                <th style="width:10%;color:#17365D;font-weight:bold;">AC</th>
-                                <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
-                                <th style="width:25%;color:#17365D;font-weight:bold;">Address</th>
-                                <th style="width:16%;color:#17365D;font-weight:bold;">Debit</th>
-                                <th style="width:16%;color:#17365D;font-weight:bold;">Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
+        foreach ($groupedData as $headCount => $heads) {
+            // Add table row for each $headCount (will no longer use div)
+            $html .= '<thead>
+                        <tr>
+                            <th colspan="6" style="text-align:center; color:red; font-size:18px; border-bottom: 1px solid #000; padding: 10px;">
+                                ' . $headCount . '
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+                            <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add subhead row
-                $html .= '<tr><td colspan="6" style="text-align:center;font-size:15px;font-weight:600; border: 1px solid #000;">' . $subHeadCount . '</td></tr>';
+                $html .= '<tr><td colspan="6" style="text-align:center; font-size:15px; font-weight:600; border: 1px solid #000;">' . $subHeadCount . '</td></tr>';
 
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
@@ -114,7 +118,7 @@ class RptAccGrpBAController extends Controller
                 }
             }
 
-            $html .= '</tbody></table></div>'; // Close the box for the current $headCount
+            $html .= '</tbody>'; // Close tbody for the current $headCount
         }
 
         // Add totals row
@@ -133,7 +137,10 @@ class RptAccGrpBAController extends Controller
             <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
         </tr>';
 
+        $html .= '</table>'; // Close the main table
+
         $pdf->writeHTML($html, true, false, true, false, '');
+
 
         $filename = "balance_all.pdf";
 
