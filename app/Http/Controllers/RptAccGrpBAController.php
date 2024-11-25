@@ -64,7 +64,8 @@ class RptAccGrpBAController extends Controller
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
-       // Group the data
+     
+        // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
         // Initialize HTML content
@@ -76,8 +77,9 @@ class RptAccGrpBAController extends Controller
         // Start the main table
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
 
-        // Add the main header row (headCount)
+        // Loop through each headCount (main header)
         foreach ($groupedData as $headCount => $heads) {
+            // Add the main header row (headCount)
             $html .= '<thead>
                         <tr>
                             <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
@@ -99,12 +101,14 @@ class RptAccGrpBAController extends Controller
             $subTotalDebit = 0;
             $subTotalCredit = 0;
 
+            // Loop through each subHeadCount (sub-header under the main header)
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add sub-header row
                 $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #ccc;">
                             <strong>' . $subHeadCount . '</strong>
                         </td></tr>';
 
+                // Loop through each item under the subHeadCount
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
@@ -143,6 +147,8 @@ class RptAccGrpBAController extends Controller
                     </tr>';
         }
 
+        $html .= '</tbody>';
+
         // Add overall totals row after all data
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="4" style="text-align:right;">Total:</td>
@@ -157,12 +163,12 @@ class RptAccGrpBAController extends Controller
                     <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
                 </tr>';
 
-        $html .= '</tbody>';
-        $html .= '</table>'; // Close the main table
+        // Close the table
+        $html .= '</table>';
 
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
- 
+        
         $filename = "balance_all.pdf";
 
         // Determine output type
