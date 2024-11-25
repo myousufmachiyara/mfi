@@ -191,22 +191,11 @@ function expireSession() {
     fetch('/logout', {
         method: 'GET',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token for security
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
-    })
-    .then(response => {
-        if (response.ok) {
-            // Check for redirection (redirect status)
-            if (response.redirected) {
-                window.location.href = response.url; // Redirect to the URL Laravel sends in response
-            }
-        } else {
-            console.error('Logout timeout failed:', response.statusText);
-        }
-    })
-    .catch(err => {
-        console.error('Error with logout timeout request:', err);
-    });
+    }).then(() => {
+        window.location.href = '/logout'; // Redirect to logout route
+    }).catch(err => console.error('Manual logout failed:', err));
 }
 
 // Keep session alive after user confirms activity
