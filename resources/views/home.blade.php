@@ -25,6 +25,7 @@
 		}
 	</style>
 	<body>
+		@php die(session()); @endphp
 		<section class="body">
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
