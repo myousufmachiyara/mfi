@@ -145,7 +145,7 @@ class RptAccNameGLController extends Controller
         
             // Add row with merged Account Name & Remarks column
             $html .= '<tr style="background-color:' . $bgColor . ';">
-                <td>' . $items['auto_lager'] . '' . $items['prefix'] . '></td>
+                <td>' . $items['prefix'] . '' . $items['auto_lager'] . '</td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
                 <td>' . $items['ac2'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
@@ -158,7 +158,7 @@ class RptAccNameGLController extends Controller
         // Add totals row
         $num_to_words = $pdf->convertCurrencyToWords($balance);
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
+                    <td colspan="3" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
                     <td style="width:13%;">' . number_format($totalDebit, 0) . '</td>
                     <td style="width:13%;">' . number_format($totalCredit, 0) . '</td>
                     <td style="width:17%;">' . number_format($balance, 0) . '</td>
