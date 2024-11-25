@@ -195,7 +195,7 @@ function expireSession() {
         }
     }).then(() => {
         window.location.href = '/login'; // Redirect to logout route
-    }).catch(err => console.error('Session Time logout failed:', err));
+    }).catch(err => console.error('Manual logout failed:', err));
 }
 
 // Keep session alive after user confirms activity
