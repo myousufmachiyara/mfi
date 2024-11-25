@@ -272,7 +272,6 @@ class UsersController extends Controller
     
         // Invalidate the session and regenerate the CSRF token
         $request->session()->invalidate();
-        $request->session()->regenerateToken();
     
         // Redirect to the login page after logout
         return redirect()->route('login');
