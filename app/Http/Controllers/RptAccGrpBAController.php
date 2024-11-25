@@ -46,7 +46,7 @@ class RptAccGrpBAController extends Controller
     private function bageneratePDF($balance_all, Request $request){
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
-
+        
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -54,65 +54,75 @@ class RptAccGrpBAController extends Controller
         $pdf->SetSubject('Balance All Report');
         $pdf->SetKeywords('Balance All Report, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-
+        
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-
+        
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-
+        
         // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
-
+        
         // Initialize HTML content
         $html = '';
         $rowCount = 1;
         $totalDebit = 0;
         $totalCredit = 0;
-
+        
         // Start the main table
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
-
-        // Add the main header row
-        $html .= '<thead>
-                    <tr>
-                        <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
-                            Main Header
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
-                        <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
-                    </tr>
-                </thead>';
-
-        $html .= '<tbody>';
-
+        
+        // // Add the main header row
+        // $html .= '<thead>
+        //             <tr>
+        //                 <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
+        //                     Main Header
+        //                 </th>
+        //             </tr>
+        //             <tr>
+        //                 <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+        //                 <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+        //                 <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+        //                 <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+        //                 <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+        //                 <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+        //             </tr>
+        //         </thead>';
+        
+        // $html .= '<tbody>';
+        
         foreach ($groupedData as $headCount => $heads) {
             // Add the sub-header for each $headCount
             $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;">
                         <strong>' . $headCount . '</strong>
-                    </td></tr>';
-
+                      </td></tr>';
+        
             $subTotalDebit = 0;
             $subTotalCredit = 0;
-
+        
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add sub-header row
                 $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #ccc;">
                             <strong>' . $subHeadCount . '</strong>
-                        </td></tr>';
-
+                          </td></tr>';
+        
+                // Add the main table header row inside each sub-header
+                $html .= '<tr>
+                            <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+                            <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+                          </tr>';
+        
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($rowCount % 2 == 0) ? '#f1f1f1' : '#ffffff';
-
+        
                     $html .= '<tr style="background-color:' . $backgroundColor . ';">
                                 <td>' . $rowCount . '</td>
                                 <td>' . $item['ac_code'] . '</td>
@@ -120,53 +130,55 @@ class RptAccGrpBAController extends Controller
                                 <td>' . $item['address'] . ' ' . $item['phone'] . '</td>
                                 <td>' . number_format($item['Debit'], 0) . '</td>
                                 <td>' . number_format($item['Credit'], 0) . '</td>
-                            </tr>';
-
+                              </tr>';
+        
                     // Update totals for both sub-header and overall totals
                     $subTotalDebit += $item['Debit'];
                     $subTotalCredit += $item['Credit'];
                     $totalDebit += $item['Debit'];
                     $totalCredit += $item['Credit'];
-
+        
                     $rowCount++;
                 }
-
+        
                 // Add sub-total row for this sub-header
                 $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                             <td colspan="4" style="text-align:right;">Sub Total:</td>
                             <td>' . number_format($subTotalDebit, 0) . '</td>
                             <td>' . number_format($subTotalCredit, 0) . '</td>
-                        </tr>';
+                          </tr>';
             }
         }
-
+        
         // Add overall totals row after all data
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="4" style="text-align:right;">Total:</td>
                     <td>' . number_format($totalDebit, 0) . '</td>
                     <td>' . number_format($totalCredit, 0) . '</td>
-                </tr>';
-
+                  </tr>';
+        
         // Calculate balance and add balance row
         $balance = $totalDebit - $totalCredit;
         $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
                     <td colspan="4" style="text-align:right;">Balance:</td>
                     <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
-                </tr>';
-
+                  </tr>';
+        
         $html .= '</tbody>';
         $html .= '</table>'; // Close the main table
-
+        
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
-
-        // Generate the file name and output type
+        
         $filename = "balance_all.pdf";
-        $outputType = $request->outputType === 'download' ? 'D' : 'I'; // Default is inline view
 
-        // Output the PDF
-        $pdf->Output($filename, $outputType);
-}
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
+    }
     
 
     private function groupByHeadAndSub($data)
