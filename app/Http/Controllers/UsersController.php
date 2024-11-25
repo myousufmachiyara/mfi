@@ -265,19 +265,16 @@ class UsersController extends Controller
         return $user_mac_address;
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        // Perform logout only if a user is logged in
-        users::where('id', session('user_id'))->update([
-            'is_login' => 0,
-        ]);
-
-        // Log out the authenticated user
+        // Log the user out
         Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        
-        // Redirect to the login page
+    
+        // Invalidate the session and regenerate the CSRF token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        // Redirect to the login page after logout
         return redirect()->route('login');
     }
 
