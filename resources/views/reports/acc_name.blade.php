@@ -784,7 +784,16 @@
                             $.each(result['lager_much_all'], function(k, v) {
                                 var html = "<tr>";
                                 html += "<td>" + (k + 1) + "</td>";
-                                html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                // html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                if (v['entry_of'] === 'Sale') {
+                                    html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'SP') {
+                                    html += "<td><a href='/sales2/show/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'JV2') {
+                                    html += "<td><a href='/vouchers2/print/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else {
+                                    html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
+                                }
                                 html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
