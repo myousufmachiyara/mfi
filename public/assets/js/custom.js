@@ -187,6 +187,7 @@ function showModal() {
 
 // Expire session due to inactivity
 function expireSession() {
+    console.log("in expireSession function");
     // Send a request to backend to mark logout due to inactivity
     fetch('/logout-timeout', {
         method: 'GET',
