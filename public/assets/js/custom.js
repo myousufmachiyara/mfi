@@ -189,7 +189,7 @@ function showModal() {
 // Expire session due to inactivity
 function expireSession() {
     fetch('/logout', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
@@ -216,7 +216,7 @@ $('#continueSession').on('click', function() {
 // Logout manually from the warning modal
 $('#logoutSession').on('click', function() {
     fetch('/logout', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
