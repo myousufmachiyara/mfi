@@ -165,35 +165,64 @@ function convertTens(number) {
 
 // session maintain
 
-let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
-let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
+// Session expiration logic
+const timeoutWarning = 0.5 * 60 * 1000; // 30 seconds in milliseconds
+const timeoutRedirect = 0.7 * 60 * 1000; // 42 seconds in milliseconds
 let warningTimeout;
-let warningShown = false;
+let redirectTimeout;
 
+// Reset session activity timer
 function resetTimer() {
+    // Clear any existing timeouts
     clearTimeout(warningTimeout);
-    warningShown = false;
-    warningTimeout = setTimeout(showModal, timeoutWarning);
+    clearTimeout(redirectTimeout);
+
+    // Set new timeouts
+    warningTimeout = setTimeout(showModal, timeoutWarning); // Warning modal
+    redirectTimeout = setTimeout(expireSession, timeoutRedirect); // Expire session
 }
 
+// Show warning modal
 function showModal() {
-    warningShown = true;
-    $('#timeoutModal').show(); // Show the modal
+    $('#timeoutModal').show(); // Display the modal
 }
 
-// Continue session event
+// Expire session due to inactivity
+function expireSession() {
+    fetch('/logout-timeout', {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
+        }
+    });
+}
+
+// Keep session alive after user confirms activity
 $('#continueSession').on('click', function() {
-    $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
-    $('#timeoutModal').hide(); // Hide the modal
-    resetTimer(); // Reset the timer
+    $.post('/keep-alive', { _token: '{{ csrf_token() }}' }) // Extend session duration
+        .done(() => {
+            $('#timeoutModal').hide(); // Hide the warning modal
+            resetTimer(); // Restart the timers
+        })
+        .fail(err => console.error('Failed to keep session alive:', err));
 });
 
-// Logout event
+// Logout manually from the warning modal
 $('#logoutSession').on('click', function() {
-    window.location.href = '/logout'; // Redirect to logout or any desired action
+    fetch('/logout', {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
+        }
+    }).then(() => {
+        window.location.href = '/logout'; // Redirect to logout route
+    }).catch(err => console.error('Manual logout failed:', err));
 });
 
+// Monitor user activity to reset the timer
 $(document).on('mousemove keypress click scroll', resetTimer);
+
+// Initialize the session activity timer when the page loads
 resetTimer();
 
 $('#changePasswordForm').on('submit', function(e){
