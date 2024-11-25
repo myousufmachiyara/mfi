@@ -112,16 +112,14 @@ class RptAccNameGLController extends Controller
         // Table Headers
             $html = '<table border="1" style="border-collapse: collapse;text-align:center">
             <tr>
-                <th style="width:11%;color:#17365D;font-weight:bold;">R/No</th>
-                <th style="width:8%;color:#17365D;font-weight:bold;">Vochr</th>
+                <th style="width:13%;color:#17365D;font-weight:bold;">R/No</th>
                 <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
-                <th style="width:31%;color:#17365D;font-weight:bold;">Details</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
-                <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                <th style="width:15%;color:#17365D;font-weight:bold;">Balance</th>
+                <th style="width:33%;color:#17365D;font-weight:bold;">Details</th>
+                <th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>
+                <th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>
+                <th style="width:17%;color:#17365D;font-weight:bold;">Balance</th>
             </tr>
             <tr>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th  style="text-align: center;font-weight:bold;">+----Opening Balance----+</th>
@@ -147,8 +145,7 @@ class RptAccNameGLController extends Controller
         
             // Add row with merged Account Name & Remarks column
             $html .= '<tr style="background-color:' . $bgColor . ';">
-                <td>' . $items['auto_lager'] . '</td>
-                <td>' . $items['entry_of'] . '</td>
+                <td>' . $items['auto_lager'] . '' . $items['prefix'] . '></td>
                 <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
                 <td>' . $items['ac2'] . '</td>
                 <td>' . number_format($items['Debit'], 0) . '</td>
@@ -162,9 +159,9 @@ class RptAccNameGLController extends Controller
         $num_to_words = $pdf->convertCurrencyToWords($balance);
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="4" style="text-align:center; font-style:italic;"> ' . htmlspecialchars($num_to_words) . '</td>
-                    <td style="width:12%;">' . number_format($totalDebit, 0) . '</td>
-                    <td style="width:12%;">' . number_format($totalCredit, 0) . '</td>
-                    <td style="width:15%;">' . number_format($balance, 0) . '</td>
+                    <td style="width:13%;">' . number_format($totalDebit, 0) . '</td>
+                    <td style="width:13%;">' . number_format($totalCredit, 0) . '</td>
+                    <td style="width:17%;">' . number_format($balance, 0) . '</td>
                 </tr>';
         
         $html .= '</table>';
