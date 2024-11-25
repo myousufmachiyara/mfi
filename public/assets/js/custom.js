@@ -193,9 +193,19 @@ function expireSession() {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
-        }.then(() => {
-            console.log('timeout function failed')
-        }).catch(err => console.error('Manual logout failed:', err));
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Handle successful response (e.g., redirect to login)
+            console.log('Session expired and logged out.');
+            window.location.href = '/login'; // Redirect to login page
+        } else {
+            console.error('Failed to log out:', response.statusText);
+        }
+    })
+    .catch(err => {
+        console.error('Manual logout failed:', err);
     });
 }
 
