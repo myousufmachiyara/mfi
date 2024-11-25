@@ -75,24 +75,24 @@ class RptAccGrpBAController extends Controller
         // Start the main table
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
         
-        // Add the main header row
-        $html .= '<thead>
-                    <tr>
-                        <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
-                            Main Header
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
-                        <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
-                    </tr>
-                </thead>';
+        // // Add the main header row
+        // $html .= '<thead>
+        //             <tr>
+        //                 <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
+        //                     Main Header
+        //                 </th>
+        //             </tr>
+        //             <tr>
+        //                 <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+        //                 <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+        //                 <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+        //                 <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+        //                 <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+        //                 <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+        //             </tr>
+        //         </thead>';
         
-        $html .= '<tbody>';
+        // $html .= '<tbody>';
         
         foreach ($groupedData as $headCount => $heads) {
             // Add the sub-header for each $headCount
