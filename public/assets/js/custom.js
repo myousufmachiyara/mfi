@@ -187,32 +187,30 @@ function showModal() {
 
 // Function to expire the session
 function expireSession() {
-    if (!warningShown) {
-        $('#timeoutModal').hide(); // Ensure modal is hidden if session expires without showing it
-    }
-    fetch('/logout', {
+    // Send a request to backend to mark logout due to inactivity
+    fetch('/logout-timeout', {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
     }).then(() => {
-        window.location.reload(); // Reload the page to show the login screen
+        window.location.reload(); // Reload the page
     });
 }
 
 // Keep the session alive
 $('#continueSession').on('click', function() {
     $.post('/keep-alive', {_token: '{{ csrf_token() }}'}) // Send a request to keep session alive
-        .done(() => {
-            $('#timeoutModal').hide(); // Hide the modal
-            resetTimer(); // Reset the timer
-        });
+    .done(() => {
+        $('#timeoutModal').hide(); // Hide the modal
+        resetTimer(); // Reset the timer
+    });
 });
 
 // Manual logout from modal
 $('#logoutSession').on('click', function() {
     fetch('/logout', {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
@@ -225,7 +223,7 @@ $('#logoutSession').on('click', function() {
 $(document).on('mousemove keypress click scroll', resetTimer);
 
 // Initial call to reset the timer when the script loads
-resetTimer();s
+resetTimer();
 
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();
