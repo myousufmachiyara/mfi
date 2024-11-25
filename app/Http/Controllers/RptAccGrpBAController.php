@@ -76,11 +76,11 @@ class RptAccGrpBAController extends Controller
         // Start the main table
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
 
-        // Add the main header row
+        // Add the main header row (headCount)
         $html .= '<thead>
                     <tr>
                         <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
-                            Main Header
+                            ' . $headCount . '
                         </th>
                     </tr>
                     <tr>
@@ -96,7 +96,7 @@ class RptAccGrpBAController extends Controller
         $html .= '<tbody>';
 
         foreach ($groupedData as $headCount => $heads) {
-            // Add the sub-header for each $headCount
+            // Add the headCount as the main header row
             $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;">
                         <strong>' . $headCount . '</strong>
                     </td></tr>';
@@ -162,6 +162,8 @@ class RptAccGrpBAController extends Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 
 
+    
+        
         $filename = "balance_all.pdf";
 
         // Determine output type
