@@ -194,7 +194,7 @@ function expireSession() {
             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
     }).then(() => {
-        window.location.href = '/logout'; // Redirect to logout route
+        window.location.href = '/login'; // Redirect to logout route
     }).catch(err => console.error('Session Time logout failed:', err));
 }
 
@@ -221,7 +221,7 @@ $('#logoutSession').on('click', function() {
             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
         }
     }).then(() => {
-        window.location.href = '/logout'; // Redirect to logout route
+        window.location.href = '/login'; // Redirect to logout route
     }).catch(err => console.error('Manual logout failed:', err));
 });
 
