@@ -8,7 +8,7 @@
     Route::middleware(['guest'])->group(function () {
         Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     });
-    
+
     Route::middleware(['checkPermission:view'])->group(function () {
 
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
@@ -294,7 +294,7 @@
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/backup-database', [App\Http\Controllers\DatabaseBackupController::class, 'backupDatabase'])->name('backup.database');
-        Route::post('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
+        Route::post('/logout', [App\Http\Controllers\UsersController::class, 'logout'])->name('logout');
         Route::get('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
         Route::post('/change-user-password', [App\Http\Controllers\UsersController::class, 'updateUserPassowrd'])->name('change-user-password');
         Route::get('/item-groups/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
