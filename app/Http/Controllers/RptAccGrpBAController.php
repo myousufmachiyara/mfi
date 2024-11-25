@@ -64,7 +64,7 @@ class RptAccGrpBAController extends Controller
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
-       // Group the data
+        // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
         // Initialize HTML content
@@ -76,40 +76,39 @@ class RptAccGrpBAController extends Controller
         // Start the main table
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
 
-        // Add the main header row (headCount)
-        $html .= '<thead>
-                    <tr>
-                        <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
-                            ' . $headCount . '
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
-                        <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
-                        <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
-                        <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
-                    </tr>
-                </thead>';
-
-        $html .= '<tbody>';
-
+        // Loop through each headCount (main header)
         foreach ($groupedData as $headCount => $heads) {
-            // Add the headCount as the main header row
-            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;">
-                        <strong>' . $headCount . '</strong>
-                    </td></tr>';
+            // Add the main header row (headCount) only once per block
+            $html .= '<thead>
+                        <tr>
+                            <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
+                                ' . $headCount . '
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+                            <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+                            <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+                            <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+                        </tr>
+                    </thead>';
 
+            $html .= '<tbody>';
+
+            // Initialize sub-total variables for each headCount
             $subTotalDebit = 0;
             $subTotalCredit = 0;
 
+            // Loop through each subHeadCount (sub-header under the main header)
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add sub-header row
                 $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #ccc;">
                             <strong>' . $subHeadCount . '</strong>
                         </td></tr>';
 
+                // Loop through each item under the subHeadCount
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
@@ -139,7 +138,16 @@ class RptAccGrpBAController extends Controller
                             <td>' . number_format($subTotalCredit, 0) . '</td>
                         </tr>';
             }
+
+            // Add the main header total row for this $headCount
+            $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                        <td colspan="4" style="text-align:right;">Total:</td>
+                        <td>' . number_format($subTotalDebit, 0) . '</td>
+                        <td>' . number_format($subTotalCredit, 0) . '</td>
+                    </tr>';
         }
+
+        $html .= '</tbody>';
 
         // Add overall totals row after all data
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
@@ -155,14 +163,12 @@ class RptAccGrpBAController extends Controller
                     <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
                 </tr>';
 
-        $html .= '</tbody>';
-        $html .= '</table>'; // Close the main table
+        // Close the table
+        $html .= '</table>';
 
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
 
-
-    
         
         $filename = "balance_all.pdf";
 
