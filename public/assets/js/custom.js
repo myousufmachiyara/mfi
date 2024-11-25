@@ -163,38 +163,69 @@ function convertTens(number) {
     return tens[number] || "";
 }
 
-// session maintain
-
+// session expire 
 let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
 let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
 let warningTimeout;
+let redirectTimeout;
 let warningShown = false;
 
+// Function to reset the timer
 function resetTimer() {
     clearTimeout(warningTimeout);
+    clearTimeout(redirectTimeout);
     warningShown = false;
-    warningTimeout = setTimeout(showModal, timeoutWarning);
+    warningTimeout = setTimeout(showModal, timeoutWarning); // Show warning modal
+    redirectTimeout = setTimeout(expireSession, timeoutRedirect); // Expire session
 }
 
+// Function to show the warning modal
 function showModal() {
     warningShown = true;
     $('#timeoutModal').show(); // Show the modal
 }
 
-// Continue session event
+// Function to expire the session
+function expireSession() {
+    if (!warningShown) {
+        $('#timeoutModal').hide(); // Ensure modal is hidden if session expires without showing it
+    }
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    }).then(() => {
+        window.location.reload(); // Reload the page to show the login screen
+    });
+}
+
+// Keep the session alive
 $('#continueSession').on('click', function() {
-    $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
-    $('#timeoutModal').hide(); // Hide the modal
-    resetTimer(); // Reset the timer
+    $.post('/keep-alive', {_token: '{{ csrf_token() }}'}) // Send a request to keep session alive
+        .done(() => {
+            $('#timeoutModal').hide(); // Hide the modal
+            resetTimer(); // Reset the timer
+        });
 });
 
-// Logout event
+// Manual logout from modal
 $('#logoutSession').on('click', function() {
-    window.location.href = '/logout'; // Redirect to logout or any desired action
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    }).then(() => {
+        window.location.href = '/logout'; // Redirect to logout
+    });
 });
 
+// Add event listeners for user activity to reset the timer
 $(document).on('mousemove keypress click scroll', resetTimer);
-resetTimer();
+
+// Initial call to reset the timer when the script loads
+resetTimer();s
 
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();
