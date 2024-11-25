@@ -197,6 +197,7 @@ function expireSession() {
     })
     .then(response => {
         if (response.ok) {
+            console.log(response);
             console.log('Session expired and logged out.');
             // No need to redirect, the server handles it
         } else {

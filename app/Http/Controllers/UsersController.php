@@ -291,6 +291,7 @@ class UsersController extends Controller
     // Route handler for session timeout
     public function logoutTimeout()
     {
+        return "hello";
         session(['logout_reason' => 'session_timeout']);  // Set a flag for session timeout
         
         // Log out the user
