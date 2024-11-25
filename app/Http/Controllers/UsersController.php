@@ -274,6 +274,8 @@ class UsersController extends Controller
 
         // Log out the authenticated user
         Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
         
         // Redirect to the login page
         return redirect()->route('login');
