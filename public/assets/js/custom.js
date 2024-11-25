@@ -164,8 +164,8 @@ function convertTens(number) {
 }
 
 // session expire 
-let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
-let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
+let timeoutWarning = 0.5 * 60 * 1000; // 1 minute in milliseconds
+let timeoutRedirect = 0.7 * 60 * 1000; // 2 minutes in milliseconds
 let warningTimeout;
 let redirectTimeout;
 let warningShown = false;

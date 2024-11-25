@@ -245,6 +245,7 @@ class UsersController extends Controller
                     'role_name' => $user_roles->role_name,
                     'user_role' => $user_roles->role_id,
                     'user_access' => $user_access,
+                    'logout_reason', 'intentional_logout',
                 ]);
     
                 return redirect()->intended('/home');
@@ -299,7 +300,7 @@ class UsersController extends Controller
     public function logout()
     {
         // Check logout reason
-        $logoutReason = session('logout_reason', 'intentional_logout'); // Default to 'intentional_logout' if not set
+        $logoutReason = session('logout_reason');
 
         // Update the user's login status
         users::where('id', session('user_id'))->update([
