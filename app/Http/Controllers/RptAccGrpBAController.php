@@ -64,77 +64,106 @@ class RptAccGrpBAController extends Controller
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
+       // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
-        // Table header for data
+        // Initialize HTML content
         $html = '';
         $count = 1;
         $totalDebit = 0;
         $totalCredit = 0;
 
-        foreach ($groupedData as $headCount => $heads) {
-            // Create a separate box for each $headCount and set text color to red
-            $html .= '<div style="border: 1px solid #000; padding: 5px; margin-bottom: 10px;">
-                        <h2 style="color:red; text-align:center; font-size:18px; border-bottom: 1px solid #000;">' . $headCount . '</h2>';
+        // Start the main table
+        $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
 
-            $html .= '<table border="1" style="border-collapse: collapse; text-align: center;">
-                        <thead>
-                            <tr><th style="width:8%;color:#17365D;font-weight:bold;">S/No</th>
-                                <th style="width:10%;color:#17365D;font-weight:bold;">AC</th>
-                                <th style="width:25%;color:#17365D;font-weight:bold;">Account Name</th>
-                                <th style="width:25%;color:#17365D;font-weight:bold;">Address</th>
-                                <th style="width:16%;color:#17365D;font-weight:bold;">Debit</th>
-                                <th style="width:16%;color:#17365D;font-weight:bold;">Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
+        // Add the main header row (headCount)
+        $html .= '<thead>
+                    <tr>
+                        <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
+                            ' . $headCount . '
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+                        <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+                        <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+                        <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+                        <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+                        <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+                    </tr>
+                </thead>';
+
+        $html .= '<tbody>';
+
+        foreach ($groupedData as $headCount => $heads) {
+            // Add the headCount as the main header row
+            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;">
+                        <strong>' . $headCount . '</strong>
+                    </td></tr>';
+
+            $subTotalDebit = 0;
+            $subTotalCredit = 0;
 
             foreach ($heads as $subHeadCount => $subheads) {
-                // Add subhead row
-                $html .= '<tr><td colspan="6" style="text-align:center;font-size:15px;font-weight:600; border: 1px solid #000;">' . $subHeadCount . '</td></tr>';
+                // Add sub-header row
+                $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #ccc;">
+                            <strong>' . $subHeadCount . '</strong>
+                        </td></tr>';
 
                 foreach ($subheads as $item) {
                     // Add data row with alternating background colors
                     $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
 
                     $html .= '<tr style="background-color:' . $backgroundColor . ';">
-                                <td style="width:8%;">' . $count . '</td>
-                                <td style="width:10%;">' . $item['ac_code'] . '</td>
-                                <td style="width:25%;">' . $item['ac_name'] . '</td>
-                                <td style="width:25%;">' . $item['address'] . ' ' . $item['phone'] . '</td>
-                                <td style="width:16%;">' . number_format($item['Debit'], 0) . '</td>
-                                <td style="width:16%;">' . number_format($item['Credit'], 0) . '</td>
+                                <td>' . $count . '</td>
+                                <td>' . $item['ac_code'] . '</td>
+                                <td>' . $item['ac_name'] . '</td>
+                                <td>' . $item['address'] . ' ' . $item['phone'] . '</td>
+                                <td>' . number_format($item['Debit'], 0) . '</td>
+                                <td>' . number_format($item['Credit'], 0) . '</td>
                             </tr>';
 
-                    // Update totals
+                    // Update totals for both sub-header and overall totals
+                    $subTotalDebit += $item['Debit'];
+                    $subTotalCredit += $item['Credit'];
                     $totalDebit += $item['Debit'];
                     $totalCredit += $item['Credit'];
 
                     $count++;
                 }
-            }
 
-            $html .= '</tbody></table></div>'; // Close the box for the current $headCount
+                // Add sub-total row for this sub-header
+                $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                            <td colspan="4" style="text-align:right;">Sub Total:</td>
+                            <td>' . number_format($subTotalDebit, 0) . '</td>
+                            <td>' . number_format($subTotalCredit, 0) . '</td>
+                        </tr>';
+            }
         }
 
-        // Add totals row
-        $html .= '
-        <tr style="background-color:#d9edf7; font-weight:bold;">
-            <td colspan="4" style="text-align:right;">Total:</td>
-            <td style="width:14%;">' . number_format($totalDebit, 0) . '</td>
-            <td style="width:14%;">' . number_format($totalCredit, 0) . '</td>
-        </tr>';
+        // Add overall totals row after all data
+        $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">Total:</td>
+                    <td>' . number_format($totalDebit, 0) . '</td>
+                    <td>' . number_format($totalCredit, 0) . '</td>
+                </tr>';
 
         // Calculate balance and add balance row
         $balance = $totalDebit - $totalCredit;
-        $html .= '
-        <tr style="background-color:#d2edc7; font-weight:bold;">
-            <td colspan="4" style="text-align:right;">Balance:</td>
-            <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
-        </tr>';
+        $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">Balance:</td>
+                    <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+                </tr>';
 
+        $html .= '</tbody>';
+        $html .= '</table>'; // Close the main table
+
+        // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
 
+
+    
+        
         $filename = "balance_all.pdf";
 
         // Determine output type
