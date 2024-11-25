@@ -64,7 +64,6 @@ class RptAccGrpBAController extends Controller
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
-     
         // Group the data
         $groupedData = $this->groupByHeadAndSub($balance_all);
 
@@ -79,7 +78,7 @@ class RptAccGrpBAController extends Controller
 
         // Loop through each headCount (main header)
         foreach ($groupedData as $headCount => $heads) {
-            // Add the main header row (headCount)
+            // Add the main header row (headCount) only once per block
             $html .= '<thead>
                         <tr>
                             <th colspan="6" style="text-align:center; font-size:22px; color:#17365D; font-weight: bold; padding: 10px; background-color: #f1f1f1;">
@@ -98,6 +97,7 @@ class RptAccGrpBAController extends Controller
 
             $html .= '<tbody>';
 
+            // Initialize sub-total variables for each headCount
             $subTotalDebit = 0;
             $subTotalCredit = 0;
 
@@ -168,6 +168,7 @@ class RptAccGrpBAController extends Controller
 
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
+
         
         $filename = "balance_all.pdf";
 
