@@ -191,15 +191,16 @@ function expireSession() {
     fetch('/logout-timeout', {
         method: 'GET',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Add CSRF token for security
-            'Content-Type': 'application/json',  // Specify content type if necessary
+            'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token for security
         }
     })
     .then(response => {
         if (response.ok) {
-            console.log(response);
             console.log('Session expired and logged out.');
-            // No need to redirect, the server handles it
+            // Check for redirection (redirect status)
+            if (response.redirected) {
+                window.location.href = response.url; // Redirect to the URL Laravel sends in response
+            }
         } else {
             console.error('Logout timeout failed:', response.statusText);
         }
