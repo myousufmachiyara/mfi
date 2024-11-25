@@ -207,7 +207,7 @@ $('#continueSession').on('click', function() {
     fetch('/keep-alive', {
         method: 'POST',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
         }
     })
     .then(() => {
@@ -222,11 +222,15 @@ $('#logoutSession').on('click', function() {
     fetch('/logout', {
         method: 'POST',
         headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Add CSRF token for security
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
+        },
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '/login'; // Redirect to login page after successful logout
+        } else {
+            console.error('Logout failed:', response);
         }
-    }).then(() => {
-        window.location.href = '/login'; // Redirect to logout route
-    }).catch(err => console.error('Manual logout failed:', err));
+    }).catch(err => console.error('Session Timeout logout failed:', err));
 });
 
 // Monitor user activity to reset the timer
