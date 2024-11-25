@@ -160,12 +160,14 @@ class RptAccGrpBAController extends Controller
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Generate the file name and output type
         $filename = "balance_all.pdf";
-        $outputType = $request->outputType === 'download' ? 'D' : 'I'; // Default is inline view
 
-        // Output the PDF
-        $pdf->Output($filename, $outputType);
+        // Determine output type
+        if ($request->outputType === 'download') {
+            $pdf->Output($filename, 'D'); // For download
+        } else {
+            $pdf->Output($filename, 'I'); // For inline view
+        }
 }
     
 
