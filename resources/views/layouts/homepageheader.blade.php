@@ -71,7 +71,7 @@
 					<li>
 						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
 					</li>
-					<li>
+					<li>	
 						<form action="/logout" method="POST">
 							@csrf
 							<a type="submit" role="menuitem" tabindex="-1"><i class="bx bx-power-off"></i> Logout</a>
