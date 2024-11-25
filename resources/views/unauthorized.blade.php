@@ -4,7 +4,6 @@
 			@include('../layouts.pageheader')			
             <div class="inner-wrapper cust-pad">
 				<section role="main" class="content-body" style="margin:0px">
-					@include('../layouts.pageheader')
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="main-error mb-3">
