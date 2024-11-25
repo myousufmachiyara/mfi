@@ -73,9 +73,8 @@
 					</li>
 					<li>
 						<form action="/logout" method="POST">
-							
+							<a type="submit" role="menuitem" tabindex="-1"><i class="bx bx-power-off"></i> Logout</a>
 						</form>
-						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
 					</li>
 					<li>
 						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-cloud-download"></i> DB Backup</a>
