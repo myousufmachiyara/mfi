@@ -124,7 +124,7 @@ class RptAccGrpBAController extends Controller
         
                 // Add sub-total row for this sub-header
                 $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                            <td colspan="4" style="text-align:right;"><strong>Subtotal for '. $subheads . '</strong></td>
+                            <td colspan="4" style="text-align:right;">Sub Total:</td>
                             <td>' . number_format($subTotalDebit, 0) . '</td>
                             <td>' . number_format($subTotalCredit, 0) . '</td>
                           </tr>';
