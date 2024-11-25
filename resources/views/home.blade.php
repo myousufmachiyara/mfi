@@ -25,7 +25,7 @@
 		}
 	</style>
 	<body>
-		@php die(print_r(session(['user_id']))); @endphp
+		@php die(print_r(session(['role_name']))); @endphp
 		<section class="body">
 			<div class="inner-wrapper">
 				@include('layouts.leftmenu')
