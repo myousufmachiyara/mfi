@@ -74,7 +74,7 @@ class RptAccGrpBAController extends Controller
 
         foreach ($groupedData as $headCount => $heads) {
             // Create a separate box for each $headCount and set text color to red
-            $html .= '<div style="border: 1px solid #000; padding: 5px; margin-bottom: 10px;">
+            $html .= '<div style="border: 1px solid #000;">
                         <h2 style="color:red; text-align:center; font-size:18px; border-bottom: 1px solid #000;">' . $headCount . '</h2>';
 
             $html .= '<table border="1" style="border-collapse: collapse; text-align: center;">
