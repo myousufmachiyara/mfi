@@ -267,15 +267,15 @@ class UsersController extends Controller
 
     public function logout()
     {
-        // Update the user's login status
+        // Perform logout only if a user is logged in
         users::where('id', session('user_id'))->update([
             'is_login' => 0,
         ]);
 
-        // Perform logout
-        session()->flush();
+        // Log out the authenticated user
         Auth::logout();
-        
+
+        // Redirect to the login page
         return redirect()->route('login');
     }
 
