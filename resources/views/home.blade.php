@@ -553,6 +553,7 @@
 			data: {
 				labels: top5Customerlabels,
 				datasets: [
+					
 					{
 						label: dash_pur_2_summary_monthly_companywise[0]['mill_name'],
 						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[0]['total_weight']),
