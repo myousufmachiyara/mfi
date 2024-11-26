@@ -577,9 +577,6 @@
 			stack: 'Stack Others',
 		});
 
-		// Log the datasets
-		console.log(datasets);
-
 		// Use the datasets in your chart
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
