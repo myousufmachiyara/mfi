@@ -510,36 +510,61 @@
 		}
 
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-
 		const groupedData = dash_pur_2_summary_monthly_companywise.reduce((acc, item) => {
-			if (!acc[item.dat]) acc[item.dat] = [];
+			// If the dat value doesn't exist as a key in acc, create an empty array
+			if (!acc[item.dat]) {
+				acc[item.dat] = [];
+			}
+
+			// Push the current item to the appropriate group
 			acc[item.dat].push(item);
+
 			return acc;
 		}, {});
 
 		const Utils = {
-			CHART_COLORS: [
-				'rgba(220, 53, 69, 1)', 'rgba(0, 136, 204, 1)', 'rgba(25, 135, 84, 1)',
-				'rgba(43, 170, 177, 1)', 'rgba(219, 150, 81, 1)'
-			]
+			CHART_COLORS: {
+				0: 'rgba(220, 53, 69, 1)',
+				1: 'rgba(0, 136, 204, 1)',
+				2: 'rgba(25, 135, 84, 1)',
+				3: 'rgba(43, 170, 177, 1)',
+				4: 'rgba(219, 150, 81, 1)',
+			}
 		};
 
-		const chartLabels = Object.keys(groupedData);
-		const mills = [...new Set(dash_pur_2_summary_monthly_companywise.map(item => item.mill_name))];
+		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
 
-		const datasets = mills.map((mill, index) => ({
-			label: mill,
-			data: chartLabels.map(dat => {
+		// Initialize an empty array to hold datasets
+		const datasets = [];
+
+		// Loop through each mill and create a dataset for it
+		const mills = ['STEELEX', 'ZAFAR ASSOCIATES', 'AKBER PIPE', 'S.P.M', 'MEHBOOB PIPE'];
+
+		mills.forEach((mill, index) => {
+			// For each mill, get the total weights for each 'dat'
+			const dataForMill = chartLabels.map(dat => {
+				// Find the mill's total_weight for the current 'dat'
 				const millData = groupedData[dat].find(item => item.mill_name === mill);
-				return millData ? millData.total_weight : 0;
-			}),
-			backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
-			stack: `Stack ${index}`
-		}));
+				return millData ? millData.total_weight : 0; // Default to 0 if no data found for this mill
+			});
 
-		new Chart(document.getElementById('top5CustomerPerformance'), {
+			// Create the dataset for this mill
+			datasets.push({
+				label: mill,
+				data: dataForMill,
+				backgroundColor: Utils.CHART_COLORS[index], // You can customize the colors here
+				stack: `Stack ${index}`,
+			});
+		});
+
+		// Now, use the datasets in your chart
+		new Chart(top5CustomerPerformance, {
 			type: 'bar',
-			data: { labels: chartLabels, datasets }
+			data: {
+				labels: chartLabels, // 'dat' values as labels
+				datasets: datasets,  // Dynamic datasets based on groupedData
+			}
 		});
 
 	</script>									
