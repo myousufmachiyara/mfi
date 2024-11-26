@@ -585,7 +585,7 @@
 				return months.slice(0, options.count);  // Returns first 'count' months
 			}
 		};
-		const labels = Utils.months({count: 6});
+		labels = Utils.months({count: 6});
 
 		new Chart(halfYearSale, {
 			type: 'line',
