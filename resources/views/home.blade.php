@@ -493,6 +493,13 @@
 	</body>
 	<script>
 
+		const Utils = {
+			months: function(options) {
+				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+				return months.slice(0, options.count);  // Returns first 'count' months
+			}
+		};
+		
 		$(document).ready(function() {
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
@@ -579,12 +586,6 @@
 		});
 
 		const halfYearSale = document.getElementById('halfYearSale');
-		const Utils = {
-			months: function(options) {
-				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-				return months.slice(0, options.count);  // Returns first 'count' months
-			}
-		};
 		labels = Utils.months({count: 6});
 
 		new Chart(halfYearSale, {
