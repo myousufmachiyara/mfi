@@ -435,6 +435,27 @@
 									</div>
 								</div>
 
+								<div id="AS" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- Category Sale -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">TOP 5 CUSTOMERS PERFORMANCE</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="top5CustomerPerformance"></canvas>
+												</div>
+											</section>
+										</div>
+
+									</div>
+								</div>
+
 							</div>
 						</div>
 
