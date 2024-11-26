@@ -536,71 +536,71 @@
 		// Initialize an empty array to hold datasets
 
 		// The mills to check
-const mills = ['187', '170', '133'];
+		const mills = ['187', '170', '133', 'Others'];
 
-// Initialize datasets
-const datasets = [];
-const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
+		// Initialize datasets
+		const datasets = [];
+		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
 
-// Loop through each 'dat' value (chart label) and create a dataset for each mill
-mills.forEach((mill, index) => {
-    // For each 'dat', get the total weights for the current 'mill'
-    const dataForMill = chartLabels.map(dat => {
-        // Find the mill's total_weight for the current 'dat'
-        const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
+		// Loop through each 'dat' value (chart label) and create a dataset for each mill
+		mills.forEach((mill, index) => {
+			// For each 'dat', get the total weights for the current 'mill'
+			const dataForMill = chartLabels.map(dat => {
+				// Find the mill's total_weight for the current 'dat'
+				const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
 
-        // If millData is found, return the total_weight, otherwise return 0
-        if (millData) {
-            return millData.total_weight;
-        } else {
-            // If millData is not found for this specific mill code, return the data under "Others"
-            const othersData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code === 'Others') : null;
-            return othersData ? othersData.total_weight : 0; // Default to 0 if no data found for "Others"
-        }
-    });
+				// If millData is found, return the total_weight, otherwise return 0
+				if (millData) {
+					return millData.total_weight;
+				} else {
+					// If millData is not found for this specific mill code, return the data under "Others"
+					const othersData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code === 'Others') : null;
+					return othersData ? othersData.total_weight : 0; // Default to 0 if no data found for "Others"
+				}
+			});
 
-    // Create the dataset for this mill (or 'Others')
-    datasets.push({
-        label: `Mill ${mill}`,  // Display "Mill {mill}" label
-        data: dataForMill,
-        backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
-        stack: `Stack ${index}`,
-    });
-});
+			// Create the dataset for this mill (or 'Others')
+			datasets.push({
+				label: `Mill ${mill}`,  // Display "Mill {mill}" label
+				data: dataForMill,
+				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
+				stack: `Stack ${index}`,
+			});
+		});
 
-// Create the dataset for "Others"
-const othersData = chartLabels.map(dat => {
-    let totalWeightOthers = 0;
-    // Loop through all mills to check if data is missing for them
-    mills.forEach(mill => {
-        const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
-        if (!millData) {
-            // If no data for this mill, consider the mill as "Others"
-            totalWeightOthers += groupedData[dat] ? groupedData[dat].reduce((acc, item) => acc + (item.mill_code !== mill ? item.total_weight : 0), 0) : 0;
-        }
-    });
-    return totalWeightOthers;
-});
+		// Create the dataset for "Others"
+		const othersData = chartLabels.map(dat => {
+			let totalWeightOthers = 0;
+			// Loop through all mills to check if data is missing for them
+			mills.forEach(mill => {
+				const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
+				if (!millData) {
+					// If no data for this mill, consider the mill as "Others"
+					totalWeightOthers += groupedData[dat] ? groupedData[dat].reduce((acc, item) => acc + (item.mill_code !== mill ? item.total_weight : 0), 0) : 0;
+				}
+			});
+			return totalWeightOthers;
+		});
 
-// Add the "Others" dataset to datasets
-datasets.push({
-    label: 'Others',
-    data: othersData,
-    backgroundColor: 'rgba(200, 200, 200, 1)',  // Default color for "Others"
-    stack: 'Stack Others',
-});
+		// Add the "Others" dataset to datasets
+		datasets.push({
+			label: 'Others',
+			data: othersData,
+			backgroundColor: 'rgba(200, 200, 200, 1)',  // Default color for "Others"
+			stack: 'Stack Others',
+		});
 
-// Log the datasets
-console.log(datasets);
+		// Log the datasets
+		console.log(datasets);
 
-// Now, use the datasets in your chart
-new Chart(top5CustomerPerformance, {
-    type: 'bar',
-    data: {
-        labels: chartLabels, // 'dat' values as labels
-        datasets: datasets,  // Dynamic datasets based on groupedData
-    }
-});
+		// Now, use the datasets in your chart
+		new Chart(top5CustomerPerformance, {
+			type: 'bar',
+			data: {
+				labels: chartLabels, // 'dat' values as labels
+				datasets: datasets,  // Dynamic datasets based on groupedData
+			}
+		});
 
 	</script>									
 </html>
