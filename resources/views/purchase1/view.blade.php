@@ -114,7 +114,7 @@
 								</table>
 
 								<div class="row">
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-5">
 										<table class="table h6 text-dark">
 											<tbody>
 												<tr class="b-top-0">
@@ -130,7 +130,11 @@
 										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 
 									</div>
-									<div class="col-12 col-md-6">
+
+									<div class="d-sm-none col-md-2">
+									</div>
+									
+									<div class="col-12 col-md-5">
 										<table class="table h6 text-dark">
 											<tbody>
 												<tr class="b-top-0">
