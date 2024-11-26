@@ -472,7 +472,7 @@
 
         // Log the data to the console
         console.log(dash_pur_2_summary_monthly_companywise);
-		const datValues = data.map(item => item.dat);
+		const datValues = dash_pur_2_summary_monthly_companywise.map(item => item.dat);
 
 		// Log the results
 		console.log(datValues);
