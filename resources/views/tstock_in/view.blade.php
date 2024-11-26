@@ -108,39 +108,33 @@
 									</tbody>
 								</table>
 
-								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<table class="table h6 text-dark">
-													<tbody>
-														<tr class="b-top-0">
-															<td colspan="2" style="color:#17365D">Total Quantity</td>
-															<td class="text-left">{{$total_quantity}}</td>
-														</tr>
-														<tr>
-															<td colspan="2" style="color:#17365D">Total Weight(KGs)</td>
-															<td class="text-left">{{$total_weight}}</td>
-														</tr>
-			
-													</tbody>
-												</table>
 
-											</div>
+								<div class="row">
+									<div class="col-12 col-md-8">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2" style="color:#17365D">Total Quantity</td>
+													<td class="text-left">{{$total_quantity}}</td>
+												</tr>
+												<tr>
+													<td colspan="2" style="color:#17365D">Total Weight(KGs)</td>
+													<td class="text-left">{{$total_weight}}</td>
+												</tr>
+	
+											</tbody>
+										</table>
+										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+									</div>
+									<div class="col-12 col-md-4">
+										<div class="text-end">
+											<a onclick="window.location='{{ route('all-tstock-in') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+											<a href="{{ route('print-tstock-in-invoice', $tstock_in->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
 										</div>
 									</div>
-									
 								<div>
 							</div>
-
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-tstock-in') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-tstock-in-invoice', $tstock_in->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
-							
-							</div>
-
 						</div>
-
 					</section>
 				</section>
 			</div>
