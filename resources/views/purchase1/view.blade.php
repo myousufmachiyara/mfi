@@ -113,7 +113,7 @@
 									</tbody>
 								</table>
 
-								<div class="row">
+								<div class="row" style="justify-content: space-between">
 									<div class="col-12 col-md-4">
 										<table class="table h6 text-dark">
 											<tbody>
