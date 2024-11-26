@@ -8,6 +8,7 @@ use App\Models\dash_month_sale;
 use App\Models\dash_month_purchase;
 use App\Models\dash_acc_group;
 use App\Models\users;
+use App\Models\pur_summary_monthly;
 
 use Carbon\Carbon;
 
@@ -56,5 +57,11 @@ class HomeController extends Controller
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
 
         return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale'));
+    }
+
+    public function hrPipesGraphs(){
+
+        $receivables = pur_summary_monthly::where('sub',1)->first();
+
     }
 }
