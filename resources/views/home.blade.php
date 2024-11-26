@@ -474,7 +474,7 @@
 				return months.slice(0, options.count);  // Returns first 'count' months
 			},
 			numbers: function (cfg) {
-				const count = cfg.count || 5;
+				const count = cfg.count || 10;
 				const min = cfg.min || 0;
 				const max = cfg.max || 1000;
 				const numbers = [];
@@ -534,7 +534,7 @@
 		}
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-		const DATA_COUNT = 10;
+		const DATA_COUNT = 5;
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
 		const top5Customerlabels = Utils.months({count: 5});
 
