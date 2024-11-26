@@ -424,10 +424,10 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Category Sales Chart</h2>
+													<h2 class="card-title">TOP 5 CUSTOMERS PERFORMANCE</h2>
 												</header>
 												<div class="card-body">
-													<canvas id="catSalesChart"></canvas>
+													<canvas id="top5CustomerPerformance"></canvas>
 												</div>
 											</section>
 										</div>
@@ -534,24 +534,47 @@
 			});
 		}
 
-		const catSalesChart = document.getElementById('catSalesChart');
-		new Chart(catSalesChart, {
+		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+		const DATA_COUNT = 5;
+		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1000};
+
+		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
-			labels: ['Pipe', 'Garder', 'TR', 'ABC', 'XYZ', 'Orange'],
-			datasets: [{
-				label: 'No. Of Tons',
-				data: [20, 11, 50, 12, 100, 38],
-				borderWidth: 1
-			}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: false
-					}
-				}
-			}
+				labels: labels,
+				datasets: [
+					{
+					label: 'STEELEX',
+					data: Utils.numbers(NUMBER_CFG),
+					backgroundColor: Utils.CHART_COLORS.red,
+					stack: 'Stack 0',
+					},
+					{
+					label: 'IIL',
+					data: Utils.numbers(NUMBER_CFG),
+					backgroundColor: Utils.CHART_COLORS.blue,
+					stack: 'Stack 2',
+					},
+					{
+					label: 'MEHBOOB',
+					data: Utils.numbers(NUMBER_CFG),
+					backgroundColor: Utils.CHART_COLORS.green,
+					stack: 'Stack 1',
+					},
+						{
+					label: 'SPM',
+					data: Utils.numbers(NUMBER_CFG),
+					backgroundColor: Utils.CHART_COLORS.black,
+					stack: 'Stack 3',
+					},
+						{
+					label: 'OTHERS',
+					data: Utils.numbers(NUMBER_CFG),
+					backgroundColor: Utils.CHART_COLORS.yellow,
+					stack: 'Stack 4',
+					},
+				]
+			}		
 		});
 
 		const halfYearSale = document.getElementById('halfYearSale');
