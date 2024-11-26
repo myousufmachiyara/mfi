@@ -549,34 +549,35 @@
 				labels: top5Customerlabels,
 				datasets: [
 					{
-					label: pur_2_summary_monthly[0]['mill_name'],
-					data: Utils.numbers(pur_2_summary_monthly[0]['weight']),
-					backgroundColor: Utils.CHART_COLORS.red,
-					stack: 'Stack 0',
+						label: pur_2_summary_monthly[0]['mill_name'],
+						data: Utils.numbers(pur_2_summary_monthly[0]['weight']),
+						backgroundColor: Utils.CHART_COLORS.red,
+						stack: 'Stack 0',
 					},
 					{
-					label: 'IIL',
-					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.tertiary,
-					stack: 'Stack 2',
+						label: pur_2_summary_monthly[1]['mill_name'],
+						data: Utils.numbers(pur_2_summary_monthly[1]['weight']),
+						backgroundColor: Utils.CHART_COLORS.tertiary,
+						stack: 'Stack 2',
 					},
 					{
-					label: 'MEHBOOB',
-					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.green,
-					stack: 'Stack 1',
+						label: pur_2_summary_monthly[2]['mill_name'],
+						data: Utils.numbers(pur_2_summary_monthly[2]['weight']),
+						backgroundColor: Utils.CHART_COLORS.green,
+						stack: 'Stack 1',
 					},
-						{
-					label: 'SPM',
-					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.blue,
-					stack: 'Stack 3',
+					{
+						label: pur_2_summary_monthly[3]['mill_name'],
+						data: Utils.numbers(pur_2_summary_monthly[3]['weight']),
+						backgroundColor: Utils.CHART_COLORS.blue,
+						stack: 'Stack 3',
 					},
-						{
-					label: 'OTHERS',
-					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.yellow,
-					stack: 'Stack 4',
+					{
+						label: 'OTHERS',
+						label: pur_2_summary_monthly[0]['mill_name'],
+						data: Utils.numbers(pur_2_summary_monthly[4]['weight']),
+						backgroundColor: Utils.CHART_COLORS.yellow,
+						stack: 'Stack 4',
 					},
 				]
 			}		
