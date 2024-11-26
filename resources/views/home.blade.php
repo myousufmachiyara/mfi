@@ -508,6 +508,13 @@
 				}
 				return numbers;
 			},
+			CHART_COLORS: {
+				red: 'rgba(220, 53, 69, 1)',
+				blue: 'rgba(54, 162, 235, 0.2)',
+				green: 'rgba(75, 192, 192, 0.2)',
+				black: 'rgba(0, 0, 0, 0.2)',
+				yellow: 'rgba(255, 159, 64, 0.2)',
+			}
 		};
 
 		$(document).ready(function() {
