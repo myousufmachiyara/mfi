@@ -535,8 +535,7 @@
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		// Initialize an empty array to hold datasets
 
-		// The mills to check
-		const mills = ['187', '170', '133', 'Others'];
+		const mills = ['187', '170', '133'];
 
 		// Initialize datasets
 		const datasets = [];
@@ -553,9 +552,8 @@
 				if (millData) {
 					return millData.total_weight;
 				} else {
-					// If millData is not found for this specific mill code, return the data under "Others"
-					const othersData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code === 'Others') : null;
-					return othersData ? othersData.total_weight : 0; // Default to 0 if no data found for "Others"
+					// If millData is not found for this specific mill code, return 0
+					return 0;
 				}
 			});
 
@@ -568,17 +566,19 @@
 			});
 		});
 
-		// Create the dataset for "Others"
+		// Create the dataset for "Others" (handle mills not in the provided mills list)
 		const othersData = chartLabels.map(dat => {
+			// Initialize totalWeightOthers
 			let totalWeightOthers = 0;
-			// Loop through all mills to check if data is missing for them
-			mills.forEach(mill => {
-				const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
-				if (!millData) {
-					// If no data for this mill, consider the mill as "Others"
-					totalWeightOthers += groupedData[dat] ? groupedData[dat].reduce((acc, item) => acc + (item.mill_code !== mill ? item.total_weight : 0), 0) : 0;
+
+			// Loop through all items for the current 'dat' value
+			groupedData[dat]?.forEach(item => {
+				// If the mill_code is not in the mills array, add the weight to "Others"
+				if (!mills.includes(item.mill_code.toString())) {
+					totalWeightOthers += item.total_weight;
 				}
 			});
+
 			return totalWeightOthers;
 		});
 
