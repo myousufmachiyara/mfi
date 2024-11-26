@@ -539,34 +539,40 @@
 		// Initialize an empty array to hold datasets
 		const datasets = [];
 
-		// Loop through each mill and create a dataset for it
+		// The mills to check
 		const mills = ['187', '170', '133', 'Others'];
 
+		// Initialize datasets
+		const datasets = [];
+		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
+
+		// Loop through each mill and create a dataset for it
 		mills.forEach((mill, index) => {
 			// For each mill, get the total weights for each 'dat'
 			const dataForMill = chartLabels.map(dat => {
 				// Find the mill's total_weight for the current 'dat'
-				const millData = groupedData[dat].find(item => item.mill_code === mill);
+				const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
 
-				// If mill is not found and it's not "Others", look for the "Others" category
 				if (!millData && mill !== 'Others') {
-					// Find the "Others" category data for the current 'dat'
-					const othersData = groupedData[dat].find(item => item.mill_code === 'Others');
+					// If mill is not found and it's not "Others", push data to "Others"
+					const othersData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code === 'Others') : null;
 					return othersData ? othersData.total_weight : 0; // Default to 0 if no data found for 'Others'
 				}
 
-				return millData ? millData.total_weight : 0; // Return the found total_weight or 0 if no data found
+				// If millData is found, return the total_weight, otherwise return 0
+				return millData ? millData.total_weight : 0;
 			});
 
 			// Create the dataset for this mill (or 'Others')
 			datasets.push({
-				label: mill,
+				label: mill === 'Others' ? 'Others' : `Mill ${mill}`,  // Display "Others" label when mill is 'Others'
 				data: dataForMill,
 				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
 				stack: `Stack ${index}`,
 			});
 		});
 
+		// Log the datasets
 		console.log(datasets);
 
 		// Now, use the datasets in your chart
