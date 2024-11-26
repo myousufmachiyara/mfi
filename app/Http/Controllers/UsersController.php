@@ -283,6 +283,22 @@ class UsersController extends Controller
         return redirect()->route('login');
     }
 
+    public function logoutBrowser(Request $request)
+    {
+        $userId = session('user_id');
+
+        if ($userId) {
+            // Update the `is_login` column
+            users::where('id', $userId)->update(['is_login' => 0]);
+        }
+        
+        // Invalidate the session
+        $request->session()->invalidate();
+        
+        // Redirect to the login page
+        return redirect()->route('login');
+    }
+
     public function assignRole(Request $request, User $user)
     {
         $request->validate([

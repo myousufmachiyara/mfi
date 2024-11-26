@@ -239,6 +239,12 @@ $(document).on('mousemove keypress click scroll', resetTimer);
 // Initialize the session activity timer when the page loads
 resetTimer();
 
+window.addEventListener('beforeunload', function () {
+    navigator.sendBeacon('/logout-browser', JSON.stringify({
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    }));
+});
+
 $('#changePasswordForm').on('submit', function(e){
     e.preventDefault();
     var currentPassword=$('#current_passowrd').val();

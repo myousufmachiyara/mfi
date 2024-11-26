@@ -477,6 +477,74 @@
 										</div>
 									</div>
 								</div>
+
+								<div id="HR_Sale" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- Category Sale -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Category Sales Chart</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="catSalesChart"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<!-- Half Year Sales -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Half Year Sale</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="halfYearSale"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<!-- Half Year Sales 2 -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Half Year Sale 2</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="halfYearSale2"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<!-- Top 5 Customers -->
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Customers Of The Month</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="top5Customers"></canvas>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
