@@ -534,8 +534,6 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
-
-		console.log(groupedData);
 		// Initialize an empty array to hold datasets
 		const datasets = [];
 
