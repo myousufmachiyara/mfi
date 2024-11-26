@@ -481,7 +481,7 @@
 			numbers: function (cfg) {
 				const count = cfg.count || 5;
 				const min = cfg.min || 0;
-				const max = cfg.max || 1000;
+				const max = cfg.max || 100000;
 				const numbers = [];
 				for (let i = 0; i < count; i++) {
 					numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
@@ -540,7 +540,7 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
-		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 10000};
+		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
 		const top5Customerlabels = Utils.months({count: 2});
 
 		new Chart(top5CustomerPerformance, {
