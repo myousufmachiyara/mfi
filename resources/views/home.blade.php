@@ -534,63 +534,39 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		// The mills to check
-		const mills = ['187','170','133'];
+		const mills = ['187', '170', '133'];
 
 		// Initialize datasets
 		const datasets = [];
 		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
 
-		// Loop through each 'dat' value (chart label) and create a dataset for each mill
+		// Loop through each 'dat' value (chart label) and create datasets for each mill
 		mills.forEach((mill, index) => {
-			// For each 'dat', get the total weights for the current 'mill'
 			const dataForMill = chartLabels.map(dat => {
-				// Find the mill's total_weight for the current 'dat'
-				const millData = groupedData[dat] ? groupedData[dat].find(item => item.mill_code.toString() === mill) : null;
-
-				// If millData is found, return the total_weight, otherwise return 0
-				if (millData) {
-					return millData.total_weight;
-				} else {
-					// If millData is not found for this specific mill code, return 0
-					return 0;
-				}
+				const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+				return millData ? millData.total_weight : 0;
 			});
 
-			// Get the mill name from groupedData
-			let millName = 'Others'; // Default value if not found
-			for (let dat in groupedData) {
-				if (groupedData[dat]) {
-					const foundItem = groupedData[dat].find(item => item.mill_code.toString() === mill);
-					if (foundItem) {
-						millName = foundItem.mill_name;  // Extract mill_name if match is found
-						break; // Stop the loop once the mill_name is found
-					}
-				}
-			}
+			// Get the mill name from groupedData (first match)
+			const millName = chartLabels
+				.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+				.find(name => name) || `Mill ${mill}`;  // Default to `Mill {mill}` if not found
 
 			// Create the dataset for this mill
 			datasets.push({
-				label: millName || `Mill ${mill}`,  // Use mill_name from groupedData as the label
+				label: millName,
 				data: dataForMill,
-				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
+				backgroundColor: Utils.CHART_COLORS[index],
 				stack: `Stack ${index}`,
 			});
 		});
 
-		// Create the dataset for "Others" (handle mills not in the provided mills list)
+		// Create the dataset for "Others" (for mills not in the mills array)
 		const othersData = chartLabels.map(dat => {
-			// Initialize totalWeightOthers
-			let totalWeightOthers = 0;
-
-			// Loop through all items for the current 'dat' value
-			groupedData[dat]?.forEach(item => {
-				// If the mill_code is not in the mills array, add the weight to "Others"
-				if (!mills.includes(item.mill_code.toString())) {
-					totalWeightOthers += item.total_weight;
-				}
-			});
-
-			return totalWeightOthers;
+			return groupedData[dat]?.reduce((acc, item) => {
+				if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+				return acc;
+			}, 0) || 0; // Default to 0 if no matching items
 		});
 
 		// Add the "Others" dataset to datasets
@@ -604,7 +580,7 @@
 		// Log the datasets
 		console.log(datasets);
 
-		// Now, use the datasets in your chart
+		// Use the datasets in your chart
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
@@ -612,5 +588,6 @@
 				datasets: datasets,  // Dynamic datasets based on groupedData
 			}
 		});
+
 	</script>									
 </html>
