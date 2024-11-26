@@ -26,7 +26,7 @@
             
                     @if(((session('user_access')[0]['module_id'])==1 && (session('user_access')[0]['view'])==1) OR ((session('user_access')[1]['module_id'])==2 && (session('user_access')[1]['view'])==1))
                     <li class="nav-parent">
-                        <a>
+                        <a class="nav-link" href="#">
                             <i style="font-size:16px" class="fa fa-users" aria-hidden="true"></i>
                             <span>Users</span>
                         </a>
@@ -365,7 +365,7 @@
 
                     @if(((session('user_access')[28]['module_id'])==29 && (session('user_access')[28]['view'])==1) OR ((session('user_access')[29]['module_id'])==30 && (session('user_access')[29]['view'])==1))
                     <li class="nav-parent">
-                        <a class="nav-link">
+                        <a class="nav-link" href="#">
                             <i style="font-size:16px"class="fa fa-arrow-right"></i>
                             <span>Others</span>  
                         </a>
@@ -392,7 +392,7 @@
                     @endif
 
                     <li class="nav-parent">
-                        <a class="nav-link">
+                        <a class="nav-link" href="#">
                             <i class="fa fa-file-pdf" style="font-size:16px;"></i>
                             <span>Reports</span>
                         </a>
