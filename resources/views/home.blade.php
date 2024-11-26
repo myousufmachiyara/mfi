@@ -468,6 +468,11 @@
 	</body>
 	<script>
 
+		const dataFromController = @json($pur_summary_monthly);
+
+        // Log the data to the console
+        console.log(dataFromController);
+
 		const Utils = {
 			months: function(options) {
 				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

@@ -55,13 +55,12 @@ class HomeController extends Controller
         
         $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
+        $pur_summary_monthly = pur_summary_monthly::get();
 
-        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale'));
+        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','pur_summary_monthly'));
     }
 
     public function hrPipesGraphs(){
-
-        $receivables = pur_summary_monthly::where('sub',1)->first();
 
     }
 }
