@@ -539,21 +539,29 @@
 		const datasets = [];
 
 		// Loop through each mill and create a dataset for it
-		const mills = ['STEELEX', 'S.P.M', 'MEHBOOB PIPE', 'IIL' ,'Others'];
+		const mills = ['187', '170', '133', 'Others'];
 
 		mills.forEach((mill, index) => {
 			// For each mill, get the total weights for each 'dat'
 			const dataForMill = chartLabels.map(dat => {
 				// Find the mill's total_weight for the current 'dat'
-				const millData = groupedData[dat].find(item => item.mill_name === mill);
-				return millData ? millData.total_weight : 0; // Default to 0 if no data found for this mill
+				const millData = groupedData[dat].find(item => item.mill_code === mill);
+
+				// If mill is not found and it's not "Others", look for the "Others" category
+				if (!millData && mill !== 'Others') {
+					// Find the "Others" category data for the current 'dat'
+					const othersData = groupedData[dat].find(item => item.mill_code === 'Others');
+					return othersData ? othersData.total_weight : 0; // Default to 0 if no data found for 'Others'
+				}
+
+				return millData ? millData.total_weight : 0; // Return the found total_weight or 0 if no data found
 			});
 
-			// Create the dataset for this mill
+			// Create the dataset for this mill (or 'Others')
 			datasets.push({
 				label: mill,
 				data: dataForMill,
-				backgroundColor: Utils.CHART_COLORS[index], // You can customize the colors here
+				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
 				stack: `Stack ${index}`,
 			});
 		});
