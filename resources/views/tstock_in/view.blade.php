@@ -123,7 +123,6 @@
 	
 											</tbody>
 										</table>
-										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 									</div>
 									<div class="col-12 col-md-4">
 										<div class="text-end">
