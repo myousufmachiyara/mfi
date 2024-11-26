@@ -536,7 +536,7 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
-		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1000};
+		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1000};
 		const top5Customerlabels = Utils.months({count: 5});
 
 		new Chart(top5CustomerPerformance, {
@@ -546,31 +546,31 @@
 				datasets: [
 					{
 					label: 'STEELEX',
-					data: Utils.numbers(NUMBER_CFG),
+					data: Utils.numbers(top5Customers_NUMBER_CFG),
 					backgroundColor: Utils.CHART_COLORS.red,
 					stack: 'Stack 0',
 					},
 					{
 					label: 'IIL',
-					data: Utils.numbers(NUMBER_CFG),
+					data: Utils.numbers(top5Customers_NUMBER_CFG),
 					backgroundColor: Utils.CHART_COLORS.blue,
 					stack: 'Stack 2',
 					},
 					{
 					label: 'MEHBOOB',
-					data: Utils.numbers(NUMBER_CFG),
+					data: Utils.numbers(top5Customers_NUMBER_CFG),
 					backgroundColor: Utils.CHART_COLORS.green,
 					stack: 'Stack 1',
 					},
 						{
 					label: 'SPM',
-					data: Utils.numbers(NUMBER_CFG),
+					data: Utils.numbers(top5Customers_NUMBER_CFG),
 					backgroundColor: Utils.CHART_COLORS.black,
 					stack: 'Stack 3',
 					},
 						{
 					label: 'OTHERS',
-					data: Utils.numbers(NUMBER_CFG),
+					data: Utils.numbers(top5Customers_NUMBER_CFG),
 					backgroundColor: Utils.CHART_COLORS.yellow,
 					stack: 'Stack 4',
 					},
