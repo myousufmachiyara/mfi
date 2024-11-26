@@ -64,7 +64,7 @@
 										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 									</div>
 									<div class="col-12 col-md-4">
-										<div class="d-grid gap-3 d-md-flex justify-content-md-end">
+										<div class="text-end">
 											<a onclick="window.location='{{ route('all-jv1') }}'" class="btn btn-primary mt-2"> <i class="fas fa-arrow-left"></i> Back</a>
 											<a href="{{ route('print-jv1', $jv1->auto_lager) }}" class="btn btn-danger mt-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
 										</div>
