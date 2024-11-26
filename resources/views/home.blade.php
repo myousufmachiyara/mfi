@@ -482,8 +482,8 @@
 		}, {});
 
         // Log the data to the console
-		const datValuesLength = groupedData.length;
-        console.log(datValuesLength);
+		const lengthOfGroupedData = Object.keys(groupedData).length;
+		console.log(lengthOfGroupedData);
 
 		const Utils = {
 			months: function(options) {
