@@ -579,7 +579,7 @@
 					},
 					{
 						label: 'OTHERS',
-						label: dash_pur_2_summary_monthly_companywise[0]['mill_name'],
+						label: dash_pur_2_summary_monthly_companywise[4]['mill_name'],
 						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[4]['total_weight']),
 						backgroundColor: Utils.CHART_COLORS.yellow,
 						stack: 'Stack 4',
