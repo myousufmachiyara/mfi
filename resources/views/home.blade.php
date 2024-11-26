@@ -548,46 +548,59 @@
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
 		const top5Customerlabels = datValues;
 
+		const datasets = dash_pur_2_summary_monthly_companywise.map((item, index) => ({
+			label: item.mill_name,
+			data: [item.total_weight], // Wrap total_weight in an array to fit Chart.js data structure
+			backgroundColor: Object.values(Utils.CHART_COLORS)[index % Object.values(Utils.CHART_COLORS).length], // Cycle through colors
+			stack: `Stack ${index}` // Unique stack for each dataset
+		}));
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
-				labels: top5Customerlabels,
-				datasets: [
-					
-					{
-						label: dash_pur_2_summary_monthly_companywise[0]['mill_name'],
-						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[0]['total_weight']),
-						backgroundColor: Utils.CHART_COLORS.red,
-						stack: 'Stack 0',
-					},
-					{
-						label: dash_pur_2_summary_monthly_companywise[1]['mill_name'],
-						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[1]['total_weight']),
-						backgroundColor: Utils.CHART_COLORS.tertiary,
-						stack: 'Stack 2',
-					},
-					{
-						label: dash_pur_2_summary_monthly_companywise[2]['mill_name'],
-						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[2]['total_weight']),
-						backgroundColor: Utils.CHART_COLORS.green,
-						stack: 'Stack 1',
-					},
-					{
-						label: dash_pur_2_summary_monthly_companywise[3]['mill_name'],
-						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[3]['total_weight']),
-						backgroundColor: Utils.CHART_COLORS.blue,
-						stack: 'Stack 3',
-					},
-					{
-						label: 'OTHERS',
-						label: dash_pur_2_summary_monthly_companywise[4]['mill_name'],
-						data: Utils.numbers(dash_pur_2_summary_monthly_companywise[4]['total_weight']),
-						backgroundColor: Utils.CHART_COLORS.yellow,
-						stack: 'Stack 4',
-					},
-				]
-			}		
+				labels: top5Customerlabels, // Assuming this is pre-defined
+				datasets: datasets // Use the dynamically generated datasets
+			}
 		});
+		// new Chart(top5CustomerPerformance, {
+		// 	type: 'bar',
+		// 	data: {
+		// 		labels: top5Customerlabels,
+		// 		datasets: [
+					
+		// 			{
+		// 				label: dash_pur_2_summary_monthly_companywise[0]['mill_name'],
+		// 				data: Utils.numbers(dash_pur_2_summary_monthly_companywise[0]['total_weight']),
+		// 				backgroundColor: Utils.CHART_COLORS.red,
+		// 				stack: 'Stack 0',
+		// 			},
+		// 			{
+		// 				label: dash_pur_2_summary_monthly_companywise[1]['mill_name'],
+		// 				data: Utils.numbers(dash_pur_2_summary_monthly_companywise[1]['total_weight']),
+		// 				backgroundColor: Utils.CHART_COLORS.tertiary,
+		// 				stack: 'Stack 2',
+		// 			},
+		// 			{
+		// 				label: dash_pur_2_summary_monthly_companywise[2]['mill_name'],
+		// 				data: Utils.numbers(dash_pur_2_summary_monthly_companywise[2]['total_weight']),
+		// 				backgroundColor: Utils.CHART_COLORS.green,
+		// 				stack: 'Stack 1',
+		// 			},
+		// 			{
+		// 				label: dash_pur_2_summary_monthly_companywise[3]['mill_name'],
+		// 				data: Utils.numbers(dash_pur_2_summary_monthly_companywise[3]['total_weight']),
+		// 				backgroundColor: Utils.CHART_COLORS.blue,
+		// 				stack: 'Stack 3',
+		// 			},
+		// 			{
+		// 				label: 'OTHERS',
+		// 				label: dash_pur_2_summary_monthly_companywise[4]['mill_name'],
+		// 				data: Utils.numbers(dash_pur_2_summary_monthly_companywise[4]['total_weight']),
+		// 				backgroundColor: Utils.CHART_COLORS.yellow,
+		// 				stack: 'Stack 4',
+		// 			},
+		// 		]
+		// 	}		
+		// });
 
 	</script>									
 </html>
