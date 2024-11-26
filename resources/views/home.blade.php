@@ -533,8 +533,7 @@
 		};
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-		// Initialize an empty array to hold datasets
-
+		// The mills to check
 		const mills = ['187', '170', '133'];
 
 		// Initialize datasets
@@ -557,9 +556,12 @@
 				}
 			});
 
-			// Create the dataset for this mill (or 'Others')
+			// Get the mill name from groupedData
+			const millName = groupedData[chartLabels[0]] ? groupedData[chartLabels[0]].find(item => item.mill_code.toString() === mill)?.mill_name : `Mill ${mill}`;
+
+			// Create the dataset for this mill
 			datasets.push({
-				label: `Mill ${mill}`,  // Display "Mill {mill}" label
+				label: millName,  // Use mill_name from groupedData as the label
 				data: dataForMill,
 				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
 				stack: `Stack ${index}`,
