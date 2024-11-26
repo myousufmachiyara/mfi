@@ -534,7 +534,7 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		// The mills to check
-		const mills = ['187', '170', '133'];
+		const mills = ['187','170','133'];
 
 		// Initialize datasets
 		const datasets = [];
@@ -557,9 +557,16 @@
 			});
 
 			// Get the mill name from groupedData
-			const millName = groupedData[chartLabels[0]] 
-				? groupedData[chartLabels[0]].find(item => item.mill_code.toString() === mill)?.mill_name
-				: `Mill ${mill}`;
+			let millName = 'Others'; // Default value if not found
+			for (let dat in groupedData) {
+				if (groupedData[dat]) {
+					const foundItem = groupedData[dat].find(item => item.mill_code.toString() === mill);
+					if (foundItem) {
+						millName = foundItem.mill_name;  // Extract mill_name if match is found
+						break; // Stop the loop once the mill_name is found
+					}
+				}
+			}
 
 			// Create the dataset for this mill
 			datasets.push({
@@ -605,6 +612,5 @@
 				datasets: datasets,  // Dynamic datasets based on groupedData
 			}
 		});
-
 	</script>									
 </html>
