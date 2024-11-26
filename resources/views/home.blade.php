@@ -555,19 +555,39 @@
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 500};
 		const top5Customerlabels = datValues;
 
-		const datasets = dash_pur_2_summary_monthly_companywise.map((item, index) => ({
-			label: item.mill_name,
-			data: [item.total_weight], // Wrap total_weight in an array to fit Chart.js data structure
-			backgroundColor: Object.values(Utils.CHART_COLORS)[index % Object.values(Utils.CHART_COLORS).length], // Cycle through colors
-			stack: `Stack ${index}` // Unique stack for each dataset
-		}));
+		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
 
+		// Initialize an empty array to hold datasets
+		const datasets = [];
+
+		// Loop through each mill and create a dataset for it
+		const mills = ['STEELEX', 'ZAFAR ASSOCIATES', 'AKBER PIPE', 'S.P.M', 'MEHBOOB PIPE'];
+
+		mills.forEach((mill, index) => {
+			// For each mill, get the total weights for each 'dat'
+			const dataForMill = chartLabels.map(dat => {
+				// Find the mill's total_weight for the current 'dat'
+				const millData = groupedData[dat].find(item => item.mill_name === mill);
+				return millData ? millData.total_weight : 0; // Default to 0 if no data found for this mill
+			});
+
+			// Create the dataset for this mill
+			datasets.push({
+				label: mill,
+				data: dataForMill,
+				backgroundColor: Utils.CHART_COLORS[index], // You can customize the colors here
+				stack: `Stack ${index}`,
+			});
+		});
+
+		// Now, use the datasets in your chart
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
-				labels: top5Customerlabels, // Assuming this is pre-defined
-				datasets: datasets // Use the dynamically generated datasets
+				labels: chartLabels, // 'dat' values as labels
+				datasets: datasets,  // Dynamic datasets based on groupedData
 			}
 		});
+
 	</script>									
 </html>
