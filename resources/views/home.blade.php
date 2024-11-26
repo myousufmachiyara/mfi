@@ -468,7 +468,7 @@
 	</body>
 	<script>
 
-		const dataFromController = @json($pur_summary_monthly);
+		const dataFromController = @json($pur_2_summary_monthly);
 
         // Log the data to the console
         console.log(dataFromController);
