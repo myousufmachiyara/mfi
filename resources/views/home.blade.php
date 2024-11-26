@@ -486,7 +486,7 @@
 			numbers: function (cfg) {
 				const count = cfg.count || 5;
 				const min = cfg.min || 0;
-				const max = cfg.max || 100000;
+				const max = cfg.max || 2000;
 				const numbers = [];
 				for (let i = 0; i < count; i++) {
 					numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
