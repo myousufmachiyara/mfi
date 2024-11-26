@@ -474,7 +474,7 @@
 				return months.slice(0, options.count);  // Returns first 'count' months
 			},
 			numbers: function (cfg) {
-				const count = cfg.count || 10;
+				const count = cfg.count || 5;
 				const min = cfg.min || 0;
 				const max = cfg.max || 1000;
 				const numbers = [];
