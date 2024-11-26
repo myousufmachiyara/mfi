@@ -83,13 +83,13 @@
 								<table class="table table-responsive-md invoice-items table-striped invoice-items">
 									<thead>
 										<tr class="text-dark">
-											<th width="3%" class="font-weight-semibold"  style="color:#17365D">S.No</th>
-											<th width="4%" class="text-center font-weight-semibold"  style="color:#17365D">Qty</th>
-											<th width="26%" class="font-weight-semibold"  style="color:#17365D">Item Name</th>
-											<th width="26%" class="font-weight-semibold"  style="color:#17365D">Remarks</th>
-											<th  width="6%" class="text-center font-weight-semibold"  style="color:#17365D">Weight</th>
-											<th  width="6%" class="text-center font-weight-semibold"  style="color:#17365D">Price</th>
-											<th  width="8%" class="text-center font-weight-semibold"  style="color:#17365D">Amount</th>
+											<th class="font-weight-semibold"  style="color:#17365D">S.No</th>
+											<th class="text-center font-weight-semibold"  style="color:#17365D">Qty</th>
+											<th class="font-weight-semibold"  style="color:#17365D">Item Name</th>
+											<th class="font-weight-semibold"  style="color:#17365D">Remarks</th>
+											<th class="text-center font-weight-semibold"  style="color:#17365D">Weight</th>
+											<th class="text-center font-weight-semibold"  style="color:#17365D">Price</th>
+											<th class="text-center font-weight-semibold"  style="color:#17365D">Amount</th>
 										</tr>
 									</thead>
 									@php($subtotal = 0)
