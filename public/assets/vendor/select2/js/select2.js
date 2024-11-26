@@ -6168,25 +6168,19 @@ document.addEventListener('DOMContentLoaded', function() {
       isPageVisible = !document.hidden;
   });
 
-  // Apply the functionality to all select2 elements
+  // Apply the functionality to all item-name elements
   $(document).on('focus', selectClassPattern, function() {
-      // Initialize select2 if not already initialized
-      if (!$(this).hasClass('select2-hidden-accessible')) {
-          $(this).select2();
-      }
-
       // Prevent select2 from opening automatically when returning to the tab
-      if (isPageVisible && !isTabPressed) {
-          $(this).select2('open'); // Open the select2 dropdown
+      if (isPageVisible && !isTabPressed && typeof $(this).select2 === 'function') {
+          $(this).select2('open');
       }
   });
 
-  // Ensure the search field inside the select2 dropdown is focused when opened
   $(document).on('select2:open', selectClassPattern, function() {
       setTimeout(function() {
           const searchField = document.querySelector('.select2-search__field');
           if (searchField) {
-              searchField.focus(); // Focus the search field inside the dropdown
+              searchField.focus();
           }
       }, 100);
   });
