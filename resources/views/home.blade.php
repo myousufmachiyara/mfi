@@ -541,7 +541,7 @@
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
-		const top5Customerlabels = Utils.months({count: 5});
+		const top5Customerlabels = Utils.months({count: 1});
 
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
