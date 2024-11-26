@@ -472,7 +472,10 @@
 
         // Log the data to the console
         console.log(dash_pur_2_summary_monthly_companywise);
+		const datValues = data.map(item => item.dat);
 
+		// Log the results
+		console.log(datValues);
 		const Utils = {
 			months: function(options) {
 				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -541,7 +544,7 @@
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
-		const top5Customerlabels = Utils.months({count: 2});
+		const top5Customerlabels = datValues;
 
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
