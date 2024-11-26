@@ -556,6 +556,5 @@
 			}		
 		});
 
-	</script>
-											
+	</script>									
 </html>
