@@ -391,7 +391,7 @@
 									<a class="nav-link nav-link-rep" data-bs-target="#GS" href="#GS" data-bs-toggle="tab">Garder Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#DS" href="#DS" data-bs-toggle="tab">Door Sale</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#IIL_Sale" href="#IIL_Sale" data-bs-toggle="tab">IIL Sale</a>
@@ -432,55 +432,9 @@
 											</section>
 										</div>
 
-										<!-- Half Year Sales -->
-										<div class="col-12 col-md-4 mb-2">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Half Year Sale</h2>
-												</header>
-												<div class="card-body">
-													<canvas id="halfYearSale"></canvas>
-												</div>
-											</section>
-										</div>
-
-										<!-- Half Year Sales 2 -->
-										<div class="col-12 col-md-4 mb-2">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Half Year Sale 2</h2>
-												</header>
-												<div class="card-body">
-													<canvas id="halfYearSale2"></canvas>
-												</div>
-											</section>
-										</div>
-
-										<!-- Top 5 Customers -->
-										<div class="col-12 col-md-4 mb-2">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Customers Of The Month</h2>
-												</header>
-												<div class="card-body">
-													<canvas id="top5Customers"></canvas>
-												</div>
-											</section>
-										</div>
 									</div>
 								</div>
+
 							</div>
 						</div>
 
@@ -600,83 +554,6 @@
 					},
 				]
 			}		
-		});
-
-		const halfYearSale = document.getElementById('halfYearSale');
-		labels = Utils.months({count: 6});
-
-		new Chart(halfYearSale, {
-			type: 'line',
-			data: {
-				labels: labels,
-				datasets: [{
-					label: 'My First Dataset',
-					data: [65, 59, 80, 81, 56, 55],
-				}]
-			},
-			options: {
-				scales: {
-					y: {
-						beginAtZero: false
-					}
-				}
-			}
-		}); 
-		
-		const halfYearSale2 = document.getElementById('halfYearSale2');
-		const NUMBER_CFG = {count: 6, min: -100, max: 100};
-
-		const data = {
-			labels: labels,
-			datasets: [
-				{
-				label: 'Dataset 1',
-				data: [65, 59, 80, 81, 56, 55],
-				borderColor: '#FF0000',
-				backgroundColor:' #FF0000'
-				},
-				{
-				label: 'Dataset 2',
-				data: [21, 34, 53, 88, 71, 86],
-				borderColor: '#0000FF',
-				backgroundColor: '#0000FF',
-				}
-			]
-		};
-		new Chart(halfYearSale2, {
-			type: 'line',
-			data: data,
-			options: {
-				responsive: true,
-				plugins: {
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Chart.js Line Chart'
-				}
-				}
-			},
-		}); 
-
-		const top5Customers = document.getElementById('top5Customers');
-
-		new Chart(top5Customers, {
-			type: 'doughnut',
-			data: {
-				labels: ['Red','Blue','Yellow'],
-				datasets: [{
-					label: 'My First Dataset',
-					data: [300, 50, 100],
-					backgroundColor: [
-						'rgb(255, 99, 132)',
-						'rgb(54, 162, 235)',
-						'rgb(255, 205, 86)'
-					],
-					hoverOffset: 4
-				}]
-			},
 		});
 
 	</script>
