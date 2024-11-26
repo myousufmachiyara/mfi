@@ -468,10 +468,10 @@
 	</body>
 	<script>
 
-		const dataFromController = @json($pur_2_summary_monthly);
+		const pur_2_summary_monthly = @json($pur_2_summary_monthly);
 
         // Log the data to the console
-        console.log(dataFromController);
+        console.log(pur_2_summary_monthly);
 
 		const Utils = {
 			months: function(options) {
@@ -549,8 +549,8 @@
 				labels: top5Customerlabels,
 				datasets: [
 					{
-					label: 'STEELEX',
-					data: Utils.numbers(top5Customers_NUMBER_CFG),
+					label: pur_2_summary_monthly[0]['mill_name'],
+					data: Utils.numbers(pur_2_summary_monthly[0]['weight']),
 					backgroundColor: Utils.CHART_COLORS.red,
 					stack: 'Stack 0',
 					},
