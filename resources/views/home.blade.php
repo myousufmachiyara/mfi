@@ -482,9 +482,8 @@
 		}, {});
 
         // Log the data to the console
-        console.log(groupedData);
-		const datValues = dash_pur_2_summary_monthly_companywise.map(item => item.dat);
 		const datValuesLength = groupedData.length;
+        console.log(datValuesLength);
 
 		const Utils = {
 			months: function(options) {
