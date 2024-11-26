@@ -385,7 +385,7 @@
 									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#HR_Sale" href="#HR_Sale" data-bs-toggle="tab">HR Sale</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#HR_Sale" href="#HR_Sale" data-bs-toggle="tab">HR</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#GS" href="#GS" data-bs-toggle="tab">Garder Sale</a>
@@ -424,7 +424,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">TOP 5 CUSTOMERS PERFORMANCE</h2>
+													<h2 class="card-title">MILL WISE HR PIPE PURCHASE</h2>
 												</header>
 												<div class="card-body">
 													<canvas id="top5CustomerPerformance"></canvas>
