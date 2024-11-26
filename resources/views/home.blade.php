@@ -537,12 +537,12 @@
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
 		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1000};
-		const labels = Utils.months({count: 5});
+		const top5Customerlabels = Utils.months({count: 5});
 
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
-				labels: labels,
+				labels: top5Customerlabels,
 				datasets: [
 					{
 					label: 'STEELEX',
