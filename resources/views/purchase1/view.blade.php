@@ -79,41 +79,42 @@
 									</div>
 								</div>
 
-
-								<table class="table table-responsive-md invoice-items table-striped invoice-items">
-									<thead>
-										<tr class="text-dark">
-											<th class="font-weight-semibold"  style="color:#17365D">S.No</th>
-											<th class="text-center font-weight-semibold"  style="color:#17365D">Qty</th>
-											<th class="font-weight-semibold"  style="color:#17365D">Item Name</th>
-											<th class="font-weight-semibold"  style="color:#17365D">Remarks</th>
-											<th class="text-center font-weight-semibold"  style="color:#17365D">Weight</th>
-											<th class="text-center font-weight-semibold"  style="color:#17365D">Price</th>
-											<th class="text-center font-weight-semibold"  style="color:#17365D">Amount</th>
-										</tr>
-									</thead>
-									@php($subtotal = 0)
-									@php($total_quantity = 0)
-									@php($total_weight = 0)
-									<tbody>
-										@foreach($pur2 as $key => $pur_item)
-										<tr>
-											<td>{{$key+1}}</td>
-											<td class="text-center">{{$pur_item->pur_qty2}}</td>
-											<td class="font-weight-semibold text-dark">{{$pur_item->item_name}}</td>
-											<td>{{$pur_item->remarks}}</td>
-											<td class="text-center">{{$pur_item->pur_qty}}</td>
-											<td class="text-center">{{$pur_item->pur_price}}</td>
-											<td class="text-center">{{$pur_item->pur_price * $pur_item->pur_qty}}</td>
-										</tr>
-										<?php $subtotal=$subtotal+($pur_item->pur_price * $pur_item->pur_qty) ?>
-										<?php $total_weight=$total_weight+ $pur_item->pur_qty ?>
-										<?php $total_quantity=$total_quantity+ $pur_item->pur_qty2 ?>
-
-										@endforeach
-									</tbody>
-								</table>
-
+								<div style="overflow-x: auto ">
+									<table class="table table-responsive-md invoice-items table-striped invoice-items">
+										<thead>
+											<tr class="text-dark">
+												<th width="3%" class="font-weight-semibold"  style="color:#17365D">S.No</th>
+												<th width="4%" class="text-center font-weight-semibold"  style="color:#17365D">Qty</th>
+												<th width="26%" class="font-weight-semibold"  style="color:#17365D">Item Name</th>
+												<th width="26%" class="font-weight-semibold"  style="color:#17365D">Remarks</th>
+												<th  width="6%" class="text-center font-weight-semibold"  style="color:#17365D">Weight</th>
+												<th  width="6%" class="text-center font-weight-semibold"  style="color:#17365D">Price</th>
+												<th  width="8%" class="text-center font-weight-semibold"  style="color:#17365D">Amount</th>
+											</tr>
+										</thead>
+										@php($subtotal = 0)
+										@php($total_quantity = 0)
+										@php($total_weight = 0)
+										<tbody>
+											@foreach($pur2 as $key => $pur_item)
+											<tr>
+												<td>{{$key+1}}</td>
+												<td class="text-center">{{$pur_item->pur_qty2}}</td>
+												<td class="font-weight-semibold text-dark">{{$pur_item->item_name}}</td>
+												<td>{{$pur_item->remarks}}</td>
+												<td class="text-center">{{$pur_item->pur_qty}}</td>
+												<td class="text-center">{{$pur_item->pur_price}}</td>
+												<td class="text-center">{{$pur_item->pur_price * $pur_item->pur_qty}}</td>
+											</tr>
+											<?php $subtotal=$subtotal+($pur_item->pur_price * $pur_item->pur_qty) ?>
+											<?php $total_weight=$total_weight+ $pur_item->pur_qty ?>
+											<?php $total_quantity=$total_quantity+ $pur_item->pur_qty2 ?>
+	
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+								
 								<div class="row">
 									<div class="col-8">
 										<div class="row">
