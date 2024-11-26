@@ -485,20 +485,6 @@
 		const lengthOfGroupedData = Object.keys(groupedData).length;
 
 		const Utils = {
-			months: function(options) {
-				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-				return months.slice(0, options.count);  // Returns first 'count' months
-			},
-			numbers: function (cfg) {
-				const count = cfg.count || 5;
-				const min = cfg.min || 0;
-				const max = cfg.max || 2000;
-				const numbers = [];
-				for (let i = 0; i < count; i++) {
-					numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
-				}
-				return numbers;
-			},
 			CHART_COLORS: {
 				0: 'rgba(220, 53, 69, 1)',
 				1: 'rgba(0, 136, 204, 1)',
