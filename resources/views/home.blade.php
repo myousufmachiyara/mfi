@@ -557,11 +557,13 @@
 			});
 
 			// Get the mill name from groupedData
-			const millName = groupedData[chartLabels[0]] ? groupedData[chartLabels[0]].find(item => item.mill_code.toString() === mill)?.mill_name : `Mill ${mill}`;
+			const millName = groupedData[chartLabels[0]] 
+				? groupedData[chartLabels[0]].find(item => item.mill_code.toString() === mill)?.mill_name
+				: `Mill ${mill}`;
 
 			// Create the dataset for this mill
 			datasets.push({
-				label: millName,  // Use mill_name from groupedData as the label
+				label: millName || `Mill ${mill}`,  // Use mill_name from groupedData as the label
 				data: dataForMill,
 				backgroundColor: Utils.CHART_COLORS[index], // Customize the colors here
 				stack: `Stack ${index}`,
