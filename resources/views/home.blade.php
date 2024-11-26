@@ -536,7 +536,7 @@
 		// Initialize an empty array to hold datasets
 
 		// The mills to check
-		const mills = ['187', '170', '133', 'Others'];
+		const mills = ['187', '170', '133'];
 
 		// Initialize datasets
 		const datasets = [];
