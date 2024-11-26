@@ -545,7 +545,7 @@
 
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
-		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 1500};
+		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 500};
 		const top5Customerlabels = datValues;
 
 		const datasets = dash_pur_2_summary_monthly_companywise.map((item, index) => ({
