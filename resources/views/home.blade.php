@@ -577,7 +577,7 @@
 					{
 					label: 'IIL',
 					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.blue,
+					backgroundColor: Utils.CHART_COLORS.tertiary,
 					stack: 'Stack 2',
 					},
 					{
@@ -589,7 +589,7 @@
 						{
 					label: 'SPM',
 					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.tertiary,
+					backgroundColor: Utils.CHART_COLORS.blue,
 					stack: 'Stack 3',
 					},
 						{
