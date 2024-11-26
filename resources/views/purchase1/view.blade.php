@@ -114,27 +114,23 @@
 								</table>
 
 								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<table class="table h6 text-dark">
-													<tbody>
-														<tr class="b-top-0">
-															<td colspan="2"  style="color:#17365D">Total Quantity</td>
-															<td class="text-left">{{$total_quantity}}</td>
-														</tr>
-														<tr>
-															<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
-															<td class="text-left">{{$total_weight}}</td>
-														</tr>
-													</tbody>
-												</table>
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+									<div class="col-6">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D">Total Quantity</td>
+													<td class="text-left">{{$total_quantity}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
+													<td class="text-left">{{$total_weight}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 
-											</div>
-										</div>
 									</div>
-									<div class="col-4 invoice-summary">
+									<div class="col-6 invoice-summary">
 										<div class="row justify-content-end">
 											<table class="table h6 text-dark">
 												<tbody>
