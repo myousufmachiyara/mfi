@@ -272,13 +272,7 @@ class UsersController extends Controller
         ]);
         // Log the user out
         Auth::logout();
-        
-        // Invalidate the session
-        $request->session()->invalidate();
-        
-        // Regenerate session ID to prevent session fixation attacks
-        $request->session()->regenerateToken();
-        
+                
         // Redirect to the login page
         return redirect()->route('login');
     }
@@ -291,9 +285,7 @@ class UsersController extends Controller
             // Update the `is_login` column
             users::where('id', $userId)->update(['is_login' => 0]);
         }
-        
-        // Invalidate the session
-        $request->session()->invalidate();
+        Auth::logout();
         
         // Redirect to the login page
         return redirect()->route('login');
