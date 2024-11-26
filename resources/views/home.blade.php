@@ -511,8 +511,8 @@
 			CHART_COLORS: {
 				red: 'rgba(220, 53, 69, 1)',
 				blue: 'rgba(0, 136, 204, 1)',
-				green: 'rgba(75, 192, 192, 0.2)',
-				black: 'rgba(0, 0, 0, 0.2)',
+				green: 'rgba(25, 135, 84, 1)',
+				tertiary: 'rgba(43, 170, 177, 1)',
 				yellow: 'rgba(219, 150, 81, 1)',
 			}
 		};
@@ -589,7 +589,7 @@
 						{
 					label: 'SPM',
 					data: Utils.numbers(top5Customers_NUMBER_CFG),
-					backgroundColor: Utils.CHART_COLORS.black,
+					backgroundColor: Utils.CHART_COLORS.tertiary,
 					stack: 'Stack 3',
 					},
 						{
