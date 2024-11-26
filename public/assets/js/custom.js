@@ -246,7 +246,6 @@ window.addEventListener('beforeunload', function () {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
-        body: JSON.stringify({ logout: true }),
     }).catch(err => console.error('Logout failed:', err));
 });
 
