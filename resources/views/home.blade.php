@@ -469,14 +469,22 @@
 	<script>
 
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
+		const groupedData = dash_pur_2_summary_monthly_companywise.reduce((acc, item) => {
+			// If the dat value doesn't exist as a key in acc, create an empty array
+			if (!acc[item.dat]) {
+				acc[item.dat] = [];
+			}
+
+			// Push the current item to the appropriate group
+			acc[item.dat].push(item);
+
+			return acc;
+		}, {});
 
         // Log the data to the console
-        console.log(dash_pur_2_summary_monthly_companywise);
+        console.log(groupedData);
 		const datValues = dash_pur_2_summary_monthly_companywise.map(item => item.dat);
-
-		// Log the results
-		console.log(datValues);
-		const datValuesLength = datValues.length;
+		const datValuesLength = groupedData.length;
 
 		const Utils = {
 			months: function(options) {
