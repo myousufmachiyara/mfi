@@ -539,7 +539,7 @@
 		const datasets = [];
 
 		// Loop through each mill and create a dataset for it
-		const mills = ['STEELEX', 'ZAFAR ASSOCIATES', 'AKBER PIPE', 'S.P.M', 'MEHBOOB PIPE'];
+		const mills = ['STEELEX', 'S.P.M', 'MEHBOOB PIPE', 'IIL' ,'Others'];
 
 		mills.forEach((mill, index) => {
 			// For each mill, get the total weights for each 'dat'
