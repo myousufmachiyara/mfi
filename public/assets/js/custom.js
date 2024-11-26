@@ -240,9 +240,14 @@ $(document).on('mousemove keypress click scroll', resetTimer);
 resetTimer();
 
 window.addEventListener('beforeunload', function () {
-    navigator.sendBeacon('/logout-browser', JSON.stringify({
-        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    }));
+    fetch('/logout-browser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+        body: JSON.stringify({ logout: true }),
+    }).catch(err => console.error('Logout failed:', err));
 });
 
 $('#changePasswordForm').on('submit', function(e){
