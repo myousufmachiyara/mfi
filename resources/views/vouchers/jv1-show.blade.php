@@ -4,7 +4,6 @@
 			<div class="inner-wrapper cust-pad">
 				<section role="main" class="content-body" style="margin:0px">
 					@include('../layouts.pageheader')
-
                     <section class="card">
 						<div class="card-body">
 							<div class="invoice">
