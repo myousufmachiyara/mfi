@@ -483,7 +483,6 @@
 
         // Log the data to the console
 		const lengthOfGroupedData = Object.keys(groupedData).length;
-		console.log(lengthOfGroupedData);
 
 		const Utils = {
 			months: function(options) {
@@ -501,11 +500,11 @@
 				return numbers;
 			},
 			CHART_COLORS: {
-				red: 'rgba(220, 53, 69, 1)',
-				blue: 'rgba(0, 136, 204, 1)',
-				green: 'rgba(25, 135, 84, 1)',
-				tertiary: 'rgba(43, 170, 177, 1)',
-				yellow: 'rgba(219, 150, 81, 1)',
+				0: 'rgba(220, 53, 69, 1)',
+				1: 'rgba(0, 136, 204, 1)',
+				2: 'rgba(25, 135, 84, 1)',
+				3: 'rgba(43, 170, 177, 1)',
+				4: 'rgba(219, 150, 81, 1)',
 			}
 		};
 
