@@ -497,9 +497,26 @@
 			months: function(options) {
 				const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 				return months.slice(0, options.count);  // Returns first 'count' months
+			},
+			numbers: function (cfg) {
+				const count = cfg.count || 5;
+				const min = cfg.min || 0;
+				const max = cfg.max || 1000;
+				const numbers = [];
+				for (let i = 0; i < count; i++) {
+					numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+				}
+				return numbers;
+			},
+			CHART_COLORS: {
+				red: 'rgba(255, 99, 132, 0.2)',
+				blue: 'rgba(54, 162, 235, 0.2)',
+				green: 'rgba(75, 192, 192, 0.2)',
+				black: 'rgba(0, 0, 0, 0.2)',
+				yellow: 'rgba(255, 159, 64, 0.2)',
 			}
 		};
-		
+
 		$(document).ready(function() {
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
