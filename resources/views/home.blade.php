@@ -558,14 +558,16 @@
 			});
 		});
 
+		console.log(datasets);
+
 		// Now, use the datasets in your chart
-		new Chart(top5CustomerPerformance, {
-			type: 'bar',
-			data: {
-				labels: chartLabels, // 'dat' values as labels
-				datasets: datasets,  // Dynamic datasets based on groupedData
-			}
-		});
+		// new Chart(top5CustomerPerformance, {
+		// 	type: 'bar',
+		// 	data: {
+		// 		labels: chartLabels, // 'dat' values as labels
+		// 		datasets: datasets,  // Dynamic datasets based on groupedData
+		// 	}
+		// });
 
 	</script>									
 </html>
