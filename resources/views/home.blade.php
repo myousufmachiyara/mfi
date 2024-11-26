@@ -553,7 +553,6 @@
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const DATA_COUNT = 5;
 		const top5Customers_NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 500};
-		const top5Customerlabels = datValues;
 
 		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
 
