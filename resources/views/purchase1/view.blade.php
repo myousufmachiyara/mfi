@@ -131,32 +131,30 @@
 
 									</div>
 									<div class="col-12 col-md-6">
-										<div class="row justify-content-end">
-											<table class="table h6 text-dark">
-												<tbody>
-													<tr class="b-top-0">
-														<td colspan="2"  style="color:#17365D" >Subtotal</td>
-														<td class="text-left">{{$subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2"  style="color:#17365D">Labour Charges</td>
-														<td class="text-left">{{$pur->pur_labor_char}} PKR</td>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Convance Charges</td>
-														<td class="text-left">{{$pur->pur_convance_char}} PKR</td>
-													</tr>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Discount</td>
-														<td class="text-left">{{$pur->pur_discount}} PKR</td>
-													</tr>
-													<?php $netamount=round($subtotal + $pur->pur_labor_char + $pur->pur_convance_char - $pur->pur_discount) ?>
-													<tr class="h5">
-														<td colspan="2"  style="color:#17365D">Net Amount</td>
-														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D" >Subtotal</td>
+													<td class="text-left">{{$subtotal}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Labour Charges</td>
+													<td class="text-left">{{$pur->pur_labor_char}} PKR</td>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Convance Charges</td>
+													<td class="text-left">{{$pur->pur_convance_char}} PKR</td>
+												</tr>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Discount</td>
+													<td class="text-left">{{$pur->pur_discount}} PKR</td>
+												</tr>
+												<?php $netamount=round($subtotal + $pur->pur_labor_char + $pur->pur_convance_char - $pur->pur_discount) ?>
+												<tr class="h5">
+													<td colspan="2"  style="color:#17365D">Net Amount</td>
+													<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								<div>
 							</div>
