@@ -640,11 +640,10 @@
 					month: month,
 				}, 
 				success: function(result){
-
 					const chartData = {
 						datasets: [
 							{
-								label: 'Dataset 1', // You can adjust the label if needed
+								label: result.map(item => item.mill_name), // You can adjust the label if needed
 								data: result.map(item => item.total_weight), // Extract total_weight
 								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors
 							}
