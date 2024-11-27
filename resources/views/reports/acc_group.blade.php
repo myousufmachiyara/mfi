@@ -466,6 +466,11 @@
                 }
                 window.location.href = `/rep-by-acc-grp/shoa/report?outputType=download&acc_id=${acc_id}`;
             }
+
+            else if (tabName === "BA") {
+                
+                window.open(`/rep-by-acc-grp/ba/report?outputType=view`, '_blank');
+            }
         }
 
         function groupByHeadAndSub(data) {
