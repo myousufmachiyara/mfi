@@ -17,7 +17,27 @@
                                 </header>
 
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="1">by Item Name</option>
+                                                <option value="2">by Remarks</option>
+                                                <option value="3">by Group Name</option>
+                                                <option value="4">by Qty</option>
+                                                <option value="5">by Wt.</option>
+                                                <option value="6">by P.Date</option>
+                                                <option value="7">by P.Price</option>
+                                                <option value="8">by S.Date</option>
+                                                <option value="9">by S.Price</option>
+                                                <option value="10">by L.Price</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                	<table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                         <thead>
                                             <tr>
                                                 <th width="4%">Code</th>
@@ -289,6 +309,19 @@
 	</body>
 </html>
 <script>
+
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
 
     function setId(id){
         $('#deleteID').val(id);
