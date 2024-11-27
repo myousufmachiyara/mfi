@@ -641,7 +641,7 @@
 					month: month,
 				},
 				success: function(result) {
-					const groupedData = groupByMillCode(mills, data);
+					const groupedData = groupByMillCode(mills, result);
 
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
