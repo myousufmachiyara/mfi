@@ -641,19 +641,18 @@
 					month: month,
 				},
 				success: function(result) {
-					const groupedData = groupByMillCode(mills, result);
+					const groupedData = groupByMillCode(mills, data);
 
-					console.log(groupedData);
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
-					const labels = result.map(item => item.mill_name);
+
 					const chartData = {
-						labels: labels, // Set the labels directly here
+						labels: groupedData.labels, // Set the labels directly here
 						datasets: [
 							{
-								data: result.map(item => item.total_weight), // Extract total_weight values for each mill
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]),
+								data: groupedData.data, // Extract total_weight values for each mill
+								backgroundColor: groupedData.backgroundColor, // Assign background colors
 							}
 						]
 					};
@@ -670,28 +669,42 @@
 		}
 
 		function groupByMillCode(mills, data) {
-			const result = {};
+			const result = {
+				labels: [], // To hold the labels for the chart
+				data: [], // To hold the total_weight for each mill
+				backgroundColor: [] // To hold the colors for the chart
+			};
 
-			// Initialize a group for 'Others'
-			result['Others'] = [];
-
-			// Loop over the mills array and add corresponding mill data to result
+			// Initialize groups for each mill in mills array
 			mills.forEach(mill => {
-				result[mill] = [];
+				result[mill] = { weight: 0, name: "" };
 			});
 
-			// Iterate through the data and assign to the appropriate group
+			// Add a group for "Others"
+			result['Others'] = { weight: 0, name: "Others" };
+
+			// Iterate through the data to group by mill_code and calculate total_weight
 			data.forEach(item => {
 				const millCode = item.mill_code.toString();
 				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
-				
-				// Add item to its respective group
+
+				// Aggregate the total_weight based on the mill_code or group it under "Others"
 				if (millName === 'Others') {
-					result['Others'].push(item);
+					result['Others'].weight += item.total_weight;
 				} else {
-					result[millCode].push(item);
+					result[millCode].weight += item.total_weight;
+					result[millCode].name = item.mill_name;
 				}
 			});
+
+			// Prepare the final chart data
+			for (const key in result) {
+				if (result[key].weight > 0) {
+					result.labels.push(result[key].name);
+					result.data.push(result[key].weight);
+					result.backgroundColor.push(Utils.CHART_COLORS[result.labels.length % Utils.CHART_COLORS.length]);
+				}
+			}
 
 			return result;
 		}
