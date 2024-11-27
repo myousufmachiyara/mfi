@@ -623,23 +623,6 @@
 
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 
-		new Chart(MonthlyTonage, {
-			type: 'doughnut',
-			data: data,
-			options: {
-				responsive: true,
-				plugins: {
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Chart.js Doughnut Chart'
-				}
-				}
-			},
-		});
-
 		function generateRandomNumbers({ count, min, max }) {
 			const numbers = [];
 			for (let i = 0; i < count; i++) {
@@ -657,12 +640,41 @@
 					month: month,
 				}, 
 				success: function(result){
+					const chartData = {
+						datasets: [
+							{
+								label: result.map(item => item.mill_name), // You can adjust the label if needed
+								data: result.map(item => item.total_weight), // Extract total_weight
+								backgroundColor: Utils.CHART_COLORS[item],
+
+								// backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors
+							}
+						]
+					};
+
+					// Create the doughnut chart
+					new Chart(MonthlyTonage, {
+						type: 'doughnut',
+						data: chartData,
+						options: {
+							responsive: true,
+							plugins: {
+								legend: {
+									position: 'top',
+								},
+								title: {
+									display: true,
+									text: 'Monthly Tonage Distribution'
+								}
+							}
+						}
+					});
 					console.log(result);
 				},
 				error: function(){
 					alert("error");
 				}
-            });
+			});
 		}
 	</script>									
 </html>
