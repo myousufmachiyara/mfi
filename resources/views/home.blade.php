@@ -641,7 +641,9 @@
 					month: month,
 				},
 				success: function(result) {
-					console.log(result);
+					const groupedData = groupByMillCode(mills, result);
+
+					console.log(groupedData);
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
@@ -665,6 +667,33 @@
 					alert("Error loading HR data");
 				}
 			});
+		}
+
+		function groupByMillCode(mills, data) {
+			const result = {};
+
+			// Initialize a group for 'Others'
+			result['Others'] = [];
+
+			// Loop over the mills array and add corresponding mill data to result
+			mills.forEach(mill => {
+				result[mill] = [];
+			});
+
+			// Iterate through the data and assign to the appropriate group
+			data.forEach(item => {
+				const millCode = item.mill_code.toString();
+				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
+				
+				// Add item to its respective group
+				if (millName === 'Others') {
+					result['Others'].push(item);
+				} else {
+					result[millCode].push(item);
+				}
+			});
+
+			return result;
 		}
 	</script>									
 </html>
