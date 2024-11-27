@@ -649,7 +649,9 @@
 							}
 						]
 					};
-
+					if (MonthlyTonage) {
+						MonthlyTonage.destroy();
+					}
 					// Create the doughnut chart
 					new Chart(MonthlyTonage, {
 						type: 'doughnut',
