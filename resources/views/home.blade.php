@@ -631,23 +631,21 @@
 			return numbers;
 		}
 
-		function filterHR(){
+		function filterHR() {
 			var month = document.getElementById('filterHR').value;
 			$.ajax({
 				type: "GET",
 				url: '/rep-summary/hr',
-				data:{
+				data: {
 					month: month,
-				}, 
-				success: function(result){
+				},
+				success: function(result) {
 					const chartData = {
 						datasets: [
 							{
-								label: result.map(item => item.mill_name), // You can adjust the label if needed
-								data: result.map(item => item.total_weight), // Extract total_weight
-								backgroundColor: Utils.CHART_COLORS[item],
-
-								// backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors
+								label: 'Monthly Tonage Distribution', // Set a general label for the chart
+								data: result.map(item => item.total_weight), // Extract total_weight values
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
 							}
 						]
 					};
@@ -669,10 +667,11 @@
 							}
 						}
 					});
-					console.log(result);
+
+					console.log(result); // Log the result data for debugging
 				},
-				error: function(){
-					alert("error");
+				error: function() {
+					alert("Error loading HR data");
 				}
 			});
 		}
