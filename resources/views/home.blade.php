@@ -663,18 +663,6 @@
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
 						data: chartData,
-						options: {
-							responsive: true,
-							plugins: {
-								legend: {
-									position: 'top',
-								},
-								title: {
-									display: true,
-									text: 'Monthly Tonage Distribution'
-								}
-							}
-						}
 					});
 				},
 				error: function() {
