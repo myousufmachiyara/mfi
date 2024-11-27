@@ -53,7 +53,7 @@ class RptAccGrpBAController extends Controller
         $pdf->SetTitle('Balance All Report');
         $pdf->SetSubject('Balance All Report');
         $pdf->SetKeywords('Balance All Report, TCPDF, PDF');
-        $pdf->setPageOrientation('P');
+        $pdf->setPageOrientation('P');  // Page Orientation: Portrait
         
         // Add a page and set padding
         $pdf->AddPage();
@@ -145,11 +145,11 @@ class RptAccGrpBAController extends Controller
                     <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
                   </tr>';
         
-        $html .= '</tbody>';
         $html .= '</table>'; // Close the main table
         
         // Output the HTML content to the PDF
         $pdf->writeHTML($html, true, false, true, false, '');
+        
 
         
         $filename = "balance_all.pdf";
