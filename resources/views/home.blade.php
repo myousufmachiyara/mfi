@@ -620,6 +620,35 @@
 			};
 		}
 
+		function generateDoughnutData(result, mills) {
+			const groupedData = groupData(result, 'dat'); // Group the data by 'dat'
+			const chartLabels = Object.keys(groupedData);  // Get the labels based on 'dat'
+
+			// Generate data for the doughnut chart
+			const doughnutData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+				if (mills.includes(item.mill_code.toString())) {
+					acc += item.total_weight;  // Sum the weights for the relevant mills
+				}
+				return acc;
+				}, 0) || 0;  // Default to 0 if no data is found
+			});
+
+			// Assign the background colors
+			const backgroundColors = Object.values(Utils.CHART_COLORS);
+
+			// Return the chart data in the desired structure
+			return {
+				labels: chartLabels,
+				datasets: [
+				{
+					label: 'Tonage Distribution',  // Dataset label
+					data: doughnutData,  // Data values for each segment
+					backgroundColor: backgroundColors,  // Color for each segment
+				}
+				]
+			};
+		}
 		// In the filterHR function, make sure to pass chartLabels correctly
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
@@ -630,12 +659,24 @@
 					month: month,
 				}, 
 				success: function(result){
-					const monthlyTonage = generateChartData(result, mills);
-					console.log(monthlyTonage);
+
+					const doughnutChartData = generateDoughnutData(result, mills);
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
-						data: monthlyTonage.datasets,
+						data: doughnutChartData,  // Use the generated doughnut data
+						options: {
+							responsive: true,
+							plugins: {
+							legend: {
+								position: 'top',
+							},
+							title: {
+								display: true,
+								text: 'Monthly Tonage Distribution',
+							}
+							}
+						}
 					});
 				},
 				error: function(){
