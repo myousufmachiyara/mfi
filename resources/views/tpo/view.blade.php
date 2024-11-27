@@ -132,7 +132,7 @@
 									@php($grand_subtotal += $subtotal)
 									@endforeach
 								
-									<div class="row d-none">
+									<div class="row">
 										<div class="col-12 col-md-8">
 											<table class="table h6 text-dark">
 												<tbody>
