@@ -650,7 +650,7 @@
 							{
 								label: 'Monthly Tonage Distribution', // Set a general label for the chart
 								data: result.map(item => item.total_weight), // Extract total_weight values
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign background colors from Utils.CHART_COLORS
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
 							}
 						]
 					};
