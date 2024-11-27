@@ -89,7 +89,7 @@ class RptAccGrpBAController extends Controller
             $headTotalCredit = 0;
             
             // Add the sub-header for each $headCount
-            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d2edc7; border: 1px solid #000;color: red;">
+            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d2edc7; border: 1px solid #000 ;color: red;">
                         <strong>' . $headCount . '</strong>
                       </td></tr>';
     
@@ -98,7 +98,7 @@ class RptAccGrpBAController extends Controller
     
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add sub-header row
-                $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #ccc;">
+                $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #000;">
                             <strong>' . $subHeadCount . '</strong>
                           </td></tr>';
     
