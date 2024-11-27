@@ -427,12 +427,12 @@
 													<h2 class="card-title">MILL WISE HR PIPE PURCHASE</h2>
 												</header>
 												<div class="card-body">
-													<canvas id="top5CustomerPerformance"></canvas>
+													<canvas id="top5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
 												</div>
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-2">
+										<div class="col-12 col-md-3 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
