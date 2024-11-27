@@ -530,126 +530,99 @@
 			});
 		}
 
-		function groupData(data, key) {
-			return data.reduce((acc, item) => {
-				// If the key doesn't exist as a property in the accumulator object, create an empty array
-				if (!acc[item[key]]) {
-					acc[item[key]] = [];
-				}
+		// Assuming you are using Chart.js and you want to render the chart in a DOM element
+		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 
-				// Push the current item to the appropriate group based on the key
-				acc[item[key]].push(item);
-
-				return acc;
-			}, {});
-		}
+		// Assuming $dash_pur_2_summary_monthly_companywise is passed from Laravel
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-		const groupedData = groupData(dash_pur_2_summary_monthly_companywise, 'dat');
+		const mills = ['187', '170', '133']; // Mill codes
 
+		// Utility for chart colors
 		const Utils = {
 			CHART_COLORS: {
-				0: 'rgba(220, 53, 69, 1)',
-				1: 'rgba(0, 136, 204, 1)',
-				2: 'rgba(25, 135, 84, 1)',
-				3: 'rgba(43, 170, 177, 1)',
-				4: 'rgba(219, 150, 81, 1)',
+				0: 'rgba(220, 53, 69, 1)',    // Red
+				1: 'rgba(0, 136, 204, 1)',    // Blue
+				2: 'rgba(25, 135, 84, 1)',    // Green
+				3: 'rgba(43, 170, 177, 1)',   // Teal
+				4: 'rgba(219, 150, 81, 1)',   // Orange
 			}
 		};
 
-		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-		// The mills to check
-		const mills = ['187', '170', '133'];
-
-		// Initialize datasets
-		const datasets = [];
-		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
-
-		// Loop through each 'dat' value (chart label) and create datasets for each mill
-		mills.forEach((mill, index) => {
-			const dataForMill = chartLabels.map(dat => {
-				const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
-				return millData ? millData.total_weight : 0;
-			});
-
-			// Get the mill name from groupedData (first match)
-			const millName = chartLabels
-				.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
-				.find(name => name) || `Mill ${mill}`;  // Default to `Mill {mill}` if not found
-
-			// Create the dataset for this mill
-			datasets.push({
-				label: millName,
-				data: dataForMill,
-				backgroundColor: Utils.CHART_COLORS[index],
-				stack: `Stack ${index}`,
-			});
-		});
-
-		// Create the dataset for "Others" (for mills not in the mills array)
-		const othersData = chartLabels.map(dat => {
-			return groupedData[dat]?.reduce((acc, item) => {
-				if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+		// Group data by a specific key (e.g., 'dat')
+		function groupData(data, key) {
+			return data.reduce((acc, item) => {
+				if (!acc[item[key]]) {
+					acc[item[key]] = [];
+				}
+				acc[item[key]].push(item);
 				return acc;
-			}, 0) || 0; // Default to 0 if no matching items
-		});
+			}, {});
+		}
 
-		// Add the "Others" dataset to datasets
-		datasets.push({
-			label: 'Others',
-			data: othersData,
-			backgroundColor: 'rgba(200, 200, 200, 1)',  // Default color for "Others"
-			stack: 'Stack Others',
-		});
+		// Create datasets for each mill
+		function createMillDatasets(groupedData, mills, chartLabels) {
+			return mills.map((mill, index) => {
+				const dataForMill = chartLabels.map(dat => {
+					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millData ? millData.total_weight : 0;
+				});
 
-		// Use the datasets in your chart
+				const millName = chartLabels
+					.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+					.find(name => name) || `Mill ${mill}`;
+
+				return {
+					label: millName,
+					data: dataForMill,
+					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length], // Wrap around if there are more mills than colors
+					stack: `Stack ${index}`,
+				};
+			});
+		}
+
+		// Create dataset for "Others" (mills not in the `mills` array)
+		function createOthersDataset(groupedData, chartLabels, mills) {
+			const othersData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					return acc;
+				}, 0) || 0;
+			});
+
+			return {
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)', // Color for "Others"
+				stack: 'Stack Others',
+			};
+		}
+
+		// Generate chart data using the functions above
+		function generateChartData(dash_pur_2_summary_monthly_companywise, mills) {
+			const groupedData = groupData(dash_pur_2_summary_monthly_companywise, 'dat');
+			const chartLabels = Object.keys(groupedData);
+
+			const millDatasets = createMillDatasets(groupedData, mills, chartLabels);
+			const othersDataset = createOthersDataset(groupedData, chartLabels, mills);
+
+			const datasets = [...millDatasets, othersDataset];
+
+			return {
+				labels: chartLabels,
+				datasets: datasets,
+			};
+		}
+
+		// Example usage of the generateChartData function to create a chart
+		const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
+
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
 				labels: chartLabels, // 'dat' values as labels
-				datasets: datasets,  // Dynamic datasets based on groupedData
+				datasets: chartData,  // Dynamic datasets based on groupedData
 			}
 		});
-
-		const DATA_COUNT = 5;
-		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-
-		const data = {
-			labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
-			datasets: [
-				{
-				label: 'Dataset 1',
-				data: generateRandomNumbers(NUMBER_CFG),
-				backgroundColor: Object.values(Utils.CHART_COLORS),
-				}
-			]
-		};
-
-		const MonthlyTonage = document.getElementById('MonthlyTonage');
-
-		new Chart(MonthlyTonage, {
-			type: 'doughnut',
-			data: data,
-			options: {
-				responsive: true,
-				plugins: {
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Chart.js Doughnut Chart'
-				}
-				}
-			},
-		});
-
-		function generateRandomNumbers({ count, min, max }) {
-			const numbers = [];
-			for (let i = 0; i < count; i++) {
-				numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
-			}
-			return numbers;
-		}
 
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
@@ -660,8 +633,26 @@
 					month: month,
 				}, 
 				success: function(result){
-					var monthlyTonage = groupData(result, 'dat');
-					console.log(monthlyTonage)
+					const monthlyTonage = generateChartData(result, mills);
+
+					const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
+
+					new Chart(MonthlyTonageGraph, {
+						type: 'doughnut',
+						data: monthlyTonage,
+						options: {
+							responsive: true,
+							plugins: {
+							legend: {
+								position: 'top',
+							},
+							title: {
+								display: true,
+								text: 'Chart.js Doughnut Chart'
+							}
+							}
+						},
+					});
 				},
 				error: function(){
 					alert("error");
