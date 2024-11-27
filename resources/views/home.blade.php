@@ -631,8 +631,7 @@
 				}, 
 				success: function(result){
 					const monthlyTonage = generateChartData(result, mills);
-					console.log(monthlyTonage.labels);  // Log labels
-					console.log(monthlyTonage.datasets);  // Log datasets
+					console.log(monthlyTonage);
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
