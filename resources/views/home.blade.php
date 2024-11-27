@@ -489,21 +489,22 @@
 	</body>
 	<script>
 		const Utils = {
-			CHART_COLORS: {
-				0: 'rgba(220, 53, 69, 1)',    // Red
-				1: 'rgba(0, 136, 204, 1)',    // Blue
-				2: 'rgba(25, 135, 84, 1)',    // Green
-				3: 'rgba(43, 170, 177, 1)',   // Teal
-				4: 'rgba(219, 150, 81, 1)',   // Orange
-			}
+			CHART_COLORS: [
+				'rgba(220, 53, 69, 1)',  // Red
+				'rgba(0, 136, 204, 1)',  // Blue
+				'rgba(25, 135, 84, 1)',  // Green
+				'rgba(43, 170, 177, 1)', // Teal
+				'rgba(219, 150, 81, 1)', // Orange
+			],
 		};
-		// Assuming you are using Chart.js and you want to render the chart in a DOM element
+
+		// Ensure elements are correctly selected
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
 
-		// Assuming $dash_pur_2_summary_monthly_companywise is passed from Laravel
+		// Assuming data is passed from Laravel
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-		const mills = ['187', '170', '133']; // Mill codes
+		const mills = ['187', '170', '133'];  // Mill codes
 
 		$(document).ready(function() {			
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
@@ -511,13 +512,7 @@
             handleToggleSwitch(toggleSwitch); // Trigger the function
 
 			const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
-			new Chart(top5CustomerPerformance, {
-				type: 'bar',
-				data: {
-					labels: chartData.labels, // Use chartData.labels instead of chartLabels
-					datasets: chartData.datasets, // Use chartData.datasets instead of chartData
-				}
-			});
+			renderBarChart(top5CustomerPerformance, chartData);
 		});	
 
 		function handleToggleSwitch(switchElement) {
@@ -558,9 +553,7 @@
 		// Group data by a specific key (e.g., 'dat')
 		function groupData(data, key) {
 			return data.reduce((acc, item) => {
-				if (!acc[item[key]]) {
-					acc[item[key]] = [];
-				}
+				if (!acc[item[key]]) acc[item[key]] = [];
 				acc[item[key]].push(item);
 				return acc;
 			}, {});
@@ -581,7 +574,7 @@
 				return {
 					label: millName,
 					data: dataForMill,
-					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length], // Wrap around if there are more mills than colors
+					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length], // Wrap around if more mills than colors
 					stack: `Stack ${index}`,
 				};
 			});
@@ -612,86 +605,102 @@
 			const millDatasets = createMillDatasets(groupedData, mills, chartLabels);
 			const othersDataset = createOthersDataset(groupedData, chartLabels, mills);
 
-			const datasets = [...millDatasets, othersDataset];
-
 			return {
 				labels: chartLabels,
-				datasets: datasets,
+				datasets: [...millDatasets, othersDataset],
 			};
 		}
 
-		function generateMillWiseDoughnutData(result, mills) {
-			const groupedData = groupData(result, 'dat'); // Group the data by 'dat'
-			const chartLabels = Object.keys(groupedData);  // Get the labels based on 'dat'
+		// Render bar chart
+		function renderBarChart(chartElement, chartData) {
+			if (!chartElement) return console.error('Chart element not found.');
 
-			// Initialize an empty array for mill-wise data
-			const millWiseData = mills.map((mill, index) => {
-				// For each mill, calculate the total weight for each 'dat'
-				const millData = chartLabels.map(dat => {
-				const millGroup = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
-				return millGroup ? millGroup.total_weight : 0;  // If no data, use 0
-				});
-
-				return {
-				label: `Mill ${mill}`,  // Label for the dataset
-				data: millData,  // Data values for each 'dat' corresponding to this mill
-				backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],  // Color for each mill
-				};
-			});
-
-			// Calculate 'Others' (sum of weights for mills not in the `mills` array)
-			const othersData = chartLabels.map(dat => {
-				return groupedData[dat]?.reduce((acc, item) => {
-				if (!mills.includes(item.mill_code.toString())) {
-					acc += item.total_weight;  // Sum for mills not in the `mills` list
+			new Chart(chartElement, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					plugins: {
+						legend: { position: 'top' },
+						title: { display: true, text: 'Top 5 Customer Performance' }
+					},
+					scales: {
+						x: { stacked: true },
+						y: { stacked: true }
+					}
 				}
-				return acc;
-				}, 0) || 0;  // Default to 0 if no data is found
 			});
-
-			millWiseData.push({
-				label: 'Others',  // Label for 'Others'
-				data: othersData,  // Data for 'Others'
-				backgroundColor: 'rgba(200, 200, 200, 1)',  // Color for 'Others'
-			});
-
-			return {
-				labels: chartLabels,  // Labels corresponding to each 'dat'
-				datasets: millWiseData,  // Mill-wise datasets, including 'Others'
-			};
 		}
 
-		function filterHR(){
-			var month = document.getElementById('filterHR').value;
+		// AJAX request for filtering HR data and rendering Doughnut chart
+		function filterHR() {
+			const month = document.getElementById('filterHR').value;
 			$.ajax({
 				type: "GET",
 				url: '/rep-summary/hr',
-				data:{
-					month: month,
-				}, 
-				success: function(result){
-
+				data: { month: month },
+				success: function(result) {
 					const doughnutChartData = generateMillWiseDoughnutData(result, mills);
-
-					new Chart(MonthlyTonageGraph, {
-						type: 'doughnut',
-						data: doughnutChartData,  // Use the generated doughnut data
-						options: {
-							responsive: true,
-							plugins: {
-							legend: {
-								position: 'top',
-							},
-							title: {
-								display: true,
-								text: 'Monthly Tonage Distribution',
-							}
-							}
-						}
-					});
+					renderDoughnutChart(MonthlyTonageGraph, doughnutChartData);
 				},
-				error: function(){
-					alert("error");
+				error: function() {
+					alert("Error loading HR data");
+				}
+			});
+		}
+
+		// Generate doughnut chart data
+		function generateMillWiseDoughnutData(result, mills) {
+			const groupedData = groupData(result, 'dat');
+			const chartLabels = Object.keys(groupedData);
+
+			// Generate mill-wise data
+			const millWiseData = mills.map((mill, index) => {
+				const millData = chartLabels.map(dat => {
+					const millGroup = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millGroup ? millGroup.total_weight : 0;
+				});
+
+				return {
+					label: `Mill ${mill}`,
+					data: millData,
+					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
+				};
+			});
+
+			// Add "Others" data
+			const othersData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					return acc;
+				}, 0) || 0;
+			});
+
+			millWiseData.push({
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)',
+			});
+
+			return {
+				labels: chartLabels,
+				datasets: millWiseData,
+			};
+		}
+
+		// Render doughnut chart
+		function renderDoughnutChart(chartElement, chartData) {
+			if (!chartElement) return console.error('Chart element not found.');
+
+			new Chart(chartElement, {
+				type: 'doughnut',
+				data: chartData,
+				options: {
+					responsive: true,
+					plugins: {
+						legend: { position: 'top' },
+						title: { display: true, text: 'Monthly Tonage Distribution' }
+					}
 				}
 			});
 		}
