@@ -286,10 +286,6 @@
         Route::get('/tquotation/generatePDF/', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tqout-invoice');
     });
 
-    // Route::middleware(['checkPermission:report'])->group(function (){
-
-    // });
-
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
