@@ -136,17 +136,21 @@ class RptAccGrpBAController extends Controller
                 </tr>'
                 . '<tr style="background-color:#e2f3f5; font-weight:bold;">
                 <td colspan="4" style="text-align:right;"><strong>Balance For ' . $subHeadCount . '</strong></td>
-                <td colspan="2">' . number_format($subTotalDebit - $subTotalCredit, 0) . '</td>
+                <td colspan="2">' . number_format($subTotalDebit + $subTotalCredit, 0) . '</td>
                 </tr>';
 
             }
 
             // Add head total row after processing all sub-heads under this headCount
             $html .= '<tr style="background-color:#d2edc7; font-weight:bold; color:red;">
-                    <td colspan="4" style="text-align:right;"><strong>Total For ' . $headCount . '</strong></td>
-                    <td>' . number_format($headTotalDebit, 0) . '</td>
-                    <td>' . number_format($headTotalCredit, 0) . '</td>
-                    </tr>';
+            <td colspan="4" style="text-align:right;"><strong>Total For ' . $headCount . '</strong></td>
+            <td>' . number_format($headTotalDebit, 0) . '</td>
+            <td>' . number_format($headTotalCredit, 0) . '</td>
+            </tr>'
+                . '<tr style="background-color:#d2edc7; font-weight:bold; color:red;">
+                <td colspan="4" style="text-align:right;"><strong>Balance For ' . $headCount . '</strong></td>
+                <td colspan="2">' . number_format($headTotalDebit + $headTotalCredit, 0) . '</td>
+                </tr>';
         }
 
         $html .= '</table>'; // Close the main table
