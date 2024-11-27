@@ -530,18 +530,21 @@
 			});
 		}
 
+		function groupData(data, key) {
+			return data.reduce((acc, item) => {
+				// If the key doesn't exist as a property in the accumulator object, create an empty array
+				if (!acc[item[key]]) {
+					acc[item[key]] = [];
+				}
+
+				// Push the current item to the appropriate group based on the key
+				acc[item[key]].push(item);
+
+				return acc;
+			}, {});
+		}
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-		const groupedData = dash_pur_2_summary_monthly_companywise.reduce((acc, item) => {
-			// If the dat value doesn't exist as a key in acc, create an empty array
-			if (!acc[item.dat]) {
-				acc[item.dat] = [];
-			}
-
-			// Push the current item to the appropriate group
-			acc[item.dat].push(item);
-
-			return acc;
-		}, {});
+		const groupedData = groupData(dash_pur_2_summary_monthly_companywise, 'dat');
 
 		const Utils = {
 			CHART_COLORS: {
@@ -657,7 +660,9 @@
 					month: month,
 				}, 
 				success: function(result){
-					console.log(result);
+					const result = @json($result);
+					var monthlyTonage = groupData(result, 'dat');
+					console.log(monthlyTonage)
 				},
 				error: function(){
 					alert("error");
