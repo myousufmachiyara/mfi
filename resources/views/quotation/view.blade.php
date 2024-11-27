@@ -6,11 +6,8 @@
 					@include('../layouts.pageheader')
 
                     <section class="card">
-
 						<div class="card-body">
-
 							<div class="invoice">
-
 								<header class="clearfix">
 									<div class="row">
 										<div class="col-8 mt-3 mb-3">
@@ -79,7 +76,6 @@
 									</div>
 								</div>
 
-
 								<table class="table table-responsive-md invoice-items table-striped">
 									<thead>
 										<tr class="text-dark">
@@ -114,80 +110,75 @@
 										@endforeach
 									</tbody>
 								</table>
-								</table>
 
-								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<table class="table h6 text-dark">
-													<tbody>
-														<tr class="b-top-0">
-															<td colspan="2"  style="color:#17365D">Total Quantity</td>
-															<td class="text-left">{{$total_quantity}}</td>
-														</tr>
-														<tr>
-															<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
-															<td class="text-left">{{$total_weight}}</td>
-														</tr>
-													</tbody>
-												</table>
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+								<div class="row" style="justify-content: space-between">
+									<div class="col-12 col-md-6">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D">Total Quantity</td>
+													<td class="text-left">{{$total_quantity}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
+													<td class="text-left">{{$total_weight}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<h3 class="d-none d-md-block" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 
-											</div>
-
-
-											<div>
-												<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
-													Terms And Conditions:&nbsp
-												</span><br><br>
-												<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($sales->tc) }}</span>
-												</h2>
-											</div>
-										</div>
+										<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-none d-md-block">
+											<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+												Terms And Conditions:&nbsp
+											</span><br><br>
+											<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($sales->tc) }}</span>
+										</h2>
 									</div>
-									<div class="col-4 invoice-summary">
-										<div class="row justify-content-end">
-											<table class="table h6 text-dark">
-												<tbody>
-													<tr class="b-top-0">
-														<td colspan="2"  style="color:#17365D" >Subtotal</td>
-														<td class="text-left">{{$subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2"  style="color:#17365D">Labour Charges</td>
-														<td class="text-left">{{$sales->LaborCharges}} PKR</td>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Convance Charges</td>
-														<td class="text-left">{{$sales->ConvanceCharges}} PKR</td>
-													</tr>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Discount</td>
-														<td class="text-left">{{$sales->Bill_discount}} PKR</td>
-													</tr>
-													<?php $netamount=round($subtotal + $sales->LaborCharges + $sales->ConvanceCharges - $sales->Bill_discount) ?>
-													<tr class="h5">
-														<td colspan="2"  style="color:#17365D">Net Amount</td>
-														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+									<div class="col-12 col-md-4">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D" >Subtotal</td>
+													<td class="text-left">{{$subtotal}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Labour Charges</td>
+													<td class="text-left">{{$sales->LaborCharges}} PKR</td>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Convance Charges</td>
+													<td class="text-left">{{$sales->ConvanceCharges}} PKR</td>
+												</tr>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Discount</td>
+													<td class="text-left">{{$sales->Bill_discount}} PKR</td>
+												</tr>
+												<?php $netamount=round($subtotal + $sales->LaborCharges + $sales->ConvanceCharges - $sales->Bill_discount) ?>
+												<tr class="h5">
+													<td colspan="2"  style="color:#17365D">Net Amount</td>
+													<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-								<div>
+									<div class="col-12">
+										<h3 class="d-block d-md-none" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+										<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-block d-md-none">
+											<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+												Terms And Conditions:&nbsp
+											</span><br><br>
+											<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($sales->tc) }}</span>
+										</h2>
+										<div class="text-end">
+											<a onclick="window.location='{{ route('all-quotation') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
+											<a href="{{ route('print-quotation-invoice', $sales->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
+										</div>
+									</div>		
+								</div>
 							</div>
-
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-quotation') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-quotation-invoice', $sales->Sal_inv_no) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
-							</div>
-
 						</div>
 
 					</section>
 				</section>
-			</div>
 			</div>
 		</section>
         @include('../layouts.footerlinks')
