@@ -620,11 +620,6 @@
 			};
 		}
 
-		// Example usage of the generateChartData function to create a chart
-
-		console.log(chartData.labels);  // Log labels
-		console.log(chartData.datasets);  // Log datasets
-
 		// In the filterHR function, make sure to pass chartLabels correctly
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
@@ -636,6 +631,8 @@
 				}, 
 				success: function(result){
 					const monthlyTonage = generateChartData(result, mills);
+					console.log(monthlyTonage.labels);  // Log labels
+					console.log(monthlyTonage.datasets);  // Log datasets
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
