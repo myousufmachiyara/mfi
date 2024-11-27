@@ -128,12 +128,17 @@ class RptAccGrpBAController extends Controller
                     $rowCount++;
                 }
 
-                // Add sub-total row for this subhead
+               // Add sub-total row for this subhead
                 $html .= '<tr style="background-color:#e2f3f5; font-weight:bold;">
-                        <td colspan="4" style="text-align:right;"><strong>Sub Total For ' . $subHeadCount . '</strong></td>
-                        <td>' . number_format($subTotalDebit, 0) . '</td>
-                        <td>' . number_format($subTotalCredit, 0) . '</td>
-                        </tr>';
+                <td colspan="4" style="text-align:right;"><strong>Sub Total For ' . $subHeadCount . '</strong></td>
+                <td>' . number_format($subTotalDebit, 0) . '</td>
+                <td>' . number_format($subTotalCredit, 0) . '</td>
+                </tr>'
+                . '<tr style="background-color:#e2f3f5; font-weight:bold;">
+                <td colspan="4" style="text-align:right;"><strong>Balance For ' . $subHeadCount . '</strong></td>
+                <td colspan="2">' . number_format($subTotalDebit - $subTotalCredit, 0) . '</td>
+                </tr>';
+
             }
 
             // Add head total row after processing all sub-heads under this headCount
