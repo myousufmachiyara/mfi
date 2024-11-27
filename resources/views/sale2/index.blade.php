@@ -15,8 +15,32 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">Company Name</option>
+                                                <option value="4">Mill Inv #</option>
+                                                <option value="5">Dispatch To</option>
+                                                <option value="6">Person Name</option>
+                                                <option value="7">Remarks</option>
+                                                <option value="8">SaleInv #</option>
+                                                <option value="9">Item Group</option>
+                                                <option value="10">Weight (kg)</option>
+                                                <option value="11">Bill Amount</option>
+                                                <option value="12">Convance Charges</option>
+                                                <option value="13">Labour Charges</option>
+                                                <option value="14">Discount</option>
+                                                <option value="15">Net Amount</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
