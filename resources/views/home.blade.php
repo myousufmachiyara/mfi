@@ -630,6 +630,7 @@
 			}
 			return numbers;
 		}
+		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
 		function filterHR() {
 			var month = document.getElementById('filterHR').value;
