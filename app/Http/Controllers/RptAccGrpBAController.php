@@ -77,7 +77,7 @@ class RptAccGrpBAController extends Controller
         
         foreach ($groupedData as $headCount => $heads) {
             // Add the sub-header for each $headCount
-            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;">
+            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;color: red;">
                         <strong>' . $headCount . '</strong>
                       </td></tr>';
         
