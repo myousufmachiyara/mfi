@@ -640,20 +640,22 @@
 					month: month,
 				},
 				success: function(result) {
+					if (monthlyTonageChart) {
+						monthlyTonageChart.destroy();
+					}
+
 					const chartData = {
 						datasets: [
 							{
-								label: result.map(item => item.total_weight), // Set a general label for the chart
+								label: 'Monthly Tonage Distribution', // Set a general label for the chart
 								data: result.map(item => item.total_weight), // Extract total_weight values
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign background colors from Utils.CHART_COLORS
 							}
 						]
 					};
-					if (MonthlyTonage) {
-						MonthlyTonage.destroy();
-					}
+
 					// Create the doughnut chart
-					new Chart(MonthlyTonage, {
+					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
 						data: chartData,
 						options: {
