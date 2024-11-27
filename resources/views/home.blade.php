@@ -488,7 +488,7 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
-		onst Utils = {
+		const Utils = {
 			CHART_COLORS: [
 				'rgba(220, 53, 69, 1)',  // Red
 				'rgba(0, 136, 204, 1)',  // Blue
