@@ -641,46 +641,59 @@
 					month: month,
 				},
 				success: function(result) {
+					const groupedData = groupByMillCode(mills, result);
+
+					console.log(groupedData);
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
-
 					const labels = result.map(item => item.mill_name);
-					console.log(labels);
-
 					const chartData = {
 						labels: labels, // Set the labels directly here
 						datasets: [
 							{
 								data: result.map(item => item.total_weight), // Extract total_weight values for each mill
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors from Utils.CHART_COLORS
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]),
 							}
 						]
 					};
-					console.log(chartData);
-
 					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
 						data: chartData,
-						options: {
-							responsive: true,
-							plugins: {
-								legend: {
-									position: 'top',
-								},
-								title: {
-									display: true,
-									text: 'Monthly Tonage Distribution'
-								}
-							}
-						}
 					});
 				},
 				error: function() {
 					alert("Error loading HR data");
 				}
 			});
+		}
+
+		function groupByMillCode(mills, data) {
+			const result = {};
+
+			// Initialize a group for 'Others'
+			result['Others'] = [];
+
+			// Loop over the mills array and add corresponding mill data to result
+			mills.forEach(mill => {
+				result[mill] = [];
+			});
+
+			// Iterate through the data and assign to the appropriate group
+			data.forEach(item => {
+				const millCode = item.mill_code.toString();
+				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
+				
+				// Add item to its respective group
+				if (millName === 'Others') {
+					result['Others'].push(item);
+				} else {
+					result[millCode].push(item);
+				}
+			});
+
+			return result;
 		}
 	</script>									
 </html>
