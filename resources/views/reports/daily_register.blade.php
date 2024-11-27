@@ -687,7 +687,7 @@
                             $(tableID).append(html);
                         });
                         // Display the total in the last row or specific cell
-                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
                         $(tableID).append(totalRow);
                     },
