@@ -14,7 +14,7 @@
                                         <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Invoice</button>
                                     </form>
                                 </header>
-                                <div class="card-body"  >
+                                <div class="card-body">
                                     <div>
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
@@ -39,8 +39,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="modal-wrapper" style="overflow-x:auto">
-                                        <table class="table table-bordered table-striped mb-0" id="searchableTable" >
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default" >
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
@@ -178,6 +178,19 @@
 	</body>
 </html>
 <script>
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }
