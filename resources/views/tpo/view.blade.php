@@ -132,7 +132,7 @@
 									@php($grand_subtotal += $subtotal)
 									@endforeach
 								
-									<div class="row">
+									<div class="row d-none d-md-block">
 										<div class="col-12 col-md-8">
 											<table class="table h6 text-dark">
 												<tbody>
@@ -178,8 +178,6 @@
 														<td colspan="2"  style="color:#17365D">Net Amount</td>
 														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
 													</tr>
-													
-													
 												</tbody>
 											</table>
 										</div>
