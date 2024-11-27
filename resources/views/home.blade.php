@@ -418,7 +418,7 @@
 									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
-											<input type="month" class="form-control" id="filterHR" value="{{ date('m-Y') }}" onchange="filterHR()">
+											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="filterHR()">
 										</div>
 										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="filterHR()"><i class="fa fa-filter"></i></a>
 									</div>
