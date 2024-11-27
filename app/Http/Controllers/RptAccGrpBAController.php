@@ -77,7 +77,7 @@ class RptAccGrpBAController extends Controller
         
         foreach ($groupedData as $headCount => $heads) {
             // Add the sub-header for each $headCount
-            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d9edf7; border: 1px solid #000;color: red;">
+            $html .= '<tr><td colspan="6" style="text-align:center; font-size:18px; font-weight:600; background-color: #d2edc7; border: 1px solid #000;color: red;">
                         <strong>' . $headCount . '</strong>
                       </td></tr>';
         
@@ -132,7 +132,7 @@ class RptAccGrpBAController extends Controller
         }
         
         // Add overall totals row after all data
-        $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+        $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
                     <td colspan="4" style="text-align:right;">Total:</td>
                     <td>' . number_format($totalDebit, 0) . '</td>
                     <td>' . number_format($totalCredit, 0) . '</td>
