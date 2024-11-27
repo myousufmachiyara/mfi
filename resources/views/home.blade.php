@@ -432,6 +432,21 @@
 											</section>
 										</div>
 
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Monthly Tonage</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="MonthlyTonage"></canvas>
+												</div>
+											</section>
+										</div>
+
 									</div>
 								</div>
 
@@ -584,6 +599,39 @@
 				labels: chartLabels, // 'dat' values as labels
 				datasets: datasets,  // Dynamic datasets based on groupedData
 			}
+		});
+
+		const DATA_COUNT = 5;
+		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+		const data = {
+			labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+			datasets: [
+				{
+				label: 'Dataset 1',
+				data: Utils.numbers(NUMBER_CFG),
+				backgroundColor: Object.values(Utils.CHART_COLORS),
+				}
+			]
+		};
+
+		const MonthlyTonage = document.getElementById('MonthlyTonage');
+
+		new Chart(MonthlyTonage, {
+			type: 'doughnut',
+			data: data,
+			options: {
+				responsive: true,
+				plugins: {
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Doughnut Chart'
+				}
+				}
+			},
 		});
 
 	</script>									
