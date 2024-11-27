@@ -634,7 +634,7 @@
                             html +="</tr>";
                             $(tableID).append(html);
                         });
-                        
+
                         // Display the total in the last row or specific cell
                         var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
                         totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
@@ -669,20 +669,27 @@
                         $('#pur1_to').text(formattedtoDate);
 
                         $(tableID).empty(); // Clear the loading message
+                        var totalBillAmt = 0; // Variable to accumulate total
 
                         $.each(result, function(k,v){
+                            var billAmt = v['bill_amt'] ? parseFloat(v['bill_amt']) : 0;
+                            totalBillAmt += billAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
                             html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
                             html += "<td>" + (v['cash_saler_name'] ? v['cash_saler_name'] : "") + "</td>";
                             html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
+                            html += "<td>" + (billAmt ? billAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
