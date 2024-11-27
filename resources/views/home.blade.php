@@ -630,30 +630,37 @@
 			}
 			return numbers;
 		}
+		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
-		function filterHR(){
+		function filterHR() {
 			var month = document.getElementById('filterHR').value;
 			$.ajax({
 				type: "GET",
 				url: '/rep-summary/hr',
-				data:{
+				data: {
 					month: month,
-				}, 
-				success: function(result){
+				},
+				success: function(result) {
+					if (monthlyTonageChart) {
+						monthlyTonageChart.destroy();
+					}
+
+					const labels = result.map(item => item.mill_name);
+					console.log(labels);
+
 					const chartData = {
 						datasets: [
 							{
-								label: result.map(item => item.mill_name), // You can adjust the label if needed
-								data: result.map(item => item.total_weight), // Extract total_weight
-								backgroundColor: Utils.CHART_COLORS[item],
-
-								// backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors
+								label: result.map((item,index) => labels[index]), // Set a general label for the chart
+								data: result.map(item => item.total_weight), // Extract total_weight values
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
 							}
 						]
 					};
+					console.log(chartData);
 
 					// Create the doughnut chart
-					new Chart(MonthlyTonage, {
+					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
 						data: chartData,
 						options: {
@@ -669,10 +676,9 @@
 							}
 						}
 					});
-					console.log(result);
 				},
-				error: function(){
-					alert("error");
+				error: function() {
+					alert("Error loading HR data");
 				}
 			});
 		}
