@@ -70,7 +70,7 @@
                                                     <td style="display:none">{{$row->Sale_inv_no}}</td>
                                                     <td style="border-left:1px solid #dee2e6 ">{{$row->prefix}}{{$row->Sale_inv_no}}</td>
                                                     <td>{{ \Carbon\Carbon::parse($row->sa_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->acc_name}}</td>
+                                                    <td><strong>{{$row->acc_name}}</strong></td>
                                                     <td>{{$row->pur_ord_no}}</td>
                                                     <td>{{$row->disp_to}}</td>
                                                     <td>{{$row->Cash_pur_name}}</td>
