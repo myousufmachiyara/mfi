@@ -488,25 +488,24 @@
         @include('layouts.footerlinks')
 	</body>
 	<script>
+		const Utils = {
+			CHART_COLORS: {
+				0: 'rgba(220, 53, 69, 1)',    // Red
+				1: 'rgba(0, 136, 204, 1)',    // Blue
+				2: 'rgba(25, 135, 84, 1)',    // Green
+				3: 'rgba(43, 170, 177, 1)',   // Teal
+				4: 'rgba(219, 150, 81, 1)',   // Orange
+			}
+		};
+		// Assuming you are using Chart.js and you want to render the chart in a DOM element
+		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+		const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
 
-		$(document).ready(function() {
-			// Utility for chart colors
-			const Utils = {
-				CHART_COLORS: {
-					0: 'rgba(220, 53, 69, 1)',    // Red
-					1: 'rgba(0, 136, 204, 1)',    // Blue
-					2: 'rgba(25, 135, 84, 1)',    // Green
-					3: 'rgba(43, 170, 177, 1)',   // Teal
-					4: 'rgba(219, 150, 81, 1)',   // Orange
-				}
-			};
-			// Assuming you are using Chart.js and you want to render the chart in a DOM element
-			const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-			const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
+		// Assuming $dash_pur_2_summary_monthly_companywise is passed from Laravel
+		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
+		const mills = ['187', '170', '133']; // Mill codes
 
-			// Assuming $dash_pur_2_summary_monthly_companywise is passed from Laravel
-			const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-			const mills = ['187', '170', '133']; // Mill codes
+		$(document).ready(function() {			
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
