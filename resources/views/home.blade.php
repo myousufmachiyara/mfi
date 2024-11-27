@@ -660,7 +660,7 @@
 					month: month,
 				}, 
 				success: function(result){
-					const result = @json($result);
+					const result = @json(result);
 					var monthlyTonage = groupData(result, 'dat');
 					console.log(monthlyTonage)
 				},
