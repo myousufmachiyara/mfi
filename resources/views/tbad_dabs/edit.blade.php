@@ -240,7 +240,6 @@ function tableTotal(){
 }
 
 function getItemDetails(row_no,option){       
-        console.log(row_no);
 		var itemId;
 		if(option==1){
 			itemId = document.getElementById("item_code"+row_no).value;

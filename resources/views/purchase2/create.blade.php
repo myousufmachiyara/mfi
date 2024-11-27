@@ -325,7 +325,6 @@
 	});
 
 	function removeRow(button) {
-		console.log("before remove");
 		var tableRows = $("#Purchase2Table tr").length;
 		if(tableRows>1){
 			var row = button.parentNode.parentNode;
@@ -534,7 +533,6 @@
 		$('#net_amount').val(netTotal);
 
 		var bill_perc = ((bill_discount/total)*100) + ' %';
-		console.log(bill_perc);
 
 		$('#bill_perc').val(bill_perc);
 
@@ -557,7 +555,6 @@
 	}
 
 	function toggleInputs(checkbox) {
-		console.log(checkbox);
 		const inputGroups = document.querySelectorAll('.comm-form-field');
 		const isChecked = checkbox.checked;
 

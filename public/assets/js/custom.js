@@ -182,7 +182,6 @@ function resetTimer() {
 
 // Show warning modal
 function showModal() {
-    console.log("in showModal function");
     $('#timeoutModal').show(); // Display the modal
 }
 
@@ -255,7 +254,6 @@ $('#changePasswordForm').on('submit', function(e){
             'password':currentPassword,
         },
         success: function(response){
-            console.log(response);
             if(response==1){
                 var form = document.getElementById('changePasswordForm');
                 form.submit();

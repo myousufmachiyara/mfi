@@ -148,7 +148,6 @@
             url: "/coa-groups/detail",
             data: {id:id},
             success: function(result){
-                console.log(result)
                 $('#group_id').val(result['group_cod']);
                 $('#update_group_id').val(result['group_cod']);
                 $('#update_group_name').val(result['group_name']);

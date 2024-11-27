@@ -458,9 +458,7 @@
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 		$('#net_amount').val(netTotal);
 
-		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		console.log(bill_perc);
-		
+		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';		
 		$('#bill_perc').val(bill_perc);
 	}
  
