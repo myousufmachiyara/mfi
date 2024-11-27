@@ -60,7 +60,16 @@ class RptAccGrpBAController extends Controller
         $pdf->setCellPadding(1.2);
 
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Balance All - ' . $formattedDate . '</h1>';
+        $heading = '
+        <div style="position:relative;">
+            <h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">
+                Balance All
+            </h1>
+            <span style="font-size:12px; position:absolute; top:0; right:0; color:#17365D;">
+                ' . $formattedDate . '
+            </span>
+        </div>';
+
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Group the data
