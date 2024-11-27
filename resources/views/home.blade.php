@@ -418,9 +418,9 @@
 									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
-											<input type="month" class="form-control"  value="{{ date('Y-m') }}">
+											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="filterHR()">
 										</div>
-										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;"><i class="fa fa-filter"></i></a>
+										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="filterHR()"><i class="fa fa-filter"></i></a>
 									</div>
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
@@ -452,14 +452,6 @@
 													<canvas id="MonthlyTonage"></canvas>
 												</div>
 											</section>
-										</div>
-
-										<div class="col-12 col-md-4 text-end">
-											<div class="form-group" style="display: inline-block">
-												<label class="col-form-label">Select Month</label>
-												<input type="month" class="form-control"  value="{{ date('Y-m') }}">
-											</div>
-											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;"><i class="fa fa-filter"></i></a>
 										</div>
 									</div>
 								</div>
@@ -654,6 +646,10 @@
 				numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
 			}
 			return numbers;
+		}
+
+		function filterHR(){
+			alert("hello");
 		}
 	</script>									
 </html>
