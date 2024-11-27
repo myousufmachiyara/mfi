@@ -619,11 +619,12 @@
 		new Chart(top5CustomerPerformance, {
 			type: 'bar',
 			data: {
-				labels: chartLabels, // 'dat' values as labels
-				datasets: chartData,  // Dynamic datasets based on groupedData
+				labels: chartData.labels, // Use chartData.labels instead of chartLabels
+				datasets: chartData.datasets, // Use chartData.datasets instead of chartData
 			}
 		});
 
+		// In the filterHR function, make sure to pass chartLabels correctly
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
 			$.ajax({
@@ -639,17 +640,20 @@
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
-						data: monthlyTonage,
+						data: {
+							labels: monthlyTonage.labels,  // Correctly reference the labels
+							datasets: monthlyTonage.datasets,  // Correctly reference the datasets
+						},
 						options: {
 							responsive: true,
 							plugins: {
-							legend: {
-								position: 'top',
-							},
-							title: {
-								display: true,
-								text: 'Chart.js Doughnut Chart'
-							}
+								legend: {
+									position: 'top',
+								},
+								title: {
+									display: true,
+									text: 'Chart.js Doughnut Chart'
+								}
 							}
 						},
 					});
@@ -657,7 +661,7 @@
 				error: function(){
 					alert("error");
 				}
-            });
+			});
 		}
 	</script>									
 </html>
