@@ -96,16 +96,14 @@ class RptAccGrpBAController extends Controller
                 // Add sub-header row
                 $html .= '<tr><td colspan="6" style="text-align:center; font-size:16px; font-weight:500; background-color: #e2f3f5; border: 1px solid #000;">
                            <strong>' . $subHeadCount . '</strong>
-                         </td></tr>';
-
-                         $html .= '<thead><tr>
+                         </td></tr><tr>
                    <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
                    <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
                    <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
                    <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
                    <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
                    <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
-                 </tr></thead>';
+                 </tr>';
             
                 // Now iterate through subhead data rows
                 foreach ($subheads as $item) {
