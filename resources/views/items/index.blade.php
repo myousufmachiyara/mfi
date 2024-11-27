@@ -21,16 +21,15 @@
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
-                                                <option value="1">by Account</option>
-                                                <option value="2">by Receivable</option>
-                                                <option value="3">by Payable</option>
-                                                <option value="4">by Date</option>
-                                                <option value="5">by Remarks</option>
-                                                <option value="6">by Address</option>
-                                                <option value="7">by Credit Limit</option>
-                                                <option value="8">by Days Limit</option>
-                                                <option value="9">by Group</option>
-                                                <option value="10">by Account Type</option>
+                                                <option value="1">by Item Name</option>
+                                                <option value="2">by Remarks</option>
+                                                <option value="3">by Group Name</option>
+                                                <option value="4">by Qty</option>
+                                                <option value="5">by P.Date</option>
+                                                <option value="6">by P.Price</option>
+                                                <option value="7">by S.Date</option>
+                                                <option value="8">by S.Price</option>
+                                                <option value="9">by L.Price</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
@@ -301,7 +300,7 @@
 
     $(document).ready(function(){
         var table = $('#cust-datatable-default').DataTable();
-        
+
         $('#columnSelect').on('change', function () {
             // Clear the previous search
             table.search('').columns().search('').draw(); // Reset global and column-specific filters
