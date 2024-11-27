@@ -651,7 +651,7 @@
 					const chartData = {
 						datasets: [
 							{
-								label: result.map((item,index) => labels[index]), // Set a general label for the chart
+								labels: result.map((item,index) => labels[index]), // Set a general label for the chart
 								data: result.map(item => item.total_weight), // Extract total_weight values
 								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
 							}
@@ -662,7 +662,6 @@
 					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
-						labels: labels,
 						data: chartData,
 						options: {
 							responsive: true,
