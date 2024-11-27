@@ -417,7 +417,7 @@
 								<div id="HR_Sale" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
-										<div class="col-12 col-md-6 mb-2">
+										<div class="col-12 col-md-5 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -432,7 +432,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-2">
+										<div class="col-12 col-md-3 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
