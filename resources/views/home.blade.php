@@ -416,11 +416,11 @@
 
 								<div id="HR_Sale" class="tab-pane">
 									<div class="mb-2">
-										<div class="col-3 form-group">
+										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
 											<input type="month" class="form-control"  value="{{ date('Y-m') }}">
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;"><i class="fa fa-filter"></i></a>
 										</div>
-										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;"><i class="fa fa-filter"></i></a>
 									</div>
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
