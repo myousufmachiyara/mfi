@@ -653,7 +653,7 @@
 						datasets: [
 							{
 								data: result.map(item => item.total_weight), // Extract total_weight values for each mill
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors from Utils.CHART_COLORS
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]),
 							}
 						]
 					};
