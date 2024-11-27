@@ -146,13 +146,13 @@
 													</tr>
 												</tbody>
 											</table>
-											<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+											<h3 class="d-none d-md-block" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 										
-											<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-											<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
-												Terms And Conditions:&nbsp
-											</span><br><br>
-											<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
+											<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-none d-md-block">
+												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+													Terms And Conditions:&nbsp
+												</span><br><br>
+												<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
 											</h2>
 										</div>
 										<div class="col-12 col-md-4">
@@ -181,9 +181,16 @@
 												</tbody>
 											</table>
 										</div>
-										<div class="col-12 text-end">
-											<a onclick="window.location='{{ route('all-tpo') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-											<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
+										<div class="col-12">
+											<h3 class="d-none d-sm-block" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+											<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-none d-sm-block">
+												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
+													Terms And Conditions:&nbsp
+												</span><br><br>
+												<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
+											</h2>
+											<a onclick="window.location='{{ route('all-tpo') }}'" class="btn btn-primary mt-2 mb-2 text-end"> <i class="fas fa-arrow-left"></i> Back</a>
+											<a class="btn btn-danger mt-2 mb-2 mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-end" onclick="setPrintId({{$pur->Sale_inv_no}})" href="#printModal"><i class="fas fa-print"></i> Print</a>
 										</div>		
 									</div>
 								</div>
