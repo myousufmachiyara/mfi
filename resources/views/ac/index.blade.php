@@ -16,7 +16,7 @@
                                     </div>
                                 </header>
                                 <div class="card-body">
-                                    <div >
+                                    <div>
                                         <div class="col-md-5" style="display:flex;">
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
                                                 <option selected disabled>Search by</option>
@@ -463,10 +463,6 @@
         $('#att_id').val(id);
     }
 
-    function test(){
-        alert("hello");
-    }
-
     function getAccountDetails(id){
         $.ajax({
             type: "GET",
@@ -557,5 +553,4 @@
         });
     }
 
-    
 </script>
