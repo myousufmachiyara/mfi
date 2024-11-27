@@ -37,71 +37,72 @@
                                         </div>
                                     </div>
                                     <div class="modal-wrapper table-scroll">
-                                	<table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th width="4%">Code</th>
-                                                <th width="13%">Item Name</th>
-                                                <th width="13%">Remarks</th>
-                                                <th width="13%">Group Name</th>
-                                                <th width="4%">Qty</th>
-                                                <th width="4%">Wt.</th>
-                                                <th width="6%">P.Date</th>
-                                                <th width="2%">P.Price</th>
-                                                <th width="6%">S.Date</th>
-                                                <th width="2%">S.Price</th>
-                                                <th width="4%">L.Price</th>
-                                                <th width="4%"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($items as $key => $row)
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$row->it_cod}}</td>
-                                                    <td><strong>{{$row->item_name}}</strong></td>
-                                                    <td>{{$row->item_remark}}</td>
-                                                    <td>{{$row->group_name}}</td>
-                                                    @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
-                                                        <td>{{$row->opp_qty}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->opp_qty) }}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->weight), strpos(strval($row->weight), '.') + 1)>0)
-                                                        <td>{{$row->weight}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->weight) }}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->pur_rate_date)->format('d-m-y') }}</td>
-                                                    @if(substr(strval($row->OPP_qty_cost), strpos(strval($row->OPP_qty_cost), '.') + 1)>0)
-                                                        <td>{{$row->OPP_qty_cost}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->OPP_qty_cost) }}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
-
-                                                    @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
-                                                        <td>{{$row->sales_price}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->sales_price) }}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->labourprice), strpos(strval($row->labourprice), '.') + 1)>0)
-                                                        <td>{{$row->labourprice}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->labourprice) }}</td>
-                                                    @endif
-                                                    <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal">
-                                                            <i class="far fa-trash-alt" style="color:red"></i>
-                                                        </a>
-                                                    </td>
+                                                    <th width="4%">Code</th>
+                                                    <th width="13%">Item Name</th>
+                                                    <th width="13%">Remarks</th>
+                                                    <th width="13%">Group Name</th>
+                                                    <th width="4%">Qty</th>
+                                                    <th width="4%">Wt.</th>
+                                                    <th width="6%">P.Date</th>
+                                                    <th width="2%">P.Price</th>
+                                                    <th width="6%">S.Date</th>
+                                                    <th width="2%">S.Price</th>
+                                                    <th width="4%">L.Price</th>
+                                                    <th width="4%"></th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-									</table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($items as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->it_cod}}</td>
+                                                        <td><strong>{{$row->item_name}}</strong></td>
+                                                        <td>{{$row->item_remark}}</td>
+                                                        <td>{{$row->group_name}}</td>
+                                                        @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
+                                                            <td>{{$row->opp_qty}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->opp_qty) }}</td>
+                                                        @endif
+                                                        @if(substr(strval($row->weight), strpos(strval($row->weight), '.') + 1)>0)
+                                                            <td>{{$row->weight}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->weight) }}</td>
+                                                        @endif
+                                                        <td>{{ \Carbon\Carbon::parse($row->pur_rate_date)->format('d-m-y') }}</td>
+                                                        @if(substr(strval($row->OPP_qty_cost), strpos(strval($row->OPP_qty_cost), '.') + 1)>0)
+                                                            <td>{{$row->OPP_qty_cost}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->OPP_qty_cost) }}</td>
+                                                        @endif
+                                                        <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
+
+                                                        @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
+                                                            <td>{{$row->sales_price}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->sales_price) }}</td>
+                                                        @endif
+                                                        @if(substr(strval($row->labourprice), strpos(strval($row->labourprice), '.') + 1)>0)
+                                                            <td>{{$row->labourprice}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->labourprice) }}</td>
+                                                        @endif
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal">
+                                                                <i class="far fa-trash-alt" style="color:red"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
