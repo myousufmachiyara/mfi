@@ -146,19 +146,19 @@ class RptAccGrpBAController extends Controller
                      </tr>';
         }
         
-        // Add overall totals row after all data
-        $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
-                    <td colspan="4" style="text-align:right;">Total:</td>
-                    <td>' . number_format($totalDebit, 0) . '</td>
-                    <td>' . number_format($totalCredit, 0) . '</td>
-                  </tr>';
+        // // Add overall totals row after all data
+        // $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
+        //             <td colspan="4" style="text-align:right;">Total:</td>
+        //             <td>' . number_format($totalDebit, 0) . '</td>
+        //             <td>' . number_format($totalCredit, 0) . '</td>
+        //           </tr>';
         
-        // Calculate balance and add balance row
-        $balance = $totalDebit - $totalCredit;
-        $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
-                    <td colspan="4" style="text-align:right;">Balance:</td>
-                    <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
-                  </tr>';
+        // // Calculate balance and add balance row
+        // $balance = $totalDebit - $totalCredit;
+        // $html .= '<tr style="background-color:#d2edc7; font-weight:bold;">
+        //             <td colspan="4" style="text-align:right;">Balance:</td>
+        //             <td colspan="2" style="text-align:center;">' . number_format($balance, 0) . '</td>
+        //           </tr>';
         
         $html .= '</table>'; // Close the main table
         
