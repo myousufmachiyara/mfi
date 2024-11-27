@@ -640,9 +640,21 @@
 					month: month,
 				}, 
 				success: function(result){
+
+					const chartData = {
+						datasets: [
+							{
+								label: 'Dataset 1', // You can adjust the label if needed
+								data: result.map(item => item.total_weight), // Extract total_weight
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors
+							}
+						]
+					};
+
+					// Create the doughnut chart
 					new Chart(MonthlyTonage, {
 						type: 'doughnut',
-						data: result,
+						data: chartData,
 						options: {
 							responsive: true,
 							plugins: {
@@ -651,17 +663,17 @@
 								},
 								title: {
 									display: true,
-									text: 'Chart.js Doughnut Chart'
+									text: 'Monthly Tonage Distribution'
 								}
 							}
-						},
+						}
 					});
 					console.log(result);
 				},
 				error: function(){
 					alert("error");
 				}
-            });
+			});
 		}
 	</script>									
 </html>
