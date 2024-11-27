@@ -489,214 +489,215 @@
 	</body>
 	<script>
 		const Utils = {
-    CHART_COLORS: [
-        'rgba(220, 53, 69, 1)',  // Red
-        'rgba(0, 136, 204, 1)',  // Blue
-        'rgba(25, 135, 84, 1)',  // Green
-        'rgba(43, 170, 177, 1)', // Teal
-        'rgba(219, 150, 81, 1)', // Orange
-    ],
-};
+			CHART_COLORS: [
+				'rgba(220, 53, 69, 1)',  // Red
+				'rgba(0, 136, 204, 1)',  // Blue
+				'rgba(25, 135, 84, 1)',  // Green
+				'rgba(43, 170, 177, 1)', // Teal
+				'rgba(219, 150, 81, 1)', // Orange
+			],
+		};
 
-// Ensure elements are correctly selected
-const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
+		// Ensure elements are correctly selected
+		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+		const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
 
-// Assuming data is passed from Laravel
-const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-const mills = ['187', '170', '133']; // Mill codes
+		// Assuming data is passed from Laravel
+		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
+		const mills = ['187', '170', '133']; // Mill codes
 
-$(document).ready(function () {
-    // Initialize toggle switch
-    const toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
-    toggleSwitch.checked = true;
-    handleToggleSwitch(toggleSwitch); // Trigger the function
+		$(document).ready(function () {
+			// Initialize toggle switch
+			const toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
+			toggleSwitch.checked = true;
+			handleToggleSwitch(toggleSwitch); // Trigger the function
 
-    // Generate bar chart data and render
-    const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
-    renderBarChart(top5CustomerPerformance, chartData);
-});
+			// Generate bar chart data and render
+			const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
+			renderBarChart(top5CustomerPerformance, chartData);
+		});
 
-// Toggle switch handling
-function handleToggleSwitch(switchElement) {
-    const dataContainers = document.querySelectorAll('.data-container');
-    dataContainers.forEach(dataContainer => {
-        if (!switchElement.checked) {
-            dataContainer.classList.remove('switch-off');
-            animateDataValues(".actual-data strong");
-        } else {
-            dataContainer.classList.add('switch-off');
-        }
-    });
-}
+		// Toggle switch handling
+		function handleToggleSwitch(switchElement) {
+			const dataContainers = document.querySelectorAll('.data-container');
+			dataContainers.forEach(dataContainer => {
+				if (!switchElement.checked) {
+					dataContainer.classList.remove('switch-off');
+					animateDataValues(".actual-data strong");
+				} else {
+					dataContainer.classList.add('switch-off');
+				}
+			});
+		}
 
-// Animate numerical data values
-function animateDataValues(selector) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(element => {
-        const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
-        const duration = 2000; // Animation duration in milliseconds
-        const frameRate = 60; // Frames per second
-        const totalFrames = Math.round(duration / (1000 / frameRate));
-        let frame = 0;
+		// Animate numerical data values
+		function animateDataValues(selector) {
+			const elements = document.querySelectorAll(selector);
+			elements.forEach(element => {
+				const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
+				const duration = 2000; // Animation duration in milliseconds
+				const frameRate = 60; // Frames per second
+				const totalFrames = Math.round(duration / (1000 / frameRate));
+				let frame = 0;
 
-        if (totalBalance !== 0) {
-            const counter = setInterval(() => {
-                frame++;
-                const progress = frame / totalFrames;
-                const currentValue = Math.floor(progress * totalBalance);
-                element.textContent = currentValue.toLocaleString();
+				if (totalBalance !== 0) {
+					const counter = setInterval(() => {
+						frame++;
+						const progress = frame / totalFrames;
+						const currentValue = Math.floor(progress * totalBalance);
+						element.textContent = currentValue.toLocaleString();
 
-                if (frame === totalFrames) {
-                    clearInterval(counter);
-                    element.textContent = totalBalance.toLocaleString();
-                }
-            }, 1000 / frameRate);
-        } else {
-            element.textContent = "0"; // Set to 0 if no value
-        }
-    });
-}
+						if (frame === totalFrames) {
+							clearInterval(counter);
+							element.textContent = totalBalance.toLocaleString();
+						}
+					}, 1000 / frameRate);
+				} else {
+					element.textContent = "0"; // Set to 0 if no value
+				}
+			});
+		}
 
-// Group data by a specific key
-function groupData(data, key) {
-    return data.reduce((acc, item) => {
-        if (!acc[item[key]]) acc[item[key]] = [];
-        acc[item[key]].push(item);
-        return acc;
-    }, {});
-}
+		// Group data by a specific key
+		function groupData(data, key) {
+			return data.reduce((acc, item) => {
+				if (!acc[item[key]]) acc[item[key]] = [];
+				acc[item[key]].push(item);
+				return acc;
+			}, {});
+		}
 
-// Create datasets for each mill
-function createMillDatasets(groupedData, mills, chartLabels) {
-    return mills.map((mill, index) => {
-        const dataForMill = chartLabels.map(dat => {
-            const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
-            return millData ? millData.total_weight : 0;
-        });
+		// Create datasets for each mill
+		function createMillDatasets(groupedData, mills, chartLabels) {
+			return mills.map((mill, index) => {
+				const dataForMill = chartLabels.map(dat => {
+					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millData ? millData.total_weight : 0;
+				});
 
-        const millName = chartLabels
-            .map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
-            .find(name => name) || `Mill ${mill}`;
+				const millName = chartLabels
+					.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+					.find(name => name) || `Mill ${mill}`;
 
-        return {
-            label: millName,
-            data: dataForMill,
-            backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
-            stack: `Stack ${index}`,
-        };
-    });
-}
+				return {
+					label: millName,
+					data: dataForMill,
+					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
+					stack: `Stack ${index}`,
+				};
+			});
+		}
 
-// Create dataset for "Others"
-function createOthersDataset(groupedData, chartLabels, mills) {
-    const othersData = chartLabels.map(dat => {
-        return groupedData[dat]?.reduce((acc, item) => {
-            if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
-            return acc;
-        }, 0) || 0;
-    });
+		// Create dataset for "Others"
+		function createOthersDataset(groupedData, chartLabels, mills) {
+			const othersData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					return acc;
+				}, 0) || 0;
+			});
 
-    return {
-        label: 'Others',
-        data: othersData,
-        backgroundColor: 'rgba(200, 200, 200, 1)', // Color for "Others"
-        stack: 'Stack Others',
-    };
-}
+			return {
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)', // Color for "Others"
+				stack: 'Stack Others',
+			};
+		}
 
-// Generate bar chart data
-function generateChartData(data, mills) {
-    const groupedData = groupData(data, 'dat');
-    const chartLabels = Object.keys(groupedData);
+		// Generate bar chart data
+		function generateChartData(data, mills) {
+			const groupedData = groupData(data, 'dat');
+			const chartLabels = Object.keys(groupedData);
 
-    const millDatasets = createMillDatasets(groupedData, mills, chartLabels);
-    const othersDataset = createOthersDataset(groupedData, chartLabels, mills);
+			const millDatasets = createMillDatasets(groupedData, mills, chartLabels);
+			const othersDataset = createOthersDataset(groupedData, chartLabels, mills);
 
-    return {
-        labels: chartLabels,
-        datasets: [...millDatasets, othersDataset],
-    };
-}
+			return {
+				labels: chartLabels,
+				datasets: [...millDatasets, othersDataset],
+			};
+		}
 
-// Render bar chart
-function renderBarChart(chartElement, chartData) {
-    if (!chartElement) return console.error('Chart element not found.');
+		// Render bar chart
+		function renderBarChart(chartElement, chartData) {
+			if (!chartElement) return console.error('Chart element not found.');
 
-    new Chart(chartElement, {
-        type: 'bar',
-        data: chartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                title: { display: true, text: 'Top 5 Customer Performance' }
-            },
-            scales: {
-                x: { stacked: true },
-                y: { stacked: true }
-            }
-        }
-    });
-}
+			new Chart(chartElement, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					plugins: {
+						legend: { position: 'top' },
+						title: { display: true, text: 'Top 5 Customer Performance' }
+					},
+					scales: {
+						x: { stacked: true },
+						y: { stacked: true }
+					}
+				}
+			});
+		}
 
-// AJAX request for filtering HR data and rendering Doughnut chart
-function filterHR() {
-    const month = document.getElementById('filterHR').value;
-    $.ajax({
-        type: "GET",
-        url: '/rep-summary/hr',
-        data: { month: month },
-        success: function (result) {
-            const doughnutChartData = generateDoughnutData(result, mills);
-            renderDoughnutChart(MonthlyTonageGraph, doughnutChartData);
-        },
-        error: function () {
-            alert("Error loading HR data");
-        }
-    });
-}
+		// AJAX request for filtering HR data and rendering Doughnut chart
+		function filterHR() {
+			const month = document.getElementById('filterHR').value;
+			$.ajax({
+				type: "GET",
+				url: '/rep-summary/hr',
+				data: { month: month },
+				success: function (result) {
+					const doughnutChartData = generateDoughnutData(result, mills);
+					console.log(doughnutChartData);
+					renderDoughnutChart(MonthlyTonageGraph, doughnutChartData);
+				},
+				error: function () {
+					alert("Error loading HR data");
+				}
+			});
+		}
 
-// Generate doughnut chart data
-function generateDoughnutData(data, mills) {
-    const groupedData = groupData(data, 'dat');
-    const labels = Object.keys(groupedData);
+		// Generate doughnut chart data
+		function generateDoughnutData(data, mills) {
+			const groupedData = groupData(data, 'dat');
+			const labels = Object.keys(groupedData);
 
-    const datasets = mills.map((mill, index) => {
-        const dataForMill = labels.map(dat => {
-            const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
-            return millData ? millData.total_weight : 0;
-        });
+			const datasets = mills.map((mill, index) => {
+				const dataForMill = labels.map(dat => {
+					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millData ? millData.total_weight : 0;
+				});
 
-        return {
-            label: `Mill ${mill}`,
-            data: dataForMill,
-            backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
-        };
-    });
+				return {
+					label: `Mill ${mill}`,
+					data: dataForMill,
+					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
+				};
+			});
 
-    return {
-        labels: labels,
-        datasets: datasets,
-    };
-}
+			return {
+				labels: labels,
+				datasets: datasets,
+			};
+		}
 
-// Render doughnut chart
-function renderDoughnutChart(chartElement, chartData) {
-    if (!chartElement) return console.error('Chart element not found.');
+		// Render doughnut chart
+		function renderDoughnutChart(chartElement, chartData) {
+			if (!chartElement) return console.error('Chart element not found.');
 
-    new Chart(chartElement, {
-        type: 'doughnut',
-        data: chartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                title: { display: true, text: 'Monthly Tonage Distribution' }
-            }
-        }
-    });
-}
+			new Chart(chartElement, {
+				type: 'doughnut',
+				data: chartData,
+				options: {
+					responsive: true,
+					plugins: {
+						legend: { position: 'top' },
+						title: { display: true, text: 'Monthly Tonage Distribution' }
+					}
+				}
+			});
+		}
 
 	</script>									
 </html>
