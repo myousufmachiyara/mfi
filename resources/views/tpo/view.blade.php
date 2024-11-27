@@ -132,7 +132,7 @@
 									@php($grand_subtotal += $subtotal)
 									@endforeach
 								
-									<div class="row">
+									<div class="row d-none d-md-block">
 										<div class="col-12 col-md-8">
 											<table class="table h6 text-dark">
 												<tbody>
@@ -155,7 +155,7 @@
 											<span style="font-weight:400;color:rgb(224, 8, 8);white-space: pre-wrap;word-wrap: break-word;" class="value">{{ htmlspecialchars($pur->tc) }}</span>
 											</h2>
 										</div>
-										<div class="col-12 col-md-4 invoice-summary">
+										<div class="col-12 col-md-4">
 											<table class="table h6 text-dark">
 												<tbody>
 													<tr class="b-top-0">
