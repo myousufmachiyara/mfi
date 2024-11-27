@@ -74,14 +74,7 @@ class RptAccGrpBAController extends Controller
         
         // Start the main table and add the header only once
         $html .= '<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">';
-        $html .= '<thead><tr>
-                   <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
-                   <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
-                   <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
-                   <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
-                   <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
-                   <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
-                 </tr></thead>';
+        
         
         // Loop through grouped data
         foreach ($groupedData as $headCount => $heads) {
@@ -96,6 +89,15 @@ class RptAccGrpBAController extends Controller
         
             $subTotalDebit = 0;
             $subTotalCredit = 0;
+            
+            $html .= '<thead><tr>
+                   <th style="width:8%; color:#17365D; font-weight:bold;">S/No</th>
+                   <th style="width:10%; color:#17365D; font-weight:bold;">AC</th>
+                   <th style="width:25%; color:#17365D; font-weight:bold;">Account Name</th>
+                   <th style="width:25%; color:#17365D; font-weight:bold;">Address</th>
+                   <th style="width:16%; color:#17365D; font-weight:bold;">Debit</th>
+                   <th style="width:16%; color:#17365D; font-weight:bold;">Credit</th>
+                 </tr></thead>';
         
             foreach ($heads as $subHeadCount => $subheads) {
                 // Add sub-header row
