@@ -660,21 +660,39 @@
 
 		// Generate doughnut chart data
 		function generateDoughnutData(data, mills) {
-			const groupedData = groupData(data, 'dat');
-			const labels = Object.keys(groupedData);
+			const groupedData = groupData(data, 'dat'); // Group data by 'dat'
+			const labels = Object.keys(groupedData); // Use the grouped keys as labels
 
+			// Initialize data for each mill
 			const datasets = mills.map((mill, index) => {
 				const dataForMill = labels.map(dat => {
-					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
-					return millData ? millData.total_weight : 0;
+				const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+				return millData ? millData.total_weight : 0;
 				});
 
 				return {
-					label: `Mill ${mill}`,
-					data: dataForMill,
-					backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
+				label: `Mill ${mill}`,
+				data: dataForMill,
+				backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],
 				};
 			});
+
+			// Calculate "Others" (Sum of weights for mills not in the specified `mills` array)
+			const othersData = labels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+				if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+				return acc;
+				}, 0) || 0;
+			});
+
+			// Add "Others" dataset if there is data
+			if (othersData.some(weight => weight > 0)) {
+				datasets.push({
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)', // Gray color for "Others"
+				});
+			}
 
 			return {
 				labels: labels,
