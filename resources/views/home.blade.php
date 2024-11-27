@@ -645,6 +645,9 @@
 						monthlyTonageChart.destroy();
 					}
 
+					const labels = result.map(item => item.mill_name);
+					console.log(labels);
+					
 					const chartData = {
 						datasets: [
 							{
