@@ -635,7 +635,7 @@
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
-						data: monthlyTonage,
+						data: monthlyTonage.datasets,
 					});
 				},
 				error: function(){
