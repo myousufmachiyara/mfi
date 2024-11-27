@@ -415,7 +415,7 @@
 								</div>
 
 								<div id="HR_Sale" class="tab-pane">
-									<div class="mb-3">
+									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
 											<input type="month" class="form-control"  value="{{ date('Y-m') }}">
