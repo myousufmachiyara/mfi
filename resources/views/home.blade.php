@@ -493,6 +493,13 @@
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
+			new Chart(top5CustomerPerformance, {
+				type: 'bar',
+				data: {
+					labels: chartData.labels, // Use chartData.labels instead of chartLabels
+					datasets: chartData.datasets, // Use chartData.datasets instead of chartData
+				}
+			});
 		});	
 
 		function handleToggleSwitch(switchElement) {
@@ -532,6 +539,7 @@
 
 		// Assuming you are using Chart.js and you want to render the chart in a DOM element
 		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+		const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
 
 		// Assuming $dash_pur_2_summary_monthly_companywise is passed from Laravel
 		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
@@ -616,40 +624,33 @@
 		// Example usage of the generateChartData function to create a chart
 		const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
 
-		new Chart(top5CustomerPerformance, {
-			type: 'bar',
-			data: {
-				labels: chartData.labels, // Use chartData.labels instead of chartLabels
-				datasets: chartData.datasets, // Use chartData.datasets instead of chartData
-			}
-		});
+		console.log(chartData.labels);  // Log labels
+		console.log(chartData.datasets);  // Log datasets
 
-		// In the filterHR function, make sure to pass chartLabels correctly
-		function filterHR(){
-			var month = document.getElementById('filterHR').value;
-			$.ajax({
-				type: "GET",
-				url: '/rep-summary/hr',
-				data:{
-					month: month,
-				}, 
-				success: function(result){
-					const monthlyTonage = generateChartData(result, mills);
+		// // In the filterHR function, make sure to pass chartLabels correctly
+		// function filterHR(){
+		// 	var month = document.getElementById('filterHR').value;
+		// 	$.ajax({
+		// 		type: "GET",
+		// 		url: '/rep-summary/hr',
+		// 		data:{
+		// 			month: month,
+		// 		}, 
+		// 		success: function(result){
+		// 			const monthlyTonage = generateChartData(result, mills);
 
-					const MonthlyTonageGraph = document.getElementById('MonthlyTonage');
-
-					new Chart(MonthlyTonageGraph, {
-						type: 'doughnut',
-						data: {
-							labels: monthlyTonage.labels,  // Correctly reference the labels
-							datasets: monthlyTonage.datasets,  // Correctly reference the datasets
-						},
-					});
-				},
-				error: function(){
-					alert("error");
-				}
-			});
-		}
+		// 			new Chart(MonthlyTonageGraph, {
+		// 				type: 'doughnut',
+		// 				data: {
+		// 					labels: monthlyTonage.labels,  // Correctly reference the labels
+		// 					datasets: monthlyTonage.datasets,  // Correctly reference the datasets
+		// 				},
+		// 			});
+		// 		},
+		// 		error: function(){
+		// 			alert("error");
+		// 		}
+		// 	});
+		// }
 	</script>									
 </html>
