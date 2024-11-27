@@ -649,7 +649,7 @@
 		}
 
 		function filterHR(){
-			var month = document.getElementById('filterHR').val();
+			var month = document.getElementById('filterHR').value;
 			alert("hello");
 
 			$.ajax({
