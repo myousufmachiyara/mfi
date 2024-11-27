@@ -447,6 +447,12 @@
 											</section>
 										</div>
 
+										<div class="col-12 col-md-4 mb-2">
+											<div class="form-group">
+												<label class="col-form-label"><strong>Select Month</strong></label>
+												<input type="date" class="form-control" id="filterMonth">
+											</div>
+										</div>
 									</div>
 								</div>
 
