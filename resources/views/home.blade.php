@@ -415,7 +415,7 @@
 								</div>
 
 								<div id="HR_Sale" class="tab-pane">
-									<div class="text-end">
+									<div class="text-end mb-2">
 										<div class="form-group">
 											<label class="col-form-label"><strong>Select Month</strong></label>
 											<input type="date" class="form-control" id="filterMonth">
