@@ -333,8 +333,8 @@
 			success: function(result){
 				$('#item_code'+row_no).val(result[0]['it_cod']);
 				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#price'+row_no).val(result[0]['sales_price']);
+				// $('#remarks'+row_no).val(result[0]['item_remark']);
+				// $('#price'+row_no).val(result[0]['sales_price']);
 
 				addNewRow();
 			},
