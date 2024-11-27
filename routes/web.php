@@ -349,6 +349,12 @@
             session()->regenerate();
             return response()->json(['status' => 'success']);
         })->name('keep-alive');
+
+
+        // Home Tabs
+        Route::get('/rep-summary/hr', [App\Http\Controllers\HomeController::class, 'HR']);
+
+
     });
 
     // reporting

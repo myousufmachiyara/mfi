@@ -649,7 +649,22 @@
 		}
 
 		function filterHR(){
+			var month = document.getElementById('filterHR').val();
 			alert("hello");
+
+			$.ajax({
+				type: "GET",
+				url: '/rep-summary/hr',
+				data:{
+					month: month,
+				}, 
+				success: function(result){
+					console.log(result);
+				},
+				error: function(){
+					alert("error");
+				}
+            });
 		}
 	</script>									
 </html>

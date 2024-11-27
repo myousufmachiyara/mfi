@@ -60,7 +60,8 @@ class HomeController extends Controller
         return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','dash_pur_2_summary_monthly_companywise'));
     }
 
-    public function hrPipesGraphs(){
-
+    public function HR(){
+        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::get();
+        return $dash_pur_2_summary_monthly_companywise;
     }
 }
