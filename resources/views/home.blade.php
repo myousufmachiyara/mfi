@@ -649,11 +649,11 @@
 					console.log(labels);
 
 					const chartData = {
+						labels: labels, // Set the labels directly here
 						datasets: [
 							{
-								labels: result.map((item,index) => labels[index]), // Set a general label for the chart
-								data: result.map(item => item.total_weight), // Extract total_weight values
-								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index]), // Assign background colors from Utils.CHART_COLORS
+								data: result.map(item => item.total_weight), // Extract total_weight values for each mill
+								backgroundColor: result.map((item, index) => Utils.CHART_COLORS[index % Utils.CHART_COLORS.length]), // Assign colors from Utils.CHART_COLORS
 							}
 						]
 					};
