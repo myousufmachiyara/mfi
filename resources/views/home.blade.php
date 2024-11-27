@@ -644,18 +644,6 @@
 							labels: monthlyTonage.labels,  // Correctly reference the labels
 							datasets: monthlyTonage.datasets,  // Correctly reference the datasets
 						},
-						options: {
-							responsive: true,
-							plugins: {
-								legend: {
-									position: 'top',
-								},
-								title: {
-									display: true,
-									text: 'Chart.js Doughnut Chart'
-								}
-							}
-						},
 					});
 				},
 				error: function(){
