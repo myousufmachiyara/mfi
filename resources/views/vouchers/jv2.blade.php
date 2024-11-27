@@ -15,47 +15,63 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th>Voch#</th>
-                                                <th>Date</th>
-                                                <th>Narration</th>
-                                                <th>Debit / Credit</th>
-                                                <th>Sales Invoices</th>
-                                                <th>Purchase Invoices</th>
-                                                <th>Att.</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($jv2 as $key => $row)
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Vouch#</option>
+                                                <option value="1">by Date</option>
+                                                <option value="2">by Narration</option>
+                                                <option value="3">by Debit/Credit</option>
+                                                <option value="4">by Sale Invoices</option>
+                                                <option value="5">by Purchase Invoices</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$row->jv_no}}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
-                                                    <td>{{$row->narration}}</td>
-                                                    <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
-                                                    <td>{{$row->merged_sales_ids}}</td>
-                                                    <td>{{$row->merged_purchase_ids}}</td>
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
-                                                    <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
-                                                            <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1" href="{{ route('edit-jv2', $row->jv_no) }}">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->jv_no}})" href="#deleteModal">
-                                                            <i class="far fa-trash-alt" style="color:red"></i>
-                                                        </a>
-                                                    </td>
-
+                                                    <th>Voch#</th>
+                                                    <th>Date</th>
+                                                    <th>Narration</th>
+                                                    <th>Debit / Credit</th>
+                                                    <th>Sales Invoices</th>
+                                                    <th>Purchase Invoices</th>
+                                                    <th>Att.</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-									</table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($jv2 as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->jv_no}}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
+                                                        <td>{{$row->narration}}</td>
+                                                        <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
+                                                        <td>{{$row->merged_sales_ids}}</td>
+                                                        <td>{{$row->merged_purchase_ids}}</td>
+                                                        <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
+                                                                <i class="fas fa-print"></i>
+                                                            </a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1" href="{{ route('edit-jv2', $row->jv_no) }}">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->jv_no}})" href="#deleteModal">
+                                                                <i class="far fa-trash-alt" style="color:red"></i>
+                                                            </a>
+                                                        </td>
+
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
