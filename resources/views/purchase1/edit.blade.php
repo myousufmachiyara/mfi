@@ -310,8 +310,8 @@
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
 				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#pur_price'+row_no).val(result[0]['OPP_qty_cost']);
+				// $('#remarks'+row_no).val(result[0]['item_remark']);
+				// $('#pur_price'+row_no).val(result[0]['OPP_qty_cost']);
 				addNewRow();
 			},
 			error: function(){
