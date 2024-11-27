@@ -609,7 +609,7 @@
 			datasets: [
 				{
 				label: 'Dataset 1',
-				data: Utils.numbers(NUMBER_CFG),
+				data: generateRandomNumbers(NUMBER_CFG),
 				backgroundColor: Object.values(Utils.CHART_COLORS),
 				}
 			]
@@ -634,5 +634,12 @@
 			},
 		});
 
+		function generateRandomNumbers({ count, min, max }) {
+			const numbers = [];
+			for (let i = 0; i < count; i++) {
+				numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+			}
+			return numbers;
+		}
 	</script>									
 </html>
