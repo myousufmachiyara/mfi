@@ -432,7 +432,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-3 mb-2">
+										<div class="col-12 col-md-4 mb-2">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
