@@ -418,7 +418,7 @@
 									<div class="text-end mb-2">
 										<div class="form-group">
 											<label class="col-form-label">Select Month</label>
-											<input type="date" class="form-control" id="filterMonth">
+											<input type="month" class="form-control"  value="{{ date('Y-m') }}">
 										</div>
 									</div>
 									<div class="row form-group pb-3">
