@@ -617,36 +617,12 @@
 		const chartData = generateChartData(dash_pur_2_summary_monthly_companywise, mills);
 
 		new Chart(top5CustomerPerformance, {
-    type: 'bar',
-    data: {
-        labels: chartData.labels,
-        datasets: chartData.datasets,
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: {
-                beginAtZero: true, // Ensure the x-axis starts at 0
-            },
-            y: {
-                beginAtZero: true, // Ensure the y-axis starts at 0
-                ticks: {
-                    // Optional: configure ticks (e.g., step size or min/max range)
-                    stepSize: 10,
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Top 5 Customer Performance',
-            }
-        }
-    }
-});
+			type: 'bar',
+			data: {
+				labels: chartData.labels, // Use chartData.labels instead of chartLabels
+				datasets: chartData.datasets, // Use chartData.datasets instead of chartData
+			}
+		});
 
 		// In the filterHR function, make sure to pass chartLabels correctly
 		function filterHR(){
