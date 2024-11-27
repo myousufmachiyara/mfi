@@ -61,7 +61,7 @@ class HomeController extends Controller
     }
 
     public function HR(Request $request){
-        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat',$request->month)
+        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
         return $dash_pur_2_summary_monthly_companywise;
     }
