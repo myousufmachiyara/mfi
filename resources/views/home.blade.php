@@ -662,6 +662,7 @@
 					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
+						labels: labels
 						data: chartData,
 						options: {
 							responsive: true,
