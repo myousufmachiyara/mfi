@@ -419,6 +419,7 @@
 										<div class="form-group">
 											<label class="col-form-label">Select Month</label>
 											<input type="month" class="form-control"  value="{{ date('Y-m') }}">
+											<a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;"><i class="fa fa-filter"></i></a>
 										</div>
 									</div>
 									<div class="row form-group pb-3">
