@@ -702,7 +702,7 @@
 				if (result[key].weight > 0) {
 					result.labels.push(result[key].name);
 					result.data.push(result[key].weight);
-					result.backgroundColor.push(Utils.CHART_COLORS[result.labels.length % Utils.CHART_COLORS.length]);
+					result.backgroundColor.push(Utils.CHART_COLORS[key]);
 				}
 			}
 
