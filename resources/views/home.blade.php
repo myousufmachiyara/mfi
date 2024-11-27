@@ -623,23 +623,6 @@
 
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 
-		new Chart(MonthlyTonage, {
-			type: 'doughnut',
-			data: data,
-			options: {
-				responsive: true,
-				plugins: {
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Chart.js Doughnut Chart'
-				}
-				}
-			},
-		});
-
 		function generateRandomNumbers({ count, min, max }) {
 			const numbers = [];
 			for (let i = 0; i < count; i++) {
@@ -657,6 +640,22 @@
 					month: month,
 				}, 
 				success: function(result){
+					new Chart(MonthlyTonage, {
+						type: 'doughnut',
+						data: result,
+						options: {
+							responsive: true,
+							plugins: {
+								legend: {
+									position: 'top',
+								},
+								title: {
+									display: true,
+									text: 'Chart.js Doughnut Chart'
+								}
+							}
+						},
+					});
 					console.log(result);
 				},
 				error: function(){
