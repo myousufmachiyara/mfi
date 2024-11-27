@@ -182,8 +182,8 @@
 											</table>
 										</div>
 										<div class="col-12">
-											<h3 class="d-none d-sm-block" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
-											<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-none d-sm-block">
+											<h3 class="d-block d-md-none" style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+											<h2 class="mb-0 h6 mb-1 text-dark font-weight-semibold d-block d-md-none">
 												<span style="color:#17365D; font-size:20px; font-weight:bold; font-style:italic; text-decoration:underline;">
 													Terms And Conditions:&nbsp
 												</span><br><br>
