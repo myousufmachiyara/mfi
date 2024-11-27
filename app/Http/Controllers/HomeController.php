@@ -61,7 +61,8 @@ class HomeController extends Controller
     }
 
     public function HR(){
-        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::get();
+        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat')
+        ->get();
         return $dash_pur_2_summary_monthly_companywise;
     }
 }
