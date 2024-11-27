@@ -647,7 +647,7 @@
 
 					const labels = result.map(item => item.mill_name);
 					console.log(labels);
-					
+
 					const chartData = {
 						datasets: [
 							{
@@ -657,7 +657,8 @@
 							}
 						]
 					};
-
+					console.log(chartData);
+					
 					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
@@ -675,8 +676,6 @@
 							}
 						}
 					});
-
-					console.log(result); // Log the result data for debugging
 				},
 				error: function() {
 					alert("Error loading HR data");
