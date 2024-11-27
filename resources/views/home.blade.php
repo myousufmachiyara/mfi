@@ -641,13 +641,11 @@
 					month: month,
 				},
 				success: function(result) {
+					console.log(result);
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
-
 					const labels = result.map(item => item.mill_name);
-					console.log(labels);
-
 					const chartData = {
 						labels: labels, // Set the labels directly here
 						datasets: [
@@ -657,8 +655,6 @@
 							}
 						]
 					};
-					console.log(chartData);
-
 					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
