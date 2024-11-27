@@ -650,7 +650,6 @@
 
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
-			console.log(month);
 			$.ajax({
 				type: "GET",
 				url: '/rep-summary/hr',
