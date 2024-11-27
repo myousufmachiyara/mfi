@@ -21,19 +21,19 @@
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
-                                                <option value="3">Company Name</option>
-                                                <option value="4">Mill Inv #</option>
-                                                <option value="5">Dispatch To</option>
+                                                <option value="3">Account Name</option>
+                                                <option value="4">Bill#</option>
+                                                <option value="5">Company Name</option>
                                                 <option value="6">Person Name</option>
                                                 <option value="7">Remarks</option>
-                                                <option value="8">SaleInv #</option>
-                                                <option value="9">Item Group</option>
-                                                <option value="10">Weight (kg)</option>
-                                                <option value="11">Bill Amount</option>
-                                                <option value="12">Convance Charges</option>
-                                                <option value="13">Labour Charges</option>
-                                                <option value="14">Discount</option>
-                                                <option value="15">Net Amount</option>
+                                                <option value="8">Purchase Inv #</option>
+                                                <option value="9">Weight (Kg)</option>
+                                                <option value="10">Bill Amount</option>
+                                                <option value="11">Convance Charges</option>
+                                                <option value="12">Labour Charges Amount</option>
+                                                <option value="13">Discount</option>
+                                                <option value="14">Net Amount</option>
+                                                <option value="15">Status</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
 
@@ -179,6 +179,18 @@
 </html>
 <script>
 
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
     
     function setId(id){
         $('#deleteID').val(id);
