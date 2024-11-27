@@ -620,36 +620,47 @@
 			};
 		}
 
-		function generateDoughnutData(result, mills) {
+		function generateMillWiseDoughnutData(result, mills) {
 			const groupedData = groupData(result, 'dat'); // Group the data by 'dat'
 			const chartLabels = Object.keys(groupedData);  // Get the labels based on 'dat'
 
-			// Generate data for the doughnut chart
-			const doughnutData = chartLabels.map(dat => {
+			// Initialize an empty array for mill-wise data
+			const millWiseData = mills.map((mill, index) => {
+				// For each mill, calculate the total weight for each 'dat'
+				const millData = chartLabels.map(dat => {
+				const millGroup = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+				return millGroup ? millGroup.total_weight : 0;  // If no data, use 0
+				});
+
+				return {
+				label: `Mill ${mill}`,  // Label for the dataset
+				data: millData,  // Data values for each 'dat' corresponding to this mill
+				backgroundColor: Utils.CHART_COLORS[index % Utils.CHART_COLORS.length],  // Color for each mill
+				};
+			});
+
+			// Calculate 'Others' (sum of weights for mills not in the `mills` array)
+			const othersData = chartLabels.map(dat => {
 				return groupedData[dat]?.reduce((acc, item) => {
-				if (mills.includes(item.mill_code.toString())) {
-					acc += item.total_weight;  // Sum the weights for the relevant mills
+				if (!mills.includes(item.mill_code.toString())) {
+					acc += item.total_weight;  // Sum for mills not in the `mills` list
 				}
 				return acc;
 				}, 0) || 0;  // Default to 0 if no data is found
 			});
 
-			// Assign the background colors
-			const backgroundColors = Object.values(Utils.CHART_COLORS);
+			millWiseData.push({
+				label: 'Others',  // Label for 'Others'
+				data: othersData,  // Data for 'Others'
+				backgroundColor: 'rgba(200, 200, 200, 1)',  // Color for 'Others'
+			});
 
-			// Return the chart data in the desired structure
 			return {
-				labels: chartLabels,
-				datasets: [
-				{
-					label: 'Tonage Distribution',  // Dataset label
-					data: doughnutData,  // Data values for each segment
-					backgroundColor: backgroundColors,  // Color for each segment
-				}
-				]
+				labels: chartLabels,  // Labels corresponding to each 'dat'
+				datasets: millWiseData,  // Mill-wise datasets, including 'Others'
 			};
 		}
-		// In the filterHR function, make sure to pass chartLabels correctly
+
 		function filterHR(){
 			var month = document.getElementById('filterHR').value;
 			$.ajax({
@@ -660,7 +671,7 @@
 				}, 
 				success: function(result){
 
-					const doughnutChartData = generateDoughnutData(result, mills);
+					const doughnutChartData = generateMillWiseDoughnutData(result, mills);
 
 					new Chart(MonthlyTonageGraph, {
 						type: 'doughnut',
