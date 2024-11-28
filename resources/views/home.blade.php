@@ -712,6 +712,7 @@
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 		let top5CustomerPerformance; // Declare a global variable to hold the chart instance
+		const chartElement = document.getElementById('top5CustomerPerformance'); // Make sure this is your canvas element ID
 
 		function groupByMillCode(mills, data) {
 			const result = {
