@@ -26,8 +26,8 @@ class DashboardHRTabController extends Controller
     }
 
     public function monthlyTonageOfCustomer(Request $request){
-        $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat2',$request->month)
-        ->where('account_name',$request->month)
+        $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        ->where('account_name',$request->acc_name)
         ->get();
 
         return $sale_pipe_summary_of_party_by_mill;

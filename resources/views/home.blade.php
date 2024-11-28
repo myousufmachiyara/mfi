@@ -702,8 +702,20 @@
 			var month = document.getElementById('filterHR').value;
 			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
 			
-			console.log(month);
-			console.log(acc_name);
+			$.ajax({
+				type: "GET",
+				url: '/dashboard-tabs/hr/monthlyTonageOfCustomer',
+				data: {
+					month: month,
+					acc_name:acc_name,
+				},
+				success: function(result) {
+					console.log(result);
+				},
+				error: function() {
+					alert("Error loading HR Monthly Tonage Of Customer Data");
+				}
+			});
 		}
 
 		// get Monthly Tonage Of Customer Ended
