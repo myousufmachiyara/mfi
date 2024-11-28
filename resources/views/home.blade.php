@@ -385,7 +385,7 @@
 									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#HR_Sale" href="#HR_Sale" data-bs-toggle="tab">HR</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#GS" href="#GS" data-bs-toggle="tab">Garder Sale</a>
@@ -472,7 +472,7 @@
 														<thead>
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tonage</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 																{{-- <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Status</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Progress</font></font></th> --}}
 															</tr>
@@ -480,7 +480,7 @@
 														<tbody>
 															<tr>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
-																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">1</font></font></td>
 																{{-- <td><span class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">success</font></font></span></td>
 																<td>
 																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
@@ -696,18 +696,19 @@
 			}
 			return numbers;
 		}
+
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
 		function filterHR() {
 			var month = document.getElementById('filterHR').value;
 			$.ajax({
 				type: "GET",
-				url: '/rep-summary/hr',
+				url: '/dashboard-tabs/hr',
 				data: {
 					month: month,
 				},
 				success: function(result) {
-					const groupedData = groupByMillCode(mills, result);
+					const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
 
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
@@ -786,5 +787,53 @@
 
 			return result;
 		}
+		
+		document.querySelectorAll('.nav-link-dashboard-tab').forEach(tabLink => {
+            tabLink.addEventListener('click', function() {
+                tabId = this.getAttribute('data-bs-target');
+                tabChanged(tabId);
+            });
+        });
+
+		function tabChanged(tabId) {
+
+			if(tabId=="#HR"){
+				var month = document.getElementById('filterHR').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/hr',
+					data: {
+						month: month,
+					},
+					success: function(result) {
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+
+						if (monthlyTonageChart) {
+							monthlyTonageChart.destroy();
+						}
+
+						const chartData = {
+							labels: groupedData.labels, // Set the labels directly here
+							datasets: [
+								{
+									data: groupedData.data, // Extract total_weight values for each mill
+									backgroundColor: groupedData.backgroundColor, // Assign background colors
+								}
+							]
+						};
+						// Create the doughnut chart
+						monthlyTonageChart = new Chart(MonthlyTonage, {
+							type: 'doughnut',
+							data: chartData,
+						});
+					},
+					error: function() {
+						alert("Error loading HR data");
+					}
+				});
+        	}
+		}
+	
 	</script>									
 </html>

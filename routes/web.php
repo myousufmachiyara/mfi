@@ -350,11 +350,6 @@
             return response()->json(['status' => 'success']);
         })->name('keep-alive');
 
-
-        // Home Tabs
-        Route::get('/rep-summary/hr', [App\Http\Controllers\HomeController::class, 'HR']);
-
-
     });
 
     // reporting
@@ -527,6 +522,11 @@
         Route::get('/rep-comm/comm/report', [App\Http\Controllers\RptCommissionsController::class, 'commReport'])->name('comm-rep-report');
 
 
-        
+        // Dashboard Tabs
+
+        // HR Tab
+        Route::get('/dashboard-tabs/hr', [App\Http\Controllers\DashboardHRTabController::class, 'HR']);
+        Route::get('/dashboard-tabs/hr/monthlyTonage', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonage']);
+        Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
 
     });
