@@ -599,6 +599,8 @@
 		// Initialize datasets
 		const datasets = [];
 		const chartLabels = Object.keys(groupedData); // Assuming you have unique 'dat' values as labels
+		const MonthlyTonage = document.getElementById('MonthlyTonage');
+		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
 		// Loop through each 'dat' value (chart label) and create datasets for each mill
 		mills.forEach((mill, index) => {
@@ -645,10 +647,6 @@
 				datasets: datasets,  // Dynamic datasets based on groupedData
 			}
 		});
-
-		const MonthlyTonage = document.getElementById('MonthlyTonage');
-
-		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
 		function groupByMillCode(mills, data) {
 			const result = {
