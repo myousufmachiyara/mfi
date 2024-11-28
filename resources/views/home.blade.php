@@ -484,7 +484,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-3">
+										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -510,7 +510,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-3">
+										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -536,7 +536,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-3">
+										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -562,7 +562,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-4 mb-3">
+										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
