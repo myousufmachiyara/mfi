@@ -836,14 +836,6 @@
 					table.deleteRow(0);
 				}
 
-				new Chart(top5CustomerPerformance, {
-					type: 'bar',
-					data: {
-						labels: chartLabels, // 'dat' values as labels
-						datasets: datasets,  // Dynamic datasets based on groupedData
-					},
-				});
-
 				if (top5CustomerPerformanceChart) {
 					top5CustomerPerformanceChart.destroy();
 				}
