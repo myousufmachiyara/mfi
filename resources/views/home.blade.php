@@ -467,14 +467,13 @@
 																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 															@endforeach
 														</select>
+														<a class="btn btn-primary" style="margin-top: 2.1rem;padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-																{{-- <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Status</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Progress</font></font></th> --}}
 															</tr>
 														</thead>
 														<tbody id="HRMonthlyTonageOfCust">
