@@ -549,7 +549,7 @@
 				1: 'rgba(0, 136, 204, 1)',
 				2: 'rgba(25, 135, 84, 1)',
 				3: 'rgba(43, 170, 177, 1)',
-				4: 'rgba(200, 200, 200, 1)',
+				4: 'rgba(219, 150, 81, 1)',
 			}
 		};
 
@@ -692,7 +692,7 @@
 				// Aggregate the total_weight based on the mill_code or group it under "Others"
 				if (millName === 'Others') {
 					result['Others'].weight += item.total_weight;
-					result['Others'].backgroundColor = Utils.CHART_COLORS['4'];
+					result['Others'].backgroundColor = 'rgba(200, 200, 200, 1)';
 
 				} else {
 					result[millCode].weight += item.total_weight;
