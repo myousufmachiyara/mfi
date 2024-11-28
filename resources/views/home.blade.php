@@ -461,7 +461,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Monthly Tonage</h2>
+													<h2 class="card-title">Monthly Tonage Of Customer</h2>
 												</header>
 												<div class="card-body">
 													<table class="table table-responsive-md table-striped mb-0">
