@@ -633,85 +633,92 @@
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
 		function filterHR() {
-		var month = document.getElementById('filterHR').value;
-		$.ajax({
-			type: "GET",
-			url: '/rep-summary/hr',
-			data: { month: month },
-			success: function(result) {
-				const groupedData = groupByMillCode(mills, result);
+			var month = document.getElementById('filterHR').value;
+			$.ajax({
+				type: "GET",
+				url: '/rep-summary/hr',
+				data: {
+					month: month,
+				},
+				success: function(result) {
+					const groupedData = groupByMillCode(mills, result);
 
-				if (monthlyTonageChart) {
-					monthlyTonageChart.data = {
-						labels: groupedData.labels,
-						datasets: [{
-							data: groupedData.data,
-							backgroundColor: groupedData.backgroundColor,
-						}]
+					if (monthlyTonageChart) {
+						monthlyTonageChart.destroy();
+					}
+
+					const chartData = {
+						labels: groupedData.labels, // Set the labels directly here
+						datasets: [
+							{
+								data: groupedData.data, // Extract total_weight values for each mill
+								backgroundColor: groupedData.backgroundColor, // Assign background colors
+							}
+						]
 					};
-					monthlyTonageChart.update();
-				} else {
+					// Create the doughnut chart
 					monthlyTonageChart = new Chart(MonthlyTonage, {
 						type: 'doughnut',
-						data: {
-							labels: groupedData.labels,
-							datasets: [{
-								data: groupedData.data,
-								backgroundColor: groupedData.backgroundColor,
-							}]
-						},
+						data: chartData,
 					});
+				},
+				error: function() {
+					alert("Error loading HR data");
 				}
-			},
-			error: function(xhr, status, error) {
-				console.error("Error loading HR data:", error);
-				alert("Error loading HR data");
-			}
-		});
-	}
-
-	function groupByMillCode(mills, data) {
-		if (!Array.isArray(data) || !Array.isArray(mills)) {
-			console.error("Invalid input data");
-			return { labels: [], data: [], backgroundColor: [] };
+			});
 		}
 
-		const result = {
-			labels: [],
-			data: [],
-			backgroundColor: []
-		};
+		function groupByMillCode(mills, data) {
+			const result = {
+				labels: [], // To hold the labels for the chart
+				data: [], // To hold the total_weight for each mill
+				backgroundColor: [] // To hold the colors for the chart
+			};
 
-		const millMap = mills.reduce((acc, mill) => {
-			acc[mill] = { weight: 0, name: mill, backgroundColor: getBackgroundColor(mill) };
-			return acc;
-		}, { Others: { weight: 0, name: "Others", backgroundColor: 'rgba(200, 200, 200, 1)' } });
+			// Initialize groups for each mill in mills array
+			mills.forEach(mill => {
+				result[mill] = { weight: 0, name: "", backgroundColor: "" };
+			});
 
-		data.forEach(item => {
-			const millCode = item.mill_code.toString();
-			const group = millMap[mills.includes(millCode) ? millCode : 'Others'];
-			group.weight += item.total_weight;
-		});
+			// Add a group for "Others"
+			result['Others'] = { weight: 0, name: "Others" };
 
-		Object.values(millMap).forEach(group => {
-			if (group.weight > 0) {
-				result.labels.push(group.name);
-				result.data.push(group.weight);
-				result.backgroundColor.push(group.backgroundColor);
+			// Iterate through the data to group by mill_code and calculate total_weight
+			data.forEach(item => {
+				const millCode = item.mill_code.toString();
+				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
+
+				// Aggregate the total_weight based on the mill_code or group it under "Others"
+				if (millName === 'Others') {
+					result['Others'].weight += item.total_weight;
+					result['Others'].backgroundColor = 'rgba(200, 200, 200, 1)';
+
+				} else {
+					result[millCode].weight += item.total_weight;
+					result[millCode].name = item.mill_name;
+					if(item.mill_name=="STEELEX"){
+						result[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
+					}
+					else if(item.mill_name=="S.P.M"){
+						result[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
+					}
+					else if(item.mill_name=="MEHBOOB PIPE"){
+						result[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
+					}
+				}
+			});
+
+			console.log(result);
+			// Prepare the final chart data
+			for (const key in result) {
+				if (result[key].weight > 0) {
+					result.labels.push(result[key].name);
+					result.data.push(result[key].weight);
+					result.backgroundColor.push(result[key].backgroundColor);
+				}
 			}
-		});
 
-		return result;
-	}
-
-	function getBackgroundColor(millName) {
-		switch (millName) {
-			case "STEELEX": return 'rgba(220, 53, 69, 1)';
-			case "S.P.M": return 'rgba(0, 136, 204, 1)';
-			case "MEHBOOB PIPE": return 'rgba(25, 135, 84, 1)';
-			default: return 'rgba(200, 200, 200, 1)';
+			return result;
 		}
-	}
-
 	</script>									
 </html>
