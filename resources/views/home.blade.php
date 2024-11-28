@@ -774,8 +774,6 @@
 					}
 				}
 			});
-
-			console.log(result);
 			// Prepare the final chart data
 			for (const key in result) {
 				if (result[key].weight > 0) {
@@ -787,7 +785,7 @@
 
 			return result;
 		}
-		
+
 		document.querySelectorAll('.nav-link-dashboard-tab').forEach(tabLink => {
             tabLink.addEventListener('click', function() {
                 tabId = this.getAttribute('data-bs-target');
@@ -798,6 +796,7 @@
 		function tabChanged(tabId) {
 
 			if(tabId=="#HR"){
+				console.log("HR Tab");
 				var month = document.getElementById('filterHR').value;
 
 				$.ajax({
