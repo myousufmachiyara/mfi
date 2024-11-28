@@ -468,7 +468,7 @@
 															@endforeach
 														</select>
 													</div>
-													<table class="table table-responsive-md table-striped mb-0" id="HRMonthlyTonageOfCust">
+													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
@@ -477,7 +477,7 @@
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Progress</font></font></th> --}}
 															</tr>
 														</thead>
-														<tbody>
+														<tbody id="HRMonthlyTonageOfCust">
 															<tr>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">1</font></font></td>
@@ -701,7 +701,7 @@
 		function getMonthlyTonageOfCustomer(){
 			var month = document.getElementById('filterHR').value;
 			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
-			var table = document.getElementById('HRMonthlyTonageOfCust tbody');
+			var table = document.getElementById('HRMonthlyTonageOfCust');
 
 			while (table.rows.length > 0) {
                 table.deleteRow(0);
