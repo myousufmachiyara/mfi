@@ -65,8 +65,8 @@ class HomeController extends Controller
         $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
 
-        $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat2',$request->month)
-        ->get();
+        // $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat2',$request->month)
+        // ->get();
 
         return $dash_pur_2_summary_monthly_companywise;
     }
