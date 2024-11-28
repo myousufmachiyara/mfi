@@ -8,6 +8,7 @@ use App\Models\dash_month_sale;
 use App\Models\dash_month_purchase;
 use App\Models\dash_acc_group;
 use App\Models\users;
+use App\Models\dash_pur_2_summary_monthly_companywise;
 
 use Carbon\Carbon;
 
