@@ -709,7 +709,8 @@
 				},
 				success: function(result) {
 					const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
-
+					console.log(groupedData);
+					
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
