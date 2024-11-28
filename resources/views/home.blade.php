@@ -462,7 +462,7 @@
 												<div class="card-body">
 													<div class="form-group" style="display: flex">
 														<label class="col-form-label">Customer</label>
-														<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required>
+														<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
 															<option value="" disabled selected>Select Account</option>
 															@foreach($coa as $key => $row)	
 																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
