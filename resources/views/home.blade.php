@@ -677,7 +677,7 @@
 
 			// Initialize groups for each mill in mills array
 			mills.forEach(mill => {
-				result[mill] = { weight: 0, name: "" };
+				result[mill] = { weight: 0, name: "", backgroundColor: "" };
 			});
 
 			// Add a group for "Others"
