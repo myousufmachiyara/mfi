@@ -20,10 +20,10 @@
                                             <select class="form-control" style="margin-right:10px" id="columnSelect">
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
-                                                <option value="2">by Date</option>
-                                                <option value="3">Reason</option>
-                                                <option value="4">Total Add</option>
-                                                <option value="5">Total Less</option>
+                                                <option value="1">by Date</option>
+                                                <option value="2">Reason</option>
+                                                <option value="3">Total Add</option>
+                                                <option value="4">Total Less</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
