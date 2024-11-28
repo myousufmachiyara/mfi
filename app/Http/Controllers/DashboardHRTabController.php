@@ -14,19 +14,19 @@ class DashboardHRTabController extends Controller
         ->get();
 
         $steelex = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
-        ->where('account_name',187)
+        ->where('company_code',187)
         ->get();
 
         $spm = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
-        ->where('account_name',170)
+        ->where('company_code',170)
         ->get();
 
         $mehboob = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
-        ->where('account_name',133)
+        ->where('company_code',133)
         ->get();
 
         $godown = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
-        ->where('account_name',24)
+        ->where('company_code',24)
         ->get();
 
         return [
