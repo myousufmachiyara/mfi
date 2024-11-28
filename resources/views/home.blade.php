@@ -839,6 +839,11 @@
 					top5CustomerPerformanceChart.destroy();
 				}
 
+				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+
+				top5CustomerPerformance.width = 600; // Set desired width
+				top5CustomerPerformance.height = 353; // Set desired height
+
 				// Create the new chart
 				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
 					type: 'bar',
