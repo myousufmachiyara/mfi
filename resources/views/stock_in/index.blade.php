@@ -21,17 +21,10 @@
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
-                                                <option value="3">Account Name</option>
-                                                <option value="4">Person Name</option>
-                                                <option value="5">Remarks</option>
-                                                <option value="6">Bill#</option>
-                                                <option value="7">Weight(Kg)</option>
-                                                <option value="8">Bill Amount</option>
-                                                <option value="9">Convane Charges Group</option>
-                                                <option value="10">Labour Charges</option>
-                                                <option value="11">Discount</option>
-                                                <option value="12">Net Amount</option>
-                                                <option value="13">Status</option>
+                                                <option value="3">karigar Name</option>
+                                                <option value="4">Remarks</option>
+                                                <option value="5">Total Qty</option>
+                                                <option value="6">Total Weight</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
@@ -155,6 +148,20 @@
 	</body>
 </html>
 <script>
+
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }
