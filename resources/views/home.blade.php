@@ -416,7 +416,7 @@
 											<label class="col-form-label">Select Month</label>
 											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
 										</div>
-										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="filterHR()"><i class="fa fa-filter"></i></a>
+										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 									</div>
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
