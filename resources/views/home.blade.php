@@ -464,8 +464,8 @@
 													<h2 class="card-title">Monthly Tonage Of Customer</h2>
 												</header>
 												<div class="card-body">
-													<div class="form-group" style="display: inline-block">
-														<label class="col-form-label">Select Month</label>
+													<div class="form-group" style="display: flex">
+														<label class="col-form-label">Customer</label>
 														<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="filterHR()">
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
