@@ -21,16 +21,16 @@
                                                 <option selected disabled>Search by</option>
                                                 <option value="0">by Code</option>
                                                 <option value="2">by Date</option>
-                                                <option value="3">Company Name</option>
-                                                <option value="4">Person Name</option>
-                                                <option value="5">Remarks</option>
-                                                <option value="6">PurInv #</option>
-                                                <option value="7">Weight (kg)</option>
-                                                <option value="8">Bill Amount</option>
-                                                <option value="9">Convance Charges</option>
-                                                <option value="10">Labour Charges</option>
-                                                <option value="11">Discount</option>
-                                                <option value="12">Net Amount</option>
+                                                <option value="3">by Company Name</option>
+                                                <option value="4">by Person Name</option>
+                                                <option value="5">by Remarks</option>
+                                                <option value="6">by PurInv #</option>
+                                                <option value="7">by Weight (kg)</option>
+                                                <option value="8">by Bill Amount</option>
+                                                <option value="9">by Convance Charges</option>
+                                                <option value="10">by Labour Charges</option>
+                                                <option value="11">by Discount</option>
+                                                <option value="12">by Net Amount</option>
                                             </select>
                                             <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
                                         </div>
