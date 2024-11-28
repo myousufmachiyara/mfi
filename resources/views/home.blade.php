@@ -653,7 +653,6 @@
 			'rgba(219, 150, 81, 1)',
 		];
 		const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
-		const chartElement = document.getElementById('top5CustomerPerformance'); // Canvas element where the chart is rendered
 
 		function generateChartDatasets(data, mills, colors) {
 			// Group data by 'dat' field
@@ -840,6 +839,7 @@
 				if (top5CustomerPerformanceChart) {
 					top5CustomerPerformanceChart.destroy();  // Destroy the existing chart instance
 				}
+				const chartElement = document.getElementById('top5CustomerPerformance'); // Canvas element where the chart is rendered
 
 				top5CustomerPerformanceChart = new Chart(chartElement, {
 					type: 'bar',
