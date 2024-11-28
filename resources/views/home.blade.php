@@ -835,14 +835,6 @@
 					table.deleteRow(0);
 				}
 
-				new Chart(top5CustomerPerformance, {
-					type: 'bar',
-					data: {
-						labels: chartLabels, // 'dat' values as labels
-						datasets: datasets,  // Dynamic datasets based on groupedData
-					},
-				});
-
 				var month = document.getElementById('filterHR').value;
 
 				$.ajax({
@@ -867,6 +859,7 @@
 								}
 							]
 						};
+						
 						// Create the doughnut chart
 						monthlyTonageChart = new Chart(MonthlyTonage, {
 							type: 'doughnut',
