@@ -711,6 +711,7 @@
 		// donut graph for Monthly Tonage Started 
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
+		let top5CustomerPerformanceChart;
 
 		function groupByMillCode(mills, data) {
 			const result = {
@@ -836,6 +837,19 @@
 				}
 
 				new Chart(top5CustomerPerformance, {
+					type: 'bar',
+					data: {
+						labels: chartLabels, // 'dat' values as labels
+						datasets: datasets,  // Dynamic datasets based on groupedData
+					},
+				});
+
+				if (top5CustomerPerformanceChart) {
+					top5CustomerPerformanceChart.destroy();
+				}
+
+				// Create the new chart
+				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
 					type: 'bar',
 					data: {
 						labels: chartLabels, // 'dat' values as labels
