@@ -718,6 +718,7 @@
                     $('#HRMonthlyTonageOfCust').html('<tr><td colspan="2" class="text-center">Loading Data Please Wait...</td></tr>');
                 },
 				success: function(result) {
+					console.log(result);
 					var rows = '';
 
 					$.each(result, function (index, value) {
