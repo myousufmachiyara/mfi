@@ -467,8 +467,8 @@
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Project</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tonage</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Status</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Progress</font></font></th>
 															</tr>
