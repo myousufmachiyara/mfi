@@ -453,6 +453,94 @@
 												</div>
 											</section>
 										</div>
+
+										<div class="col-12 col-md-4 mb-2">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Monthly Tonage</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Project</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Status</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Progress</font></font></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
+																<td><span class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">success</font></font></span></td>
+																<td>
+																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
+																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+																			100%
+																		</font></font></div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tucson - Responsive HTML5 Template</font></font></td>
+																<td><span class="badge badge-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Warning</font></font></span></td>
+																<td>
+																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
+																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+																			60%
+																		</font></font></div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tucson - Responsive Business WordPress Theme</font></font></td>
+																<td><span class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">success</font></font></span></td>
+																<td>
+																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
+																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+																			90%
+																		</font></font></div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive Admin HTML5 Template</font></font></td>
+																<td><span class="badge badge-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Warning</font></font></span></td>
+																<td>
+																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
+																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+																			45%
+																		</font></font></div>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
+																<td><span class="badge badge-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Danger</font></font></span></td>
+																<td>
+																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
+																		<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+																			40%
+																		</font></font></div>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+
 									</div>
 								</div>
 

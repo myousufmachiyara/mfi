@@ -9,6 +9,7 @@ use App\Models\dash_month_purchase;
 use App\Models\dash_acc_group;
 use App\Models\users;
 use App\Models\dash_pur_2_summary_monthly_companywise;
+use App\Models\sale_pipe_summary_of_party_by_mill;
 
 use Carbon\Carbon;
 
@@ -63,6 +64,10 @@ class HomeController extends Controller
     public function HR(Request $request){
         $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
+
+        $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat2',$request->month)
+        ->get();
+
         return $dash_pur_2_summary_monthly_companywise;
     }
 }
