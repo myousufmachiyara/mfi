@@ -684,6 +684,7 @@
 			result['Others'] = { weight: 0, name: "Others" };
 
 			// Iterate through the data to group by mill_code and calculate total_weight
+			count=0;
 			data.forEach(item => {
 				const millCode = item.mill_code.toString();
 				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
@@ -696,8 +697,9 @@
 				} else {
 					result[millCode].weight += item.total_weight;
 					result[millCode].name = item.mill_name;
-					result[millCode].backgroundColor = Utils.CHART_COLORS[item];
+					result[millCode].backgroundColor = Utils.CHART_COLORS[count];
 				}
+				count++;
 			});
 
 			console.log(result);
