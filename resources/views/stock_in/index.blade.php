@@ -15,8 +15,29 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">Account Name</option>
+                                                <option value="4">Person Name</option>
+                                                <option value="5">Remarks</option>
+                                                <option value="6">Bill#</option>
+                                                <option value="7">Weight(Kg)</option>
+                                                <option value="8">Bill Amount</option>
+                                                <option value="9">Convane Charges Group</option>
+                                                <option value="10">Labour Charges</option>
+                                                <option value="11">Discount</option>
+                                                <option value="12">Net Amount</option>
+                                                <option value="13">Status</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">ID</th>
