@@ -13,8 +13,28 @@ class DashboardHRTabController extends Controller
         $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
 
+        $steelex = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        ->where('account_name',187)
+        ->get();
+
+        $spm = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        ->where('account_name',170)
+        ->get();
+
+        $mehboob = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        ->where('account_name',133)
+        ->get();
+
+        $godown = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        ->where('account_name',24)
+        ->get();
+
         return [
             'dash_pur_2_summary_monthly_companywise' => $dash_pur_2_summary_monthly_companywise,
+            'steelex' => $steelex,
+            'spm' => $spm,
+            'mehboob' => $mehboob,
+            'godown' => $godown,
         ];
     }
 

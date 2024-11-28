@@ -815,6 +815,26 @@
 
 		function tabChanged(tabId) {
 			if(tabId=="#HR"){
+				var table = document.getElementById('SteelexSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('SPMSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('MehboobSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('GodownSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				new Chart(top5CustomerPerformance, {
 					type: 'bar',
 					data: {
@@ -852,6 +872,47 @@
 							type: 'doughnut',
 							data: chartData,
 						});
+
+						var rows = '';
+
+						$.each(result['steelex'], function (index, value) {
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#SteelexSaleTable').html(rows);
+
+						var rows = '';
+
+						$.each(result['spm'], function (index, value) {
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#SPMSaleTable').html(rows);
+
+						var rows = '';
+
+						$.each(result['mehboob'], function (index, value) {
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#MehboobSaleTable').html(rows);
+
+						var rows = '';
+
+						$.each(result['godown'], function (index, value) {
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#GodownSaleTable').html(rows);
+
 					},
 					error: function() {
 						alert("Error loading HR data");
