@@ -468,7 +468,7 @@
 															@endforeach
 														</select>
 													</div>
-													<table class="table table-responsive-md table-striped mb-0">
+													<table class="table table-responsive-md table-striped mb-0" id="HRMonthlyTonageOfCust">
 														<thead>
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
@@ -701,7 +701,12 @@
 		function getMonthlyTonageOfCustomer(){
 			var month = document.getElementById('filterHR').value;
 			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
-			
+			var table = document.getElementById('HRMonthlyTonageOfCust');
+
+			while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+
 			$.ajax({
 				type: "GET",
 				url: '/dashboard-tabs/hr/monthlyTonageOfCustomer',
@@ -709,8 +714,19 @@
 					month: month,
 					acc_name:acc_name,
 				},
+				beforeSend: function () {
+                    $('#HRMonthlyTonageOfCust').html('<tr><td colspan="2" class="text-center">Loading Data Please Wait...</td></tr>');
+                },
 				success: function(result) {
-					console.log(result);
+					var rows = '';
+
+					$.each(result, function (index, value) {
+						rows += `<tr>
+							<td>${value['company_name'] ? value['company_name'] : ''}</td>
+                            <td>${value['weight'] ? value['weight'] : ''}</td>
+ 						</tr>`;
+					});
+					$('#HRMonthlyTonageOfCust').html(rows);
 				},
 				error: function() {
 					alert("Error loading HR Monthly Tonage Of Customer Data");
