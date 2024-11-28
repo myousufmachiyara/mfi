@@ -691,9 +691,12 @@
 				// Aggregate the total_weight based on the mill_code or group it under "Others"
 				if (millName === 'Others') {
 					result['Others'].weight += item.total_weight;
+					result['Others'].backgroundColor = Utils.CHART_COLORS['4'];
+
 				} else {
 					result[millCode].weight += item.total_weight;
 					result[millCode].name = item.mill_name;
+					result[millCode].backgroundColor = Utils.CHART_COLORS[item];
 				}
 			});
 
@@ -703,8 +706,7 @@
 				if (result[key].weight > 0) {
 					result.labels.push(result[key].name);
 					result.data.push(result[key].weight);
-					// Use index to cycle through the colors
-					result.backgroundColor.push(Utils.CHART_COLORS[result.labels.length % Utils.CHART_COLORS.length]);
+					result.backgroundColor.push(result[key].backgroundColor);
 				}
 			}
 
