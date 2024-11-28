@@ -587,6 +587,33 @@
 												</div>
 											</section>
 										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Top 10 Customers Of Sale 2</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="Top3Cus">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -835,6 +862,11 @@
 					table.deleteRow(0);
 				}
 
+				var table = document.getElementById('Top3Cus');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				if (top5CustomerPerformanceChart) {
 					top5CustomerPerformanceChart.destroy();
 				}
@@ -924,6 +956,17 @@
 						});
 						$('#GodownSaleTable').html(rows);
 
+						var rows = '';
+
+						$.each(result['top_customers_of_sale2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#Top3Cus').html(rows);
+
+						
 					},
 					error: function() {
 						alert("Error loading HR data");

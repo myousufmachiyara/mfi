@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\dash_pur_2_summary_monthly_companywise;
 use App\Models\sale_pipe_summary_of_party_by_mill;
 use App\Models\AC;
+use App\Models\top_customers_of_sale2;
 
 class DashboardHRTabController extends Controller
 {
@@ -33,12 +34,18 @@ class DashboardHRTabController extends Controller
         ->where('company_code',24)
         ->get();
 
+        $top_customers_of_sale2 = top_customers_of_sale2::leftjoin('ac','ac.ac_code','=','top_customers_of_sale2.account_name')
+        ->where('dat',$request->month)
+        ->get();
+
+        
         return [
             'dash_pur_2_summary_monthly_companywise' => $dash_pur_2_summary_monthly_companywise,
             'steelex' => $steelex,
             'spm' => $spm,
             'mehboob' => $mehboob,
             'godown' => $godown,
+            'top_customers_of_sale2' => $top_customers_of_sale2,
         ];
     }
 
