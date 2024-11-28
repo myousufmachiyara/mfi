@@ -414,7 +414,7 @@
 
 								</div>
 
-								<div id="HR_Sale" class="tab-pane">
+								<div id="HR" class="tab-pane">
 									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
@@ -710,7 +710,7 @@
 				success: function(result) {
 					const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
 					console.log(groupedData);
-					
+
 					if (monthlyTonageChart) {
 						monthlyTonageChart.destroy();
 					}
