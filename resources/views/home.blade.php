@@ -410,10 +410,6 @@
 								</li>
 							</ul>
 							<div class="tab-content">
-								<div id="BNF" class="tab-pane">
-
-								</div>
-
 								<div id="HR" class="tab-pane">
 									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
@@ -521,28 +517,6 @@
 										</div>
 									</div>
 								</div>
-
-								<div id="AS" class="tab-pane">
-									<div class="row form-group pb-3">
-										<!-- Category Sale -->
-										<div class="col-12 col-md-4 mb-2">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">TOP 5 CUSTOMERS PERFORMANCE</h2>
-												</header>
-												<div class="card-body">
-													<canvas id="top5CustomerPerformance"></canvas>
-												</div>
-											</section>
-										</div>
-
-									</div>
-								</div>
-
 							</div>
 						</div>
 
@@ -619,7 +593,6 @@
 			}
 		};
 
-		const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 		// The mills to check
 		const mills = ['187', '170', '133'];
 
@@ -673,29 +646,7 @@
 			}
 		});
 
-		const DATA_COUNT = 5;
-		const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-
-		const data = {
-			labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
-			datasets: [
-				{
-				label: 'Dataset 1',
-				data: generateRandomNumbers(NUMBER_CFG),
-				backgroundColor: Object.values(Utils.CHART_COLORS),
-				}
-			]
-		};
-
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
-
-		function generateRandomNumbers({ count, min, max }) {
-			const numbers = [];
-			for (let i = 0; i < count; i++) {
-				numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
-			}
-			return numbers;
-		}
 
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
