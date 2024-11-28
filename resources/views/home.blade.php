@@ -475,8 +475,8 @@
 														</thead>
 														<tbody>
 															<tr>
-																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
 																{{-- <td><span class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">success</font></font></span></td>
 																<td>
 																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
@@ -487,8 +487,8 @@
 																</td> --}}
 															</tr>
 															<tr>
-																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tucson - Responsive HTML5 Template</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
 																{{-- <td><span class="badge badge-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Warning</font></font></span></td>
 																<td>
 																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
@@ -499,8 +499,8 @@
 																</td> --}}
 															</tr>
 															<tr>
-																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
 																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Porto - Responsive HTML5 Template</font></font></td>
+																<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
 																{{-- <td><span class="badge badge-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Danger</font></font></span></td>
 																<td>
 																	<div class="progress progress-sm progress-half-rounded m-0 mt-1 light">
