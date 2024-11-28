@@ -418,7 +418,7 @@
 									<div class="mb-3 text-end">
 										<div class="form-group" style="display: inline-block">
 											<label class="col-form-label">Select Month</label>
-											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="filterHR()">
+											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
 										</div>
 										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="filterHR()"><i class="fa fa-filter"></i></a>
 									</div>
@@ -699,43 +699,6 @@
 
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 
-		function filterHR() {
-			var month = document.getElementById('filterHR').value;
-			$.ajax({
-				type: "GET",
-				url: '/dashboard-tabs/hr',
-				data: {
-					month: month,
-				},
-				success: function(result) {
-					const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
-					console.log(groupedData);
-
-					if (monthlyTonageChart) {
-						monthlyTonageChart.destroy();
-					}
-
-					const chartData = {
-						labels: groupedData.labels, // Set the labels directly here
-						datasets: [
-							{
-								data: groupedData.data, // Extract total_weight values for each mill
-								backgroundColor: groupedData.backgroundColor, // Assign background colors
-							}
-						]
-					};
-					// Create the doughnut chart
-					monthlyTonageChart = new Chart(MonthlyTonage, {
-						type: 'doughnut',
-						data: chartData,
-					});
-				},
-				error: function() {
-					alert("Error loading HR data");
-				}
-			});
-		}
-
 		function groupByMillCode(mills, data) {
 			const result = {
 				labels: [], // To hold the labels for the chart
@@ -795,7 +758,6 @@
         });
 
 		function tabChanged(tabId) {
-
 			if(tabId=="#HR"){
 				var month = document.getElementById('filterHR').value;
 
@@ -834,6 +796,13 @@
 				});
         	}
 		}
+
+		function getTabData() {
+            const activeTabLink = document.querySelector('.nav-link-dashboard-tab.active');
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
 	
 	</script>									
 </html>
