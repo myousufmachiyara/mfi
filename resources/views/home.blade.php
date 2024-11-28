@@ -427,7 +427,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">MILL WISE HR PIPE PURCHASE</h2>
+													<h2 class="card-title">Mill Wise HR Pipe Purchase</h2>
 												</header>
 												<div class="card-body">
 													<canvas id="top5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
