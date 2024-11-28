@@ -883,7 +883,7 @@
 
 						$.each(result['steelex'], function (index, value) {
 							rows += `<tr>
-								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['weight'] ? value['weight'] : ''}</td>
 							</tr>`;
 						});
@@ -893,7 +893,7 @@
 
 						$.each(result['spm'], function (index, value) {
 							rows += `<tr>
-								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['weight'] ? value['weight'] : ''}</td>
 							</tr>`;
 						});
@@ -903,7 +903,7 @@
 
 						$.each(result['mehboob'], function (index, value) {
 							rows += `<tr>
-								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['weight'] ? value['weight'] : ''}</td>
 							</tr>`;
 						});
@@ -913,7 +913,7 @@
 
 						$.each(result['godown'], function (index, value) {
 							rows += `<tr>
-								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['weight'] ? value['weight'] : ''}</td>
 							</tr>`;
 						});
