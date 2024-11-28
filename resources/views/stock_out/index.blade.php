@@ -15,14 +15,28 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">Customer Name</option>
+                                                <option value="4">Remarks</option>
+                                                <option value="5">Total Qty</option>
+                                                <option value="6">Total Weight</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">ID</th>
                                                     <th>Code</th>
                                                     <th>Date</th>
-                                                    <th>Custmer Name</th>
+                                                    <th>Customer Name</th>
                                                     <th>Remarks</th>
                                                     <th>Total Qty</th>
                                                     <th>Total Weight</th>
