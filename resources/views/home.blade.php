@@ -701,7 +701,7 @@
 		function getMonthlyTonageOfCustomer(){
 			var month = document.getElementById('filterHR').value;
 			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
-			var table = document.getElementById('HRMonthlyTonageOfCust');
+			var table = document.getElementById('HRMonthlyTonageOfCust tbody');
 
 			while (table.rows.length > 0) {
                 table.deleteRow(0);
