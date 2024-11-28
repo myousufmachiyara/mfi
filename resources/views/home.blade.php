@@ -462,7 +462,12 @@
 												<div class="card-body">
 													<div class="form-group" style="display: flex">
 														<label class="col-form-label">Customer</label>
-														<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="filterHR()">
+														<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required>
+															<option value="" disabled selected>Select Account</option>
+															@foreach($coa as $key => $row)	
+																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+															@endforeach
+														</select>
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
@@ -692,6 +697,17 @@
 		}
 
 		// donut graph for Monthly Tonage Ended 
+
+		// get Monthly Tonage Of Customer Started
+		function getMonthlyTonageOfCustomer(){
+			var month = document.getElementById('filterHR').value;
+			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
+			
+			console.log(month);
+			console.log(acc_name);
+		}
+
+		// get Monthly Tonage Of Customer Ended
 
 		// on tab changes flow
 		document.querySelectorAll('.nav-link-dashboard-tab').forEach(tabLink => {

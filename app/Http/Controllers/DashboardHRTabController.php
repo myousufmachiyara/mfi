@@ -13,11 +13,8 @@ class DashboardHRTabController extends Controller
         $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
 
-        $coa = AC::where('status', 1)->get();
-
         return [
             'dash_pur_2_summary_monthly_companywise' => $dash_pur_2_summary_monthly_companywise,
-            'coa' => $coa,
         ];
     }
 

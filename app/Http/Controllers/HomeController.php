@@ -9,6 +9,7 @@ use App\Models\dash_month_purchase;
 use App\Models\dash_acc_group;
 use App\Models\users;
 use App\Models\dash_pur_2_summary_monthly_companywise;
+use App\Models\AC;
 
 use Carbon\Carbon;
 
@@ -57,6 +58,8 @@ class HomeController extends Controller
         $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();
         $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::get();
 
-        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','dash_pur_2_summary_monthly_companywise'));
+        $coa = AC::where('status', 1)->get();
+
+        return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','dash_pur_2_summary_monthly_companywise','coa'));
     }
 }
