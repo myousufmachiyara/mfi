@@ -796,7 +796,6 @@
 		function tabChanged(tabId) {
 
 			if(tabId=="#HR"){
-				console.log("HR Tab");
 				var month = document.getElementById('filterHR').value;
 
 				$.ajax({
@@ -806,6 +805,7 @@
 						month: month,
 					},
 					success: function(result) {
+						console.log(result);
 						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
 
 						if (monthlyTonageChart) {
