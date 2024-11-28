@@ -460,8 +460,7 @@
 													<h2 class="card-title">Monthly Tonage Of Customer</h2>
 												</header>
 												<div class="card-body">
-													<div class="form-group" style="display: flex">
-														<label class="col-form-label">Customer</label>
+													<div class="form-group">
 														<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
 															<option value="" disabled selected>Select Account</option>
 															@foreach($coa as $key => $row)	
