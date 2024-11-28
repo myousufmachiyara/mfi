@@ -653,6 +653,7 @@
 			'rgba(219, 150, 81, 1)',
 		];
 		const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
+		const chartElement = document.getElementById('top5CustomerPerformance'); // Canvas element where the chart is rendered
 
 		function generateChartDatasets(data, mills, colors) {
 			// Group data by 'dat' field
@@ -711,6 +712,7 @@
 		// donut graph for Monthly Tonage Started 
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
+		let top5CustomerPerformanceChart; // Declare a global variable to hold the chart instance
 
 		function groupByMillCode(mills, data) {
 			const result = {
@@ -836,6 +838,18 @@
 				}
 
 				new Chart(top5CustomerPerformance, {
+					type: 'bar',
+					data: {
+						labels: chartLabels, // 'dat' values as labels
+						datasets: datasets,  // Dynamic datasets based on groupedData
+					},
+				});
+
+				if (top5CustomerPerformanceChart) {
+					top5CustomerPerformanceChart.destroy();  // Destroy the existing chart instance
+				}
+
+				top5CustomerPerformanceChart = new Chart(chartElement, {
 					type: 'bar',
 					data: {
 						labels: chartLabels, // 'dat' values as labels
