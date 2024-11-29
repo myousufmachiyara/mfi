@@ -84,6 +84,7 @@ class RptDailyRegSale1Controller extends Controller
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
+        
 
         // Header details
         $html = '
@@ -114,6 +115,7 @@ class RptDailyRegSale1Controller extends Controller
                         <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
                         <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
+                $pdf->setTableHtml($html);
                 // Table Rows
                 $count = 1;
                 $totalAmount = 0;
