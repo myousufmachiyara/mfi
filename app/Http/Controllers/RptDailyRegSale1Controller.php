@@ -68,7 +68,7 @@ class RptDailyRegSale1Controller extends Controller
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
-    
+
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -76,15 +76,15 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->SetSubject('Daily Register Sale 1');
         $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-    
+
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-    
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-    
+
         // Header details
         $html = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
@@ -107,7 +107,6 @@ class RptDailyRegSale1Controller extends Controller
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-    
         // Table header for data
         $html = '
             <table border="1" style="border-collapse: collapse; text-align: center;">
@@ -121,14 +120,14 @@ class RptDailyRegSale1Controller extends Controller
                     <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
-    
+
         // Iterate through items and add rows
         $count = 1;
         $totalAmount = 0;
-    
+
         foreach ($activite5_sales as $item) {
             $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
-    
+
             $html .= '
                 <tr style="background-color:' . $backgroundColor . ';">
                     <td style="width:7%;">' . $count . '</td>
@@ -138,23 +137,25 @@ class RptDailyRegSale1Controller extends Controller
                     <td style="width:22%;">' . $item['acc_name'] . '</td>
                     <td style="width:15%;">' . $item['Cash_pur_name'] . '</td>
                     <td style="width:15%;">' . $item['Sales_Remarks'] . '</td>
-                    <td style="width:12%;">' . $item['bill_amt'] . '</td>
+                    <td style="width:12%;">' . number_format($item['bill_amt'], 2) . '</td>
                 </tr>';
             
             $totalAmount += $item['bill_amt']; // Accumulate total quantity
             $count++;
         }
-    
+
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-    
+
         // Display total amount at the bottom
         $currentY = $pdf->GetY();
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->SetXY(155, $currentY + 5);
         $pdf->MultiCell(20, 5, 'Total', 1, 'C');
         $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
+        $pdf->MultiCell(28, 5, number_format($totalAmount, 2), 1, 'C');
+
+
     
         // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
