@@ -938,33 +938,61 @@
 
 
 						var rows = '';
+						var totalWeight = 0; // Initialize total
 
 						$.each(result['spm'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
 							</tr>`;
 						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
 						$('#SPMSaleTable').html(rows);
 
 						var rows = '';
+						var totalWeight = 0; // Initialize total
 
 						$.each(result['mehboob'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
 							</tr>`;
 						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
 						$('#MehboobSaleTable').html(rows);
 
 						var rows = '';
+						var totalWeight = 0; // Initialize total
 
 						$.each(result['godown'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
 							</tr>`;
 						});
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
 						$('#GodownSaleTable').html(rows);
 
 						var rows = '';
