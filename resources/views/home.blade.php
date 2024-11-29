@@ -450,7 +450,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Monthly Tonage Of Customer</h2>
+													<h2 class="card-title">Monthly Tonage Of Customer From Purchase 2</h2>
 												</header>
 												<div class="card-body">
 													<div class="form-group">
