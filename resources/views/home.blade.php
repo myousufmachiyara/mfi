@@ -454,33 +454,27 @@
 												</header>
 												<div class="card-body">
 													<div class="form-group">
-														<!-- Flexbox wrapper -->
-														<div style="display: flex; align-items: center; gap: 0.5rem;">
-															<!-- Dropdown (combobox) -->
-															<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
-																<option value="" disabled selected>Select Account</option>
-																@foreach($coa as $key => $row)
-																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-																@endforeach
-															</select>
-															<!-- Button -->
-															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()">
-																<i class="fa fa-filter"></i>
-															</a>
-														</div>
+														<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
+															<option value="" disabled selected>Select Account</option>
+															@foreach($coa as $key => $row)	
+																<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+															@endforeach
+														</select>
+														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th>Company Name</th>
-																<th style="text-align:center;">Tonage</th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
 														<tbody id="HRMonthlyTonageOfCust">
-															<!-- Data will be dynamically loaded here -->
+															
 														</tbody>
 													</table>
-												</div>												
+												</div>
+												
 											</section>
 										</div>
 
