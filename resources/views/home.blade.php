@@ -455,16 +455,19 @@
 												<div class="card-body">
 													<div class="form-group">
 														<div class="col-sm-12 col-md-8 mb-3">
-															<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
-																<option value="" disabled selected>Select Account</option>
-																@foreach($coa as $key => $row)	
-																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-																@endforeach
-															</select>
-															<button type="button" class="btn btn-primary" onclick="getMonthlyTonageOfCustomer()" aria-label="Filter Accounts">
-																<i class="fa fa-filter"></i>
-															</button>
+															<div class="input-group">
+																<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
+																	<option value="" disabled selected>Select Account</option>
+																	@foreach($coa as $key => $row)    
+																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																	@endforeach
+																</select>
+																<button type="button" class="btn btn-primary" onclick="getMonthlyTonageOfCustomer()" aria-label="Filter Accounts">
+																	<i class="fa fa-filter"></i>
+																</button>
+															</div>
 														</div>
+														
 														
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
