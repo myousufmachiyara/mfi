@@ -411,13 +411,6 @@
 							</ul>
 							<div class="tab-content">
 								<div id="HR" class="tab-pane">
-									<div class="mb-3 text-end">
-										<div class="form-group" style="display: inline-block">
-											<label class="col-form-label">Select Month</label>
-											<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
-										</div>
-										<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
-									</div>
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
 										<div class="col-12 col-md-5 mb-3">
@@ -480,6 +473,13 @@
 															
 														</tbody>
 													</table>
+												</div>
+												<div class="mb-3 text-end">
+													<div class="form-group" style="display: inline-block">
+														<label class="col-form-label">Select Month</label>
+														<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
+													</div>
+													<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 												</div>
 											</section>
 										</div>
