@@ -122,7 +122,7 @@ class RptDailyRegSale1Controller extends Controller
                 // Table Rows
                 $count = 1;
                 $totalAmount = 0;
-                foreach ($pipe_sale_by_account as $items) {
+                foreach ($activite5_sales as $items) {
                     $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                     $html .= '<tr style="background-color:' . $bgColor . ';">
                                 <td>' . $count . '</td>
