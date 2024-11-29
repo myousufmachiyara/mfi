@@ -1009,7 +1009,7 @@
 
 						var rows = '';
 
-						$.each(result['top_customers_of_pur2'], function (index, value) {
+						$.each(result['top_customers_of_sale2'], function (index, value) {
 							rows += `<tr>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['weight'] ? value['weight'] : ''}</td>
