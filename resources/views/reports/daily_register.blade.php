@@ -825,26 +825,44 @@
                         $('#jv2_to').text(formattedtoDate);
 
                         $(tableID).empty(); // Clear the loading message
-                        
 
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
-                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
-                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
-                            html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
-                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html +="</tr>";
+                            var totalDebit = 0;
+                            var totalCredit = 0;
 
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
-                    }
+                            $.each(result, function (k, v) {
+                                var debit = v['debit'] ? parseFloat(v['debit']) : 0;
+                                var credit = v['credit'] ? parseFloat(v['credit']) : 0;
+
+                                totalDebit += debit;
+                                totalCredit += credit;
+
+                                var html = "<tr>";
+                                html += "<td>" + (k + 1) + "</td>";
+                                html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
+                                html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                                html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                                html += "<td>" + (debit ? debit.toFixed(2) : "") + "</td>";
+                                html += "<td>" + (credit ? credit.toFixed(2) : "") + "</td>";
+                                html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
+                                html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                                html += "</tr>";
+
+                                $(tableID).append(html);
+                            });
+
+                            // Add a row for totals
+                                var totalHtml = "<tr class='font-weight-bold'>";
+                                totalHtml += "<td colspan='4' class='text-right'>Total</td>";
+                                totalHtml += "<td>" + totalDebit.toFixed(2) + "</td>";
+                                totalHtml += "<td>" + totalCredit.toFixed(2) + "</td>";
+                                totalHtml += "<td colspan='2'></td>";
+                                totalHtml += "</tr>";
+
+                                $(tableID).append(totalHtml);
+                            },
+                            error: function () {
+                            $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        }
                 });
             }
             else if(tabId=="#sale_1_return"){
