@@ -138,7 +138,7 @@ class RptDailyRegSale1Controller extends Controller
                         <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
                         <td>' . $items['pur_ord_no'] . '</td>
                         <td>' . $items['acc_name'] . '</td>
-                        <td>' . $items['Cash_pur_name'] . '' . $items['Sales_Remarks'] . '</td>
+                        <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
                         <td>' . number_format($items['bill_amt'], 0) . '</td>
                     </tr>';
 
