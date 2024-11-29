@@ -115,7 +115,7 @@ class RptDailyRegSale1Controller extends Controller
                         <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
                         <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
-                $pdf->setTableHtml($html);
+                
                 // Table Rows
                 $count = 1;
                 $totalAmount = 0;
