@@ -454,15 +454,16 @@
 												</header>
 												<div class="card-body">
 													<div class="form-group">
-														<div class="col-sm-12 col-md-6 mb-3">
+														<div class="col-sm-12 col-md-8 mb-3">
 															<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
 																<option value="" disabled selected>Select Account</option>
 																@foreach($coa as $key => $row)	
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 																@endforeach
 															</select>
+															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 														</div>
-														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
+														
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
