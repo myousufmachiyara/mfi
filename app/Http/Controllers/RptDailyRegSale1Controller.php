@@ -115,7 +115,6 @@ class RptDailyRegSale1Controller extends Controller
                         <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
                         <th style="width:10%;color:#17365D;font-weight:bold;">Ord No.</th>
                         <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                        <th style="width:15%;color:#17365D;font-weight:bold;">Customer Name</th>
                         <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
                         <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
@@ -130,8 +129,7 @@ class RptDailyRegSale1Controller extends Controller
                                 <td>' . $items['Sal_inv_no'] . '</td>
                                 <td>' . $items['pur_ord_no'] . '</td>
                                 <td>' . $items['acc_name'] . '</td>
-                                <td>' . $items['Cash_pur_name'] . '</td>
-                                <td>' . $items['Sales_Remarks'] . '</td>
+                                <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
                                 <td>' . number_format($items['bill_amt'], 0) . '</td>
                             </tr>';
 
