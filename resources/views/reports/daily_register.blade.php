@@ -841,8 +841,8 @@
                                 html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                                html += "<td>" + (debit ? debit.toFixed(2) : "") + "</td>";
-                                html += "<td>" + (credit ? credit.toFixed(2) : "") + "</td>";
+                                html += "<td>" + (debit ? debit.toFixed(0) : "") + "</td>";
+                                html += "<td>" + (credit ? credit.toFixed(0) : "") + "</td>";
                                 html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
                                 html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
                                 html += "</tr>";
@@ -852,9 +852,9 @@
 
                             // Add a row for totals
                                 var totalHtml = "<tr class='font-weight-bold'>";
-                                totalHtml += "<td colspan='4' class='text-right'>Total</td>";
-                                totalHtml += "<td>" + totalDebit.toFixed(2) + "</td>";
-                                totalHtml += "<td>" + totalCredit.toFixed(2) + "</td>";
+                                totalHtml += "<td colspan='4'style='text-align: right;'>Total</td>";
+                                totalHtml += "<td class='text-danger'><strong>" + totalDebit.toFixed(0) + "</strong></td>";
+                                totalHtml += "<td class='text-danger'><strong>" + totalCredit.toFixed(0) + "</strong></td>";
                                 totalHtml += "<td colspan='2'></td>";
                                 totalHtml += "</tr>";
 
