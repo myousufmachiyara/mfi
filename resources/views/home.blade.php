@@ -815,13 +815,23 @@
                 },
 				success: function(result) {
 					var rows = '';
+					var totalWeight = 0; // Initialize total
 
 					$.each(result, function (index, value) {
+						var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+    					totalWeight += weight; // Add to total
 						rows += `<tr>
 							<td>${value['company_name'] ? value['company_name'] : ''}</td>
-                            <td>${value['weight'] ? value['weight'] : ''}</td>
+                            <td>${weight ? weight : ''}</td>
  						</tr>`;
 					});
+
+					// Append a row for the total
+					rows += `<tr>
+						<td><strong>Total</strong></td>
+						<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+					</tr>`;
+
 					$('#HRMonthlyTonageOfCust').html(rows);
 				},
 				error: function() {
