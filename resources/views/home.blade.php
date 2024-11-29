@@ -461,7 +461,9 @@
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 																@endforeach
 															</select>
-															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
+															<button type="button" class="btn btn-primary" onclick="getMonthlyTonageOfCustomer()" aria-label="Filter Accounts">
+																<i class="fa fa-filter"></i>
+															</button>
 														</div>
 														
 													</div>
