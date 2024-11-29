@@ -111,12 +111,12 @@ class RptDailyRegSale1Controller extends Controller
            $html = '<table border="1" style="border-collapse: collapse;text-align:center">
                 <tr>
                         <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
-                        <th style="width:10%;color:#17365D;font-weight:bold;">Ord No.</th>
-                        <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                        <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                        <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
+                        <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
+                        <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
+                        <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
+                        <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
+                        <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
+                        <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
                 // Table Rows
                 $count = 1;
@@ -126,10 +126,10 @@ class RptDailyRegSale1Controller extends Controller
                     $html .= '<tr style="background-color:' . $bgColor . ';">
                                 <td>' . $count . '</td>
                                 <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
-                                <td>' . $items['Sal_inv_no'] . '</td>
+                                <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
                                 <td>' . $items['pur_ord_no'] . '</td>
                                 <td>' . $items['acc_name'] . '</td>
-                                <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
+                                <td>' . $items['Cash_pur_name'] . '' . $items['Sales_Remarks'] . '</td>
                                 <td>' . number_format($items['bill_amt'], 0) . '</td>
                             </tr>';
 
@@ -140,7 +140,7 @@ class RptDailyRegSale1Controller extends Controller
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
                 <td colspan="7" style="text-align:right;">Total:</td>
-                <td style="width:14%;">' . number_format($totalAmount, 0) . '</td>
+                <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
             </tr>';
             
         $html .= '</table>';
