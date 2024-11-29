@@ -454,7 +454,7 @@
 												</header>
 												<div class="card-body">
 												<div class="row mb-2">
-													<div class="col-lg-8">
+													<div class="col-lg-10">
 														<div class="form-group">
 														
 															<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
@@ -466,7 +466,7 @@
 															
 														</div>
 													</div>
-													<div class="col-lg-4">
+													<div class="col-lg-2">
 														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 													</div>
 												</div>
