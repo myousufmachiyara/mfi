@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dash_pur_2_summary_monthly_companywise;
 use App\Models\sale_pipe_summary_of_party_by_mill;
+use App\Models\pur_pipe_summary_of_party_by_mill;
 use App\Models\AC;
 use App\Models\top_customers_of_sale2;
 
@@ -57,10 +58,10 @@ class DashboardHRTabController extends Controller
     }
 
     public function monthlyTonageOfCustomer(Request $request){
-        $sale_pipe_summary_of_party_by_mill = sale_pipe_summary_of_party_by_mill::where('dat',$request->month)
+        $pur_pipe_summary_of_party_by_mill = pur_pipe_summary_of_party_by_mill::where('dat',$request->month)
         ->where('account_name',$request->acc_name)
         ->get();
 
-        return $sale_pipe_summary_of_party_by_mill;
+        return $pur_pipe_summary_of_party_by_mill;
     }
 }
