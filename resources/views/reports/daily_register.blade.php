@@ -1101,31 +1101,36 @@
                 return;
             }
 
+            let url = '';
+
             if (tabName === "sale_1") {
-                window.location.href = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "sale_pipe") {
-                window.location.href = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "purchase1") {
-                window.location.href = `/rep-by-daily-reg/pur1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/pur1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "pp") {
-                window.location.href = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "jv1") {
-                window.location.href = `/rep-by-daily-reg/jv1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/jv1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "jv2") {
-                window.location.href = `/rep-by-daily-reg/jv2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/jv2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
+            // Open the URL in a new tab
+            window.open(url, '_blank');
         }
+
 
         function downloadPDF(tabName) {
             const { fromDate, toDate } = getInputValues();
