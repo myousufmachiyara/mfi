@@ -453,6 +453,7 @@
 													<h2 class="card-title">Monthly Tonage Of Customer From Purchase 2</h2>
 												</header>
 												<div class="card-body">
+												<div class="row mb-2">
 													<div class="col-lg-3">
 														<div class="form-group">
 														
@@ -470,6 +471,7 @@
 													<div class="col-lg-4">
 														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 													</div>
+												</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
