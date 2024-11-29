@@ -931,7 +931,7 @@
 						// Append a row for the total
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
 						</tr>`;
 
 						$('#SteelexSaleTable').html(rows);
