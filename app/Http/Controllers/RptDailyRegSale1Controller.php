@@ -139,7 +139,7 @@ class RptDailyRegSale1Controller extends Controller
                 // Add totals row
             $html .= '
             <tr style="background-color:#d9edf7; font-weight:bold;">
-                <td colspan="7" style="text-align:right;">Total:</td>
+                <td colspan="6" style="text-align:right;">Total:</td>
                 <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
             </tr>';
             
