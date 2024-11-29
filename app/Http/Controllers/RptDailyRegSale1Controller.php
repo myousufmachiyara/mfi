@@ -116,6 +116,7 @@ class RptDailyRegSale1Controller extends Controller
         // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
         $html .= $tableHeader;
+        $pdf->writeHTML($tableHeader, true, false, true, false, '');
 
         $count = 1;
         $totalAmount = 0;
