@@ -90,13 +90,13 @@ class RptDailyRegSale1Controller extends Controller
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
-                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
                     From Date: <span style="color:black;">' . $formattedFromDate . '</span>
                 </td>
                 <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:34%;">
                     To Date: <span style="color:black;">' . $formattedToDate . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
+                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
                 </td>
             </tr>
         </table>';
