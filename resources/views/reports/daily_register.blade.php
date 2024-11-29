@@ -772,7 +772,13 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalJv = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+
+                            var jvAmount = v['Amount'] ? parseFloat(v['Amount']) : 0;
+                            totalJv += jvAmount; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
@@ -780,11 +786,16 @@
                             html += "<td>" + (v['Debit_Acc'] ? v['Debit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['Credit_Acc'] ? v['Credit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['Amount'] ? v['Amount'] : "") + "</td>";
+                            html += "<td>" + (jvAmount ? jvAmount.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalJv.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -815,20 +826,34 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalDebit = 0; // Variable to accumulate total
+                        var totalCredit = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var debitAmt = v['debit'] ? parseFloat(v['debit']) : 0;
+                            totalDebit += debit; // Add to total
+                            var creditAmt = v['credit'] ? parseFloat(v['credit']) : 0;
+                            totalCredit += credit; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
                             html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
-                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
+                            html += "<td>" + (debitAmt ? debitAmt.toFixed(0) : "") + "</td>";
+                            html += "<td>" + (creditAmt ? creditAmt.toFixed(0) : "") + "</td>";
                             html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
                             html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalDebit.toFixed(0) + "</strong></td></tr>";
+                        totalRow += "<td class='text-danger'><strong>" + totalCredit.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
