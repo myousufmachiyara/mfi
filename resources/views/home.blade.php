@@ -464,10 +464,11 @@
 															</select>
 															
 														</div>
-														<div class="col-lg-4">
-															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
-														</div>
 														
+														
+													</div>
+													<div class="col-lg-4">
+														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 													</div>
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
