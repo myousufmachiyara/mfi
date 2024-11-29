@@ -493,7 +493,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Steelex Sale Summary</h2>
+													<h2 class="card-title">Steelex Purchase Summary</h2>
 												</header>
 												<div class="card-body">
 													
@@ -519,7 +519,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">S.P.M Sale Summary</h2>
+													<h2 class="card-title">S.P.M Purchase Summary</h2>
 												</header>
 												<div class="card-body">
 													
@@ -545,7 +545,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Mehboob Sale Summary</h2>
+													<h2 class="card-title">Mehboob Purchase Summary</h2>
 												</header>
 												<div class="card-body">
 													
@@ -597,7 +597,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Top 3 Customers Of Sale 2</h2>
+													<h2 class="card-title">Top 3 Customers Of Purchase 2</h2>
 												</header>
 												<div class="card-body">
 													

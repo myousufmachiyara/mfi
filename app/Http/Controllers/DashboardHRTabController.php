@@ -8,6 +8,7 @@ use App\Models\sale_pipe_summary_of_party_by_mill;
 use App\Models\pur_pipe_summary_of_party_by_mill;
 use App\Models\AC;
 use App\Models\top_customers_of_sale2;
+use App\Models\top_customers_of_pur2;
 
 class DashboardHRTabController extends Controller
 {
@@ -30,12 +31,12 @@ class DashboardHRTabController extends Controller
         ->where('company_code',133)
         ->get();
 
-        $godown = pur_pipe_summary_of_party_by_mill::leftjoin('ac','ac.ac_code','=','pur_pipe_summary_of_party_by_mill.account_name')
+        $godown = sale_pipe_summary_of_party_by_mill::leftjoin('ac','ac.ac_code','=','sale_pipe_summary_of_party_by_mill.account_name')
         ->where('dat',$request->month)
         ->where('company_code',24)
         ->get();
 
-        $top_customers_of_sale2 = top_customers_of_sale2::leftjoin('ac','ac.ac_code','=','top_customers_of_sale2.account_name')
+        $top_customers_of_pur2 = top_customers_of_pur2::leftjoin('ac','ac.ac_code','=','top_customers_of_pur2.account_name')
         ->where('dat',$request->month)
         ->get();
 
@@ -46,7 +47,7 @@ class DashboardHRTabController extends Controller
             'spm' => $spm,
             'mehboob' => $mehboob,
             'godown' => $godown,
-            'top_customers_of_sale2' => $top_customers_of_sale2,
+            'top_customers_of_pur2' => $top_customers_of_pur2,
         ];
     }
 
