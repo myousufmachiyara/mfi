@@ -108,13 +108,12 @@ class RptDailyRegSale2Controller extends Controller
        // Table headers
        $tableHeader = '<tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Date</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Inv No.</th>
-                    <th style="width:10%;color:#17365D;font-weight:bold;">Ord No.</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Customer Name</th>
-                    <th style="width:15%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Bill Amount</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
+                    <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Dispatch From</th>
+                    <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                 </tr>';
 
        // Start the table
