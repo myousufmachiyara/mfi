@@ -454,8 +454,8 @@
 												</header>
 												<div class="card-body">
 													<div class="form-group">
-														<div class="col-sm-12 col-md-8 mb-3">
-															<div class="input-group">
+														<div class="col-sm-12 col-md-12 mb-3">
+															<div class="input-group col-sm-12 col-md-8 mb-3">
 																<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
 																	<option value="" disabled selected>Select Account</option>
 																	@foreach($coa as $key => $row)    
