@@ -461,6 +461,9 @@
 																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
 																@endforeach
 															</select>
+															
+														</div>
+														<div class="col-lg-4">
 															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 														</div>
 														
