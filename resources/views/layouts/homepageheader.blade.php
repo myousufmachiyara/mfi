@@ -59,6 +59,8 @@
 
 	<div class="logo-container d-none d-md-block">
 		<div id="userbox" class="userbox" style="float:right !important;">
+			<button class="btn btn-success"> POS System</button>
+
 			<a href="#" data-bs-toggle="dropdown" style="margin-right: 20px;">
 				<div class="profile-info"> 
 					<span class="name">{{session('user_name')}}</span>
@@ -66,7 +68,6 @@
 				</div>
 				<i class="fa custom-caret"></i>
 			</a>
-			<button class="btn btn-success"> POS System</button>
 			<div class="dropdown-menu" >
 				<ul class="list-unstyled">
 					<li>
