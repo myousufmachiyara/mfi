@@ -15,7 +15,7 @@
                             </header>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <div class="card card-modern card-modern-alt-padding col-6">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
@@ -45,7 +45,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-8">
                                         <div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
                                             <table class="table table-bordered table-striped mb-0" id="myTable" >
                                                 <thead>
