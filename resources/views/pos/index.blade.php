@@ -155,24 +155,8 @@
                                                 </div>
 
                                                 <div class="col-6 col-md-2 pb-sm-3 pb-md-0">
-                                                    <label class="col-form-label">Total Weight</label>
-                                                    <input type="number" id="total_weight_show"  placeholder="Total Weight" class="form-control" step="any" disabled>
-                                                    <input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control">
-                                                </div>
-
-                                                <div class="col-6 col-md-2 pb-sm-3 pb-md-0">
                                                     <label class="col-form-label">Total Quantity</label>
                                                     <input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" step="any" disabled>
-                                                </div>
-
-                                                <div class="col-6 col-md-2 pb-sm-3 pb-md-0">
-                                                    <label class="col-form-label">Convance Charges</label>
-                                                    <input type="number" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" step="any" value="0" class="form-control">
-                                                </div>
-
-                                                <div class="col-6 col-md-2 pb-sm-3 pb-md-0">
-                                                    <label class="col-form-label">Labour Charges</label>
-                                                    <input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" step="any" value="0" class="form-control">
                                                 </div>
 
                                                 <div class="col-6 col-md-2 pb-sm-3 pb-md-0">
@@ -234,7 +218,6 @@
                 success: function(result){
                     $('#item_code'+row_no).val(result[0]['it_cod']);
                     $('#item_name'+row_no).val(result[0]['it_cod']).select2();
-                    $('#remarks'+row_no).val(result[0]['item_remark']);
                     $('#price'+row_no).val(result[0]['sales_price']);
                 },
                 error: function(){
@@ -282,16 +265,15 @@
 	    }
 
         function rowTotal(index){
-            var weight = $('#weight'+index+'').val();
+            var qty = $('#item_qty'+index+'').val();
             var price = $('#price'+index+'').val();
-            var amount = weight * price;
+            var amount = qty * price;
             $('#amount'+index+'').val(amount);
             tableTotal();
 	    }
 
         function tableTotal(){
             var totalAmount=0;
-            var totalWeight=0;
             var totalQuantity=0;
             var tableRows = $("#saleInvoiceTable tr").length;
             var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
@@ -299,14 +281,11 @@
             for (var i = 0; i < tableRows; i++) {
                 var currentRow =  table.rows[i];
                 totalAmount = totalAmount + Number(currentRow.cells[6].querySelector('input').value);
-                totalWeight = totalWeight + Number(currentRow.cells[4].querySelector('input').value);
-                totalQuantity = totalQuantity + Number(currentRow.cells[1].querySelector('input').value);
+                totalQuantity = totalQuantity + Number(currentRow.cells[2].querySelector('input').value);
             }
 
             $('#totalAmount').val(totalAmount);
             $('#total_amount_show').val(totalAmount);
-            $('#total_weight').val(totalWeight);
-            $('#total_weight_show').val(totalWeight);
             $('#total_quantity').val(totalQuantity);
 
             netTotal();
@@ -315,11 +294,9 @@
         function netTotal(){
             var netTotal = 0;
             var total = Number($('#totalAmount').val());
-            var convance_charges = Number($('#convance_charges').val());
-            var labour_charges = Number($('#labour_charges').val());
             var bill_discount = Number($('#bill_discount').val());
 
-            netTotal = total + convance_charges + labour_charges - bill_discount;
+            netTotal = total - bill_discount;
             netTotal = netTotal.toFixed(0);
             FormattednetTotal = formatNumberWithCommas(netTotal);
             document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
