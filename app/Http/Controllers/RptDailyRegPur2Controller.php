@@ -112,7 +112,7 @@ class RptDailyRegPur2Controller extends Controller
                     <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
                     <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:22%;color:#17365D;font-weight:bold;">Detail/th>
+                    <th style="width:22%;color:#17365D;font-weight:bold;">Detail</th>
                     <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amt</th>
                  </tr>';
  
