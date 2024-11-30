@@ -14,7 +14,12 @@
                                 </div>
                             </header>
                             <div class="card-body">
-                                <div class="row form-group mb-2">
+                                <div class="row">
+                                    <div class="col-6">
+                                    </div>
+
+                                    <div class="col-6">
+                                    </div>
                                 </div>
                             </div>
 
