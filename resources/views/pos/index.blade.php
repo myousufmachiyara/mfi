@@ -86,6 +86,88 @@
                                             </table>
 									    </div>
                                     </div>
+                                    <div class="col-lg-8">
+                                        <div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
+                                            <table class="table table-bordered table-striped mb-0" id="myTable" >
+                                                <thead>
+                                                    <tr>
+                                                        <th width="15%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Item Name<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Qty<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Price<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Amount</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="saleInvoiceTable">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
+                                                        </td>
+                                                        <td>
+                                                            <select data-plugin-selecttwo class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
+                                                            <option selected>Select Item</option>
+                                                               
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" value="0" step="any" required class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control" value="0" step="any" required disabled>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+									    </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
+                                            <table class="table table-bordered table-striped mb-0" id="myTable" >
+                                                <thead>
+                                                    <tr>
+                                                        <th width="15%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Item Name<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Qty<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Price<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Amount</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="saleInvoiceTable">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
+                                                        </td>
+                                                        <td>
+                                                            <select data-plugin-selecttwo class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
+                                                            <option selected>Select Item</option>
+                                                               
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" value="0" step="any" required class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" id="amount1" name="item_amount[]" placeholder="Amount" class="form-control" value="0" step="any" required disabled>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+									    </div>
+                                    </div>
                                 </div>
                             </div>
 
