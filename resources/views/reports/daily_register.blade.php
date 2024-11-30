@@ -781,7 +781,7 @@
 
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['auto_lager'] ? v['auto_lager'] : "") +"</td>";
                             html += "<td>" + (v['Date'] ? moment(v['Date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Debit_Acc'] ? v['Debit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['Credit_Acc'] ? v['Credit_Acc'] : "") + "</td>";
@@ -838,7 +838,7 @@
 
                                 var html = "<tr>";
                                 html += "<td>" + (k + 1) + "</td>";
-                                html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
+                                html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['jv_no'] ? v['jv_no'] : "") +"</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                                 html += "<td>" + (debit ? debit.toFixed(0) : "") + "</td>";
