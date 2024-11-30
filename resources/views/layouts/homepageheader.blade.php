@@ -59,7 +59,7 @@
 
 	<div class="logo-container d-none d-md-block">
 		<div id="userbox" class="userbox" style="float:right !important;">
-			<button class="btn btn-success"> POS System</button>
+			<a class="btn btn-success" href="/pos"> POS System</a>
 
 			<a href="#" data-bs-toggle="dropdown" style="margin-right: 20px;">
 				<div class="profile-info"> 
