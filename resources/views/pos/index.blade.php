@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <div class="card card-modern card-modern-alt-padding col-4">
+                                        <div class="card card-modern card-modern-alt-padding col-6">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
@@ -30,35 +30,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-modern card-modern-alt-padding col-4">
-                                            <div class="card-body bg-light">
-                                                <div class="image-frame mb-2">
-                                                    <div class="image-frame-wrapper">
-                                                        <img src="/assets/img/empty-300x240.jpg" class="img-fluid" alt="Product Short Name">
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-4 line-height-2 mt-0 mb-2"><a href="ecommerce-products-form.html" class="ecommerce-sidebar-link text-color-dark text-color-hover-primary text-decoration-none">Product Name</a></h4>
-                                                <div class="product-price">
-                                                    <div class="regular-price on-sale">$59.00</div>
-                                                    <div class="sale-price">$49.00</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card card-modern card-modern-alt-padding col-4">
-                                            <div class="card-body bg-light">
-                                                <div class="image-frame mb-2">
-                                                    <div class="image-frame-wrapper">
-                                                        <img src="/assets/img/empty-300x240.jpg" class="img-fluid" alt="Product Short Name">
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-4 line-height-2 mt-0 mb-2"><a href="ecommerce-products-form.html" class="ecommerce-sidebar-link text-color-dark text-color-hover-primary text-decoration-none">Product Name</a></h4>
-                                                <div class="product-price">
-                                                    <div class="regular-price on-sale">$59.00</div>
-                                                    <div class="sale-price">$49.00</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card card-modern card-modern-alt-padding col-4">
+                                        <div class="card card-modern card-modern-alt-padding col-6">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
