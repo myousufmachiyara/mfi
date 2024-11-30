@@ -15,7 +15,7 @@
                             </header>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-4" style="display: inherit;">
+                                    <div class="col-lg-4">
                                         <div class="card card-modern card-modern-alt-padding col-5 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
@@ -72,7 +72,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
