@@ -391,7 +391,7 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
