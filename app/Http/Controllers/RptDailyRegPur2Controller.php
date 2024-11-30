@@ -123,7 +123,7 @@ class RptDailyRegPur2Controller extends Controller
         $count = 1;
         $totalAmount = 0;
  
-        foreach ($activite11_sales_pipe as $items) {
+        foreach ($activite13_pur_pipe as $items) {
             // Check if a new page is needed
             if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
                 $html .= '</table>'; // Close the current table
