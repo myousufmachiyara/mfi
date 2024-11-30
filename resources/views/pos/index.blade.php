@@ -15,7 +15,7 @@
                             </header>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3 row">
+                                    <div class="col-lg-3 row" style="margin-right:0px;">
                                         <div class="card card-modern card-modern-alt-padding col-6 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
