@@ -13,6 +13,10 @@
                                     <button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Item </button>
                                 </div>
                             </header>
+                            <div class="card-body">
+                                <div class="row form-group mb-2">
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </div>
