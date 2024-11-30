@@ -53,7 +53,6 @@
                                                         <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
-                                                        <th width="20%">Remarks</th>
                                                         <th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="10%">Amount</th>
@@ -66,19 +65,13 @@
                                                             <input type="number" id="item_code1" name="item_code[]" placeholder="Code" class="form-control" required onchange="getItemDetails(1,1)">
                                                         </td>
                                                         <td>
-                                                            <input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
-                                                        </td>
-                                                        <td>
                                                             <select data-plugin-selecttwo class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
                                                             <option selected>Select Item</option>
                                                                
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <input type="text" id="remarks1" name="item_remarks[]" placeholder="Remarks" class="form-control">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" id="weight1" name="item_weight[]" onchange="rowTotal(1)" placeholder="Weight (kgs)" value="0" step="any" required class="form-control">
+                                                            <input type="number" id="item_qty1" name="item_qty[]" onchange="rowTotal(0)" placeholder="Qty" value="0" step="any" required class="form-control">
                                                         </td>
                                                         <td>
                                                             <input type="number" id="price1" name="item_price[]" onchange="rowTotal(1)" placeholder="Price" value="0" step="any" required class="form-control">
