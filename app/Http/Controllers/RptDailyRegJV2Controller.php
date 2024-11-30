@@ -102,9 +102,10 @@ class RptDailyRegJV2Controller extends Controller
                     <th style="width:13%;color:#17365D;font-weight:bold;">JV No</th>
                     <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
+                    <th style="width:24%;color:#17365D;font-weight:bold;">Detail</th>
                     <th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>
                     <th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:24%;color:#17365D;font-weight:bold;">Detail</th>
+                    
                 </tr>';
 
         // Start the table
@@ -132,9 +133,9 @@ class RptDailyRegJV2Controller extends Controller
                         <td>' . $items['prefix'] . '' . $items['jv_no'] . '</td>
                         <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
                         <td>' . $items['ac_name'] . '</td>
+                        <td>' . $items['remarks'] . ' ' . $items['Narration'] . '</td>
                         <td>' . number_format($items['debit'], 0) . '</td>
                         <td>' . number_format($items['credit'], 0) . '</td>
-                        <td>' . $items['remarks'] . ' ' . $items['Narration'] . '</td>
                     </tr>';
 
             $totaldebit += $items['debit'];
@@ -144,7 +145,7 @@ class RptDailyRegJV2Controller extends Controller
 
         // Add totals row
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                    <td colspan="4" style="text-align:right;">Total:</td>
+                    <td colspan="5" style="text-align:right;">Total:</td>
                     <td style="width:13%;">' . number_format($totaldebit, 0) . '</td>
                     <td style="width:13%;">' . number_format($totalcredit, 0) . '</td>
                 </tr>';
