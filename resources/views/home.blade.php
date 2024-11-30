@@ -1188,7 +1188,7 @@
 						month: month,
 					},
 					success: function(result) {
-						// const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+				
 
 						var rows = '';
 						var totalWeight = 0; // Initialize total
@@ -1197,7 +1197,7 @@
 							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
 							totalWeight += weight; // Add to total
 							rows += `<tr>
-								<td>${value['company_name'] ? value['ac_company_nameame'] : ''}</td>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
 								<td>${weight ? weight : ''}</td>
 							</tr>`;
 						});
