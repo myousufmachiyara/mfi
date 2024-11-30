@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <div class="class="row row-gutter-sm">
+                                        <div class="row row-gutter-sm">
                                             <div class="card card-modern card-modern-alt-padding">
                                                 <div class="card-body bg-light">
                                                     <div class="image-frame mb-2">
