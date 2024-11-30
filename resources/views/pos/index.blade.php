@@ -50,12 +50,12 @@
                                             <table class="table table-bordered table-striped mb-0" id="myTable" >
                                                 <thead>
                                                     <tr>
-                                                        <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
-                                                        <th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
-                                                        <th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
-                                                        <th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
-                                                        <th width="10%">Amount</th>
-                                                        <th width="10%"></th>
+                                                        <th>Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Item Name<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Qty<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Price<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th>Amount</th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="saleInvoiceTable">
