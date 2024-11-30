@@ -129,10 +129,7 @@
 
                                                 <div class="col-6 col-md-2">
                                                     <label class="col-form-label">Status</label>
-                                                    <select data-plugin-selecttwo="" class="form-control select2-js mb-3 select2-hidden-accessible" name="bill_status" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                        <option value="0" data-select2-id="3">Bill Not Final</option>
-                                                        <option value="1">Finalized</option>
-                                                    </select><span class="select2 select2-container select2-container--bootstrap" dir="ltr" data-select2-id="2" style="width: 223.325px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-bill_status-kh-container"><span class="select2-selection__rendered" id="select2-bill_status-kh-container" role="textbox" aria-readonly="true" title="Bill Not Final">Bill Not Final</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>												
+                                                    
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-4">
