@@ -3,14 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\dash_pur_2_summary_monthly_companywise;
-use App\Models\sale_pipe_summary_of_party_by_mill;
-use App\Models\pur_pipe_summary_of_party_by_mill;
+use App\Models\pur2_company_wise_item_group_wise;
 use App\Models\AC;
-use App\Models\top_customers_of_sale2;
-use App\Models\top_customers_of_pur2;
 
 class DashboardIILTabController extends Controller
-{
-    //
+{ 
+    public function IIL(Request $request){
+
+        $crc = pur2_company_wise_item_group_wise::where('dat',$request->month)
+        ->where('item_group_cod',1)
+        ->get();
+
+        $hrs = pur2_company_wise_item_group_wise::where('dat',$request->month)
+        ->where('item_group_cod',2)
+        ->get();
+
+        $eco = pur2_company_wise_item_group_wise::where('dat',$request->month)
+        ->where('item_group_cod',5)
+        ->get();
+
+        $cosmo = pur2_company_wise_item_group_wise::where('dat',$request->month)
+        ->where('item_group_cod',6)
+        ->get();
+
+
+        return [
+            'crc' => $crc,
+            'hrs' => $hrs,
+            'eco' => $eco,
+            'cosmo' => $cosmo,
+        ];
+    }
 }

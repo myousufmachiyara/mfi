@@ -391,13 +391,16 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
 								</li>
 								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
+								</li>
+								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Purchase</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
@@ -710,7 +713,7 @@
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="EcoSaleTable">
+														<tbody id="ECOSaleTable">
 															
 														</tbody>
 													</table>
@@ -736,7 +739,7 @@
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="CosmoSaleTable">
+														<tbody id="COSMOSaleTable">
 															
 														</tbody>
 													</table>
@@ -1155,177 +1158,36 @@
 				});
         	}
 
-			else if(tabId=="#IIL"){
-				var table = document.getElementById('SteelexSaleTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('SPMSaleTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('MehboobSaleTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('GodownSaleTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('Top3Cus');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				if (top5CustomerPerformanceChart) {
-					top5CustomerPerformanceChart.destroy();
-				}
-
-				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-
-				top5CustomerPerformance.width = 600; // Set desired width
-				top5CustomerPerformance.height = 353; // Set desired height
-
-				// Create the new chart
-				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
-					type: 'bar',
-					data: {
-						labels: chartLabels, // 'dat' values as labels
-						datasets: datasets,  // Dynamic datasets based on groupedData
-					},
+			else if (tabId === "#IIL") {
+				['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'].forEach((tableId) => {
+					const table = document.getElementById(tableId);
+					table.innerHTML = ''; // Clear table rows
 				});
 
-				var month = document.getElementById('filterHR').value;
+				['CRC', 'HRS', 'ECO', 'COSMO'].forEach((key) => {
+					let rows = '';
+					let totalWeight = 0;
 
-				$.ajax({
-					type: "GET",
-					url: '/dashboard-tabs/hr',
-					data: {
-						month: month,
-					},
-					success: function(result) {
-						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
-
-						if (monthlyTonageChart) {
-							monthlyTonageChart.destroy();
-						}
-
-						const chartData = {
-							labels: groupedData.labels, // Set the labels directly here
-							datasets: [
-								{
-									data: groupedData.data, // Extract total_weight values for each mill
-									backgroundColor: groupedData.backgroundColor, // Assign background colors
-								}
-							]
-						};
-						
-						// Create the doughnut chart
-						monthlyTonageChart = new Chart(MonthlyTonage, {
-							type: 'doughnut',
-							data: chartData,
-						});
-
-						var rows = '';
-						var totalWeight = 0; // Initialize total
-
-						$.each(result['steelex'], function (index, value) {
-							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
-							totalWeight += weight; // Add to total
-							rows += `<tr>
-								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${weight ? weight : ''}</td>
-							</tr>`;
-						});
-
-						// Append a row for the total
+					$.each(result[key], function (index, value) {
+						const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+						totalWeight += weight;
 						rows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+							<td>${value['company_name'] ? value['company_name'] : ''}</td>
+							<td>${weight ? weight : ''}</td>
 						</tr>`;
+					});
 
-						$('#SteelexSaleTable').html(rows);
+					// Add total row
+					rows += `<tr>
+						<td><strong>Total</strong></td>
+						<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+					</tr>`;
 
-
-						var rows = '';
-						var totalWeight = 0; // Initialize total
-
-						$.each(result['spm'], function (index, value) {
-							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
-							totalWeight += weight; // Add to total
-							rows += `<tr>
-								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${weight ? weight : ''}</td>
-							</tr>`;
-						});
-
-						// Append a row for the total
-						rows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
-						</tr>`
-
-						$('#SPMSaleTable').html(rows);
-
-						var rows = '';
-						var totalWeight = 0; // Initialize total
-
-						$.each(result['mehboob'], function (index, value) {
-							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
-							totalWeight += weight; // Add to total
-							rows += `<tr>
-								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${weight ? weight : ''}</td>
-							</tr>`;
-						});
-
-						// Append a row for the total
-						rows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
-						</tr>`
-
-						$('#MehboobSaleTable').html(rows);
-
-						var rows = '';
-						var totalWeight = 0; // Initialize total
-
-						$.each(result['godown'], function (index, value) {
-							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
-							totalWeight += weight; // Add to total
-							rows += `<tr>
-								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${weight ? weight : ''}</td>
-							</tr>`;
-						});
-						// Append a row for the total
-						rows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
-						</tr>`
-						$('#GodownSaleTable').html(rows);
-
-						var rows = '';
-
-						$.each(result['top_customers_of_pur2'], function (index, value) {
-							rows += `<tr>
-								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#Top3Cus').html(rows);
-
-						
-					},
-					error: function() {
-						alert("Error loading HR data");
-					}
+					// Populate the corresponding table
+					$(`#${key}SaleTable`).html(rows);
 				});
-        	}
+			}
+
 		}
 
 		function getTabData() {

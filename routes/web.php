@@ -529,6 +529,9 @@
         Route::get('/dashboard-tabs/hr/monthlyTonage', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonage']);
         Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
 
+        // IIL Tab
+        Route::get('/dashboard-tabs/iil', [App\Http\Controllers\DashboardIILTabController::class, 'IIL']);
+
     });
 
 
