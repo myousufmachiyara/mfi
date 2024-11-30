@@ -638,7 +638,7 @@
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
 												{{-- <label class="col-form-label">Select Month</label> --}}
-												<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
+												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
 											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 										</div>
@@ -1159,35 +1159,48 @@
         	}
 
 			else if (tabId === "#IIL") {
-				['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'].forEach((tableId) => {
-					const table = document.getElementById(tableId);
-					table.innerHTML = ''; // Clear table rows
+				const month = document.getElementById('filterIIL').value;  // Get selected month
+				$.ajax({
+					url: '/dashboard-tabs/iil',  // Make AJAX request to the back-end
+					type: 'GET',
+					data: { month },
+					success: function(result) {
+						console.log('Result:', result); // For debugging, check the response
+
+						// Loop through each of the categories (crc, hrs, eco, cosmo)
+						['crc', 'hrs', 'eco', 'cosmo'].forEach((key, index) => {
+							let rows = '';
+							let totalWeight = 0;
+
+							// Check if there are results for the current category
+							if (result[key]) {
+								$.each(result[key], function(index, value) {
+									const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+									totalWeight += weight;
+
+									// Build the table row
+									rows += `<tr>
+										<td>${value['company_name'] || ''}</td>
+										<td>${weight || ''}</td>
+									</tr>`;
+								});
+							}
+
+							// Add a row for the total weight
+							rows += `<tr>
+								<td><strong>Total</strong></td>
+								<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+							</tr>`;
+
+							// Table IDs corresponding to each category
+							const tableIds = ['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'];
+							$(`#${tableIds[index]}`).html(rows);  // Populate the table with rows
+						});
+					},
+					error: function(xhr, status, error) {
+						console.error('AJAX Error:', status, error);  // For debugging, check if any error occurs
+					}
 				});
-
-				['CRC', 'HRS', 'ECO', 'COSMO'].forEach((key) => {
-					let rows = '';
-					let totalWeight = 0;
-
-					$.each(result[key], function (index, value) {
-						const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-						totalWeight += weight;
-						rows += `<tr>
-							<td>${value['company_name'] ? value['company_name'] : ''}</td>
-							<td>${weight ? weight : ''}</td>
-						</tr>`;
-					});
-
-					// Add total row
-					rows += `<tr>
-						<td><strong>Total</strong></td>
-						<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
-					</tr>`;
-
-					// Populate the corresponding table
-					$(`#${key}SaleTable`).html(rows);
-				});
-			}
-
 		}
 
 		function getTabData() {
