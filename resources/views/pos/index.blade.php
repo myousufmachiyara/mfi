@@ -17,6 +17,10 @@
                                 <div class="row form-group mb-2">
                                 </div>
                             </div>
+
+                            <div class="card-footer">
+                            </div>
+                            
                         </section>
                     </div>
                 </div>
