@@ -115,7 +115,7 @@ class RptDailyRegJV2Controller extends Controller
         $totaldebit = 0;
         $totalcredit = 0;
 
-        foreach ($activites10_gen_ac as $items) {
+        foreach ($activites9_gen_acas as $items) {
             // Check if a new page is needed
             if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
                 $html .= '</table>'; // Close the current table
