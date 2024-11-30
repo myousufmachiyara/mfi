@@ -1158,49 +1158,124 @@
 				});
         	}
 
-			else if (tabId === "#IIL") {
-				const month = document.getElementById('filterHR').value;  // Get selected month
-			$.ajax({
-				url: '/dashboard-tabs/iil',  // Make AJAX request to the back-end
-				type: 'GET',
-				data: { month },
-				success: function(result) {
-					console.log('Result:', result); // For debugging, check the response
+			else if(tabId=="#IIL"){
+				var table = document.getElementById('CRCSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-					// Loop through each of the categories (crc, hrs, eco, cosmo)
-					['crc', 'hrs', 'eco', 'cosmo'].forEach((key, index) => {
-						let rows = '';
-						let totalWeight = 0;
+				var table = document.getElementById('HRSSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-						// Check if there are results for the current category
-						if (result[key]) {
-							$.each(result[key], function(index, value) {
-								const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-								totalWeight += weight;
+				var table = document.getElementById('ECOSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-								// Build the table row
-								rows += `<tr>
-									<td>${value['company_name'] || ''}</td>
-									<td>${weight || ''}</td>
-								</tr>`;
-							});
-						}
+				var table = document.getElementById('COSMOSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-						// Add a row for the total weight
+				var month = document.getElementById('filterHR').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/hr',
+					data: {
+						month: month,
+					},
+					success: function(result) {
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['CRC'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['company_name'] ? value['ac_company_nameame'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
 						</tr>`;
 
-						// Table IDs corresponding to each category
-						const tableIds = ['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'];
-						$(`#${tableIds[index]}`).html(rows);  // Populate the table with rows
-					});
-				},
-				error: function(xhr, status, error) {
-					console.error('AJAX Error:', status, error);  // For debugging, check if any error occurs
-				}
-			});
+						$('#CRCSaleTable').html(rows);
+
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['HRS'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#HRSSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['ECO'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#ECOSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['COSMO'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+						$('#COSMOSaleTable').html(rows);
+
+						
+					},
+					error: function() {
+						alert("Error loading IIL data");
+					}
+				});
+        	}
 		}
 
 		function getTabData() {
