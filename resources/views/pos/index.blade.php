@@ -50,7 +50,7 @@
                                             <table class="table table-bordered table-striped mb-0" id="myTable" >
                                                 <thead>
                                                     <tr>
-                                                        <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                        <th width="15%">Item Code<span style="color: red;"><strong>*</strong></span></th>
                                                         <th>Item Name<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="15%">Qty<span style="color: red;"><strong>*</strong></span></th>
                                                         <th width="15%">Price<span style="color: red;"><strong>*</strong></span></th>
