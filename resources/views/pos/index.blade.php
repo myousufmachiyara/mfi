@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="row row-gutter-sm mb-5">
-                                        <div class="col-lg-2-5 col-xl-1-5 mb-4 mb-lg-0">
+                                        <div class="col-lg-8">
                                             <div class="filters-sidebar-wrapper bg-light rounded">
                                                 <div class="card card-modern">
                                                     <div class="card-header">
@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3-5 col-xl-4-5">
+                                        <div class="col-lg-4">
                                             <div class="row row-gutter-sm">
                                                 
                                                 <div class="col-sm-6 col-xl-3 mb-4">
