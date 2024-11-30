@@ -16,99 +16,6 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="row row-gutter-sm mb-5">
-                                        <div class="col-lg-8">
-                                            <div class="filters-sidebar-wrapper bg-light rounded">
-                                                <div class="card card-modern">
-                                                    <div class="card-header">
-                                                        <div class="card-actions">
-                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
-                                                        </div>
-                                                        <h4 class="card-title">ELECTRONICS</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <ul class="list list-unstyled mb-0">
-                                                            <li><a href="#">Smart TVs</a></li>
-                                                            <li><a href="#">Cameras</a></li>
-                                                            <li><a href="#">Headphones</a></li>
-                                                            <li><a href="#">Games</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <hr class="solid opacity-7">
-                                                <div class="card card-modern">
-                                                    <div class="card-header">
-                                                        <div class="card-actions">
-                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
-                                                        </div>
-                                                        <h4 class="card-title">PRICE</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="slider-range-wrapper">
-                                                            <div class="m-md slider-primary slider-modern ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-plugin-slider="" data-plugin-options="{ &quot;half_values&quot;: true, &quot;values&quot;: [ 25, 270 ], &quot;range&quot;: true, &quot;max&quot;: 300 }" data-plugin-slider-output="#priceRange" data-plugin-slider-link-values-to="#priceRangeValues">
-                                                                <input id="priceRange" type="hidden" value="25, 270">
-                                                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 8.33333%; width: 81.6667%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 8.33333%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 90%;"></span></div>
-                                                            <form class="d-flex align-items-center justify-content-between mb-2" method="get">
-                                                                <span id="priceRangeValues" class="price-range-values">
-                                                                    Price $<span class="min price-range-low">25</span> - $<span class="max price-range-high">270</span>
-                                                                </span>
-                                                                <input type="hidden" class="hidden-price-range-low" name="priceLow" value="">
-                                                                <input type="hidden" class="hidden-price-range-high" name="priceHigh" value="">
-                                                                <button type="submit" class="btn btn-primary btn-h-1 font-weight-semibold rounded-0 btn-px-3 btn-py-1 text-2">FILTER</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr class="solid opacity-7">
-                                                <div class="card card-modern">
-                                                    <div class="card-header">
-                                                        <div class="card-actions">
-                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
-                                                        </div>
-                                                        <h4 class="card-title">SIZES</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <ul class="list list-inline list-filter mb-0">
-                                                            <li class="list-inline-item">
-                                                                <a href="#">S</a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <a href="#" class="active">M</a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <a href="#">L</a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <a href="#">XL</a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <a href="#">2XL</a>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <a href="#">3XL</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <hr class="solid opacity-7">
-                                                <div class="card card-modern">
-                                                    <div class="card-header">
-                                                        <div class="card-actions">
-                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
-                                                        </div>
-                                                        <h4 class="card-title">BRANDS</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <ul class="list list-unstyled mb-0">
-                                                            <li><a href="#">Adidas <span class="float-right">18</span></a></li>
-                                                            <li><a href="#">Camel <span class="float-right">22</span></a></li>
-                                                            <li><a href="#">Samsung Galaxy <span class="float-right">05</span></a></li>
-                                                            <li><a href="#">Seiko <span class="float-right">68</span></a></li>
-                                                            <li><a href="#">Sony <span class="float-right">03</span></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-4">
                                             <div class="row row-gutter-sm">
                                                 
@@ -337,6 +244,99 @@
                                                             </li>
                                                         </ul>
                                                     </nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="filters-sidebar-wrapper bg-light rounded">
+                                                <div class="card card-modern">
+                                                    <div class="card-header">
+                                                        <div class="card-actions">
+                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                                                        </div>
+                                                        <h4 class="card-title">ELECTRONICS</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list list-unstyled mb-0">
+                                                            <li><a href="#">Smart TVs</a></li>
+                                                            <li><a href="#">Cameras</a></li>
+                                                            <li><a href="#">Headphones</a></li>
+                                                            <li><a href="#">Games</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <hr class="solid opacity-7">
+                                                <div class="card card-modern">
+                                                    <div class="card-header">
+                                                        <div class="card-actions">
+                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                                                        </div>
+                                                        <h4 class="card-title">PRICE</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="slider-range-wrapper">
+                                                            <div class="m-md slider-primary slider-modern ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-plugin-slider="" data-plugin-options="{ &quot;half_values&quot;: true, &quot;values&quot;: [ 25, 270 ], &quot;range&quot;: true, &quot;max&quot;: 300 }" data-plugin-slider-output="#priceRange" data-plugin-slider-link-values-to="#priceRangeValues">
+                                                                <input id="priceRange" type="hidden" value="25, 270">
+                                                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 8.33333%; width: 81.6667%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 8.33333%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 90%;"></span></div>
+                                                            <form class="d-flex align-items-center justify-content-between mb-2" method="get">
+                                                                <span id="priceRangeValues" class="price-range-values">
+                                                                    Price $<span class="min price-range-low">25</span> - $<span class="max price-range-high">270</span>
+                                                                </span>
+                                                                <input type="hidden" class="hidden-price-range-low" name="priceLow" value="">
+                                                                <input type="hidden" class="hidden-price-range-high" name="priceHigh" value="">
+                                                                <button type="submit" class="btn btn-primary btn-h-1 font-weight-semibold rounded-0 btn-px-3 btn-py-1 text-2">FILTER</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="solid opacity-7">
+                                                <div class="card card-modern">
+                                                    <div class="card-header">
+                                                        <div class="card-actions">
+                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                                                        </div>
+                                                        <h4 class="card-title">SIZES</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list list-inline list-filter mb-0">
+                                                            <li class="list-inline-item">
+                                                                <a href="#">S</a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a href="#" class="active">M</a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a href="#">L</a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a href="#">XL</a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a href="#">2XL</a>
+                                                            </li>
+                                                            <li class="list-inline-item">
+                                                                <a href="#">3XL</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <hr class="solid opacity-7">
+                                                <div class="card card-modern">
+                                                    <div class="card-header">
+                                                        <div class="card-actions">
+                                                            <a href="#" class="card-action card-action-toggle" data-card-toggle=""></a>
+                                                        </div>
+                                                        <h4 class="card-title">BRANDS</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list list-unstyled mb-0">
+                                                            <li><a href="#">Adidas <span class="float-right">18</span></a></li>
+                                                            <li><a href="#">Camel <span class="float-right">22</span></a></li>
+                                                            <li><a href="#">Samsung Galaxy <span class="float-right">05</span></a></li>
+                                                            <li><a href="#">Seiko <span class="float-right">68</span></a></li>
+                                                            <li><a href="#">Sony <span class="float-right">03</span></a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
