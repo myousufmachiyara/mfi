@@ -138,7 +138,7 @@ class RptDailyRegPur2Controller extends Controller
             $html .= '<tr style="background-color:' . $bgColor . ';">
                         <td>' . $count . '</td>
                         <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
-                        <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
+                        <td>' . $items['prefix'] . '' . $items['Sale_inv_no'] . '</td>
                         <td>' . $items['pur_ord_no'] . '</td>
                         <td>' . $items['acc_name'] . '</td>
                         <td>' . $items['cust_name'] . ' ' . $items['Sales_Remarks'] . '</td>
