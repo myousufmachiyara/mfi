@@ -37,7 +37,6 @@
         Route::get('/quotation/all-quotation', [App\Http\Controllers\QuotationController::class, 'index'])->name('all-quotation');
         Route::get('/tquotation/all-tquotation', [App\Http\Controllers\TQuotationController::class, 'index'])->name('all-tquotation');
         Route::get('/weight/all-weight', [App\Http\Controllers\WeightController::class, 'index'])->name('all-weight');
-        Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
         Route::get('/po/show/{id}', [App\Http\Controllers\PoController::class, 'show'])->name('show-po');
         Route::get('/purchase2/show/{id}', [App\Http\Controllers\Purchase2Controller::class, 'show'])->name('show-purchases2');
         Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'showNew'])->name('show-sale-invoice');
@@ -531,3 +530,6 @@
         Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
 
     });
+
+
+    Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
