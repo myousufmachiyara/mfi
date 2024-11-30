@@ -257,7 +257,7 @@
                 var cell3 = newRow.insertCell(2);
                 var cell4 = newRow.insertCell(3);
                 var cell5 = newRow.insertCell(4);
-                var cell6 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
 
                 cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" onchange="getItemDetails('+index+','+1+')" placeholder="Code" class="form-control" required>';
                 cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" required onchange="getItemDetails('+index+','+2+')" name="item_name">'+
