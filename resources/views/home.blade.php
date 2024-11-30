@@ -634,97 +634,123 @@
 								</div>
 								<div id="IIL" class="tab-pane">
 									<div class="row form-group pb-3">
+
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
+												{{-- <label class="col-form-label">Select Month</label> --}}
 												<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
-											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()">
-												<i class="fa fa-filter"></i>
-											</a>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 										</div>
-								
-										<!-- CRC Table -->
+
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
 													<h2 class="card-title">CRC Purchase Summary</h2>
 												</header>
 												<div class="card-body">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th>Company Name</th>
-																<th style="text-align:center">Tonage</th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="CRCSaleTable"></tbody>
+														<tbody id="CRCSaleTable">
+															
+														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-								
-										<!-- HRS Table -->
+
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
 													<h2 class="card-title">HRS Purchase Summary</h2>
 												</header>
 												<div class="card-body">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th>Company Name</th>
-																<th style="text-align:center">Tonage</th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="HRSSaleTable"></tbody>
+														<tbody id="HRSSaleTable">
+															
+														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-								
-										<!-- ECO Table -->
+
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
 													<h2 class="card-title">SS Eco 201 Purchase Summary</h2>
 												</header>
 												<div class="card-body">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th>Company Name</th>
-																<th style="text-align:center">Tonage</th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="ECOSaleTable"></tbody>
+														<tbody id="ECOSaleTable">
+															
+														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-								
-										<!-- COSMO Table -->
+
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
 													<h2 class="card-title">SS Cosmo 304 Sale Summary</h2>
 												</header>
 												<div class="card-body">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th>Company Name</th>
-																<th style="text-align:center">Tonage</th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
 															</tr>
 														</thead>
-														<tbody id="COSMOSaleTable"></tbody>
+														<tbody id="COSMOSaleTable">
+															
+														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
+
+										
+										
 									</div>
 								</div>
-								
 							</div>
 						</div>
 
@@ -1133,48 +1159,48 @@
         	}
 
 			else if (tabId === "#IIL") {
-				const month = document.getElementById('filterIIL').value;  // Get selected month
-				$.ajax({
-					url: '/dashboard-tabs/iil',  // Make AJAX request to the back-end
-					type: 'GET',
-					data: { month },
-					success: function(result) {
-						console.log('Result:', result); // For debugging, check the response
+				const month = document.getElementById('filterHR').value;  // Get selected month
+			$.ajax({
+				url: '/dashboard-tabs/iil',  // Make AJAX request to the back-end
+				type: 'GET',
+				data: { month },
+				success: function(result) {
+					console.log('Result:', result); // For debugging, check the response
 
-						// Loop through each of the categories (crc, hrs, eco, cosmo)
-						['crc', 'hrs', 'eco', 'cosmo'].forEach((key, index) => {
-							let rows = '';
-							let totalWeight = 0;
+					// Loop through each of the categories (crc, hrs, eco, cosmo)
+					['crc', 'hrs', 'eco', 'cosmo'].forEach((key, index) => {
+						let rows = '';
+						let totalWeight = 0;
 
-							// Check if there are results for the current category
-							if (result[key]) {
-								$.each(result[key], function(index, value) {
-									const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-									totalWeight += weight;
+						// Check if there are results for the current category
+						if (result[key]) {
+							$.each(result[key], function(index, value) {
+								const weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+								totalWeight += weight;
 
-									// Build the table row
-									rows += `<tr>
-										<td>${value['company_name'] || ''}</td>
-										<td>${weight || ''}</td>
-									</tr>`;
-								});
-							}
+								// Build the table row
+								rows += `<tr>
+									<td>${value['company_name'] || ''}</td>
+									<td>${weight || ''}</td>
+								</tr>`;
+							});
+						}
 
-							// Add a row for the total weight
-							rows += `<tr>
-								<td><strong>Total</strong></td>
-								<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
-							</tr>`;
+						// Add a row for the total weight
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						</tr>`;
 
-							// Table IDs corresponding to each category
-							const tableIds = ['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'];
-							$(`#${tableIds[index]}`).html(rows);  // Populate the table with rows
-						});
-					},
-					error: function(xhr, status, error) {
-						console.error('AJAX Error:', status, error);  // For debugging, check if any error occurs
-					}
-				});
+						// Table IDs corresponding to each category
+						const tableIds = ['CRCSaleTable', 'HRSSaleTable', 'ECOSaleTable', 'COSMOSaleTable'];
+						$(`#${tableIds[index]}`).html(rows);  // Populate the table with rows
+					});
+				},
+				error: function(xhr, status, error) {
+					console.error('AJAX Error:', status, error);  // For debugging, check if any error occurs
+				}
+			});
 		}
 
 		function getTabData() {
