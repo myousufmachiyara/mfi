@@ -113,12 +113,13 @@
                                                 </tbody>
                                             </table>
 									    </div>
+                                        <footer class="card-footer">
+                                        </footer>
                                     </div>
                                 </div>
                             </div>
 
-                            <footer class="card-footer">
-                            </footer>
+                           
                             
                         </section>
                     </div>
