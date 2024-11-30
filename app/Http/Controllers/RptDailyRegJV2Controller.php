@@ -80,75 +80,76 @@ class RptDailyRegJV2Controller extends Controller
         $pdf->writeHTML($heading, true, false, true, false, '');
     
         // Header details
-        $html = '
+        $htmlHeaderDetails = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
+                    From Date: <span style="color:black;">' . $formattedFromDate . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:34%;">
+                    To Date: <span style="color:black;">' . $formattedToDate . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
                     Print Date: <span style="color:black;">' . $formattedDate . '</span>
                 </td>
             </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:30%;">
-                    From Date: <span style="color:black;">' . $formattedFromDate . '</span>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:30%;">
-                    To Date: <span style="color:black;">' . $formattedToDate . '</span>
-                </td>
-            </tr>
         </table>';
+        $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
-        $pdf->writeHTML($html, true, false, true, false, '');
-
-    
-        // Table header for data
-        $html = '
-            <table border="1" style="border-collapse: collapse; text-align: center;">
-                <tr>
+        // Table headers
+        $tableHeader = '<tr>
                     <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                    <th style="width:8%;color:#17365D;font-weight:bold;">JV No</th>
-                    <th style="width:11%;color:#17365D;font-weight:bold;">Date</th>
+                    <th style="width:13%;color:#17365D;font-weight:bold;">JV No</th>
+                    <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
                     <th style="width:18%;color:#17365D;font-weight:bold;">Account Name</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Debit</th>
-                    <th style="width:12%;color:#17365D;font-weight:bold;">Credit</th>
-                    <th style="width:16%;color:#17365D;font-weight:bold;">Remarks</th>
-                    <th style="width:18%;color:#17365D;font-weight:bold;">Narration</th>
+                    <th style="width:13%;color:#17365D;font-weight:bold;">Debit</th>
+                    <th style="width:13%;color:#17365D;font-weight:bold;">Credit</th>
+                    <th style="width:24%;color:#17365D;font-weight:bold;">Detail</th>
                 </tr>';
-    
-        // Iterate through items and add rows
+
+        // Start the table
+        $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
+        $html .= $tableHeader;
+
         $count = 1;
-        $totalAmount = 0;
-    
-        foreach ($activites9_gen_acas as $item) {
-            $backgroundColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff'; // Alternating row colors
-    
-            $html .= '
-                <tr style="background-color:' . $backgroundColor . ';">
-                    <td style="width:7%;">' . $count . '</td>
-                    <td style="width:8%;">' . $item['jv_no']. '</td>
-                    <td style="width:11%;">' . Carbon::parse($item['jv_date'])->format('d-m-y') . '</td>
-                    <td style="width:18%;">' . $item['ac_name'] . '</td>
-                    <td style="width:12%;">' . $item['debit'] . '</td>
-                    <td style="width:12%;">' . $item['credit'] . '</td>
-                    <td style="width:16%;">' . $item['Remark'] . '</td>
-                    <td style="width:18%;">' . $item['Narration'] . '</td>
-                </tr>';
-            
-            $totalAmount += $item['Amount']; // Accumulate total quantity
+        $totaldebit = 0;
+        $totalcredit = 0;
+
+        foreach ($activites10_gen_ac as $items) {
+            // Check if a new page is needed
+            if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
+                $html .= '</table>'; // Close the current table
+                $pdf->writeHTML($html, true, false, true, false, '');
+                $pdf->AddPage(); // Add a new page
+                $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
+                $html .= $tableHeader; // Re-add table header
+            }
+
+            // Add table rows
+            $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+            $html .= '<tr style="background-color:' . $bgColor . ';">
+                        <td>' . $count . '</td>
+                        <td>' . $items['prefix'] . '' . $items['jv_no'] . '</td>
+                        <td>' . Carbon::createFromFormat('Y-m-d', $items['jv_date'])->format('d-m-y') . '</td>
+                        <td>' . $items['ac_name'] . '</td>
+                        <td>' . number_format($items['debit'], 0) . '</td>
+                        <td>' . number_format($items['credit'], 0) . '</td>
+                        <td>' . $items['remarks'] . ' ' . $items['Narration'] . '</td>
+                    </tr>';
+
+            $totaldebit += $items['debit'];
+            $totalcredit += $items['credit'];
             $count++;
         }
-    
+
+        // Add totals row
+        $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="4" style="text-align:right;">Total:</td>
+                    <td style="width:13%;">' . number_format($totaldebit, 0) . '</td>
+                    <td style="width:13%;">' . number_format($totalcredit, 0) . '</td>
+                </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-    
-        // Display total amount at the bottom
-        $currentY = $pdf->GetY();
-        $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->SetXY(155, $currentY + 5);
-        $pdf->MultiCell(20, 5, 'Total', 1, 'C');
-        $pdf->SetXY(175, $currentY + 5);
-        $pdf->MultiCell(28, 5, $totalAmount, 1, 'C');
     
         // Prepare filename for the PDF
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
