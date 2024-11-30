@@ -634,123 +634,97 @@
 								</div>
 								<div id="IIL" class="tab-pane">
 									<div class="row form-group pb-3">
-
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
-												{{-- <label class="col-form-label">Select Month</label> --}}
-												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+												<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
-											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()">
+												<i class="fa fa-filter"></i>
+											</a>
 										</div>
-
+								
+										<!-- CRC Table -->
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
 													<h2 class="card-title">CRC Purchase Summary</h2>
 												</header>
 												<div class="card-body">
-													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																<th>Company Name</th>
+																<th style="text-align:center">Tonage</th>
 															</tr>
 														</thead>
-														<tbody id="CRCSaleTable">
-															
-														</tbody>
+														<tbody id="CRCSaleTable"></tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-
+								
+										<!-- HRS Table -->
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
 													<h2 class="card-title">HRS Purchase Summary</h2>
 												</header>
 												<div class="card-body">
-													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																<th>Company Name</th>
+																<th style="text-align:center">Tonage</th>
 															</tr>
 														</thead>
-														<tbody id="HRSSaleTable">
-															
-														</tbody>
+														<tbody id="HRSSaleTable"></tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-
+								
+										<!-- ECO Table -->
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
 													<h2 class="card-title">SS Eco 201 Purchase Summary</h2>
 												</header>
 												<div class="card-body">
-													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																<th>Company Name</th>
+																<th style="text-align:center">Tonage</th>
 															</tr>
 														</thead>
-														<tbody id="ECOSaleTable">
-															
-														</tbody>
+														<tbody id="ECOSaleTable"></tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-
+								
+										<!-- COSMO Table -->
 										<div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
 													<h2 class="card-title">SS Cosmo 304 Sale Summary</h2>
 												</header>
 												<div class="card-body">
-													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																<th>Company Name</th>
+																<th style="text-align:center">Tonage</th>
 															</tr>
 														</thead>
-														<tbody id="COSMOSaleTable">
-															
-														</tbody>
+														<tbody id="COSMOSaleTable"></tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-
-										
-										
 									</div>
 								</div>
+								
 							</div>
 						</div>
 
