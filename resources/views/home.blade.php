@@ -376,10 +376,13 @@
 						<div class="tabs mt-3">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#BNF" href="#BNF" data-bs-toggle="tab">Bills Not Final</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#SALE_NOT_FINAL" href="#SALE_NOT_FINAL" data-bs-toggle="tab">Sale Not Final</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#BNR" href="#BNR" data-bs-toggle="tab">Bills Not Recieved </a>
+									<a class="nav-link nav-link-rep" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bills Not Recieved </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-rep" data-bs-target="#PUR_NOT_FINAL" href="#PUR_NOT_FINAL" data-bs-toggle="tab">Purchase Not Final </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
@@ -388,7 +391,7 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#GS" href="#GS" data-bs-toggle="tab">Garder Sale</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
@@ -397,16 +400,16 @@
 									<a class="nav-link nav-link-rep" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#annual" href="#annual" data-bs-toggle="tab">Annual</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#overDues" href="#overDues" data-bs-toggle="tab">Overdues</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#OVER_DUES" href="#OVER_DUES" data-bs-toggle="tab">Overdues</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#overDays" href="#overDays" data-bs-toggle="tab">Over Days</a>
+									<a class="nav-link nav-link-rep" data-bs-target="#OVER_DAYS" href="#OVER_DAYS" data-bs-toggle="tab">Over Days</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -623,6 +626,125 @@
 												</div>
 											</section>
 										</div>
+										
+									</div>
+								</div>
+								<div id="IIL" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												{{-- <label class="col-form-label">Select Month</label> --}}
+												<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">CRC Purchase Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CRCSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">HRS Purchase Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="HRSSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">SS Eco 201 Purchase Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="EcoSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">SS Cosmo 304 Sale Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CosmoSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
 										
 									</div>
 								</div>
@@ -862,6 +984,178 @@
 
 		function tabChanged(tabId) {
 			if(tabId=="#HR"){
+				var table = document.getElementById('SteelexSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('SPMSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('MehboobSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('GodownSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Top3Cus');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				if (top5CustomerPerformanceChart) {
+					top5CustomerPerformanceChart.destroy();
+				}
+
+				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+
+				top5CustomerPerformance.width = 600; // Set desired width
+				top5CustomerPerformance.height = 353; // Set desired height
+
+				// Create the new chart
+				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
+					type: 'bar',
+					data: {
+						labels: chartLabels, // 'dat' values as labels
+						datasets: datasets,  // Dynamic datasets based on groupedData
+					},
+				});
+
+				var month = document.getElementById('filterHR').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/hr',
+					data: {
+						month: month,
+					},
+					success: function(result) {
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+
+						if (monthlyTonageChart) {
+							monthlyTonageChart.destroy();
+						}
+
+						const chartData = {
+							labels: groupedData.labels, // Set the labels directly here
+							datasets: [
+								{
+									data: groupedData.data, // Extract total_weight values for each mill
+									backgroundColor: groupedData.backgroundColor, // Assign background colors
+								}
+							]
+						};
+						
+						// Create the doughnut chart
+						monthlyTonageChart = new Chart(MonthlyTonage, {
+							type: 'doughnut',
+							data: chartData,
+						});
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['steelex'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#SteelexSaleTable').html(rows);
+
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['spm'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#SPMSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['mehboob'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#MehboobSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['godown'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+						$('#GodownSaleTable').html(rows);
+
+						var rows = '';
+
+						$.each(result['top_customers_of_pur2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#Top3Cus').html(rows);
+
+						
+					},
+					error: function() {
+						alert("Error loading HR data");
+					}
+				});
+        	}
+
+			else if(tabId=="#IIL"){
 				var table = document.getElementById('SteelexSaleTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
