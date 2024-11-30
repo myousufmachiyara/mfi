@@ -66,6 +66,7 @@
 				</div>
 				<i class="fa custom-caret"></i>
 			</a>
+			<button class="btn btn-success"> POS System</button>
 			<div class="dropdown-menu" >
 				<ul class="list-unstyled">
 					<li>
