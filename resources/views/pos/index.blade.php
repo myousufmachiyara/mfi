@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-4 row">
-                                        <div class="card card-modern card-modern-alt-padding col-5 mt-0">
+                                        <div class="card card-modern card-modern-alt-padding col-6 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
@@ -30,7 +30,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-modern card-modern-alt-padding col-5 mt-0">
+                                        <div class="card card-modern card-modern-alt-padding col-6 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
@@ -44,7 +44,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-modern card-modern-alt-padding col-5 mt-0">
+                                        <div class="card card-modern card-modern-alt-padding col-6 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-modern card-modern-alt-padding col-5 mt-0">
+                                        <div class="card card-modern card-modern-alt-padding col-6 mt-0">
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
