@@ -20,7 +20,7 @@
                                             <div class="card-body bg-light">
                                                 <div class="image-frame mb-2">
                                                     <div class="image-frame-wrapper">
-                                                        <img src="img/empty-300x240.jpg" class="img-fluid" alt="Product Short Name">
+                                                        <img src="/assets/img/empty-300x240.jpg" class="img-fluid" alt="Product Short Name">
                                                     </div>
                                                 </div>
                                                 <small><a href="ecommerce-products-form.html" class="ecommerce-sidebar-link text-color-grey text-color-hover-primary text-decoration-none">CATEGORY</a></small>
