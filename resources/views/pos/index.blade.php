@@ -108,60 +108,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
-                                        <div class="card-body">
-                                            <div class="row form-group mb-2">
-                                                <div class="col-6 col-md-2 mb-2">
-                                                    <label class="col-form-label">Invoice no.</label>
-                                                    <input type="text" name="invoice_no" placeholder="(New Invoice)" class="form-control" disabled="">
-                                                    <input type="hidden" id="itemCount" name="items" value="1" class="form-control">
-                                                    <input type="hidden" id="printInvoice" name="printInvoice" value="0" class="form-control">
-                                                </div>
-
-                                                <div class="col-6 col-md-2 mb-2">
-                                                    <label class="col-form-label">Date</label>
-                                                    <input type="date" name="date" required="" value="2024-11-30" class="form-control">
-                                                </div>
-
-                                                <div class="col-6 col-md-2">
-                                                    <label class="col-form-label">Bill No.</label>
-                                                    <input type="text" name="bill_no" placeholder="Bill No." class="form-control">
-                                                </div>
-
-                                                <div class="col-6 col-md-2">
-                                                    <label class="col-form-label">Status</label>
-                                                    
-                                                </div>
-
-                                                <div class="col-sm-12 col-md-4">
-                                                    <label class="col-form-label">File Attached</label>
-                                                    <input type="file" class="form-control" name="att[]" multiple="" accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
-                                                </div>
-
-                                                <div class="col-12 col-md-2 mb-3">
-                                                    <label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
-                                                </div>
-
-                                                <div class="col-sm-12 col-md-2 mb-2">
-                                                    <label class="col-form-label">Name Of Person</label>
-                                                    <input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control">
-                                                </div>
-
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label class="col-form-label">Person Address</label>
-                                                    <input type="text" name="address" id="address" placeholder="Person Address" class="form-control">
-                                                </div>
-
-                                                <div class="col-12 col-md-4 mb-3">
-                                                    <label class="col-form-label">Person Phone Number</label>
-                                                    <input type="text" name="cash_pur_phone" id="cash_pur_phone" placeholder="Person Phone Number" class="form-control">
-                                                </div>
-
-                                                <div class="col-12 mb-3">
-                                                    <label class="col-form-label">Remarks</label>
-                                                    <textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="card-body" style="overflow-x:auto;min-height:250px;max-height:450px;overflow-y:auto">
                                             <table class="table table-bordered table-striped mb-0" id="myTable" >
                                                 <thead>
