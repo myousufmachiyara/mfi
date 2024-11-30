@@ -123,8 +123,10 @@
                                                             </td>
                                                             <td>
                                                                 <select class="form-control select2-js" id="item_name1" onchange="getItemDetails(1,2)" name="item_name[]" required>
-                                                                <option selected>Select Item</option>
-                                                                
+                                                                    <option selected>Select Item</option>
+                                                                    @foreach($items as $key => $row)	
+                                                                        <option value="{{$row->it_cod}}">{{$row->item_name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </td>
                                                             <td>
