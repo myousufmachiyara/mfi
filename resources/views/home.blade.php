@@ -1184,7 +1184,6 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
-						console.log(result);
 						var rows = '';
 						var totalWeight = 0; // Initialize total
 
