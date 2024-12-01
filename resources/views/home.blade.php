@@ -951,6 +951,100 @@
 										
 									</div>
 								</div>
+
+								<div id="GARDER" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Purchase Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Top 3 Customers Of The Month</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="TopSaleCustomersTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+									</div>
+								</div>
 								
 							</div>
 						</div>
