@@ -412,40 +412,35 @@
 							<div class="tab-content">
 								<div id="PENDING_INVOICES" class="tab-pane">
 									<div class="row form-group pb-3">
-
 										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
-
 													<h2 class="card-title">Sale 1 Not Final</h2>
 												</header>
 												<div class="card-body">
-													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead>
 															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Invoive#</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Date</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bill#</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Name Of Person</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Remarks</font></font></th>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th class="text-center">Remarks</th>
 															</tr>
 														</thead>
 														<tbody id="Sale1NotTable">
-															
+															<!-- Table rows will be populated dynamically -->
 														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-
-										
 									</div>
 								</div>
+								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
@@ -1015,55 +1010,37 @@
         });
 
 		function tabChanged(tabId) {
-			if(tabId=="#PENDING_INVOICES"){
-				var table = document.getElementById('Sale1NotTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
+			if (tabId === "#PENDING_INVOICES") {
+			// Clear the table
+			$('#Sale1NotTable').empty();
 
-				// var table = document.getElementById('SaleAgainstPur1Table');
-				// while (table.rows.length > 0) {
-				// 	table.deleteRow(0);
-				// }
-
-				// var table = document.getElementById('SaleAgainstPur2Table');
-				// while (table.rows.length > 0) {
-				// 	table.deleteRow(0);
-				// }
-
-				// var table = document.getElementById('CashBillNotTable');
-				// while (table.rows.length > 0) {
-				// 	table.deleteRow(0);
-				// }
-
-				// var month = document.getElementById('filterIIL').value;
-
-				$.ajax({
-					type: "GET",
-					url: '/dashboard-tabs/pending-invoices',
-					success: function(result) {
-						var rows = '';
-						$.each(result['sale1_not'], function (index, value) {
+			// Fetch data using AJAX
+			$.ajax({
+				type: "GET",
+				url: '/dashboard-tabs/pending-invoices',
+				success: function(result) {
+					var rows = '';
+					if (result['sale1_not'].length > 0) {
+						$.each(result['sale1_not'], function(index, value) {
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
-								<td>${value['sa_date'] ? value['sa_date'] : ''}</td>
-								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? value['sa_date'] : ''}</td>
 								<td>${value['account_name'] ? value['account_name'] : ''}</td>
 								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
-								<td>${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
-
+								<td class="text-center">${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
 							</tr>`;
 						});
-
-						$('#Sale1NotTable').html(rows);
-
-					},
-					error: function() {
-						alert("Error loading PENDING INVOICES data");
+					} else {
+						rows = `<tr><td colspan="5" class="text-center">No pending invoices found</td></tr>`;
 					}
-				});
+					$('#Sale1NotTable').html(rows);
+				},
+				error: function(xhr, status, error) {
+					alert(`Failed to load PENDING INVOICES data. Status: ${status}, Error: ${error}`);
+				}
+			});
+		}
 
-        	}
 
 			else if(tabId=="#HR"){
 				var table = document.getElementById('SteelexSaleTable');
