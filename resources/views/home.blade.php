@@ -1229,13 +1229,8 @@
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
 								<td>${value['sales_remarks'] ? value['sales_remarks'] : ''}</td>
-								html += "<td>";
-									if (v['item_type'] == 1) {
-										html += "<strong>Pipes</strong>";
-									} else if (v['item_type'] == 2) {
-										html += "<strong>Garder / TR</strong>";
-									}
-								html += "</td>";
+								<td>${value['item_type'] ? value['item_type'] : ''}</td>
+								
 							</tr>`;
 						});
 
