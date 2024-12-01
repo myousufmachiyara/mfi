@@ -149,7 +149,7 @@
                     <div class="card-body">
                         <div class="modal-wrapper">
 
-                            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                            <table class="table table-bordered table-striped mb-0">
                                 <thead>
                                     <tr>
                                         <th>Attachement Path</th>
