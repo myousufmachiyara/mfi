@@ -443,83 +443,6 @@
 											</section>
 										</div>
 
-										{{-- <div class="col-12 col-md-3 mb-3">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Sale Against Purchase 1 Not Final</h2>
-												</header>
-												<div class="card-body">
-													
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-															</tr>
-														</thead>
-														<tbody id="SaleAgainstPur1Table">
-															
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div>
-
-										<div class="col-12 col-md-3 mb-3">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Sale Againts Pur 2 Not Final</h2>
-												</header>
-												<div class="card-body">
-													
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-															</tr>
-														</thead>
-														<tbody id="SaleAgainstPur2Table">
-															
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div>
-
-										<div class="col-12 col-md-3 mb-3">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Cash Bill Not Recieved</h2>
-												</header>
-												<div class="card-body">
-													
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-															</tr>
-														</thead>
-														<tbody id="CashBillNotTable">
-															
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div> --}}
 										
 									</div>
 								</div>
@@ -1118,7 +1041,6 @@
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/pending-invoices',
-					data: { month: month },
 					success: function(result) {
 						var rows = '';
 						$.each(result['sale1_not'], function (index, value) {
