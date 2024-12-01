@@ -483,10 +483,10 @@
 												<tr>
 												  <th>Invoice#</th>
 												  <th class="text-center">Date</th>
-												  <th>Pur Inv#</th>
-												  <th>Account Name</th>
+												  <th>Customer Name</th>
+												  <th>Company Name</th>
 												  <th>Name Of Person</th>
-												  <th>Remarks</th>
+												  
 												</tr>
 											  </thead>
 											  <tbody id="PendingSaleAgainstPur2Table">
@@ -1144,6 +1144,11 @@
 					table.deleteRow(0);
 				}
 
+				var table = document.getElementById('PendingSaleAgainstPur2Table');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/pending-invoices',
@@ -1191,7 +1196,22 @@
 						});
 
 						$('#Sale2NotTable').html(rows);
-					},
+
+
+						rows = '';
+
+						$.each(result['pending_sale_against_pur2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sale_inv_no'] ? value['Sale_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['customer_name'] ? value['customer_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstPur2Table').html(rows);
+						},
 					error: function() {
 						alert("Error loading Pending Invoices data");
 					}

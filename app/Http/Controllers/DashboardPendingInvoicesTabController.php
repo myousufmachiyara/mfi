@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\dash_sale1_not_final;
 use App\Models\dash_pur1_not;
 use App\Models\dash_sale2_not;
-
+use App\Models\dash_pending_sale_against_pur2;
 class DashboardPendingInvoicesTabController extends Controller
 {
     public function PENDING_INVOICES(Request $request)
@@ -21,11 +21,16 @@ class DashboardPendingInvoicesTabController extends Controller
         $sale2_not = dash_sale2_not::whereNull('pur_ord_no')
         ->get(['prefix', 'Sal_inv_no', 'sa_date', 'pur_inv', 'ac_name', 'name_of', 'remarks']);
 
+        $pending_sale_against_pur2 = dash_pending_sale_against_pur2::leftjoin('ac','ac.ac_code','=','dash_pending_sale_against_pur2.account_name')
+        ->whereNull('sales_against')
+        ->get(['prefix', 'Sale_inv_no', 'sa_date', 'customer_name', 'ac_name', 'Cash_pur_name']);
+
 
         return response()->json([
             'sale1_not' => $sale1_not,
             'pur1_not' => $pur1_not,
-            'sale2_not' => $sale2_not
+            'sale2_not' => $sale2_not,
+            'pending_sale_against_pur2' => $pending_sale_against_pur2
         ]);
     }
 }
