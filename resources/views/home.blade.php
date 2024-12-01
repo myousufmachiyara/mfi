@@ -467,6 +467,7 @@
 										</div>
 									</div>
 									
+								</div>
 								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
