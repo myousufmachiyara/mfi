@@ -11,7 +11,7 @@ class DashboardPendingInvoicesTabController extends Controller
     {
         // Query to fetch pending invoices
         $sale1_not = dash_sale1_not_final::where('bill_not', 0)
-            ->get(['prefix', 'Sal_inv_no', 'sa_date', 'account_name', 'Cash_pur_name', 'Sales_remarks']);
+            ->get(['prefix', 'Sal_inv_no', 'sa_date','pur_ord_no', 'account_name', 'Cash_pur_name', 'Sales_remarks']);
 
         return response()->json([
             'sale1_not' => $sale1_not
