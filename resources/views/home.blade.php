@@ -413,14 +413,7 @@
 								<div id="PENDING_INVOICES" class="tab-pane">
 									<div class="row form-group pb-3">
 
-										<div class="mb-3 text-end">
-											<div class="form-group" style="display: inline-block">
-												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
-											</div>
-											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
-										</div>
-
-										<div class="col-12 col-md-3 mb-3">
+										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
