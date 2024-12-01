@@ -1226,7 +1226,8 @@
 								<td>${value['mill_gate'] ? value['mill_gate'] : ''}</td>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
-								<td>${value['item_type'] ? value['item_type'] : ''}</td>
+								<td>${value['item_type'] == 1 ? '<strong>Pipes</strong>' : (value['item_type'] == 2 ? '<strong>Garder / TR</strong>' : '')}</td>
+
 							</tr>`;
 						});
 
