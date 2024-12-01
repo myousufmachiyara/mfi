@@ -284,6 +284,7 @@
 									<th>Date</th>
 									<th>Gate Pass #</th>
 									<th>Person Name</th>
+									<th>Item Type</th>
 									<th>Action</th>
 								</tr>
 							</thead>
