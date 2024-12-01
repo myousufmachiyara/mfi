@@ -376,13 +376,7 @@
 						<div class="tabs mt-3">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#SALE_NOT_FINAL" href="#SALE_NOT_FINAL" data-bs-toggle="tab">Sale Not Final</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bills Not Recieved </a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#PUR_NOT_FINAL" href="#PUR_NOT_FINAL" data-bs-toggle="tab">Purchase Not Final </a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#PENDING_INVOICES" href="#PENDING_INVOICES" data-bs-toggle="tab">Pending Invoices </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
@@ -416,6 +410,126 @@
 								</li>
 							</ul>
 							<div class="tab-content">
+								<div id="PENDING_INVOICES" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Sale 1 Not Final</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Invoive#</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Date</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bill#</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Name Of Person</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Remarks</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Sale Against Purchase 1 Not Final</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="SaleAgainstPur1Table">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Sale Againts Pur 2 Not Final</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="SaleAgainstPur2Table">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Cash Bill Not Recieved</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CashBillNotTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										
+									</div>
+								</div>
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
@@ -749,6 +863,7 @@
 										
 									</div>
 								</div>
+								
 							</div>
 						</div>
 
@@ -984,7 +1099,58 @@
         });
 
 		function tabChanged(tabId) {
-			if(tabId=="#HR"){
+			if(tabId=="#PENDING_INVOICES"){
+				var table = document.getElementById('Sale1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				// var table = document.getElementById('SaleAgainstPur1Table');
+				// while (table.rows.length > 0) {
+				// 	table.deleteRow(0);
+				// }
+
+				// var table = document.getElementById('SaleAgainstPur2Table');
+				// while (table.rows.length > 0) {
+				// 	table.deleteRow(0);
+				// }
+
+				// var table = document.getElementById('CashBillNotTable');
+				// while (table.rows.length > 0) {
+				// 	table.deleteRow(0);
+				// }
+
+				// var month = document.getElementById('filterIIL').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/pending-invoices',
+					data: { month: month },
+					success: function(result) {
+						var rows = '';
+						$.each(result['sale1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td>${value['sa_date'] ? value['sa_date'] : ''}</td>
+								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
+								<td>${value['account_name'] ? value['account_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+								<td>${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
+
+							</tr>`;
+						});
+
+						$('#sale1_not').html(rows);
+
+					},
+					error: function() {
+						alert("Error loading PENDING INVOICES data");
+					}
+				});
+
+        	}
+
+			else if(tabId=="#HR"){
 				var table = document.getElementById('SteelexSaleTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
