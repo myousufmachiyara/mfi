@@ -23,6 +23,16 @@
 		.switch-off .masked-data {
 			display: block;
 		}
+		.scrollable-div{
+			height: 390px;
+			overflow-y: auto;
+			padding: 0px !important;
+		}
+		.sticky-tbl-header{
+			position: sticky;
+			top: 0;
+			background-color: white;
+		}
 	</style>
 	<body>
 		<section class="body">
@@ -501,9 +511,9 @@
 													</div>
 													<h2 class="card-title">Pending Sale Against Godwon</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Stock Out#</th>
 																<th class="text-center">Date</th>
@@ -565,9 +575,9 @@
 													</div>
 													<h2 class="card-title">Sale 1 Not Received</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
