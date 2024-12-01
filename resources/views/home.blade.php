@@ -514,7 +514,6 @@
 												  <th>Gate Pass#</th>
 												  <th>Account Name</th>
 												  <th>Name Of Person</th>
-												  <th>Remarks</th>
 												  <th>Item Type</th>
 												</tr>
 											  </thead>
@@ -1222,11 +1221,12 @@
 
 						$.each(result['pending_sale_against_tstockout'], function (index, value) {
 							rows += `<tr>
-								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sale_inv_no'] ? value['Sale_inv_no'] : ''}</td>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
 								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['mill_gate'] ? value['mill_gate'] : ''}</td>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-								<td>${value['customer_name'] ? value['customer_name'] : ''}</td>
-								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
+								<td>${value['item_type'] ? value['item_type'] : ''}</td>
 							</tr>`;
 						});
 
