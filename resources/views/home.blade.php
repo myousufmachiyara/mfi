@@ -570,11 +570,10 @@
 														<thead>
 															<tr>
 																<th>Invoice#</th>
-																<th class="text-center">Bill Date</th>
+																<th class="text-center">Date</th>
 																<th>Bill#</th>
 																<th>Account Name</th>
 																<th>Name Of Person</th>
-																<th>Remarks</th>
 																<th>Bill Amount</th>
 																<th>Received Amount</th>
 																<th>Balance Amount</th>
@@ -600,11 +599,10 @@
 														<thead>
 															<tr>
 																<th>Invoice#</th>
-																<th class="text-center">Bill Date</th>
+																<th class="text-center">Date</th>
 																<th>Bill#</th>
 																<th>Account Name</th>
 																<th>Name Of Person</th>
-																<th>Remarks</th>
 																<th>Bill Amount</th>
 																<th>Received Amount</th>
 																<th>Balance Amount</th>
