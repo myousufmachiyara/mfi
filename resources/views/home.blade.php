@@ -440,7 +440,7 @@
 											</section>
 										</div>
 									</div>
-									{{-- <div class="row form-group pb-3">
+									<div class="row form-group pb-3">
 										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
@@ -455,20 +455,19 @@
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
-																<th>Bill#</th>
 																<th>Account Name</th>
 																<th>Name Of Person</th>
 																<th>Remarks</th>
 															</tr>
 														</thead>
-														<tbody id="PUR1NotTable">
+														<tbody id="Pur1NotTable">
 															<!-- Table rows will be populated dynamically -->
 														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-									</div> --}}
+									</div>
 								</div>
 								
 								<div id="HR" class="tab-pane">
@@ -1047,6 +1046,11 @@
 					table.deleteRow(0);
 				}
 
+				var table = document.getElementById('Pur1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/pending-invoices',
@@ -1054,76 +1058,31 @@
 						var rows = '';
 
 						$.each(result['sale1_not'], function (index, value) {
-							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
-							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
 								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
 								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
 								<td>${value['account_name'] ? value['account_name'] : ''}</td>
 								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
-								<td class="text-center">${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
+								<td>${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
 							</tr>`;
 						});
 
 						$('#Sale1NotTable').html(rows);
 
-						// rows = '';
-						// totalWeight = 0;
+						rows = '';
 
-						// $.each(result['HRS'], function (index, value) {
-						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-						// 	totalWeight += weight;
-						// 	rows += `<tr>
-						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
-						// 		<td>${weight ? weight : ''}</td>
-						// 	</tr>`;
-						// });
+						$.each(result['pur1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['pur_id'] ? value['pur_id'] : ''}</td>
+								<td class="text-center">${value['pur_date'] ? moment(value['pur_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_saler_name'] ? value['cash_saler_name'] : ''}</td>
+								<td>${value['pur_remarks'] ? value['pur_remarks'] : ''}</td>
+							</tr>`;
+						});
 
-						// rows += `<tr>
-						// 	<td><strong>Total</strong></td>
-						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
-						// </tr>`;
-
-						// $('#HRSSaleTable').html(rows);
-
-						// rows = '';
-						// totalWeight = 0;
-
-						// $.each(result['ECO'], function (index, value) {
-						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-						// 	totalWeight += weight;
-						// 	rows += `<tr>
-						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
-						// 		<td>${weight ? weight : ''}</td>
-						// 	</tr>`;
-						// });
-
-						// rows += `<tr>
-						// 	<td><strong>Total</strong></td>
-						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
-						// </tr>`;
-
-						// $('#ECOSaleTable').html(rows);
-
-						// rows = '';
-						// totalWeight = 0;
-
-						// $.each(result['COSMO'], function (index, value) {
-						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
-						// 	totalWeight += weight;
-						// 	rows += `<tr>
-						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
-						// 		<td>${weight ? weight : ''}</td>
-						// 	</tr>`;
-						// });
-
-						// rows += `<tr>
-						// 	<td><strong>Total</strong></td>
-						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
-						// </tr>`;
-
-						// $('#COSMOSaleTable').html(rows);
+						$('#Pur1NotTable').html(rows);
 					},
 					error: function() {
 						alert("Error loading Pending Invoices data");
