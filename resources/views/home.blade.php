@@ -467,34 +467,8 @@
 										</section>
 									  </div>
 								  
-									  <!-- Second Pair: Sale 2 Not Final and Pending Sale Against Pur 2 -->
-									  <div class="col-12 col-md-6 mb-3">
-										<section class="card">
-										  <header class="card-header">
-											<div class="card-actions">
-											  <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-											</div>
-											<h2 class="card-title">Sale 2 Not Final</h2>
-										  </header>
-										  <div class="card-body">
-											<table class="table table-responsive-md table-striped mb-0">
-											  <thead>
-												<tr>
-												  <th>Invoice#</th>
-												  <th class="text-center">Date</th>
-												  <th>Pur Inv#</th>
-												  <th>Account Name</th>
-												  <th>Name Of Person</th>
-												  <th>Remarks</th>
-												</tr>
-											  </thead>
-											  <tbody id="Sale2NotTable">
-												<!-- Table rows will be populated dynamically -->
-											  </tbody>
-											</table>
-										  </div>
-										</section>
-									  </div>
+									  <!-- Second Pair:-->
+									  
 									  <div class="col-12 col-md-6 mb-3">
 										<section class="card">
 										  <header class="card-header">
@@ -522,36 +496,65 @@
 										  </div>
 										</section>
 									  </div>
+
+									  <div class="col-12 col-md-6 mb-3">
+										<section class="card">
+										  <header class="card-header">
+											<div class="card-actions">
+											  <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+											</div>
+											<h2 class="card-title">Pending Sale Against Godwon</h2>
+										  </header>
+										  <div class="card-body">
+											<table class="table table-responsive-md table-striped mb-0">
+											  <thead>
+												<tr>
+												  <th>Invoice#</th>
+												  <th class="text-center">Date</th>
+												  <th>Pur Inv#</th>
+												  <th>Account Name</th>
+												  <th>Name Of Person</th>
+												  <th>Remarks</th>
+												</tr>
+											  </thead>
+											  <tbody id="PendingSaleAgainstGodwonTable">
+												<!-- Table rows will be populated dynamically -->
+											  </tbody>
+											</table>
+										  </div>
+										</section>
+									  </div>
+
 									</div>
 								  
-									<!-- Third Pair: Pending Sale Against Godwon -->
+									<!-- Third Pair:  -->
 									<div class="col-12 col-md-6 mb-3">
-									  <section class="card">
-										<header class="card-header">
-										  <div class="card-actions">
-											<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+										<section class="card">
+										  <header class="card-header">
+											<div class="card-actions">
+											  <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+											</div>
+											<h2 class="card-title">Sale 2 Not Final</h2>
+										  </header>
+										  <div class="card-body">
+											<table class="table table-responsive-md table-striped mb-0">
+											  <thead>
+												<tr>
+												  <th>Invoice#</th>
+												  <th class="text-center">Date</th>
+												  <th>Pur Inv#</th>
+												  <th>Account Name</th>
+												  <th>Name Of Person</th>
+												  <th>Remarks</th>
+												</tr>
+											  </thead>
+											  <tbody id="Sale2NotTable">
+												<!-- Table rows will be populated dynamically -->
+											  </tbody>
+											</table>
 										  </div>
-										  <h2 class="card-title">Pending Sale Against Godwon</h2>
-										</header>
-										<div class="card-body">
-										  <table class="table table-responsive-md table-striped mb-0">
-											<thead>
-											  <tr>
-												<th>Invoice#</th>
-												<th class="text-center">Date</th>
-												<th>Pur Inv#</th>
-												<th>Account Name</th>
-												<th>Name Of Person</th>
-												<th>Remarks</th>
-											  </tr>
-											</thead>
-											<tbody id="PendingSaleAgainstGodwonTable">
-											  <!-- Table rows will be populated dynamically -->
-											</tbody>
-										  </table>
-										</div>
-									  </section>
-									</div>
+										</section>
+									  </div>
 								</div>
 								  
 								
