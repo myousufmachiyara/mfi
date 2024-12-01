@@ -413,8 +413,8 @@
 								<div id="PENDING_INVOICES" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- First Pair: Sale 1 Not Final and Purchase 1 Not Final -->
-										<div class="col-12 col-md-6 mb-3">
-											<section class="card">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -440,8 +440,8 @@
 												</div>
 											</section>
 										</div>
-										<div class="col-12 col-md-6 mb-3">
-											<section class="card">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -467,8 +467,8 @@
 											</section>
 										</div>
 										<!-- Second Pair:-->
-										<div class="col-12 col-md-6 mb-3">
-											<section class="card">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -493,8 +493,8 @@
 												</div>
 											</section>
 										</div>
-										<div class="col-12 col-md-6 mb-3">
-											<section class="card">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -523,8 +523,8 @@
 									</div>
 									<!-- Third Pair:  -->
 									<div class="row">
-										<div class="col-12 col-md-6 mb-3">
-											<section class="card">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -552,8 +552,6 @@
 										</div>
 									</div>
 								</div>
-								
-								  
 								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
