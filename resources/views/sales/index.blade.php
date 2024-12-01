@@ -41,7 +41,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
-                                                    <th>Code</th>
+                                                    <th>Invoice#</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>

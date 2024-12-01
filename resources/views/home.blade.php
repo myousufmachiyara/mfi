@@ -376,16 +376,10 @@
 						<div class="tabs mt-3">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#SALE_NOT_FINAL" href="#SALE_NOT_FINAL" data-bs-toggle="tab">Sale Not Final</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#PENDING_INVOICES" href="#PENDING_INVOICES" data-bs-toggle="tab">Pending Invoices </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bills Not Recieved </a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#PUR_NOT_FINAL" href="#PUR_NOT_FINAL" data-bs-toggle="tab">Purchase Not Final </a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#PC" href="#PC" data-bs-toggle="tab">Pending Complains</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bill Not Recieved</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
@@ -394,28 +388,236 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Purchase</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Purchase</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#OVER_DUES" href="#OVER_DUES" data-bs-toggle="tab">Overdues</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#OVER_DUES" href="#OVER_DUES" data-bs-toggle="tab">Overdues</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-rep" data-bs-target="#OVER_DAYS" href="#OVER_DAYS" data-bs-toggle="tab">Over Days</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#OVER_DAYS" href="#OVER_DAYS" data-bs-toggle="tab">Over Days</a>
 								</li>
 							</ul>
 							<div class="tab-content">
+								<div id="PENDING_INVOICES" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- First Pair: Sale 1 Not Final and Purchase 1 Not Final -->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 1 Not Final</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Purchase 1 Not Final</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Pur1NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<!-- Second Pair:-->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Pending Sale Against Pur 2</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Company Name</th>
+																<th>Customer Name</th>
+																<th>Name Of Person</th>
+															</tr>
+														</thead>
+														<tbody id="PendingSaleAgainstPur2Table" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Pending Sale Against Godwon</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Stock Out#</th>
+																<th class="text-center">Date</th>
+																<th>Gate Pass#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Item Type</th>
+															</tr>
+														</thead>
+														<tbody id="PendingSaleAgainstGodwonTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+									<!-- Third Pair:  -->
+									<div class="row">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Final</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Pur Inv#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="BILL_NOT_RECVD" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- First Pair: -->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 1 Not Received</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Received</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- Category Sale -->
@@ -749,6 +951,101 @@
 										
 									</div>
 								</div>
+
+								<div id="GARDER" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Purchase Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Sale Summary</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Top 3 Customers Of The Month</h2>
+												</header>
+												<div class="card-body">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="TopSaleCustomersTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+									</div>
+								</div>
+								
 							</div>
 						</div>
 
@@ -984,7 +1281,122 @@
         });
 
 		function tabChanged(tabId) {
-			if(tabId=="#HR"){
+			if (tabId === "#PENDING_INVOICES") {
+
+				var table = document.getElementById('Sale1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Pur1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Sale2NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('PendingSaleAgainstPur2Table');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('PendingSaleAgainstGodwonTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/pending-invoices',
+					success: function(result) {
+						var rows = '';
+
+						$.each(result['sale1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
+								<td>${value['account_name'] ? value['account_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+								<td>${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Sale1NotTable').html(rows);
+
+						rows = '';
+
+						$.each(result['pur1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['pur_id'] ? value['pur_id'] : ''}</td>
+								<td class="text-center">${value['pur_date'] ? moment(value['pur_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_saler_name'] ? value['cash_saler_name'] : ''}</td>
+								<td>${value['pur_remarks'] ? value['pur_remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Pur1NotTable').html(rows);
+
+						rows = '';
+
+						$.each(result['sale2_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_inv'] ? value['pur_inv'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['name_of'] ? value['name_of'] : ''}</td>
+								<td>${value['remarks'] ? value['remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Sale2NotTable').html(rows);
+
+
+						rows = '';
+
+						$.each(result['pending_sale_against_pur2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sale_inv_no'] ? value['Sale_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['customer_name'] ? value['customer_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstPur2Table').html(rows);
+
+						rows = '';
+
+						$.each(result['pending_sale_against_tstockout'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['mill_gate'] ? value['mill_gate'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
+								<td>${value['item_type'] == 1 ? '<strong>Pipes</strong>' : (value['item_type'] == 2 ? '<strong>Garder / TR</strong>' : '')}</td>
+
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstGodwonTable').html(rows);
+
+						},
+					error: function() {
+						alert("Error loading Pending Invoices data");
+					}
+				});
+
+			}
+
+
+			else if(tabId=="#HR"){
 				var table = document.getElementById('SteelexSaleTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
