@@ -7,6 +7,7 @@ use App\Models\dash_sale1_not_final;
 use App\Models\dash_pur1_not;
 use App\Models\dash_sale2_not;
 use App\Models\dash_pending_sale_against_pur2;
+use App\Models\dash_pending_sale_against_tstock_out;
 class DashboardPendingInvoicesTabController extends Controller
 {
     public function PENDING_INVOICES(Request $request)
@@ -25,12 +26,16 @@ class DashboardPendingInvoicesTabController extends Controller
         ->whereNull('sales_against')
         ->get(['prefix', 'Sale_inv_no', 'sa_date', 'customer_name', 'ac_name', 'Cash_pur_name']);
 
+        $pending_sale_against_tstockout = dash_pending_sale_against_tstock_out::whereNull('sale_against')
+        ->get(['prefix', 'Sal_inv_no', 'sa_date', 'cash_pur_name', 'ac_name', 'mill_gate', 'sales_remarks', 'item_type']);
+
 
         return response()->json([
             'sale1_not' => $sale1_not,
             'pur1_not' => $pur1_not,
             'sale2_not' => $sale2_not,
-            'pending_sale_against_pur2' => $pending_sale_against_pur2
+            'pending_sale_against_pur2' => $pending_sale_against_pur2,
+            'pending_sale_against_tstockout' => $pending_sale_against_tstockout
         ]);
     }
 }

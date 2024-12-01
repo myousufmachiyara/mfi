@@ -509,12 +509,13 @@
 											<table class="table table-responsive-md table-striped mb-0">
 											  <thead>
 												<tr>
-												  <th>Invoice#</th>
+												  <th>Stock Out#</th>
 												  <th class="text-center">Date</th>
-												  <th>Pur Inv#</th>
+												  <th>Gate Pass#</th>
 												  <th>Account Name</th>
 												  <th>Name Of Person</th>
 												  <th>Remarks</th>
+												  <th>Item Type</th>
 												</tr>
 											  </thead>
 											  <tbody id="PendingSaleAgainstGodwonTable">
@@ -1149,6 +1150,11 @@
 					table.deleteRow(0);
 				}
 
+				var table = document.getElementById('PendingSaleAgainstGodwonTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/pending-invoices',
@@ -1211,7 +1217,32 @@
 						});
 
 						$('#PendingSaleAgainstPur2Table').html(rows);
+
+						
+						rows = '';
+
+						$.each(result['pending_sale_against_tstockout'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['mill_gate'] ? value['mill_gate'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
+								<td>${value['sales_remarks'] ? value['sales_remarks'] : ''}</td>
+								html += "<td>";
+									if (v['item_type'] == 1) {
+										html += "<strong>Pipes</strong>";
+									} else if (v['item_type'] == 2) {
+										html += "<strong>Garder / TR</strong>";
+									}
+								html += "</td>";
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstGodwonTable').html(rows);
 						},
+						},
+						
 					error: function() {
 						alert("Error loading Pending Invoices data");
 					}
