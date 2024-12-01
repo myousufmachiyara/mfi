@@ -450,7 +450,7 @@
 											</section>
 										</div>
 
-										<div class="col-12 col-md-3 mb-3">
+										{{-- <div class="col-12 col-md-3 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -526,7 +526,7 @@
 													</table>
 												</div>
 											</section>
-										</div>
+										</div> --}}
 										
 									</div>
 								</div>
