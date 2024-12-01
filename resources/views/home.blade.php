@@ -1182,7 +1182,7 @@
 						$.each(result['sale2_not'], function (index, value) {
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
-								<td class="text-center">${value['pur_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
 								<td>${value['pur_inv'] ? value['pur_inv'] : ''}</td>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['name_of'] ? value['name_of'] : ''}</td>
