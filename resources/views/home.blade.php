@@ -439,8 +439,6 @@
 												</div>
 											</section>
 										</div>
-									</div>
-									<div class="row form-group pb-3">
 										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
@@ -468,7 +466,7 @@
 											</section>
 										</div>
 									</div>
-								</div>
+									
 								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
