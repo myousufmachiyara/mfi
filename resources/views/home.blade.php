@@ -466,6 +466,34 @@
 											</section>
 										</div>
 									</div>
+									<div class="col-12 col-md-6 mb-3">
+										<section class="card">
+											<header class="card-header">
+												<div class="card-actions">
+													<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+												</div>
+												<h2 class="card-title">Sale 2 Not Final</h2>
+											</header>
+											<div class="card-body">
+												<table class="table table-responsive-md table-striped mb-0">
+													<thead>
+														<tr>
+															<th>Invoice#</th>
+															<th class="text-center">Date</th>
+															<th>Pur Inv#</th>
+															<th>Account Name</th>
+															<th>Name Of Person</th>
+															<th>Remarks</th>
+														</tr>
+													</thead>
+													<tbody id="Sale2NotTable">
+														<!-- Table rows will be populated dynamically -->
+													</tbody>
+												</table>
+											</div>
+										</section>
+									</div>
+								</div>
 									
 								</div>
 								
@@ -1050,6 +1078,11 @@
 					table.deleteRow(0);
 				}
 
+				var table = document.getElementById('Sale2NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/pending-invoices',
@@ -1082,6 +1115,21 @@
 						});
 
 						$('#Pur1NotTable').html(rows);
+
+						rows = '';
+
+						$.each(result['sale2_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['pur_date'] ? moment(value['pur_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_inv'] ? value['pur_inv'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['name_of'] ? value['name_of'] : ''}</td>
+								<td>${value['remarks'] ? value['remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Sale2NotTable').html(rows);
 					},
 					error: function() {
 						alert("Error loading Pending Invoices data");

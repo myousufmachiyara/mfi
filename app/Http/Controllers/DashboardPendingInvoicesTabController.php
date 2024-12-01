@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dash_sale1_not_final;
 use App\Models\dash_pur1_not;
+use App\Models\dash_sale2_not;
 
 class DashboardPendingInvoicesTabController extends Controller
 {
@@ -17,10 +18,14 @@ class DashboardPendingInvoicesTabController extends Controller
         $pur1_not = dash_pur1_not::whereNull('sale_against')
         ->get(['prefix', 'pur_id', 'pur_date', 'ac_name', 'cash_saler_name', 'pur_remarks']);
 
+        $sale2_not = dash_sale2_not::whereNull('pur_ord_no')
+        ->get(['prefix', 'Sal_inv_no', 'sa_date', 'ac_name', 'name_of', 'remarks']);
+
 
         return response()->json([
             'sale1_not' => $sale1_not,
-            'pur1_not' => $pur1_not
+            'pur1_not' => $pur1_not,
+            'sale2_not' => $sale2_not
         ]);
     }
 }
