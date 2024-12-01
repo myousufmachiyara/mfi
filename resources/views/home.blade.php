@@ -483,8 +483,8 @@
 												<tr>
 												  <th>Invoice#</th>
 												  <th class="text-center">Date</th>
-												  <th>Customer Name</th>
 												  <th>Company Name</th>
+												  <th>Customer Name</th>
 												  <th>Name Of Person</th>
 												  
 												</tr>
