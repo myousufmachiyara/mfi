@@ -57,7 +57,7 @@
                                                             <td><strong style="font-size:15px">{{ number_format($row->amount, 0, '.', ',') }}</strong></td>
                                                         @endif
                                                         <td style="vertical-align: middle;">
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->auto_lager}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->auto_lager}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                             <span class="separator"> | </span>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
                                                         </td>
@@ -253,7 +253,7 @@
                 <div class="card-body">
                     <div class="modal-wrapper">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
