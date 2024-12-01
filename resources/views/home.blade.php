@@ -552,6 +552,73 @@
 										</div>
 									</div>
 								</div>
+
+
+								<div id="BILL_NOT_RECVD" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- First Pair: -->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 1 Not Received</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Bill Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Received</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Bill Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
 								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
