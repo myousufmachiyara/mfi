@@ -14,7 +14,7 @@ class DashboardPendingInvoicesTabController extends Controller
         $sale1_not = dash_sale1_not_final::where('bill_not', 0)
         ->get(['prefix', 'Sal_inv_no', 'sa_date','pur_ord_no', 'account_name', 'Cash_pur_name', 'Sales_remarks']);
 
-        $pur1_not = dash_pur1_not::whereNotNull('sale_against')
+        $pur1_not = dash_pur1_not::whereNull('sale_against')
         ->get(['prefix', 'pur_id', 'pur_date', 'ac_name', 'cash_saler_name', 'pur_remarks']);
 
 
