@@ -412,7 +412,7 @@
 							<div class="tab-content">
 								<div id="PENDING_INVOICES" class="tab-pane">
 									<div class="row form-group pb-3">
-										<div class="col-12 col-md-6 mb-3">
+										<div class="col-12 col-md-4 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -439,7 +439,7 @@
 												</div>
 											</section>
 										</div>
-										<div class="col-12 col-md-6 mb-3">
+										<div class="col-12 col-md-4 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
@@ -466,7 +466,7 @@
 											</section>
 										</div>
 									</div>
-									<div class="col-12 col-md-6 mb-3">
+									<div class="col-12 col-md-4 mb-3">
 										<section class="card">
 											<header class="card-header">
 												<div class="card-actions">
@@ -493,13 +493,13 @@
 											</div>
 										</section>
 									</div>
-									<div class="col-12 col-md-6 mb-3">
+									<div class="col-12 col-md-4 mb-3">
 										<section class="card">
 											<header class="card-header">
 												<div class="card-actions">
 													<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 												</div>
-												<h2 class="card-title">Pending Sale Against Purcahse 2</h2>
+												<h2 class="card-title">Bill Not Recvied</h2>
 											</header>
 											<div class="card-body">
 												<table class="table table-responsive-md table-striped mb-0">
