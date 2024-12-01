@@ -426,6 +426,7 @@
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
+																<th>Bill#</th>
 																<th>Account Name</th>
 																<th>Name Of Person</th>
 																<th class="text-center">Remarks</th>
@@ -1024,7 +1025,8 @@
 						$.each(result['sale1_not'], function(index, value) {
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
-								<td class="text-center">${value['sa_date'] ? value['sa_date'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
 								<td>${value['account_name'] ? value['account_name'] : ''}</td>
 								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
 								<td class="text-center">${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
