@@ -493,9 +493,35 @@
 											</div>
 										</section>
 									</div>
+									<div class="col-12 col-md-6 mb-3">
+										<section class="card">
+											<header class="card-header">
+												<div class="card-actions">
+													<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+												</div>
+												<h2 class="card-title">Pending Sale Against Purcahse 2</h2>
+											</header>
+											<div class="card-body">
+												<table class="table table-responsive-md table-striped mb-0">
+													<thead>
+														<tr>
+															<th>Invoice#</th>
+															<th class="text-center">Date</th>
+															<th>Pur Inv#</th>
+															<th>Account Name</th>
+															<th>Name Of Person</th>
+															<th>Remarks</th>
+														</tr>
+													</thead>
+													<tbody id="PendingSaleAgainstPur2Table">
+														<!-- Table rows will be populated dynamically -->
+													</tbody>
+												</table>
+											</div>
+										</section>
+									</div>
+								
 								</div>
-									
-							
 								
 								<div id="HR" class="tab-pane">
 									<div class="row form-group pb-3">
@@ -1121,7 +1147,7 @@
 						$.each(result['sale2_not'], function (index, value) {
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
-								<td class="text-center">${value['pur_date'] ? moment(value['pur_date']).format('D-M-YY') : ''}</td>
+								<td class="text-center">${value['pur_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
 								<td>${value['pur_inv'] ? value['pur_inv'] : ''}</td>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 								<td>${value['name_of'] ? value['name_of'] : ''}</td>
