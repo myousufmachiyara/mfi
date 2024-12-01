@@ -19,7 +19,7 @@ class DashboardPendingInvoicesTabController extends Controller
         ->get(['prefix', 'pur_id', 'pur_date', 'ac_name', 'cash_saler_name', 'pur_remarks']);
 
         $sale2_not = dash_sale2_not::whereNull('pur_ord_no')
-        ->get(['prefix', 'Sal_inv_no', 'sa_date', 'ac_name', 'name_of', 'remarks']);
+        ->get(['prefix', 'Sal_inv_no', 'sa_date', 'pur_inv', 'ac_name', 'name_of', 'remarks']);
 
 
         return response()->json([
