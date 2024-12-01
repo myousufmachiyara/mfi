@@ -522,34 +522,37 @@
 										</div>
 									</div>
 									<!-- Third Pair:  -->
-									<div class="col-12 col-md-6 mb-3">
-										<section class="card">
-											<header class="card-header">
-												<div class="card-actions">
-													<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+									<div class="row">
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Final</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Pur Inv#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
 												</div>
-												<h2 class="card-title">Sale 2 Not Final</h2>
-											</header>
-											<div class="card-body">
-												<table class="table table-responsive-md table-striped mb-0">
-													<thead>
-														<tr>
-															<th>Invoice#</th>
-															<th class="text-center">Date</th>
-															<th>Pur Inv#</th>
-															<th>Account Name</th>
-															<th>Name Of Person</th>
-															<th>Remarks</th>
-														</tr>
-													</thead>
-													<tbody id="Sale2NotTable" class="table-body-scroll">
-														<!-- Table rows will be populated dynamically -->
-													</tbody>
-												</table>
-											</div>
-										</section>
+											</section>
+										</div>
 									</div>
 								</div>
+								
 								  
 								
 								<div id="HR" class="tab-pane">
