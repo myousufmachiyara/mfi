@@ -1140,7 +1140,7 @@
 							</tr>`;
 						});
 
-						$('#sale1_not').html(rows);
+						$('#Sale1NotTable').html(rows);
 
 					},
 					error: function() {
