@@ -429,10 +429,39 @@
 																<th>Bill#</th>
 																<th>Account Name</th>
 																<th>Name Of Person</th>
-																<th class="text-center">Remarks</th>
+																<th>Remarks</th>
 															</tr>
 														</thead>
 														<tbody id="Sale1NotTable">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+									<div class="row form-group pb-3">
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Purchase 1 Not Final</h2>
+												</header>
+												<div class="card-body">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead>
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="PUR1NotTable">
 															<!-- Table rows will be populated dynamically -->
 														</tbody>
 													</table>
@@ -1012,17 +1041,21 @@
 
 		function tabChanged(tabId) {
 			if (tabId === "#PENDING_INVOICES") {
-			// Clear the table
-			$('#Sale1NotTable').empty();
 
-			// Fetch data using AJAX
-			$.ajax({
-				type: "GET",
-				url: '/dashboard-tabs/pending-invoices',
-				success: function(result) {
-					var rows = '';
-					if (result['sale1_not'].length > 0) {
-						$.each(result['sale1_not'], function(index, value) {
+				var table = document.getElementById('Sale1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/pending-invoices',
+					success: function(result) {
+						var rows = '';
+
+						$.each(result['sale1_not'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
 								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
@@ -1032,16 +1065,72 @@
 								<td class="text-center">${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
 							</tr>`;
 						});
-					} else {
-						rows = `<tr><td colspan="5" class="text-center">No pending invoices found</td></tr>`;
+
+						$('#Sale1NotTable').html(rows);
+
+						// rows = '';
+						// totalWeight = 0;
+
+						// $.each(result['HRS'], function (index, value) {
+						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+						// 	totalWeight += weight;
+						// 	rows += `<tr>
+						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
+						// 		<td>${weight ? weight : ''}</td>
+						// 	</tr>`;
+						// });
+
+						// rows += `<tr>
+						// 	<td><strong>Total</strong></td>
+						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						// </tr>`;
+
+						// $('#HRSSaleTable').html(rows);
+
+						// rows = '';
+						// totalWeight = 0;
+
+						// $.each(result['ECO'], function (index, value) {
+						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+						// 	totalWeight += weight;
+						// 	rows += `<tr>
+						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
+						// 		<td>${weight ? weight : ''}</td>
+						// 	</tr>`;
+						// });
+
+						// rows += `<tr>
+						// 	<td><strong>Total</strong></td>
+						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						// </tr>`;
+
+						// $('#ECOSaleTable').html(rows);
+
+						// rows = '';
+						// totalWeight = 0;
+
+						// $.each(result['COSMO'], function (index, value) {
+						// 	var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+						// 	totalWeight += weight;
+						// 	rows += `<tr>
+						// 		<td>${value['company_name'] ? value['company_name'] : ''}</td>
+						// 		<td>${weight ? weight : ''}</td>
+						// 	</tr>`;
+						// });
+
+						// rows += `<tr>
+						// 	<td><strong>Total</strong></td>
+						// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						// </tr>`;
+
+						// $('#COSMOSaleTable').html(rows);
+					},
+					error: function() {
+						alert("Error loading Pending Invoices data");
 					}
-					$('#Sale1NotTable').html(rows);
-				},
-				error: function(xhr, status, error) {
-					alert(`Failed to load PENDING INVOICES data. Status: ${status}, Error: ${error}`);
-				}
-			});
-		}
+				});
+
+			}
 
 
 			else if(tabId=="#HR"){
