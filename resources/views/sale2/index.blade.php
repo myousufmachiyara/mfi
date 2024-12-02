@@ -155,7 +155,7 @@
                 </header>
                 <div class="card-body">
 
-                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                        <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>

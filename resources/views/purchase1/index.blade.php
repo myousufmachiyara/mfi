@@ -149,7 +149,7 @@
                 </header>
                 <div class="card-body">
 
-                        <table class="table table-bordered table-striped mb-0" id="">
+                        <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th>Attachement Path</th>
