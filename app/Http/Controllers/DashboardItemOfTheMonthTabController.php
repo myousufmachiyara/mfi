@@ -13,43 +13,43 @@ class DashboardItemOfTheMonthTabController extends Controller
         $month = $request->month;
 
         $hrbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 7)
+        ->where('item_group_code', 7)
         ->get(['item_name', 'weight']); // Only select the necessary fields
 
         $hrbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 7)
+        ->where('item_group_code', 7)
         ->get(['item_name', 'qty']);
 
         $wtbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 8)
+        ->where('item_group_code', 8)
         ->get(['item_name', 'weight']); // Only select the necessary fields
 
         $wtbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 8)
+        ->where('item_group_code', 8)
         ->get(['item_name', 'qty']);
 
         $crcbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 1)
+        ->where('item_group_code', 1)
         ->get(['item_name', 'weight']); // Only select the necessary fields
 
         $crcbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 1)
+        ->where('item_group_code', 1)
         ->get(['item_name', 'qty']);
 
         $ecobyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 5)
+        ->where('item_group_code', 5)
         ->get(['item_name', 'weight']); // Only select the necessary fields
 
         $ecobyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 5)
+        ->where('item_group_code', 5)
         ->get(['item_name', 'qty']);
 
         $cosmobyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 6)
+        ->where('item_group_code', 6)
         ->get(['item_name', 'weight']); // Only select the necessary fields
 
         $cosmobyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 6)
+        ->where('item_group_code', 6)
         ->get(['item_name', 'qty']);
 
 
