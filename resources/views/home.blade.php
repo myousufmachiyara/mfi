@@ -24,7 +24,7 @@
 			display: block;
 		}
 		.scrollable-div{
-			height: 390px;
+			height: 300px;
 			overflow-y: auto;
 			padding: 0px !important;
 		}
