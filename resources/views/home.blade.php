@@ -1734,7 +1734,7 @@
 						var totalWeight = 0; // Initialize total
 
 						$.each(result['garder_customer'], function (index, value) {
-							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							var weight = value['tt_weight'] ? parseFloat(value['tt_weight']) : 0; // Convert to a number
 							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
@@ -1754,7 +1754,7 @@
 						
 					},
 					error: function() {
-						alert("Error loading IIL data");
+						alert("Error loading Garder data");
 					}
 				});
 

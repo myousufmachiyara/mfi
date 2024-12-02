@@ -19,7 +19,7 @@ class DashboardGARDERTabController extends Controller
         
         $garder_customer = dash_sale_by_item_group_customer::where('dat', $month)
         ->whereIn('item_group_code', [10, 11]) // Filter for item group codes
-        ->select('ac_name', DB::raw('SUM(weight) as weight')) // Aggregate weights
+        ->select('ac_name', DB::raw('SUM(weight) as tt_weight')) // Aggregate weights
         ->groupBy('ac_name') // Group by account name
         ->get(); // Fetch the results
 
