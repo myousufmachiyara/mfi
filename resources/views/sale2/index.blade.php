@@ -84,16 +84,20 @@
                                 
                                                     @if(substr(strval($row->net_amount), strpos(strval($row->net_amount), '.') + 1)>0) 
                                                     <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
-                                                @else
-                                                    <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
-                                                @endif
+                                                    @else
+                                                        <td><strong style="font-size:15px">{{ number_format(intval($net_amount))}}</strong></td>
+                                                    @endif
 
                                                     @if($row->pur_ord_no!=null) 
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Closed </td>
                                                     @else
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
                                                     @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     <td class="actions">
                                                         <a href="{{ route('show-sales2',$row->Sal_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
                                                         <span class="separator"> | </span>

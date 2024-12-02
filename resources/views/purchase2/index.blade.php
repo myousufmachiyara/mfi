@@ -94,7 +94,11 @@
                                                     @else
                                                         <td> <i class="fas fa-circle" style="color:red;font-size:10px"></i> Not Close </td>
                                                     @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal">View</a></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     <td class="actions">
                                                         <!-- <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a> -->
                                                         <a href="{{ route('show-purchases2',$row->Sale_inv_no) }}" class=""><i class="fas fa-eye"></i></a>
@@ -225,7 +229,7 @@
     function setAttId(id){
         $('#att_id').val(id);
     }
-    
+
     function getAttachements(id){
 
         var table = document.getElementById('pur2_attachements');
