@@ -415,21 +415,21 @@ class Purchase2Controller extends Controller
 
     public function addAtt(Request $request)
     {
-        $jv2_id=$request->att_id;
+        $pur2_id=$request->att_id;
 
         if($request->hasFile('addAtt')){
             $files = $request->file('addAtt');
             foreach ($files as $file)
             {
-                $jv2_att = new jv2_att();
-                $jv1_att->created_by = session('user_id');
-                $jv2_att->jv2_id = $jv2_id;
+                $pur2Att = new pur2_att();
+                $pur2Att->created_by = session('user_id');
+                $pur2Att->pur2_id = $pur2_id;
                 $extension = $file->getClientOriginalExtension();
-                $jv2_att->att_path = $this->jv2Doc($file,$extension);
-                $jv2_att->save();
+                $pur2Att->att_path = $this->pur2Doc($file,$extension);
+                $pur2Att->save();
             }
         }
-        return redirect()->route('all-jv2');
+        return redirect()->route('all-purchases2');
 
     }
     
