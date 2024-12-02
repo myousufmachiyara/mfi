@@ -966,7 +966,7 @@
 
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
-												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+												<input type="month" class="form-control" id="filterGARDER" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
 											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 										</div>
@@ -1681,6 +1681,50 @@
 						</tr>`;
 
 						$('#COSMOSaleTable').html(rows);
+					},
+					error: function() {
+						alert("Error loading IIL data");
+					}
+				});
+
+        	}
+			else if(tabId=="#GARDER"){
+				var table = document.getElementById('GarderPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				
+
+				var month = document.getElementById('filterGARDER').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/garder',
+					data: { month: month },
+					success: function(result) {
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['garder_mill'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#GarderPurTable').html(rows);
+
+						
 					},
 					error: function() {
 						alert("Error loading IIL data");

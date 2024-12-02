@@ -550,6 +550,9 @@
         // IIL Tab
         Route::get('/dashboard-tabs/iil', [App\Http\Controllers\DashboardIILTabController::class, 'IIL']);
 
+        // GARDER Tab
+        Route::get('/dashboard-tabs/garder', [App\Http\Controllers\DashboardGARDERTabController::class, 'GARDER']);
+
     });
 
 
