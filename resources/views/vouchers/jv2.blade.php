@@ -52,7 +52,12 @@
                                                         <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
                                                         <td>{{$row->merged_sales_ids}}</td>
                                                         <td>{{$row->merged_purchase_ids}}</td>
-                                                        <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->jv_no}})" href="#attModal">View Att.</a></td>
+                                                        <td>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->jv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->jv_no}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                        </td>
+                                                        <td></td>
                                                         <td class="actions">
                                                             <a class="mb-1 mt-1 me-1" target="_blank" href="{{ route('print-jv2', $row->jv_no) }}">
                                                                 <i class="fas fa-print"></i>
@@ -142,6 +147,34 @@
                 </footer>
             </section>
         </div>
+
+        <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('jv2-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                @csrf  
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Upload Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="col-lg-12 mb-2">
+                                <input type="file" class="form-control" name="addAtt[]" multiple accept="application/pdf, image/png, image/jpeg">
+                                <input type="hidden" class="form-control" name="att_id" id="att_id">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="sumit" class="btn btn-danger">Upload</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
+
         @include('../layouts.footerlinks')
 	</body>
 </html>
@@ -162,6 +195,10 @@
 
     function setId(id){
         $('#deleteID').val(id);
+    }
+
+    function setAttId(id){
+        $('#att_id').val(id);
     }
 
     function getAttachements(id){

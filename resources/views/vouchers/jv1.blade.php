@@ -304,6 +304,7 @@
                 </section>
             </form>
         </div>
+        
         @include('../layouts.footerlinks')
 	</body>
 </html>
