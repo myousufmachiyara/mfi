@@ -2094,7 +2094,7 @@
 						$('#WTItemByQtyTable').html(rows);
 
 						rows = '';
-						$.each(result['crbyweight'], function (index, value) {
+						$.each(result['crcbyweight'], function (index, value) {
 							
 							rows += `<tr>
 								<td>${value['item_name'] ? value['item_name'] : ''}</td>
@@ -2104,7 +2104,7 @@
 						$('#CRCItemByWeightTable').html(rows);
 
 						rows = '';
-						$.each(result['crbyqty'], function (index, value) {
+						$.each(result['crcbyqty'], function (index, value) {
 							
 							rows += `<tr>
 								<td>${value['item_name'] ? value['item_name'] : ''}</td>
