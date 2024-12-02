@@ -263,7 +263,7 @@
             return;
         }
 
-        fetch('/purchase2/deleteAttachment/' + fileId, {
+        fetch('/sales2/deleteAttachment/' + fileId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
