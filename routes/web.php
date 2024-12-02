@@ -553,6 +553,9 @@
         // GARDER Tab
         Route::get('/dashboard-tabs/garder', [App\Http\Controllers\DashboardGARDERTabController::class, 'GARDER']);
 
+        // ITEM OF THE MONTH Tab
+        Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
+
     });
 
 
