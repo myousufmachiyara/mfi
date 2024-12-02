@@ -97,7 +97,7 @@
                                                     <td style="vertical-align: middle;">
                                                         <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->Sale_inv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->auto_lager}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->Sale_inv_no}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
                                                     </td>
                                                     <td class="actions">
                                                         <!-- <a href="{{ route('print-purc2-invoice', $row->Sale_inv_no) }}" class="text-danger"> <i class="fas fa-print"></i></a> -->
