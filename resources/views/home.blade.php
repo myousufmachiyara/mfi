@@ -2006,6 +2006,161 @@
 				});
 
         	}
+			else if(tabId=="#ITEM_OF_MONTH"){
+				var table = document.getElementById('HRItemByWeightTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('HRItemByQtyTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('CRCItemByWeightTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('CRCItemByQtyTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('ECOItemByWeightTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+				var table = document.getElementById('ECOItemByQtyTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('COSMOItemByWeightTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('COSMOItemByQtyTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var month = document.getElementById('filterITEM_OF_MONTH').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/item-of-the-month',
+					data: { month: month },
+					success: function(result) {
+						
+						$.each(result['hrbyweight'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#HRItemByWeightTable').html(rows);
+
+						rows = '';
+						$.each(result['hrbyqty'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['qty'] ? value['qty'] : ''}</td>
+							</tr>`;
+						});
+						$('#HRItemByQtyTable').html(rows);
+
+						rows = '';
+						$.each(result['wtbyweight'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#WTItemByWeightTable').html(rows);
+
+						rows = '';
+						$.each(result['wtbyqty'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['qty'] ? value['qty'] : ''}</td>
+							</tr>`;
+						});
+						$('#WTItemByQtyTable').html(rows);
+
+						rows = '';
+						$.each(result['crbyweight'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#CRCItemByWeightTable').html(rows);
+
+						rows = '';
+						$.each(result['crbyqty'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['qty'] ? value['qty'] : ''}</td>
+							</tr>`;
+						});
+						$('#CRCItemByQtyTable').html(rows);
+						
+						rows = '';
+						$.each(result['ecobyweight'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#ECOItemByWeightTable').html(rows);
+
+						rows = '';
+						$.each(result['ecobyqty'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['qty'] ? value['qty'] : ''}</td>
+							</tr>`;
+						});
+						$('#ECOItemByQtyTable').html(rows);
+
+						
+						rows = '';
+						$.each(result['cosmobyweight'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#COSMOItemByWeightTable').html(rows);
+
+						rows = '';
+						$.each(result['cosmobyqty'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['item_name'] ? value['item_name'] : ''}</td>
+								<td>${value['qty'] ? value['qty'] : ''}</td>
+							</tr>`;
+						});
+						$('#COSMOItemByQtyTable').html(rows);
+
+
+					},
+					error: function() {
+						alert("Error loading Item Of The Month data");
+					}
+				});
+        	}
 		}
 
 		function getTabData() {
