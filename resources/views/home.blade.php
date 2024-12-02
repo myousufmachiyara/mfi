@@ -401,6 +401,9 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
 								</li>
 								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ITEM_OF_MONTH" href="#ITEM_OF_MONTH" data-bs-toggle="tab">Item Of THe Month</a>
+								</li>
+								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
 								</li>
 								<li class="nav-item">
@@ -1024,32 +1027,6 @@
 										</div>
 
 										
-										<div class="col-12 col-md-4 mb-3">
-											<section class="card">
-												<header class="card-header">
-													<div class="card-actions">
-														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-													</div>
-
-													<h2 class="card-title">Top 3 Customers Of The Month</h2>
-												</header>
-												<div class="card-body scrollable-div">
-													
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead class="sticky-tbl-header">
-															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-															</tr>
-														</thead>
-														<tbody id="TopSaleCustomersTable">
-															
-														</tbody>
-													</table>
-												</div>
-											</section>
-										</div>
-
 										
 										
 									</div>
