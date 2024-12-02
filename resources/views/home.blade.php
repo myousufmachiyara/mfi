@@ -431,9 +431,9 @@
 													</div>
 													<h2 class="card-title">Sale 1 Not Final</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
@@ -458,9 +458,9 @@
 													</div>
 													<h2 class="card-title">Purchase 1 Not Final</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
@@ -485,9 +485,9 @@
 													</div>
 													<h2 class="card-title">Pending Sale Against Pur 2</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
@@ -541,9 +541,9 @@
 													</div>
 													<h2 class="card-title">Sale 2 Not Final</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
@@ -604,10 +604,9 @@
 													</div>
 													<h2 class="card-title">Sale 2 Not Received</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
+														<thead class="sticky-tbl-header">															<tr>
 																<th>Invoice#</th>
 																<th class="text-center">Date</th>
 																<th>Bill#</th>
@@ -671,36 +670,36 @@
 													<h2 class="card-title">Monthly Tonage Of Customer From Purchase 2</h2>
 												</header>
 												<div class="card-body">
-												<div class="row mb-2">
-													<div class="col-lg-10">
-														<div class="form-group">
-														
-															<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
-																<option value="" disabled selected>Select Account</option>
-																@foreach($coa as $key => $row)	
-																	<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
-																@endforeach
-															</select>
+													<div class="row mb-2">
+														<div class="col-lg-10">
+															<div class="form-group">
 															
+																<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
+																	<option value="" disabled selected>Select Account</option>
+																	@foreach($coa as $key => $row)	
+																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																	@endforeach
+																</select>
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
 														</div>
 													</div>
-													<div class="col-lg-2">
-														<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
+													<div class="scrollable-div">
+														<table class="table table-responsive-md table-striped mb-0">
+															<thead class="sticky-tbl-header">
+																<tr>
+																	<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																	<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																</tr>
+															</thead>
+															<tbody id="HRMonthlyTonageOfCust">
+																
+															</tbody>
+														</table>
 													</div>
 												</div>
-													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
-															<tr>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
-																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
-															</tr>
-														</thead>
-														<tbody id="HRMonthlyTonageOfCust">
-															
-														</tbody>
-													</table>
-												</div>
-												
 											</section>
 										</div>
 
@@ -720,10 +719,10 @@
 
 													<h2 class="card-title">Steelex Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -746,10 +745,10 @@
 
 													<h2 class="card-title">S.P.M Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -772,10 +771,10 @@
 
 													<h2 class="card-title">Mehboob Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -798,10 +797,10 @@
 
 													<h2 class="card-title">GoDown Sale Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -824,10 +823,10 @@
 
 													<h2 class="card-title">Top 3 Customers Of Purchase 2</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -862,10 +861,10 @@
 
 													<h2 class="card-title">CRC Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -888,10 +887,10 @@
 
 													<h2 class="card-title">HRS Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -914,10 +913,10 @@
 
 													<h2 class="card-title">SS Eco 201 Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -940,10 +939,10 @@
 
 													<h2 class="card-title">SS Cosmo 304 Sale Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -981,10 +980,10 @@
 
 													<h2 class="card-title">Garder / TR Purchase Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -1007,10 +1006,10 @@
 
 													<h2 class="card-title">Garder / TR Sale Summary</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
@@ -1034,10 +1033,10 @@
 
 													<h2 class="card-title">Top 3 Customers Of The Month</h2>
 												</header>
-												<div class="card-body">
+												<div class="card-body scrollable-div">
 													
 													<table class="table table-responsive-md table-striped mb-0">
-														<thead>
+														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
