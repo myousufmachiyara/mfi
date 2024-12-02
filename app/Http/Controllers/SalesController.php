@@ -252,6 +252,26 @@ class SalesController extends Controller
         return redirect()->route('all-saleinvoices');
     }
 
+    public function addAtt(Request $request)
+    {
+        $sale1_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $sale1_att = new sale1_att();
+                $sale1_att->created_by = session('user_id');
+                $sale1_att->sale1_id = $sale1_id;
+                $extension = $file->getClientOriginalExtension();
+                $sale1_att->att_path = $this->sale1Doc($file,$extension);
+                $sale1_att->save();
+            }
+        }
+        return redirect()->route('all-saleinvoices');
+
+    }
+
     public function destroy(Request $request)
     {
         $sales = Sales::where('Sal_inv_no', $request->invoice_id)->update([

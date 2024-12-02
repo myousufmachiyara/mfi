@@ -236,6 +236,27 @@ class PurchaseController extends Controller
         return redirect()->route('all-purchases1');
     }
 
+    public function addAtt(Request $request)
+    {
+        $pur_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $purAtt = new pur1_att();
+                $purAtt->created_by = session('user_id');
+                $purAtt->pur1_id = $pur_id;
+                $extension = $file->getClientOriginalExtension();
+                $purAtt->att_path = $this->pur1Doc($file,$extension);
+                $purAtt->save();
+            }
+
+        }
+        return redirect()->route('all-purchases1');
+
+    }
+
     public function destroy(Request $request)
     {
         $purc1 = purchase::where('pur_id', $request->delete_purc1)->update([

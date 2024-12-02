@@ -235,7 +235,21 @@
         Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
         Route::post('/vouchers/addAtt/', [App\Http\Controllers\JV1Controller::class, 'addAtt'])->name('jv1-att-add');
         Route::post('/vouchers2/addAtt/', [App\Http\Controllers\JV2Controller::class, 'addAtt'])->name('jv2-att-add');
-
+        Route::post('/purchase1/addAtt/', [App\Http\Controllers\PurchaseController::class, 'addAtt'])->name('pur1-att-add');
+        Route::post('/purchase2/addAtt/', [App\Http\Controllers\Purchase2Controller::class, 'addAtt'])->name('pur2-att-add');
+        Route::post('/sales/addAtt/', [App\Http\Controllers\SalesController::class, 'addAtt'])->name('sale1-att-add');
+        Route::post('/sales2/addAtt/', [App\Http\Controllers\Sales2Controller::class, 'addAtt'])->name('sale2-att-add');
+        Route::post('/tstock_in/addAtt/', [App\Http\Controllers\TStockInController::class, 'addAtt'])->name('tstockin-att-add');
+        Route::post('/tstock_out/addAtt/', [App\Http\Controllers\TStockOutController::class, 'addAtt'])->name('tstockout-att-add');
+        Route::post('/tbad_dabs/addAtt/', [App\Http\Controllers\TBadDabsController::class, 'addAtt'])->name('tbaddabs-att-add');
+        Route::post('/stock_in/addAtt/', [App\Http\Controllers\StockInController::class, 'addAtt'])->name('stock_in-att-add');
+        Route::post('/stock_out/addAtt/', [App\Http\Controllers\StockOutController::class, 'addAtt'])->name('stock_out-att-add');
+        Route::post('/bad_dabs/addAtt/', [App\Http\Controllers\BadDabsController::class, 'addAtt'])->name('bad_dabs-att-add');
+        Route::post('/po/addAtt/', [App\Http\Controllers\PoController::class, 'addAtt'])->name('po-att-add');
+        Route::post('/tpo/addAtt/', [App\Http\Controllers\TpoController::class, 'addAtt'])->name('tpo-att-add');
+        Route::post('/quotation/addAtt/', [App\Http\Controllers\QuotationController::class, 'addAtt'])->name('quotation-att-add');
+        Route::post('/tquotation/addAtt/', [App\Http\Controllers\TQuotationController::class, 'addAtt'])->name('tquotation-att-add');
+        Route::post('/complains/addAtt/', [App\Http\Controllers\ComplainsController::class, 'addAtt'])->name('complains-att-add');
     });
 
     Route::middleware(['checkPermission:att_delete'])->group(function () {

@@ -312,6 +312,26 @@ class Sales2Controller extends Controller
         return redirect()->route('show-sales2',$request->pur2_id);
     }
 
+    public function addAtt(Request $request)
+    {
+        $sale2_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $sale2_att = new sale2_att();
+                $sale2_att->created_by = session('user_id');
+                $sale2_att->sale2_id = $sale2_id;
+                $extension = $file->getClientOriginalExtension();
+                $sale2_att->att_path = $this->sale2Doc($file,$extension);
+                $sale2_att->save();
+            }
+        }
+        return redirect()->route('all-sale2invoices');
+
+    }
+
     public function destroy(Request $request)
     {
         tsales::where('Sal_inv_no', $request->delete_purc2)->update([

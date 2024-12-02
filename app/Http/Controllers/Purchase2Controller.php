@@ -413,6 +413,26 @@ class Purchase2Controller extends Controller
         return redirect()->route('all-purchases2');
     }
 
+    public function addAtt(Request $request)
+    {
+        $jv2_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $jv2_att = new jv2_att();
+                $jv1_att->created_by = session('user_id');
+                $jv2_att->jv2_id = $jv2_id;
+                $extension = $file->getClientOriginalExtension();
+                $jv2_att->att_path = $this->jv2Doc($file,$extension);
+                $jv2_att->save();
+            }
+        }
+        return redirect()->route('all-jv2');
+
+    }
+    
     public function destroy(Request $request)
     {
         tpurchase::where('Sale_inv_no', $request->delete_purc2)->update([
