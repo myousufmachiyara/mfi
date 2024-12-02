@@ -1689,7 +1689,13 @@
 
         	}
 			else if(tabId=="#GARDER"){
+
 				var table = document.getElementById('GarderPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('GarderSaleTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
 				}
@@ -1723,6 +1729,27 @@
 						</tr>`;
 
 						$('#GarderPurTable').html(rows);
+
+						rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['garder_customer'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#GarderSaleTable').html(rows);
+
 
 						
 					},
