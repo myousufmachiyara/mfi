@@ -401,7 +401,7 @@
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ITEM_OF_MONTH" href="#ITEM_OF_MONTH" data-bs-toggle="tab">Item Of THe Month</a>
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ITEM_OF_MONTH" href="#ITEM_OF_MONTH" data-bs-toggle="tab">Item Of The Month</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
