@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dash_pur1_mill;
 use App\Models\dash_sale_by_item_group_customer;
+use Illuminate\Support\Facades\DB;
 
 class DashboardGARDERTabController extends Controller
 {
