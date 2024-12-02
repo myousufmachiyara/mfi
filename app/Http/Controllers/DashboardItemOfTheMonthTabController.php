@@ -10,61 +10,36 @@ class DashboardItemOfTheMonthTabController extends Controller
 {
     public function ItemOfMonth(Request $request)
     {
+        // Validate the 'month' parameter to ensure it's in the correct format
+        $request->validate([
+            'month' => 'required|date_format:Y-m',
+        ]);
+
         $month = $request->month;
 
-        $hrbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 7)
-        ->get(['item_name', 'weight']); // Only select the necessary fields
+        // Define item groups and their respective prefixes
+        $itemGroups = [
+            7 => 'hr', 
+            8 => 'wt', 
+            1 => 'crc', 
+            5 => 'eco', 
+            6 => 'cosmo'
+        ];
 
-        $hrbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 7)
-        ->get(['item_name', 'qty']);
+        $results = [];
 
-        $wtbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 8)
-        ->get(['item_name', 'weight']); // Only select the necessary fields
+        // Fetch data for each item group
+        foreach ($itemGroups as $code => $prefix) {
+            $results["{$prefix}byweight"] = dash_item_of_month_by_weight_pur2::where('dat', $month)
+                ->where('item_group_cod', $code)
+                ->get(['item_name', 'weight']);
 
-        $wtbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 8)
-        ->get(['item_name', 'qty']);
+            $results["{$prefix}byqty"] = dash_item_of_month_by_qty_pur2::where('dat', $month)
+                ->where('item_group_cod', $code)
+                ->get(['item_name', 'qty']);
+        }
 
-        $crcbyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 1)
-        ->get(['item_name', 'weight']); // Only select the necessary fields
-
-        $crcbyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 1)
-        ->get(['item_name', 'qty']);
-
-        $ecobyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 5)
-        ->get(['item_name', 'weight']); // Only select the necessary fields
-
-        $ecobyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 5)
-        ->get(['item_name', 'qty']);
-
-        $cosmobyweight = dash_item_of_month_by_weight_pur2::where('dat', $month)
-        ->where('item_group_cod', 6)
-        ->get(['item_name', 'weight']); // Only select the necessary fields
-
-        $cosmobyqty = dash_item_of_month_by_qty_pur2::where('dat', $month)
-        ->where('item_group_cod', 6)
-        ->get(['item_name', 'qty']);
-
-
-        return response()->json([
-            'hrbyweight' => $hrbyweight,
-            'hrbyqty' => $hrbyqty,
-            'wtbyweight' => $wtbyweight,
-            'wtbyqty' => $wtbyqty,
-            'crbyweight' => $crbyweight,
-            'crbyqty' => $crbyqty,
-            'ecobyweight' => $ecobyweight,
-            'ecobyqty' => $ecobyqty,
-            'cosmobyweight' => $cosmobyweight,
-            'cosmobyqty' => $cosmobyqty
-            
-        ]);
+        // Return the response as JSON
+        return response()->json($results);
     }
 }

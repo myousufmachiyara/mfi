@@ -2006,161 +2006,66 @@
 				});
 
         	}
-			else if(tabId=="#ITEM_OF_MONTH"){
-				var table = document.getElementById('HRItemByWeightTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
+			// ITEM OF THE MONTH Tab
+			else if (tabId == "#ITEM_OF_MONTH") {
+				// Clear all the tables
+				const tableIds = [
+					'HRItemByWeightTable', 'HRItemByQtyTable',
+					'WTItemByWeightTable', 'WTItemByQtyTable',
+					'CRCItemByWeightTable', 'CRCItemByQtyTable',
+					'ECOItemByWeightTable', 'ECOItemByQtyTable',
+					'COSMOItemByWeightTable', 'COSMOItemByQtyTable'
+				];
 
-				var table = document.getElementById('HRItemByQtyTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
+				tableIds.forEach(id => {
+					const table = document.getElementById(id);
+					while (table.rows.length > 0) {
+						table.deleteRow(0);
+					}
+				});
 
-				var table = document.getElementById('CRCItemByWeightTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
+				// Get the selected month
+				const month = document.getElementById('filterITEM_OF_MONTH').value;
 
-				var table = document.getElementById('CRCItemByQtyTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('ECOItemByWeightTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-				var table = document.getElementById('ECOItemByQtyTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('COSMOItemByWeightTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var table = document.getElementById('COSMOItemByQtyTable');
-				while (table.rows.length > 0) {
-					table.deleteRow(0);
-				}
-
-				var month = document.getElementById('filterITEM_OF_MONTH').value;
-
+				// Perform AJAX request
 				$.ajax({
 					type: "GET",
 					url: '/dashboard-tabs/item-of-the-month',
 					data: { month: month },
 					success: function(result) {
-						
-						$.each(result['hrbyweight'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#HRItemByWeightTable').html(rows);
+						const resultMapping = {
+							hrbyweight: 'HRItemByWeightTable',
+							hrbyqty: 'HRItemByQtyTable',
+							wtbyweight: 'WTItemByWeightTable',
+							wtbyqty: 'WTItemByQtyTable',
+							crbyweight: 'CRCItemByWeightTable',
+							crbyqty: 'CRCItemByQtyTable',
+							ecobyweight: 'ECOItemByWeightTable',
+							ecobyqty: 'ECOItemByQtyTable',
+							cosmobyweight: 'COSMOItemByWeightTable',
+							cosmobyqty: 'COSMOItemByQtyTable'
+						};
 
-						rows = '';
-						$.each(result['hrbyqty'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['qty'] ? value['qty'] : ''}</td>
-							</tr>`;
+						// Loop through the results and populate the respective tables
+						Object.keys(result).forEach(key => {
+							const tableId = resultMapping[key];
+							let rows = '';
+							result[key].forEach(item => {
+								rows += `<tr>
+									<td>${item.item_name || ''}</td>
+									<td>${item.weight || item.qty || ''}</td>
+								</tr>`;
+							});
+							document.getElementById(tableId).innerHTML = rows;
 						});
-						$('#HRItemByQtyTable').html(rows);
-
-						rows = '';
-						$.each(result['wtbyweight'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#WTItemByWeightTable').html(rows);
-
-						rows = '';
-						$.each(result['wtbyqty'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['qty'] ? value['qty'] : ''}</td>
-							</tr>`;
-						});
-						$('#WTItemByQtyTable').html(rows);
-
-						rows = '';
-						$.each(result['crbyweight'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#CRCItemByWeightTable').html(rows);
-
-						rows = '';
-						$.each(result['crbyqty'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['qty'] ? value['qty'] : ''}</td>
-							</tr>`;
-						});
-						$('#CRCItemByQtyTable').html(rows);
-						
-						rows = '';
-						$.each(result['ecobyweight'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#ECOItemByWeightTable').html(rows);
-
-						rows = '';
-						$.each(result['ecobyqty'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['qty'] ? value['qty'] : ''}</td>
-							</tr>`;
-						});
-						$('#ECOItemByQtyTable').html(rows);
-
-						
-						rows = '';
-						$.each(result['cosmobyweight'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['weight'] ? value['weight'] : ''}</td>
-							</tr>`;
-						});
-						$('#COSMOItemByWeightTable').html(rows);
-
-						rows = '';
-						$.each(result['cosmobyqty'], function (index, value) {
-							
-							rows += `<tr>
-								<td>${value['item_name'] ? value['item_name'] : ''}</td>
-								<td>${value['qty'] ? value['qty'] : ''}</td>
-							</tr>`;
-						});
-						$('#COSMOItemByQtyTable').html(rows);
-
-
 					},
-					error: function() {
-						alert("Error loading Item Of The Month data");
+					error: function(xhr, status, error) {
+						console.error(`Error: ${status} - ${error}`);
+						alert("Error loading Item Of The Month data. Please try again later.");
 					}
 				});
-        	}
+			}
+
 		}
 
 		function getTabData() {
