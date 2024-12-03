@@ -13,8 +13,11 @@ use App\Models\top_customers_of_pur2;
 class DashboardHRTabController extends Controller
 {
     public function HR(Request $request){
-        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
+        $dash_pur_2_summary_monthly_companywise_for_donut = dash_pur_2_summary_monthly_companywise::where('dat2',$request->month)
         ->get();
+
+        $dash_pur_2_summary_monthly_companywise = dash_pur_2_summary_monthly_companywise::get();
+
 
         $steelex = pur_pipe_summary_of_party_by_mill::leftjoin('ac','ac.ac_code','=','pur_pipe_summary_of_party_by_mill.account_name')
         ->where('dat',$request->month)
@@ -43,6 +46,7 @@ class DashboardHRTabController extends Controller
         
         return [
             'dash_pur_2_summary_monthly_companywise' => $dash_pur_2_summary_monthly_companywise,
+            'dash_pur_2_summary_monthly_companywise_for_donut' => $dash_pur_2_summary_monthly_companywise_for_donut,
             'steelex' => $steelex,
             'spm' => $spm,
             'mehboob' => $mehboob,

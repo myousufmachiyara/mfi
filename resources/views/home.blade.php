@@ -1687,8 +1687,7 @@
 						month: month,
 					},
 					success: function(result) {
-						const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-						const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
+						const { datasets, chartLabels } = generateChartDatasets(result['dash_pur_2_summary_monthly_companywise'], mills, colors);
 
 						const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 
@@ -1703,7 +1702,7 @@
 								datasets: datasets,  // Dynamic datasets based on groupedData
 							},
 						});
-						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise_for_donut']);
 
 						if (monthlyTonageChart) {
 							monthlyTonageChart.destroy();
