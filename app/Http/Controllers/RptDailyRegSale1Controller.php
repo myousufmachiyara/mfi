@@ -127,24 +127,24 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
 
-        $html1 = '<table border="0.3" style="text-align:center;margin-top:10px">';
-        $html1 .= '<tr>';
-        $html1 .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Date</th>';
-        $html1 .= '<th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>';
-        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>';
-        $html1 .= '<th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>';
-        $html1 .= '<th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>';
-        $html1 .= '<th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>';
-        $html1 .= '</tr>';
-        $html1 .= '</table>';
+        // $html1 = '<table border="0.3" style="text-align:center;margin-top:10px">';
+        // $html1 .= '<tr>';
+        // $html1 .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
+        // $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Date</th>';
+        // $html1 .= '<th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        // $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>';
+        // $html1 .= '<th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>';
+        // $html1 .= '<th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>';
+        // $html1 .= '<th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>';
+        // $html1 .= '</tr>';
+        // $html1 .= '</table>';
 
         
                 
 
         // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-        $html .= $tableHeader;
+        //$html .= $tableHeader;
 
         
        // call htmlHeaderDetails on every page
