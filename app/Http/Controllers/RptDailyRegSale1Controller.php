@@ -141,17 +141,7 @@ class RptDailyRegSale1Controller extends Controller
             $totalAmount += $items['bill_amt'];
             $count++;
 
-            $currentY = $pdf->GetY();
-            // Check if a new page is needed based on remaining space
-    
-            if(($pdf->getPageHeight()-$pdf->GetY())<57){
-                $pdf->AddPage();
-                $currentY = $pdf->GetY()+15;
-                $html .= '</table>'; // Close the current table
-                $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
-                $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
-                $html .= $tableHeader; // Re-add the table header for the new page
-            }
+         
         }
         
        
@@ -163,6 +153,18 @@ class RptDailyRegSale1Controller extends Controller
                 </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
+        $currentY = $pdf->GetY();
+        // Check if a new page is needed based on remaining space
+
+        if(($pdf->getPageHeight()-$pdf->GetY())<57){
+            $pdf->AddPage();
+            $currentY = $pdf->GetY()+15;
+            $html .= '</table>'; // Close the current table
+            $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
+            $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
+            $html .= $tableHeader; // Re-add the table header for the new page
+        }
         
         // Prepare filename
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
