@@ -57,7 +57,7 @@ class HomeController extends Controller
             
             $last_month_purchase = dash_month_purchase::where('month_year',$previousMonthAndYear)->first();
             $last_month_sale = dash_month_sale::where('month_year',$previousMonthAndYear)->first();    
-            $coa = AC::where('status', 1)->get();
+            $coa = AC::where('status', 1)->get(['ac_code','ac_name']);
     
             return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','coa'));
         }
