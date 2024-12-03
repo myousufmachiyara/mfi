@@ -100,6 +100,8 @@ class RptDailyRegSale1Controller extends Controller
                 </td>
             </tr>
         </table>';
+
+        // call htmlHeaderDetails on every page
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
         // Table headers
@@ -116,6 +118,8 @@ class RptDailyRegSale1Controller extends Controller
         // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
         $html .= $tableHeader;
+
+        $pdf->setTableHtml($tableHeader);
 
         $count = 1;
         $totalAmount = 0;
