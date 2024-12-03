@@ -13,10 +13,10 @@ class ItemsController extends Controller
     public function index()
     {
         $items = Item_entry::where('item_entry.status', 1)
-                ->join('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
+                ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry.item_group')
+                ->orderby('it_cod','desc')
                 ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
-
         return view('items.index',compact('items','itemGroups'));
     }
 
@@ -42,7 +42,6 @@ class ItemsController extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
         if($request->has('items'))
         {
             for($i=0;$i<$request->items;$i++)
@@ -63,7 +62,7 @@ class ItemsController extends Controller
                     $item_entry->stock_level=$request->item_stock_level[$i];
                     $item_entry->labourprice=$request->item_l_price[$i];
                     $item_entry->status=1;
-                    $item_entry->created_by=$userId;
+                    $item_entry->created_by=session('user_id');
 
                     $item_entry->save();
                 }
@@ -75,7 +74,10 @@ class ItemsController extends Controller
 
     public function destroy(Request $request)
     {
-        $item_groups = Item_entry::where('it_cod', $request->item_id)->update(['status' => '0']);
+        $item_groups = Item_entry::where('it_cod', $request->item_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-items');
     }
 
@@ -91,7 +93,7 @@ class ItemsController extends Controller
         if ($request->has('item_name') && $request->item_name) {
             $item->item_name=$request->item_name;
         }
-        if ($request->has('item_remark') && $request->item_remark) {
+        if ($request->has('item_remark') && $request->item_remark OR empty($request->item_remark)) {
             $item->item_remark=$request->item_remark;
         }
         if ($request->has('qty') && $request->qty OR $request->qty==0) {
@@ -131,6 +133,7 @@ class ItemsController extends Controller
             'opp_date'=>$item->opp_date,
             'stock_level'=>$item->stock_level,
             'labourprice'=>$item->labourprice,
+            'updated_by' => session('user_id'),
         ]);
         
         return redirect()->route('all-items');

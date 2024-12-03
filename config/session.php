@@ -19,7 +19,8 @@ return [
     */
 
     'driver' => env('SESSION_DRIVER', 'file'),
-
+    'gc_probability' => 1,
+    'gc_divisor' => 100,
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
@@ -31,9 +32,10 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    // 'lifetime' => 1,
 
-    'expire_on_close' => false,
+    'lifetime' => 30, // For example, 20 minutes
+    'expire_on_close' => true,
 
     /*
     |--------------------------------------------------------------------------

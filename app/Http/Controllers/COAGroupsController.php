@@ -18,6 +18,7 @@ class COAGroupsController extends Controller
     public function store(Request $request)
     {
         $acc_group = new ac_group();
+        $acc_group->created_by = session('user_id');
 
         if ($request->has('acc_group_name') && $request->acc_group_name) {
             $acc_group->group_name=$request->acc_group_name;
@@ -29,7 +30,10 @@ class COAGroupsController extends Controller
     
     public function destroy(Request $request)
     {
-        $ac_group = ac_group::where('group_cod', $request->acc_group_cod)->update(['status' => '0']);
+        $ac_group = ac_group::where('group_cod', $request->acc_group_cod)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-acc-groups');
     }
 
@@ -43,6 +47,7 @@ class COAGroupsController extends Controller
                
         ac_group::where('group_cod', $request->group_cod)->update([
             'group_name'=>$ac_group->group_name,
+            'updated_by' => session('user_id'),
         ]);
 
         return redirect()->route('all-acc-groups');

@@ -1,19 +1,18 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
-
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper cust-pad">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">COA Sub Heads</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Sub Head</button>
                                     </div>
-                                    <h2 class="card-title">COA Sub Heads</h2>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
@@ -33,13 +32,15 @@
                                                     <td>{{$row->sub_name}}</td>
                                                     <td>{{$row->name}}</td>
                                                     <td class="actions text-end">
-                                                        <a class="mb-1 mt-1 me-1" onclick="getCOASubHeadDetails({{$row->id}})" href="#updateModal">
+                                                        <a class="mb-1 mt-1 me-1  modal-with-zoom-anim ws-normal" onclick="getCOASubHeadDetails({{$row->id}})" href="#updateModal">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
+                                                        @if(session('user_role')==1)
                                                         <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1" onclick="setId({{$row->id}})" href="#deleteModal">
+                                                        <a class="mb-1 mt-1 me-1  modal-with-zoom-anim ws-normal" onclick="setId({{$row->id}})" href="#deleteModal">
                                                             <i class="far fa-trash-alt" style="color:red"></i>
                                                         </a>
+                                                        @endif
                                                     </td>
 
                                                 </tr>
@@ -93,8 +94,8 @@
                     </header>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Select Head</label>
-                            <select class="form-control" name ="main" required>
+                            <label>Select Head<span style="color: red;"><strong>*</strong></span></label>
+                            <select data-plugin-selecttwo class="form-control select2-js" name ="main" required>
                                 <option value="" selected disabled>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>
@@ -102,7 +103,7 @@
                             </select>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Sub Head Name</label>
+                            <label>Sub Head Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Sub Head Name" name="sub" required>
                         </div>
                     </div>
@@ -131,8 +132,8 @@
                             <input type="number" class="form-control" id="sub_head_id" name="id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Select Head</label>
-                            <select class="form-control" name="main" required id="update_head_name">
+                            <label>Select Head<span style="color: red;"><strong>*</strong></span></label>
+                            <select data-plugin-selecttwo class="form-control select2-js" name="main" required id="update_head_name">
                                 <option disabled selected>Select Group</option>
                                 @foreach($heads as $key => $row)	
                                     <option value="{{$row->id}}">{{$row->heads}}</option>
@@ -141,7 +142,7 @@
                             <input type="hidden" class="form-control" id="update_sub_head_id" name="sub_head_id" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label>Sub Head Name</label>
+                            <label>Sub Head Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_sub_head_name" placeholder="Remarks" name="sub" required>
                         </div>
                     </div>
@@ -157,7 +158,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
@@ -169,12 +170,12 @@
     function getCOASubHeadDetails(id){
         $.ajax({
             type: "GET",
-            url: "/coa/coa-sub-heads/detail",
+            url: "/coa-sub-heads/detail",
             data: {id:id},
             success: function(result){
                 $('#sub_head_id').val(result['id']);
                 $('#update_sub_head_id').val(result['id']);
-                $('#update_head_name').val(result['main']);
+                $('#update_head_name').val(result['main']).trigger('change');
                 $('#update_sub_head_name').val(result['sub']);
             },
             error: function(){

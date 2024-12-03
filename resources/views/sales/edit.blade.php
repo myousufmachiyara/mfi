@@ -1,59 +1,58 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+			@include('../layouts.pageheader')
+			<div class="inner-wrapper cust-pad">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-sale-invoice') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header"  style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">Edit Sale Invoice</h2>
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 									</header>
+
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Invoice no.</label>
-												<input type="text" placeholder="Invoice No." class="form-control" disabled value="{{$sales->Sal_inv_no}}">
+												<input type="text" placeholder="Invoice No." class="form-control" disabled value="{{$sales->prefix}}{{$sales->Sal_inv_no}}">
 												<input type="hidden" name="invoice_no" placeholder="Invoice No." class="form-control" value="{{$sales->Sal_inv_no}}">
 												<input type="hidden" id="itemCount" name="items" class="form-control" >
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-6 col-md-2 mb-2">
 												<label class="col-form-label" >Date</label>
 												<input type="date" name="date" required class="form-control" value="{{$sales->sa_date}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label" >Bill No.</label>
 												<input type="text" name="bill_no" placeholder="Bill No." class="form-control" value="{{$sales->pur_ord_no}}">
 											</div>
 
-											<div class="col-sm-12 col-md-2">
+											<div class="col-6 col-md-2">
 												<label class="col-form-label">Status</label>
-												<select class="form-control mb-3" name="bill_status" required>
-													@if($sales->bill_not==0)
-														<option value="0" selected>Bill Not Final</option>
-														<option value="1">Finalized</option>
-													@elseif($sales->bill_not==1)
-														<option value="0" >Bill Not Final</option>
-														<option value="1" selected>Finalized</option>
-													@endif
-												</select>													
+												<select class="form-control mb-3" id="bill_status" name="bill_status" required>
+													<option value="0" {{ $sales->bill_not == 0 ? 'selected' : '' }}>Bill Not Final</option>
+													<option value="1" {{ $sales->bill_not == 1 ? 'selected' : '' }}>Finalized</option>
+												</select>
+												
 											</div>
 
-											<div class="col-sm-12 col-md-4">
+											<div class="col-12 col-md-4">
 												<label class="col-form-label">File Attached</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 
 											<div class="col-12 col-md-2 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select class="form-control" id="coa_name" required name="account_name">
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js" id="coa_name" required name="account_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $row->ac_code == $sales->account_name ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -61,7 +60,7 @@
 												</select>
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
+											<div class="col-12 col-md-2 mb-2">
 												<label class="col-form-label">Name Of Person</label>
 												<input type="text" name="nop" id="nop" placeholder="Name Of Person" class="form-control" value="{{$sales->Cash_pur_name}}">
 											</div>
@@ -79,31 +78,21 @@
 
 											<div class="col-12 mb-3">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control">{{$sales->Sales_remarks}}</textarea>
+												<textarea rows="4" cols="50" name="remarks" id="remarks" placeholder="Remarks" class="form-control cust-textarea">{{$sales->Sales_remarks}}</textarea>
 											</div>
 									  </div>
 									</div>
-								</section>
-							</div>
-
-							<div class="col-12 mb-3">
-								<header class="card-header">
-									<div class="card-actions">
-										<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-									</div>
-									<h2 class="card-title">Edit Sale Invoice Details</h2>
-								</header>
-								<section class="card">
-									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+							
+									<div class="card-body" style="overflow-x:auto;max-height:450px;overflow-y:auto">
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="10%">Item Code</th>
-													<th width="10%">Qty.</th>
-													<th width="20%">Item Name</th>
+													<th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="15%">Weight (kgs)</th>
-													<th width="10%">Price</th>
+													<th width="15%">Weight(kgs)<span style="color: red;"><strong>*</strong></span></th>
+													<th width="10%">Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width="10%">Amount</th>
 													<th width="10%"></th>
 												</tr>
@@ -119,13 +108,13 @@
 												@foreach($sale_items as $key1 => $sale_item)
 												<tr>
 													<td>
-														<input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" onchange="getItemDetails(1,1)">
+														<input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" class="form-control" value="{{$sale_item->item_cod}}" required onchange="getItemDetails({{$key1+1}},1)">
 													</td>
 													<td>
-														<input type="number" id="item_qty{{$key1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1}})" class="form-control" step="any" value="{{$sale_item->Sales_qty2}}">
+														<input type="number" id="item_qty{{$key1+1}}" name="item_qty[]" placeholder="Qty" onchange="rowTotal({{$key1+1}})" class="form-control" required  step="any" value="{{$sale_item->Sales_qty2}}">
 													</td>
 													<td>
-														<select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails(1,2)" name="item_name[]">
+														<select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},2)" required  name="item_name[]">
 															<option>Select Item</option>
 															@foreach($items as $key2 => $row)	
 																<option value="{{$row->it_cod}}" {{ $row->it_cod == $sale_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -133,18 +122,18 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" id="remarks{{$key1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
+														<input type="text" id="remarks{{$key1+1}}" name="item_remarks[]" placeholder="Remarks" class="form-control" value="{{$sale_item->remarks}}">
 													</td>
 													<td>
-														<input type="number" id="weight{{$key1}}" name="item_weight[]" onchange="rowTotal({{$key1}})" placeholder="Weight (kgs)" step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
+														<input type="number" id="weight{{$key1+1}}" name="item_weight[]" onchange="rowTotal({{$key1+1}})" placeholder="Weight (kgs)" required step="any" class="form-control" value="{{$sale_item->Sales_qty}}">
 														@php  $total_weight=$total_weight + $sale_item->Sales_qty  @endphp
 
 													</td>
 													<td>
-														<input type="number" id="price{{$key1}}" name="item_price[]" onchange="rowTotal({{$key1}})" placeholder="Price" class="form-control" step="any" value="{{$sale_item->sales_price}}">
+														<input type="number" id="price{{$key1+1}}" name="item_price[]" onchange="rowTotal({{$key1+1}})" placeholder="Price" class="form-control" required step="any" value="{{$sale_item->sales_price}}">
 													</td>
 													<td>
-														<input type="number" id="amount{{$key1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
+														<input type="number" id="amount{{$key1+1}}" name="item_amount[]" placeholder="Amount" class="form-control" disabled step="any" required value="{{$sale_item->Sales_qty * $sale_item->sales_price}}"> 
 														@php  $total_amount=$total_amount+ ($sale_item->Sales_qty * $sale_item->sales_price) @endphp
 													</td>
 													<td>
@@ -157,44 +146,42 @@
 									</div>
 									<footer class="card-footer">
 										<div class="row form-group mb-3">
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 										 	    <label class="col-form-label">Total Amount</label>
 										 		<input type="number" id="total_amount_show" step="any" placeholder="Total Amount" class="form-control" disabled step="any" value=@php echo $total_amount @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Weight</label>
 												<input type="number" id="total_weight_show" step="any" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_weight @endphp >
 												<input type="hidden" id="total_weight" name="total_weight" step="any" placeholder="Total Weight" class="form-control" value=@php echo $total_weight @endphp>
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Total Quantity</label>
 												<input type="number" id="total_quantity" name="total_quantity" placeholder="Total Weight" class="form-control" disabled step="any" value=@php echo $total_quantity @endphp >
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Convance</label>
 												<input type="text" id="convance_charges" onchange="netTotal()" name="convance_charges" placeholder="Convance Charges" class="form-control" step="any" value="{{$sales->ConvanceCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Labour Charges</label>
 												<input type="number" id="labour_charges"  onchange="netTotal()" name="labour_charges" placeholder="Labour Charges" class="form-control" step="any" value="{{$sales->LaborCharges}}">
 											</div>
 
-											<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+											<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 												<label class="col-form-label">Bill Discount</label>
 												<input type="number" id="bill_discount"  onchange="netTotal()" name="bill_discount" placeholder="Bill Discount" class="form-control" step="any" value="{{$sales->Bill_discount}}">
 											</div>
-										</div>
 
-										<div class="row mb-3">
 											@php $net_amount= round($total_amount + $sales->ConvanceCharges + $sales->LaborCharges - $sales->Bill_discount) @endphp
-											<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-												<span class="d-flex align-items-center justify-content-lg-end">
-														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
+											<div class="col-12 pb-sm-3 pb-md-0 text-end">
+												<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+												<span>
+													<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">@php echo $net_amount @endphp</span></strong>
 												</span>
 											</div>
 										</div>
@@ -202,8 +189,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-warning mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
 											</div>
 										</div>
@@ -215,10 +201,11 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
+
 	var itemCount=0, index;
 	var totalAmount=0, totalWeight=0, totalQuantity=0, netAmount=0, amount=0, weight=0, quantity=0;
 
@@ -296,9 +283,9 @@
 			var cell7 = newRow.insertCell(6);
 			var cell8 = newRow.insertCell(7);
 
-			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
+			cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" required onchange="getItemDetails('+index+','+1+')" class="form-control">';
 			cell2.innerHTML = '<input type="number" id="item_qty'+index+'" onchange="rowTotal('+index+')"  name="item_qty[]" placeholder="Qty" value="0" step="any" required class="form-control">';
-			cell3.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+			cell3.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
 									'<option>Select Item</option>'+
 									@foreach($items as $key => $row)	
 										'<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -315,7 +302,18 @@
 			var itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
+			
 		}
+	}
+
+	function addNewRow_btn() {
+
+	addNewRow(); // Call the same function
+	// Set focus on the new item_code input field
+	document.getElementById('item_code' + (index - 1)).focus();
+
+
 	}
 
 
@@ -329,13 +327,13 @@
 		}
 		$.ajax({
 			type: "GET",
-			url: "/item/detail",
+			url: "/items/detail",
 			data: {id:itemId},
 			success: function(result){
 				$('#item_code'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#price'+row_no).val(result[0]['sales_price']);
+				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
+				// $('#remarks'+row_no).val(result[0]['item_remark']);
+				// $('#price'+row_no).val(result[0]['sales_price']);
 
 				addNewRow();
 			},

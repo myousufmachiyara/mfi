@@ -1,21 +1,22 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper cust-pad">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
-                                <header class="card-header">
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
+                                    <h2 class="card-title">Item Groups</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus"></i> New Group</button>
                                     </div>
-                                    <h2 class="card-title">Item Groups</h2>
                                 </header>
                                 <div class="card-body">
                                 	<table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                        
                                         <thead>
                                             <tr>
                                                 <th width="5%">Code</th>
@@ -91,7 +92,7 @@
                     </header>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Group Name</label>
+                            <label>Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" placeholder="Name" name="group_name" required>
                         </div>
                         <div class="form-group">
@@ -124,7 +125,7 @@
                             <input type="number" class="form-control" id="group_id" required disabled>
                         </div>
                         <div class="form-group">
-                            <label>Group Name</label>
+                            <label>Group Name<span style="color: red;"><strong>*</strong></span></label>
                             <input type="text" class="form-control" id="update_group_name" placeholder="Name" name="group_name" required>
                             <input type="hidden" class="form-control" id="update_group_id" name="item_group_cod" required>
                         </div>
@@ -145,7 +146,7 @@
             </section>
         </div>
 
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
@@ -156,7 +157,7 @@
     function getGroupDetails(groupID){
         $.ajax({
             type: "GET",
-            url: "/item-group/detail",
+            url: "/item-groups/detail",
             data: {id:groupID},
             success: function(result){
                 $('#group_id').val(result['item_group_cod']);

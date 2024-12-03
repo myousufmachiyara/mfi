@@ -1,17 +1,19 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+		@include('layouts.pageheader')
+			<div class="inner-wrapper cust-pad">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('store-item') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
 						@csrf
 						<div class="row">
 							<div class="col-12 mb-3">
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" style="display: flex;justify-content: space-between;">
 										<h2 class="card-title">New Item Entry (Multiple)</h2>
+										<div class="card-actions">
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
+										</div>
 									</header>
 
 									<div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
@@ -20,24 +22,24 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="">Group Name</th>
-													<th width="">Item Name</th>
-													<th width="">Remarks</th>
-													<th width="6%">O.Stock</th>
-													<th width="6%">P.Price</th>
-													<th width="">PR.Date</th>
-													<th width="6%">S.Price</th>
-													<th width="">SR.Date</th>
-													<th width="">Date</th>
-													<th width="6%">S.Level</th>
-													<th width="6%">L.Price</th>
+													<th width="">Group Name<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Item Name<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Remarks<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">O.Stock<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">P.Price<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">PR.Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">S.Price<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">SR.Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="">Date<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">S.Level<span style="color: red;"><strong>*</strong></span></th>
+													<th width="6%">L.Price<span style="color: red;"><strong>*</strong></span></th>
 													<th width=""></th>
 												</tr>
 											</thead>
 											<tbody id="ItemsTable">
 												<tr>
 													<td>
-														<select class="form-control" autofocus name="item_group[]" onchange="addNewRow(1)" required>
+														<select data-plugin-selecttwo class="form-control select2-js"  name="item_group[]" onchange="addNewRow(1)" required>
 															<option value="" disabled selected>Select Group</option>
 															@foreach($item_groups as $key => $row)	
 																<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>
@@ -45,7 +47,7 @@
 														</select>
 													</td>
 													<td>
-														<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>
+														<input type="text" class="form-control" name="item_name[]" autofocus onchange="validateItemName(this)" required>
 													</td>
 													<td>
 														<input type="text" class="form-control" name="item_remarks[]" value=" ">
@@ -96,10 +98,9 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 	var index=2;
@@ -156,13 +157,13 @@
 			var cell11 = newRow.insertCell(10);
 			var cell12 = newRow.insertCell(11);
 
-			cell1.innerHTML  = '<select class="form-control" autofocus onclick="addNewRow('+index+')" name ="item_group[]" required>'+
+			cell1.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js"  onclick="addNewRow('+index+')" name ="item_group[]" required>'+
 									'<option value="" disabled selected>Select Group</option>'+
 									@foreach($item_groups as $key => $row)	
 										'<option value="{{$row->item_group_cod}}">{{$row->group_name}}</option>'+
 									@endforeach
 								'</select>';
-			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" onchange="validateItemName(this)" required>';
+			cell2.innerHTML  = '<input type="text" class="form-control" name="item_name[]" autofocus onchange="validateItemName(this)" required>';
 			cell3.innerHTML  = '<input type="text"   class="form-control" name="item_remarks[]">';
 			cell4.innerHTML  = '<input type="number" class="form-control" name="item_stock[]" required value="0" step=".00001">';
 			cell5.innerHTML  = '<input type="number" class="form-control" name="item_pur_cost[]" required value="0" step=".00001">';
@@ -179,7 +180,9 @@
 			itemCount = Number($('#itemCount').val());
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
+			$('#myTable select[data-plugin-selecttwo]').select2();
 		}
+		
 	}
 
 	function validateItemName(inputElement)
@@ -197,7 +200,6 @@
 			url: '/item/new-item/validate',
             data: {'item_name': item_name},
             success: function(response){
-				console.log(response)
             },
             error: function(response){
                 var errors = response.responseJSON.errors;

@@ -1,42 +1,41 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
-					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+			@include('../layouts.pageheader')
+			<div class="inner-wrapper cust-pad">
+				<section role="main" class="content-body" style="margin:0px">
+					<form method="post" action="{{ route('update-sales2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
-							<div class="col-6 mb-3">								
+							<div class="col-12 col-md-6 mb-3">								
 								<section class="card">
-									<header class="card-header">
+									<header class="card-header" >
 										<h2 class="card-title">Edit Sale 2 Details</h2>
 									</header>
 
 									<div class="card-body">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Invoice No.</label>
 												<input type="text" placeholder="(Edit Invoice)" class="form-control" value="{{$pur2->prefix}}{{$pur2->Sal_inv_no}}" disabled>
 												<input type="hidden" placeholder="Invoice #" class="form-control" value="{{$pur2->Sal_inv_no}}" name="pur2_id">
 												<input type="hidden" id="itemCount" name="items" value="1" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
+											<div class="col-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
+												<input type="date" name="sa_date" autofocus value="{{$pur2->sa_date}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Mill Inv. No.</label>
-												<input type="text" placeholder="Mill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
+											<div class="col-6 mb-2">
+												<label class="col-form-label" >Bill Inv. No.</label>
+												<input type="text" placeholder="Bill Inv. No." name="pur_ord_no" value="{{$pur2->pur_ord_no}}" class="form-control">
 											</div>
-											<div class="col-sm-12 col-md-6 mb-3">
+											<div class="col-6 mb-3">
 												<label class="col-form-label">Attachements</label>
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
-											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
+											<div class="col-12 mb-3">
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -48,7 +47,7 @@
 								</section>
 							</div>
 
-							<div class="col-6 mb-3">								
+							<div class="col-12 col-md-6 mb-3">								
 								<section class="card">
 									<header class="card-header">
 										<h2 class="card-title">Company Details</h2>
@@ -57,8 +56,8 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
+												<label class="col-form-label">Account Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js" disabled>
 													<option value="" disabled selected>Select Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->company_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
@@ -70,8 +69,10 @@
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_name}}" class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<label class="col-form-label" >Purchase Inv. No.</label>
+												<input type="text" placeholder="Purchase Inv. No." value="{{$pur2->pur_against}}"  disabled class="form-control">
+												<input type="hidden" name="sales_against" value="{{$pur2->pur_against}}"  class="form-control">
+												<input type="hidden" name="disp_account_name" value="{{$pur2->company_name}}"  class="form-control">
 											</div>
 
 											<div class="col-sm-3 col-md-6 mb-2">
@@ -81,7 +82,7 @@
 
 											<div class="col-12 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control">{{$pur2->Sales_Remarks}}</textarea>
+												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
 
 									  </div>
@@ -93,7 +94,7 @@
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 										<h2 class="card-title">Edit Sale 2 Invoice Details</h2>
 									</header>
@@ -101,13 +102,13 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty.</th>
-													<th width="7%">Price/Unit</th>
-													<th width="7%">Len.</th>
-													<th width="7%">%.</th>
+													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Len<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Sale Date</th>
@@ -118,10 +119,10 @@
 												@foreach ($pur2_item as $pur2_key => $pur2_items)
 													<tr>
 														<td>
-															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)" required>
+															<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)" required>
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails({{$pur2_key+1}},2)" required>
+															<select data-plugin-selecttwo class="form-control select2-js"  id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails({{$pur2_key+1}},2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -168,36 +169,36 @@
 									<footer class="card-footer" >
 										<div class="row">
 											<div class="row form-group mb-3">
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Amount</label>
 													<input type="text" id="totalAmount" name="totalAmount" placeholder="Total Amount" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Weight</label>
 													<input type="text" id="total_weight" placeholder="Total Weight" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Total Quantity</label>
 													<input type="text" id="total_quantity" placeholder="Total Quantity" class="form-control" disabled>
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
+													<input type="text" id="convance_charges"  required onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-6 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
+													<input type="text" id="labour_charges"  required onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
-												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
+												<div class="col-12 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
-															<input type="number" id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
+															<input type="number" id="bill_discount" required onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
 														</div>
 														<div class="col-4">
 															<input type="text" id="bill_perc" class="form-control" placeholder="0%" disabled>
@@ -205,9 +206,9 @@
 													</div>
 												</div>
 
-												<div class="col-sm-2 col-md-12 pb-sm-3 pb-md-0">
-													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-end text-primary">Net Amount</h3>
-													<span class="d-flex align-items-center justify-content-lg-end">
+												<div class="col-12 col-md-12 pb-sm-3 pb-md-0 text-end">
+													<h3 class="font-weight-bold mt-3 mb-0 text-5 text-primary">Net Amount</h3>
+													<span>
 														<strong class="text-4 text-primary">PKR <span id="netTotal" class="text-4 text-danger">0.00 </span></strong>
 													</span>
 												</div>
@@ -217,7 +218,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-purchases2') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-sale2invoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Update Invoice</button>
 											</div>
 										</div>
@@ -230,11 +231,10 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 <script>
 
 	var index=2;
@@ -322,8 +322,8 @@
 			var cell11 = newRow.insertCell(10);
 
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -345,8 +345,17 @@
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
-
+			
 		}
+	}
+
+	function addNewRow_btn() {
+
+	addNewRow(); // Call the same function
+	// Set focus on the new item_code input field
+	document.getElementById('item_cod' + (index - 1)).focus();
+
+
 	}
 
 	function getItemDetails(row_no,option){
@@ -363,7 +372,7 @@
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
+				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['sales_price']);
 				$('#pur2_price_date'+row_no).val(result[0]['sale_rate_date']);
@@ -462,7 +471,6 @@
 		$('#net_amount').val(netTotal);
 
 		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		console.log(bill_perc);
 		
 		$('#bill_perc').val(bill_perc);
 	}

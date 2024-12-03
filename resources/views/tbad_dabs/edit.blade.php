@@ -1,33 +1,41 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 <body>
     <section class="body">
-        @extends('../layouts.menu')
-        <div class="inner-wrapper">
-            <section role="main" class="content-body">
-                @extends('../layouts.pageheader')
+        @include('../layouts.pageheader')
+        <div class="inner-wrapper cust-pad">
+            <section role="main" class="content-body" style="margin:0px">
                 <form method="post" id="myForm" action="{{ route('update-tbad-dabs') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="row">
                         <div class="col-12 mb-3">
                             <section class="card">
                                 <header class="card-header">
-                                    <h2 class="card-title">Edit Pipe Bad Debts</h2>
+                                    <h2 class="card-title">Edit Pipe/Garder Bad Debts</h2>
                                 </header>
                                 <div class="card-body">
                                     <div class="row form-group mb-2">
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">ID</label>
                                             <input type="text" placeholder="ID" class="form-control" disabled value="{{$tbad_dabs->bad_dabs_id}}">
                                             <input type="hidden" name="bad_dabs_id" placeholder="bad_dabs_id" class="form-control" value="{{$tbad_dabs->bad_dabs_id}}">
                                             <input type="hidden" id="itemCount" name="items" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-2 mb-2">
+                                        <div class="col-6 col-md-2 mb-2">
                                             <label class="col-form-label">Date</label>
                                             <input type="date" name="date" value="{{$tbad_dabs->date}}" class="form-control">
                                         </div>
-                                        <div class="col-sm-12 col-md-8 mb-2">
+                                        <div class="col-sm-12 col-md-2">
+                                            <label class="col-form-label">Item Type</label>
+                                            <select class="form-control mb-3" id="item_type" name="item_type" required>
+                                                <option value="1" {{ $tbad_dabs->item_type == 1 ? 'selected' : '' }}>Pipes</option>
+                                                <option value="2" {{ $tbad_dabs->item_type == 2 ? 'selected' : '' }}>Garder / TR</option>
+                                            </select>
+                                            
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-2">
                                             <label class="col-form-label">Reason</label>
-                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control">{{$tbad_dabs->reason}}</textarea>
+                                            <textarea rows="2" cols="50" name="reason" id="reason" placeholder="Reason" class="form-control cust-textarea">{{$tbad_dabs->reason}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -35,21 +43,21 @@
                         </div>
                         <div class="col-12 mb-3">
                             <section class="card">
-                                <header class="card-header">
-                                    <div class="card-actions">
-                                        <button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
-                                    </div>
+                                <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">Edit Pipe Bad Dabs Details</h2>
+                                    <div class="card-actions">
+                                        <button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
+                                    </div>
                                 </header>
-                                <div class="card-body" style="overflow-x:auto;min-height:450px;max-height:450px;overflow-y:auto">
+                                <div class="card-body" style="overflow-x:auto;max-height:450px;overflow-y:auto">
                                     <table class="table table-bordered table-striped mb-0" id="myTable">
                                         <thead>
                                             <tr>
-                                                <th width="10%">Item Code</th>
-                                                <th width="30%">Item Name</th>
+                                                <th width="10%">Item Code<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="30%">Item Name<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="20%">Remarks</th>
-                                                <th width="15%">Qty Add</th>
-                                                <th width="15%">Qty Less</th>
+                                                <th width="15%">Qty Add<span style="color: red;"><strong>*</strong></span></th>
+                                                <th width="15%">Qty Less<span style="color: red;"><strong>*</strong></span></th>
                                                 <th width="10%"></th>
                                             </tr>
                                         </thead>
@@ -57,10 +65,10 @@
                                             @foreach($tbad_dabs_items as $key1 => $tbad_dabs_item)
                                             <tr>
                                                 <td>
-                                                    <input type="number" id="item_code{{$key1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails('{{$key1}}','1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
+                                                    <input type="number" id="item_code{{$key1+1}}" name="item_code[]" placeholder="Code" onchange="getItemDetails({{$key1+1}},'1')" class="form-control" value="{{$tbad_dabs_item->item_cod}}" required>
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="item_name{{$key1}}" onchange="getItemDetails('{{$key1}}','2')" name="item_name2[]" required>
+                                                    <select data-plugin-selecttwo class="form-control select2-js" id="item_name{{$key1+1}}" onchange="getItemDetails({{$key1+1}},'2')" name="item_name2[]" required>
                                                         <option>Select Item</option>
                                                         @foreach($items as $key2 => $row)
                                                         <option value="{{$row->it_cod}}" {{ $row->it_cod == $tbad_dabs_item->item_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -68,13 +76,13 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="remarks{{$key1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
+                                                    <input type="text" id="remarks{{$key1+1}}" name="remarks[]" placeholder="Remarks" class="form-control" value="{{$tbad_dabs_item->remarks}}">
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyadd{{$key1}}" name="qty_add[]" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
+                                                    <input type="number" id="qtyadd{{$key1+1}}" name="qty_add[]" onchange="tableTotal()" placeholder="Qty Add" class="form-control" step="any" value="{{$tbad_dabs_item->pc_add}}" required>
                                                 </td>
                                                 <td>
-                                                    <input type="number" id="qtyless{{$key1}}" name="qty_less[]" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
+                                                    <input type="number" id="qtyless{{$key1+1}}" name="qty_less[]" onchange="tableTotal()" placeholder="Qty Less" class="form-control" step="any" value="{{$tbad_dabs_item->pc_less}}" required>
                                                 </td>
                                                 <td>
                                                     <button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>
@@ -86,12 +94,12 @@
                                 </div>
                                 <footer class="card-footer">
                                     <div class="row mb-3" style="float:right; margin-right: 10%;">
-                                        <div class="col-sm-2 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                              <label class="col-form-label">Total Add</label>
                                              <input type="number" id="total_add_show" step="any" placeholder="Total Add" class="form-control" disabled value=@php echo $total_add @endphp>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 pb-sm-3 pb-md-0">
+                                        <div class="col-6 col-md-6 pb-sm-3 pb-md-0">
                                             <label class="col-form-label">Total Less</label>
                                             <input type="number" id="total_less_show" step="any" placeholder="Total Less" class="form-control" disabled value=@php echo $total_less @endphp>
                                             <input type="hidden" id="total_less" name="total_less" step="any" placeholder="Total Less" class="form-control" value=@php echo $total_less @endphp>
@@ -115,10 +123,17 @@
             </section>
         </div>
     </section>
-    @extends('../layouts.footerlinks')
+    @include('../layouts.footerlinks')
 </body>
 </html>
 <script>
+
+
+
+
+
+
+
 var itemCount=0, index;
 var totaladd=0, totalless=0;
 
@@ -177,23 +192,38 @@ function addNewRow(){
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
 
-        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" onchange="getItemDetails('+index+','+1+')" class="form-control">';
-        cell2.innerHTML = '<select class="form-control" id="item_name'+index+'" onchange="getItemDetails('+index+','+2+')" name="item_name">'+
+        cell1.innerHTML = '<input type="text" id="item_code'+index+'" name="item_code[]" placeholder="Code" required onchange="getItemDetails('+index+','+1+')" class="form-control">';
+        cell2.innerHTML = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'" required onchange="getItemDetails('+index+','+2+')" name="item_name">'+
                             '<option>Select Item</option>'+
                             @foreach($items as $key => $row)	
                                 '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
                             @endforeach
                           '</select>';
         cell3.innerHTML = '<input type="text" id="remarks'+index+'" name="remarks[]" placeholder="Remarks" class="form-control">';
-        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" onchange="tableTotal()" class="form-control">';
-        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" onchange="tableTotal()" class="form-control">';
+        cell4.innerHTML = '<input type="number" id="qtyadd'+index+'" name="qty_add[]" placeholder="Qty Add" value="0" required onchange="tableTotal()" class="form-control">';
+        cell5.innerHTML = '<input type="number" id="qtyless'+index+'" name="qty_less[]" placeholder="Qty Less" value="0" required onchange="tableTotal()" class="form-control">';
         cell6.innerHTML = '<button type="button" onclick="removeRow(this)" class="btn btn-danger" tabindex="1"><i class="fas fa-times"></i></button>';
 
         var itemCount = Number($('#itemCount').val());
         itemCount = itemCount+1;
         $('#itemCount').val(itemCount);
         index++;
+        $('#myTable select[data-plugin-selecttwo]').select2();
+        
+   
+
     }
+}
+
+
+
+function addNewRow_btn() {
+
+addNewRow(); // Call the same function
+// Set focus on the new item_code input field
+document.getElementById('item_code' + (index - 1)).focus();
+
+
 }
 
 function tableTotal(){
@@ -209,7 +239,7 @@ function tableTotal(){
     $('#total_add_show').val(totaladd);
 }
 
-function getItemDetails(row_no,option){
+function getItemDetails(row_no,option){       
 		var itemId;
 		if(option==1){
 			itemId = document.getElementById("item_code"+row_no).value;
@@ -223,7 +253,7 @@ function getItemDetails(row_no,option){
 			data: {id:itemId},
 			success: function(result){
                 $('#item_code' + row_no).val(result[0]['it_cod']);
-                $('#item_name' + row_no).val(result[0]['it_cod']);
+                $('#item_name' + row_no).val(result[0]['it_cod']).select2();
                 $('#remarks' + row_no).val(result[0]['item_remark']);
                 
 				addNewRow();

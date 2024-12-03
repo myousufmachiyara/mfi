@@ -1,22 +1,35 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
+            @include('layouts.homepageheader')
+			<div class="inner-wrapper cust-pad">
+				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
                     <div class="row">
                         <div class="col">
                             <section class="card">
                                 <header class="card-header" style="display: flex;justify-content: space-between;">
                                     <h2 class="card-title">All Doors Bad Dabs</h2>
                                     <form class="text-end" action="{{ route('create-bad-dabs') }}" method="GET">
-                                        <button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-plus"></i> New Entry</button>
+                                        <button type="submit" class="btn btn-primary"> <i class="fas fa-plus"></i> New Entry</button>
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="1">by Date</option>
+                                                <option value="2">Reason</option>
+                                                <option value="3">Total Add</option>
+                                                <option value="4">Total Less</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
@@ -36,11 +49,7 @@
                                                     <td>{{$row->add_sum}}</td>
                                                     <td>{{$row->less_sum}}</td>
                                                     <td class="actions">
-                                                        <a href="#" class="text-danger">
-                                                            <i class="fas fa-print"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a href="#" class="">
+                                                        <a href="{{ route('show-bad-dabs', $row->bad_dabs_id) }}" class="">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <span class="separator"> | </span>
@@ -125,10 +134,24 @@
         </div>
 
         
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
+
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }

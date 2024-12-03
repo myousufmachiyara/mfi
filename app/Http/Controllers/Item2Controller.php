@@ -13,11 +13,21 @@ class Item2Controller extends Controller
     public function index()
     {
         $items = Item_entry2::where('item_entry2.status', 1)
-                ->join('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
+                ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
                 ->get();
         $itemGroups = Item_Groups::where('status', 1)->get();
 
         return view('item2.index',compact('items','itemGroups'));
+    }
+
+    public function index1()
+    {
+        $items = Item_entry2::where('item_entry2.status', 1)
+                ->leftjoin('item_group as ig', 'ig.item_group_cod', '=', 'item_entry2.item_group')
+                ->get();
+        $itemGroups = Item_Groups::where('status', 1)->get();
+
+        return view('item2.index1',compact('items','itemGroups'));
     }
 
     public function validation(Request $request)
@@ -42,7 +52,6 @@ class Item2Controller extends Controller
 
     public function store(Request $request)
     {
-        $userId=1;
 
         if($request->has('items'))
         {
@@ -65,7 +74,7 @@ class Item2Controller extends Controller
                     $Item_entry2->stock_level=$request->item_stock_level[$i];
                     $Item_entry2->labourprice=$request->item_l_price[$i];
                     $Item_entry2->status=1;
-                    $Item_entry2->created_by=$userId;
+                    $Item_entry2->created_by=session('user_id');
 
                     $Item_entry2->save();
                 }
@@ -92,7 +101,7 @@ class Item2Controller extends Controller
         if ($request->has('item_name') && $request->item_name) {
             $item->item_name=$request->item_name;
         }
-        if ($request->has('item_remark') && $request->item_remark) {
+        if ($request->has('item_remark') && $request->item_remark OR empty($request->item_remark)) {
             $item->item_remark=$request->item_remark;
         }
         if ($request->has('qty') && $request->qty OR $request->qty==0) {
@@ -136,6 +145,7 @@ class Item2Controller extends Controller
             'opp_date'=>$item->opp_date,
             'stock_level'=>$item->stock_level,
             'labourprice'=>$item->labourprice,
+            'updated_by' => session('user_id'),
         ]);
         
         return redirect()->route('all-items-2');

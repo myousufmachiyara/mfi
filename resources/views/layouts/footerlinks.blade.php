@@ -1,47 +1,23 @@
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/jquery.nanoscroller.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-placeholder/2.3.1/jquery.placeholder.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
+
 <!-- Vendor -->
-<script src="/assets/vendor/jquery/jquery.js"></script>
-<script src="/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-<script src="/assets/vendor/popper/umd/popper.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="/assets/vendor/common/common.js"></script>
-<script src="/assets/vendor/nanoscroller/nanoscroller.js"></script>
-<script src="/assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
-<script src="/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-
-<!-- Specific Page Vendor -->
-<script src="/assets/vendor/jquery-ui/jquery-ui.js"></script>
-<script src="/assets/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
-<script src="/assets/vendor/jquery-appear/jquery.appear.js"></script>
-<script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
-<script src="/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.js"></script>
-<script src="/assets/vendor/flot/jquery.flot.js"></script>
-<script src="/assets/vendor/flot.tooltip/jquery.flot.tooltip.js"></script>
-<script src="/assets/vendor/flot/jquery.flot.pie.js"></script>
-<script src="/assets/vendor/flot/jquery.flot.categories.js"></script>
-<script src="/assets/vendor/flot/jquery.flot.resize.js"></script>
-<script src="/assets/vendor/jquery-sparkline/jquery.sparkline.js"></script>
-<script src="/assets/vendor/raphael/raphael.js"></script>
-<script src="/assets/vendor/morris/morris.js"></script>
-<script src="/assets/vendor/gauge/gauge.js"></script>
-<script src="/assets/vendor/snap.svg/snap.svg.js"></script>
-<script src="/assets/vendor/liquid-meter/liquid.meter.js"></script>
-<script src="/assets/vendor/jqvmap/jquery.vmap.js"></script>
-<script src="/assets/vendor/jqvmap/data/jquery.vmap.sampledata.js"></script>
-<script src="/assets/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+<!-- <script src="/assets/vendor/common/common.js"></script> -->
 <script src="/assets/vendor/select2/js/select2.js"></script>
-<script src="/assets/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js"></script>
-<script src="/assets/vendor/select2/js/select2.js"></script>
-<script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="/assets/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
-<script src="/assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
-
 
 <!-- Theme Base, Components and Settings -->
 <script src="/assets/js/theme.js"></script>
@@ -49,13 +25,15 @@
 <!-- Theme Custom -->
 <script src="/assets/js/custom.js"></script>
 
-<!-- Theme Initialization Files -->
-<script src="/assets/js/theme.init.js"></script>
-
 <!-- Examples -->
 <script src="/assets/js/examples/examples.header.menu.js"></script>
 <script src="/assets/js/examples/examples.dashboard.js"></script>
 <script src="/assets/js/examples/examples.datatables.default.js"></script>
 <script src="/assets/js/examples/examples.modals.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/assets/js/theme.init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 

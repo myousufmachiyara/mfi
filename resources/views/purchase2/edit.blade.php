@@ -1,10 +1,9 @@
-@extends('../layouts.header')
+@include('../layouts.header')
 	<body>
 		<section class="body">
-			@extends('../layouts.menu')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@extends('../layouts.pageheader')
+			@include('../layouts.pageheader')
+			<div class="inner-wrapper cust-pad">
+				<section role="main" class="content-body" style="margin:0px">
 					<form method="post" action="{{ route('update-purchases2') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
 						@csrf
 						<div class="row">	
@@ -24,7 +23,7 @@
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Date</label>
-												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" class="form-control">
+												<input type="date" name="sa_date" value="{{$pur2->sa_date}}" autofocus class="form-control">
 											</div>
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Mill Inv. No.</label>
@@ -35,9 +34,9 @@
 												<input type="file" class="form-control" name="att[]" multiple accept=".zip, appliation/zip, application/pdf, image/png, image/jpeg">
 											</div>
 											<div class="col-sm-12 col-md-12 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="account_name" required>
-													<option value="" disabled selected>Select Account</option>
+												<label class="col-form-label">Company Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js"  name="account_name" required>
+													<option value="" disabled selected>Select Company Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->account_name == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
@@ -57,9 +56,9 @@
 									<div class="card-body">
 										<div class="row form-group mb-2">
 											<div class="col-sm-12 col-md-6 mb-3">
-												<label class="col-form-label">Account Name</label>
-												<select data-plugin-selecttwo class="form-control" autofocus name="disp_account_name" required>
-													<option value="" disabled selected>Select Account</option>
+												<label class="col-form-label">Customer Name<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control select2-js" autofocus name="disp_account_name" required>
+													<option value="" disabled selected>Select Customer Account</option>
 													@foreach($coa as $key => $row)	
 														<option value="{{$row->ac_code}}" {{ $pur2->Cash_pur_name_ac == $row->ac_code ? 'selected' : '' }}>{{$row->ac_name}}</option>
 													@endforeach
@@ -69,10 +68,19 @@
 												<label class="col-form-label" >Name of Person</label>
 												<input type="text" placeholder="Name of Person" name="Cash_pur_name" value="{{$pur2->Cash_pur_name}}" class="form-control">
 											</div>
+
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Sale Inv. No.</label>
-												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}"  disabled class="form-control">
+												<label class="col-form-label">Sale Inv#</label>
+												<label class="col-form-label" style="cursor: pointer; color: blue; text-decoration: underline; float: right;" id="edit-sale-inv">Enable</label>
+												
+												<!-- First Input Field (visible and disabled initially) -->
+												<input type="text" placeholder="Sale Inv. No." name="sales_against" value="{{$pur2->sales_against}}" id="sale-inv-no" disabled class="form-control">
+												
+												<!-- Hidden Input Field -->
+												<input type="hidden" placeholder="Sale Inv. No." class="form-control" value="{{$pur2->sales_against}}" name="hidden_sales_against" id="hidden-sale-inv-no">
 											</div>
+											
+											
 
 											<div class="col-sm-3 col-md-6 mb-2">
 												<label class="col-form-label" >Person Address</label>
@@ -81,7 +89,7 @@
 
 											<div class="col-12 mb-12">
 												<label class="col-form-label">Remarks</label>
-												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control">{{$pur2->Sales_Remarks}}</textarea>
+												<textarea rows="2" cols="50" name="Sales_Remarks" id="Sales_Remarks"  placeholder="Remarks" class="form-control cust-textarea">{{$pur2->Sales_Remarks}}</textarea>
 											</div>	
 
 									  </div>
@@ -105,23 +113,23 @@
 								<section class="card">
 									<div class="card-body" style="background: #2023240f !important">
 										<div class="row form-group mb-2">
-											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Basic Amount</label>
-												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" value="{{$pur2->bamount}}" class="form-control comm-form-field" required>
+											<div class="col-sm-6 col-md-6 mb-2">
+												<label class="col-form-label" >Basic Amount<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" name="bamount" onchange="CalBillAfterDisc()" id="basic_amount" autofocus value="{{$pur2->bamount}}" class="form-control comm-form-field" required step="any">
 											</div>
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >%</label>
-												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required>
-											</div>
-
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >P.B</label>
-												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field">
+											<div class="col-sm-2 col-md-2 mb-2">
+												<label class="col-form-label" >%<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" name="disc" id="basic_amount_disc" onchange="CalBillAfterDisc()" value="{{$pur2->disc}}" class="form-control comm-form-field" required step="any">
 											</div>
 
-											<div class="col-sm-12 col-md-2 mb-2">
-												<label class="col-form-label" >Target</label>
-												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field">
+											<div class="col-sm-2 col-md-2 mb-2">
+												<label class="col-form-label" >P.B<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number"  name="cd_disc" value="{{$pur2->cd_disc}}" required class="form-control comm-form-field" step="any">
+											</div>
+
+											<div class="col-sm-2 col-md-2 mb-2">
+												<label class="col-form-label" >Target<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" name="comm_disc" value="{{$pur2->comm_disc}}" required class="form-control comm-form-field" step="any">
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
@@ -130,13 +138,38 @@
 											</div>
 
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Commission Amount</label>
-												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field">
+												<label class="col-form-label" >Commission Amount<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number" name="comm_amount" value="{{$pur2->comm_amount}}" required class="form-control comm-form-field" step="any">
+											</div>
+											<div class="col-sm-12 col-md-3 mb-2">
+												<label class="col-form-label" >GST<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number"  name="gst" value="{{$pur2->gst}}" id="gst_id"  onchange="CalGSTAmount()" required class="form-control comm-form-field" step="any">
 											</div>
 
+											<div class="col-sm-12 col-md-3 mb-2">
+												<label class="col-form-label" >GST Amount</label>
+												<input type="number" id="GSTAmount" disabled
+												 value="{{((($pur2->bamount * $pur2->disc )/100)+$pur2->bamount)*(($pur2->gst)/100)}}" 
+												 class="form-control comm-form-field">
+											</div>
+
+											<div class="col-sm-12 col-md-3 mb-2">
+												<label class="col-form-label" >Income Tax<span style="color: red;"><strong>*</strong></span></label>
+												<input type="number"  name="income_tax" value="{{$pur2->income_tax}}" onchange="CalITAmount()" id="it_id" required class="form-control comm-form-field" step="any">
+											</div>
+											<div class="col-sm-12 col-md-3 mb-2">
+												<label class="col-form-label" >IT Amount</label>
+												<input type="number" id="ITAmount" disabled
+												 value="{{(((($pur2->bamount * $pur2->disc )/100)+$pur2->bamount)*(($pur2->gst)/100)
+												 +
+												 ((($pur2->bamount * $pur2->disc )/100)+$pur2->bamount))*(($pur2->income_tax)/100)}}" 
+												class="form-control comm-form-field">
+											</div>
+											
+
 											<div class="col-sm-12 col-md-6 mb-2">
-												<label class="col-form-label" >Item Group</label>
-												<select data-plugin-selecttwo class="form-control comm-form-field" required autofocus name="tax_item_name">
+												<label class="col-form-label" >Item Group<span style="color: red;"><strong>*</strong></span></label>
+												<select data-plugin-selecttwo class="form-control comm-form-field select2-js" required  name="tax_item_name">
 													<option value="" disabled selected>Select Account</option>
 													@foreach($item_group as $key => $row)	
 														<option value="{{$row->item_group_cod}}" {{ $pur2->item == $row->item_group_cod ? 'selected' : '' }}>{{$row->group_name}}</option>
@@ -146,7 +179,7 @@
 
 											<div class="col-sm-12 col-md-6 mb-2">
 												<label class="col-form-label" >Commission Remarks</label>
-												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field"> {{$pur2->tax_remarks}} </textarea>
+												<textarea rows="2" cols="50" name="tax_remarks" placeholder="Remarks" class="form-control comm-form-field cust-textarea"> {{$pur2->tax_remarks}} </textarea>
 											</div>
 									  </div>
 									</div>
@@ -157,7 +190,7 @@
 								<section class="card">
 									<header class="card-header">
 										<div class="card-actions">
-											<button type="button" class="btn btn-primary" onclick="addNewRow()"> <i class="fas fa-plus"></i> Add New Row </button>
+											<button type="button" class="btn btn-primary" onclick="addNewRow_btn()"> <i class="fas fa-plus"></i> Add New Row </button>
 										</div>
 										<h2 class="card-title">Edit Purchase 2 Invoice Details</h2>
 									</header>
@@ -165,13 +198,13 @@
 										<table class="table table-bordered table-striped mb-0" id="myTable" >
 											<thead>
 												<tr>
-													<th width="7%">Item Code</th>
-													<th width="20%">Item Name</th>
+													<th width="7%">Code<span style="color: red;"><strong>*</strong></span></th>
+													<th width="20%">Item Name<span style="color: red;"><strong>*</strong></span></th>
 													<th width="20%">Remarks</th>
-													<th width="7%">Qty.</th>
-													<th width="7%">Price/Unit</th>
-													<th width="7%">Len.</th>
-													<th width="7%">%.</th>
+													<th width="7%">Qty<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7.5%">Price/Unit<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">Len.<span style="color: red;"><strong>*</strong></span></th>
+													<th width="7%">%<span style="color: red;"><strong>*</strong></span></th>
 													<th width="7%">Weight</th>
 													<th width="7%">Amount</th>
 													<th width="7%">Price Date</th>
@@ -182,10 +215,10 @@
 												@foreach ($pur2_item as $pur2_key => $pur2_items)
 													<tr>
 														<td>
-															<input type="text" class="form-control" name="item_cod[]" id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails(1,1)" required>
+															<input type="text" class="form-control" name="item_cod[]" autofocus id="item_cod{{$pur2_key+1}}" value="{{$pur2_items->item_cod}}" onchange="getItemDetails({{$pur2_key+1}},1)" required>
 														</td>
 														<td>
-															<select data-plugin-selecttwo class="form-control" autofocus id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails(1,2)" required>
+															<select data-plugin-selecttwo class="form-control select2-js"  id="item_name{{$pur2_key+1}}" name="item_name[]" onchange="getItemDetails({{$pur2_key+1}},2)" required>
 																<option value="" selected disabled>Select Item</option>
 																@foreach($items as $key => $row)	
 																	<option value="{{$row->it_cod}}" {{ $pur2_items->item_cod == $row->it_cod ? 'selected' : '' }}>{{$row->item_name}}</option>
@@ -249,19 +282,19 @@
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Convance Charges</label>
-													<input type="text" id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
+													<input type="text" required id="convance_charges" onchange="netTotal()" value="{{$pur2->ConvanceCharges}}"  name="ConvanceCharges"  placeholder="Convance Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Labour Charges</label>
-													<input type="text" id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
+													<input type="text" required id="labour_charges"  onchange="netTotal()" value="{{$pur2->LaborCharges}}"  name="LaborCharges" placeholder="Labour Charges" class="form-control">
 												</div>
 
 												<div class="col-sm-2 col-md-2 pb-sm-3 pb-md-0">
 													<label class="col-form-label">Bill Discount </label>
 													<div class="row">
 														<div class="col-8">
-															<input type="number" id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
+															<input type="number" required id="bill_discount" onchange="netTotal()" value="{{$pur2->Bill_discount}}"  name="Bill_discount" placeholder="Bill Discount" class="form-control">
 														</div>
 														<div class="col-4">
 															<input type="text" id="bill_perc" class="form-control" placeholder="0%" disabled>
@@ -294,11 +327,10 @@
 				</section>
 			</div>
 		</section>
-        @extends('../layouts.footerlinks')
+        @include('../layouts.footerlinks')
 	</body>
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 <script>
 
 	var index=2;
@@ -346,7 +378,7 @@
 		var bill_discount = Number($('#bill_discount').val());
 
 		netAmount = totalAmount + convance_charges +  labour_charges - bill_discount;
-		FormattednetTotal = formatNumberWithCommas(netAmount);
+		FormattednetTotal = formatNumberWithCommas(netAmount.toFixed(0));
 		document.getElementById("netTotal").innerHTML = '<span class="text-4 text-danger">'+FormattednetTotal+'</span>';
 
 		document.getElementById('toggleSwitch').addEventListener('change', toggleInputs);
@@ -386,8 +418,8 @@
 			var cell11 = newRow.insertCell(10);
 
 
-			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" onchange="getItemDetails('+index+','+1+')" required>';
-			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control" id="item_name'+index+'" autofocus onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
+			cell1.innerHTML  = '<input type="text" class="form-control" name="item_cod[]" id="item_cod'+index+'" autofocus onchange="getItemDetails('+index+','+1+')" required>';
+			cell2.innerHTML  = '<select data-plugin-selecttwo class="form-control select2-js" id="item_name'+index+'"  onchange="getItemDetails('+index+','+2+')" name="item_name[]" required>'+
 									'<option value="" disabled selected>Select Account</option>'+
 									'@foreach($items as $key => $row)'+	
                                         '<option value="{{$row->it_cod}}">{{$row->item_name}}</option>'+
@@ -409,8 +441,19 @@
 			itemCount = itemCount+1;
 			$('#itemCount').val(itemCount);
 			$('#myTable select[data-plugin-selecttwo]').select2();
+			
+        
 
 		}
+	}
+		
+	function addNewRow_btn() {
+
+    		addNewRow(); // Call the same function
+			// Set focus on the new item_code input field
+			document.getElementById('item_cod' + (index - 1)).focus();
+
+
 	}
 
 	function getItemDetails(row_no,option){
@@ -427,7 +470,7 @@
 			data: {id:itemId},
 			success: function(result){
 				$('#item_cod'+row_no).val(result[0]['it_cod']);
-				$('#item_name'+row_no).val(result[0]['it_cod']);
+				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
 				$('#remarks'+row_no).val(result[0]['item_remark']);
 				$('#pur2_per_unit'+row_no).val(result[0]['OPP_qty_cost']);
 				$('#pur2_price_date'+row_no).val(result[0]['pur_rate_date']);
@@ -448,7 +491,37 @@
 
 		sum= ((basic_amount * basic_amount_disc )/100)+basic_amount;
 		$('#BillAfterDisc').val(sum);
+
+		// Update GST and IT amount based on the discounted bill
+		CalGSTAmount();
+		CalITAmount();
 	}
+
+
+	function CalGSTAmount() {
+        var gst_id = parseFloat($('#gst_id').val());
+        var BillAfterDisc = parseFloat($('#BillAfterDisc').val());
+
+        if (!isNaN(gst_id) && !isNaN(BillAfterDisc)) {
+            var sum = (BillAfterDisc * gst_id) / 100;
+            $('#GSTAmount').val(sum.toFixed(0));
+        }
+    }
+
+	function CalITAmount() {
+		var it_id = parseFloat($('#it_id').val());
+		var GSTAmount = parseFloat($('#GSTAmount').val());
+		var BillAfterDisc = parseFloat($('#BillAfterDisc').val());
+
+		if (!isNaN(it_id) && !isNaN(BillAfterDisc) && !isNaN(GSTAmount)) {
+			// Calculate the income tax amount
+			var sum = ((BillAfterDisc + GSTAmount) * it_id) / 100;
+			$('#ITAmount').val(sum.toFixed(0));
+		}
+	}
+
+
+
 
 	function getCOADetails(){
 		var coaId = document.getElementById("coa_name").value;
@@ -526,7 +599,6 @@
 		$('#net_amount').val(netTotal);
 
 		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		console.log(bill_perc);
 		
 		$('#bill_perc').val(bill_perc);
 	}
@@ -550,7 +622,7 @@
 		const inputGroups = document.querySelectorAll('.comm-form-field');
 		inputGroups.forEach(input => {
 			// Show or hide input groups based on the toggle switch state
-			if (input.id !== 'BillAfterDisc') {
+			if (input.id !== 'BillAfterDisc' && input.id !== 'GSTAmount' && input.id !== 'ITAmount') {
 				input.disabled = !isChecked;
 			}
 		});
@@ -563,5 +635,24 @@
 			$('#isCommissionForm').val(0);
 		}
 	}
+
+	document.getElementById('edit-sale-inv').addEventListener('click', function () {
+        var inputField = document.getElementById('sale-inv-no');
+        if (inputField.disabled) {
+            inputField.disabled = false;
+            inputField.focus(); // Focus on the input when enabled
+            this.textContent = "Disable"; // Change the label to "Save" when editing
+        } else {
+            inputField.disabled = true;
+            this.textContent = "Enable"; // Change the label back to "Edit" after saving
+        }
+    });
+
+		 // Update the hidden input field on change of the first input field
+		 document.getElementById('sale-inv-no').addEventListener('input', function() {
+        var hiddenSaleInvInput = document.getElementById('hidden-sale-inv-no');
+        hiddenSaleInvInput.value = this.value;  // Update the hidden input with the new value
+    });
+											
 
 </script>

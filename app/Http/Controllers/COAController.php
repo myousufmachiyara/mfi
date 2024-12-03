@@ -51,7 +51,7 @@ class COAController extends Controller
     {
         $acc = new AC();
 
-        $acc->created_by=1;
+        $acc->created_by = session('user_id');
 
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
@@ -74,6 +74,12 @@ class COAController extends Controller
         if ($request->has('phone_no') && $request->phone_no) {
             $acc->phone_no=$request->phone_no;
         }
+        if ($request->has('credit_limit') && $request->credit_limit) {
+            $acc->credit_limit=$request->credit_limit;
+        }
+        if ($request->has('days_limit') && $request->days_limit) {
+            $acc->days_limit=$request->days_limit;
+        }
         if ($request->has('group_cod') && $request->group_cod) {
             $acc->group_cod=$request->group_cod;
         }
@@ -89,6 +95,7 @@ class COAController extends Controller
             foreach ($files as $file)
             {
                 $acc_att = new ac_att();
+                $acc_att->created_by = session('user_id');                
                 $acc_att->ac_code = $latest_acc['ac_code'];
                 $extension = $file->getClientOriginalExtension();
                 $acc_att->att_path = $this->coaDoc($file,$extension);
@@ -100,7 +107,10 @@ class COAController extends Controller
     
     public function destroy(Request $request)
     {
-        $acc = AC::where('ac_code', $request->acc_id)->update(['status' => '0']);
+        $acc = AC::where('ac_code', $request->acc_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-acc');
     }
 
@@ -114,6 +124,9 @@ class COAController extends Controller
     {
         
         $acc = AC::where('ac_code', $request->ac_cod)->get()->first();
+
+        $acc->updated_by = session('user_id');
+
         if ($request->has('ac_name') && $request->ac_name) {
             $acc->ac_name=$request->ac_name;
         }
@@ -126,16 +139,23 @@ class COAController extends Controller
         if ($request->has('opp_date') && $request->opp_date) {
             $acc->opp_date=$request->opp_date;
         }
-        if ($request->has('remarks') && $request->remarks OR $request->group_cod==null) {
+        if ($request->has('remarks') && $request->remarks OR empty($request->remarks)) {
             $acc->remarks=$request->remarks;
         }
-        if ($request->has('address') && $request->address) {
+        if ($request->has('address') && $request->address OR empty($request->address)) {
             $acc->address=$request->address;
         }
-        if ($request->has('phone_no') && $request->phone_no) {
+        if ($request->has('phone_no') && $request->phone_no OR empty($request->phone_no)) {
             $acc->phone_no=$request->phone_no;
         }
-        if ($request->has('group_cod') && $request->group_cod OR $request->group_cod==null) {
+        if ($request->has('credit_limit') && $request->credit_limit) {
+            $acc->credit_limit=$request->credit_limit;
+        }
+        if ($request->has('days_limit') && $request->days_limit) {
+            $acc->days_limit=$request->days_limit;
+        }
+
+        if ($request->has('group_cod') && $request->group_cod OR empty($request->group_cod)) {
             $acc->group_cod=$request->group_cod;
         }
         if ($request->has('AccountType') && $request->AccountType) {
@@ -150,8 +170,11 @@ class COAController extends Controller
             'remarks'=>$acc->remarks,
             'address'=>$acc->address,
             'phone_no'=>$acc->phone_no,
+            'credit_limit'=>$acc->credit_limit,
+            'days_limit'=>$acc->days_limit,
             'group_cod'=>$acc->group_cod,
             'AccountType'=>$acc->AccountType,
+            'updated_by'=> $acc->updated_by,
         ]);
 
         
@@ -327,16 +350,24 @@ class COAController extends Controller
         }
     }
 
-    public function downloadAllAtt(Request $request)
+    public function addAtt(Request $request)
     {
-        $doc=ac_att::where('ac_code', $request->download_id)->select('att_path')->get();
-        foreach($doc as $attachment){
-            $filePath = public_path($attachment['att_path']);
-            if (file_exists($filePath)) {
-                $allAtt[] = public_path($attachment['att_path']);
+        $coa_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $acc_att = new ac_att();
+                $acc_att->created_by = session('user_id');                
+                $acc_att->ac_code = $coa_id;
+                $extension = $file->getClientOriginalExtension();
+                $acc_att->att_path = $this->coaDoc($file,$extension);
+                $acc_att->save();
             }
         }
-        return Response::download($allAtt[0]);
+        return redirect()->route('all-acc');
+
     }
 
     public function view($id)

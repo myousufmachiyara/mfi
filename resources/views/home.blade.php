@@ -1,66 +1,2069 @@
-@extends('layouts.header')
+@include('layouts.header')
+	<style>
+		h3{
+			margin-top: 7px;
+			margin-bottom: 10px;
+		}
+
+		.icon-container {
+			background-size: auto; /* Adjust the size of the icon to fit within the div */
+			background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
+			background-position: right bottom; /* Align the icon to the center-right */
+		}
+		/* Initially hide the masked data */
+		.masked-data {
+			display: none;
+		}
+
+		/* When the switch is toggled ON, show the masked data and hide the actual data */
+		.switch-off .actual-data {
+			display: none;
+		}
+
+		.switch-off .masked-data {
+			display: block;
+		}
+		.scrollable-div{
+			height: 300px;
+			overflow-y: auto;
+			padding: 0px !important;
+		}
+		.sticky-tbl-header{
+			position: sticky;
+			top: 0;
+			background-color: white;
+		}
+	</style>
 	<body>
 		<section class="body">
-			@extends('layouts.menu')
-
-			<div class="inner-wrapper" style="padding-top: 110px;">
-				<aside id="sidebar-left" class="sidebar-left" >
-
-					<div class="sidebar-header">
-						<div class="sidebar-title">
-							<strong>MENU</strong>
-						</div>
-						<div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-							<i class="fas fa-bars" aria-label="Toggle sidebar"></i>
-						</div>
-					</div>
-
-					<div class="nano">
-						<div class="nano-content">
-							@include('layouts.leftmenu')
-						</div>
-
-						<script>
-							// Maintain Scroll Position
-							if (typeof localStorage !== 'undefined') {
-								if (localStorage.getItem('sidebar-left-position') !== null) {
-									var initialPosition = localStorage.getItem('sidebar-left-position'),
-										sidebarLeft = document.querySelector('#sidebar-left .nano-content');
-
-									sidebarLeft.scrollTop = initialPosition;
-								}
-							}
-						</script>
-
-					</div>
-				</aside>
-
-				<section role="main" class="content-body" >
-
-					<header class="page-header" >
-						<div class="right-wrapper text-end">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="/">
-										<i class="bx bx-home-alt"></i>
-									</a>
-								</li>
-
-								<li><span>Software</span></li>
-
-								<li><span>Home</span></li>
-
-							</ol>
-
-							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
-						</div>
-					</header>
+			<div class="inner-wrapper">
+				@include('layouts.leftmenu')
+				<section role="main" class="content-body">
+					@include('layouts.homepageheader')
 					<!-- start: page -->
+					<div class="row home-cust-pad">
+						@if(session('user_role')==1 || session('user_role')==2)
+							<div style="display: flex;justify-content: space-between;">
+								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)" style="margin-top:30px">
+								</div>
+							</div>
+
+							<div class="col-12 col-md-3 mb-2">
+								<section class="card card-featured-left card-featured-primary">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Post Dated Cheques</strong></h3>
+										@if(isset($pdc) && isset($pdc->Total_Balance))
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="{{ $pdc->Total_Balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-primary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/rec-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Total Receivables</strong></h3>
+										@if(isset($receivables) && isset($receivables->total_balance))
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="{{ $receivables->total_balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-primary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-sale-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Sale</strong></h3>
+										@if(isset($last_month_sale) && isset($last_month_sale->total_dr_amt) && isset($last_month_sale->total_weight))
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="{{ $last_month_sale->total_dr_amt }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="{{ $last_month_sale->total_weight }}">0</strong>
+												<span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-primary masked-data">
+												<strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-primary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-primary masked-data">
+												<strong>******</strong>
+											</h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+							</div>
+
+							<div class="col-12 col-md-3 mb-2">
+								<section class="card card-featured-left card-featured-danger">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/bank-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Bank</strong></h3>
+										@if(isset($banks) && isset($banks->Total_Balance))
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="{{ $banks->Total_Balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-danger mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/pay-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Total Payables</strong></h3>
+										@if(isset($payables) && isset($payables->total_balance))
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="{{ $payables->total_balance }}">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-danger mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/last-month-pur-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Purchase</strong></h3>
+										@if(isset($last_month_purchase) && isset($last_month_purchase->total_cr_amt) && isset($last_month_purchase->total_weight))
+										<h2 class="amount m-0 text-danger actual-data">
+											<strong data-value="{{ $last_month_purchase->total_cr_amt }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span></h2>
+										<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+
+										<h2 class="amount m-0 text-danger actual-data">
+											<strong data-value="{{ $last_month_purchase->total_weight }}">0</strong>
+											<span class="title text-end text-dark h6"> M-Ton</span></h2>
+										<h2 class="amount m-0 text-danger masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span></h2>
+											<h2 class="amount m-0 text-danger masked-data">
+												<strong>******</strong></h2>
+
+											<h2 class="amount m-0 text-danger actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> M-Ton</span></h2>
+											<h2 class="amount m-0 text-danger masked-data">
+												<strong>******</strong>
+											</h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-success">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Cash</strong></h3>
+										@if(isset($cash) && isset($cash->Total_Balance))
+										<h2 class="amount m-0 text-success actual-data">
+											<strong data-value="{{ $cash->Total_Balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-success actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+								
+								<section class="card card-featured-left card-featured-success mb-2 mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/long-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Long Term Loan</strong></h3>
+
+										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
+										<h2 class="amount m-0 text-success actual-data">
+											<strong data-value="{{ $long_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-success actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-success mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-in-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Cash In</strong></h3>
+										@if(isset($long_term_loan) && isset($long_term_loan->total_balance))
+										<h2 class="amount m-0 text-success actual-data">
+											<strong data-value="{{ $long_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-success actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-success masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-tertiary mb-2">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/fc-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Foreign Currency</strong></h3>
+
+										@if(isset($foreign) && isset($foreign->Total_Balance))
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $foreign->Total_Balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@endif
+
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-tertiary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/short-term-loan-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Short Term Loan</strong></h3>
+										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $short_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+
+								<section class="card card-featured-left card-featured-tertiary mt-3">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cash-out-icon.png'); ">
+										<h3 class="amount text-dark"><strong>Last Month Cash Out</strong></h3>
+										@if(isset($short_term_loan) && isset($short_term_loan->total_balance))
+										<h2 class="amount m-0 text-tertiary actual-data">
+											<strong data-value="{{ $short_term_loan->total_balance }}">0</strong>
+											<span class="title text-end text-dark h6"> PKR</span>
+										</h2>
+										<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@else
+											<h2 class="amount m-0 text-tertiary actual-data">
+												<strong data-value="0">0</strong>
+												<span class="title text-end text-dark h6"> PKR</span>
+											</h2>
+											<h2 class="amount m-0 text-tertiary masked-data"><strong>******</strong></h2>
+										@endif
+										<div class="summary-footer">
+											<a class="text-primary text-uppercase" href="#">View Details</a>
+										</div>
+									</div>
+								</section>
+							</div>
+
+							<div class="col-12 col-md-2 mb-2">
+								<section class="card card-featured-left card-featured-success">
+									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/all-user-icon.png');background-position: top right;background-size: 44%;">
+										<h3 class="amount text-dark"><strong>Active Users</strong></h3>
+
+										<table class="table table-responsive-md table-striped mb-0">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Role</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach ($login_users as $key => $row)
+												<tr>
+													<td>{{$row->user_name}}</td>
+													<td>{{$row->user_role}}</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+										<div class="summary-footer text-end mt-1">
+											<a class="text-primary text-uppercase" href="{{ route('all-users')}}">View All</a>
+										</div>
+									</div>
+								</section>
+							</div>	
+						@endif
 					
+						<!-- summaries ends here -->
+						<div class="tabs mt-3">
+							<ul class="nav nav-tabs">
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#PENDING_INVOICES" href="#PENDING_INVOICES" data-bs-toggle="tab">Pending Invoices </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bill Not Recieved</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#IIL" href="#IIL" data-bs-toggle="tab">IIL</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#GARDER" href="#GARDER" data-bs-toggle="tab">Garder</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ITEM_OF_MONTH" href="#ITEM_OF_MONTH" data-bs-toggle="tab">Item Of The Month</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Sale</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#AS" href="#AS" data-bs-toggle="tab">All Purchase</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#OVER_DUES" href="#OVER_DUES" data-bs-toggle="tab">Overdues</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#OVER_DAYS" href="#OVER_DAYS" data-bs-toggle="tab">Over Days</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div id="PENDING_INVOICES" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- First Pair: Sale 1 Not Final and Purchase 1 Not Final -->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 1 Not Final</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Purchase 1 Not Final</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Pur1NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<!-- Second Pair:-->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Pending Sale Against Pur 2</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Company Name</th>
+																<th>Customer Name</th>
+																<th>Name Of Person</th>
+															</tr>
+														</thead>
+														<tbody id="PendingSaleAgainstPur2Table" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Pending Sale Against Godwon</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Stock Out#</th>
+																<th class="text-center">Date</th>
+																<th>Gate Pass#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Item Type</th>
+															</tr>
+														</thead>
+														<tbody id="PendingSaleAgainstGodwonTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+									<!-- Third Pair:  -->
+									<div class="row">
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Final</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Pur Inv#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+
+
+								<div id="BILL_NOT_RECVD" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- First Pair: -->
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 1 Not Received</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale1NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-6 mb-3 d-flex">
+											<section class="card flex-fill">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+													<h2 class="card-title">Sale 2 Not Received</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">															<tr>
+																<th>Invoice#</th>
+																<th class="text-center">Date</th>
+																<th>Bill#</th>
+																<th>Account Name</th>
+																<th>Name Of Person</th>
+																<th>Bill Amount</th>
+																<th>Received Amount</th>
+																<th>Balance Amount</th>
+															</tr>
+														</thead>
+														<tbody id="Sale2NotRECVDTable" class="table-body-scroll">
+															<!-- Table rows will be populated dynamically -->
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+								
+								<div id="HR" class="tab-pane">
+									<div class="row form-group pb-3">
+										<!-- Category Sale -->
+										<div class="col-12 col-md-5 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Mill Wise HR Pipe Purchase</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="top5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Monthly Tonage</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="MonthlyTonage"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Monthly Tonage Of Customer From Purchase 2</h2>
+												</header>
+												<div class="card-body">
+													<div class="row mb-2">
+														<div class="col-lg-10">
+															<div class="form-group">
+															
+																<select data-plugin-selecttwo class="form-control select2-js" id="hr_monthly_tonage_of_coa" name="account_name" required onchange="getMonthlyTonageOfCustomer()">
+																	<option value="" disabled selected>Select Account</option>
+																	@foreach($coa as $key => $row)	
+																		<option value="{{$row->ac_code}}">{{$row->ac_name}}</option>
+																	@endforeach
+																</select>
+															</div>
+														</div>
+														<div class="col-lg-2">
+															<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getMonthlyTonageOfCustomer()"><i class="fa fa-filter"></i></a>
+														</div>
+													</div>
+													<div class="scrollable-div">
+														<table class="table table-responsive-md table-striped mb-0">
+															<thead class="sticky-tbl-header">
+																<tr>
+																	<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																	<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+																</tr>
+															</thead>
+															<tbody id="HRMonthlyTonageOfCust">
+																
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</section>
+										</div>
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterHR" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Steelex Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="SteelexSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">S.P.M Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="SPMSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Mehboob Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="MehboobSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">GoDown Sale Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GodownSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Top 3 Customers Of Purchase 2</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="Top3Cus">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										
+									</div>
+								</div>
+								<div id="IIL" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterIIL" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">CRC Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CRCSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">HRS Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="HRSSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">SS Eco 201 Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="ECOSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">SS Cosmo 304 Sale Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="COSMOSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+									</div>
+								</div>
+
+								<div id="GARDER" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterGARDER" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Purchase Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Company Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-4 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Garder / TR Sale Summary</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Customer Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="GarderSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+										
+									</div>
+								</div>
+
+								<div id="ITEM_OF_MONTH" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterITEM_OF_MONTH" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">HR Item OF The Month By Weight</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="HRItemByWeightTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">HR Item Of The Month By Qty</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Quantity</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="HRItemByQtyTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Water HR Item OF The Month By Weight</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="WTItemByWeightTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Water HR Item Of The Month By Qty</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Quantity</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="WTItemByQtyTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">CRC Item OF The Month By Weight</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CRCItemByWeightTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">CRC Item Of The Month By Qty</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Quantity</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="CRCItemByQtyTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Eco 201 Item Of The Month By Weight</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="ECOItemByWeightTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Eco 201 Item Of The Month By Qty</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Quantity</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="ECOItemByQtyTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Cosmo 304 Item Of The Month By Weight</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Weight</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="COSMOItemByWeightTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Cosmo 304 Item Of The Month By Qty</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0" >
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Quantity</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="COSMOItemByQtyTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+									</div>
+								</div>
+								
+							</div>
+						</div>
+
+					</div>
 					<!-- end: page -->
 				</section>
 			</div>
 		</section>
-        @extends('layouts.footerlinks')
+        @include('layouts.footerlinks')
 	</body>
+	<script>
+
+		$(document).ready(function() {
+			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
+            toggleSwitch.checked = true; // Set to "on" by default
+            handleToggleSwitch(toggleSwitch); // Trigger the function
+		});	
+
+		function handleToggleSwitch(switchElement) {
+			var dataContainers = document.querySelectorAll('.data-container');
+			dataContainers.forEach(function(dataContainer) {
+				if (!switchElement.checked) {
+					dataContainer.classList.remove('switch-off');
+					const elements = document.querySelectorAll(".actual-data strong");
+					elements.forEach(element => {
+						const totalBalance = parseFloat(element.dataset.value || 0); // Get value from data-value attribute or default to 0
+						const duration = 2000; // Animation duration in milliseconds
+						const frameRate = 60; // Frames per second
+						const totalFrames = Math.round(duration / (1000 / frameRate));
+						let frame = 0;
+						
+						if (totalBalance !== 0) {
+							const counter = setInterval(() => {
+								frame++;
+								const progress = frame / totalFrames;
+								const currentValue = Math.floor(progress * totalBalance);
+								element.textContent = currentValue.toLocaleString();
+
+								if (frame === totalFrames) {
+									clearInterval(counter);
+									element.textContent = totalBalance.toLocaleString();
+								}
+							}, 1000 / frameRate);
+						} else {
+							element.textContent = "0"; // Set to 0 if no value
+						}
+					});
+				} else {
+					dataContainer.classList.add('switch-off');
+				}
+			});
+		}
+
+		// Graph Chart for MILL WISE HR PIPE PURCHASE Started
+		const mills = ['187', '170', '133'];
+		const colors = [
+			'rgba(220, 53, 69, 1)',
+			'rgba(0, 136, 204, 1)',
+			'rgba(25, 135, 84, 1)',
+			'rgba(43, 170, 177, 1)',
+			'rgba(219, 150, 81, 1)',
+		];
+
+		function generateChartDatasets(data, mills, colors) {
+			// Group data by 'dat' field
+			const groupedData = data.reduce((acc, item) => {
+				if (!acc[item.dat]) acc[item.dat] = [];
+				acc[item.dat].push(item);
+				return acc;
+			}, {});
+
+			// Get unique 'dat' values for chart labels
+			const chartLabels = Object.keys(groupedData);
+
+			// Initialize datasets
+			const datasets = [];
+
+			// Loop through each mill and create datasets
+			mills.forEach((mill, index) => {
+				const dataForMill = chartLabels.map(dat => {
+					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millData ? millData.total_weight : 0;
+				});
+
+				// Get the mill name
+				const millName = chartLabels
+					.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+					.find(name => name) || `Mill ${mill}`; // Default if not found
+
+				// Add dataset for the mill
+				datasets.push({
+					label: millName,
+					data: dataForMill,
+					backgroundColor: colors[index] || 'rgba(0, 0, 0, 0.5)', // Default color if not enough colors provided
+					stack: `Stack ${index}`,
+				});
+			});
+
+			// Create dataset for "Others" (mills not in the mills array)
+			const othersData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					return acc;
+				}, 0) || 0; // Default to 0 if no matching items
+			});
+
+			datasets.push({
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)', // Default color for "Others"
+				stack: 'Stack Others',
+			});
+
+			return { datasets, chartLabels };
+		}
+		// Graph Chart for MILL WISE HR PIPE PURCHASE Ended 
+
+		// donut graph for Monthly Tonage Started 
+		const MonthlyTonage = document.getElementById('MonthlyTonage');
+		let monthlyTonageChart; // Declare a global variable to hold the chart instance
+		let top5CustomerPerformanceChart;
+
+		function groupByMillCode(mills, data) {
+			const result = {
+				labels: [], // To hold the labels for the chart
+				data: [], // To hold the total_weight for each mill
+				backgroundColor: [] // To hold the colors for the chart
+			};
+
+			// Initialize groups for each mill in mills array
+			mills.forEach(mill => {
+				result[mill] = { weight: 0, name: "", backgroundColor: "" };
+			});
+
+			// Add a group for "Others"
+			result['Others'] = { weight: 0, name: "Others" };
+
+			// Iterate through the data to group by mill_code and calculate total_weight
+			data.forEach(item => {
+				const millCode = item.mill_code.toString();
+				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
+
+				// Aggregate the total_weight based on the mill_code or group it under "Others"
+				if (millName === 'Others') {
+					result['Others'].weight += item.total_weight;
+					result['Others'].backgroundColor = 'rgba(200, 200, 200, 1)';
+
+				} else {
+					result[millCode].weight += item.total_weight;
+					result[millCode].name = item.mill_name;
+					if(item.mill_name=="STEELEX"){
+						result[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
+					}
+					else if(item.mill_name=="S.P.M"){
+						result[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
+					}
+					else if(item.mill_name=="MEHBOOB PIPE"){
+						result[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
+					}
+				}
+			});
+			// Prepare the final chart data
+			for (const key in result) {
+				if (result[key].weight > 0) {
+					result.labels.push(result[key].name);
+					result.data.push(result[key].weight);
+					result.backgroundColor.push(result[key].backgroundColor);
+				}
+			}
+
+			return result;
+		}
+
+		// donut graph for Monthly Tonage Ended 
+
+		// get Monthly Tonage Of Customer Started
+		function getMonthlyTonageOfCustomer(){
+			var month = document.getElementById('filterHR').value;
+			var acc_name = document.getElementById('hr_monthly_tonage_of_coa').value;
+			var table = document.getElementById('HRMonthlyTonageOfCust');
+
+			while (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+
+			$.ajax({
+				type: "GET",
+				url: '/dashboard-tabs/hr/monthlyTonageOfCustomer',
+				data: {
+					month: month,
+					acc_name:acc_name,
+				},
+				beforeSend: function () {
+                    $('#HRMonthlyTonageOfCust').html('<tr><td colspan="2" class="text-center">Loading Data Please Wait...</td></tr>');
+                },
+				success: function(result) {
+					var rows = '';
+					var totalWeight = 0; // Initialize total
+
+					$.each(result, function (index, value) {
+						var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+    					totalWeight += weight; // Add to total
+						rows += `<tr>
+							<td>${value['company_name'] ? value['company_name'] : ''}</td>
+                            <td>${weight ? weight : ''}</td>
+ 						</tr>`;
+					});
+
+					// Append a row for the total
+					rows += `<tr>
+						<td><strong>Total</strong></td>
+						<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+					</tr>`;
+
+					$('#HRMonthlyTonageOfCust').html(rows);
+				},
+				error: function() {
+					alert("Error loading HR Monthly Tonage Of Customer Data");
+				}
+			});
+		}
+
+		// get Monthly Tonage Of Customer Ended
+
+		// on tab changes flow
+		document.querySelectorAll('.nav-link-dashboard-tab').forEach(tabLink => {
+            tabLink.addEventListener('click', function() {
+                tabId = this.getAttribute('data-bs-target');
+                tabChanged(tabId);
+            });
+        });
+
+		function tabChanged(tabId) {
+			if (tabId === "#PENDING_INVOICES") {
+
+				var table = document.getElementById('Sale1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Pur1NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Sale2NotTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('PendingSaleAgainstPur2Table');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('PendingSaleAgainstGodwonTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/pending-invoices',
+					success: function(result) {
+						var rows = '';
+
+						$.each(result['sale1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_ord_no'] ? value['pur_ord_no'] : ''}</td>
+								<td>${value['account_name'] ? value['account_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+								<td>${value['Sales_remarks'] ? value['Sales_remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Sale1NotTable').html(rows);
+
+						rows = '';
+
+						$.each(result['pur1_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['pur_id'] ? value['pur_id'] : ''}</td>
+								<td class="text-center">${value['pur_date'] ? moment(value['pur_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_saler_name'] ? value['cash_saler_name'] : ''}</td>
+								<td>${value['pur_remarks'] ? value['pur_remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Pur1NotTable').html(rows);
+
+						rows = '';
+
+						$.each(result['sale2_not'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['pur_inv'] ? value['pur_inv'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['name_of'] ? value['name_of'] : ''}</td>
+								<td>${value['remarks'] ? value['remarks'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#Sale2NotTable').html(rows);
+
+
+						rows = '';
+
+						$.each(result['pending_sale_against_pur2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sale_inv_no'] ? value['Sale_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['customer_name'] ? value['customer_name'] : ''}</td>
+								<td>${value['Cash_pur_name'] ? value['Cash_pur_name'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstPur2Table').html(rows);
+
+						rows = '';
+
+						$.each(result['pending_sale_against_tstockout'], function (index, value) {
+							rows += `<tr>
+								<td>${value['prefix'] ? value['prefix'] : ''} ${value['Sal_inv_no'] ? value['Sal_inv_no'] : ''}</td>
+								<td class="text-center">${value['sa_date'] ? moment(value['sa_date']).format('D-M-YY') : ''}</td>
+								<td>${value['mill_gate'] ? value['mill_gate'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['cash_pur_name'] ? value['cash_pur_name'] : ''}</td>
+								<td>${value['item_type'] == 1 ? '<strong>Pipes</strong>' : (value['item_type'] == 2 ? '<strong>Garder / TR</strong>' : '')}</td>
+
+							</tr>`;
+						});
+
+						$('#PendingSaleAgainstGodwonTable').html(rows);
+
+						},
+					error: function() {
+						alert("Error loading Pending Invoices data");
+					}
+				});
+
+			}
+			else if(tabId=="#HR"){
+				var table = document.getElementById('SteelexSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('SPMSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('MehboobSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('GodownSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('Top3Cus');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				if (top5CustomerPerformanceChart) {
+					top5CustomerPerformanceChart.destroy();
+				}
+
+				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+
+				top5CustomerPerformance.width = 600; // Set desired width
+				top5CustomerPerformance.height = 353; // Set desired height
+
+				// Create the new chart
+				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
+					type: 'bar',
+					data: {
+						labels: chartLabels, // 'dat' values as labels
+						datasets: datasets,  // Dynamic datasets based on groupedData
+					},
+				});
+
+				var month = document.getElementById('filterHR').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/hr',
+					data: {
+						month: month,
+					},
+					success: function(result) {
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+
+						if (monthlyTonageChart) {
+							monthlyTonageChart.destroy();
+						}
+
+						const chartData = {
+							labels: groupedData.labels, // Set the labels directly here
+							datasets: [
+								{
+									data: groupedData.data, // Extract total_weight values for each mill
+									backgroundColor: groupedData.backgroundColor, // Assign background colors
+								}
+							]
+						};
+						
+						// Create the doughnut chart
+						monthlyTonageChart = new Chart(MonthlyTonage, {
+							type: 'doughnut',
+							data: chartData,
+						});
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['steelex'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#SteelexSaleTable').html(rows);
+
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['spm'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#SPMSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['mehboob'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+
+						$('#MehboobSaleTable').html(rows);
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['godown'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`
+						$('#GodownSaleTable').html(rows);
+
+						var rows = '';
+
+						$.each(result['top_customers_of_pur2'], function (index, value) {
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${value['weight'] ? value['weight'] : ''}</td>
+							</tr>`;
+						});
+						$('#Top3Cus').html(rows);
+
+						
+					},
+					error: function() {
+						alert("Error loading HR data");
+					}
+				});
+        	}
+			else if(tabId=="#IIL"){
+				var table = document.getElementById('CRCSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('HRSSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('ECOSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('COSMOSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var month = document.getElementById('filterIIL').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/iil',
+					data: { month: month },
+					success: function(result) {
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['CRC'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#CRCSaleTable').html(rows);
+
+						rows = '';
+						totalWeight = 0;
+
+						$.each(result['HRS'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+							totalWeight += weight;
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						</tr>`;
+
+						$('#HRSSaleTable').html(rows);
+
+						rows = '';
+						totalWeight = 0;
+
+						$.each(result['ECO'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+							totalWeight += weight;
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						</tr>`;
+
+						$('#ECOSaleTable').html(rows);
+
+						rows = '';
+						totalWeight = 0;
+
+						$.each(result['COSMO'], function (index, value) {
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0;
+							totalWeight += weight;
+							rows += `<tr>
+								<td>${value['company_name'] ? value['company_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td>
+						</tr>`;
+
+						$('#COSMOSaleTable').html(rows);
+					},
+					error: function() {
+						alert("Error loading IIL data");
+					}
+				});
+
+        	}
+			else if(tabId=="#GARDER"){
+
+				var table = document.getElementById('GarderPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('GarderSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				
+
+				var month = document.getElementById('filterGARDER').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/garder',
+					data: { month: month },
+					success: function(result) {
+
+						var rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['garder_mill'], function (index, value) {
+							var weight = value['weight'] ? parseFloat(value['weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#GarderPurTable').html(rows);
+
+						rows = '';
+						var totalWeight = 0; // Initialize total
+
+						$.each(result['garder_customer'], function (index, value) {
+							var weight = value['tt_weight'] ? parseFloat(value['tt_weight']) : 0; // Convert to a number
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#GarderSaleTable').html(rows);
+
+
+						
+					},
+					error: function() {
+						alert("Error loading Garder data");
+					}
+				});
+
+        	}
+			else if (tabId === "#ITEM_OF_MONTH") {
+				const clearTableRows = (tableIds) => {
+					tableIds.forEach((tableId) => {
+						const table = document.getElementById(tableId);
+						while (table && table.rows.length > 0) {
+							table.deleteRow(0);
+						}
+					});
+				};
+
+				clearTableRows([
+					'HRItemByWeightTable',
+					'HRItemByQtyTable',
+					'CRCItemByWeightTable',
+					'CRCItemByQtyTable',
+					'ECOItemByWeightTable',
+					'ECOItemByQtyTable',
+					'COSMOItemByWeightTable',
+					'COSMOItemByQtyTable'
+				]);
+
+				const month = document.getElementById('filterITEM_OF_MONTH').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/item-of-the-month',
+					data: { month: month },
+					success: function (result) {
+						const populateTable = (data, tableId, fields) => {
+							let rows = '';
+							data.forEach((item) => {
+								rows += `<tr>
+									<td>${item[fields[0]] || ''}</td>
+									<td>${item[fields[1]] || ''}</td>
+								</tr>`;
+							});
+							$(`#${tableId}`).html(rows);
+						};
+
+						populateTable(result.hrbyweight, 'HRItemByWeightTable', ['item_name', 'weight']);
+						populateTable(result.hrbyqty, 'HRItemByQtyTable', ['item_name', 'qty']);
+						populateTable(result.wtbyweight, 'WTItemByWeightTable', ['item_name', 'weight']);
+						populateTable(result.wtbyqty, 'WTItemByQtyTable', ['item_name', 'qty']);
+						populateTable(result.crcbyweight, 'CRCItemByWeightTable', ['item_name', 'weight']);
+						populateTable(result.crcbyqty, 'CRCItemByQtyTable', ['item_name', 'qty']);
+						populateTable(result.ecobyweight, 'ECOItemByWeightTable', ['item_name', 'weight']);
+						populateTable(result.ecobyqty, 'ECOItemByQtyTable', ['item_name', 'qty']);
+						populateTable(result.cosmobyweight, 'COSMOItemByWeightTable', ['item_name', 'weight']);
+						populateTable(result.cosmobyqty, 'COSMOItemByQtyTable', ['item_name', 'qty']);
+					},
+					error: function () {
+						alert("Error loading Item Of The Month data");
+					}
+				});
+			}
+
+		}
+
+		function getTabData() {
+            const activeTabLink = document.querySelector('.nav-link-dashboard-tab.active');
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
+	</script>									
 </html>

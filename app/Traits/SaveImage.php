@@ -104,6 +104,28 @@ trait SaveImage{
         $filename       = $img->move(public_path('uploads/tstockin/'),$filenamenew);
         return $filenamepath;
     }
+    
+    public function StockInDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/stockin/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/stockin/'),$filenamenew);
+        return $filenamepath;
+    }
+    
+    public function StockOutDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/stockout/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/stockout/'),$filenamenew);
+        return $filenamepath;
+    }
 
     public function tStockOutDoc($file,$extension)
     {
@@ -113,6 +135,83 @@ trait SaveImage{
         $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
         $filenamepath   = 'uploads/tstockout/'.$filenamenew;
         $filename       = $img->move(public_path('uploads/tstockout/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function compDoc($file, $extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/complains/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/complains/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function weightDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/weight/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/weight/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function tquotDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/tquotation/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tquotation/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function quotDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/quotDoc/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/quotDoc/'),$filenamenew);
+        return $filenamepath;
+    }
+    
+    public function tpoDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/tpo/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/tpo/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function UserProfile($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/users/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/users/'),$filenamenew);
+        return $filenamepath;
+    }
+
+    public function poDoc($file,$extension)
+    {
+        $img = $file;
+        $number = rand(1,999);
+        $numb = $number / 7 ;
+        $filenamenew    = date('Y-m-d')."_.".$numb."_.".$extension;
+        $filenamepath   = 'uploads/po/'.$filenamenew;
+        $filename       = $img->move(public_path('uploads/po/'),$filenamenew);
         return $filenamepath;
     }
 }

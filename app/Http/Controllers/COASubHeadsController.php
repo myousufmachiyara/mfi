@@ -12,7 +12,7 @@ class COASubHeadsController extends Controller
     public function index()
     {
         $subheads = sub_head_of_acc::where('status', 1)
-        ->join('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
+        ->leftjoin('head_of_acc as hoa', 'hoa.id', '=', 'sub_head_of_acc.main')
         ->select('hoa.heads as name', 'sub_head_of_acc.id as id', 'sub_head_of_acc.sub as sub_name')
         ->get();
 
@@ -23,6 +23,7 @@ class COASubHeadsController extends Controller
     public function store(Request $request)
     {
         $subheads = new sub_head_of_acc();
+        $subheads->created_by = session('user_id');
 
         if ($request->has('main') && $request->main) {
             $subheads->main=$request->main;
@@ -36,7 +37,10 @@ class COASubHeadsController extends Controller
     
     public function destroy(Request $request)
     {
-        $sub_head = sub_head_of_acc::where('id', $request->sub_head_id)->update(['status' => '0']);
+        $sub_head = sub_head_of_acc::where('id', $request->sub_head_id)->update([
+            'status' => '0',
+            'updated_by' => session('user_id'),
+        ]);
         return redirect()->route('all-acc-sub-heads-groups');
     }
 
@@ -55,6 +59,7 @@ class COASubHeadsController extends Controller
         sub_head_of_acc::where('id', $request->sub_head_id)->update([
             'main'=>$sub_head->main,
             'sub'=>$sub_head->sub,
+            'updated_by' => session('user_id'),
         ]);
 
         return redirect()->route('all-acc-sub-heads-groups');
