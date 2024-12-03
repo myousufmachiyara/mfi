@@ -39,6 +39,25 @@ class StockInController extends Controller
         return view('stock_in.index',compact('stock_in'));
     }
 
+    public function addAtt(Request $request)
+    {
+        $stock_in_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $stock_in_att = new stock_in_att();
+                $stock_in_att->created_by = session('user_id');
+                $stock_in_att->stock_in_id = $stock_in_id;
+                $extension = $file->getClientOriginalExtension();
+                $stock_in_att->att_path = $this->StockInDoc($file,$extension);
+                $stock_in_att->save();
+            }
+        }
+        return redirect()->route('all-stock-in');
+    }
+
     public function destroy(Request $request)
     {
         $stock_in = stock_in::where('Sal_inv_no', $request->invoice_id)->update([

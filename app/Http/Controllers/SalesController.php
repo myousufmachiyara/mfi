@@ -269,7 +269,6 @@ class SalesController extends Controller
             }
         }
         return redirect()->route('all-saleinvoices');
-
     }
 
     public function destroy(Request $request)
