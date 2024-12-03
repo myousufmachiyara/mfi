@@ -130,7 +130,7 @@ class RptDailyRegSale1Controller extends Controller
         $html1 = '<table border="0.3" style="text-align:center;margin-top:10px">';
         $html1 .= '<tr>';
         $html1 .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
-        $html1 .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Date</th>';
         $html1 .= '<th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>';
         $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>';
         $html1 .= '<th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>';
