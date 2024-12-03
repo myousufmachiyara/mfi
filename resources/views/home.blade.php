@@ -1648,7 +1648,6 @@
 				});
 
 			}
-
 			else if(tabId=="#HR"){
 				var table = document.getElementById('SteelexSaleTable');
 				while (table.rows.length > 0) {
@@ -1823,7 +1822,6 @@
 					}
 				});
         	}
-
 			else if(tabId=="#IIL"){
 				var table = document.getElementById('CRCSaleTable');
 				while (table.rows.length > 0) {
