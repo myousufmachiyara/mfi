@@ -1678,9 +1678,6 @@
 					top5CustomerPerformanceChart.destroy();
 				}
 
-				// const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
-				// const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
-
 				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 
 				top5CustomerPerformance.width = 600; // Set desired width
