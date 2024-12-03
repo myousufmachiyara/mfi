@@ -120,15 +120,7 @@ class RptDailyRegSale1Controller extends Controller
         $count = 1;
         $totalAmount = 0;
 
-        // Check if a new page is needed based on remaining space
-        if (($pdf->getPageHeight() - $pdf->GetY()) > 250) { 
-            $pdf->AddPage(); // Add a new page if there's not enough space left
-            $currentY = $pdf->GetY() + 1; // Set the current Y position with a buffer
-            $html .= '</table>'; // Close the current table
-            $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
-            $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
-            $html .= $tableHeader; // Re-add the table header for the new page
-        }
+        
         
         foreach ($activite5_sales as $items) {
             
@@ -149,6 +141,17 @@ class RptDailyRegSale1Controller extends Controller
             $count++;
         }
         
+        $currentY = $pdf->GetY();
+        // Check if a new page is needed based on remaining space
+        if (($pdf->getPageHeight() - $pdf->GetY()) > 250) { 
+            $pdf->AddPage(); // Add a new page if there's not enough space left
+            $currentY = $pdf->GetY() + 1; // Set the current Y position with a buffer
+            $html .= '</table>'; // Close the current table
+            $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
+            $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
+            $html .= $tableHeader; // Re-add the table header for the new page
+        }
+
         // Add totals row
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
