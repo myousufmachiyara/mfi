@@ -207,7 +207,6 @@
             table.deleteRow(0);
         }
 
-        alert(id);
         $.ajax({
             type: "GET",
             url: "/stock_in/attachements",
