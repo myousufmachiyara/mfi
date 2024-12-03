@@ -1356,7 +1356,6 @@
 		}
 
 		// Graph Chart for MILL WISE HR PIPE PURCHASE Started
-		const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
 		const mills = ['187', '170', '133'];
 		const colors = [
 			'rgba(220, 53, 69, 1)',
@@ -1365,7 +1364,6 @@
 			'rgba(43, 170, 177, 1)',
 			'rgba(219, 150, 81, 1)',
 		];
-		const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
 
 		function generateChartDatasets(data, mills, colors) {
 			// Group data by 'dat' field
@@ -1651,7 +1649,6 @@
 
 			}
 
-
 			else if(tabId=="#HR"){
 				var table = document.getElementById('SteelexSaleTable');
 				while (table.rows.length > 0) {
@@ -1681,6 +1678,9 @@
 				if (top5CustomerPerformanceChart) {
 					top5CustomerPerformanceChart.destroy();
 				}
+
+				// const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
+				// const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
 
 				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 
