@@ -81,21 +81,9 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
-        // margin top
-        $margin_top = '.margin-top {
-            margin-top: 10px;
-        }';
-        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
-
-        // margin bottom
-        $margin_bottom = '.margin-bottom {
-            margin-bottom: 4px;
-        }';
-
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-        
 
         // Header details
         $htmlHeaderDetails = '
@@ -112,12 +100,10 @@ class RptDailyRegSale1Controller extends Controller
                 </td>
             </tr>
         </table>';
-
-       
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
         // Table headers
-        $html = '<tr>
+        $tableHeader = '<tr>
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
                             <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
@@ -126,16 +112,10 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
-        
-                
 
         // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-        $html .= $html;
-
-        
-       // call htmlHeaderDetails on every page
-       $pdf->setTableHtml($html);
+        $html .= $tableHeader;
 
         $count = 1;
         $totalAmount = 0;
