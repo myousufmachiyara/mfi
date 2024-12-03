@@ -68,7 +68,7 @@ class RptDailyRegSale1Controller extends Controller
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
-        
+
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -76,15 +76,15 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->SetSubject('Daily Register Sale 1');
         $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-        
+
         // Add a page and set padding
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
-        
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-        
+
         // Header details
         $htmlHeaderDetails = '
         <style>
@@ -98,10 +98,10 @@ class RptDailyRegSale1Controller extends Controller
                 <td style="width:33%;">Print Date: <span style="color:black;">' . $formattedDate . '</span></td>
             </tr>
         </table>';
-        
+
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
-        
-        // Table headers
+
+        // Table header (combined)
         $tableHeader = '<tr>
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
@@ -111,10 +111,10 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
-        
+
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-        $html .= $tableHeader;
-        
+        $html .= $tableHeader; // Add header to first page
+
         // Check if sales data is available
         if (empty($activite5_sales)) {
             $pdf->writeHTML('<p>No sales data available for the selected date range.</p>', true, false, true, false, '');
@@ -122,7 +122,7 @@ class RptDailyRegSale1Controller extends Controller
             // Start the table
             $count = 1;
             $totalAmount = 0;
-        
+
             foreach ($activite5_sales as $items) {
                 // Check if a new page is needed
                 if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
@@ -130,9 +130,9 @@ class RptDailyRegSale1Controller extends Controller
                     $pdf->writeHTML($html, true, false, true, false, '');
                     $pdf->AddPage(); // Add a new page
                     $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-                    $html .= $tableHeader; // Re-add table header
+                    $html .= $tableHeader; // Re-add table header for new page
                 }
-        
+
                 // Add table rows
                 $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
                 $html .= '<tr style="background-color:' . $bgColor . ';">
@@ -144,11 +144,11 @@ class RptDailyRegSale1Controller extends Controller
                             <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
                             <td>' . number_format($items['bill_amt'], 0) . '</td>
                         </tr>';
-        
+
                 $totalAmount += $items['bill_amt'];
                 $count++;
             }
-        
+
             // Add totals row
             $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                         <td colspan="6" style="text-align:right;">Total:</td>
@@ -157,18 +157,19 @@ class RptDailyRegSale1Controller extends Controller
             $html .= '</table>';
             $pdf->writeHTML($html, true, false, true, false, '');
         }
-        
+
         // Prepare filename
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.pdf";
-        
+
         // Determine output type
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
         } else {
             $pdf->Output($filename, 'I'); // For inline view
         }
+
     }
         
 }
