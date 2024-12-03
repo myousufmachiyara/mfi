@@ -123,7 +123,7 @@ class RptDailyRegSale1Controller extends Controller
         
         $currentY = $pdf->GetY();
         // Check if a new page is needed based on remaining space
-        if (($pdf->getPageHeight() - $pdf->GetY()) < 100) { // Trigger if remaining space is less than 100
+        if (($pdf->getPageHeight() - $pdf->GetY()) < 25) { // Trigger if remaining space is less than 100
             $pdf->AddPage(); // Add a new page
             $currentY = $pdf->GetY(); // Reset the current Y position
             $html .= '</table>'; // Close the current table
@@ -131,7 +131,7 @@ class RptDailyRegSale1Controller extends Controller
             $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
             $html .= $tableHeader; // Re-add the table header for the new page
         }
-        
+
         foreach ($activite5_sales as $items) {
             
             // Add table rows
