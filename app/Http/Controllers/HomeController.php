@@ -69,4 +69,30 @@ class HomeController extends Controller
         }
        
     }
+
+    public function getBrowserDetails(Request $request){
+        $userAgent = $request->header('User-Agent');
+        $browser = $this->getBrowserFromUserAgent($userAgent);
+
+        return response()->json([
+            'user_agent' => $userAgent,
+            'browser' => $browser,
+        ]);
+    }
+
+
+    private function getBrowserFromUserAgent($userAgent)
+    {
+        if (strpos($userAgent, 'Chrome') !== false) {
+            return 'Google Chrome';
+        } elseif (strpos($userAgent, 'Firefox') !== false) {
+            return 'Mozilla Firefox';
+        } elseif (strpos($userAgent, 'Safari') !== false) {
+            return 'Safari';
+        } elseif (strpos($userAgent, 'Edge') !== false) {
+            return 'Microsoft Edge';
+        } else {
+            return 'Other';
+        }
+    }
 }
