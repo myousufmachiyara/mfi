@@ -11,12 +11,16 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $details; // Store the details passed from the controller
+
     /**
      * Create a new message instance.
+     *
+     * @param array $details
      */
-    public function __construct()
+    public function __construct($details)
     {
-        // If you need to pass data to the view, you can define it here
+        $this->details = $details; // Store the details
     }
 
     /**
@@ -24,7 +28,8 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from My Application') // Set the subject of the email
-                    ->view('emails.otp'); // Set the view for the email content
+        return $this->subject($this->details['title']) // Set the subject dynamically from the details
+                    ->view('emails.otp') // Set the view for the email content
+                    ->with('details', $this->details); // Pass the details to the view
     }
 }
