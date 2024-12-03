@@ -81,6 +81,17 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 4px;
+        }';
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
@@ -101,7 +112,7 @@ class RptDailyRegSale1Controller extends Controller
             </tr>
         </table>';
 
-        // call htmlHeaderDetails on every page
+       
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
         // Table headers
@@ -119,6 +130,7 @@ class RptDailyRegSale1Controller extends Controller
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
         $html .= $tableHeader;
 
+        // call htmlHeaderDetails on every page
         // $pdf->setTableHtml($tableHeader);
 
         $count = 1;
