@@ -1674,24 +1674,6 @@
 					table.deleteRow(0);
 				}
 
-				if (top5CustomerPerformanceChart) {
-					top5CustomerPerformanceChart.destroy();
-				}
-
-				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-
-				top5CustomerPerformance.width = 600; // Set desired width
-				top5CustomerPerformance.height = 353; // Set desired height
-
-				// Create the new chart
-				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
-					type: 'bar',
-					data: {
-						labels: chartLabels, // 'dat' values as labels
-						datasets: datasets,  // Dynamic datasets based on groupedData
-					},
-				});
-
 				var month = document.getElementById('filterHR').value;
 
 				$.ajax({
@@ -1701,7 +1683,27 @@
 						month: month,
 					},
 					success: function(result) {
-						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
+						const { datasets, chartLabels } = generateChartDatasets(result['dash_pur_2_summary_monthly_companywise'], mills, colors);
+
+						if (top5CustomerPerformanceChart) {
+							top5CustomerPerformanceChart.destroy();
+						}
+
+						const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+
+						top5CustomerPerformance.width = 600; // Set desired width
+						top5CustomerPerformance.height = 353; // Set desired height
+
+						// Create the new chart
+						top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
+							type: 'bar',
+							data: {
+								labels: chartLabels, // 'dat' values as labels
+								datasets: datasets,  // Dynamic datasets based on groupedData
+							},
+						});
+
+						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise_for_donut']);
 
 						if (monthlyTonageChart) {
 							monthlyTonageChart.destroy();
