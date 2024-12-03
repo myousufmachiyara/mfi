@@ -71,8 +71,9 @@ class HomeController extends Controller
     }
 
     public function getBrowserDetails(Request $request){
-        $userAgent = $request->header('User-Agent');
-        $browser = $this->getBrowserFromUserAgent($userAgent);
+        $userAgent = $request->header();
+        return $userAgent;
+        // $browser = $this->getBrowserFromUserAgent($userAgent);
 
         return response()->json([
             'user_agent' => $userAgent,
