@@ -10,7 +10,9 @@ use App\Models\dash_acc_group;
 use App\Models\users;
 use App\Models\dash_pur_2_summary_monthly_companywise;
 use App\Models\AC;
-
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+    
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -76,6 +78,18 @@ class HomeController extends Controller
         $secCHUA = $request->header('Sec-CH-UA');
         $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA);
         return $browserId;
+    }
+    
+    public function sendEmail()
+    {
+        $details = [
+            'title' => 'Mail from My Application',
+            'body' => 'This is a test email sent from Laravel.'
+        ];
+
+        Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($details));
+
+        return "Email sent successfully!";
     }
 
 }
