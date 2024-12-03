@@ -62,9 +62,8 @@ class HomeController extends Controller
             return view('home', compact('receivables','payables','short_term_loan','long_term_loan','pdc','banks','cash','foreign','login_users','last_month_purchase','last_month_sale','coa'));
         }
         else{
-            $coa = AC::where('status', 1)->get();
+            $coa = AC::where('status', 1)->get(['ac_code','ac_name']);
             return view('home', compact('coa'));
         }
-       
     }
 }
