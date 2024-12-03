@@ -117,7 +117,7 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
         // Table headers
-        $tableHeader = '<tr>
+        $html = '<tr>
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
                             <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
