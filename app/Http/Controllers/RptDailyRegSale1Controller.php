@@ -68,7 +68,7 @@ class RptDailyRegSale1Controller extends Controller
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
-
+    
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -76,28 +76,30 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->SetSubject('Daily Register Sale 1');
         $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
         $pdf->setPageOrientation('P');
-
+    
         // Define the table header HTML
-        $tableHeader = '<tr>
-                            <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                            <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
-                            <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
-                            <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
-                            <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
-                            <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
-                            <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
-                        </tr>';
-
+        $tableHeader = '<table border="1" style="border-collapse: collapse;text-align:center;">
+                            <tr>
+                                <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
+                                <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
+                                <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
+                                <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
+                                <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
+                                <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
+                                <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
+                            </tr>
+                        </table>';
+    
         // Set the table header HTML in the MyPDF instance
-        $pdf->setTableHtml('<table border="1" style="border-collapse: collapse;text-align:center">' . $tableHeader . '</table>');
-
+        $pdf->setTableHtml($tableHeader);
+    
         // Add the first page
         $pdf->AddPage();
-
+    
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
-
+    
         // Header details
         $htmlHeaderDetails = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
@@ -114,12 +116,12 @@ class RptDailyRegSale1Controller extends Controller
             </tr>
         </table>';
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
-
+    
         // Table content
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
         $count = 1;
         $totalAmount = 0;
-
+    
         foreach ($activite5_sales as $items) {
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
             $html .= '<tr style="background-color:' . $bgColor . ';">
@@ -134,20 +136,20 @@ class RptDailyRegSale1Controller extends Controller
             $totalAmount += $items['bill_amt'];
             $count++;
         }
-
+    
         // Add totals row
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
                     <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
-                </tr>';
+                  </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-
+    
         // Prepare filename
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.pdf";
-
+    
         // Determine output type
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
@@ -155,5 +157,5 @@ class RptDailyRegSale1Controller extends Controller
             $pdf->Output($filename, 'I'); // For inline view
         }
     }
-
+    
 }
