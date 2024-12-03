@@ -89,15 +89,9 @@ class RptDailyRegSale1Controller extends Controller
         $htmlHeaderDetails = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
-                    From Date: <span style="color:black;">' . $formattedFromDate . '</span>
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:34%;">
-                    To Date: <span style="color:black;">' . $formattedToDate . '</span>
-                </td>
-                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
-                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
-                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">From Date: <span style="color:black;">' . $formattedFromDate . '</span></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:34%;">To Date: <span style="color:black;">' . $formattedToDate . '</span></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">Print Date: <span style="color:black;">' . $formattedDate . '</span></td>
             </tr>
         </table>';
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
@@ -121,10 +115,15 @@ class RptDailyRegSale1Controller extends Controller
         $totalAmount = 0;
         
         foreach ($activite5_sales as $items) {
-            // Check if a new page is needed based on remaining space
-            if(($pdf->getPageHeight()-$pdf->GetY())<57){
+            // Calculate the remaining space on the page
+            $remainingSpace = $pdf->getPageHeight() - $pdf->GetY();
+            
+            // Ensure there's enough space left (considering a minimum of 20mm space)
+            if ($remainingSpace < 20) {  // Adjust this threshold based on your content
                 $pdf->AddPage();
-                $currentY = $pdf->GetY()+15;
+                $currentY = 15;  // Reset Y position after adding a new page
+            } else {
+                $currentY = $pdf->GetY() + 15;  // Continue with the current Y position
             }
         
             // Add table rows
@@ -162,5 +161,5 @@ class RptDailyRegSale1Controller extends Controller
         } else {
             $pdf->Output($filename, 'I'); // For inline view
         }
-    }        
+    }              
 }
