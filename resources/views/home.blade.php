@@ -1282,7 +1282,7 @@
 												</header>
 												<div class="card-body scrollable-div">
 													
-													<table class="table table-responsive-md table-striped mb-0">
+													<table class="table table-responsive-md table-striped mb-0" >
 														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
@@ -2048,6 +2048,8 @@
 					url: '/dashboard-tabs/item-of-the-month',
 					data: { month: month },
 					success: function(result) {
+						
+						var rows = '';
 						
 						$.each(result['hrbyweight'], function (index, value) {
 							
