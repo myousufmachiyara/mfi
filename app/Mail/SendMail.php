@@ -5,60 +5,35 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $otp;
+    public $details; // Store the details passed from the controller
 
     /**
      * Create a new message instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Send Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @param array $details
      */
-    public function attachments(): array
+    public function __construct($details)
     {
-        return [];
+        $this->details = $details; // Store the details
+        $this->otp = Str::random(6); // You can adjust the length and logic as needed
     }
 
+    /**
+     * Build the message.
+     */
     public function build()
     {
-        return $this->subject('Mail from My Application')
-<<<<<<< HEAD
-                    ->view('emails.sendMail');
-=======
-                    ->view('emails.otp');
->>>>>>> 4d2ea2ddde9f0cf8cd97b6eb09d6993cf166dae7
+        return $this->subject('Your OTP Code')  // Set the subject of the email
+        ->view('emails.otp') // Set the view for the email content
+        ->with([
+            'otp' => $this->otp, // Pass the OTP to the view
+        ]);
     }
 }
-
