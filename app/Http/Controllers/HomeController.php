@@ -92,4 +92,14 @@ class HomeController extends Controller
         return "Email sent successfully!";
     }
 
+
+    public function getIp(Request $request)
+    {
+        // Get the IP address of the client
+        $ipAddress = $request->ip();
+
+        // Return the IP address as a JSON response
+        return response()->json(['ip' => $ipAddress]);
+    }
+
 }

@@ -560,3 +560,5 @@
     Route::get('/browser-details', [App\Http\Controllers\HomeController::class, 'getBrowserDetails']);
     Route::get('/send-email', [App\Http\Controllers\HomeController::class, 'sendEmail']);
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
+
+    Route::get('/get-ip', [App\Http\Controllers\HomeController::class, 'getIp']);
