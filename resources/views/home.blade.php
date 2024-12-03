@@ -1282,7 +1282,7 @@
 												</header>
 												<div class="card-body scrollable-div">
 													
-													<table class="table table-responsive-md table-striped mb-0" >
+													<table class="table table-responsive-md table-striped mb-0">
 														<thead class="sticky-tbl-header">
 															<tr>
 																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Item Name</font></font></th>
@@ -1474,6 +1474,8 @@
 
 			return result;
 		}
+
+		// donut graph for Monthly Tonage Ended 
 
 		// get Monthly Tonage Of Customer Started
 		function getMonthlyTonageOfCustomer(){
@@ -1685,7 +1687,9 @@
 						month: month,
 					},
 					success: function(result) {
-						const { datasets, chartLabels } = generateChartDatasets(result['dash_pur_2_summary_monthly_companywise'], mills, colors);
+						const dash_pur_2_summary_monthly_companywise = @json($dash_pur_2_summary_monthly_companywise);
+						const { datasets, chartLabels } = generateChartDatasets(dash_pur_2_summary_monthly_companywise, mills, colors);
+
 						const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
 
 						top5CustomerPerformance.width = 600; // Set desired width
@@ -2046,8 +2050,6 @@
 					url: '/dashboard-tabs/item-of-the-month',
 					data: { month: month },
 					success: function(result) {
-						
-						var rows = '';
 						
 						$.each(result['hrbyweight'], function (index, value) {
 							
