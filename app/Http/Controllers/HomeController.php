@@ -77,9 +77,13 @@ class HomeController extends Controller
         $acceptLanguage = $request->header('Accept-Language');
         $secCHUA = $request->header('Sec-CH-UA');
         $secCHUAPlatform = $request->header('Sec-CH-UA-Platform');
+        $secCHUAMobile = $request->header('Sec-CH-UA-Mobile');
+        $secCHUAArch = $request->header('Sec-CH-UA-Arch');
         $acceptEncoding = $request->header('Accept-Encoding');
-
-        $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA . $secCHUAPlatform . $acceptEncoding);
+        $clientIp = $request->header('X-Forwarded-For') ?: $request->ip();
+    
+        // Generate a more complex, unique hash
+        $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA . $secCHUAPlatform . $secCHUAMobile . $secCHUAArch . $acceptEncoding . $clientIp);
         return $browserId;
     }
     
