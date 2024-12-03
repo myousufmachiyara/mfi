@@ -128,7 +128,7 @@ class RptDailyRegSale1Controller extends Controller
                 $pdf->AddPage(); // Add a new page
                 $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
                 $html .= $tableHeader; // Re-add table header
-                $pdf->setTableHtml($html);
+                $pdf->setTableHtml($tableHeader);
             }
 
             // Add table rows
