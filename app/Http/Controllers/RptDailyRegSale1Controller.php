@@ -81,27 +81,42 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
+        // margin top
+        $margin_top = '.margin-top {
+            margin-top: 10px;
+        }';
+        // $pdf->writeHTML('<style>' . $margin_top . '</style>', true, false, true, false, '');
+
+        // margin bottom
+        $margin_bottom = '.margin-bottom {
+            margin-bottom: 4px;
+        }';
+
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
+        
 
         // Header details
         $htmlHeaderDetails = '
-        <style>
-            .header-table { border:1px solid #000; width:100%; padding:6px; border-collapse:collapse; }
-            .header-table td { font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000; border-left:1px solid #000; }
-        </style>
-        <table class="header-table">
+        <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
-                <td style="width:33%;">From Date: <span style="color:black;">' . $formattedFromDate . '</span></td>
-                <td style="width:34%;">To Date: <span style="color:black;">' . $formattedToDate . '</span></td>
-                <td style="width:33%;">Print Date: <span style="color:black;">' . $formattedDate . '</span></td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
+                    From Date: <span style="color:black;">' . $formattedFromDate . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left;border-left:1px solid #000; width:34%;">
+                    To Date: <span style="color:black;">' . $formattedToDate . '</span>
+                </td>
+                <td style="font-size:12px; font-weight:bold; color:#17365D; text-align:left; border-bottom:1px solid #000;border-left:1px solid #000; width:33%;">
+                    Print Date: <span style="color:black;">' . $formattedDate . '</span>
+                </td>
             </tr>
         </table>';
 
+       
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
-        // Table header (combined)
+        // Table headers
         $tableHeader = '<tr>
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
@@ -112,51 +127,65 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
 
+        $html1 = '<table border="0.3" style="text-align:center;margin-top:10px">';
+        $html1 .= '<tr>';
+        $html1 .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
+        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Date</th>';
+        $html1 .= '<th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>';
+        $html1 .= '<th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>';
+        $html1 .= '<th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html1 .= '<th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>';
+        $html1 .= '</tr>';
+        $html1 .= '</table>';
+
+        // call htmlHeaderDetails on every page
+        $pdf->setTableHtml($html1);
+                
+
+        // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-        $html .= $tableHeader; // Add header to first page
+        $html .= $tableHeader;
 
-        // Check if sales data is available
-        if (empty($activite5_sales)) {
-            $pdf->writeHTML('<p>No sales data available for the selected date range.</p>', true, false, true, false, '');
-        } else {
-            // Start the table
-            $count = 1;
-            $totalAmount = 0;
+        
+       
 
-            foreach ($activite5_sales as $items) {
-                // Check if a new page is needed
-                if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
-                    $html .= '</table>'; // Close the current table
-                    $pdf->writeHTML($html, true, false, true, false, '');
-                    $pdf->AddPage(); // Add a new page
-                    $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-                    $html .= $tableHeader; // Re-add table header for new page
-                }
+        $count = 1;
+        $totalAmount = 0;
 
-                // Add table rows
-                $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-                $html .= '<tr style="background-color:' . $bgColor . ';">
-                            <td>' . $count . '</td>
-                            <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
-                            <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
-                            <td>' . $items['pur_ord_no'] . '</td>
-                            <td>' . $items['acc_name'] . '</td>
-                            <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
-                            <td>' . number_format($items['bill_amt'], 0) . '</td>
-                        </tr>';
-
-                $totalAmount += $items['bill_amt'];
-                $count++;
+        foreach ($activite5_sales as $items) {
+            // Check if a new page is needed
+            if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
+                $html .= '</table>'; // Close the current table
+                $pdf->writeHTML($html, true, false, true, false, '');
+                $pdf->AddPage(); // Add a new page
+                $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
+                $html .= $tableHeader; // Re-add table header
             }
 
-            // Add totals row
-            $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
-                        <td colspan="6" style="text-align:right;">Total:</td>
-                        <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
+            // Add table rows
+            $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+            $html .= '<tr style="background-color:' . $bgColor . ';">
+                        <td>' . $count . '</td>
+                        <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
+                        <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
+                        <td>' . $items['pur_ord_no'] . '</td>
+                        <td>' . $items['acc_name'] . '</td>
+                        <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
+                        <td>' . number_format($items['bill_amt'], 0) . '</td>
                     </tr>';
-            $html .= '</table>';
-            $pdf->writeHTML($html, true, false, true, false, '');
+
+            $totalAmount += $items['bill_amt'];
+            $count++;
         }
+
+        // Add totals row
+        $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
+                    <td colspan="6" style="text-align:right;">Total:</td>
+                    <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
+                </tr>';
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
 
         // Prepare filename
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
@@ -169,7 +198,7 @@ class RptDailyRegSale1Controller extends Controller
         } else {
             $pdf->Output($filename, 'I'); // For inline view
         }
-
     }
-        
+
+
 }
