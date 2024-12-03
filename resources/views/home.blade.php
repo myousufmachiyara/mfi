@@ -1475,8 +1475,6 @@
 			return result;
 		}
 
-		// donut graph for Monthly Tonage Ended 
-
 		// get Monthly Tonage Of Customer Started
 		function getMonthlyTonageOfCustomer(){
 			var month = document.getElementById('filterHR').value;
@@ -1678,20 +1676,6 @@
 					top5CustomerPerformanceChart.destroy();
 				}
 
-				const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
-
-				top5CustomerPerformance.width = 600; // Set desired width
-				top5CustomerPerformance.height = 353; // Set desired height
-
-				// Create the new chart
-				top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
-					type: 'bar',
-					data: {
-						labels: chartLabels, // 'dat' values as labels
-						datasets: datasets,  // Dynamic datasets based on groupedData
-					},
-				});
-
 				var month = document.getElementById('filterHR').value;
 
 				$.ajax({
@@ -1701,6 +1685,20 @@
 						month: month,
 					},
 					success: function(result) {
+						const { datasets, chartLabels } = generateChartDatasets(result['dash_pur_2_summary_monthly_companywise'], mills, colors);
+						const top5CustomerPerformance = document.getElementById('top5CustomerPerformance');
+
+						top5CustomerPerformance.width = 600; // Set desired width
+						top5CustomerPerformance.height = 353; // Set desired height
+
+						// Create the new chart
+						top5CustomerPerformanceChart = new Chart(top5CustomerPerformance, {
+							type: 'bar',
+							data: {
+								labels: chartLabels, // 'dat' values as labels
+								datasets: datasets,  // Dynamic datasets based on groupedData
+							},
+						});
 						const groupedData = groupByMillCode(mills, result['dash_pur_2_summary_monthly_companywise']);
 
 						if (monthlyTonageChart) {
