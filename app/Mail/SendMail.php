@@ -54,11 +54,7 @@ class SendMail extends Mailable
     public function build()
     {
         return $this->subject('Mail from My Application')
-<<<<<<< HEAD
-                    ->view('emails.sendMail');
-=======
                     ->view('emails.otp');
->>>>>>> 4d2ea2ddde9f0cf8cd97b6eb09d6993cf166dae7
     }
 }
 
