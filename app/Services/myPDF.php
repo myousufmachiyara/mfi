@@ -24,7 +24,7 @@ class myPDF extends TCPDF
             $this->setCellPadding(1.2); // Set padding for all cells in the table
             $this->writeHTML($this->tableHtml, true, false, true, false, '');
         }
-    // }
+     }
 
     // public function Header()
     // {
