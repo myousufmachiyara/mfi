@@ -7,7 +7,6 @@ use TCPDF;
 class myPDF extends TCPDF
 {
 
-    private $cellspacingx = 2;  // Define at class level if used across methods
    
     private $tableHtml = ''; // Variable to store the HTML for the table
 
