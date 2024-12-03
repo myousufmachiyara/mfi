@@ -93,7 +93,7 @@ class RptDailyRegSale1Controller extends Controller
         }';
 
         // Report heading
-        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Regisddter Sale 1</h1>';
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
         // Header details
@@ -131,7 +131,7 @@ class RptDailyRegSale1Controller extends Controller
         $html .= $tableHeader;
 
         // call htmlHeaderDetails on every page
-        // $pdf->setTableHtml($tableHeader);
+         $pdf->setTableHtml($tableHeader);
 
         $count = 1;
         $totalAmount = 0;
