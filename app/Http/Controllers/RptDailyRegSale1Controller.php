@@ -147,7 +147,7 @@ class RptDailyRegSale1Controller extends Controller
             $count++;
 
             // Check if we are nearing the bottom of the page
-            if ($pdf->GetY() > 250) { // 250 is an estimated threshold based on your page margin
+            if ($pdf->GetY() > 57) { // 250 is an estimated threshold based on your page margin
                 $html .= '</table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
                 $pdf->AddPage(); // Add a new page
