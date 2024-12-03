@@ -120,23 +120,25 @@ class RptDailyRegSale1Controller extends Controller
         $count = 1;
         $totalAmount = 0;
 
-          // Check if a new page is needed
-            $pageHeight = 297; // A4 page height in mm
-            $bottomMargin = 10; // Bottom margin in mm (you can adjust this based on your settings)
-            $rowHeight = 10; // Estimated height of each row (adjust as needed)
-
-            $remainingSpace = $pageHeight - $pdf->getY() - $bottomMargin;
-
-            // If remaining space is not enough for a new row, add a new page
-            if ($remainingSpace < $rowHeight) {
-                $html .= '</table>'; // Close the current table
-                $pdf->writeHTML($html, true, false, true, false, ''); // Write the content of the current page
-                $pdf->AddPage(); // Add a new page
-                $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
-                $html .= $tableHeader; // Re-add table header
-            }
+         
 
         foreach ($activite5_sales as $items) {
+
+             // Check if a new page is needed
+             $pageHeight = 297; // A4 page height in mm
+             $bottomMargin = 10; // Bottom margin in mm (you can adjust this based on your settings)
+             $rowHeight = 10; // Estimated height of each row (adjust as needed)
+ 
+             $remainingSpace = $pageHeight - $pdf->getY() - $bottomMargin;
+ 
+             // If remaining space is not enough for a new row, add a new page
+             if ($remainingSpace < $rowHeight) {
+                 $html .= '</table>'; // Close the current table
+                 $pdf->writeHTML($html, true, false, true, false, ''); // Write the content of the current page
+                 $pdf->AddPage(); // Add a new page
+                 $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
+                 $html .= $tableHeader; // Re-add table header
+             }
 
             // Add table rows
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
