@@ -12,7 +12,7 @@ use App\Models\dash_pur_2_summary_monthly_companywise;
 use App\Models\AC;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
-    
+
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -76,7 +76,10 @@ class HomeController extends Controller
         $userAgent = $request->header('User-Agent');
         $acceptLanguage = $request->header('Accept-Language');
         $secCHUA = $request->header('Sec-CH-UA');
-        $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA);
+        $secCHUAPlatform = $request->header('Sec-CH-UA-Platform');
+        $acceptEncoding = $request->header('Accept-Encoding');
+
+        $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA . $secCHUAPlatform . $acceptEncoding);
         return $browserId;
     }
     
