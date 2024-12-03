@@ -139,8 +139,7 @@ class RptDailyRegSale1Controller extends Controller
         $html1 .= '</tr>';
         $html1 .= '</table>';
 
-        // call htmlHeaderDetails on every page
-        $pdf->setTableHtml($html1);
+        
                 
 
         // Start the table
@@ -148,7 +147,8 @@ class RptDailyRegSale1Controller extends Controller
         $html .= $tableHeader;
 
         
-       
+       // call htmlHeaderDetails on every page
+       $pdf->setTableHtml($html);
 
         $count = 1;
         $totalAmount = 0;
