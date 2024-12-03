@@ -6,11 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $otp;
     public $details; // Store the details passed from the controller
 
     /**
@@ -21,6 +22,7 @@ class SendMail extends Mailable
     public function __construct($details)
     {
         $this->details = $details; // Store the details
+        $this->otp = Str::random(6); // You can adjust the length and logic as needed
     }
 
     /**
@@ -28,8 +30,10 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->details['title']) // Set the subject dynamically from the details
-                    ->view('emails.otp') // Set the view for the email content
-                    ->with('details', $this->details); // Pass the details to the view
+        return $this->subject('Your OTP Code')  // Set the subject of the email
+        ->view('emails.otp') // Set the view for the email content
+        ->with([
+            'otp' => $this->otp, // Pass the OTP to the view
+        ]);
     }
 }
