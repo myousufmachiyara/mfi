@@ -1,8 +1,8 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			<div class="inner-wrapper cust-pad">
-				<section role="main" class="content-body" style="margin:0px">
+			<div class="inner-wrapper">
+				<section role="main" class="content-body" style="margin:0px;padding:75px 10px !important">
 				@include('../layouts.pageheader')
 
                     <section class="card">
@@ -169,7 +169,7 @@
 								<div>
 							</div>
 
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+							<div class="text-end">
 								<a onclick="window.location='{{ route('all-po') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a href="{{ route('print-po-invoice', $pur->pur_id) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
 							</div>

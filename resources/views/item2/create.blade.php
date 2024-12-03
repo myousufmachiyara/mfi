@@ -210,7 +210,6 @@
 			url: '/item2/new-item/validate',
             data: {'item_name': item_name},
             success: function(response){
-				console.log(response)
             },
             error: function(response){
                 var errors = response.responseJSON.errors;

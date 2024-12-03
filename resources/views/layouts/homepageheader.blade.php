@@ -59,6 +59,8 @@
 
 	<div class="logo-container d-none d-md-block">
 		<div id="userbox" class="userbox" style="float:right !important;">
+			<a class="btn btn-success" href="/pos"> POS System</a>
+
 			<a href="#" data-bs-toggle="dropdown" style="margin-right: 20px;">
 				<div class="profile-info"> 
 					<span class="name">{{session('user_name')}}</span>
@@ -71,8 +73,11 @@
 					<li>
 						<a role="menuitem" tabindex="-1" href="#changePassword" class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal"><i class="bx bx-lock"></i> Change Password</a>
 					</li>
-					<li>
-						<a role="menuitem" tabindex="-1" href="/logout"><i class="bx bx-power-off"></i> Logout</a>
+					<li>	
+						<form action="/logout" method="POST">
+							@csrf
+							<button style="background: transparent;border: none;font-size: 14px;" type="submit" role="menuitem" tabindex="-1"><i class="bx bx-power-off"></i> Logout</button>
+						</form>
 					</li>
 					<li>
 						<a role="menuitem" tabindex="-1" href="{{ route('backup.database') }}"><i class="bx bx-cloud-download"></i> DB Backup</a>

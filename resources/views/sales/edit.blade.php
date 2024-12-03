@@ -189,8 +189,7 @@
 									<footer class="card-footer">
 										<div class="row form-group mb-2">
 											<div class="text-end">
-												<button type="button" class="btn btn-warning mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
-												<button class="btn btn-danger mt-2"> <i class="fas fa-print"></i> Print Preview</button>
+												<button type="button" class="btn btn-danger mt-2"  onclick="window.location='{{ route('all-saleinvoices') }}'"> <i class="fas fa-trash"></i> Discard Changes</button>
 												<button type="submit" class="btn btn-primary mt-2"> <i class="fas fa-save"></i> Save Invoice</button>
 											</div>
 										</div>
@@ -333,8 +332,8 @@
 			success: function(result){
 				$('#item_code'+row_no).val(result[0]['it_cod']);
 				$('#item_name'+row_no).val(result[0]['it_cod']).select2();
-				$('#remarks'+row_no).val(result[0]['item_remark']);
-				$('#price'+row_no).val(result[0]['sales_price']);
+				// $('#remarks'+row_no).val(result[0]['item_remark']);
+				// $('#price'+row_no).val(result[0]['sales_price']);
 
 				addNewRow();
 			},

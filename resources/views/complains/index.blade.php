@@ -339,7 +339,6 @@
             url: "/complains/attachements",
             data: {id:id},
             success: function(result){
-                console.log(result);
                 $.each(result, function(k,v){
                     var html="<tr>";
                     html+= "<td>"+v['att_path']+"</td>"
@@ -357,13 +356,11 @@
     }
 
     function getComplainsDetails(id){
-        console.log("hello");
         $.ajax({
             type: "GET",
             url: "/complains/detail",
             data: {id:id},
         success: function(result) {
-            console.log(result);
             $('#update_complain_id').val(result.id);
             $('#update_id_view').val(result.id);
             $('#update_mfi_purchase_number').val(result.mfi_pur_number);

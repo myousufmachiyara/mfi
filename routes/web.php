@@ -2,9 +2,12 @@
 
     use Illuminate\Support\Facades\Route;
 
-    // Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
     Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('userlogin');
+
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/login', [App\Http\Controllers\UsersController::class, 'loginScreen'])->name('login');
+    });
 
     Route::middleware(['checkPermission:view'])->group(function () {
 
@@ -231,7 +234,22 @@
     Route::middleware(['checkPermission:att_add'])->group(function () {
         Route::post('/coa/addAtt/', [App\Http\Controllers\COAController::class, 'addAtt'])->name('coa-att-add');
         Route::post('/vouchers/addAtt/', [App\Http\Controllers\JV1Controller::class, 'addAtt'])->name('jv1-att-add');
-
+        Route::post('/vouchers2/addAtt/', [App\Http\Controllers\JV2Controller::class, 'addAtt'])->name('jv2-att-add');
+        Route::post('/purchase1/addAtt/', [App\Http\Controllers\PurchaseController::class, 'addAtt'])->name('pur1-att-add');
+        Route::post('/purchase2/addAtt/', [App\Http\Controllers\Purchase2Controller::class, 'addAtt'])->name('pur2-att-add');
+        Route::post('/sales/addAtt/', [App\Http\Controllers\SalesController::class, 'addAtt'])->name('sale1-att-add');
+        Route::post('/sales2/addAtt/', [App\Http\Controllers\Sales2Controller::class, 'addAtt'])->name('sale2-att-add');
+        Route::post('/tstock_in/addAtt/', [App\Http\Controllers\TStockInController::class, 'addAtt'])->name('tstockin-att-add');
+        Route::post('/tstock_out/addAtt/', [App\Http\Controllers\TStockOutController::class, 'addAtt'])->name('tstockout-att-add');
+        Route::post('/tbad_dabs/addAtt/', [App\Http\Controllers\TBadDabsController::class, 'addAtt'])->name('tbaddabs-att-add');
+        Route::post('/stock_in/addAtt/', [App\Http\Controllers\StockInController::class, 'addAtt'])->name('stock_in-att-add');
+        Route::post('/stock_out/addAtt/', [App\Http\Controllers\StockOutController::class, 'addAtt'])->name('stock_out-att-add');
+        Route::post('/bad_dabs/addAtt/', [App\Http\Controllers\BadDabsController::class, 'addAtt'])->name('bad_dabs-att-add');
+        Route::post('/po/addAtt/', [App\Http\Controllers\PoController::class, 'addAtt'])->name('po-att-add');
+        Route::post('/tpo/addAtt/', [App\Http\Controllers\TpoController::class, 'addAtt'])->name('tpo-att-add');
+        Route::post('/quotation/addAtt/', [App\Http\Controllers\QuotationController::class, 'addAtt'])->name('quotation-att-add');
+        Route::post('/tquotation/addAtt/', [App\Http\Controllers\TQuotationController::class, 'addAtt'])->name('tquotation-att-add');
+        Route::post('/complains/addAtt/', [App\Http\Controllers\ComplainsController::class, 'addAtt'])->name('complains-att-add');
     });
 
     Route::middleware(['checkPermission:att_delete'])->group(function () {
@@ -283,15 +301,11 @@
         Route::get('/tquotation/generatePDF/', [App\Http\Controllers\TQuotationController::class, 'generatePDF'])->name('print-tqout-invoice');
     });
 
-    // Route::middleware(['checkPermission:report'])->group(function (){
-
-    // });
-
     Route::middleware(['auth'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
         Route::get('/backup-database', [App\Http\Controllers\DatabaseBackupController::class, 'backupDatabase'])->name('backup.database');
-        Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout']);
+        Route::post('/logout', [App\Http\Controllers\UsersController::class, 'logout'])->name('logout');
         Route::get('/validate-user-password', [App\Http\Controllers\UsersController::class, 'getUserPassword'])->name('validate-user-password');
         Route::post('/change-user-password', [App\Http\Controllers\UsersController::class, 'updateUserPassowrd'])->name('change-user-password');
         Route::get('/item-groups/detail', [App\Http\Controllers\ItemGroupsController::class, 'getGroupDetails'])->name('get-item-group-details');
@@ -347,9 +361,10 @@
         })->name('unauthorized');
 
         Route::post('/keep-alive', function () {
-            session(['lastActivity' => time()]); // Update last activity time
+            session()->regenerate();
             return response()->json(['status' => 'success']);
-        });
+        })->name('keep-alive');
+
     });
 
     // reporting
@@ -522,6 +537,26 @@
         Route::get('/rep-comm/comm/report', [App\Http\Controllers\RptCommissionsController::class, 'commReport'])->name('comm-rep-report');
 
 
-        
+        // Dashboard Tabs
+
+        // Pending Invoices Tab
+        Route::get('/dashboard-tabs/pending-invoices', [App\Http\Controllers\DashboardPendingInvoicesTabController::class, 'PENDING_INVOICES']);
+
+        // HR Tab
+        Route::get('/dashboard-tabs/hr', [App\Http\Controllers\DashboardHRTabController::class, 'HR']);
+        Route::get('/dashboard-tabs/hr/monthlyTonage', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonage']);
+        Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
+
+        // IIL Tab
+        Route::get('/dashboard-tabs/iil', [App\Http\Controllers\DashboardIILTabController::class, 'IIL']);
+
+        // GARDER Tab
+        Route::get('/dashboard-tabs/garder', [App\Http\Controllers\DashboardGARDERTabController::class, 'GARDER']);
+
+        // ITEM OF THE MONTH Tab
+        Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
 
     });
+
+
+    Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');

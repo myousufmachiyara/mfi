@@ -1,10 +1,9 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			@include('../layouts.menu')
-			<div class="inner-wrapper">
-				<section role="main" class="content-body">
-					@include('../layouts.pageheader')
+			@include('../layouts.pageheader')			
+            <div class="inner-wrapper cust-pad">
+				<section role="main" class="content-body" style="margin:0px">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="main-error mb-3">

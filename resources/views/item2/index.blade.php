@@ -17,71 +17,92 @@
                                 </header>
 
                                 <div class="card-body">
-                                	<table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                        <thead>
-                                            <tr>
-                                                <th width="4%">Code</th>
-                                                <th width="13%">Item Name</th>
-                                                <th width="13%">Remarks</th>
-                                                <th width="13%">Group Name</th>
-                                                <th width="4%">Qty</th>
-                                                <th width="4%">Wt.</th>
-                                                <th width="6%">P.Date</th>
-                                                <th width="2%">P.Price</th>
-                                                <th width="6%">S.Date</th>
-                                                <th width="2%">S.Price</th>
-                                                <th width="4%">L.Price</th>
-                                                <th width="4%"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($items as $key => $row)
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="1">by Item Name</option>
+                                                <option value="2">by Remarks</option>
+                                                <option value="3">by Group Name</option>
+                                                <option value="4">by Qty</option>
+                                                <option value="5">by Wt.</option>
+                                                <option value="6">by P.Date</option>
+                                                <option value="7">by P.Price</option>
+                                                <option value="8">by S.Date</option>
+                                                <option value="9">by S.Price</option>
+                                                <option value="10">by L.Price</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{$row->it_cod}}</td>
-                                                    <td><strong>{{$row->item_name}}</strong></td>
-                                                    <td>{{$row->item_remark}}</td>
-                                                    <td>{{$row->group_name}}</td>
-                                                    @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
-                                                        <td>{{$row->opp_qty}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->opp_qty) }}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->weight), strpos(strval($row->weight), '.') + 1)>0)
-                                                        <td>{{$row->weight}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->weight) }}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->pur_rate_date)->format('d-m-y') }}</td>
-                                                    @if(substr(strval($row->OPP_qty_cost), strpos(strval($row->OPP_qty_cost), '.') + 1)>0)
-                                                        <td>{{$row->OPP_qty_cost}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->OPP_qty_cost) }}</td>
-                                                    @endif
-                                                    <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
-
-                                                    @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
-                                                        <td>{{$row->sales_price}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->sales_price) }}</td>
-                                                    @endif
-                                                    @if(substr(strval($row->labourprice), strpos(strval($row->labourprice), '.') + 1)>0)
-                                                        <td>{{$row->labourprice}}</td>
-                                                    @else
-                                                        <td>{{ intval($row->labourprice) }}</td>
-                                                    @endif
-                                                    <td class="actions">
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <span class="separator"> | </span>
-                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal">
-                                                            <i class="far fa-trash-alt" style="color:red"></i>
-                                                        </a>
-                                                    </td>
+                                                    <th width="4%">Code</th>
+                                                    <th width="13%">Item Name</th>
+                                                    <th width="13%">Remarks</th>
+                                                    <th width="13%">Group Name</th>
+                                                    <th width="4%">Qty</th>
+                                                    <th width="4%">Wt.</th>
+                                                    <th width="6%">P.Date</th>
+                                                    <th width="2%">P.Price</th>
+                                                    <th width="6%">S.Date</th>
+                                                    <th width="2%">S.Price</th>
+                                                    <th width="4%">L.Price</th>
+                                                    <th width="4%"></th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-									</table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($items as $key => $row)
+                                                    <tr>
+                                                        <td>{{$row->it_cod}}</td>
+                                                        <td><strong>{{$row->item_name}}</strong></td>
+                                                        <td>{{$row->item_remark}}</td>
+                                                        <td>{{$row->group_name}}</td>
+                                                        @if(substr(strval($row->opp_qty), strpos(strval($row->opp_qty), '.') + 1)>0)
+                                                            <td>{{$row->opp_qty}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->opp_qty) }}</td>
+                                                        @endif
+                                                        @if(substr(strval($row->weight), strpos(strval($row->weight), '.') + 1)>0)
+                                                            <td>{{$row->weight}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->weight) }}</td>
+                                                        @endif
+                                                        <td>{{ \Carbon\Carbon::parse($row->pur_rate_date)->format('d-m-y') }}</td>
+                                                        @if(substr(strval($row->OPP_qty_cost), strpos(strval($row->OPP_qty_cost), '.') + 1)>0)
+                                                            <td>{{$row->OPP_qty_cost}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->OPP_qty_cost) }}</td>
+                                                        @endif
+                                                        <td>{{ \Carbon\Carbon::parse($row->sale_rate_date)->format('d-m-y') }}</td>
+
+                                                        @if(substr(strval($row->sales_price), strpos(strval($row->sales_price), '.') + 1)>0)
+                                                            <td>{{$row->sales_price}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->sales_price) }}</td>
+                                                        @endif
+                                                        @if(substr(strval($row->labourprice), strpos(strval($row->labourprice), '.') + 1)>0)
+                                                            <td>{{$row->labourprice}}</td>
+                                                        @else
+                                                            <td>{{ intval($row->labourprice) }}</td>
+                                                        @endif
+                                                        <td class="actions">
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getItemDetails({{$row->it_cod}})" href="#updateModal">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
+                                                            <span class="separator"> | </span>
+                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->it_cod}})" href="#deleteModal">
+                                                                <i class="far fa-trash-alt" style="color:red"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -290,6 +311,19 @@
 </html>
 <script>
 
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
     }
@@ -342,7 +376,6 @@
 			url: '/item2/new-item/validate',
             data: {'item_name': item_name},
             success: function(response){
-				console.log(response)
             },
             error: function(response){
                 var errors = response.responseJSON.errors;

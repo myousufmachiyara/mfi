@@ -1,20 +1,19 @@
 @include('../layouts.header')
 	<body>
 		<section class="body">
-			<div class="inner-wrapper cust-pad">
-				<section role="main" class="content-body" style="margin:0px">
+			<div class="inner-wrapper">
+				<section role="main" class="content-body" style="margin:0px;padding:75px 10px !important">
 					@include('../layouts.pageheader')
-
                     <section class="card">
 						<div class="card-body">
 							<div class="invoice">
 								<header class="clearfix">
 									<div class="row">
-										<div class="col-sm-6 mt-3">
+										<div class="col-8 mt-3 mb-3">
 											<h2 class="h2 mt-0 mb-1" style="color:#17365D">Voucher NO:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">JV1-{{$jv1->auto_lager}}</h4>
 										</div>
-										<div class="col-sm-6 text-end mt-3 mb-3">
+										<div class="col-4 text-end mt-3 mb-3">
 											<div class="ib">
 												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
@@ -60,25 +59,18 @@
 									</tbody>
 								</table>
 								
-
 								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
-
-											</div>
+									<div class="col-12 col-md-8">
+										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+									</div>
+									<div class="col-12 col-md-4">
+										<div class="text-end">
+											<a onclick="window.location='{{ route('all-jv1') }}'" class="btn btn-primary mt-2"> <i class="fas fa-arrow-left"></i> Back</a>
+											<a href="{{ route('print-jv1', $jv1->auto_lager) }}" class="btn btn-danger mt-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
 										</div>
 									</div>
-									
 								<div>
 							</div>
-
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-								<a onclick="window.location='{{ route('all-jv1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
-								<a href="{{ route('print-jv1', $jv1->auto_lager) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
-							</div>
-
 						</div>
 
 					</section>

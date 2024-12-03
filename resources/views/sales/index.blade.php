@@ -15,12 +15,33 @@
                                     </form>
                                 </header>
                                 <div class="card-body">
-                                    <div class="modal-wrapper">
-                                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                    <div>
+                                        <div class="col-md-5" style="display:flex;">
+                                            <select class="form-control" style="margin-right:10px" id="columnSelect">
+                                                <option selected disabled>Search by</option>
+                                                <option value="0">by Code</option>
+                                                <option value="2">by Date</option>
+                                                <option value="3">Account Name</option>
+                                                <option value="4">Person Name</option>
+                                                <option value="5">Remarks</option>
+                                                <option value="6">Bill#</option>
+                                                <option value="7">Weight(Kg)</option>
+                                                <option value="8">Bill Amount</option>
+                                                <option value="9">Convane Charges Group</option>
+                                                <option value="10">Labour Charges</option>
+                                                <option value="11">Discount</option>
+                                                <option value="12">Net Amount</option>
+                                                <option value="13">Status</option>
+                                            </select>
+                                            <input type="text" class="form-control" id="columnSearch" placeholder="Search By Column"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-wrapper table-scroll">
+                                        <table class="table table-bordered table-striped mb-0" id="cust-datatable-default">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none">Inv #</th>
-                                                    <th>Code</th>
+                                                    <th>Invoice#</th>
                                                     <th>Date</th>
                                                     <th>Account Name</th>
                                                     <th>Person Name</th>
@@ -53,7 +74,7 @@
                                                     <td>{{$row->LaborCharges}}</td>
                                                     <td>{{$row->Bill_discount}}</td>
                                                     @php ($net_amount=$row->total_bill + $row->ConvanceCharges + $row->LaborCharges - $row->Bill_discount)
-                                                    <td><strong style="font-size:15px">{{ round($net_amount)}}</strong></td>
+                                                    <td><strong style="font-size:15px">{{ number_format(round($net_amount), 0) }}</strong></td>
                                                     <!-- @if(substr(strval($net_amount), strpos(strval($net_amount), '.') + 1)>0) 
                                                         <td><strong style="font-size:15px">{{ rtrim(rtrim(number_format($net_amount), '0'), '.') }}</strong></td>
                                                     @else
@@ -65,7 +86,11 @@
                                                     @elseif ($row->bill_not==1)
                                                         <td> <i class="fas fa-circle" style="color:green;font-size:10px"></i> Finalized </td>
                                                     @endif
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->Sal_inv_no}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     <td class="actions">
                                                         <a href="{{ route('show-sale-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
@@ -154,12 +179,57 @@
                 </footer>
             </section>
         </div>
+
+        <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('sale1-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                @csrf  
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Upload Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="col-lg-12 mb-2">
+                                <input type="file" class="form-control" name="addAtt[]" multiple accept="application/pdf, image/png, image/jpeg">
+                                <input type="hidden" class="form-control" name="att_id" id="att_id">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="sumit" class="btn btn-danger">Upload</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
         @include('../layouts.footerlinks')
 	</body>
 </html>
 <script>
+
+    $(document).ready(function(){
+        var table = $('#cust-datatable-default').DataTable();
+
+        $('#columnSelect').on('change', function () {
+            // Clear the previous search
+            table.search('').columns().search('').draw(); // Reset global and column-specific filters
+        });
+        $('#columnSearch').on('keyup change', function () {
+            var columnIndex = $('#columnSelect').val(); // Get selected column index
+            table.column(columnIndex).search(this.value).draw(); // Apply search and redraw
+        });
+    });
+
     function setId(id){
         $('#deleteID').val(id);
+    }
+
+    function setAttId(id){
+        $('#att_id').val(id);
     }
 
     function getAttachements(id){

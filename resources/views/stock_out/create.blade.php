@@ -208,7 +208,6 @@
     }
     
     function tableTotal() {
-        console.log("hello");
         var totalqty = 0;
         var totalweight = 0;
         $('#tstock_inTable tr').each(function() {

@@ -229,8 +229,6 @@
 		 
 		<script>
 
-				
-
 			var index=2;
 			var itemCount = Number($('#itemCount').val());
 
@@ -246,10 +244,7 @@
 				toggleInputs();
 			});
 
-
-
 			function removeRow(button) {
-				console.log("before remove");
 				var tableRows = $("#Tpo2Table tr").length;
 				if(tableRows>1){
 					var row = button.parentNode.parentNode;

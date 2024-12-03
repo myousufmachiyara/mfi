@@ -40,6 +40,25 @@ class StockOutController extends Controller
         return view('stock_out.index',compact('stock_out'));
     }
 
+    public function addAtt(Request $request)
+    {
+        $stock_out_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $stock_out_att = new stock_out_att();
+                $stock_out_att->created_by = session('user_id');
+                $stock_out_att->stock_out_id = $stock_out_id;
+                $extension = $file->getClientOriginalExtension();
+                $stock_out_att->att_path = $this->StockOutDoc($file,$extension);
+                $stock_out_att->save();
+            }
+        }
+        return redirect()->route('all-stock-out');
+    }
+
     public function destroy(Request $request)
     {
         $stock_out = stock_out::where('Sal_inv_no', $request->invoice_id)->update([

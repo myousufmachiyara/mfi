@@ -563,7 +563,13 @@
                         
                         $(tableID).empty(); // Clear the loading message
 
+                        $(tableID).empty(); // Clear the loading message
+
+                        var totalBillAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var billAmt = v['bill_amt'] ? parseFloat(v['bill_amt']) : 0;
+                            totalBillAmt += billAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -572,10 +578,15 @@
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['Cash_pur_name'] ? v['Cash_pur_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
+                            html += "<td>" + (billAmt ? billAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -606,7 +617,11 @@
                         
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalBillAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var billAmt = v['bill_amt'] ? parseFloat(v['bill_amt']) : 0;
+                            totalBillAmt += billAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
@@ -615,10 +630,16 @@
                             html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
                             html += "<td>" + (v['comp_name'] ? v['comp_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_remarks'] ? v['Sales_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
+                            html += "<td>" + (billAmt ? billAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -648,20 +669,27 @@
                         $('#pur1_to').text(formattedtoDate);
 
                         $(tableID).empty(); // Clear the loading message
+                        var totalBillAmt = 0; // Variable to accumulate total
 
                         $.each(result, function(k,v){
+                            var billAmt = v['bill_amt'] ? parseFloat(v['bill_amt']) : 0;
+                            totalBillAmt += billAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['pur_date'] ? moment(v['pur_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['pur_id'] ? v['pur_id'] : "") +"</td>";
                             html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
                             html += "<td>" + (v['cash_saler_name'] ? v['cash_saler_name'] : "") + "</td>";
                             html += "<td>" + (v['Pur_remarks'] ? v['Pur_remarks'] : "") + "</td>";
-                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
+                            html += "<td>" + (billAmt ? billAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -692,19 +720,27 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalBillAmt = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+                            var billAmt = v['bill_amt'] ? parseFloat(v['bill_amt']) : 0;
+                            totalBillAmt += billAmt; // Add to total
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
                             html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") + "</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['Sale_inv_no'] ? v['Sale_inv_no'] : "") +"</td>";
                             html += "<td>" + (v['pur_ord_no'] ? v['pur_ord_no'] : "") + "</td>";
                             html += "<td>" + (v['acc_name'] ? v['acc_name'] : "") + "</td>";
                             html += "<td>" + (v['cust_name'] ? v['cust_name'] : "") + "</td>";
                             html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
-                            html += "<td>" + (v['bill_amt'] ? v['bill_amt'] : "") + "</td>";
+                            html += "<td>" + (billAmt ? billAmt.toFixed(0) : "") + "</td>";
                             html +="</tr>";
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='7' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalBillAmt.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -736,19 +772,30 @@
 
                         $(tableID).empty(); // Clear the loading message
 
+                        var totalJv = 0; // Variable to accumulate total
+
                         $.each(result, function(k,v){
+
+                            var jvAmount = v['Amount'] ? parseFloat(v['Amount']) : 0;
+                            totalJv += jvAmount; // Add to total
+
                             var html="<tr>";
                             html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                            html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['auto_lager'] ? v['auto_lager'] : "") +"</td>";
                             html += "<td>" + (v['Date'] ? moment(v['Date']).format('DD-MM-YYYY') : "") + "</td>";
                             html += "<td>" + (v['Debit_Acc'] ? v['Debit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['Credit_Acc'] ? v['Credit_Acc'] : "") + "</td>";
                             html += "<td>" + (v['remarks'] ? v['remarks'] : "") + "</td>";
-                            html += "<td>" + (v['Amount'] ? v['Amount'] : "") + "</td>";
+                            html += "<td>" + (jvAmount ? jvAmount.toFixed(0) : "") + "</td>";
                             html +="</tr>";
 
                             $(tableID).append(html);
                         });
+                        // Display the total in the last row or specific cell
+                        var totalRow = "<tr><td colspan='6' style='text-align: right;'><strong>Total:</strong></td>";
+                        totalRow += "<td class='text-danger'><strong>" + totalJv.toFixed(0) + "</strong></td></tr>";
+                        $(tableID).append(totalRow);
+
                     },
                     error: function(){
                         $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
@@ -779,24 +826,43 @@
 
                         $(tableID).empty(); // Clear the loading message
 
-                        $.each(result, function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['jv_no'] ? v['jv_no'] : "") + "</td>";
-                            html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['debit'] ? v['debit'] : "") + "</td>";
-                            html += "<td>" + (v['credit'] ? v['credit'] : "") + "</td>";
-                            html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
-                            html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
-                            html +="</tr>";
+                            var totalDebit = 0;
+                            var totalCredit = 0;
 
-                            $(tableID).append(html);
-                        });
-                    },
-                    error: function(){
-                        $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
-                    }
+                            $.each(result, function (k, v) {
+                                var debit = v['debit'] ? parseFloat(v['debit']) : 0;
+                                var credit = v['credit'] ? parseFloat(v['credit']) : 0;
+
+                                totalDebit += debit;
+                                totalCredit += credit;
+
+                                var html = "<tr>";
+                                html += "<td>" + (k + 1) + "</td>";
+                                html += "<td>" + (v['prefix'] ? v['prefix'] : "") + (v['jv_no'] ? v['jv_no'] : "") +"</td>";
+                                html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
+                                html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
+                                html += "<td>" + (debit ? debit.toFixed(0) : "") + "</td>";
+                                html += "<td>" + (credit ? credit.toFixed(0) : "") + "</td>";
+                                html += "<td>" + (v['Remark'] ? v['Remark'] : "") + "</td>";
+                                html += "<td>" + (v['Narration'] ? v['Narration'] : "") + "</td>";
+                                html += "</tr>";
+
+                                $(tableID).append(html);
+                            });
+
+                            // Add a row for totals
+                                var totalHtml = "<tr class='font-weight-bold'>";
+                                totalHtml += "<td colspan='4'style='text-align: right;'>Total</td>";
+                                totalHtml += "<td class='text-danger'><strong>" + totalDebit.toFixed(0) + "</strong></td>";
+                                totalHtml += "<td class='text-danger'><strong>" + totalCredit.toFixed(0) + "</strong></td>";
+                                totalHtml += "<td colspan='2'></td>";
+                                totalHtml += "</tr>";
+
+                                $(tableID).append(totalHtml);
+                            },
+                            error: function () {
+                            $(tableID).html('<tr><td colspan="8" class="text-center text-danger">Error loading data. Please try again.</td></tr>');
+                        }
                 });
             }
             else if(tabId=="#sale_1_return"){
@@ -1035,31 +1101,36 @@
                 return;
             }
 
+            let url = '';
+
             if (tabName === "sale_1") {
-                window.location.href = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/sale1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "sale_pipe") {
-                window.location.href = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/sale2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "purchase1") {
-                window.location.href = `/rep-by-daily-reg/pur1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/pur1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "pp") {
-                window.location.href = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/pur2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "jv1") {
-                window.location.href = `/rep-by-daily-reg/jv1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/jv1/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
             else if (tabName === "jv2") {
-                window.location.href = `/rep-by-daily-reg/jv2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
+                url = `/rep-by-daily-reg/jv2/report?outputType=view&fromDate=${fromDate}&toDate=${toDate}`;
             }
 
+            // Open the URL in a new tab
+            window.open(url, '_blank');
         }
+
 
         function downloadPDF(tabName) {
             const { fromDate, toDate } = getInputValues();

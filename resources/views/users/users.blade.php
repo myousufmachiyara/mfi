@@ -672,8 +672,6 @@
             url: "/user/mac_address",
             data: {id:id},
             success: function(result){
-                console.log(result);
-
                 $.each(result, function(k,v){                    
                         var html="<tr>";
                         html+= "<td>"+v['device_name']+"</td>"

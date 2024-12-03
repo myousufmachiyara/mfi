@@ -44,6 +44,25 @@ class TStockInController extends Controller
         return view('tstock_in.index',compact('tstock_in'));
     }
 
+    public function addAtt(Request $request)
+    {
+        $tstock_in_id=$request->att_id;
+
+        if($request->hasFile('addAtt')){
+            $files = $request->file('addAtt');
+            foreach ($files as $file)
+            {
+                $tstock_in_att = new tstock_in_att();
+                $tstock_in_att->created_by = session('user_id');
+                $tstock_in_att->tstock_in_id = $tstock_in_id;
+                $extension = $file->getClientOriginalExtension();
+                $tstock_in_att->att_path = $this->tStockInDoc($file,$extension);
+                $tstock_in_att->save();
+            }
+        }
+        return redirect()->route('all-tstock-in');
+    }
+
     public function destroy(Request $request)
     {
         $tstock_in = tstock_in::where('Sal_inv_no', $request->invoice_id)->update([

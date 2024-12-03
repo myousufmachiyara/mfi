@@ -30,7 +30,6 @@ Theme Version: 	4.0.0
 			"order": [[0, "desc"]],
 			"pageLength": 25,  // Show all rows
 		});
-
 	};
 
 	

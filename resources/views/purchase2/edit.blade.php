@@ -599,7 +599,6 @@
 		$('#net_amount').val(netTotal);
 
 		var bill_perc = ((bill_discount/total)*100).toFixed() + ' %';
-		console.log(bill_perc);
 		
 		$('#bill_perc').val(bill_perc);
 	}

@@ -2,7 +2,7 @@
 	<body>
 		<section class="body">
             @include('layouts.homepageheader')
-			<div class="inner-wrapper">
+			<div class="inner-wrapper cust-pad">
 				@include('layouts.leftmenu')
 				<section role="main" class="content-body">
                     <div class="row">
@@ -148,7 +148,6 @@
             url: "/coa-groups/detail",
             data: {id:id},
             success: function(result){
-                console.log(result)
                 $('#group_id').val(result['group_cod']);
                 $('#update_group_id').val(result['group_cod']);
                 $('#update_group_name').val(result['group_name']);

@@ -163,37 +163,79 @@ function convertTens(number) {
     return tens[number] || "";
 }
 
-// session maintain
-
-let timeoutWarning = 1 * 60 * 1000; // 1 minute in milliseconds
-let timeoutRedirect = 2 * 60 * 1000; // 2 minutes in milliseconds
+// Session expiration logic
+const timeoutWarning = 28 * 60 * 1000; // 28 mint in milliseconds
+const timeoutRedirect = 30 * 60 * 1000; // 30 mint in milliseconds
 let warningTimeout;
-let warningShown = false;
+let redirectTimeout;
 
+// Reset session activity timer
 function resetTimer() {
+    // Clear any existing timeouts
     clearTimeout(warningTimeout);
-    warningShown = false;
-    warningTimeout = setTimeout(showModal, timeoutWarning);
-}
+    clearTimeout(redirectTimeout);
 
+    // Set new timeouts
+    warningTimeout = setTimeout(showModal, timeoutWarning); // Warning modal
+    redirectTimeout = setTimeout(expireSession, timeoutRedirect); // Expire session
+}       
+
+// Show warning modal
 function showModal() {
-    warningShown = true;
-    $('#timeoutModal').show(); // Show the modal
+    $('#timeoutModal').show(); // Display the modal
 }
 
-// Continue session event
+// Expire session due to inactivity
+function expireSession() {
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
+        },
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '/login'; // Redirect to login page after successful logout
+        } else {
+            console.error('Logout failed:', response);
+        }
+    }).catch(err => console.error('Session Timeout logout failed:', err));
+}
+
+// Keep session alive after user confirms activity
 $('#continueSession').on('click', function() {
-    $.post('/keep-alive', {_token: '{{ csrf_token() }}'}); // Keep session alive
-    $('#timeoutModal').hide(); // Hide the modal
-    resetTimer(); // Reset the timer
+    fetch('/keep-alive', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
+        }
+    })
+    .then(() => {
+        $('#timeoutModal').hide(); // Hide the warning modal
+        resetTimer(); // Restart the timers
+    })
+    .catch(err => console.error('Failed to keep session alive:', err));
 });
 
-// Logout event
+// Logout manually from the warning modal
 $('#logoutSession').on('click', function() {
-    window.location.href = '/logout'; // Redirect to logout or any desired action
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Get CSRF token from meta tag
+        },
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = '/login'; // Redirect to login page after successful logout
+        } else {
+            console.error('Logout failed:', response);
+        }
+    }).catch(err => console.error('Session Timeout logout failed:', err));
 });
 
+// Monitor user activity to reset the timer
 $(document).on('mousemove keypress click scroll', resetTimer);
+
+// Initialize the session activity timer when the page loads
 resetTimer();
 
 $('#changePasswordForm').on('submit', function(e){
@@ -212,7 +254,6 @@ $('#changePasswordForm').on('submit', function(e){
             'password':currentPassword,
         },
         success: function(response){
-            console.log(response);
             if(response==1){
                 var form = document.getElementById('changePasswordForm');
                 form.submit();

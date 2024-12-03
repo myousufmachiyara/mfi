@@ -2,8 +2,8 @@
 	<body>
 		<section class="body">
 			@include('../layouts.pageheader')
-			<div class="inner-wrapper cust-pad">
-				<section role="main" class="content-body" style="margin:0px" >
+			<div class="inner-wrapper">
+				<section role="main" class="content-body" style="margin:0px;padding:75px 10px !important">
                     <section class="card">
 
 						<div class="card-body">
@@ -12,11 +12,11 @@
 
 								<header class="clearfix">
 									<div class="row">
-										<div class="col-sm-6 mt-3">
+										<div class="col-8 mt-3 mb-3">
 											<h2 class="h2 mt-0 mb-1" style="color:#17365D">PURCHASE INVOICE NO:</h2>
 											<h4 class="h4 m-0 text-dark font-weight-bold">{{$pur->prefix}}{{$pur->pur_id}}</h4>
 										</div>
-										<div class="col-sm-6 text-end mt-3 mb-3">
+										<div class="col-4 text-end mt-3 mb-3">
 											<div class="ib">
 												<img width="100px" src="/assets/img/logo.png" alt="MFI Logo" />
 											</div>
@@ -79,8 +79,7 @@
 									</div>
 								</div>
 
-
-								<table class="table table-responsive-md invoice-items table-striped">
+								<table class="table table-responsive-md invoice-items table-striped invoice-items">
 									<thead>
 										<tr class="text-dark">
 											<th width="3%" class="font-weight-semibold"  style="color:#17365D">S.No</th>
@@ -114,59 +113,54 @@
 									</tbody>
 								</table>
 
-								<div class="row">
-									<div class="col-8">
-										<div class="row">
-											<div class="col-6">
-												<table class="table h6 text-dark">
-													<tbody>
-														<tr class="b-top-0">
-															<td colspan="2"  style="color:#17365D">Total Quantity</td>
-															<td class="text-left">{{$total_quantity}}</td>
-														</tr>
-														<tr>
-															<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
-															<td class="text-left">{{$total_weight}}</td>
-														</tr>
-													</tbody>
-												</table>
-												<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
+								<div class="row" style="justify-content: space-between">
+									<div class="col-12 col-md-4">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D">Total Quantity</td>
+													<td class="text-left">{{$total_quantity}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Total Weight(KGs)</td>
+													<td class="text-left">{{$total_weight}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<h3 style="color:#17365D; text-decoration: underline;" id="numberInWords"></h3>
 
-											</div>
-										</div>
 									</div>
-									<div class="col-4 invoice-summary">
-										<div class="row justify-content-end">
-											<table class="table h6 text-dark">
-												<tbody>
-													<tr class="b-top-0">
-														<td colspan="2"  style="color:#17365D" >Subtotal</td>
-														<td class="text-left">{{$subtotal}}</td>
-													</tr>
-													<tr>
-														<td colspan="2"  style="color:#17365D">Labour Charges</td>
-														<td class="text-left">{{$pur->pur_labor_char}} PKR</td>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Convance Charges</td>
-														<td class="text-left">{{$pur->pur_convance_char}} PKR</td>
-													</tr>
-													</tr>
-														<td colspan="2"  style="color:#17365D">Discount</td>
-														<td class="text-left">{{$pur->pur_discount}} PKR</td>
-													</tr>
-													<?php $netamount=round($subtotal + $pur->pur_labor_char + $pur->pur_convance_char - $pur->pur_discount) ?>
-													<tr class="h5">
-														<td colspan="2"  style="color:#17365D">Net Amount</td>
-														<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+
+									<div class="col-12 col-md-4">
+										<table class="table h6 text-dark">
+											<tbody>
+												<tr class="b-top-0">
+													<td colspan="2"  style="color:#17365D" >Subtotal</td>
+													<td class="text-left">{{$subtotal}}</td>
+												</tr>
+												<tr>
+													<td colspan="2"  style="color:#17365D">Labour Charges</td>
+													<td class="text-left">{{$pur->pur_labor_char}} PKR</td>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Convance Charges</td>
+													<td class="text-left">{{$pur->pur_convance_char}} PKR</td>
+												</tr>
+												</tr>
+													<td colspan="2"  style="color:#17365D">Discount</td>
+													<td class="text-left">{{$pur->pur_discount}} PKR</td>
+												</tr>
+												<?php $netamount=round($subtotal + $pur->pur_labor_char + $pur->pur_convance_char - $pur->pur_discount) ?>
+												<tr class="h5">
+													<td colspan="2"  style="color:#17365D">Net Amount</td>
+													<td class="text-left text-danger" style="font-weight:700">{{number_format($netamount)}} PKR</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								<div>
 							</div>
 
-							<div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+							<div class="text-end">
 								<a onclick="window.location='{{ route('all-purchases1') }}'" class="btn btn-primary mt-2 mb-2"> <i class="fas fa-arrow-left"></i> Back</a>
 								<a href="{{ route('print-purc1-invoice', $pur->pur_id) }}" class="btn btn-danger mt-2 mb-2" target="_blank"> <i class="fas fa-print"></i> Print</a>
 							</div>

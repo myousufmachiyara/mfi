@@ -682,7 +682,22 @@
                             $.each(result['lager_much_all'], function(k, v) {
                                 var html = "<tr>";
                                 html += "<td>" + (k + 1) + "</td>";
-                                html += "<td>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</td>";
+                                // html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                if (v['entry_of'] === 'Sale') {
+                                    html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'SP') {
+                                    html += "<td><a href='/sales2/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'Pur') {
+                                    html += "<td><a href='/purchase1/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'PP') {
+                                    html += "<td><a href='/purchase2/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'JV1') {
+                                    html += "<td><a href='/vouchers/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'JV2') {
+                                    html += "<td><a href='/vouchers2/print/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else {
+                                    html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + " " + (v['prefix'] ? v['prefix'] : "") + "</td>";
+                                }
                                 html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
@@ -745,8 +760,6 @@
                         $(tableID).html('<tr><td colspan="9" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
-
-                        console.log(result);
                         $('#glr_from').text(formattedfromDate);
                         $('#glr_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
@@ -784,7 +797,23 @@
                             $.each(result['lager_much_all'], function(k, v) {
                                 var html = "<tr>";
                                 html += "<td>" + (k + 1) + "</td>";
-                                html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                // html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"'>" + (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                if (v['entry_of'] === 'Sale') {
+                                    html += "<td><a href='/sales/saleinvoice/view/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'SP') {
+                                    html += "<td><a href='/sales2/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'Pur') {
+                                    html += "<td><a href='/purchase1/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'PP') {
+                                    html += "<td><a href='/purchase2/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'JV1') {
+                                    html += "<td><a href='/vouchers/show/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else if (v['entry_of'] === 'JV2') {
+                                    html += "<td><a href='/vouchers2/print/"+v['auto_lager']+"' target='_blank'>" + (v['prefix'] ? v['prefix'] : "") +  (v['auto_lager'] ? v['auto_lager'] : "") + "</a></td>";
+                                } else {
+                                    html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + " " + (v['prefix'] ? v['prefix'] : "") + "</td>";
+                                }
+
                                 html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
                                 html += "<td>" + (v['jv_date'] ? moment(v['jv_date']).format('DD-MM-YYYY') : "") + "</td>";
                                 html += "<td>" + (v['ac2'] ? v['ac2'] : "") + "</td>";
@@ -1258,7 +1287,6 @@
                         $(tableID).html('<tr><td colspan="8" class="text-center">Loading Data Please Wait...</td></tr>');
                     },
                     success: function(result){
-                    console.log(result)
                         $('#pur_comb_from').text(formattedfromDate);
                         $('#pur_comb_to').text(formattedtoDate);
                         var selectedAcc = $('#acc_id').find("option:selected").text();
