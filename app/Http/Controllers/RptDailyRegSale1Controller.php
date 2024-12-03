@@ -121,19 +121,10 @@ class RptDailyRegSale1Controller extends Controller
         $totalAmount = 0;
 
         
-        
-        foreach ($activite5_sales as $items) {
+      
 
-            $currentY = $pdf->GetY();
-            // Check if a new page is needed based on remaining space
-            if (($pdf->getPageHeight() - $pdf->GetY()) < 100) { // Trigger if remaining space is less than 100
-                $pdf->AddPage(); // Add a new page
-                $currentY = $pdf->GetY(); // Reset the current Y position
-                $html .= '</table>'; // Close the current table
-                $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
-                $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
-                $html .= $tableHeader; // Re-add the table header for the new page
-            }
+
+        foreach ($activite5_sales as $items) {
             
             // Add table rows
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
@@ -149,6 +140,8 @@ class RptDailyRegSale1Controller extends Controller
         
             $totalAmount += $items['bill_amt'];
             $count++;
+
+         
         }
         
        
@@ -160,6 +153,18 @@ class RptDailyRegSale1Controller extends Controller
                 </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
+
+        $currentY = $pdf->GetY();
+        // Check if a new page is needed based on remaining space
+
+        if(($pdf->getPageHeight()-$pdf->GetY())<57){
+            $pdf->AddPage();
+            $currentY = $pdf->GetY()+15;
+            $html .= '</table>'; // Close the current table
+            $pdf->writeHTML($html, true, false, true, false, ''); // Write the table to the PDF
+            $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
+            $html .= $tableHeader; // Re-add the table header for the new page
+        }
         
         // Prepare filename
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
