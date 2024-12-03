@@ -79,10 +79,7 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->AddPage();
         $pdf->setCellPadding(1.2);
 
-        // Define the cell spacing variable (fix for undefined variable)
-        $cellspacingx = 2; // Adjust the spacing as needed
-
-        // Set table header once
+        // Define table header
         $tableHeader = '<tr>
                             <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
                             <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
@@ -93,12 +90,12 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
 
-        // Set table HTML for the header
+        // Set the table HTML for later use in the Header function
         $pdf->setTableHtml($tableHeader);
 
         $count = 1;
         $totalAmount = 0;
-        $html = '<table border="1" cellspacing="' . $cellspacingx . '" style="border-collapse: collapse;text-align:center">';
+        $html = '<table border="1" cellspacing="' . $this->cellspacingx . '" style="border-collapse: collapse;text-align:center">';
         $html .= $tableHeader; // Add table header here
 
         foreach ($activite5_sales as $items) {
@@ -107,7 +104,7 @@ class RptDailyRegSale1Controller extends Controller
                 $html .= '</table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
                 $pdf->AddPage(); // Add new page
-                $html = '<table border="1" cellspacing="' . $cellspacingx . '" style="border-collapse: collapse;text-align:center">';
+                $html = '<table border="1" cellspacing="' . $this->cellspacingx . '" style="border-collapse: collapse;text-align:center">';
                 $html .= $tableHeader; // Re-add table header
             }
 
@@ -121,7 +118,7 @@ class RptDailyRegSale1Controller extends Controller
                         <td>' . $items['acc_name'] . '</td>
                         <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
                         <td>' . number_format($items['bill_amt'], 0) . '</td>
-                    </tr>';
+                      </tr>';
             $totalAmount += $items['bill_amt'];
             $count++;
         }
@@ -130,7 +127,7 @@ class RptDailyRegSale1Controller extends Controller
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
                     <td>' . number_format($totalAmount, 0) . '</td>
-                </tr>';
+                  </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
@@ -146,6 +143,5 @@ class RptDailyRegSale1Controller extends Controller
             $pdf->Output($filename, 'I');
         }
     }
-
 
 }
