@@ -69,23 +69,33 @@ class RptDailyRegSale1Controller extends Controller
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
 
+       // Create a new PDF instance
         $pdf = new MyPDF();
+
+        // Enable automatic page break
+        $pdf->SetAutoPageBreak(TRUE, 15); // 15 is the bottom margin
+
+        // Add the first page
+        $pdf->AddPage();
+
+        // Set metadata for the PDF
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
         $pdf->SetTitle('Daily Register Sale 1 ' . $request->acc_id);
         $pdf->SetSubject('Daily Register Sale 1');
         $pdf->SetKeywords('Daily Register Sale 1, TCPDF, PDF');
-        $pdf->setPageOrientation('P');
 
-        // Add a page and set padding
-        $pdf->AddPage();
-        $pdf->setCellPadding(1.2);
+        // Format the dates using Carbon
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->format('d-m-y');
+        $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
+        $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
 
         // Report heading
         $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
         $pdf->writeHTML($heading, true, false, true, false, '');
 
-        // Header details
+        // Header details table
         $htmlHeaderDetails = '
         <table style="border:1px solid #000; width:100%; padding:6px; border-collapse:collapse;">
             <tr>
@@ -121,19 +131,7 @@ class RptDailyRegSale1Controller extends Controller
         $totalAmount = 0;
 
         foreach ($activite5_sales as $items) {
-            // Check if a new page is needed
-            $currentY = $pdf->GetY();
-            if ($pdf->getY() > 57) { // Adjust 250 based on your page margins
-                $html .= '</table>'; // Close the current table
-                $pdf->writeHTML($html, true, false, true, false, '');
-                $pdf->AddPage(); // Add a new page
-                $currentY = $pdf->GetY()+15;
-                $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-                $html .= $tableHeader; // Re-add table header
-                $pdf->setTableHtml($tableHeader);
-            }
-
-            // Add table rows
+            // Add the row
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
             $html .= '<tr style="background-color:' . $bgColor . ';">
                         <td>' . $count . '</td>
@@ -147,22 +145,31 @@ class RptDailyRegSale1Controller extends Controller
 
             $totalAmount += $items['bill_amt'];
             $count++;
+
+            // Check if we are nearing the bottom of the page
+            if ($pdf->GetY() > 250) { // 250 is an estimated threshold based on your page margin
+                $html .= '</table>';
+                $pdf->writeHTML($html, true, false, true, false, '');
+                $pdf->AddPage(); // Add a new page
+                $html = '<table border="1" style="border-collapse: collapse;text-align:center">'; // Start a new table
+                $html .= $tableHeader; // Re-add the table header
+            }
         }
 
-        // Add totals row
+        // Add the totals row
         $html .= '<tr style="background-color:#d9edf7; font-weight:bold;">
                     <td colspan="6" style="text-align:right;">Total:</td>
-                    <td style="width:15%;">' . number_format($totalAmount, 0) . '</td>
+                    <td>' . number_format($totalAmount, 0) . '</td>
                 </tr>';
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Prepare filename
+        // Prepare filename for output
         $fromDate = Carbon::parse($request->fromDate)->format('Y-m-d');
         $toDate = Carbon::parse($request->toDate)->format('Y-m-d');
         $filename = "daily_reg_sale1_report_from_{$fromDate}_to_{$toDate}.pdf";
 
-        // Determine output type
+        // Output the PDF (either download or inline based on request)
         if ($request->outputType === 'download') {
             $pdf->Output($filename, 'D'); // For download
         } else {
