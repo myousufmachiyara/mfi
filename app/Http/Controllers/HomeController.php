@@ -71,29 +71,11 @@ class HomeController extends Controller
     }
 
     public function getBrowserDetails(Request $request){
-        $userAgent = $request->header();
-        return $userAgent;
-        // $browser = $this->getBrowserFromUserAgent($userAgent);
-
-        return response()->json([
-            'user_agent' => $userAgent,
-            'browser' => $browser,
-        ]);
+        $userAgent = $request->header('User-Agent');
+        $acceptLanguage = $request->header('Accept-Language');
+        $secCHUA = $request->header('Sec-CH-UA');
+        $browserId = hash('sha256', $userAgent . $acceptLanguage . $secCHUA);
+        return $browserId;
     }
 
-
-    private function getBrowserFromUserAgent($userAgent)
-    {
-        if (strpos($userAgent, 'Chrome') !== false) {
-            return 'Google Chrome';
-        } elseif (strpos($userAgent, 'Firefox') !== false) {
-            return 'Mozilla Firefox';
-        } elseif (strpos($userAgent, 'Safari') !== false) {
-            return 'Safari';
-        } elseif (strpos($userAgent, 'Edge') !== false) {
-            return 'Microsoft Edge';
-        } else {
-            return 'Other';
-        }
-    }
 }
