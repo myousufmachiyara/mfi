@@ -93,9 +93,9 @@ class RptDailyRegSale1Controller extends Controller
         }';
 
         // Report heading
-        $html = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
-        $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->setTableHtml($html);
+        $heading = '<h1 style="font-size:20px;text-align:center; font-style:italic;text-decoration:underline;color:#17365D">Daily Register Sale 1</h1>';
+        $pdf->writeHTML($heading, true, false, true, false, '');
+        
 
         // Header details
         $htmlHeaderDetails = '
@@ -127,12 +127,25 @@ class RptDailyRegSale1Controller extends Controller
                             <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
                         </tr>';
 
+        $html1 = '<table border="0.3" style="text-align:center;margin-top:10px">';
+        $html1 .= '<tr>';
+        $html1 .= '<th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>';
+        $html1 .= '<th style="width:26%;font-size:10px;font-weight:bold;font-family:poppins;color:#17365D">Item Name</th>';
+        $html1 .= '<th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>';
+        $html1 .= '<th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>';
+        $html1 .= '<th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>';
+        $html1 .= '<th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>';
+        $html1 .= '<th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>';
+        $html1 .= '</tr>';
+        $html1 .= '</table>';
+                
+
         // Start the table
         $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
         $html .= $tableHeader;
 
         // call htmlHeaderDetails on every page
-        // $pdf->setTableHtml($tableHeader);
+        $pdf->setTableHtml($html1);
        
 
         $count = 1;
