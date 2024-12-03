@@ -126,7 +126,7 @@ class RptDailyRegSale1Controller extends Controller
 
             $currentY = $pdf->GetY();
             // Check if a new page is needed based on remaining space
-            if (($pdf->getPageHeight() - $pdf->GetY()) > 100) { 
+            if (($pdf->getPageHeight() - $pdf->GetY()) ) { 
                 $pdf->AddPage(); // Add a new page if there's not enough space left
                 $currentY = $pdf->GetY() + 1; // Set the current Y position with a buffer
                 $html .= '</table>'; // Close the current table
