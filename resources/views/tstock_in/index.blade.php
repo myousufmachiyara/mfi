@@ -68,11 +68,15 @@
 
                                                     @if ($row->item_type==1)
                                                     <td><strong>Pipes</strong></td>
-                                                @elseif ($row->item_type==2)
-                                                    <td><strong>Garder / TR</strong></td>
-                                                @endif
+                                                    @elseif ($row->item_type==2)
+                                                        <td><strong>Garder / TR</strong></td>
+                                                    @endif
 
-                                                    <td><a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal">View</a></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->Sal_inv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
+                                                        <span class="separator"> | </span>
+                                                        <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" onclick="setAttId({{$row->Sal_inv_no}})" href="#addAttModal"> <i class="fas fa-paperclip"> </i></a>
+                                                    </td>
                                                     <td class="actions">
                                                         <a href="{{ route('show-tstock-in-invoice',$row->Sal_inv_no) }}" class="">
                                                             <i class="fas fa-eye"></i>
@@ -161,6 +165,33 @@
                 </footer>
             </section>
         </div>
+
+        <div id="addAttModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+            <form method="post" action="{{ route('tstockin-att-add') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+                @csrf  
+                <section class="card">
+                    <header class="card-header">
+                        <h2 class="card-title">Upload Attachements</h2>
+                    </header>
+                    <div class="card-body">
+                        <div class="modal-wrapper">
+                            <div class="col-lg-12 mb-2">
+                                <input type="file" class="form-control" name="addAtt[]" multiple accept="application/pdf, image/png, image/jpeg">
+                                <input type="hidden" class="form-control" name="att_id" id="att_id">
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12 text-end">
+                                <button type="sumit" class="btn btn-danger">Upload</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                            </div>
+                        </div>
+                    </footer>
+                </section>
+            </form>
+        </div>
         @include('../layouts.footerlinks')
 	</body>
 </html>
@@ -183,8 +214,8 @@
         $('#deleteID').val(id);
     }
 
-    function test(){
-        alert("hello");
+    function setAttId(id){
+        $('#att_id').val(id);
     }
 
     function getAttachements(id){
