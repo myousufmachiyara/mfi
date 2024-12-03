@@ -15,30 +15,28 @@ class myPDF extends TCPDF
        $this->tableHtml = $html;
     }
 
-    public function Header()
-    {
-        $this->SetFont('helvetica','B', 10);
-        $this->Cell(0, 10, '', 0, 1, 'C');
-        if ($this->getPage() > 1) {
-            $this->SetMargins(10, 17, 10); // 10mm left, 50mm top, 10mm right            
-            $this->setCellPadding(1.2); // Set padding for all cells in the table
-            $this->writeHTML($this->tableHtml, true, false, true, false, '');
-        }
-     }
-
     // public function Header()
     // {
-    //     $this->SetFont('helvetica', 'B', 10);
-    //     $this->Cell(0, 10, '', 0, 1, 'C'); // Add some spacing
-    //     $this->SetMargins(10, 20, 10); // Adjust top margin
-
-    //     // Ensure the header table is displayed properly
-    //     if (!empty($this->tableHtml)) {
+    //     $this->SetFont('helvetica','B', 10);
+    //     $this->Cell(0, 10, '', 0, 1, 'C');
+    //     if ($this->getPage() > 1) {
+    //         $this->SetMargins(10, 17, 10); // 10mm left, 50mm top, 10mm right            
     //         $this->setCellPadding(1.2); // Set padding for all cells in the table
     //         $this->writeHTML($this->tableHtml, true, false, true, false, '');
     //     }
     // }
 
+    public function Header()
+    {
+         // Add the table header for all pages
+         if (!empty($this->tableHtml)) {
+             $this->SetMargins(10, 15, 10); // Adjust top margin for the table header
+             $this->SetY(10); // Position the header content
+             $this->setCellPadding(1.2);
+             $this->writeHTML($this->tableHtml, true, false, true, false, '');
+         }
+    }
+     
 
 
     public function Footer()
