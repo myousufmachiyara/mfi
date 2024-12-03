@@ -64,15 +64,11 @@ class RptDailyRegSale1Controller extends Controller
 
     private function sale1generatePDF($activite5_sales, Request $request)
     {
-        // Validate date inputs
-        $this->validateDate($request);
-
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->format('d-m-y');
         $formattedFromDate = Carbon::parse($request->fromDate)->format('d-m-y');
         $formattedToDate = Carbon::parse($request->toDate)->format('d-m-y');
 
-        // Initialize PDF
         $pdf = new MyPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('MFI');
@@ -135,7 +131,17 @@ class RptDailyRegSale1Controller extends Controller
             }
 
             // Add table rows
-            $html .= $this->generateTableRow($count, $items);
+            $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
+            $html .= '<tr style="background-color:' . $bgColor . ';">
+                        <td>' . $count . '</td>
+                        <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
+                        <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
+                        <td>' . $items['pur_ord_no'] . '</td>
+                        <td>' . $items['acc_name'] . '</td>
+                        <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
+                        <td>' . number_format($items['bill_amt'], 0) . '</td>
+                    </tr>';
+
             $totalAmount += $items['bill_amt'];
             $count++;
         }
@@ -159,28 +165,6 @@ class RptDailyRegSale1Controller extends Controller
         } else {
             $pdf->Output($filename, 'I'); // For inline view
         }
-    }
-
-    private function validateDate($request)
-    {
-        if (!Carbon::hasFormat($request->fromDate, 'Y-m-d') || !Carbon::hasFormat($request->toDate, 'Y-m-d')) {
-            throw new \InvalidArgumentException("Invalid date format. Please use 'Y-m-d'.");
-        }
-    }
-
-    private function generateTableRow($count, $items)
-    {
-        $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
-        $row = '<tr style="background-color:' . $bgColor . ';">
-                    <td>' . $count . '</td>
-                    <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
-                    <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
-                    <td>' . $items['pur_ord_no'] . '</td>
-                    <td>' . $items['acc_name'] . '</td>
-                    <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
-                    <td>' . number_format($items['bill_amt'], 0) . '</td>
-                </tr>';
-        return $row;
     }
 
 
