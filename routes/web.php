@@ -557,6 +557,5 @@
         Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
 
     });
-
-
+    Route::get('/browser-details', [App\Http\Controllers\HomeController::class, 'getBrowserDetails']);
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
