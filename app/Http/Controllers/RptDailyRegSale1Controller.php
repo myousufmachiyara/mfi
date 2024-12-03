@@ -122,7 +122,7 @@ class RptDailyRegSale1Controller extends Controller
 
         foreach ($activite5_sales as $items) {
             // Check if a new page is needed
-            if ($pdf->getY() > 300) { // Adjust 250 based on your page margins
+            if ($pdf->getY() > 100) { // Adjust 250 based on your page margins
                 // $html .= '</table>'; // Close the current table
                 $pdf->writeHTML($html, true, false, true, false, '');
                 $pdf->AddPage(); // Add a new page
