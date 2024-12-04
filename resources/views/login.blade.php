@@ -150,7 +150,7 @@
 					fp.get().then(result => {
 						const visitorId = result.visitorId;
 						console.log("Visitor ID:", visitorId);
-						alert("Visitor ID:", visitorId);
+						alert(visitorId);
 
 						// Send the visitorId to your Laravel backend
 						fetch('/fingerprint', {
