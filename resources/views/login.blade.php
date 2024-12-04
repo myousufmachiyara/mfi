@@ -122,7 +122,7 @@
 		<script src="/assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
 		<script src="/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		<script src="/assets/vendor/owl.carousel/owl.carousel.js"></script>
-
+		<script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
 		<!-- Specific Page Vendor -->
 
 		<!-- Theme Base, Components and Settings -->
