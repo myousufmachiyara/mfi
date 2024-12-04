@@ -109,4 +109,19 @@ class HomeController extends Controller
         return response()->json(['ip' => $ipAddress]);
     }
 
+    public function fingerprint(Request $request)
+    {
+        $request->validate([
+            'fingerprint' => 'required|string|max:255',
+        ]);
+
+        // Save fingerprint to database or log
+        // \Log::info('Fingerprint received: ' . $request->fingerprint);
+
+        // Respond to the client
+        return response()->json([
+            'status' => 'success',
+            'finger_print' => $request->fingerprint,
+        ], 200);
+    }
 }

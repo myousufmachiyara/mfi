@@ -560,3 +560,4 @@
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
 
     Route::get('/get-ip', [App\Http\Controllers\HomeController::class, 'getIp']);
+    Route::post('/fingerprint', [App\Http\Controllers\HomeController::class, 'fingerprint']);
