@@ -54,6 +54,7 @@ class UsersController extends Controller
         if (Auth::check()) {
             return view('home'); // Show the home view if authenticated
         }
+        return view('login');
     }
 
     public function createUser(Request $request)
