@@ -143,6 +143,27 @@
 					x.type = "password";
 				}
 			}
+			
+			$(document).ready(function() {
+				const fpPromise = FingerprintJS.load();
+				fpPromise.then(fp => {
+					fp.get().then(result => {
+						const visitorId = result.visitorId;
+						console.log("Visitor ID:", visitorId);
+						
+						// Send the visitorId to your Laravel backend
+						fetch('/fingerprint', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								'X-CSRF-TOKEN': '{{ csrf_token() }}'
+							},
+							body: JSON.stringify({ fingerprint: visitorId })
+						});
+					});
+				});
+			});	
+			
     	</script>
 	</body>
 </html>
