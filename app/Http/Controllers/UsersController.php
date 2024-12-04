@@ -13,7 +13,6 @@ use App\Models\users;
 use App\Models\roles;
 use App\Models\user_roles;
 use App\Models\role_access;
-use App\Models\user_mac_address;
 use App\Traits\SaveImage;
 
 class UsersController extends Controller
@@ -55,10 +54,6 @@ class UsersController extends Controller
         if (Auth::check()) {
             return view('home'); // Show the home view if authenticated
         }
-        // $user_mac = $this->getMacAddress();
-        return view('login')->with([
-            'mac_add' => '',
-        ]);
     }
 
     public function createUser(Request $request)
@@ -244,25 +239,6 @@ class UsersController extends Controller
         return back()->withErrors([
             'error' => 'Invalid Username or Password.',
         ]);
-    }
-
-    public function addDevice(Request $request){
-        $user_mac_address = user_mac_address::create([
-            'user_id' => $request->user_mac_id,
-            'device_name' => $request->user_device_name,
-            'mac_address' => $request->user_device_password,
-            'created_by' => session('user_id'),
-        ]);
-
-        return redirect()->route('all-users');
-    }
-
-    public function getMacAdd(Request $request){
-        $user_mac_address = user_mac_address::where('user_id', $request->id)
-        ->select('id', 'device_name', 'mac_address')
-        ->get();
-
-        return $user_mac_address;
     }
 
     public function logout(Request $request)
