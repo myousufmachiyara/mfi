@@ -230,7 +230,7 @@ class UsersController extends Controller
                         'date' => Carbon::today(),                    
                     ]);
                 } else {
-                    // Invalid OTP
+                    Auth::logout();
                     return back()->withErrors([
                         'error' => 'Invalid OTP. Please Contact Admin',
                     ]);
