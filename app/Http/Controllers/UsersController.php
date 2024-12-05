@@ -14,6 +14,8 @@ use App\Models\roles;
 use App\Models\user_roles;
 use App\Models\role_access;
 use App\Models\user_devices;
+use App\Models\login_otps;
+
 use App\Traits\SaveImage;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
