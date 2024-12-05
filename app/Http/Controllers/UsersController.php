@@ -429,6 +429,11 @@ class UsersController extends Controller
     }
 
     public function updateUserPassowrd(Request $request){
+
+        $request->validate([
+            'new_password' => 'required|string|min:8',
+        ]);
+
         $user = users::where('id', session('user_id'))
         ->select('password')
         ->first();
