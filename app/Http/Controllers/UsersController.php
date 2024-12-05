@@ -219,7 +219,7 @@ class UsersController extends Controller
             ->first();
 
             // Handle OTP if provided
-            if ($request->has('otp') && $request->otp !== "") {
+            if ($request->otp) {
                 $currentTimestamp = Carbon::now(); // Get current timestamp using Carbon
     
                 $user_otp = login_otps::where('user_id', $user->id)
