@@ -328,14 +328,15 @@
                             html += "</tr>";
                             $(tableID).append(html);
 
-                            var balance = opening_qty || 0;
+                            var balance = parseFloat(opening_qty || 0).toFixed(0); // Ensure balance is a decimal with 2 places
 
                             $.each(result['ledger'], function (k, v) {
-                                let addQty = parseFloat(v['add_qty'] || 0); // Ensure numeric values
-                                let lessQty = parseFloat(v['less'] || 0);
+                                let addQty = parseFloat(v['add_qty'] || 0).toFixed(0); // Convert and format to 2 decimal places
+                                let lessQty = parseFloat(v['less'] || 0).toFixed(0);
 
                                 // Update balance
-                                balance += addQty - lessQty;
+                                balance = (parseFloat(balance) + parseFloat(addQty) - parseFloat(lessQty)).toFixed(0);
+
 
                                 // Create table row using template literals
                                 let html = `
@@ -355,8 +356,8 @@
                                 $(tableID).append(html);
                             });
 
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
+                        },
+                         error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown); // Log error details to console
                         alert("Error: " + textStatus + "\n" + errorThrown); // Display error message to the user
                     }
