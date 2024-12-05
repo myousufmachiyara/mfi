@@ -220,7 +220,7 @@ class UsersController extends Controller
     
                 $user_otp = login_otps::where('user_id', $user->id)
                     ->where('created_at', '>=', $currentTimestamp->subMinutes(10))
-                    ->orderBy('id',desc) // Ensure created_at is within the last 10 minutes
+                    ->orderBy('id','desc') // Ensure created_at is within the last 10 minutes
                     ->first();
     
                 // If OTP is valid, register device
