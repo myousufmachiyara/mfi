@@ -228,7 +228,7 @@ class UsersController extends Controller
                     ->first();
     
                 // If OTP is valid, register device
-                if ($user_otp && Hash::check($request->otp, $user_otp->otp)) {
+                if (Hash::check($request->otp, $user_otp->otp)) {
                     user_devices::create([
                         'user_id' => $user->id,
                         'device_id' => Hash::make($request->browser_id), // Use $request->browser_id directly
@@ -238,6 +238,7 @@ class UsersController extends Controller
                     Auth::logout();
                     return back()->withErrors([
                         'error' => 'Invalid OTP. Please Contact Administration',
+                        'not_registered' => 'Device not registered. OTP sent.',
                     ]);
                 }
             }
