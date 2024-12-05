@@ -232,7 +232,7 @@ class UsersController extends Controller
                 } else {
                     Auth::logout();
                     return back()->withErrors([
-                        'error' => 'Invalid OTP. Please Contact Admin',
+                        'error' => 'Invalid OTP. Please Contact Administration',
                     ]);
                 }
             } else {
