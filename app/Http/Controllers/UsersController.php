@@ -216,7 +216,8 @@ class UsersController extends Controller
     
             $user_devices = user_devices::where('user_id', $user->id)
             ->where('device_id', Hash::make($request->browser_id))
-            ->get();
+            ->first();
+            die($user_devices.'otp'.$request->otp);
 
             // Handle OTP if provided
             if ($request->has('otp')) {
@@ -298,7 +299,6 @@ class UsersController extends Controller
         ]);
     }
     
-
     public function fingerprint(Request $request)
     {
         $request->validate([
