@@ -267,3 +267,14 @@ $('#changePasswordForm').on('submit', function(e){
         }
     });
 });	
+
+function validatePasswordMatch() {
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_new_password').value;
+
+    if (newPassword !== confirmPassword) {
+        alert('New Password and Confirm New Password do not match.');
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}

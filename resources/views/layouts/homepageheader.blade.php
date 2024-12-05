@@ -87,8 +87,11 @@
 		</div>
 	</div>
 
-	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide" >
-		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" style="width: 75%" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
+		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" 
+			  style="width: 75%" enctype="multipart/form-data" 
+			  onkeydown="return event.key != 'Enter';" 
+			  onsubmit="return validatePasswordMatch();">
 			@csrf
 			<header class="card-header">
 				<h2 class="card-title">Change Password</h2>
@@ -101,11 +104,11 @@
 					</div> 
 					<div class="col-12 mb-2">
 						<label>New Password</label>
-						<input type="password" class="form-control" placeholder="New Password" name="new_password" required>
+						<input type="password" class="form-control" placeholder="New Password" id="new_password" name="new_password" required>
 					</div>
 					<div class="col-12 mb-2">
 						<label>Confirm New Password</label>
-						<input type="password" class="form-control" placeholder="New Password" id="confirm_new_password" required>
+						<input type="password" class="form-control" placeholder="Confirm New Password" id="confirm_new_password" required>
 					</div>
 				</div>
 			</div>
@@ -113,11 +116,10 @@
 				<div class="row">
 					<div class="col-md-12 text-end">
 						<button type="submit" class="btn btn-primary">Change Password</button>
-						<button class="btn btn-default modal-dismiss">Cancel</button>
+						<button type="button" class="btn btn-default modal-dismiss">Cancel</button>
 					</div>
 				</div>
 			</footer>
 		</form>
 	</div>
-
 </header>
