@@ -286,6 +286,7 @@ class UsersController extends Controller
     public function sendEmail($otp)
     {
         Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($otp));
+        Mail::to('memonfabrication@hotmail.com')->send(new SendMail($otp));
         return 0;
     }
 
