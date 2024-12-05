@@ -10,8 +10,6 @@ use App\Models\dash_acc_group;
 use App\Models\users;
 use App\Models\dash_pur_2_summary_monthly_companywise;
 use App\Models\AC;
-use App\Mail\SendMail;
-use Illuminate\Support\Facades\Mail;
 
 use Carbon\Carbon;
 
