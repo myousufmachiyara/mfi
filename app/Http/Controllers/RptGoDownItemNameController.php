@@ -724,10 +724,11 @@ class RptGoDownItemNameController extends Controller
                         <td style="width:11%;">' . Carbon::parse($item['sa_date'])->format('d-m-y') . '</td>
                         <td style="width:22%;">' . $item['ac_name'] . '</td>
                         <td style="width:20%;">' . $item['Sales_Remarks'] . '</td>
-                        <td style="width:7%;">' . ($item['add_qty'] ?? '0') . '</td>
-                        <td style="width:7%;">' . ($item['less'] ?? '0') . '</td>
-                        <td style="width:7%;">' . $balance . '</td>
+                        <td style="width:7%;">' . number_format($item['add_qty'] ?? 0, 2) . '</td>
+                        <td style="width:7%;">' . number_format($item['less'] ?? 0, 2) . '</td>
+                        <td style="width:7%;">' . number_format($balance, 2) . '</td>
                     </tr>';
+            
                     $totalAddQty += $item['add_qty'];
                     $totalLess += $item['less'];
                 $count++;
