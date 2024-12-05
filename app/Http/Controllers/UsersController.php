@@ -222,7 +222,7 @@ class UsersController extends Controller
                 $otp = rand(100000, 999999); // Generate a 6-digit OTP
                 $otp_email = $this->sendEmail($otp);
                 if($otp_email==0){
-                    $login_otps =login_otps::create([
+                    $login_otps = login_otps::create([
                         'user_id' => $user['id'],
                         'otp' => Hash::make($otp),
                     ]);

@@ -61,12 +61,6 @@
 							</div>
 						@endif
 
-						@if ($errors->has('not_registered'))
-						<div style="color: red;">
-							<p>hello</p>
-						</div>
-						@endif
-					
 						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="loginForm">
 							@csrf							
 							<div class="form-group">
@@ -81,27 +75,27 @@
 							</div>
 
 							<div class="form-group mb-3">
-								<div>
-								</div>
 								<div class="input-group">
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
 										<i class="bx bx-lock text-4"></i>
 									</span>
 									<input name="password" class="form-control" type="password" required id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-
 								</div>
-								@if ($errors->has('not_registered'))
+							</div>
+							
+							@if ($errors->has('not_registered'))
+								<div class="form-group mb-3">
 									<div class="input-group">
 										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 											<i class="bx bx-user text-4"></i>
 										</span>
-										<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+										<input class="form-control" name="otp" required placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 									</div>
-								@endif
-								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
-							</div>
-							
+								</div>
+							@endif
+
 							<div class="col-sm-12">
+								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
 								<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
 							</div>
 						</form>
