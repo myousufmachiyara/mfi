@@ -15,7 +15,7 @@ use App\Models\user_roles;
 use App\Models\role_access;
 use App\Models\user_devices;
 use App\Models\login_otps;
-
+use Carbon\Carbon;
 use App\Traits\SaveImage;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
@@ -208,64 +208,97 @@ class UsersController extends Controller
             'password' => 'required|string',
             'browser_id' => 'required|string',
         ]);
-
+    
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
-
-            $user_devices = user_devices::where('user_id',$user['id'])
-            ->where('device_id',Hash::make($request->browser_id))
-            ->get();
-
-            if ($user_devices->isEmpty()) {
-                $otp = rand(100000, 999999); // Generate a 6-digit OTP
-                $otp_email = $this->sendEmail($otp);
-                if($otp_email==0){
-                    $login_otps = login_otps::create([
-                        'user_id' => $user['id'],
-                        'otp' => Hash::make($otp),
+    
+            // Handle OTP if provided
+            if ($request->has('otp')) {
+                $currentTimestamp = Carbon::now(); // Get current timestamp using Carbon
+    
+                $user_otp = login_otps::where('user_id', $user->id)
+                    ->where('created_at', '>=', $currentTimestamp->subMinutes(10)) // Ensure created_at is within the last 10 minutes
+                    ->first();
+    
+                // If OTP is valid, register device
+                if ($user_otp && Hash::check($request->otp, $user_otp->otp)) {
+                    user_devices::create([
+                        'user_id' => $user->id,
+                        'device_id' => Hash::make($request->browser_id), // Use $request->browser_id directly
+                        'date' => now(), // Storing the current timestamp
+                    ]);
+                } else {
+                    // Invalid OTP
+                    return back()->withErrors([
+                        'error' => 'Invalid OTP. Please Contact Admin',
                     ]);
                 }
-                Auth::logout();
-                return back()->withErrors([
-                    'not_registered' => '0',
-                ]);
+            } else {
+                // If OTP is not provided, check for existing device registration
+                $user_devices = user_devices::where('user_id', $user->id)
+                    ->where('device_id', Hash::make($request->browser_id))
+                    ->get();
+    
+                if ($user_devices->isEmpty()) {
+                    // Generate OTP and send to email if device is not registered
+                    $otp = rand(100000, 999999); // Generate a 6-digit OTP
+                    $otp_email = $this->sendEmail($otp); // Implement email sending functionality
+                    
+                    if ($otp_email == 0) {
+                        login_otps::create([
+                            'user_id' => $user->id,
+                            'otp' => Hash::make($otp),
+                        ]);
+                    }
+    
+                    Auth::logout(); // Logout the user
+                    return back()->withErrors([
+                        'not_registered' => 'Device not registered. OTP sent.',
+                    ]);
+                }
             }
-
+    
+            // Regenerate session to ensure security
             $request->session()->regenerate();
-
-            users::where('id', $user['id'])->update([
-                'is_login'=>1,
+    
+            // Update user login status
+            users::where('id', $user->id)->update([
+                'is_login' => 1,
             ]);
-
-            $user_roles = user_roles::where('user_id',$user['id'])
-            ->join('roles','roles.id','=','user_roles.role_id')
-            ->select('user_roles.*','roles.name as role_name')
-            ->first();
-
-            $user_permission = role_access::where('role_id',$user_roles['role_id'])
-            ->select('module_id','view')
-            ->get();
-            
+    
+            // Get user roles and permissions
+            $user_roles = user_roles::where('user_id', $user->id)
+                ->join('roles', 'roles.id', '=', 'user_roles.role_id')
+                ->select('user_roles.*', 'roles.name as role_name')
+                ->first();
+    
+            $user_permission = role_access::where('role_id', $user_roles->role_id)
+                ->select('module_id', 'view')
+                ->get();
+    
             $user_access = $user_permission->toArray();
     
+            // Store user session data
             session([
-                'user_id' => $user['id'],
-                'user_name' => $user['name'],
+                'user_id' => $user->id,
+                'user_name' => $user->name,
                 'role_name' => $user_roles->role_name,
                 'user_role' => $user_roles->role_id,
                 'user_access' => $user_access,
             ]);
-
+    
+            // Redirect to intended page
             return redirect()->intended('/home');
         }
-
+    
         // Authentication failed
         return back()->withErrors([
             'error' => 'Invalid Username or Password.',
         ]);
     }
+    
 
     public function fingerprint(Request $request)
     {
