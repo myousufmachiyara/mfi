@@ -214,8 +214,12 @@ class UsersController extends Controller
             // Authentication passed
             $user = Auth::user();
     
+            $user_devices = user_devices::where('user_id', $user->id)
+            ->where('device_id', Hash::make($request->browser_id))
+            ->first();
+
             // Handle OTP if provided
-            if ($request->has('otp')) {
+            if ($request->has('otp') && !($request->otp->isEmpty())) {
                 $currentTimestamp = Carbon::now(); // Get current timestamp using Carbon
     
                 $user_otp = login_otps::where('user_id', $user->id)
@@ -236,31 +240,25 @@ class UsersController extends Controller
                         'error' => 'Invalid OTP. Please Contact Administration',
                     ]);
                 }
-            } else {
-                // If OTP is not provided, check for existing device registration
-                $user_devices = user_devices::where('user_id', $user->id)
-                    ->where('device_id', Hash::make($request->browser_id))
-                    ->get();
-    
-                if ($user_devices->isEmpty()) {
-                    // Generate OTP and send to email if device is not registered
-                    $otp = rand(100000, 999999); // Generate a 6-digit OTP
-                    $otp_email = $this->sendEmail($otp); // Implement email sending functionality
-                    
-                    if ($otp_email == 0) {
-                        login_otps::create([
-                            'user_id' => $user->id,
-                            'otp' => Hash::make($otp),
-                        ]);
-                    }
-    
-                    Auth::logout(); // Logout the user
-                    return back()->withErrors([
-                        'not_registered' => 'Device not registered. OTP sent.',
+            }
+
+            else if($user_devices->isEmpty()){
+                $otp = rand(100000, 999999); // Generate a 6-digit OTP
+                $otp_email = $this->sendEmail($otp); // Implement email sending functionality
+                
+                if ($otp_email == 0) {
+                    login_otps::create([
+                        'user_id' => $user->id,
+                        'otp' => Hash::make($otp),
                     ]);
                 }
+
+                Auth::logout(); // Logout the user
+                return back()->withErrors([
+                    'not_registered' => 'Device not registered. OTP sent.',
+                ]);
             }
-    
+
             // Regenerate session to ensure security
             $request->session()->regenerate();
     
