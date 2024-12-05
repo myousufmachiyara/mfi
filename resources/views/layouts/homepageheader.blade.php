@@ -95,13 +95,17 @@
 			</header>
 			<div class="card-body">
 				<div class="row form-group">    
-					<div class="col-lg-6 mb-2">
+					<div class="col-12 mb-2">
 						<label>Current Password</label>
 						<input type="password" class="form-control" placeholder="Current Password" id="current_passowrd" name="current_passowrd" required>
 					</div> 
-					<div class="col-lg-6 mb-2">
+					<div class="col-12 mb-2">
 						<label>New Password</label>
 						<input type="password" class="form-control" placeholder="New Password" name="new_password" required>
+					</div>
+					<div class="col-12 mb-2">
+						<label>Confirm New Password</label>
+						<input type="password" class="form-control" placeholder="New Password" id="confirm_new_password" required>
 					</div>
 				</div>
 			</div>
