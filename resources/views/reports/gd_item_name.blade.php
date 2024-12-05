@@ -328,31 +328,33 @@
                             html += "</tr>";
                             $(tableID).append(html);
 
-                        var balance = opening_qty;
+                            var balance = opening_qty || 0;
 
-                        $.each(result['ledger'], function(k,v){
-                            var html="<tr>";
-                            html += "<td>"+(k+1)+"</td>"
-                            html += "<td>" + (v['entry_of'] ? v['entry_of'] : "") + "</td>";
-                            html += "<td>" + (v['Sal_inv_no'] ? v['Sal_inv_no'] : "") +"</td>";
-                            html += "<td>" + (v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : "") + "</td>";
-                            html += "<td>" + (v['ac_name'] ? v['ac_name'] : "") + "</td>";
-                            html += "<td>" + (v['Sales_Remarks'] ? v['Sales_Remarks'] : "") + "</td>";
-                            html += "<td>" + (v['add_qty'] ? v['add_qty'] : "0") + "</td>";
-                            html += "<td>" + (v['less'] ? v['less'] : "0") + "</td>";
-                            if (v['add_qty'] !== undefined && v['add_qty'] !== null) {
-                                balance += v['add_qty']; // Add to balance
-                            }
+                            $.each(result['ledger'], function (k, v) {
+                                let addQty = parseFloat(v['add_qty'] || 0); // Ensure numeric values
+                                let lessQty = parseFloat(v['less'] || 0);
 
-                            // Check if less exists and is not empty
-                            if (v['less'] !== undefined && v['less'] !== null) {
-                                balance -= v['less']; // Subtract from balance
-                            }
+                                // Update balance
+                                balance += addQty - lessQty;
 
-                            html += "<td>" + balance + "</td>";
-                            html +="</tr>";
-                            $(tableID).append(html);
-                        });
+                                // Create table row using template literals
+                                let html = `
+                                    <tr>
+                                        <td>${k + 1}</td>
+                                        <td>${v['entry_of'] || ""}</td>
+                                        <td>${v['Sal_inv_no'] || ""}</td>
+                                        <td>${v['sa_date'] ? moment(v['sa_date']).format('DD-MM-YYYY') : ""}</td>
+                                        <td>${v['ac_name'] || ""}</td>
+                                        <td>${v['Sales_Remarks'] || ""}</td>
+                                        <td>${addQty}</td>
+                                        <td>${lessQty}</td>
+                                        <td>${balance}</td>
+                                    </tr>
+                                `;
+
+                                $(tableID).append(html);
+                            });
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error("AJAX error:", textStatus, errorThrown); // Log error details to console
