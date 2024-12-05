@@ -227,7 +227,7 @@ class UsersController extends Controller
                     user_devices::create([
                         'user_id' => $user->id,
                         'device_id' => Hash::make($request->browser_id), // Use $request->browser_id directly
-                        'date' => now(), // Storing the current timestamp
+                        'date' => Carbon::today(),                    
                     ]);
                 } else {
                     // Invalid OTP
