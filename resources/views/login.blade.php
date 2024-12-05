@@ -68,9 +68,8 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 										<i class="bx bx-user text-4"></i>
 									</span>
-									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-									<input class="form-control" name="browser_id" id="browser_id" required type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-
+									<input class="form-control form-control-lg" required name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;"/>
+									<input class="form-control form-control-lg" required name="browser_id" id="browser_id"  type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 								</div>
 							</div>
 
@@ -79,7 +78,7 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
 										<i class="bx bx-lock text-4"></i>
 									</span>
-									<input name="password" class="form-control" type="password" required id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									<input class="form-control form-control-lg" required name="password" placeholder="password" type="password" id="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 								</div>
 							</div>
 
@@ -89,7 +88,7 @@
 										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 											<i class="bx bx-key text-4"></i>
 										</span>
-										<input class="form-control" name="otp" required placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+										<input class="form-control form-control-lg" required name="otp" placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 									</div>
 								</div>
 							@endif
