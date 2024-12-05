@@ -213,10 +213,15 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
-    
-            $user_devices = user_devices::where('user_id', $user->id)
-            ->where('device_id', Hash::check($request->browser_id))
-            ->first();
+            $user_devices = user_devices::where('user_id', $user->id)->get();
+            $isDeviceRegistered = false;
+
+            foreach ($user_devices as $device) {
+                if (Hash::check($request->browser_id, $device->device_id)) {
+                    $isDeviceRegistered = true;
+                    break;
+                }
+            }
 
             // Handle OTP if provided
             if($request->otp) {
@@ -243,7 +248,7 @@ class UsersController extends Controller
                 }
             }
 
-            else if(!$user_devices){
+            else if(!$isDeviceRegistered){
                 $otp = rand(100000, 999999); // Generate a 6-digit OTP
                 $otp_email = $this->sendEmail($otp); // Implement email sending functionality
                 
