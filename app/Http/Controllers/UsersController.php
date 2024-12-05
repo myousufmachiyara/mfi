@@ -216,10 +216,10 @@ class UsersController extends Controller
     
             $user_devices = user_devices::where('user_id', $user->id)
             ->where('device_id', Hash::make($request->browser_id))
-            ->first();
+            ->get();
 
             // Handle OTP if provided
-            if ($request->has('otp')) {
+            if ($request->has('otp') && !($request->otp->isEmpty())) {
                 $currentTimestamp = Carbon::now(); // Get current timestamp using Carbon
     
                 $user_otp = login_otps::where('user_id', $user->id)
