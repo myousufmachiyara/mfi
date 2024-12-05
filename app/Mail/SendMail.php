@@ -20,10 +20,10 @@ class SendMail extends Mailable
 
     public function build()
     {
-        return $this->subject('OTP for New Device Login')  // Set the subject of the email
-        ->view('emails.otp') // Set the view for the email content
+        return view('emails.otp')
         ->with([
-            'otp' => $this->otp, // Pass the OTP to the view
+            'subject' => 'OTP for New Device Login',
+            'otp' => $this->otp,
         ]);
     }
 }
