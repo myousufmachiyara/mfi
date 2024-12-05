@@ -99,7 +99,6 @@
 										<i class="bx bx-user text-4"></i>
 									</span>
 									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
-									<input class="form-control" name="browser_id" id="browser_id" required type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 								</div>
 							</div>
 							
