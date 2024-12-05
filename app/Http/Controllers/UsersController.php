@@ -219,7 +219,8 @@ class UsersController extends Controller
                 $currentTimestamp = Carbon::now(); // Get current timestamp using Carbon
     
                 $user_otp = login_otps::where('user_id', $user->id)
-                    ->where('created_at', '>=', $currentTimestamp->subMinutes(10)) // Ensure created_at is within the last 10 minutes
+                    ->where('created_at', '>=', $currentTimestamp->subMinutes(10))
+                    ->orderBy('id',desc) // Ensure created_at is within the last 10 minutes
                     ->first();
     
                 // If OTP is valid, register device
