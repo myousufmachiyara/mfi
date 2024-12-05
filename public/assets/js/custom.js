@@ -254,11 +254,7 @@ $('#changePasswordForm').on('submit', function(e){
             'password':currentPassword,
         },
         success: function(response){
-            if(response==1){
-                var form = document.getElementById('changePasswordForm');
-                form.submit();
-            }
-            else{
+            if(response!=1){
                 alert("Current Password is not Correct")
             }
         },
