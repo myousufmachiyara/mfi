@@ -68,8 +68,8 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 										<i class="bx bx-user text-4"></i>
 									</span>
-									<input class="form-control form-control-lg" required name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;"/>
-									<input class="form-control form-control-lg" required name="browser_id" id="browser_id"  type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
+									<input class="form-control" required name="username" placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;"/>
+									<input class="form-control" required name="browser_id" id="browser_id"  type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 								</div>
 							</div>
 
@@ -78,7 +78,7 @@
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;">
 										<i class="bx bx-lock text-4"></i>
 									</span>
-									<input class="form-control form-control-lg" required name="password" placeholder="password" type="password" id="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
+									<input class="form-control" required name="password" placeholder="password" type="password" id="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 								</div>
 							</div>
 
@@ -88,7 +88,7 @@
 										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 											<i class="bx bx-key text-4"></i>
 										</span>
-										<input class="form-control form-control-lg" required name="otp" placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
+										<input class="form-control" required name="otp" placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" />
 									</div>
 								</div>
 							@endif
