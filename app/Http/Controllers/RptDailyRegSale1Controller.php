@@ -103,43 +103,40 @@ class RptDailyRegSale1Controller extends Controller
         $pdf->writeHTML($htmlHeaderDetails, true, false, true, false, '');
 
         // Table headers
-        $tableHeader = '<tr>
-                            <th style="width:7%;color:#17365D;font-weight:bold;">S/No</th>
-                            <th style="width:12%;color:#17365D;font-weight:bold;">Date</th>
-                            <th style="width:13%;color:#17365D;font-weight:bold;">Inv No.</th>
-                            <th style="width:12%;color:#17365D;font-weight:bold;">Ord No.</th>
-                            <th style="width:19%;color:#17365D;font-weight:bold;">Account Name</th>
-                            <th style="width:22%;color:#17365D;font-weight:bold;">Remarks</th>
-                            <th style="width:15%;color:#17365D;font-weight:bold;">Bill Amount</th>
-                        </tr>';
-
+        $html = '<table border="0.3" style="text-align:center;margin-top:10px"><tr>
+                            <th style="width:7%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">S/No</th>
+                            <th style="width:12%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Date</th>
+                            <th style="width:13%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Inv No.</th>
+                            <th style="width:12%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Ord No.</th>
+                            <th style="width:19%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Account Name</th>
+                            <th style="width:22%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Remarks</th>
+                            <th style="width:15%;color:#17365D;font-weight:bold;font-family:poppins;font-size:10px">Bill Amount</th>
+                        </tr></table>';
+        $pdf->setTableHtml($html);
         // Start the table
-        $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-        $html .= $tableHeader;
-
+        $html.= '<table border="1" style="border-collapse: collapse;text-align:center">';
         $count = 1;
         $totalAmount = 0;
 
         foreach ($activite5_sales as $items) {
-            // Check if a new page is needed
-            if ($pdf->getY() > 250) { // Adjust 250 based on your page margins
-                $html .= '</table>'; // Close the current table
+            // Check if a new page is needed            
+            if(($pdf->getPageHeight()-$pdf->GetY())<30){
+                $html .= '</table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
-                $pdf->AddPage(); // Add a new page
+                $pdf->AddPage();
                 $html = '<table border="1" style="border-collapse: collapse;text-align:center">';
-                $html .= $tableHeader; // Re-add table header
             }
 
             // Add table rows
             $bgColor = ($count % 2 == 0) ? '#f1f1f1' : '#ffffff';
             $html .= '<tr style="background-color:' . $bgColor . ';">
-                        <td>' . $count . '</td>
-                        <td>' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
-                        <td>' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
-                        <td>' . $items['pur_ord_no'] . '</td>
-                        <td>' . $items['acc_name'] . '</td>
-                        <td>' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
-                        <td>' . number_format($items['bill_amt'], 0) . '</td>
+                        <td width="7%">' . $count . '</td>
+                        <td width="12%">' . Carbon::createFromFormat('Y-m-d', $items['sa_date'])->format('d-m-y') . '</td>
+                        <td width="13%">' . $items['prefix'] . '' . $items['Sal_inv_no'] . '</td>
+                        <td width="12%">' . $items['pur_ord_no'] . '</td>
+                        <td width="19%">' . $items['acc_name'] . '</td>
+                        <td width="22%">' . $items['Cash_pur_name'] . ' ' . $items['Sales_Remarks'] . '</td>
+                        <td width="15%">' . number_format($items['bill_amt'], 0) . '</td>
                     </tr>';
 
             $totalAmount += $items['bill_amt'];
