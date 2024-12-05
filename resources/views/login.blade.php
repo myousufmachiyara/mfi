@@ -82,12 +82,12 @@
 									<input name="password" class="form-control" type="password" required id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 								</div>
 							</div>
-							
+
 							@if ($errors->has('not_registered'))
 								<div class="form-group mb-3">
 									<div class="input-group">
 										<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
-											<i class="bx bx-user text-4"></i>
+											<i class="bx bx-key text-4"></i>
 										</span>
 										<input class="form-control" name="otp" required placeholder="otp" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 									</div>
