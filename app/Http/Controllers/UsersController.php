@@ -242,7 +242,7 @@ class UsersController extends Controller
                 }
             }
 
-            else if($user_devices->isEmpty()){
+            else if(!$user_devices){
                 $otp = rand(100000, 999999); // Generate a 6-digit OTP
                 $otp_email = $this->sendEmail($otp); // Implement email sending functionality
                 
