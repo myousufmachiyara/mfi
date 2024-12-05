@@ -10,5 +10,6 @@ class login_otps extends Model
     use HasFactory;
     protected $table = "login_otps";
     protected $fillable = [
+        'user_id','otp',
     ];
 }
