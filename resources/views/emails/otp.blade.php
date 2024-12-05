@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>{{ $subject }}</h1>
+    <h1>Your One-Time Password (OTP)</h1>
     <p>Hi,</p>
     <p>Your OTP code is: <strong>{{ $otp }}</strong></p>
     <p>This OTP will expire after 10 minutes</p>
