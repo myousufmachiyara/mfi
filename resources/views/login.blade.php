@@ -166,6 +166,7 @@
 					fp.get().then(result => {
 						const visitorId = result.visitorId;
 						$('#browser_id').val(visitorId);
+						document.getElementById('loginForm').submit(); // Trigger form submission
 					});
 				});
 			});
