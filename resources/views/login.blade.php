@@ -90,16 +90,17 @@
 									<input name="password" class="form-control" type="password" required id="password" Placeholder="password" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 
 								</div>
-								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
-							</div>
-
-							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
 										<i class="bx bx-user text-4"></i>
 									</span>
 									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
 								</div>
+								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
+							</div>
+
+							<div class="form-group">
+								
 							</div>
 							
 							<div class="col-sm-12">
