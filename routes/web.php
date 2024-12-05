@@ -555,9 +555,7 @@
         Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
 
     });
-    Route::get('/browser-details', [App\Http\Controllers\HomeController::class, 'getBrowserDetails']);
-    Route::get('/send-email', [App\Http\Controllers\HomeController::class, 'sendEmail']);
+    Route::post('/fingerprint', [App\Http\Controllers\UsersController::class, 'fingerprint']);
+    Route::get('/send-email', [App\Http\Controllers\UsersController::class, 'sendEmail']);
+    
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'index'])->name('pos');
-
-    Route::get('/get-ip', [App\Http\Controllers\HomeController::class, 'getIp']);
-    Route::post('/fingerprint', [App\Http\Controllers\HomeController::class, 'fingerprint']);

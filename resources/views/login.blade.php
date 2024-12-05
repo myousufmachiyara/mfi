@@ -60,8 +60,14 @@
 								{{ $errors->first('error') }}
 							</div>
 						@endif
+
+						@if ($errors->has('not_registered'))
+						<div style="color: red;">
+							<p>hello</p>
+						</div>
+						@endif
 					
-						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="addForm">
+						<form method="post" action="{{ route('userlogin') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" id="loginForm">
 							@csrf							
 							<div class="form-group">
 								<div class="input-group">
@@ -69,6 +75,8 @@
 										<i class="bx bx-user text-4"></i>
 									</span>
 									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									<input class="form-control" name="browser_id" id="browser_id" required type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+
 								</div>
 							</div>
 
@@ -83,13 +91,23 @@
 
 								</div>
 								<span class="mt-3 mx-2 text-start" style="display:block"> <input type="checkbox" onclick="showPassword()"> Show Password </span>
-
 							</div>
 
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-text bg-light text-primary" style="border-top-left-radius:15px;border-bottom-left-radius:15px;" >
+										<i class="bx bx-user text-4"></i>
+									</span>
+									<input class="form-control" name="username" required placeholder="username" type="text" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+									<input class="form-control" name="browser_id" id="browser_id" required type="hidden" style="border-top-right-radius:15px;border-bottom-right-radius:15px;" class="form-control form-control-lg" />
+								</div>
+							</div>
+							
 							<div class="col-sm-12">
 								<button type="submit" class="btn btn-primary mt-2" style="font-size: 0.9rem;padding: 8.52px 18px;border-radius:15px;width:100%">Continue</button>
 							</div>
 						</form>
+
 						<p class="text-center text-muted mt-3 mb-3">&copy; Copyright 2024. All Rights Reserved.</p>
 					</div>
 				</div>
@@ -104,7 +122,6 @@
 						<div class="item"><img src="/assets/img/slide7.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
 						<div class="item"><img src="/assets/img/slide8.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
 						<div class="item"><img src="/assets/img/slide9.png" style="background-repeat: no-repeat;background-size: auto;height:100vh" alt=""></div>
-
 					</div>
 				</div>
 			</div>
@@ -143,27 +160,17 @@
 					x.type = "password";
 				}
 			}
-			
-			$(document).ready(function() {
+
+			document.getElementById('loginForm').addEventListener('submit', function(event) {
+				event.preventDefault();  // Prevents the form from submitting immediately
 				const fpPromise = FingerprintJS.load();
 				fpPromise.then(fp => {
 					fp.get().then(result => {
 						const visitorId = result.visitorId;
-						console.log("Visitor ID:", visitorId);
-						alert(visitorId);
-
-						// Send the visitorId to your Laravel backend
-						fetch('/fingerprint', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-								'X-CSRF-TOKEN': '{{ csrf_token() }}'
-							},
-							body: JSON.stringify({ fingerprint: visitorId })
-						});
+						$('#browser_id').val(visitorId);
 					});
 				});
-			});	
+			});
     	</script>
 	</body>
 </html>

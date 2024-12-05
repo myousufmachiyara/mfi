@@ -42,14 +42,15 @@
 					@include('layouts.homepageheader')
 					<!-- start: page -->
 					<div class="row home-cust-pad">
-						@if(session('user_role')==1 || session('user_role')==2)
-							<div style="display: flex;justify-content: space-between;">
-								<h2 class="text-dark"><strong>Good Morning! Have a Nice Day</strong></h2>
+						<div style="display: flex;justify-content: space-between;">
+							<h2 class="text-dark"><strong id="currentDate"></strong></h2>
+							@if(session('user_role')==1 || session('user_role')==2)
 								<div class="form-check form-switch">
 									<input class="form-check-input" type="checkbox" id="ShowDatatoggleSwitch" onchange="handleToggleSwitch(this)" style="margin-top:30px">
 								</div>
-							</div>
-
+							@endif
+						</div>
+						@if(session('user_role')==1 || session('user_role')==2)
 							<div class="col-12 col-md-3 mb-2">
 								<section class="card card-featured-left card-featured-primary">
 									<div class="card-body icon-container data-container" style="background-image: url('/assets/img/cheque-icon.png'); ">
@@ -1309,6 +1310,18 @@
 	<script>
 
 		$(document).ready(function() {
+			// Get current date and day
+			const now = new Date();
+			const day = getDaySuffix(now.getDate());
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+			const currentDate = now.toLocaleDateString(undefined, options);
+
+			// Format the date as "Thursday, 5th December 2024"
+			const formattedDate = `${now.toLocaleString('en-GB', { weekday: 'long' })}, ${day} ${now.toLocaleString('en-GB', { month: 'long' })} ${now.getFullYear()}`;
+
+			// Update UI
+			document.getElementById('currentDate').innerText = formattedDate;
+
 			var toggleSwitch = document.getElementById('ShowDatatoggleSwitch');
             toggleSwitch.checked = true; // Set to "on" by default
             handleToggleSwitch(toggleSwitch); // Trigger the function
@@ -2061,5 +2074,17 @@
                 activeTabLink.click();
             }
         }
+
+		function getDaySuffix(day) {
+			if (day >= 11 && day <= 13) {
+			return day + 'th';
+			}
+			switch (day % 10) {
+			case 1: return day + 'st';
+			case 2: return day + 'nd';
+			case 3: return day + 'rd';
+			default: return day + 'th';
+			}
+		}
 	</script>									
 </html>

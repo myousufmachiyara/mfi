@@ -13,6 +13,7 @@ use App\Models\users;
 use App\Models\roles;
 use App\Models\user_roles;
 use App\Models\role_access;
+use App\Models\user_devices;
 use App\Traits\SaveImage;
 
 class UsersController extends Controller
@@ -201,12 +202,32 @@ class UsersController extends Controller
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
+            'browser_id' => 'required|string',
         ]);
 
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
+
+            $user_devices = user_devices::where('user_id',$user['id'])
+            ->where('device_id',Hash::make($request->browser_id))
+            ->get();
+
+            if ($user_devices->isEmpty()) {
+                $otp = rand(100000, 999999); // Generate a 6-digit OTP
+                $otp_email = $this->sendEmail($otp);
+                if($otp_email==0){
+                    $login_otps =login_otps::create([
+                        'user_id' => $user['id'],
+                        'otp' => Hash::make($otp),
+                    ]);
+                }
+                Auth::logout();
+                return back()->withErrors([
+                    'not_registered' => '0',
+                ]);
+            }
 
             $request->session()->regenerate();
 
@@ -242,6 +263,28 @@ class UsersController extends Controller
         ]);
     }
 
+    public function fingerprint(Request $request)
+    {
+        $request->validate([
+            'fingerprint' => 'required|string|max:255',
+        ]);
+
+        // Save fingerprint to database or log
+        // \Log::info('Fingerprint received: ' . $request->fingerprint);
+
+        // Respond to the client
+        return response()->json([
+            'status' => 'success',
+            'finger_print' => $request->fingerprint,
+        ], 200);
+    }
+
+    public function sendEmail($otp)
+    {
+        Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($otp));
+        return 0;
+    }
+
     public function logout(Request $request)
     {
         users::where('id', session('user_id'))->update([
@@ -259,12 +302,10 @@ class UsersController extends Controller
         $userId = session('user_id');
 
         if ($userId) {
-            // Update the `is_login` column
             users::where('id', $userId)->update(['is_login' => 0]);
         }
         Auth::logout();
         
-        // Redirect to the login page
         return redirect()->route('login');
     }
 
@@ -335,27 +376,6 @@ class UsersController extends Controller
         ]);
 
         return redirect()->route('all-users');
-    }
-
-    public function getMacAddress()
-    {
-        $output = shell_exec('ifconfig'); // Or 'ip link show'
-        
-        if ($output === null) {
-            return 'Command execution failed.';
-        }
-    
-        // Log output to a file for debugging
-        file_put_contents('ifconfig_output.txt', $output);
-    
-        $lines = explode("\n", $output);
-        foreach ($lines as $line) {
-            if (preg_match('/ether ([\da-f:]+)/', $line, $matches)) {
-                return $matches[1]; // Return the first MAC address found
-            }
-        }
-    
-        return 'Unable to retrieve MAC Address';
     }
 
     public function getUserPassword(Request $request){
