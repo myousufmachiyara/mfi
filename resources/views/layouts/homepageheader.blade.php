@@ -104,11 +104,11 @@
 					</div> 
 					<div class="col-12 mb-2">
 						<label>New Password</label>
-						<input type="password" class="form-control" placeholder="New Password" id="new_password" name="new_password" required>
+						<input type="password" class="form-control" placeholder="New Password" id="new_password" minlength="8" name="new_password" required>
 					</div>
 					<div class="col-12 mb-2">
 						<label>Confirm New Password</label>
-						<input type="password" class="form-control" placeholder="Confirm New Password" id="confirm_new_password" required>
+						<input type="password" class="form-control" placeholder="Confirm New Password" minlength="8" id="confirm_new_password" required>
 					</div>
 				</div>
 			</div>
