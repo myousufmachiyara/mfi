@@ -209,7 +209,7 @@ class UsersController extends Controller
         $browserVersion = $agent->version($browserName);  // Get the browser version
         $userLocation = $this->getUserLocation();  // Get the browser version
 
-        die($userLocation['ip']);
+        die($userLocation->ip);
 
         // Validate the request
         $request->validate([
