@@ -216,36 +216,31 @@
 			</div>
 		</section>
 		
-		<div id="editBillModal" class="modal-block modal-block-primary mfp-hide">
-			<section class="card">
-				<form method="post" action="{{ route('update-bill-number') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-					@csrf
-					<input type="hidden" name="pur2_id" value="{{ $pur->Sal_inv_no }}"> <!-- Hidden field -->
-					<header class="card-header">
-						<h2 class="card-title">Update Bill Number</h2>
-					</header>
-					<div class="card-body">
-						<div class="form-group">
-							<label>Invoice Number</label>
-							<input type="number" class="form-control" id="invoice_number" value="{{ $pur->Sal_inv_no }}" required disabled>
-						</div>
-						<div class="form-group">
-							<label>Bill Number<span style="color: red;"><strong>*</strong></span></label>
-							<input type="text" class="form-control" id="update_bill_number" placeholder="Bill Number" name="pur_ord_no" value="{{ $pur->pur_ord_no }}" required>
-						</div>
+		<!-- Edit Bill Modal -->
+		<div class="modal fade" id="editBillModal" tabindex="-1" aria-labelledby="editBillModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editBillModalLabel">Edit Bill Number</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<footer class="card-footer">
-						<div class="row">
-							<div class="col-md-12 text-end">
-								<button type="submit" class="btn btn-primary">Update Bill Number</button>
-								<button class="btn btn-default modal-dismiss">Cancel</button>
+					<form action="{{ route('update-bill-number') }}" method="POST">
+						@csrf
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="billNumberInput" class="form-label">Bill Number</label>
+								<input type="text" class="form-control" id="billNumberInput" name="pur_ord_no" value="{{ $pur->pur_ord_no }}" required>
 							</div>
+							<input type="hidden" name="pur2_id" value="{{ $pur->Sal_inv_no }}">
 						</div>
-					</footer>
-				</form>
-			</section>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save Changes</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		
 
 
         @include('../layouts.footerlinks')

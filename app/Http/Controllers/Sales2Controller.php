@@ -323,9 +323,9 @@ class Sales2Controller extends Controller
             $pur2->save();
         }
     
-        return redirect()->route('show-sales2', $request->pur2_id);
+        return redirect()->route('show-sales2', ['id' => $request->pur2_id]);
     }
-    
+     
 
     public function addAtt(Request $request)
     {
