@@ -1826,6 +1826,8 @@
 						month: month,
 					},
 					success: function(result) {
+						console.log(result['dash_pur_2_summary_monthly_companywise_for_donut']);
+
 						const { datasets, chartLabels } = generateChartDatasets(result['dash_pur_2_summary_monthly_companywise'], mills, colors);
 
 						if (top5CustomerPerformanceChart) {
