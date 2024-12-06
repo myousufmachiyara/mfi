@@ -2036,7 +2036,7 @@
 						};
 
 						// Create the doughnut chart
-						IILmonthlyTonageChart = new Chart(IILmonthlyTonageChart, {
+						IILmonthlyTonageChart = new Chart(IILMonthlyTonage, {
 							type: 'doughnut',
 							data: IILchartData,
 						});						
