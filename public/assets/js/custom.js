@@ -276,7 +276,10 @@ function validatePasswordMatch() {
     });
 }
 
-function validatePasswordMatch() {
+function validatePasswordMatch(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
     const newPassword = document.getElementById('new_password').value;
     const confirmPassword = document.getElementById('confirm_new_password').value;
     const currentPassword = document.getElementById('current_password').value;
@@ -284,15 +287,17 @@ function validatePasswordMatch() {
     // Basic validation
     if (!currentPassword || !newPassword || !confirmPassword) {
         alert('All fields are required.');
-        return false; // Prevent form submission
+        return false; // Stop execution
     }
 
+    // CSRF Token setup
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
+    // Validate current password via AJAX
     $.ajax({
         type: 'GET',
         url: '/validate-user-password/',
@@ -302,7 +307,7 @@ function validatePasswordMatch() {
                 // Check if newPassword matches confirmPassword
                 if (newPassword === confirmPassword) {
                     const form = document.getElementById('changePasswordForm');
-                    form.submit(); // Submit the form if all conditions are met
+                    form.submit(); // Submit the form only if all conditions are met
                 } else {
                     alert('New Password and Confirm New Password do not match.');
                 }
@@ -315,5 +320,9 @@ function validatePasswordMatch() {
         }
     });
 
-    return false; // Prevent form submission until AJAX success conditions are met
+    // Return false to prevent form submission by default
+    return false;
 }
+
+// Attach the function to the form's submit event
+document.getElementById('changePasswordForm').addEventListener('submit', validatePasswordMatch);
