@@ -99,7 +99,7 @@
 				<div class="row form-group">    
 					<div class="col-12 mb-2">
 						<label>Current Password</label>
-						<input type="password" class="form-control" placeholder="Current Password" id="current_passowrd" name="current_passowrd" required>
+						<input type="password" class="form-control" placeholder="Current Password" id="current_password" name="current_password" required>
 					</div> 
 					<div class="col-12 mb-2">
 						<label>New Password</label>
