@@ -421,11 +421,26 @@ class UsersController extends Controller
     }
 
     public function getUserPassword(Request $request){
-        $user_password = users::where('id', session('user_id'))->value('password');
-        if (Hash::check($request->password, $user->password)) {
-            return response()->json(1); // Password is correct
-        } else {
-            return response()->json(0); // Password is incorrect
+        try {
+            $userId = session('user_id');
+    
+            if (!$userId) {
+                return response()->json(['error' => 'User session is missing'], 401);
+            }
+    
+            $user_password = users::where('id', $userId)->value('password');
+    
+            if (!$user_password) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+    
+            if (Hash::check($request->password, $user_password)) {
+                return response()->json(['status' => 1]);
+            }
+    
+            return response()->json(['status' => 0]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 

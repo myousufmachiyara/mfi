@@ -303,19 +303,24 @@ function validatePasswordMatch(event) {
         url: '/validate-user-password/',
         data: { 'password': currentPassword },
         success: function (response) {
-            if (response == 1) {
-                // Check if newPassword matches confirmPassword
+            if (response.status === 1) {
+                // New and Confirm Password Match
                 if (newPassword === confirmPassword) {
                     const form = document.getElementById('changePasswordForm');
-                    form.submit(); // Submit the form only if all conditions are met
+                    form.submit();
                 } else {
                     alert('New Password and Confirm New Password do not match.');
                 }
-            } else if (response == 0) {
+            } else if (response.status === 0) {
                 alert("Current Password is not correct.");
+            } else if (response.error) {
+                alert("Error: " + response.error);
+            } else {
+                alert("Unexpected response.");
             }
         },
-        error: function () {
+        error: function (xhr, status, error) {
+            console.error('AJAX Error:', error);
             alert("An error occurred while validating the current password.");
         }
     });
