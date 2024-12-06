@@ -331,8 +331,7 @@ class Sales2Controller extends Controller
               ]);
     
         // Redirect to the appropriate route
-        return redirect()->route('all-sale2invoices')
-                         ->with('success', 'Bill number updated successfully!');
+        return redirect()->route('all-sale2invoices');
     }
     
 

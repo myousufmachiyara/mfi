@@ -75,9 +75,10 @@
 												</h4> --}}
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
-													<span style="color:#17365D">Bill No: &nbsp </span>
+													<a href="#" style="color:#17365D" data-bs-toggle="modal" data-bs-target="#editBillModal">
+														Bill No: &nbsp;
+													</a>
 													<span style="font-weight:400;color:black" class="value" id="billNoDisplay">{{ $pur->pur_ord_no }}</span>
-													<a href="#" class="ml-2" data-bs-toggle="modal" data-bs-target="#editBillModal">Edit</a>
 												</h4>
 
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
