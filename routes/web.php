@@ -42,6 +42,7 @@
         Route::get('/purchase2/show/{id}', [App\Http\Controllers\Purchase2Controller::class, 'show'])->name('show-purchases2');
         Route::get('/sales/saleinvoice/view/{id}', [App\Http\Controllers\SalesController::class, 'showNew'])->name('show-sale-invoice');
         Route::get('/sales2/show/{id}', [App\Http\Controllers\Sales2Controller::class, 'show'])->name('show-sales2');
+        Route::post('/sales2/show/update', [App\Http\Controllers\Sales2Controller::class, 'updatebill'])->name('update-bill-number');
         Route::get('/quotation/quotationinvoice/view/{id}', [App\Http\Controllers\QuotationController::class, 'showNew'])->name('show-quotation-invoice');
         Route::get('/tpo/show/{id}', [App\Http\Controllers\TpoController::class, 'show'])->name('show-tpo');
         Route::get('/stock_in/view/{id}', [App\Http\Controllers\StockInController::class, 'show'])->name('show-stock-in-invoice');

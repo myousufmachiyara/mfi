@@ -69,10 +69,17 @@
 													<span style="font-weight:400;color:black" class="value"> {{$pur->cash_Pur_address}}</span>
 												</h4>
 
-												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+												{{-- <h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Bill No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_ord_no}}</span>
+												</h4> --}}
+
+												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
+													<span style="color:#17365D">Bill No: &nbsp </span>
+													<span style="font-weight:400;color:black" class="value" id="billNoDisplay">{{ $pur->pur_ord_no }}</span>
+													<a href="#" class="ml-2" data-bs-toggle="modal" data-bs-target="#editBillModal">Edit</a>
 												</h4>
+
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Remarks: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->Sales_Remarks}}</span>
@@ -208,6 +215,39 @@
 			</div>
 			</div>
 		</section>
+		
+		<div id="editBillModal" class="modal-block modal-block-primary mfp-hide">
+			<section class="card">
+				<form method="post" action="{{ route('update-bill-number') }}" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+					@csrf
+					<input type="hidden" name="pur2_id" value="{{ $pur->Sal_inv_no }}"> <!-- Hidden field -->
+					<header class="card-header">
+						<h2 class="card-title">Update Bill Number</h2>
+					</header>
+					<div class="card-body">
+						<div class="form-group">
+							<label>Invoice Number</label>
+							<input type="number" class="form-control" id="invoice_number" value="{{ $pur->Sal_inv_no }}" required disabled>
+						</div>
+						<div class="form-group">
+							<label>Bill Number<span style="color: red;"><strong>*</strong></span></label>
+							<input type="text" class="form-control" id="update_bill_number" placeholder="Bill Number" name="pur_ord_no" value="{{ $pur->pur_ord_no }}" required>
+						</div>
+					</div>
+					<footer class="card-footer">
+						<div class="row">
+							<div class="col-md-12 text-end">
+								<button type="submit" class="btn btn-primary">Update Bill Number</button>
+								<button class="btn btn-default modal-dismiss">Cancel</button>
+							</div>
+						</div>
+					</footer>
+				</form>
+			</section>
+		</div>
+		
+
+
         @include('../layouts.footerlinks')
 	</body>
 

@@ -312,6 +312,21 @@ class Sales2Controller extends Controller
         return redirect()->route('show-sales2',$request->pur2_id);
     }
 
+
+    public function updatebill(Request $request)
+    {
+        $pur2 = tsales::where('Sal_inv_no', $request->pur2_id)->first();
+    
+        if ($pur2 && $request->filled('pur_ord_no')) {
+            $pur2->pur_ord_no = $request->pur_ord_no;
+            $pur2->updated_by = session('user_id'); 
+            $pur2->save();
+        }
+    
+        return redirect()->route('show-sales2', $request->pur2_id);
+    }
+    
+
     public function addAtt(Request $request)
     {
         $sale2_id=$request->att_id;
