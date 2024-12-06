@@ -1459,6 +1459,8 @@
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 		let top5CustomerPerformanceChart;
+		let IILmonthlyTonageChart; // Declare a global variable to hold the chart instance
+		let IILtop5CustomerPerformanceChart;
 
 		function groupByMillCode(mills, data) {
 			const result = {
@@ -1885,6 +1887,49 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
+						const { datasets, chartLabels } = generateChartDatasets(result['dash_chart_for_item_group'], mills, colors);
+
+						if (IILtop5CustomerPerformanceChart) {
+							IILtop5CustomerPerformanceChart.destroy();
+						}
+
+						const IILtop5CustomerPerformanceChart = document.getElementById('IILtop5CustomerPerformance');
+
+						IILtop5CustomerPerformanceChart.width = 600; // Set desired width
+						IILtop5CustomerPerformanceChart.height = 353; // Set desired height
+
+						// Create the new chart
+						IILtop5CustomerPerformanceChart = new Chart(IILtop5CustomerPerformanceChart, {
+							type: 'bar',
+							data: {
+								labels: chartLabels, // 'dat' values as labels
+								datasets: datasets,  // Dynamic datasets based on groupedData
+							},
+						});
+
+						const groupedData = groupByMillCode(mills, result['dash_chart_for_item_group_for_donut']);
+
+						if (IILmonthlyTonageChart) {
+							IILmonthlyTonageChart.destroy();
+						}
+
+						// Create the doughnut chart
+						IILmonthlyTonageChart = new Chart(IILmonthlyTonageChart, {
+							type: 'doughnut',
+							data: chartData,
+						});
+
+						const chartData = {
+							labels: groupedData.labels, // Set the labels directly here
+							datasets: [
+								{
+									data: groupedData.data, // Extract total_weight values for each mill
+									backgroundColor: groupedData.backgroundColor, // Assign background colors
+								}
+							]
+						};
+						
+
 						var rows = '';
 						var totalWeight = 0; // Initialize total
 
