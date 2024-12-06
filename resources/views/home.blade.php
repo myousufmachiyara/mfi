@@ -1567,6 +1567,57 @@
 			return result;
 		}
 
+		function IILgroupByMillCode(mills, data) {
+			const result = {
+				labels: [], // To hold the labels for the chart
+				data: [], // To hold the total_weight for each mill
+				backgroundColor: [] // To hold the colors for the chart
+			};
+
+			// Initialize groups for each mill in mills array
+			mills.forEach(mill => {
+				result[mill] = { weight: 0, name: "", backgroundColor: "" };
+			});
+
+			// Add a group for "Others"
+			result['Others'] = { weight: 0, name: "Others" };
+
+			// Iterate through the data to group by mill_code and calculate total_weight
+			data.forEach(item => {
+				const millCode = item.mill_code.toString();
+				const millName = mills.includes(millCode) ? item.mill_name : 'Others';
+
+				// Aggregate the total_weight based on the mill_code or group it under "Others"
+				if (millName === 'Others') {
+					result['Others'].weight += item.total_weight;
+					result['Others'].backgroundColor = 'rgba(200, 200, 200, 1)';
+
+				} else {
+					result[millCode].weight += item.total_weight;
+					result[millCode].name = item.mill_name;
+					if(item.mill_name=="STEELEX"){
+						result[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
+					}
+					else if(item.mill_name=="S.P.M"){
+						result[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
+					}
+					else if(item.mill_name=="MEHBOOB PIPE"){
+						result[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
+					}
+				}
+			});
+			// Prepare the final chart data
+			for (const key in result) {
+				if (result[key].weight > 0) {
+					result.labels.push(result[key].name);
+					result.data.push(result[key].weight);
+					result.backgroundColor.push(result[key].backgroundColor);
+				}
+			}
+
+			return result;
+		}
+
 		// donut graph for Monthly Tonage Ended 
 
 		// get Monthly Tonage Of Customer Started
@@ -1941,7 +1992,7 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
-						console.log(result['dash_chart_for_item_group']);
+						console.log(result['dash_chart_for_item_group_for_donut']);
 
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], mills, colors);
 
@@ -1963,7 +2014,7 @@
 							},
 						});
 
-						const groupedData = groupByMillCode(mills, result['dash_chart_for_item_group_for_donut']);
+						const groupedData = IILgroupByMillCode(mills, result['dash_chart_for_item_group_for_donut']);
 
 						if (IILmonthlyTonageChart) {
 							IILmonthlyTonageChart.destroy();
