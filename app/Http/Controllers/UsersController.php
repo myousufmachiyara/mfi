@@ -214,7 +214,7 @@ class UsersController extends Controller
         $locationData = $userLocation->getData();
 
         // Display the extracted data (ip, city, region, country, location)
-        die($locationData);
+        die(print_r($locationData['ip']));
 
 
         // Validate the request
