@@ -210,6 +210,8 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Change Details</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
                     </footer>
@@ -461,6 +463,8 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
+                                <button type="submit" class="btn btn-primary">Change Details</button>
+                                <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
                     </footer>
