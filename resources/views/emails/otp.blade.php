@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <p>Your OTP code is: <strong>{{ $otp }}</strong></p>
     <p>Your OTP is: <strong>{{ $details['otp'] }}</p>
     <p>Browser: <strong>{{ $details['browser'] }} (Version: {{ $details['version'] }})</strong></p>
     <p>IP Address: <strong>{{ $details['ip'] }} </strong></p>
