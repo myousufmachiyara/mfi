@@ -284,7 +284,7 @@ function validatePasswordMatch() {
     // Basic validation
     if (!currentPassword || !newPassword || !confirmPassword) {
         alert('All fields are required.');
-        return false;
+        return false; // Prevent form submission
     }
 
     $.ajaxSetup({
@@ -296,24 +296,24 @@ function validatePasswordMatch() {
     $.ajax({
         type: 'GET',
         url: '/validate-user-password/',
-        data: {
-            'password': currentPassword,
-        },
+        data: { 'password': currentPassword },
         success: function (response) {
             if (response == 1) {
-                if (newPassword !== confirmPassword) {
-                    alert('New Password and Confirm New Password do not match.');
-                    return false; // Prevent form submission
-                } else {
+                // Check if newPassword matches confirmPassword
+                if (newPassword === confirmPassword) {
                     const form = document.getElementById('changePasswordForm');
-                    form.submit();
+                    form.submit(); // Submit the form if all conditions are met
+                } else {
+                    alert('New Password and Confirm New Password do not match.');
                 }
-            } else if(response==0){
-                alert("Current Password is not Correct")
-            } 
+            } else if (response == 0) {
+                alert("Current Password is not correct.");
+            }
         },
         error: function () {
             alert("An error occurred while validating the current password.");
         }
     });
+
+    return false; // Prevent form submission until AJAX success conditions are met
 }
