@@ -217,7 +217,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="editBillModalLabel">Edit Bill Number</h5>
+						<h5 class="modal-title" id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<form action="{{ route('update-bill-number') }}" method="POST">
@@ -230,7 +230,7 @@
 							<input type="hidden" name="pur3_id" value="{{ $pur->Sal_inv_no }}">
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-primary">Save Changes</button>
 						</div>
 					</form>
