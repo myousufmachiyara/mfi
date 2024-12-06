@@ -231,7 +231,7 @@
 								<label for="billNumberInput" class="form-label">Bill Number</label>
 								<input type="text" class="form-control" id="billNumberInput" name="pur_ord_no" value="{{ $pur->pur_ord_no }}" required>
 							</div>
-							<input type="hidden" name="pur2_id" value="{{ $pur->Sal_inv_no }}">
+							<input type="text" name="pur2_id" value="{{ $pur->Sal_inv_no }}">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
