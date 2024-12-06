@@ -210,11 +210,11 @@ class UsersController extends Controller
 
         $userLocation = $this->getUserLocation(); // Fetch user location details
 
-        // Extract the "original" data from the JSON response
-        $locationData = $userLocation->getData();
-
-        // Display the extracted data (ip, city, region, country, location)
-        die(print_r($locationData));
+        // Convert the stdClass object to an array
+        $locationData = (array) $userLocation->getData();
+    
+        // Display the data directly
+        die(print_r($locationData, true));
 
 
         // Validate the request
