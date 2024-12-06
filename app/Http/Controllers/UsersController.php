@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Traits\SaveImage;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
+use Jenssegers\Agent\Agent;
 
 class UsersController extends Controller
 {
@@ -202,8 +203,12 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-        $userAgent = $request->headers->all();
-        die(print_r($userAgent));
+        $agent = new Agent();
+        $browserName = $agent->browser();  // Get the browser name
+        $browserVersion = $agent->version($browserName);  // Get the browser version
+        $userLocation = $this->getUserLocation();  // Get the browser version
+
+        die($browserName."-".$browserVersion."-".$userLocation);
 
         // Validate the request
         $request->validate([
@@ -328,6 +333,26 @@ class UsersController extends Controller
         Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($otp));
         Mail::to('memonfabrication@hotmail.com')->send(new SendMail($otp));
         return 0;
+    }
+
+    public function getUserLocation()
+    {
+        // Get the user's IP address (you can use request()->ip() to get the IP)
+        $ip = request()->ip();
+        
+        // Call ipinfo.io API to get location details
+        $response = Http::get("http://ipinfo.io/{$ip}/json");
+
+        // Decode the response to get location data
+        $data = $response->json();
+
+        return response()->json([
+            'ip' => $data['ip'],
+            'city' => $data['city'],
+            'region' => $data['region'],
+            'country' => $data['country'],
+            'location' => $data['loc'],  // Latitude, Longitude
+        ]);
     }
 
     public function logout(Request $request)
