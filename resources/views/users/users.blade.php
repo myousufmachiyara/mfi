@@ -434,7 +434,7 @@
             </section>
         </div>
 
-        <div id="RegDevices" class="modal-block modal-block-primary mfp-hide">
+        <div id="RegDevices" class="modal-block modal-block-danger mfp-hide">
             <section class="card">
                 <section class="card">
                     <header class="card-header">
