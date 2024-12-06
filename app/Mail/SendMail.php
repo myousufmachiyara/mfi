@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $otp;
+    public $details;
 
-    public function __construct($otp)
+    public function __construct($details)
     {
-        $this->otp = $otp;
+        $this->details = $details;
     }
 
     public function build()
@@ -23,7 +23,7 @@ class SendMail extends Mailable
         return $this->subject('OTP for New Device Login') // Set the subject of the email
         ->view('emails.otp') // Set the view for the email content
         ->with([
-            'otp' => $this->otp, // Pass the OTP to the view
+            'details' => $this->details, // Pass the OTP to the view
         ]);
     }
 }

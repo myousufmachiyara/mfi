@@ -204,19 +204,6 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-        $agent = new Agent();
-        $browserName = $agent->browser();  // Get the browser name
-        $browserVersion = $agent->version($browserName);  // Get the browser version
-
-        $userLocation = $this->getUserLocation(); // Fetch user location details
-
-        // Convert the stdClass object to an array
-        $locationData = (array) $userLocation->getData();
-    
-        // Display the data directly
-        die(print_r($locationData, true));
-
-
         // Validate the request
         $request->validate([
             'username' => 'required|string',
@@ -228,6 +215,11 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
+            
+            $agent = new Agent();
+            $userLocation = $this->getUserLocation(); // Fetch user location details
+            $locationData = (array) $userLocation->getData();
+
             $user_devices = user_devices::where('user_id', $user->id)->get();
             $isDeviceRegistered = false;
 
@@ -264,8 +256,28 @@ class UsersController extends Controller
             }
 
             else if(!$isDeviceRegistered){
-                $otp = rand(100000, 999999); // Generate a 6-digit OTP
-                $otp_email = $this->sendEmail($otp); // Implement email sending functionality
+
+                $otp = rand(100000, 999999); // Generate a 6-digit 
+                $browserName = $agent->browser();  
+                $browserVersion = $agent->version($browserName);  
+                $ip=$locationData['ip'];
+                $city=$locationData['city'];
+                $region=$locationData['region'];
+                $country=$locationData['country'];
+                $location=$locationData['location'];
+
+                $data = [
+                    'otp' => $otp,
+                    'browser' => $browserName,
+                    'version' => $browserVersion,
+                    'ip' => $ip,
+                    'city' => $city,
+                    'region' => $region,
+                    'country' => $country,
+                    'location' => $location,
+                ];
+
+                $otp_email = $this->sendEmail($data); // Implement email sending functionality
                 
                 if ($otp_email == 0) {
                     login_otps::create([
@@ -335,10 +347,10 @@ class UsersController extends Controller
         ], 200);
     }
 
-    public function sendEmail($otp)
+    public function sendEmail($data)
     {
-        Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($otp));
-        Mail::to('memonfabrication@hotmail.com')->send(new SendMail($otp));
+        Mail::to('yousufmachiyara@gmail.com')->send(new SendMail($data));
+        Mail::to('memonfabrication@hotmail.com')->send(new SendMail($data));
         return 0;
     }
 
