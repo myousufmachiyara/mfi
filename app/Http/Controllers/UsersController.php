@@ -374,7 +374,7 @@ class UsersController extends Controller
 
     public function getRegDevices(Request $request){
         $user_devices = user_devices::leftjoin('users','users.id','=','user_devices.user_id')
-        ->select('user_devices.*','users.name')
+        ->select('user_devices.*','users.name as user')
         ->get();
         return $user_devices;
     }
