@@ -203,7 +203,7 @@ class UsersController extends Controller
     public function login(Request $request)
     {
         $userAgent = $request->headers->all();
-        die($userAgent);
+        die(print_r($userAgent));
 
         // Validate the request
         $request->validate([
