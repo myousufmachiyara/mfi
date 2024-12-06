@@ -422,10 +422,11 @@ class UsersController extends Controller
 
     public function getUserPassword(Request $request){
         $user_password = users::where('id', session('user_id'))->value('password');
-        if (Hash::check($request->password, $user_password)) {
-            return 1;
+        if (Hash::check($request->password, $user->password)) {
+            return response()->json(1); // Password is correct
+        } else {
+            return response()->json(0); // Password is incorrect
         }
-        return 0;
     }
 
     public function updateUserPassowrd(Request $request){
