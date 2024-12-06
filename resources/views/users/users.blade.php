@@ -184,38 +184,37 @@
         </div>
 
         <div id="attModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-                <section class="card">
-                    <header class="card-header">
-                        <h2 class="card-title">All Attachements</h2>
-                    </header>
-                    <div class="card-body">
-                        <div class="modal-wrapper">
+            <section class="card">
+                <header class="card-header">
+                    <h2 class="card-title">All Attachements</h2>
+                </header>
+                <div class="card-body">
+                    <div class="modal-wrapper">
 
-                            <table class="table table-bordered table-striped mb-0" id="datatable-default">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Attachement Path</th>
-                                        <th>Download</th>
-                                        <th>View</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="acc_attachements">
+                        <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Attachement Path</th>
+                                    <th>Download</th>
+                                    <th>View</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="acc_attachements">
 
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-end">
+                            <button class="btn btn-default modal-dismiss">Close</button>
                         </div>
                     </div>
-                    <footer class="card-footer">
-                        <div class="row">
-                            <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Change Details</button>
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
-                            </div>
-                        </div>
-                    </footer>
-                </section>
+                </footer>
+            </section>
         </div>
 
         <div id="printModal" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
@@ -462,8 +461,7 @@
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Change Details</button>
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
+                                <button class="btn btn-default modal-dismiss">Close</button>
                             </div>
                         </div>
                     </footer>
