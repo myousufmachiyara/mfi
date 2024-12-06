@@ -372,6 +372,13 @@ class UsersController extends Controller
         ]);
     }
 
+    public function getRegDevices(Request $request){
+        $user_devices = user_devices::leftjoin('users','users.id','=','user_devices.user_id')
+        ->select('user_devices.*','users.name')
+        ->get();
+        return $user_devices;
+    }
+
     public function deactivateUser(Request $request)
     {
         users::where('id', $request->deactivate_user)->update([

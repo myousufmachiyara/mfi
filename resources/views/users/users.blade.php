@@ -32,7 +32,7 @@
                                     <h2 class="card-title mb-2">All Users</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New User</button>
-                                        <button type="button" class="modal-with-form btn btn-danger" href="#RegDevices"> <i class="fa fa-desktop">  </i>  Registered Devices</button>
+                                        <button type="button" class="modal-with-form btn btn-danger" href="#RegDevices" onclick="getRegDevices()"> <i class="fa fa-desktop">  </i>  Registered Devices</button>
                                     </div>
                                 </header>
                                 <div class="card-body">
@@ -452,7 +452,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="regDevices">
 
                                 </tbody>
                             </table>
@@ -659,5 +659,30 @@
         });
     }
 
+    function getRegDevices(){
+        var table = document.getElementById('acc_attachements');
+        while (table.rows.length > 0) {
+            table.deleteRow(0);
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/user/reg-devices",
+            success: function(result){
+                $.each(result, function(k,v){                    
+                    var html="<tr>";
+                    html+= "<td>"+(k+1)+"</td>"
+                    html+= "<td>"+v['']+"</td>"
+                    html+= "<td>"+v['']+"</td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-primary' href='#' onclick='deleteFile("+id+")'><i class='fas fa-trash'></i></a></td>"
+                    html+="</tr>";
+                    $('#regDevices').append(html);
+                });
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+    }
     
 </script>

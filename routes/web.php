@@ -12,6 +12,7 @@
     Route::middleware(['checkPermission:view'])->group(function () {
 
         Route::get('/user/all-users', [App\Http\Controllers\UsersController::class, 'index'])->name('all-users');
+        Route::get('/user/reg-devices', [App\Http\Controllers\UsersController::class, 'getRegDevices'])->name('all-user-reg-devices');
         Route::get('/user-role/all-roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('all-roles');
         Route::get('/item-groups/all-groups', [App\Http\Controllers\ItemGroupsController::class, 'index'])->name('all-item-groups');
         Route::get('/items/all-items', [App\Http\Controllers\ItemsController::class, 'index'])->name('all-items');
@@ -365,7 +366,6 @@
 
     });
 
-    // reporting
     Route::middleware(['auth'])->group(function () {
 
         // Main Routes
@@ -555,6 +555,7 @@
         Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
 
     });
+
     Route::post('/fingerprint', [App\Http\Controllers\UsersController::class, 'fingerprint']);
     Route::get('/send-email', [App\Http\Controllers\UsersController::class, 'sendEmail']);
     
