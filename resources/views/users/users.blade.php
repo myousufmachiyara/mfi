@@ -435,32 +435,36 @@
 
         <div id="addMacAdd" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
-                <form method="post"  enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
-                    @csrf
+                <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">Add User Device</h2>
+                        <h2 class="card-title">User Devices</h2>
                     </header>
                     <div class="card-body">
-                        <div class="row form-group">    
-                            <div class="col-lg-6 mb-2">
-                                <label>Device Name</label>
-                                <input type="text" class="form-control" placeholder="Device Name"  name="user_device_name" required>
-                            </div> 
-                            <div class="col-lg-6 mb-2">
-                                <label>Mac Address</label>
-                                <input type="text" class="form-control" placeholder="Mac Address" name="user_device_password" required>
-                            </div>
+                        <div class="modal-wrapper">
+
+                            <table class="table table-bordered table-striped mb-0" id="datatable-default">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Attachement Path</th>
+                                        <th>Download</th>
+                                        <th>View</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <footer class="card-footer">
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Add Device</button>
-                                <button class="btn btn-default modal-dismiss">Cancel</button>
                             </div>
                         </div>
                     </footer>
-                </form>
+                </section>
             </section>
         </div>
 
