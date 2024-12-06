@@ -315,16 +315,26 @@ class Sales2Controller extends Controller
 
     public function updatebill(Request $request)
     {
-
-        if ($request->has('pur_ord_no') && $request->pur_ord_no) {
-            $pur_ord_no=$request->pur_ord_no;
-        }
-    
-        tsales::where('Sal_inv_no', $request->pur3_id)->update([
-            'pur_ord_no'=>$pur_ord_no,
+        // Validate the request data
+        $request->validate([
+            'pur_ord_no' => 'required|string', // Ensure it's a string if it's a text input
+            'pur3_id' => 'required|integer',   // Validate pur3_id to be a valid integer
         ]);
-        return redirect()->route('all-sale2invoices');
-    } 
+    
+        // Get the new bill number
+        $pur_ord_no = $request->pur_ord_no;
+    
+        // Update the record in tsales table
+        tsales::where('Sal_inv_no', $request->pur3_id)
+              ->update([
+                  'pur_ord_no' => $pur_ord_no,
+              ]);
+    
+        // Redirect to the appropriate route
+        return redirect()->route('all-sale2invoices')
+                         ->with('success', 'Bill number updated successfully!');
+    }
+    
 
     public function addAtt(Request $request)
     {
