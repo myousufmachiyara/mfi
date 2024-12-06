@@ -207,9 +207,15 @@ class UsersController extends Controller
         $agent = new Agent();
         $browserName = $agent->browser();  // Get the browser name
         $browserVersion = $agent->version($browserName);  // Get the browser version
-        $userLocation = $this->getUserLocation();  // Get the browser version
 
-        die(print_r($userLocation));
+        $userLocation = $this->getUserLocation(); // Fetch user location details
+
+        // Extract the "original" data from the JSON response
+        $locationData = $userLocation->getData();
+
+        // Display the extracted data (ip, city, region, country, location)
+        die(print_r($locationData));
+
 
         // Validate the request
         $request->validate([
