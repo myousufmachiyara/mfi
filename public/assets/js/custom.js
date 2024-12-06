@@ -238,9 +238,11 @@ $(document).on('mousemove keypress click scroll', resetTimer);
 // Initialize the session activity timer when the page loads
 resetTimer();
 
-$('#changePasswordForm').on('submit', function(e){
-    e.preventDefault();
-    var currentPassword=$('#current_passowrd').val();
+function validatePasswordMatch() {
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_new_password').value;
+    const currentPassword= document.getElementById('current_passowrd').value;
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -254,7 +256,18 @@ $('#changePasswordForm').on('submit', function(e){
             'password':currentPassword,
         },
         success: function(response){
-            if(response!=1){
+            if(response==1){
+                alert("Current Password is not Correct");
+                if (newPassword !== confirmPassword) {
+                    alert('New Password and Confirm New Password do not match.');
+                    return false; // Prevent form submission
+                }
+                else{
+                    var form = document.getElementById('changePasswordForm');
+                    form.submit();
+                }
+            }
+            else{
                 alert("Current Password is not Correct")
             }
         },
@@ -262,15 +275,4 @@ $('#changePasswordForm').on('submit', function(e){
             alert("error");
         }
     });
-});	
-
-function validatePasswordMatch() {
-    const newPassword = document.getElementById('new_password').value;
-    const confirmPassword = document.getElementById('confirm_new_password').value;
-
-    if (newPassword !== confirmPassword) {
-        alert('New Password and Confirm New Password do not match.');
-        return false; // Prevent form submission
-    }
-    return true; // Allow form submission
 }
