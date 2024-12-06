@@ -1999,7 +1999,7 @@
 					success: function(result) {
 						console.log(result['dash_chart_for_item_group_for_donut']);
 
-						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], mills, colors);
+						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], IILmills, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
