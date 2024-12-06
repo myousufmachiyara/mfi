@@ -215,7 +215,7 @@ class UsersController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => 1])) {
             // Authentication passed
             $user = Auth::user();
-            
+
             $agent = new Agent();
             $userLocation = $this->getUserLocation(); // Fetch user location details
             $locationData = (array) $userLocation->getData();
@@ -275,6 +275,7 @@ class UsersController extends Controller
                     'region' => $region,
                     'country' => $country,
                     'location' => $location,
+                    'username' => $user->name,
                 ];
 
                 $otp_email = $this->sendEmail($data); // Implement email sending functionality
