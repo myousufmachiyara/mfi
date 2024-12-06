@@ -316,7 +316,7 @@ class Sales2Controller extends Controller
     public function updatebill(Request $request)
     {
         // Ensure we are using 'Sal_inv_no' as the identifier
-        $pur2 = tsales::where('Sal_inv_no', $request->pur2_id)->first();
+        $pur2 = tsales::where('Sal_inv_no', $request->pur3_id)->get()->first();
     
         // Check if the record exists and if 'pur_ord_no' is provided in the request
         if ($pur2 && $request->filled('pur_ord_no')) {
@@ -325,7 +325,7 @@ class Sales2Controller extends Controller
             $pur2->save();  // Save the updated record
         }
     
-        return redirect()->route('show-sales2',$request->pur2_id);
+        return redirect()->route('show-sales2',$request->pur3_id);
     }
     
      
