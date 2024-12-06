@@ -325,8 +325,8 @@ class Sales2Controller extends Controller
             $pur2->save();  // Save the updated record
         }
 
-        // Redirect back to the route with the updated bill number
-        return redirect()->route('show-sales2', ['id' => $request->pur3_id]);
+        // // Redirect back to the route with the updated bill number
+        // return redirect()->route('show-sales2', ['id' => $request->pur3_id]);
     }
 
      
