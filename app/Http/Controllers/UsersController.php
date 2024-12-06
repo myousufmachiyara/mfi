@@ -202,6 +202,9 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
+        $userAgent = $request->headers->all();
+        die($userAgent);
+
         // Validate the request
         $request->validate([
             'username' => 'required|string',
