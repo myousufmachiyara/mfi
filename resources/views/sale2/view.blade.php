@@ -72,9 +72,6 @@
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Bill No: &nbsp </span>
 													<span style="font-weight:400;color:black" class="value"> {{$pur->pur_ord_no}}</span>
-													<a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal" onclick="setId({{$row->item_group_cod}})" href="#deleteModal">
-														<i class="far fa-trash-alt" style="color:red"></i>
-													   </a>
 												</h4>
 												<h4 class="mb-0 h6 mb-1 text-dark font-weight-semibold">
 													<span style="color:#17365D">Remarks: &nbsp </span>
