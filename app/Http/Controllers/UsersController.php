@@ -379,6 +379,17 @@ class UsersController extends Controller
         return $user_devices;
     }
 
+    public function deleteDevice($id){
+        $device = user_devices::where('id', $id)->get();
+        $filePath = public_path($doc['att_path']);
+        if ($device) {
+            $device = user_devices::where('id', $id)->delete();
+            return response()->json(['message' => 'Device deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'Device not found.'], 404);
+        }	
+    }
+
     public function deactivateUser(Request $request)
     {
         users::where('id', $request->deactivate_user)->update([
