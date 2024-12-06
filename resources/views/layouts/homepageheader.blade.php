@@ -88,24 +88,27 @@
 	</div>
 
 	<div id="changePassword" class="zoom-anim-dialog modal-block modal-block-danger mfp-hide">
-		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" style="width: 75%" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+		<form id="changePasswordForm" method="post" action="{{ route('change-user-password') }}" 
+			  style="width: 75%" enctype="multipart/form-data" 
+			  onkeydown="return event.key != 'Enter';" 
+			  onsubmit="return validatePasswordMatch();">
 			@csrf
 			<header class="card-header">
 				<h2 class="card-title">Change Password</h2>
 			</header>
 			<div class="card-body">
-				<div class="row form-group">
+				<div class="row form-group">    
 					<div class="col-12 mb-2">
-						<label for="current_password">Current Password</label>
-						<input type="password" class="form-control" placeholder="Current Password" id="current_password" name="current_password" autocomplete="current-password" required>
+						<label>Current Password</label>
+						<input type="password" class="form-control" placeholder="Current Password" id="current_passowrd" name="current_passowrd" required>
+					</div> 
+					<div class="col-12 mb-2">
+						<label>New Password</label>
+						<input type="password" class="form-control" placeholder="New Password" id="new_password" minlength="8" name="new_password" required>
 					</div>
 					<div class="col-12 mb-2">
-						<label for="new_password">New Password</label>
-						<input type="password" class="form-control" placeholder="New Password" id="new_password" name="new_password" minlength="8" autocomplete="new-password" required>
-					</div>
-					<div class="col-12 mb-2">
-						<label for="confirm_new_password">Confirm New Password</label>
-						<input type="password" class="form-control" placeholder="Confirm New Password" id="confirm_new_password" minlength="8" required>
+						<label>Confirm New Password</label>
+						<input type="password" class="form-control" placeholder="Confirm New Password" minlength="8" id="confirm_new_password" required>
 					</div>
 				</div>
 			</div>
