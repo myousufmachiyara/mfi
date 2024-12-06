@@ -217,7 +217,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
+						<h5 id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<form action="{{ route('update-bill-number') }}" method="POST">
