@@ -238,41 +238,52 @@ $(document).on('mousemove keypress click scroll', resetTimer);
 // Initialize the session activity timer when the page loads
 resetTimer();
 
-function validatePasswordMatch() {
+document.getElementById('changePasswordForm').addEventListener('submit', function(event) {
+    // Prevent the default form submission
     event.preventDefault();
+
     const newPassword = document.getElementById('new_password').value;
     const confirmPassword = document.getElementById('confirm_new_password').value;
-    const currentPassword= document.getElementById('current_passowrd').value;
+    const currentPassword = document.getElementById('current_password').value;
 
+    // Basic validation to ensure all fields are filled
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        alert('All fields are required.');
+        return false; // Stop execution
+    }
+
+    // CSRF Token setup
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
+    // AJAX request to validate current password
     $.ajax({
         type: 'GET',
         url: '/validate-user-password/',
-        data: {
-            'password':currentPassword,
-        },
-        success: function(response){
-            if(response==1){
+        data: { 'password': currentPassword },
+        success: function (response) {
+            if (response == 1) {
+                // Check if newPassword matches confirmPassword
                 if (newPassword !== confirmPassword) {
                     alert('New Password and Confirm New Password do not match.');
-                    return false; // Prevent form submission
-                }
-                else{
-                    var form = document.getElementById('changePasswordForm');
+                    return false; // Stop execution
+                } else {
+                    // Submit the form programmatically if everything is valid
+                    const form = document.getElementById('changePasswordForm');
                     form.submit();
                 }
-            }
-            else if(response==0){
-                alert("Current Password is not Correct")
+            } else if (response == 0) {
+                alert("Current Password is not correct.");
             }
         },
-        error: function(){
-            alert("error");
+        error: function () {
+            alert("An error occurred while validating the current password.");
         }
     });
-}
+
+    // Return false to prevent form submission by default
+    return false;
+});
