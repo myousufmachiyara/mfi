@@ -1942,20 +1942,20 @@
 					data: { month: month },
 					success: function(result) {
 						console.log(result['dash_chart_for_item_group']);
-						
+
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], mills, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
 						}
 
-						const IILtop5CustomerPerformanceChart = document.getElementById('IILtop5CustomerPerformance');
+						const IILtop5CustomerPerformance = document.getElementById('IILtop5CustomerPerformance');
 
-						IILtop5CustomerPerformanceChart.width = 600; // Set desired width
-						IILtop5CustomerPerformanceChart.height = 353; // Set desired height
+						IILtop5CustomerPerformance.width = 600; // Set desired width
+						IILtop5CustomerPerformance.height = 353; // Set desired height
 
 						// Create the new chart
-						IILtop5CustomerPerformanceChart = new Chart(IILtop5CustomerPerformanceChart, {
+						IILtop5CustomerPerformanceChart = new Chart(IILtop5CustomerPerformance, {
 							type: 'bar',
 							data: {
 								labels: chartLabels, // 'dat' values as labels
