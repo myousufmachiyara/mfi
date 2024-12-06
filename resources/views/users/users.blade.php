@@ -32,6 +32,7 @@
                                     <h2 class="card-title mb-2">All Users</h2>
                                     <div class="card-actions">
                                         <button type="button" class="modal-with-form btn btn-primary" href="#addModal"> <i class="fas fa-plus">  </i>  New User</button>
+                                        <button type="button" class="modal-with-form btn btn-danger" href="#RegDevices"> <i class="fa fa-desktop">  </i>  Registered Devices</button>
                                     </div>
                                 </header>
                                 <div class="card-body">
@@ -72,7 +73,6 @@
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal modal-with-form" onclick="getUserDetails({{$row->id}})" href="#updateModal"><i class="fas fa-pencil-alt"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-primary" href="#updateCred" onclick="setUserCredID({{$row->id}},'{{$row->username}}')" ><i class="fa fa-user-lock"></i></a>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-danger" href="#deactivateUser" onclick="setDeactivateID({{$row->id}})"><i class="fa fa-user-minus"></i></a>
-                                                            <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" href="#addMacAdd" onclick="setMacAddID({{$row->id}})"><i class="fa fa-desktop"></i></a>
                                                         </td>
                                                         @elseif($row->status==0)
                                                         <td class="actions">
@@ -435,7 +435,7 @@
             </section>
         </div>
 
-        <div id="addMacAdd" class="modal-block modal-block-primary mfp-hide">
+        <div id="RegDevices" class="modal-block modal-block-primary mfp-hide">
             <section class="card">
                 <section class="card">
                     <header class="card-header">
