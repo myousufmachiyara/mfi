@@ -238,44 +238,6 @@ $(document).on('mousemove keypress click scroll', resetTimer);
 // Initialize the session activity timer when the page loads
 resetTimer();
 
-function validatePasswordMatch() {
-    const newPassword = document.getElementById('new_password').value;
-    const confirmPassword = document.getElementById('confirm_new_password').value;
-    const currentPassword= document.getElementById('current_passowrd').value;
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $.ajax({
-        type: 'GET',
-        url: '/validate-user-password/',
-        data: {
-            'password':currentPassword,
-        },
-        success: function(response){
-            if(response==1){
-                if (newPassword !== confirmPassword) {
-                    alert('New Password and Confirm New Password do not match.');
-                    return false; // Prevent form submission
-                }
-                else{
-                    var form = document.getElementById('changePasswordForm');
-                    form.submit();
-                }
-            }
-            else if(response==0){
-                alert("Current Password is not Correct")
-            }
-        },
-        error: function(){
-            alert("error");
-        }
-    });
-}
-
 function validatePasswordMatch(event) {
     // Prevent the default form submission
     event.preventDefault();
