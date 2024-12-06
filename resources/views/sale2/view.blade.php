@@ -229,14 +229,8 @@
 							<input type="hidden" name="pur3_id" value="{{ $pur->Sal_inv_no }}">
 						</div>
 						<div class="modal-footer">
-							{{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save Changes</button> --}}
-							<div class="row">
-								<div class="col-md-12 text-end">
-									<button type="submit" class="btn btn-primary">Update Bill Number</button>
-									<button class="btn btn-default modal-dismiss">Cancel</button>
-								</div>
-							</div>
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save Changes</button>
 						</div>
 					</form>
 					
