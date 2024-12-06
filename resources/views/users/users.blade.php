@@ -447,14 +447,13 @@
                             <table class="table table-bordered table-striped mb-0" id="datatable-default">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Attachement Path</th>
-                                        <th>Download</th>
-                                        <th>View</th>
-                                        <th>Delete</th>
+                                        <th>S No.</th>
+                                        <th>User Name</th>
+                                        <th>Device Name</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody >
+                                <tbody>
 
                                 </tbody>
                             </table>
