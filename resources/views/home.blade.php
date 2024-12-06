@@ -1969,6 +1969,16 @@
 							IILmonthlyTonageChart.destroy();
 						}
 
+						const chartData = {
+							labels: groupedData.labels, // Set the labels directly here
+							datasets: [
+								{
+									data: groupedData.data, // Extract total_weight values for each mill
+									backgroundColor: groupedData.backgroundColor, // Assign background colors
+								}
+							]
+						};
+
 						// Create the doughnut chart
 						IILmonthlyTonageChart = new Chart(IILmonthlyTonageChart, {
 							type: 'doughnut',
