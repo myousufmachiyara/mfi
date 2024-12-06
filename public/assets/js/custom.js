@@ -257,7 +257,6 @@ function validatePasswordMatch() {
         },
         success: function(response){
             if(response==1){
-                alert("Current Password is not Correct");
                 if (newPassword !== confirmPassword) {
                     alert('New Password and Confirm New Password do not match.');
                     return false; // Prevent form submission
