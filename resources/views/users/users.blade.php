@@ -439,7 +439,7 @@
             <section class="card">
                 <section class="card">
                     <header class="card-header">
-                        <h2 class="card-title">User Devices</h2>
+                        <h2 class="card-title">All Registered</h2>
                     </header>
                     <div class="card-body">
                         <div class="modal-wrapper">
