@@ -1969,7 +1969,7 @@
 							IILmonthlyTonageChart.destroy();
 						}
 
-						const chartData = {
+						const IILchartData = {
 							labels: groupedData.labels, // Set the labels directly here
 							datasets: [
 								{
@@ -1982,19 +1982,8 @@
 						// Create the doughnut chart
 						IILmonthlyTonageChart = new Chart(IILmonthlyTonageChart, {
 							type: 'doughnut',
-							data: chartData,
-						});
-
-						const chartData = {
-							labels: groupedData.labels, // Set the labels directly here
-							datasets: [
-								{
-									data: groupedData.data, // Extract total_weight values for each mill
-									backgroundColor: groupedData.backgroundColor, // Assign background colors
-								}
-							]
-						};
-						
+							data: IILchartData,
+						});						
 
 						var rows = '';
 						var totalWeight = 0; // Initialize total
