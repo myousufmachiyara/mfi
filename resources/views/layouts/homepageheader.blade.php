@@ -94,11 +94,11 @@
 				<h2 class="card-title">Change Password</h2>
 			</header>
 			<div class="card-body">
-				<div class="row form-group">    
+				<div class="row form-group">
 					<div class="col-12 mb-2">
 						<label for="current_password">Current Password</label>
 						<input type="password" class="form-control" placeholder="Current Password" id="current_password" name="current_password" autocomplete="current-password" required>
-					</div> 
+					</div>
 					<div class="col-12 mb-2">
 						<label for="new_password">New Password</label>
 						<input type="password" class="form-control" placeholder="New Password" id="new_password" name="new_password" minlength="8" autocomplete="new-password" required>
@@ -117,6 +117,6 @@
 					</div>
 				</div>
 			</footer>
-  		</form>
+		</form>
 	</div>
 </header>

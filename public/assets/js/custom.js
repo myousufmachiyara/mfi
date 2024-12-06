@@ -262,14 +262,13 @@ function validatePasswordMatch(event) {
     // Validate current password via AJAX
     $.ajax({
         type: 'GET',
-        url: '/validate-user-password/',
+        url: '{{ route("validate-user-password") }}',
         data: { 'password': currentPassword },
         success: function (response) {
             if (response.status === 1) {
                 // New and Confirm Password Match
                 if (newPassword === confirmPassword) {
-                    const form = document.getElementById('changePasswordForm');
-                    form.submit();
+                    document.getElementById('changePasswordForm').submit();
                 } else {
                     alert('New Password and Confirm New Password do not match.');
                 }
@@ -278,7 +277,7 @@ function validatePasswordMatch(event) {
             } else if (response.error) {
                 alert("Error: " + response.error);
             } else {
-                alert("Unexpected response.");
+                alert("Unexpected response format.");
             }
         },
         error: function (xhr, status, error) {

@@ -420,7 +420,7 @@ class UsersController extends Controller
         return redirect()->route('all-users');
     }
 
-    public function getUserPassword(Request $request){
+    public function getUserPassword(Request $request) {
         try {
             $userId = session('user_id');
     
@@ -428,17 +428,17 @@ class UsersController extends Controller
                 return response()->json(['error' => 'User session is missing'], 401);
             }
     
-            $user_password = users::where('id', $userId)->value('password');
+            $user_password = \App\Models\User::where('id', $userId)->value('password');
     
             if (!$user_password) {
                 return response()->json(['error' => 'User not found'], 404);
             }
     
             if (Hash::check($request->password, $user_password)) {
-                return response()->json(['status' => 1]);
+                return response()->json(['status' => 1]); // Password matches
             }
     
-            return response()->json(['status' => 0]);
+            return response()->json(['status' => 0]); // Password does not match
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
