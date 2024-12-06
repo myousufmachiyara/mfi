@@ -216,12 +216,8 @@
 		<div class="modal fade" id="editBillModal" tabindex="-1" aria-labelledby="editBillModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					{{-- <div class="modal-header">
-						<h5 class="modal-title" id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div> --}}
 					<header class="card-header">
-                        <h2 class="card-title">Edit Bill Numbe</h2>
+                        <h2 class="card-title">Edit Bill Number</h2>
                     </header>
 					<form action="{{ route('update-bill-number') }}" method="POST">
 						@csrf
@@ -233,8 +229,14 @@
 							<input type="hidden" name="pur3_id" value="{{ $pur->Sal_inv_no }}">
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save Changes</button>
+							{{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save Changes</button> --}}
+							<div class="row">
+								<div class="col-md-12 text-end">
+									<button type="submit" class="btn btn-primary">Update Bill Number</button>
+									<button class="btn btn-default modal-dismiss">Cancel</button>
+								</div>
+							</div>
 						</div>
 					</form>
 					
