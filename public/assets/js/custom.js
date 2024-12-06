@@ -266,12 +266,54 @@ function validatePasswordMatch() {
                     form.submit();
                 }
             }
-            else{
+            else if(response==0){
                 alert("Current Password is not Correct")
             }
         },
         error: function(){
             alert("error");
+        }
+    });
+}
+
+function validatePasswordMatch() {
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_new_password').value;
+    const currentPassword = document.getElementById('current_password').value;
+
+    // Basic validation
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        alert('All fields are required.');
+        return false;
+    }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'GET',
+        url: '/validate-user-password/',
+        data: {
+            'password': currentPassword,
+        },
+        success: function (response) {
+            if (response == 1) {
+                if (newPassword !== confirmPassword) {
+                    alert('New Password and Confirm New Password do not match.');
+                    return false; // Prevent form submission
+                } else {
+                    const form = document.getElementById('changePasswordForm');
+                    form.submit();
+                }
+            } else if(response==0){
+                alert("Current Password is not Correct")
+            } 
+        },
+        error: function () {
+            alert("An error occurred while validating the current password.");
         }
     });
 }
