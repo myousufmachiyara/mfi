@@ -1453,10 +1453,64 @@
 
 			return { datasets, chartLabels };
 		}
+
+		function generateChartDatasetsforIIL(data, mills, colors) {
+			// Group data by 'dat' field
+			const groupedData = data.reduce((acc, item) => {
+				if (!acc[item.dat]) acc[item.dat] = [];
+				acc[item.dat].push(item);
+				return acc;
+			}, {});
+
+			// Get unique 'dat' values for chart labels
+			const chartLabels = Object.keys(groupedData);
+
+			// Initialize datasets
+			const datasets = [];
+
+			// Loop through each mill and create datasets
+			mills.forEach((mill, index) => {
+				const dataForMill = chartLabels.map(dat => {
+					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					return millData ? millData.total_weight : 0;
+				});
+
+				// Get the mill name
+				const millName = chartLabels
+					.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+					.find(name => name) || `Mill ${mill}`; // Default if not found
+
+				// Add dataset for the mill
+				datasets.push({
+					label: millName,
+					data: dataForMill,
+					backgroundColor: colors[index] || 'rgba(0, 0, 0, 0.5)', // Default color if not enough colors provided
+					stack: `Stack ${index}`,
+				});
+			});
+
+			// Create dataset for "Others" (mills not in the mills array)
+			const othersData = chartLabels.map(dat => {
+				return groupedData[dat]?.reduce((acc, item) => {
+					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					return acc;
+				}, 0) || 0; // Default to 0 if no matching items
+			});
+
+			datasets.push({
+				label: 'Others',
+				data: othersData,
+				backgroundColor: 'rgba(200, 200, 200, 1)', // Default color for "Others"
+				stack: 'Stack Others',
+			});
+
+			return { datasets, chartLabels };
+		}
 		// Graph Chart for MILL WISE HR PIPE PURCHASE Ended 
 
 		// donut graph for Monthly Tonage Started 
 		const MonthlyTonage = document.getElementById('MonthlyTonage');
+		const IILMonthlyTonage = document.getElementById('IILMonthlyTonage');
 		let monthlyTonageChart; // Declare a global variable to hold the chart instance
 		let top5CustomerPerformanceChart;
 		let IILmonthlyTonageChart; // Declare a global variable to hold the chart instance
@@ -1887,7 +1941,9 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
-						const { datasets, chartLabels } = generateChartDatasets(result['dash_chart_for_item_group'], mills, colors);
+						console.log(result['dash_chart_for_item_group']);
+						
+						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], mills, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
