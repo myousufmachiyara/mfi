@@ -216,10 +216,13 @@
 		<div class="modal fade" id="editBillModal" tabindex="-1" aria-labelledby="editBillModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
+					{{-- <div class="modal-header">
+						<h5 class="modal-title" id="editBillModalLabel"><strong class="text-danger">Edit Bill Number</strong></h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
+					</div> --}}
+					<header class="card-header">
+                        <h2 class="card-title">Edit Bill Numbe</h2>
+                    </header>
 					<form action="{{ route('update-bill-number') }}" method="POST">
 						@csrf
 						<div class="modal-body">
