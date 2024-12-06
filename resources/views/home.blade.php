@@ -561,7 +561,6 @@
 									</div>
 								</div>
 
-
 								<div id="BILL_NOT_RECVD" class="tab-pane">
 									<div class="row form-group pb-3">
 										<!-- First Pair: -->
@@ -842,6 +841,36 @@
 								</div>
 								<div id="IIL" class="tab-pane">
 									<div class="row form-group pb-3">
+
+										<div class="col-12 col-md-5 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Mill Wise IIL Pipe Purchase</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="IILtop5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-3 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Monthly Tonage</h2>
+												</header>
+												<div class="card-body">
+													<canvas id="IILMonthlyTonage"></canvas>
+												</div>
+											</section>
+										</div>
 
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
