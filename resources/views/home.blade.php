@@ -2375,7 +2375,7 @@
 
 						// Process purchases data
 						$.each(result['annual_pur'], function (index, value) {
-							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0;
+							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']).toFixed(0) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
 							netamount += amount;
 							totalWeightPurchases += weight;
@@ -2389,7 +2389,7 @@
 						// Append the total row for purchases
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netamount.toFixed(1)}</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
