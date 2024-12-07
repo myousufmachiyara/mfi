@@ -1333,12 +1333,12 @@
 
 										<div class="mb-3 text-end">
 											<div class="form-group" style="display: inline-block">
-												<input type="date" class="form-control" id="filterANNUALFrom" value="{{ date('Y-01') }}" onchange="getTabData()">
+												<input type="month" class="form-control" id="filterANNUALFrom" value="{{ date('Y-01') }}" onchange="getTabData()">
 											</div>
 											
 											<span> To </span>
 											<div class="form-group" style="display: inline-block">
-												<input type="date" class="form-control" id="filterANNUALTo" value="{{ date('Y-m') }}" onchange="getTabData()">
+												<input type="month" class="form-control" id="filterANNUALTo" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
 											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 										</div>
