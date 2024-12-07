@@ -675,6 +675,7 @@
                     html+= "<td>"+(k+1)+"</td>"
                     html+= "<td>"+v['user']+"</td>"
                     html+= "<td></td>"
+                    html+= "<td>"+v['browser']"</td>"
                     html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='#'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#regDevices').append(html);
