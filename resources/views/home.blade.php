@@ -1998,12 +1998,11 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
-						const itemGroupNames = result.map(item => item.item_group_name);
+						const itemGroupNames = result['item_group_name'].map(item => item.item_group_name);
 
 						// Log the array with item_group_name values
 						console.log(itemGroupNames);
-
-						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'],	itemGroupNames, colors);
+						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], itemGroupNames, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
