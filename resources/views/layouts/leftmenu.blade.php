@@ -409,7 +409,6 @@
                             </li>
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
-                                    <i class="fa fa-pallet" style="font-size:16px;"></i>
                                     <span>Item Name</span>
                                 </a>
                                 <ul class="nav nav-children">
