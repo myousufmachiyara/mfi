@@ -1496,7 +1496,7 @@
 			// Create dataset for "Others" (mills not in the mills array)
 			const othersData = chartLabels.map(dat => {
 				return groupedData[dat]?.reduce((acc, item) => {
-					if (!mills.includes(item.mill_code.toString())) acc += item.total_weight;
+					if (!mills.includes(item.item_group_code.toString())) acc += item.total_weight;
 					return acc;
 				}, 0) || 0; // Default to 0 if no matching items
 			});
