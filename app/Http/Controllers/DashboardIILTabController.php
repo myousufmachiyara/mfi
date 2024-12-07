@@ -16,7 +16,7 @@ class DashboardIILTabController extends Controller
         ->get();
 
         $dash_chart_for_item_group = dash_chart_for_item_group::where('ac_group_cod',5)->get();
-        
+
         $item_group_list = dash_chart_for_item_group::where('ac_group_cod',5)
         ->select('item_group_code')
         ->get();

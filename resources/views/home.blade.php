@@ -1475,13 +1475,13 @@
 			// Loop through each mill and create datasets
 			mills.forEach((mill, index) => {
 				const dataForMill = chartLabels.map(dat => {
-					const millData = groupedData[dat]?.find(item => item.mill_code.toString() === mill);
+					const millData = groupedData[dat]?.find(item => item.item_group_code.toString() === mill);
 					return millData ? millData.total_weight : 0;
 				});
 
 				// Get the mill name
 				const millName = chartLabels
-					.map(dat => groupedData[dat]?.find(item => item.mill_code.toString() === mill)?.mill_name)
+					.map(dat => groupedData[dat]?.find(item => item.item_group_code.toString() === mill)?.mill_name)
 					.find(name => name) || `Mill ${mill}`; // Default if not found
 
 				// Add dataset for the mill
@@ -2003,7 +2003,7 @@
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], IILmills, colors);
 
 						console.log(datasets);
-						
+
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
 						}
