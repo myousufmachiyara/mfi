@@ -10,15 +10,17 @@
                             <li class="nav-item">
                                 <a class="nav-link nav-link-rep" data-bs-target="#AG" href="#AG" data-bs-toggle="tab">Acc Group</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-rep" data-bs-target="#SHOA" href="#SHOA" data-bs-toggle="tab">SHOA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-rep" data-bs-target="#BA" href="#BA" data-bs-toggle="tab">Balance All</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-rep" data-bs-target="#TB" href="#TB" data-bs-toggle="tab"> Trial Balance</a>
-                            </li>
+                            @if(session('user_role')==1 || session('user_role')==2)
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-rep" data-bs-target="#SHOA" href="#SHOA" data-bs-toggle="tab">SHOA</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-rep" data-bs-target="#BA" href="#BA" data-bs-toggle="tab">Balance All</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-rep" data-bs-target="#TB" href="#TB" data-bs-toggle="tab"> Trial Balance</a>
+                                </li>
+                            @endif
                         </ul>
                         <div class="tab-content">
                             <div id="AG" class="tab-pane">
