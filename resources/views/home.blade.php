@@ -2414,7 +2414,7 @@
 			}
 		}
 
-		var netAmount = <?php echo json_encode($netamount); ?>;
+		var netAmount = <?php echo json_encode($total_cr_amount); ?>;
    		var words = convertCurrencyToWords(netAmount);
     	document.getElementById('numberInWords').innerHTML = words;
 
