@@ -10,6 +10,6 @@ class user_devices extends Model
     use HasFactory;
     protected $table = "user_devices";
     protected $fillable = [
-        'user_id' , 'device_id','date'
+        'user_id' , 'device_id','date','device_name','browser'
     ];
 }
