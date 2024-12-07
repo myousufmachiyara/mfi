@@ -366,6 +366,26 @@
             return response()->json(['status' => 'success']);
         })->name('keep-alive');
 
+        
+        // Dashboard Tabs
+
+        // Pending Invoices Tab
+        Route::get('/dashboard-tabs/pending-invoices', [App\Http\Controllers\DashboardPendingInvoicesTabController::class, 'PENDING_INVOICES']);
+
+        // HR Tab
+        Route::get('/dashboard-tabs/hr', [App\Http\Controllers\DashboardHRTabController::class, 'HR']);
+        Route::get('/dashboard-tabs/hr/monthlyTonage', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonage']);
+        Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
+
+        // IIL Tab
+        Route::get('/dashboard-tabs/iil', [App\Http\Controllers\DashboardIILTabController::class, 'IIL']);
+
+        // GARDER Tab
+        Route::get('/dashboard-tabs/garder', [App\Http\Controllers\DashboardGARDERTabController::class, 'GARDER']);
+
+        // ITEM OF THE MONTH Tab
+        Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
+
     });
 
     Route::middleware(['checkPermission:report'])->group(function () {
@@ -535,27 +555,6 @@
         Route::get('/rep-comm/comm', [App\Http\Controllers\RptCommissionsController::class, 'comm'])->name('comm-rep');
         Route::get('/rep-comm/comm/excel', [App\Http\Controllers\RptCommissionsController::class, 'commExcel'])->name('comm-rep-excel');
         Route::get('/rep-comm/comm/report', [App\Http\Controllers\RptCommissionsController::class, 'commReport'])->name('comm-rep-report');
-
-
-        // Dashboard Tabs
-
-        // Pending Invoices Tab
-        Route::get('/dashboard-tabs/pending-invoices', [App\Http\Controllers\DashboardPendingInvoicesTabController::class, 'PENDING_INVOICES']);
-
-        // HR Tab
-        Route::get('/dashboard-tabs/hr', [App\Http\Controllers\DashboardHRTabController::class, 'HR']);
-        Route::get('/dashboard-tabs/hr/monthlyTonage', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonage']);
-        Route::get('/dashboard-tabs/hr/monthlyTonageOfCustomer', [App\Http\Controllers\DashboardHRTabController::class, 'monthlyTonageOfCustomer']);
-
-        // IIL Tab
-        Route::get('/dashboard-tabs/iil', [App\Http\Controllers\DashboardIILTabController::class, 'IIL']);
-
-        // GARDER Tab
-        Route::get('/dashboard-tabs/garder', [App\Http\Controllers\DashboardGARDERTabController::class, 'GARDER']);
-
-        // ITEM OF THE MONTH Tab
-        Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
-
     });
 
     Route::post('/fingerprint', [App\Http\Controllers\UsersController::class, 'fingerprint']);
