@@ -2375,7 +2375,7 @@
 
 						// Process purchases data
 						$.each(result['annual_pur'], function (index, value) {
-							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']).toFixed(0) : 0;
+							var amount = value['total_cr_amount'] ? parseFloat(parseFloat(value['total_cr_amount']).toFixed(0)) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
 							netamount += amount;
 							totalWeightPurchases += weight;
