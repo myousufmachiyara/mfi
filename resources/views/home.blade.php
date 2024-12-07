@@ -1330,36 +1330,31 @@
 
 								<div id="ANNUAL" class="tab-pane">
 									<div class="row form-group pb-3">
-										<div class="d-flex align-items-center">
-											<div class="mb-3 me-2">
-												<div class="form-group" style="display: inline-block">
-													<input type="month" class="form-control" id="filterANNUALFrom" value="{{ date('Y-01') }}" onchange="getTabData()">
-												</div>
+										
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterANNUALFrom" value="{{ date('Y-01') }}" onchange="getTabData()">
 											</div>
-								
-											<span class="me-2">To</span>
-								
-											<div class="mb-3 me-2">
-												<div class="form-group" style="display: inline-block">
-													<input type="month" class="form-control" id="filterANNUALTo" value="{{ date('Y-m') }}" onchange="getTabData()">
-												</div>
+											
+											<span> To </span>
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterANNUALTo" value="{{ date('Y-m') }}" onchange="getTabData()">
 											</div>
-								
-											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()">
-												<i class="fa fa-filter"></i>
-											</a>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
 										</div>
-								
-										<div class="col-12 col-md-4 mb-3">
+										
+
+										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
-								
+
 													<h2 class="card-title">Annual Sale</h2>
 												</header>
 												<div class="card-body scrollable-div">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead class="sticky-tbl-header">
 															<tr>
@@ -1369,22 +1364,24 @@
 															</tr>
 														</thead>
 														<tbody id="AnnualSaleTable">
+															
 														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
-								
-										<div class="col-12 col-md-4 mb-3">
+
+										<div class="col-12 col-md-6 mb-3">
 											<section class="card">
 												<header class="card-header">
 													<div class="card-actions">
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
-								
+
 													<h2 class="card-title">Annual Purchase</h2>
 												</header>
 												<div class="card-body scrollable-div">
+													
 													<table class="table table-responsive-md table-striped mb-0">
 														<thead class="sticky-tbl-header">
 															<tr>
@@ -1394,14 +1391,16 @@
 															</tr>
 														</thead>
 														<tbody id="AnnualPurTable">
+															
 														</tbody>
 													</table>
 												</div>
 											</section>
 										</div>
+								
+										
 									</div>
 								</div>
-								
 								
 							</div>
 						</div>
