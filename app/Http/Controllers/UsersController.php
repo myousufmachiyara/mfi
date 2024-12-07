@@ -217,10 +217,14 @@ class UsersController extends Controller
             $user = Auth::user();
 
             $agent = new Agent();
+            $browserName = $agent->browser();  
+            $browserVersion = $agent->version($browserName);
+            
             $userLocation = $this->getUserLocation(); // Fetch user location details
             $locationData = (array) $userLocation->getData();
 
             $user_devices = user_devices::where('user_id', $user->id)->get();
+
             $isDeviceRegistered = false;
 
             foreach ($user_devices as $device) {
@@ -260,8 +264,6 @@ class UsersController extends Controller
             else if(!$isDeviceRegistered){
 
                 $otp = rand(100000, 999999); // Generate a 6-digit 
-                $browserName = $agent->browser();  
-                $browserVersion = $agent->version($browserName);  
                 $ip=$locationData['ip'];
                 $city=$locationData['city'];
                 $region=$locationData['region'];
