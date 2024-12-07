@@ -2341,8 +2341,9 @@
 							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
-								<td>${amount ? amount : ''}</td>
-								<td>${weight ? weight : ''}</td>
+								<td>${amount ? amount.toFixed(0) : ''}</td>
+								<td>${weight ? weight.toFixed(2) : ''}</td>
+
 							</tr>`;
 						});
 
@@ -2366,8 +2367,8 @@
 							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
-								<td>${amount ? amount : ''}</td>
-								<td>${weight ? weight : ''}</td>
+								<td>${amount ? amount.toFixed(0) : ''}</td>
+								<td>${weight ? weight.toFixed(2) : ''}</td>
 							</tr>`;
 						});
 
