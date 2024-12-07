@@ -2335,8 +2335,8 @@
 						var totalWeight = 0;
 
 						$.each(result['annual_sale'], function (index, value) {
-							var amount = value['total_dr_amt'] ? parseFloat(value['total_dr_amt']) : 0; // Convert to a number
-							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0; // Convert to a number
+							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0; // Convert to a number
 							totalAmount += amount; // Add to total
 							totalWeight += weight; // Add to total
 							rows += `<tr>
@@ -2360,8 +2360,8 @@
 						var totalWeight = 0;
 
 						$.each(result['annual_pur'], function (index, value) {
-							var amount = value['total_cr_amt'] ? parseFloat(value['total_cr_amt']) : 0; // Convert to a number
-							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0; // Convert to a number
+							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0; // Convert to a number
 							totalAmount += amount; // Add to total
 							totalWeight += weight; // Add to total
 							rows += `<tr>
