@@ -2357,13 +2357,13 @@
 						$('#AnnualSaleTable').html(rows);
 
 						rows = '';
-						var totalAmount = 0; // Initialize total
+						var netamount = 0; // Initialize total
 						var totalWeight = 0;
 
 						$.each(result['annual_pur'], function (index, value) {
-							var amount = value['netamount'] ? parseFloat(value['netamount']) : 0; // Convert to a number
+							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0; // Convert to a number
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0; // Convert to a number
-							totalAmount += amount; // Add to total
+							netamount += amount; // Add to total
 							totalWeight += weight; // Add to total
 							rows += `<tr>
 								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
@@ -2375,7 +2375,7 @@
 						// Append a row for the total
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalAmount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
 						</tr>
 						<tr>
