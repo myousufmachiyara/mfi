@@ -1401,6 +1401,69 @@
 										
 									</div>
 								</div>
+
+								<div id="UV" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">UnAdjusted Sales Ageing Voucher</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JV2-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Sales-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="UVSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">UnAdjusted Sales Ageing Voucher</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JV2-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Pur-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="UVPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+										
+									</div>
+								</div>
 								
 							</div>
 						</div>
@@ -2412,6 +2475,65 @@
 						alert("Error loading Annual data");
 					}
 				});
+			}
+			else if(tabId=="#UV"){
+
+			var table = document.getElementById('UVSaleTable');
+			while (table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+
+			var table = document.getElementById('UVpurTable');
+			while (table.rows.length > 0) {
+				table.deleteRow(0);
+			}
+
+			$.ajax({
+				type: "GET",
+				url: '/dashboard-tabs/uv',
+				success: function(result) {
+
+					var rows = '';
+				
+					$.each(result['sales_ageing'], function (index, value) {
+						
+						rows += `<tr>
+							<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+							<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+							<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+						</tr>`;
+					});
+
+					$('#UVSaleTable').html(rows);
+
+					// rows = '';
+					// var totalWeight = 0; // Initialize total
+
+					// $.each(result['garder_customer'], function (index, value) {
+					// 	var weight = value['tt_weight'] ? parseFloat(value['tt_weight']) : 0; // Convert to a number
+					// 	totalWeight += weight; // Add to total
+					// 	rows += `<tr>
+					// 		<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+					// 		<td>${weight ? weight : ''}</td>
+					// 	</tr>`;
+					// });
+
+					// // Append a row for the total
+					// rows += `<tr>
+					// 	<td><strong>Total</strong></td>
+					// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+					// </tr>`;
+
+					// $('#GarderSaleTable').html(rows);
+
+
+					
+				},
+				error: function() {
+					alert("Error loading UV data");
+				}
+			});
+
 			}
 
 		}

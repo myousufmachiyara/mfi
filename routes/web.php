@@ -390,6 +390,10 @@
         // ANNUAL Tab
         Route::get('/dashboard-tabs/annual', [App\Http\Controllers\DashboardANNUALTabController::class, 'ANNUAL']);
 
+        // Un Adjusted Vouchers Tab
+        Route::get('/dashboard-tabs/uv', [App\Http\Controllers\DashboardUnAdjustedVouchersTabController::class, 'UV']);
+
+
     
     });
 

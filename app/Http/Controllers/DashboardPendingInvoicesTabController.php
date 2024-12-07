@@ -8,6 +8,7 @@ use App\Models\dash_pur1_not;
 use App\Models\dash_sale2_not;
 use App\Models\dash_pending_sale_against_pur2;
 use App\Models\dash_pending_sale_against_tstock_out;
+
 class DashboardPendingInvoicesTabController extends Controller
 {
     public function PENDING_INVOICES(Request $request)
