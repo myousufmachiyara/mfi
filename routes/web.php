@@ -368,7 +368,7 @@
 
     });
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['checkPermission:report'])->group(function () {
 
         // Main Routes
         Route::get('/rep-by-acc-name', [App\Http\Controllers\ReportingController::class, 'byAccountName'])->name('rep-by-acc-name');

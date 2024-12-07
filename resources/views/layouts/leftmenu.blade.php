@@ -397,6 +397,7 @@
                             <span>Reports</span>
                         </a>
                         <ul class="nav nav-children">
+                            @if((session('user_access')[10]['module_id'])==11 && (session('user_access')[10]['view']) == 1 || (session('user_access')[11]['module_id']) == 12 && (session('user_access')[11]['view']) == 1 || (session('user_access')[12]['module_id']) == 13 && (session('user_access')[12]['view']) == 1 || (session('user_access')[13]['module_id']) == 14 && (session('user_access')[13]['view']) == 1 || (session('user_access')[14]['module_id']) == 15 && (session('user_access')[14]['view']) == 1 || (session('user_access')[15]['module_id']) == 16 && (session('user_access')[15]['view']) == 1 || (session('user_access')[16]['module_id']) == 17 && (session('user_access')[16]['view']) == 1 || (session('user_access')[17]['module_id']) == 18 && (session('user_access')[17]['view']) == 1)
                             <li>
                                 <a class="nav-link" href="{{ route('rep-by-acc-name')}}">
                                     Account Name
