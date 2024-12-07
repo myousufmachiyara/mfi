@@ -2312,6 +2312,82 @@
 					}
 				});
 			}
+			else if (tabId == "#ANNUAL") {
+				var table = document.getElementById('AnnualSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('AnnualPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var fromMonth = document.getElementById('filterANNUALFrom').value;
+				var toMonth = document.getElementById('filterANNUALTo').value;
+				$.ajax({
+						type: "GET",
+						url: '/dashboard-tabs/annual',
+						data: { from: fromMonth, to: toMonth },
+						success: function(result) {
+						var rows = '';
+						var totalAmount = 0; // Initialize total
+						var totalWeight = 0;
+
+						$.each(result['annual_sale'], function (index, value) {
+							var amount = value['total_dr_amt'] ? parseFloat(value['total_dr_amt']) : 0; // Convert to a number
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalAmount += amount; // Add to total
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
+								<td>${amount ? amount : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalAmount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#AnnualSaleTable').html(rows);
+
+						rows = '';
+						var totalAmount = 0; // Initialize total
+						var totalWeight = 0;
+
+						$.each(result['annual_pur'], function (index, value) {
+							var amount = value['total_cr_amt'] ? parseFloat(value['total_cr_amt']) : 0; // Convert to a number
+							var weight = value['ttl_weight'] ? parseFloat(value['ttl_weight']) : 0; // Convert to a number
+							totalAmount += amount; // Add to total
+							totalWeight += weight; // Add to total
+							rows += `<tr>
+								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
+								<td>${amount ? amount : ''}</td>
+								<td>${weight ? weight : ''}</td>
+							</tr>`;
+						});
+
+						// Append a row for the total
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${totalAmount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>`;
+
+						$('#AnnualPurTable').html(rows);
+
+						
+					},
+					error: function() {
+						alert("Error loading Annual data");
+					}
+				});
+
+				}
 
 		}
 

@@ -386,6 +386,11 @@
         // ITEM OF THE MONTH Tab
         Route::get('/dashboard-tabs/item-of-the-month', [App\Http\Controllers\DashboardItemOfTheMonthTabController::class, 'ItemOfMonth']);
 
+
+        // ANNUAL Tab
+        Route::get('/dashboard-tabs/annual', [App\Http\Controllers\DashboardANNUALTabController::class, 'ANNUAL']);
+
+    
     });
 
     Route::middleware(['checkPermission:report'])->group(function () {
