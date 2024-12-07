@@ -1589,7 +1589,7 @@
 
 			// Iterate through the data to group by mill_code and calculate total_weight
 			data.forEach(item => {
-				const millCode = item.mill_code.toString();
+				const millCode = item.item_group_code.toString();
 				const millName = mills.includes(millCode) ? item.item_group_name : 'Others';
 
 				if (millName === 'Others') {
