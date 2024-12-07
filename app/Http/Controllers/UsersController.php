@@ -244,6 +244,8 @@ class UsersController extends Controller
                     user_devices::create([
                         'user_id' => $user->id,
                         'device_id' => Hash::make($request->browser_id), // Use $request->browser_id directly
+                        'device_name' => $user->id,
+                        'browser' => $agent->browser()."(".$agent->version($browserName).")",
                         'date' => Carbon::today(),                    
                     ]);
                 } else {
