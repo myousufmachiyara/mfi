@@ -2356,7 +2356,11 @@
 							<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
-							<td colspan="2"><strong><span id="numberInWordsSale" style="color:#17365D; text-decoration: underline;"></span></strong></td>
+							<td colspan="2">
+							<strong>
+								<span id="numberInWordsSale" style="color:#17365D; text-decoration: underline; font-size: 20px;"></span>
+							</strong>
+							</td>
 						</tr>`;
 						$('#AnnualSaleTable').html(rows);
 
@@ -2389,7 +2393,12 @@
 							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
-							<td colspan="2"><strong><span id="numberInWords" style="color:#17365D; text-decoration: underline;"></span></strong></td>
+							<td colspan="2">
+							<strong>
+								<span id="numberInWords" style="color:#17365D; text-decoration: underline; font-size: 20px;"></span>
+							</strong>
+							</td>
+
 						</tr>`;
 
 						$('#AnnualPurTable').html(rows);
