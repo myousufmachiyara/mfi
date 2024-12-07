@@ -2313,94 +2313,91 @@
 				});
 			}
 			else if (tabId == "#ANNUAL") {
-				// Clear previous rows from the tables
-				var saleTable = document.getElementById('AnnualSaleTable');
-				while (saleTable.rows.length > 0) {
-					saleTable.deleteRow(0);
-				}
-
-				var purTable = document.getElementById('AnnualPurTable');
-				while (purTable.rows.length > 0) {
-					purTable.deleteRow(0);
-				}
-
-				var fromMonth = document.getElementById('filterANNUALFrom').value;
-				var toMonth = document.getElementById('filterANNUALTo').value;
-
-				$.ajax({
-					type: "GET",
-					url: '/dashboard-tabs/annual',
-					data: { from: fromMonth, to: toMonth },
-					success: function(result) {
-						var saleRows = '';
-						var purchaseRows = '';
-						var netAmountSales = 0; // Total for sales
-						var totalWeightSales = 0; // Total weight for sales
-
-						// Process sales data
-						$.each(result['annual_sale'], function(index, value) {
-							var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0;
-							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
-							netAmountSales += amount;
-							totalWeightSales += weight;
-							saleRows += `<tr>
-								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
-								<td>${amount ? amount.toFixed(0) : ''}</td>
-								<td>${weight ? weight.toFixed(2) : ''}</td>
-							</tr>`;
-						});
-
-						// Append the total row for sales
-						saleRows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netAmountSales.toFixed(0)}</strong></td>
-							<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
-						</tr>
-						<tr>
-							<td colspan="2"><strong><span id="numberInWordsSales" style="color:#17365D; text-decoration: underline;"></span></strong></td>
-						</tr>`;
-						$('#AnnualSaleTable').html(saleRows);
-
-						// Convert sales total to words
-						var wordsSales = convertCurrencyToWords(netAmountSales);
-						document.getElementById('numberInWordsSales').innerHTML = wordsSales;
-
-						var netAmountPurchases = 0; // Total for purchases
-						var totalWeightPurchases = 0; // Total weight for purchases
-
-						// Process purchases data
-						$.each(result['annual_pur'], function(index, value) {
-							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0;
-							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
-							netAmountPurchases += amount;
-							totalWeightPurchases += weight;
-							purchaseRows += `<tr>
-								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
-								<td>${amount ? amount.toFixed(0) : ''}</td>
-								<td>${weight ? weight.toFixed(2) : ''}</td>
-							</tr>`;
-						});
-
-						// Append the total row for purchases
-						purchaseRows += `<tr>
-							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netAmountPurchases.toFixed(0)}</strong></td>
-							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
-						</tr>
-						<tr>
-							<td colspan="2"><strong><span id="numberInWordsPurchases" style="color:#17365D; text-decoration: underline;"></span></strong></td>
-						</tr>`;
-						$('#AnnualPurTable').html(purchaseRows);
-
-						// Convert purchases total to words
-						var wordsPurchases = convertCurrencyToWords(netAmountPurchases);
-						document.getElementById('numberInWordsPurchases').innerHTML = wordsPurchases;
-					},
-					error: function() {
-						alert("Error loading Annual data");
-					}
-				});
+			// Clear previous rows from the tables
+			var saleTable = document.getElementById('AnnualSaleTable');
+			while (saleTable.rows.length > 0) {
+				saleTable.deleteRow(0);
 			}
+
+			var purTable = document.getElementById('AnnualPurTable');
+			while (purTable.rows.length > 0) {
+				purTable.deleteRow(0);
+			}
+
+			var fromMonth = document.getElementById('filterANNUALFrom').value;
+			var toMonth = document.getElementById('filterANNUALTo').value;
+
+			$.ajax({
+				type: "GET",
+				url: '/dashboard-tabs/annual',
+				data: { from: fromMonth, to: toMonth },
+				success: function(result) {
+					var saleRows = '';
+					var purchaseRows = '';
+					var netAmountSales = 0; // Total for sales
+					var totalWeightSales = 0; // Total weight for sales
+
+					// Process sales data
+					$.each(result['annual_sale'], function(index, value) {
+						var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0;
+						var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
+						netAmountSales += amount;
+						totalWeightSales += weight;
+						saleRows += `<tr>
+							<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
+							<td>${amount ? amount.toFixed(0) : ''}</td>
+							<td>${weight ? weight.toFixed(2) : ''}</td>
+						</tr>`;
+					});
+
+					// Append the total row for sales
+					saleRows += `<tr>
+						<td><strong>Total</strong></td>
+						<td class="text-danger"><strong>${netAmountSales.toFixed(0)}</strong></td>
+						<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
+					</tr>`;
+					$('#AnnualSaleTable').html(saleRows);
+
+					// Convert sales total to words
+					var wordsSales = convertCurrencyToWords(netAmountSales);
+
+					// Ensure the element is correctly updated
+					$('#numberInWordsSales').text(wordsSales);  // Use jQuery to safely update the element text
+
+					var netAmountPurchases = 0; // Total for purchases
+					var totalWeightPurchases = 0; // Total weight for purchases
+
+					// Process purchases data
+					$.each(result['annual_pur'], function(index, value) {
+						var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0;
+						var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
+						netAmountPurchases += amount;
+						totalWeightPurchases += weight;
+						purchaseRows += `<tr>
+							<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
+							<td>${amount ? amount.toFixed(0) : ''}</td>
+							<td>${weight ? weight.toFixed(2) : ''}</td>
+						</tr>`;
+					});
+
+					// Append the total row for purchases
+					purchaseRows += `<tr>
+						<td><strong>Total</strong></td>
+						<td class="text-danger"><strong>${netAmountPurchases.toFixed(0)}</strong></td>
+						<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
+					</tr>`;
+					$('#AnnualPurTable').html(purchaseRows);
+
+					// Convert purchases total to words
+					var wordsPurchases = convertCurrencyToWords(netAmountPurchases);
+					$('#numberInWordsPurchases').text(wordsPurchases);  // Ensure the purchases number is updated
+				},
+				error: function() {
+					alert("Error loading Annual data");
+				}
+			});
+		}
+
 
 		}
 
