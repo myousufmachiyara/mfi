@@ -2333,14 +2333,14 @@
 					data: { from: fromMonth, to: toMonth },
 					success: function(result) {
 						var rows = '';
-						var netamountsale = 0; // Initialize total for sales
+						var netamount = 0; // Initialize total for sales
 						var totalWeightSales = 0; // Rename to avoid conflict
 
 						// Process sales data
 						$.each(result['annual_sale'], function (index, value) {
 							var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
-							netamountsale += amount;
+							netamount += amount;
 							totalWeightSales += weight;
 							rows += `<tr>
 								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
@@ -2352,17 +2352,17 @@
 						// Append the total row for sales
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netamountsale.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
-							<td colspan="2"><strong><span id="numberInWordssale" style="color:#17365D; text-decoration: underline;"></span></strong></td>
+							<td colspan="2"><strong><span id="numberInWordsSale" style="color:#17365D; text-decoration: underline;"></span></strong></td>
 						</tr>`;
 						$('#AnnualSaleTable').html(rows);
 
 						// Convert netamount to words
-						var wordssale = convertCurrencyToWords(netamountsale);
-						document.getElementById('numberInWordssale').innerHTML = wordssale;
+						var words = convertCurrencyToWords(netamount);
+						document.getElementById('numberInWordsSale').innerHTML = words;
 
 						// Reset rows for purchases
 						rows = '';
