@@ -2332,17 +2332,18 @@
 					url: '/dashboard-tabs/annual',
 					data: { from: fromMonth, to: toMonth },
 					success: function(result) {
-						var rows = '';
-						var totalAmount = 0; // Initialize total for sales
-						var totalWeightSales = 0; // Rename to avoid conflict
+						var saleRows = '';
+						var purchaseRows = '';
+						var netAmountSales = 0; // Total for sales
+						var totalWeightSales = 0; // Total weight for sales
 
 						// Process sales data
-						$.each(result['annual_sale'], function (index, value) {
+						$.each(result['annual_sale'], function(index, value) {
 							var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
-							totalAmount += amount;
+							netAmountSales += amount;
 							totalWeightSales += weight;
-							rows += `<tr>
+							saleRows += `<tr>
 								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
 								<td>${amount ? amount.toFixed(0) : ''}</td>
 								<td>${weight ? weight.toFixed(2) : ''}</td>
@@ -2350,26 +2351,30 @@
 						});
 
 						// Append the total row for sales
-						rows += `<tr>
+						saleRows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${totalAmount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${netAmountSales.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
+						</tr>
+						<tr>
+							<td colspan="2"><strong><span id="numberInWordsSales" style="color:#17365D; text-decoration: underline;"></span></strong></td>
 						</tr>`;
+						$('#AnnualSaleTable').html(saleRows);
 
-						$('#AnnualSaleTable').html(rows);
+						// Convert sales total to words
+						var wordsSales = convertCurrencyToWords(netAmountSales);
+						document.getElementById('numberInWordsSales').innerHTML = wordsSales;
 
-						// Reset rows for purchases
-						rows = '';
-						var netamount = 0; // Initialize total for purchases
-						var totalWeightPurchases = 0; // Rename to avoid conflict
+						var netAmountPurchases = 0; // Total for purchases
+						var totalWeightPurchases = 0; // Total weight for purchases
 
 						// Process purchases data
-						$.each(result['annual_pur'], function (index, value) {
+						$.each(result['annual_pur'], function(index, value) {
 							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
-							netamount += amount;
+							netAmountPurchases += amount;
 							totalWeightPurchases += weight;
-							rows += `<tr>
+							purchaseRows += `<tr>
 								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
 								<td>${amount ? amount.toFixed(0) : ''}</td>
 								<td>${weight ? weight.toFixed(2) : ''}</td>
@@ -2377,21 +2382,19 @@
 						});
 
 						// Append the total row for purchases
-						rows += `<tr>
+						purchaseRows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${netAmountPurchases.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
-							<td colspan="2"><strong><span id="numberInWords" style="color:#17365D; text-decoration: underline;"></span></strong></td>
+							<td colspan="2"><strong><span id="numberInWordsPurchases" style="color:#17365D; text-decoration: underline;"></span></strong></td>
 						</tr>`;
+						$('#AnnualPurTable').html(purchaseRows);
 
-						$('#AnnualPurTable').html(rows);
-
-						// Convert netamount to words
-						var words = convertCurrencyToWords(netamount);
-						document.getElementById('numberInWords').innerHTML = words;
-
+						// Convert purchases total to words
+						var wordsPurchases = convertCurrencyToWords(netAmountPurchases);
+						document.getElementById('numberInWordsPurchases').innerHTML = wordsPurchases;
 					},
 					error: function() {
 						alert("Error loading Annual data");
