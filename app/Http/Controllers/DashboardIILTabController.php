@@ -17,9 +17,9 @@ class DashboardIILTabController extends Controller
 
         $dash_chart_for_item_group = dash_chart_for_item_group::where('ac_group_cod',5)->get();
 
-        $item_group_name = dash_chart_for_item_group::where('ac_group_cod',5)
-        ->select('item_group_name')
-        ->groupBy('dat')
+        $item_group_name = dash_chart_for_item_group::where('ac_group_cod', 5)
+        ->select('item_group_name', 'dat')
+        ->distinct()
         ->get();
 
         $crc = pur2_company_wise_item_group_wise::where('dat', $month)
