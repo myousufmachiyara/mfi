@@ -2478,24 +2478,37 @@
 			}
 			else if(tabId=="#UV"){
 
-			var table = document.getElementById('UVSaleTable');
-			while (table.rows.length > 0) {
-				table.deleteRow(0);
-			}
+				var table = document.getElementById('UVSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-			var table = document.getElementById('UVpurTable');
-			while (table.rows.length > 0) {
-				table.deleteRow(0);
-			}
+				var table = document.getElementById('UVPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
 
-			$.ajax({
-				type: "GET",
-				url: '/dashboard-tabs/uv',
-				success: function(result) {
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/uv',
+					success: function(result) {
 
-					var rows = '';
-				
-					$.each(result['sales_ageing'], function (index, value) {
+						var rows = '';
+					
+						$.each(result['sales_ageing'], function (index, value) {
+							
+							rows += `<tr>
+								<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+								<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+							</tr>`;
+						});
+
+						$('#UVSaleTable').html(rows);
+
+						rows = '';
+					
+					$.each(result['purchase_ageing'], function (index, value) {
 						
 						rows += `<tr>
 							<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
@@ -2504,27 +2517,14 @@
 						</tr>`;
 					});
 
-					$('#UVSaleTable').html(rows);
-
-					rows = '';
+					$('#UVPurTable').html(rows);
 				
-				$.each(result['purchase_ageing'], function (index, value) {
-					
-					rows += `<tr>
-						<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
-						<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
-						<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-					</tr>`;
+						
+					},
+					error: function() {
+						alert("Error loading UV data");
+					}
 				});
-
-				$('#UVPurTable').html(rows);
-			
-					
-				},
-				error: function() {
-					alert("Error loading UV data");
-				}
-			});
 
 			}
 
