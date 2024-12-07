@@ -2361,7 +2361,7 @@
 						var totalWeight = 0;
 
 						$.each(result['annual_pur'], function (index, value) {
-							var amount = value['total_cr_amount'] ? parseFloat(value['total_cr_amount']) : 0; // Convert to a number
+							var amount = value['netamount'] ? parseFloat(value['netamount']) : 0; // Convert to a number
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0; // Convert to a number
 							totalAmount += amount; // Add to total
 							totalWeight += weight; // Add to total
@@ -2414,7 +2414,7 @@
 			}
 		}
 
-		var netAmount = <?php echo json_encode($total_cr_amount); ?>;
+		var netAmount = <?php echo json_encode($netamount); ?>;
    		var words = convertCurrencyToWords(netAmount);
     	document.getElementById('numberInWords').innerHTML = words;
 
