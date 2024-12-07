@@ -18,7 +18,7 @@ class DashboardIILTabController extends Controller
         $dash_chart_for_item_group = dash_chart_for_item_group::where('ac_group_cod',5)->get();
 
         $item_group_name = dash_chart_for_item_group::where('ac_group_cod', 5)
-        ->select('item_group_name', 'dat')
+        ->select('item_group_name')
         ->distinct()
         ->get();
 
