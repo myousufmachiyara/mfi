@@ -408,6 +408,7 @@
                                     Account Group
                                 </a>
                             </li>
+                            @endif
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
                                     <span>Item Name</span>
