@@ -2002,7 +2002,7 @@
 
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], IILmills, colors);
 
-						console.log(datasets);
+						console.log(result['item_group_name']);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();

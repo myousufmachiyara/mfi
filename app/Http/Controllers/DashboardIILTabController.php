@@ -17,8 +17,8 @@ class DashboardIILTabController extends Controller
 
         $dash_chart_for_item_group = dash_chart_for_item_group::where('ac_group_cod',5)->get();
 
-        $item_group_list = dash_chart_for_item_group::where('ac_group_cod',5)
-        ->select('item_group_code')
+        $item_group_name = dash_chart_for_item_group::where('ac_group_cod',5)
+        ->select('item_group_name')
         ->get();
 
         $crc = pur2_company_wise_item_group_wise::where('dat', $month)
@@ -44,7 +44,7 @@ class DashboardIILTabController extends Controller
             'HRS' => $hrs,
             'ECO' => $eco,
             'COSMO' => $cosmo,
-            'item_group_list' => $item_group_list
+            'item_group_name' => $item_group_name
         ]);
     }
 }
