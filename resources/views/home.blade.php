@@ -2002,8 +2002,8 @@
 
 						// Log the array with item_group_name values
 						console.log(itemGroupNames);
-						
-						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], result['item_group_name'], colors);
+
+						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'],	itemGroupNames, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
 							IILtop5CustomerPerformanceChart.destroy();
