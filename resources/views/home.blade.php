@@ -2483,7 +2483,7 @@
 					table.deleteRow(0);
 				}
 
-				var table = document.getElementById('UVPurTable');
+				var table = document.getElementById('UVpurTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
 				}
@@ -2492,34 +2492,27 @@
 					type: "GET",
 					url: '/dashboard-tabs/uv',
 					success: function(result) {
-
-						var rows = '';
-					
+						// For Sales Ageing
+						var salesRows = '';
 						$.each(result['sales_ageing'], function (index, value) {
-							
-							rows += `<tr>
+							salesRows += `<tr>
 								<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
 								<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
 								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
 							</tr>`;
 						});
+						$('#UVSaleTable').html(salesRows);
 
-						$('#UVSaleTable').html(rows);
-
-						rows = '';
-					
-					$.each(result['purchase_ageing'], function (index, value) {
-						
-						rows += `<tr>
-							<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
-							<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
-							<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-						</tr>`;
-					});
-
-					$('#UVPurTable').html(rows);
-				
-						
+						// For Purchase Ageing
+						var purchaseRows = '';
+						$.each(result['purchase_ageing'], function (index, value) {
+							purchaseRows += `<tr>
+								<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+								<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+							</tr>`;
+						});
+						$('#UVPurTable').html(purchaseRows);
 					},
 					error: function() {
 						alert("Error loading UV data");
@@ -2527,6 +2520,7 @@
 				});
 
 			}
+
 
 		}
 
