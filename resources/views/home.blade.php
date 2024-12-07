@@ -2389,7 +2389,7 @@
 						// Append the total row for purchases
 						rows += `<tr>
 							<td><strong>Total</strong></td>
-							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(1)}</strong></td>
 							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
 						</tr>
 						<tr>
