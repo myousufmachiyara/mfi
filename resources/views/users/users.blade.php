@@ -661,7 +661,7 @@
     }
 
     function getRegDevices(){
-        var table = document.getElementById('acc_attachements');
+        var table = document.getElementById('regDevices');
         while (table.rows.length > 0) {
             table.deleteRow(0);
         }
