@@ -1998,7 +1998,7 @@
 					url: '/dashboard-tabs/iil',
 					data: { month: month },
 					success: function(result) {
-						console.log(result['dash_chart_for_item_group_for_donut']);
+						console.log(result['dash_chart_for_item_group']);
 
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], IILmills, colors);
 
