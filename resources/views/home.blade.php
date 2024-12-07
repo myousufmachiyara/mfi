@@ -2483,7 +2483,7 @@
 					table.deleteRow(0);
 				}
 
-				var table = document.getElementById('UVpurTable');
+				var table = document.getElementById('UVPurTable');
 				while (table.rows.length > 0) {
 					table.deleteRow(0);
 				}
