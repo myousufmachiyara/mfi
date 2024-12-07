@@ -2022,7 +2022,7 @@
 							},
 						});
 
-						const groupedData = groupByMillCode(IILmills, result['dash_chart_for_item_group_for_donut']);
+						const groupedData = IILgroupByMillCode(IILmills, result['dash_chart_for_item_group_for_donut']);
 
 						if (IILmonthlyTonageChart) {
 							IILmonthlyTonageChart.destroy();
