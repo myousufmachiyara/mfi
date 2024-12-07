@@ -398,16 +398,21 @@
                         </a>
                         <ul class="nav nav-children">
                             @if((session('user_access')[10]['module_id'])==11 && (session('user_access')[10]['view']) == 1 || (session('user_access')[11]['module_id']) == 12 && (session('user_access')[11]['view']) == 1 || (session('user_access')[12]['module_id']) == 13 && (session('user_access')[12]['view']) == 1 || (session('user_access')[13]['module_id']) == 14 && (session('user_access')[13]['view']) == 1 || (session('user_access')[14]['module_id']) == 15 && (session('user_access')[14]['view']) == 1 || (session('user_access')[15]['module_id']) == 16 && (session('user_access')[15]['view']) == 1 || (session('user_access')[16]['module_id']) == 17 && (session('user_access')[16]['view']) == 1 || (session('user_access')[17]['module_id']) == 18 && (session('user_access')[17]['view']) == 1)
-                            <li>
-                                <a class="nav-link" href="{{ route('rep-by-acc-name')}}">
-                                    Account Name
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ route('rep-by-acc-grp')}}">
-                                    Account Group
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('rep-by-acc-name')}}">
+                                        Account Name
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('rep-by-acc-grp')}}">
+                                        Account Group
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ route('rep-daily-register')}}">
+                                        Daily Register
+                                    </a>
+                                </li>
                             @endif
                             <li class="nav-parent">
                                 <a class="nav-link" href="#">
@@ -431,54 +436,54 @@
                                     Item Group
                                 </a>
                             </li>
-                            <li>
-                                <a class="nav-link" href="{{ route('rep-daily-register')}}">
-                                    Daily Register
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ route('rep-commissions')}}">
-                                    Commissions
-                                </a>
-                            </li>
-                    
-                            <li class="nav-parent">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-warehouse" style="font-size:16px;"></i>
-                                    <span>GoDown</span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <li>
-                                        <a class="nav-link" href="/rep-godown-by-item-name">
-                                            By Item Name
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="/rep-godown-by-group-name">
-                                            By Item Group
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                    
-                            <li class="nav-parent">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-industry" style="font-size:16px;"></i>
-                                    <span>Factory</span>
-                                </a>
-                                <ul class="nav nav-children">
-                                    <li>
-                                        <a class="nav-link" href="#">
-                                            By Item Name
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#">
-                                            By Item Group
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if(session('user_role')==1 OR session('user_role')==2)
+                                <li>
+                                    <a class="nav-link" href="{{ route('rep-commissions')}}">
+                                        Commissions
+                                    </a>
+                                </li>
+                            @endif
+                            @if((session('user_access')[18]['module_id']) == 19 && (session('user_access')[18]['view']) == 1 || (session('user_access')[19]['module_id']) == 20 && (session('user_access')[19]['view']) == 1)
+                                <li class="nav-parent">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-warehouse" style="font-size:16px;"></i>
+                                        <span>GoDown</span>
+                                    </a>
+                                    <ul class="nav nav-children">
+                                        <li>
+                                            <a class="nav-link" href="/rep-godown-by-item-name">
+                                                By Item Name
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="/rep-godown-by-group-name">
+                                                By Item Group
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+                            @if((session('user_access')[21]['module_id']) == 22 && (session('user_access')[21]['view']) == 1 || (session('user_access')[22]['module_id']) == 23 && (session('user_access')[22]['view']) == 1)
+
+                                <li class="nav-parent">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa fa-industry" style="font-size:16px;"></i>
+                                        <span>Factory</span>
+                                    </a>
+                                    <ul class="nav nav-children">
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                By Item Name
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" href="#">
+                                                By Item Group
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     
