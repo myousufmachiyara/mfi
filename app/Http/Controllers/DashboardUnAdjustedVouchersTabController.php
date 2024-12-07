@@ -12,7 +12,7 @@ class DashboardUnAdjustedVouchersTabController extends Controller
     {
       
         $sales_ageing = sales_ageing::leftJoin('ac', 'ac.ac_code', '=', 'sales_ageing.acc_name')
-        ->where('status', 0)
+        ->where('status', 1)
         ->get(['jv2_id', 'sales_prefix', 'sales_id', 'ac_name', 'amount']);
     
 
