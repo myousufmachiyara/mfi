@@ -1475,14 +1475,14 @@
 			// Loop through each mill and create datasets
 			mills.forEach((mill, index) => {
 				const dataForMill = chartLabels.map(dat => {
-					const millData = groupedData[dat]?.find(item => item.item_group_code.toString() === mill);
+					const millData = groupedData[dat]?.find(item => item.item_group_name.toString() === mill);
 					return millData ? millData.total_weight : 0;
 				});
 
 				// Get the mill name
 				const millName = chartLabels
-					.map(dat => groupedData[dat]?.find(item => item.item_group_code.toString() === mill)?.mill_name)
-					.find(name => name) || `Mill ${mill}`; // Default if not found
+					.map(dat => groupedData[dat]?.find(item => item.item_group_name.toString() === mill)?.mill_name)
+					.find(name => name) || `${mill}`; // Default if not found
 
 				// Add dataset for the mill
 				datasets.push({
@@ -1496,7 +1496,7 @@
 			// Create dataset for "Others" (mills not in the mills array)
 			const othersData = chartLabels.map(dat => {
 				return groupedData[dat]?.reduce((acc, item) => {
-					if (!mills.includes(item.item_group_code.toString())) acc += item.total_weight;
+					if (!mills.includes(item.item_group_name.toString())) acc += item.total_weight;
 					return acc;
 				}, 0) || 0; // Default to 0 if no matching items
 			});
