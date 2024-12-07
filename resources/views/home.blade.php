@@ -392,6 +392,7 @@
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#BILL_NOT_RECVD" href="#BILL_NOT_RECVD" data-bs-toggle="tab">Bill Not Recieved</a>
 								</li>
+								@if(session('user_role')==1 || session('user_role')==2)
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#HR" href="#HR" data-bs-toggle="tab">HR</a>
 								</li>
@@ -407,6 +408,7 @@
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#ANNUAL" href="#ANNUAL" data-bs-toggle="tab">Annual</a>
 								</li>
+								@endif
 								<li class="nav-item">
 									<a class="nav-link nav-link-dashboard-tab" data-bs-target="#UV" href="#UV" data-bs-toggle="tab">Unadjusted Vouchers</a>
 								</li>
