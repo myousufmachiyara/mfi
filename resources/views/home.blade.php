@@ -2506,27 +2506,19 @@
 
 					$('#UVSaleTable').html(rows);
 
-					// rows = '';
-					// var totalWeight = 0; // Initialize total
+					rows = '';
+				
+				$.each(result['purchase_ageing'], function (index, value) {
+					
+					rows += `<tr>
+						<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+						<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+						<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+					</tr>`;
+				});
 
-					// $.each(result['garder_customer'], function (index, value) {
-					// 	var weight = value['tt_weight'] ? parseFloat(value['tt_weight']) : 0; // Convert to a number
-					// 	totalWeight += weight; // Add to total
-					// 	rows += `<tr>
-					// 		<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
-					// 		<td>${weight ? weight : ''}</td>
-					// 	</tr>`;
-					// });
-
-					// // Append a row for the total
-					// rows += `<tr>
-					// 	<td><strong>Total</strong></td>
-					// 	<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
-					// </tr>`;
-
-					// $('#GarderSaleTable').html(rows);
-
-
+				$('#UVPurTable').html(rows);
+			
 					
 				},
 				error: function() {

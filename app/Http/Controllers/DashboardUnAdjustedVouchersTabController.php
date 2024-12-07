@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\sales_ageing;
-use App\Models\dash_pur1_not;
+use App\Models\purchase_ageing;
 
 class DashboardUnAdjustedVouchersTabController extends Controller
 {
@@ -14,12 +14,18 @@ class DashboardUnAdjustedVouchersTabController extends Controller
         $sales_ageing = sales_ageing::leftJoin('ac', 'ac.ac_code', '=', 'sales_ageing.acc_name')
         ->where('status', 1)
         ->get(['jv2_id', 'sales_prefix', 'sales_id', 'ac_name', 'amount']);
+
+        $purchase_ageing = purchase_ageing::leftJoin('ac', 'ac.ac_code', '=', 'sales_ageing.acc_name')
+        ->where('status', 1)
+        ->get(['jv2_id', 'sales_prefix', 'sales_id', 'ac_name', 'amount']);
+    
     
 
         
 
         return response()->json([
-            'sales_ageing' => $sales_ageing
+            'sales_ageing' => $sales_ageing,
+            'purchase_ageing' => $purchase_ageing
         ]);
     }
 }
