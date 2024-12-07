@@ -2338,7 +2338,7 @@
 
 						// Process sales data
 						$.each(result['annual_sale'], function (index, value) {
-							var amount = value['total_dr_amount'] ? parseFloat(value['total_dr_amount']) : 0;
+							var amount = value['total_dr_amount'] ? parseFloat(parseFloat(value['total_dr_amount']).toFixed(0)) : 0;
 							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
 							netamount += amount;
 							totalWeightSales += weight;
