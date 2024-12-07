@@ -1493,21 +1493,6 @@
 				});
 			});
 
-			// Create dataset for "Others" (mills not in the mills array)
-			const othersData = chartLabels.map(dat => {
-				return groupedData[dat]?.reduce((acc, item) => {
-					if (!mills.includes(item.item_group_name.toString())) acc += item.total_weight;
-					return acc;
-				}, 0) || 0; // Default to 0 if no matching items
-			});
-
-			datasets.push({
-				label: 'Others',
-				data: othersData,
-				backgroundColor: 'rgba(200, 200, 200, 1)', // Default color for "Others"
-				stack: 'Stack Others',
-			});
-
 			return { datasets, chartLabels };
 		}
 		// Graph Chart for MILL WISE HR PIPE PURCHASE Ended 
