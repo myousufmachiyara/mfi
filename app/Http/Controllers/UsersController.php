@@ -219,7 +219,7 @@ class UsersController extends Controller
             $agent = new Agent();
             $browserName = $agent->browser();  
             $browserVersion = $agent->version($browserName);
-            
+
             $userLocation = $this->getUserLocation(); // Fetch user location details
             $locationData = (array) $userLocation->getData();
 
@@ -350,6 +350,16 @@ class UsersController extends Controller
             'status' => 'success',
             'finger_print' => $request->fingerprint,
         ], 200);
+    }
+
+    public function delUserDevices($id)
+    {
+        if ($id) {
+            user_devices::where('id', $id)->delete();
+            return response()->json(['message' => 'Device deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'Device not found.'], 404);
+        }
     }
 
     public function sendEmail($data)

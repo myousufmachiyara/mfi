@@ -660,6 +660,34 @@
         });
     }
 
+    function deleteDevice(deviceID) {
+        if (!confirm('Are you sure you want to delete this device?')) {
+            return;
+        }
+
+        fetch('/user/del-devices' + deviceID, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Device deleted successfully.');
+                // Optionally, remove the element or reload the page
+                location.reload();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.message || 'An error occurred.');
+                });
+            }
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+    }
+    
     function getRegDevices(){
         var table = document.getElementById('regDevices');
         while (table.rows.length > 0) {
@@ -676,7 +704,7 @@
                     html+= "<td>"+v['user']+"</td>"
                     html+= "<td></td>"
                     html+= "<td>"+v['browser']+"</td>"
-                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='#'><i class='fas fa-trash'></i></a></td>"
+                    html+= "<td class='text-center'><a class='mb-1 mt-1 me-1 text-danger' href='#' onclick='deleteDevice("+v['id']+")'><i class='fas fa-trash'></i></a></td>"
                     html+="</tr>";
                     $('#regDevices').append(html);
                 });
@@ -686,5 +714,7 @@
             }
         });
     }
+
+    
     
 </script>
