@@ -22,7 +22,7 @@ class DashboardANNUALTabController extends Controller
         // Sum ttl_weight and total_cr_amt, group by pur_type
         $annual_pur = annual_pur::whereBetween('dat', [$fromMonth, $toMonth])
             ->groupBy('pur_type')
-            ->selectRaw('pur_type, SUM(ttl_weight) as total_weight, SUM(total_cr_amt) as total_cr_amount')
+            ->selectRaw('pur_type, SUM(ttl_weight) as total_weight, SUM(total_cr_amt) as netamount')
             ->get();
         
         return response()->json([
