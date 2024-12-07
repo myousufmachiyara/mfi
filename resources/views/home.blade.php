@@ -2377,6 +2377,9 @@
 							<td><strong>Total</strong></td>
 							<td class="text-danger"><strong>${totalAmount.toFixed(0)}</strong></td>
 							<td class="text-danger"><strong>${totalWeight.toFixed(2)}</strong></td> <!-- Format to 2 decimal places -->
+						</tr>
+						<tr>
+							<td colspan="2"><strong><span id="numberInWords" style="color:#17365D; text-decoration: underline;"></span></strong></td>
 						</tr>`;
 
 						$('#AnnualPurTable').html(rows);
@@ -2410,5 +2413,10 @@
 			default: return day + 'th';
 			}
 		}
+
+		var netAmount = <?php echo json_encode($netamount); ?>;
+   		var words = convertCurrencyToWords(netAmount);
+    	document.getElementById('numberInWords').innerHTML = words;
+
 	</script>									
 </html>
