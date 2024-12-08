@@ -2110,7 +2110,6 @@
 						const itemGroupNames = result['item_group_name'].map(item => item.item_group_name);
 
 						// Log the array with item_group_name values
-						console.log(itemGroupNames);
 						const { datasets, chartLabels } = generateChartDatasetsforIIL(result['dash_chart_for_item_group'], itemGroupNames, colors);
 
 						if (IILtop5CustomerPerformanceChart) {
@@ -2130,6 +2129,7 @@
 								datasets: datasets,  // Dynamic datasets based on groupedData
 							},
 						});
+						console.log(result['dash_chart_for_item_group_for_donut']);
 
 						const groupedData = IILgroupByMillCode(itemGroupNames, colors , result['dash_chart_for_item_group_for_donut']);
 
