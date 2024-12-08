@@ -393,8 +393,6 @@
         // Un Adjusted Vouchers Tab
         Route::get('/dashboard-tabs/uv', [App\Http\Controllers\DashboardUnAdjustedVouchersTabController::class, 'UV']);
 
-
-    
     });
 
     Route::middleware(['checkPermission:view'])->group(function () {
