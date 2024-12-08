@@ -50,11 +50,12 @@
                                                         <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
                                                         <td>{{$row->narration}}</td>
                                                         <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
-                                                        {{-- <td>{{$row->merged_sales_ids}}</td> --}}
-                                                        <td style="color: {{ $row->sales_status == 1 ? 'red' : 'inherit' }}">
+                                                    
+                                                        <td style="color: {{ $row->sales_status == 0 ? 'red' : 'inherit' }}">
                                                             {{$row->merged_sales_ids}}
                                                         </td>
-                                                        <td style="color: {{ $row->purchase_status == 1 ? 'red' : 'inherit' }}">
+                                                        
+                                                        <td style="color: {{ $row->purchase_status == 0 ? 'red' : 'inherit' }}">
                                                             {{$row->merged_purchase_ids}}
                                                         </td>
                                                     
