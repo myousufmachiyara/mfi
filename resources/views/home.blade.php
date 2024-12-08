@@ -1693,7 +1693,7 @@
 			return result;
 		}
 
-		function IILgroupByMillCode(mills, colors, data) {
+		function IILgroupByMillCode(itemGroups, colors, data) {
 			const result = {
 				labels: [], // To hold the labels for the chart
 				data: [], // To hold the total_weight for each mill
@@ -1702,20 +1702,19 @@
 
 			// Initialize groups for each mill in mills array
 			const groups = {};
-			mills.forEach(mill => {
-				groups[mill] = { weight: 0, name: "", backgroundColor: "" };
+			itemGroups.forEach(itemGroup => {
+				groups[itemGroups] = { weight: 0, name: "", backgroundColor: "" };
 			});
 
 			// Iterate through the data to group by mill_code and calculate total_weight
 			let index = 0;  // Initialize a counter for color assignment
 
 			data.forEach(item => {
-				const millCode = item.item_group_code.toString();
-				const millName = mills.includes(millCode) ? item.item_group_name : 'Others';
+				const itemGroupName = item.item_group_name;
 				
-				groups[millCode].weight += item.total_weight;
-				groups[millCode].name = item.item_group_name;
-				groups[millCode].backgroundColor = colors[index];  // Use the modulo operator to loop through the color array
+				groups[itemGroupName].weight += item.total_weight;
+				groups[itemGroupName].name = item.item_group_name;
+				groups[itemGroupName].backgroundColor = colors[index];  // Use the modulo operator to loop through the color array
 
 				index++;  // Increment the counter for the next iteration				
 			});
