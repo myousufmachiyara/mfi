@@ -1556,7 +1556,7 @@
 			return result;
 		}
 
-		function IILgroupByMillCode(mills, data) {
+		function IILgroupByMillCode(mills, colors, data) {
 			const result = {
 				labels: [], // To hold the labels for the chart
 				data: [], // To hold the total_weight for each mill
@@ -1569,39 +1569,31 @@
 				groups[mill] = { weight: 0, name: "", backgroundColor: "" };
 			});
 
-			// Add a group for "Others"
-			groups['Others'] = { weight: 0, name: "Others", backgroundColor: "rgba(200, 200, 200, 1)" };
-
 			// Iterate through the data to group by mill_code and calculate total_weight
+			let index = 0;  // Initialize a counter for color assignment
+
 			data.forEach(item => {
 				const millCode = item.item_group_code.toString();
 				const millName = mills.includes(millCode) ? item.item_group_name : 'Others';
-
-				if (millName === 'Others') {
-					groups['Others'].weight += item.total_weight;
-				} else {
-					groups[millCode].weight += item.total_weight;
-					groups[millCode].name = item.item_group_name;
-
-					// Assign colors based on specific mill names
-					if (item.item_group_name === "IIL CRC") {
-						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
-					} else if (item.item_group_name === "IIL ECO 201") {
-						groups[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
-					} else if (item.item_group_name === "IIL COSMO 304") {
-						groups[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
-					} else if (item.item_group_name === "BLACK WATER PIPES") {
-						groups[millCode].backgroundColor = 'rgba(153, 102, 255, 1)';
-					}
+				
+				// Check if the millCode exists in the groups object, otherwise create it
+				if (!groups[millCode]) {
+					groups[millCode] = { weight: 0, name: '', backgroundColor: '' };
 				}
+
+				groups[millCode].weight += item.total_weight;
+				groups[millCode].name = item.item_group_name;
+				groups[millCode].backgroundColor = colors[index];  // Use the modulo operator to loop through the color array
+
+				index++;  // Increment the counter for the next iteration
 			});
 
 			// Prepare the final chart data
 			for (const key in groups) {
 				if (groups[key].weight > 0) {
-					result.labels.push(groups[key].name || "Others");
+					result.labels.push(groups[key].name);
 					result.data.push(groups[key].weight);
-					result.backgroundColor.push(groups[key].backgroundColor || "rgba(200, 200, 200, 1)");
+					result.backgroundColor.push(groups[key].backgroundColor);
 				}
 			}
 
@@ -2007,7 +1999,7 @@
 							},
 						});
 
-						const groupedData = IILgroupByMillCode(IILmills, result['dash_chart_for_item_group_for_donut']);
+						const groupedData = IILgroupByMillCode(itemGroupNames, colors , result['dash_chart_for_item_group_for_donut']);
 
 						if (IILmonthlyTonageChart) {
 							IILmonthlyTonageChart.destroy();
