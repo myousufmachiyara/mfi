@@ -50,7 +50,11 @@
                                                         <td>{{ \Carbon\Carbon::parse($row->jv_date)->format('d-m-y') }}</td>
                                                         <td>{{$row->narration}}</td>
                                                         <td>{{ number_format($row->total_debit, 0) }} / {{ number_format($row->total_credit, 0) }}</td>
-                                                        <td>{{$row->merged_sales_ids}}</td>
+                                                        {{-- <td>{{$row->merged_sales_ids}}</td> --}}
+                                                        <td style="color: {{ $row->sales_status == 1 ? 'red' : 'inherit' }}">
+                                                            {{$row->merged_sales_ids}}
+                                                        </td>
+                                                        
                                                         <td>{{$row->merged_purchase_ids}}</td>
                                                         <td>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->jv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
