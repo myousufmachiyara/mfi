@@ -54,8 +54,10 @@
                                                         <td style="color: {{ $row->sales_status == 1 ? 'red' : 'inherit' }}">
                                                             {{$row->merged_sales_ids}}
                                                         </td>
-                                                        
-                                                        <td>{{$row->merged_purchase_ids}}</td>
+                                                        <td style="color: {{ $row->purchase_status == 1 ? 'red' : 'inherit' }}">
+                                                            {{$row->merged_purchase_ids}}
+                                                        </td>
+                                                    
                                                         <td>
                                                             <a class="mb-1 mt-1 me-1 modal-with-zoom-anim ws-normal text-dark" onclick="getAttachements({{$row->jv_no}})" href="#attModal"><i class="fa fa-eye"> </i></a>
                                                             <span class="separator"> | </span>
