@@ -1721,13 +1721,13 @@
 					groups[millCode].name = item.item_group_name;
 
 					// Assign colors based on specific mill names
-					if (item.item_group_name === "IIL CRC") {
+					if (item.item_group_name === "IIL CRCs") {
 						groups[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
 					} else if (item.item_group_name === "IIL ECO 201") {
 						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
 					} else if (item.item_group_name === "IIL COSMO 304") {
 						groups[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
-					} else if (item.item_group_name === "	IIL HRS") {
+					} else if (item.item_group_name === "IIL HRS") {
 						groups[millCode].backgroundColor = 'rgba(153, 102, 255, 1)';
 					}
 				}
