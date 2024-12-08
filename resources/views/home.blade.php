@@ -1727,7 +1727,7 @@
 						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
 					} else if (item.item_group_name === "IIL COSMO 304") {
 						groups[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
-					} else if (item.item_group_name === "IIL HRS") {
+					} else if (item.item_group_name === "	IIL HRS") {
 						groups[millCode].backgroundColor = 'rgba(153, 102, 255, 1)';
 					}
 				}
