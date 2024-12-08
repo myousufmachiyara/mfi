@@ -851,7 +851,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Mill Wise IIL Pipe Purchase</h2>
+													<h2 class="card-title">Item Wise IIL Pipe Purchase</h2>
 												</header>
 												<div class="card-body">
 													<canvas id="IILtop5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
@@ -1327,6 +1327,143 @@
 										
 									</div>
 								</div>
+
+								<div id="ANNUAL" class="tab-pane">
+									<div class="row form-group pb-3">
+										
+										<div class="mb-3 text-end">
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterANNUALFrom" value="{{ date('Y-01') }}" onchange="getTabData()">
+											</div>
+											
+											<span> To </span>
+											<div class="form-group" style="display: inline-block">
+												<input type="month" class="form-control" id="filterANNUALTo" value="{{ date('Y-m') }}" onchange="getTabData()">
+											</div>
+											<a class="btn btn-primary" style="padding: 0.5rem 0.6rem;" onclick="getTabData()"><i class="fa fa-filter"></i></a>
+										</div>
+										
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Annual Sale</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sale Type</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Amount</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="AnnualSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">Annual Purchase</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pur Type</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Amount</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Tonage</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="AnnualPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+								
+										
+									</div>
+								</div>
+
+								<div id="UV" class="tab-pane">
+									<div class="row form-group pb-3">
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">UnAdjusted Sales Ageing Voucher</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JV2-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Sales-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="UVSaleTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										<div class="col-12 col-md-6 mb-3">
+											<section class="card">
+												<header class="card-header">
+													<div class="card-actions">
+														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+													</div>
+
+													<h2 class="card-title">UnAdjusted Sales Ageing Voucher</h2>
+												</header>
+												<div class="card-body scrollable-div">
+													
+													<table class="table table-responsive-md table-striped mb-0">
+														<thead class="sticky-tbl-header">
+															<tr>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">JV2-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Pur-ID</font></font></th>
+																<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;text-align:center">Account Name</font></font></th>
+															</tr>
+														</thead>
+														<tbody id="UVPurTable">
+															
+														</tbody>
+													</table>
+												</div>
+											</section>
+										</div>
+
+										
+										
+										
+									</div>
+								</div>
 								
 							</div>
 						</div>
@@ -1576,16 +1713,11 @@
 				const millCode = item.item_group_code.toString();
 				const millName = mills.includes(millCode) ? item.item_group_name : 'Others';
 				
-				// Check if the millCode exists in the groups object, otherwise create it
-				if (!groups[millCode]) {
-					groups[millCode] = { weight: 0, name: '', backgroundColor: '' };
-				}
-
 				groups[millCode].weight += item.total_weight;
 				groups[millCode].name = item.item_group_name;
 				groups[millCode].backgroundColor = colors[index];  // Use the modulo operator to loop through the color array
 
-				index++;  // Increment the counter for the next iteration
+				index++;  // Increment the counter for the next iteration				
 			});
 
 			// Prepare the final chart data
@@ -2230,6 +2362,152 @@
 					}
 				});
 			}
+			else if (tabId == "#ANNUAL") {
+				// Clear previous rows from the tables
+				var saleTable = document.getElementById('AnnualSaleTable');
+				while (saleTable.rows.length > 0) {
+					saleTable.deleteRow(0);
+				}
+
+				var purTable = document.getElementById('AnnualPurTable');
+				while (purTable.rows.length > 0) {
+					purTable.deleteRow(0);
+				}
+
+				var fromMonth = document.getElementById('filterANNUALFrom').value;
+				var toMonth = document.getElementById('filterANNUALTo').value;
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/annual',
+					data: { from: fromMonth, to: toMonth },
+					success: function(result) {
+						var rows = '';
+						var netamount = 0; // Initialize total for sales
+						var totalWeightSales = 0; // Rename to avoid conflict
+
+						// Process sales data
+						$.each(result['annual_sale'], function (index, value) {
+							var amount = value['total_dr_amount'] ? parseFloat(parseFloat(value['total_dr_amount']).toFixed(0)) : 0;
+							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
+							netamount += amount;
+							totalWeightSales += weight;
+							rows += `<tr>
+								<td>${value['sale_type'] ? value['sale_type'] : ''}</td>
+								<td>${amount ? amount.toFixed(0) : ''}</td>
+								<td>${weight ? weight.toFixed(2) : ''}</td>
+							</tr>`;
+						});
+
+						// Append the total row for sales
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${totalWeightSales.toFixed(2)}</strong></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+							<strong>
+								<span id="numberInWordsSale" style="color:#17365D; text-decoration: underline; font-size: 20px;"></span>
+							</strong>
+							</td>
+						</tr>`;
+						$('#AnnualSaleTable').html(rows);
+
+						// Convert netamount to words
+						var words = convertCurrencyToWords(netamount);
+						document.getElementById('numberInWordsSale').innerHTML = words;
+
+						// Reset rows for purchases
+						rows = '';
+						var netamount = 0; // Initialize total for purchases
+						var totalWeightPurchases = 0; // Rename to avoid conflict
+
+						// Process purchases data
+						$.each(result['annual_pur'], function (index, value) {
+							var amount = value['total_cr_amount'] ? parseFloat(parseFloat(value['total_cr_amount']).toFixed(0)) : 0;
+							var weight = value['total_weight'] ? parseFloat(value['total_weight']) : 0;
+							netamount += amount;
+							totalWeightPurchases += weight;
+							rows += `<tr>
+								<td>${value['pur_type'] ? value['pur_type'] : ''}</td>
+								<td>${amount ? amount.toFixed(0) : ''}</td>
+								<td>${weight ? weight.toFixed(2) : ''}</td>
+							</tr>`;
+						});
+
+						// Append the total row for purchases
+						rows += `<tr>
+							<td><strong>Total</strong></td>
+							<td class="text-danger"><strong>${netamount.toFixed(0)}</strong></td>
+							<td class="text-danger"><strong>${totalWeightPurchases.toFixed(2)}</strong></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+							<strong>
+								<span id="numberInWords" style="color:#17365D; text-decoration: underline; font-size: 20px;"></span>
+							</strong>
+							</td>
+
+						</tr>`;
+
+						$('#AnnualPurTable').html(rows);
+
+						// Convert netamount to words
+						var words = convertCurrencyToWords(netamount);
+						document.getElementById('numberInWords').innerHTML = words;
+
+					},
+					error: function() {
+						alert("Error loading Annual data");
+					}
+				});
+			}
+			else if(tabId=="#UV"){
+
+				var table = document.getElementById('UVSaleTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				var table = document.getElementById('UVPurTable');
+				while (table.rows.length > 0) {
+					table.deleteRow(0);
+				}
+
+				$.ajax({
+					type: "GET",
+					url: '/dashboard-tabs/uv',
+					success: function(result) {
+						// For Sales Ageing
+						var salesRows = '';
+						$.each(result['sales_ageing'], function (index, value) {
+							salesRows += `<tr>
+								<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+								<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+							</tr>`;
+						});
+						$('#UVSaleTable').html(salesRows);
+
+						// For Purchase Ageing
+						var purchaseRows = '';
+						$.each(result['purchase_ageing'], function (index, value) {
+							purchaseRows += `<tr>
+								<td>${value['jv2_id'] ? value['jv2_id'] : ''}</td>
+								<td>${value['sales_prefix'] ? value['sales_prefix'] : ''} ${value['sales_id'] ? value['sales_id'] : ''}</td>
+								<td>${value['ac_name'] ? value['ac_name'] : ''}</td>
+							</tr>`;
+						});
+						$('#UVPurTable').html(purchaseRows);
+					},
+					error: function() {
+						alert("Error loading UV data");
+					}
+				});
+
+			}
+
 
 		}
 
@@ -2251,5 +2529,6 @@
 			default: return day + 'th';
 			}
 		}
+
 	</script>									
 </html>

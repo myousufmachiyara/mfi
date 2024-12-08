@@ -51,7 +51,9 @@ class JV2Controller extends Controller
                 DB::raw('COALESCE(dc.total_debit, 0) AS total_debit'),
                 DB::raw('COALESCE(dc.total_credit, 0) AS total_credit'),
                 DB::raw("GROUP_CONCAT(DISTINCT CONCAT(sales_ageing.sales_prefix, sales_ageing.sales_id) SEPARATOR ' ; ') AS merged_sales_ids"),
-                DB::raw("GROUP_CONCAT(DISTINCT CONCAT(purchase_ageing.sales_prefix, purchase_ageing.sales_id) SEPARATOR ' ; ') AS merged_purchase_ids")
+                DB::raw("GROUP_CONCAT(DISTINCT CONCAT(purchase_ageing.sales_prefix, purchase_ageing.sales_id) SEPARATOR ' ; ') AS merged_purchase_ids"),
+                'sales_ageing.status as sales_status', // Add sales_ageing.status
+                'purchase_ageing.status as purchase_status' // Add purchase_ageing.status
             )
             ->leftJoin(
                 DB::raw('(SELECT auto_lager, SUM(debit) AS total_debit, SUM(credit) AS total_credit FROM lager GROUP BY auto_lager) AS dc'),
@@ -59,10 +61,11 @@ class JV2Controller extends Controller
             )
             ->leftJoin('sales_ageing', 'lager0.jv_no', '=', 'sales_ageing.jv2_id')
             ->leftJoin('purchase_ageing', 'lager0.jv_no', '=', 'purchase_ageing.jv2_id')
-            ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration')
+            ->groupBy('lager0.jv_no', 'lager0.jv_date', 'lager0.narration', 'sales_ageing.status', 'purchase_ageing.status') // Add the statuses to the groupBy clause
             ->get();
         
-            return view('vouchers.jv2', compact('jv2'));
+        return view('vouchers.jv2', compact('jv2'));
+        
             
         }        
 
