@@ -11,11 +11,11 @@ class DashboardUnAdjustedVouchersTabController extends Controller
     public function UV(Request $request)
     {
         $sales_ageing = sales_ageing::leftJoin('ac', 'ac.ac_code', '=', 'sales_ageing.acc_name')
-            ->where('sales_ageing.status', 1)
+            ->where('sales_ageing.status', 0)
             ->get(['jv2_id', 'sales_prefix', 'sales_id', 'ac_name', 'amount']);
 
         $purchase_ageing = purchase_ageing::leftJoin('ac', 'ac.ac_code', '=', 'purchase_ageing.acc_name') // Corrected the table name here
-            ->where('purchase_ageing.status', 1)
+            ->where('purchase_ageing.status', 0)
             ->get(['jv2_id', 'sales_prefix', 'sales_id', 'ac_name', 'amount']);
 
         return response()->json([
