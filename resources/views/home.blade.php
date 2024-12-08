@@ -1703,7 +1703,7 @@
 			// Initialize groups for each mill in mills array
 			const groups = {};
 			mills.forEach(mill => {
-				groups[mill] = { weight: 0, name: "", backgroundColor: "" };
+				groups[mill] = { total_weight: 0, name: "", backgroundColor: "" };
 			});
 
 			// Iterate through the data to group by mill_code and calculate total_weight
@@ -1713,7 +1713,7 @@
 				const millCode = item.item_group_code.toString();
 				const millName = mills.includes(millCode) ? item.item_group_name : 'Others';
 				
-				groups[millCode].weight += item.total_weight;
+				groups[millCode].total_weight += item.total_weight;
 				groups[millCode].name = item.item_group_name;
 				groups[millCode].backgroundColor = colors[index];  // Use the modulo operator to loop through the color array
 
@@ -1722,9 +1722,9 @@
 
 			// Prepare the final chart data
 			for (const key in groups) {
-				if (groups[key].weight > 0) {
+				if (groups[key].total_weight > 0) {
 					result.labels.push(groups[key].name);
-					result.data.push(groups[key].weight);
+					result.data.push(groups[key].total_weight);
 					result.backgroundColor.push(groups[key].backgroundColor);
 				}
 			}
