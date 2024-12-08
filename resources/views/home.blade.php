@@ -1703,7 +1703,7 @@
 			// Initialize groups for each mill in mills array
 			const groups = {};
 			itemGroups.forEach(itemGroup => {
-				groups[itemGroups] = { weight: 0, name: "", backgroundColor: "" };
+				groups[itemGroup] = { weight: 0, name: "", backgroundColor: "" };
 			});
 
 			// Iterate through the data to group by mill_code and calculate total_weight
