@@ -851,7 +851,7 @@
 														<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 													</div>
 
-													<h2 class="card-title">Mill Wise IIL Pipe Purchase</h2>
+													<h2 class="card-title">Item Wise IIL Pipe Purchase</h2>
 												</header>
 												<div class="card-body">
 													<canvas id="IILtop5CustomerPerformance" style="height: 353px;width: 600px;"></canvas>
@@ -1722,9 +1722,9 @@
 
 					// Assign colors based on specific mill names
 					if (item.item_group_name === "IIL CRC") {
-						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
-					} else if (item.item_group_name === "IIL ECO 201") {
 						groups[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
+					} else if (item.item_group_name === "IIL ECO 201") {
+						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
 					} else if (item.item_group_name === "IIL COSMO 304") {
 						groups[millCode].backgroundColor = 'rgba(25, 135, 84, 1)';
 					} else if (item.item_group_name === "BLACK WATER PIPES") {
