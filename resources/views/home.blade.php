@@ -1721,7 +1721,7 @@
 					groups[millCode].name = item.item_group_name;
 
 					// Assign colors based on specific mill names
-					if (item.item_group_name === "IIL CRCs") {
+					if (item.item_group_name === "IIL CRC") {
 						groups[millCode].backgroundColor = 'rgba(220, 53, 69, 1)';
 					} else if (item.item_group_name === "IIL ECO 201") {
 						groups[millCode].backgroundColor = 'rgba(0, 136, 204, 1)';
