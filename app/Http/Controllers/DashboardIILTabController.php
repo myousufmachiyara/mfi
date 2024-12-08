@@ -13,6 +13,7 @@ class DashboardIILTabController extends Controller
         $month = $request->month;
 
         $dash_chart_for_item_group_for_donut = dash_chart_for_item_group::where('dat2',$request->month)
+        ->where('ac_group_cod',5)
         ->get();
 
         $dash_chart_for_item_group = dash_chart_for_item_group::where('ac_group_cod',5)->get();
