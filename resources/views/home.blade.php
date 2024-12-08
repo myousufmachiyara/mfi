@@ -2128,7 +2128,7 @@
 								datasets: datasets,  // Dynamic datasets based on groupedData
 							},
 						});
-						console.log(result['dash_chart_for_item_group_for_donut']);
+						console.log(itemGroupNames);
 
 						const groupedData = IILgroupByMillCode(itemGroupNames, colors , result['dash_chart_for_item_group_for_donut']);
 
