@@ -15,30 +15,38 @@ use Carbon\Carbon;
 
 class RptAccNameGLController extends Controller
 {
-    public function gl(Request $request){
-        $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
-        ->where('date', '<', $request->fromDate)
+public function gl(Request $request)
+{
+    // Make sure the dates are in correct format
+    $fromDate = Carbon::parse($request->fromDate)->toDateString();
+    $toDate = Carbon::parse($request->toDate)->toDateString();
+
+    // Get opening balances before the fromDate
+    $lager_much_op_bal = lager_much_op_bal::where('ac1', $request->acc_id)
+        ->whereDate('date', '<', $fromDate)
         ->get();
 
-        $lager_much_all = lager_much_all::where('account_cod', $request->acc_id)
-        ->whereBetween('jv_date', [$request->fromDate, $request->toDate])
+    // Get transactions between fromDate and toDate
+    $lager_much_all = lager_much_all::where('account_cod', $request->acc_id)
+        ->whereBetween('jv_date', [$fromDate, $toDate])
         ->orderBy('jv_date','asc')
         ->orderBy('prefix','asc')
         ->orderBy('auto_lager','asc')
         ->get();
 
-        $lager_pdc = lager_pdc::where('ac_cr_sid', $request->acc_id)
+    // Get unposted PDCs
+    $lager_pdc = lager_pdc::where('ac_cr_sid', $request->acc_id)
         ->whereNull('voch_id')
         ->get();
-    
-        $response = [
-            'lager_much_op_bal' => $lager_much_op_bal,
-            'lager_much_all' => $lager_much_all,
-            'lager_pdc' => $lager_pdc,
-        ];
 
-        return response()->json($response);
-    }
+    $response = [
+        'lager_much_op_bal' => $lager_much_op_bal,
+        'lager_much_all' => $lager_much_all,
+        'lager_pdc' => $lager_pdc,
+    ];
+
+    return response()->json($response);
+}
 
     public function glExcel(Request $request)
     {
